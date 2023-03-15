@@ -1,4 +1,4 @@
-module github.com/terraform-ibm-modules/terraform-ibm-devsecops
+module github.com/terraform-ibm-modules/terraform-ibm-devsecops-starter
 
 go 1.20
 
