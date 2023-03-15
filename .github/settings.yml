@@ -13,11 +13,11 @@ repository:
   # See https://terraform-ibm-modules.github.io/documentation/#/implementation-guidelines?id=module-names-and-descriptions
 
   # By changing this field, you rename the repository.
-  name: "terraform-ibm-devsecops"
+  name: "terraform-ibm-devsecops-alm"
 
   # The description is displayed under the repository name on the
   # organization page and in the 'About' section of the repository.
 
   # Uncomment this description property
   # and update the description to the current repo description.
-  # description: ""
+  description: "This is the DevSecOps Application Lifecycle Management Deployable Architecture"
