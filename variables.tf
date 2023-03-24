@@ -461,37 +461,37 @@ variable "ci_compliance_pipeline_group" {
 
 variable "ci_pipeline_config_repo_auth_type" {
   type        = string
-  description = "Select the method of authentication is be used to access the git provider. 'oauth' or 'pat'."
+  description = "Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat'."
   default     = "oauth"
 }
 
 variable "ci_inventory_repo_auth_type" {
   type        = string
-  description = "Select the method of authentication is be used to access the git provider. 'oauth' or 'pat'."
+  description = "Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat'."
   default     = "oauth"
 }
 
 variable "ci_issues_repo_auth_type" {
   type        = string
-  description = "Select the method of authentication is be used to access the git provider. 'oauth' or 'pat'."
+  description = "Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat'."
   default     = "oauth"
 }
 
 variable "ci_evidence_repo_auth_type" {
   type        = string
-  description = "Select the method of authentication is be used to access the git provider. 'oauth' or 'pat'."
+  description = "Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat'."
   default     = "oauth"
 }
 
 variable "ci_app_repo_auth_type" {
   type        = string
-  description = "Select the method of authentication is be used to access the git provider. 'oauth' or 'pat'."
+  description = "Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat'."
   default     = "oauth"
 }
 
 variable "ci_compliance_pipeline_repo_auth_type" {
   type        = string
-  description = "Select the method of authentication is be used to access the git provider. 'oauth' or 'pat'."
+  description = "Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat'."
   default     = "oauth"
 }
 
@@ -949,43 +949,43 @@ variable "cd_compliance_pipeline_group" {
 
 variable "cd_pipeline_config_repo_auth_type" {
   type        = string
-  description = "Select the method of authentication is be used to access the git provider. 'oauth' or 'pat'."
+  description = "Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat'."
   default     = "oauth"
 }
 
 variable "cd_inventory_repo_auth_type" {
   type        = string
-  description = "Select the method of authentication is be used to access the git provider. 'oauth' or 'pat'."
+  description = "Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat'."
   default     = "oauth"
 }
 
 variable "cd_issues_repo_auth_type" {
   type        = string
-  description = "Select the method of authentication is be used to access the git provider. 'oauth' or 'pat'."
+  description = "Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat'."
   default     = "oauth"
 }
 
 variable "cd_evidence_repo_auth_type" {
   type        = string
-  description = "Select the method of authentication is be used to access the git provider. 'oauth' or 'pat'."
+  description = "Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat'."
   default     = "oauth"
 }
 
 variable "cd_deployment_repo_auth_type" {
   type        = string
-  description = "Select the method of authentication is be used to access the git provider. 'oauth' or 'pat'."
+  description = "Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat'."
   default     = "oauth"
 }
 
 variable "cd_compliance_pipeline_repo_auth_type" {
   type        = string
-  description = "Select the method of authentication is be used to access the git provider. 'oauth' or 'pat'."
+  description = "Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat'."
   default     = "oauth"
 }
 
 variable "cd_change_management_repo_auth_type" {
   type        = string
-  description = "Select the method of authentication is be used to access the git provider. 'oauth' or 'pat'."
+  description = "Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat'."
   default     = "oauth"
 }
 
@@ -1438,37 +1438,37 @@ variable "cc_compliance_pipeline_group" {
 
 variable "cc_pipeline_config_repo_auth_type" {
   type        = string
-  description = "Select the method of authentication is be used to access the git provider. 'oauth' or 'pat'."
+  description = "Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat'."
   default     = "oauth"
 }
 
 variable "cc_inventory_repo_auth_type" {
   type        = string
-  description = "Select the method of authentication is be used to access the git provider. 'oauth' or 'pat'."
+  description = "Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat'."
   default     = "oauth"
 }
 
 variable "cc_issues_repo_auth_type" {
   type        = string
-  description = "Select the method of authentication is be used to access the git provider. 'oauth' or 'pat'."
+  description = "Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat'."
   default     = "oauth"
 }
 
 variable "cc_evidence_repo_auth_type" {
   type        = string
-  description = "Select the method of authentication is be used to access the git provider. 'oauth' or 'pat'"
+  description = "Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat'"
   default     = "oauth"
 }
 
 variable "cc_app_repo_auth_type" {
   type        = string
-  description = "Select the method of authentication is be used to access the git provider. 'oauth' or 'pat'."
+  description = "Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat'."
   default     = "oauth"
 }
 
 variable "cc_compliance_pipeline_repo_auth_type" {
   type        = string
-  description = "Select the method of authentication is be used to access the git provider. 'oauth' or 'pat'."
+  description = "Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat'."
   default     = "oauth"
 }
 
