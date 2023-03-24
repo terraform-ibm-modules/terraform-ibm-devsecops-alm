@@ -1,12 +1,11 @@
 module "devsecops_ci_toolchain" {
-  count  = var.create_ci_toolchain ? 1 : 0
-  source = "git::https://us-south.git.cloud.ibm.com/open-toolchain/terraform-ibm-devsecops-ci-toolchain.git?ref=catalog-beta"
-
+  count            = var.create_ci_toolchain ? 1 : 0
+  source           = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-ci-toolchain?ref=v1.0.3"
   ibmcloud_api_key = var.ibmcloud_api_key
 
   toolchain_name           = var.ci_toolchain_name
   toolchain_region         = (var.ci_toolchain_region == "") ? var.toolchain_region : var.ci_toolchain_region
-  toolchain_resource_group = var.ci_toolchain_resource_group
+  toolchain_resource_group = (var.ci_toolchain_resource_group == "") ? var.toolchain_resource_group : var.ci_toolchain_resource_group
   toolchain_description    = var.ci_toolchain_description
   registry_namespace       = var.ci_registry_namespace
   ibmcloud_api             = var.ibmcloud_api
@@ -124,14 +123,13 @@ module "devsecops_ci_toolchain" {
 
 module "devsecops_cd_toolchain" {
   count            = var.create_cd_toolchain ? 1 : 0
-  source           = "git::https://us-south.git.cloud.ibm.com/open-toolchain/terraform-ibm-devsecops-cd-toolchain.git?ref=catalog-beta"
+  source           = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain?ref=v1.0.3"
   ibmcloud_api_key = var.ibmcloud_api_key
 
   toolchain_name           = var.cd_toolchain_name
   toolchain_description    = var.cd_toolchain_description
   toolchain_region         = (var.cd_toolchain_region == "") ? var.toolchain_region : var.cd_toolchain_region
-  toolchain_resource_group = var.cd_toolchain_resource_group
-  registry_namespace       = var.cd_registry_namespace
+  toolchain_resource_group = (var.cd_toolchain_resource_group == "") ? var.toolchain_resource_group : var.cd_toolchain_resource_group
   ibmcloud_api             = var.ibmcloud_api
   compliance_base_image    = var.cd_compliance_base_image
 
@@ -214,12 +212,11 @@ module "devsecops_cd_toolchain" {
   cluster_name                  = var.cd_cluster_name
   cluster_namespace             = var.cd_cluster_namespace
   cluster_region                = var.cd_cluster_region
-  registry_region               = var.cd_registry_region
   repositories_prefix           = var.cd_repositories_prefix
   authorization_policy_creation = var.cd_authorization_policy_creation
   doi_environment               = var.cd_doi_environment
   link_to_doi_toolchain         = var.cd_link_to_doi_toolchain
-  doi_toolchain_id              = var.cd_doi_toolchain_id
+  doi_toolchain_id              = try(module.devsecops_ci_toolchain[0].toolchain_id, var.cd_doi_toolchain_id)
   target_environment_detail     = var.cd_target_environment_detail
   customer_impact               = var.cd_customer_impact
   target_environment_purpose    = var.cd_target_environment_purpose
@@ -253,17 +250,14 @@ module "devsecops_cd_toolchain" {
 }
 
 module "devsecops_cc_toolchain" {
-  count  = var.create_cc_toolchain ? 1 : 0
-  source = "git::https://us-south.git.cloud.ibm.com/open-toolchain/terraform-ibm-devsecops-cc-toolchain.git?ref=catalog-beta"
-
+  count                         = var.create_cc_toolchain ? 1 : 0
+  source                        = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cc-toolchain?ref=v1.0.3"
   ibmcloud_api_key              = var.ibmcloud_api_key
   toolchain_name                = var.cc_toolchain_name
   toolchain_description         = var.cc_toolchain_description
   toolchain_region              = (var.cc_toolchain_region == "") ? var.toolchain_region : var.cc_toolchain_region
-  toolchain_resource_group      = var.cc_toolchain_resource_group
-  registry_namespace            = var.cc_registry_namespace
+  toolchain_resource_group      = (var.cc_toolchain_resource_group == "") ? var.toolchain_resource_group : var.cc_toolchain_resource_group
   ibmcloud_api                  = var.ibmcloud_api
-  registry_region               = var.cc_registry_region
   compliance_base_image         = var.cc_compliance_base_image
   authorization_policy_creation = var.cc_authorization_policy_creation
 
@@ -286,7 +280,7 @@ module "devsecops_cc_toolchain" {
   inventory_repo_git_token_secret_name           = var.cc_inventory_repo_git_token_secret_name
   compliance_pipeline_repo_git_token_secret_name = var.cc_compliance_pipeline_repo_git_token_secret_name
   pipeline_config_repo_git_token_secret_name     = var.cc_pipeline_config_repo_git_token_secret_name
-  deployment_repo_git_token_secret_name          = var.cc_deployment_repo_git_token_secret_name
+  app_repo_git_token_secret_name                 = var.cc_app_repo_git_token_secret_name
   scc_ibmcloud_api_key_secret_name               = var.cc_scc_ibmcloud_api_key_secret_name
   slack_webhook_secret_name                      = var.cc_slack_webhook_secret_name
 
@@ -295,7 +289,7 @@ module "devsecops_cc_toolchain" {
   inventory_repo_auth_type           = var.cc_inventory_repo_auth_type
   issues_repo_auth_type              = var.cc_issues_repo_auth_type
   evidence_repo_auth_type            = var.cc_evidence_repo_auth_type
-  deployment_repo_auth_type          = var.cc_deployment_repo_auth_type
+  app_repo_auth_type                 = var.cc_app_repo_auth_type
   compliance_pipeline_repo_auth_type = var.cc_compliance_pipeline_repo_auth_type
 
   #PIPELINE CONFIG REPO
@@ -310,18 +304,19 @@ module "devsecops_cc_toolchain" {
   evidence_group            = var.cc_evidence_group
   pipeline_config_group     = var.cc_pipeline_config_group
   compliance_pipeline_group = var.cc_compliance_pipeline_group
-  deployment_group          = var.cc_deployment_group
-
-  #deployment_repo                = var.cc_deployment_repo
-  deployment_repo_clone_from_url = var.cc_deployment_repo_clone_from_url
+  app_group                 = var.cc_app_group
 
   doi_environment       = var.cc_doi_environment
   link_to_doi_toolchain = var.cc_link_to_doi_toolchain
 
-  evidence_repo_url   = try(module.devsecops_ci_toolchain[0].evidence_repo_url, var.evidence_repo_url)
-  inventory_repo_url  = try(module.devsecops_ci_toolchain[0].inventory_repo_url, var.inventory_repo_url)
-  issues_repo_url     = try(module.devsecops_ci_toolchain[0].issues_repo_url, var.issues_repo_url)
-  deployment_repo_url = try(module.devsecops_ci_toolchain[0].deployment_repo_url, var.deployment_repo_url)
+  evidence_repo_url  = try(module.devsecops_ci_toolchain[0].evidence_repo_url, var.evidence_repo_url)
+  inventory_repo_url = try(module.devsecops_ci_toolchain[0].inventory_repo_url, var.inventory_repo_url)
+  issues_repo_url    = try(module.devsecops_ci_toolchain[0].issues_repo_url, var.issues_repo_url)
+
+  app_repo_url          = try(module.devsecops_ci_toolchain[0].app_repo_url, var.cc_app_repo_url)
+  app_repo_git_provider = try(module.devsecops_ci_toolchain[0].app_repo_git_provider, var.cc_app_repo_git_provider)
+  app_repo_branch       = try(module.devsecops_ci_toolchain[0].app_repo_branch, var.cc_app_repo_branch)
+  app_repo_git_id       = try(module.devsecops_ci_toolchain[0].app_repo_git_id, var.cc_app_repo_git_id)
 
   #SCC
   scc_enable_scc         = var.cc_scc_enable_scc
@@ -335,7 +330,7 @@ module "devsecops_cc_toolchain" {
   slack_notifications     = var.cc_slack_notifications
   sonarqube_config        = var.cc_sonarqube_config
   repositories_prefix     = var.cc_repositories_prefix
-  doi_toolchain_id        = var.cc_doi_toolchain_id
+  doi_toolchain_id        = try(module.devsecops_ci_toolchain[0].toolchain_id, var.cc_doi_toolchain_id)
   pipeline_debug          = var.cc_pipeline_debug
   opt_in_dynamic_api_scan = var.cc_opt_in_dynamic_api_scan
   opt_in_dynamic_ui_scan  = var.cc_opt_in_dynamic_ui_scan
