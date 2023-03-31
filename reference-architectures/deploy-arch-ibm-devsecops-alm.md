@@ -60,7 +60,7 @@ Out of the box, DevSecOps also leverages popular scanning tools such as SonarQub
 ## Components
 {: #components}
 
-The following components are included to support the requirements. Alternatives are included where they are available and work with this architecture.
+The following components are included that support the requirements. Alternatives are included where they are available and work with this architecture.
 
 
 | Requirement | Component | Reasons for choice | Alternative choice |
