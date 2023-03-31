@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1241px" height="721px" viewBox="0 0 1241 721" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>01_Empty Copy</title>
+    <g id="01_Empty-Copy" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <text id="Components-in-this-s" font-family="IBMPlexSans-Bold, IBM Plex Sans" font-size="20" font-weight="bold" fill="#000000">
+            <tspan x="36" y="66">Components in this solution</tspan>
+        </text>
+        <g id="Frame" transform="translate(36.000000, 110.000000)">
+            <g id="Category-groups" transform="translate(11.000000, 0.000000)">
+                <text id="Category" font-family="IBMPlexSans-Bold, IBM Plex Sans" font-size="14" font-weight="bold" fill="#000000">
+                    <tspan x="44.934" y="14">Category</tspan>
+                </text>
+                <text id="Application" font-family="IBMPlexSans, IBM Plex Sans" font-size="12" font-weight="normal" letter-spacing="0.32" fill="#161616">
+                    <tspan x="39.412" y="60">Application</tspan>
+                </text>
+                <text id="Data" font-family="IBMPlexSans, IBM Plex Sans" font-size="12" font-weight="normal" letter-spacing="0.32" fill="#161616">
+                    <tspan x="77.64" y="110">Data</tspan>
+                </text>
+                <text id="Compute" font-family="IBMPlexSans, IBM Plex Sans" font-size="12" font-weight="normal" letter-spacing="0.32" fill="#161616">
+                    <tspan x="52.584" y="161">Compute</tspan>
+                </text>
+                <text id="Storage" font-family="IBMPlexSans, IBM Plex Sans" font-size="12" font-weight="normal" letter-spacing="0.32" fill="#161616">
+                    <tspan x="60.288" y="211">Storage</tspan>
+                </text>
+                <text id="Networking" font-family="IBMPlexSans, IBM Plex Sans" font-size="12" font-weight="normal" letter-spacing="0.32" fill="#161616">
+                    <tspan x="38.76" y="261">Networking</tspan>
+                </text>
+                <text id="Security" font-family="IBMPlexSans, IBM Plex Sans" font-size="12" font-weight="normal" letter-spacing="0.32" fill="#161616">
+                    <tspan x="57.424" y="311">Security</tspan>
+                </text>
+                <text id="DevOps" font-family="IBMPlexSans, IBM Plex Sans" font-size="12" font-weight="normal" letter-spacing="0.32" fill="#161616">
+                    <tspan x="60.332" y="362">DevOps</tspan>
+                </text>
+                <text id="Resiliency" font-family="IBMPlexSans, IBM Plex Sans" font-size="12" font-weight="normal" letter-spacing="0.32" fill="#161616">
+                    <tspan x="46.176" y="412">Resiliency</tspan>
+                </text>
+                <text id="Service-management" font-family="IBMPlexSans, IBM Plex Sans" font-size="12" font-weight="normal" letter-spacing="0.32" fill="#161616">
+                    <tspan x="62.22" y="454">Service </tspan>
+                    <tspan x="29.748" y="469">management</tspan>
+                </text>
+                <text id="Managed-services" font-family="IBMPlexSans, IBM Plex Sans" font-size="12" font-weight="normal" letter-spacing="0.32" fill="#161616">
+                    <tspan x="2.604" y="508">Managed services</tspan>
+                </text>
+            </g>
+            <g id="Tech-header-and-dividers">
+                <text id="Technology" font-family="IBMPlexSans-Bold, IBM Plex Sans" font-size="14" font-weight="bold" fill="#000000">
+                    <tspan x="151" y="14">Technology</tspan>
+                </text>
+                <line x1="0.5" y1="544.5" x2="1144.5" y2="544.5" id="Line-12" stroke="#C6C6C6" stroke-linecap="square"></line>
+                <line x1="136.5" y1="528.5" x2="136.5" y2="0.5" id="Line-12" stroke="#C6C6C6" stroke-linecap="square"></line>
+            </g>
+            <g id="Key" transform="translate(151.000000, 560.000000)">
+                <rect id="Rectangle" stroke="#0E62FD" fill="#EDF5FF" x="0.5" y="0.5" width="15" height="15"></rect>
+                <text id="Included-in-this-arc" font-family="IBMPlexSans, IBM Plex Sans" font-size="12" font-weight="normal" letter-spacing="0.32" fill="#161616">
+                    <tspan x="24" y="13">Included in this architecture</tspan>
+                </text>
+            </g>
+        </g>
+        <g id="Technology-tile" transform="translate(187.000000, 144.000000)">
+            <rect id="Rectangle" stroke="#A8A8A8" x="0.5" y="0.5" width="134" height="41"></rect>
+            <text id="Text" font-family="IBMPlexSans, IBM Plex Sans" font-size="12" font-weight="normal" letter-spacing="0.32" fill="#161616">
+                <tspan x="11" y="12">Mobile</tspan>
+            </text>
+        </g>
+        <g id="Technology-tile" transform="translate(187.000000, 194.000000)">
+            <rect id="Rectangle" stroke="#A8A8A8" x="0.5" y="0.5" width="134" height="41"></rect>
+            <text id="Text" font-family="IBMPlexSans, IBM Plex Sans" font-size="12" font-weight="normal" letter-spacing="0.32" fill="#161616">
+                <tspan x="11" y="12">Application </tspan>
+                <tspan x="11" y="27">integration</tspan>
+            </text>
+        </g>
+        <g id="Technology-tile" transform="translate(187.000000, 246.000000)">
+            <rect id="Rectangle" stroke="#A8A8A8" x="0.5" y="0.5" width="134" height="41"></rect>
+            <text id="Text" font-family="IBMPlexSans, IBM Plex Sans" font-size="12" font-weight="normal" letter-spacing="0.32" fill="#161616">
+                <tspan x="11" y="12">Bare metal server</tspan>
+            </text>
+        </g>
+        <g id="Technology-tile" transform="translate(187.000000, 295.000000)">
+            <rect id="Rectangle" stroke="#A8A8A8" x="0.5" y="0.5" width="134" height="41"></rect>
+            <text id="Text" font-family="IBMPlexSans, IBM Plex Sans" font-size="12" font-weight="normal" letter-spacing="0.32" fill="#161616">
+                <tspan x="11" y="12">Primary storage</tspan>
+            </text>
+        </g>
+        <g id="Technology-tile" transform="translate(187.000000, 395.000000)">
+            <rect id="Rectangle" stroke="#A8A8A8" x="0.5" y="0.5" width="134" height="41"></rect>
+            <text id="Text" font-family="IBMPlexSans, IBM Plex Sans" font-size="12" font-weight="normal" letter-spacing="0.32" fill="#161616">
+                <tspan x="11" y="12">Data security</tspan>
+            </text>
+        </g>
+        <g id="Technology-tile" transform="translate(187.000000, 446.000000)">
+            <rect id="Rectangle" stroke="#0E62FD" fill="#EDF5FF" x="0.5" y="0.5" width="134" height="41"></rect>
+            <text id="Text" font-family="IBMPlexSans-Bold, IBM Plex Sans" font-size="12" font-weight="bold" letter-spacing="0.32" fill="#161616">
+                <tspan x="11" y="12">Build &amp; test</tspan>
+            </text>
+        </g>
+        <g id="Technology-tile" transform="translate(330.000000, 446.000000)">
+            <rect id="Rectangle" stroke="#0E62FD" fill="#EDF5FF" x="0.5" y="0.5" width="134" height="41"></rect>
+            <text id="Text" font-family="IBMPlexSans-Bold, IBM Plex Sans" font-size="12" font-weight="bold" letter-spacing="0.32" fill="#161616">
+                <tspan x="11" y="12">Delivery pipeline</tspan>
+            </text>
+        </g>
+        <g id="Technology-tile" transform="translate(473.000000, 446.000000)">
+            <rect id="Rectangle" stroke="#0E62FD" fill="#EDF5FF" x="0.5" y="0.5" width="134" height="41"></rect>
+            <text id="Text" font-family="IBMPlexSans-Bold, IBM Plex Sans" font-size="12" font-weight="bold" letter-spacing="0.32" fill="#161616">
+                <tspan x="11" y="12">Code repository</tspan>
+            </text>
+        </g>
+        <g id="Technology-tile" transform="translate(187.000000, 496.000000)">
+            <rect id="Rectangle" stroke="#A8A8A8" x="0.5" y="0.5" width="134" height="41"></rect>
+            <text id="Text" font-family="IBMPlexSans, IBM Plex Sans" font-size="12" font-weight="normal" letter-spacing="0.32" fill="#161616">
+                <tspan x="11" y="12">Backup</tspan>
+            </text>
+        </g>
+        <g id="Technology-tile" transform="translate(330.000000, 496.000000)">
+            <rect id="Rectangle" stroke="#A8A8A8" x="0.5" y="0.5" width="134" height="41"></rect>
+            <text id="Text" font-family="IBMPlexSans, IBM Plex Sans" font-size="12" font-weight="normal" letter-spacing="0.32" fill="#161616">
+                <tspan x="11" y="12">Disaster recovery</tspan>
+            </text>
+        </g>
+        <g id="Technology-tile" transform="translate(473.000000, 496.000000)">
+            <rect id="Rectangle" stroke="#A8A8A8" x="0.5" y="0.5" width="134" height="41"></rect>
+            <text id="Text" font-family="IBMPlexSans, IBM Plex Sans" font-size="12" font-weight="normal" letter-spacing="0.32" fill="#161616">
+                <tspan x="11" y="12">High availability</tspan>
+            </text>
+        </g>
+        <g id="Technology-tile" transform="translate(187.000000, 546.000000)">
+            <rect id="Rectangle" stroke="#A8A8A8" x="0.5" y="0.5" width="134" height="41"></rect>
+            <text id="Text" font-family="IBMPlexSans, IBM Plex Sans" font-size="12" font-weight="normal" letter-spacing="0.32" fill="#161616">
+                <tspan x="11" y="12">Monitoring</tspan>
+            </text>
+        </g>
+        <g id="Technology-tile" transform="translate(330.000000, 546.000000)">
+            <rect id="Rectangle" stroke="#A8A8A8" x="0.5" y="0.5" width="134" height="41"></rect>
+            <text id="Text" font-family="IBMPlexSans, IBM Plex Sans" font-size="12" font-weight="normal" letter-spacing="0.32" fill="#161616">
+                <tspan x="11" y="12">Logging</tspan>
+            </text>
+        </g>
+        <g id="Technology-tile" transform="translate(473.000000, 546.000000)">
+            <rect id="Rectangle" stroke="#0E62FD" fill="#EDF5FF" x="0.5" y="0.5" width="134" height="41"></rect>
+            <text id="Text" font-family="IBMPlexSans-Bold, IBM Plex Sans" font-size="12" font-weight="bold" letter-spacing="0.32" fill="#161616">
+                <tspan x="11" y="12">Auditing/</tspan>
+                <tspan x="11" y="27">tracking</tspan>
+            </text>
+        </g>
+        <g id="Technology-tile" transform="translate(616.000000, 546.000000)">
+            <rect id="Rectangle" stroke="#A8A8A8" x="0.5" y="0.5" width="134" height="41"></rect>
+            <text id="Text" font-family="IBMPlexSans, IBM Plex Sans" font-size="12" font-weight="normal" letter-spacing="0.32" fill="#161616">
+                <tspan x="11" y="12">Alerting</tspan>
+            </text>
+        </g>
+        <g id="Technology-tile" transform="translate(759.000000, 546.000000)">
+            <rect id="Rectangle" stroke="#A8A8A8" x="0.5" y="0.5" width="134" height="41"></rect>
+            <text id="Text" font-family="IBMPlexSans, IBM Plex Sans" font-size="12" font-weight="normal" letter-spacing="0.32" fill="#161616">
+                <tspan x="11" y="12">Event </tspan>
+                <tspan x="11" y="27">management</tspan>
+            </text>
+        </g>
+        <g id="Technology-tile" transform="translate(902.000000, 546.000000)">
+            <rect id="Rectangle" stroke="#0E62FD" fill="#EDF5FF" x="0.5" y="0.5" width="134" height="41"></rect>
+            <text id="Text" font-family="IBMPlexSans-Bold, IBM Plex Sans" font-size="12" font-weight="bold" letter-spacing="0.32" fill="#161616">
+                <tspan x="11" y="12">Automated </tspan>
+                <tspan x="11" y="27">deployment</tspan>
+            </text>
+        </g>
+        <g id="Technology-tile" transform="translate(187.000000, 596.000000)">
+            <rect id="Rectangle" stroke="#A8A8A8" x="0.5" y="0.5" width="134" height="41"></rect>
+            <text id="Text" font-family="IBMPlexSans, IBM Plex Sans" font-size="12" font-weight="normal" letter-spacing="0.32" fill="#161616">
+                <tspan x="11" y="12">Advise</tspan>
+            </text>
+        </g>
+        <g id="Technology-tile" transform="translate(330.000000, 596.000000)">
+            <rect id="Rectangle" stroke="#A8A8A8" x="0.5" y="0.5" width="134" height="41"></rect>
+            <text id="Text" font-family="IBMPlexSans, IBM Plex Sans" font-size="12" font-weight="normal" letter-spacing="0.32" fill="#161616">
+                <tspan x="11" y="12">Move</tspan>
+            </text>
+        </g>
+        <g id="Technology-tile" transform="translate(473.000000, 596.000000)">
+            <rect id="Rectangle" stroke="#A8A8A8" x="0.5" y="0.5" width="134" height="41"></rect>
+            <text id="Text" font-family="IBMPlexSans, IBM Plex Sans" font-size="12" font-weight="normal" letter-spacing="0.32" fill="#161616">
+                <tspan x="11" y="12">Build</tspan>
+            </text>
+        </g>
+        <g id="Technology-tile" transform="translate(616.000000, 596.000000)">
+            <rect id="Rectangle" stroke="#A8A8A8" x="0.5" y="0.5" width="134" height="41"></rect>
+            <text id="Text" font-family="IBMPlexSans, IBM Plex Sans" font-size="12" font-weight="normal" letter-spacing="0.32" fill="#161616">
+                <tspan x="11" y="12">Manage</tspan>
+            </text>
+        </g>
+        <g id="Technology-tile" transform="translate(330.000000, 395.000000)">
+            <rect id="Rectangle" stroke="#0E62FD" fill="#EDF5FF" x="0.5" y="0.5" width="134" height="41"></rect>
+            <text id="Text" font-family="IBMPlexSans-Bold, IBM Plex Sans" font-size="12" font-weight="bold" letter-spacing="0.32" fill="#161616">
+                <tspan x="11" y="12">Identity &amp; access</tspan>
+            </text>
+        </g>
+        <g id="Technology-tile" transform="translate(330.000000, 144.000000)">
+            <rect id="Rectangle" stroke="#A8A8A8" x="0.5" y="0.5" width="134" height="41"></rect>
+            <text id="Text" font-family="IBMPlexSans, IBM Plex Sans" font-size="12" font-weight="normal" letter-spacing="0.32" fill="#161616">
+                <tspan x="11" y="12">IoT</tspan>
+            </text>
+        </g>
+        <g id="Technology-tile" transform="translate(473.000000, 144.000000)">
+            <rect id="Rectangle" stroke="#A8A8A8" x="0.5" y="0.5" width="134" height="41"></rect>
+            <text id="Text" font-family="IBMPlexSans, IBM Plex Sans" font-size="12" font-weight="normal" letter-spacing="0.32" fill="#161616">
+                <tspan x="11" y="12">Artificial </tspan>
+                <tspan x="11" y="27">intelligence</tspan>
+            </text>
+        </g>
+        <g id="Technology-tile" transform="translate(759.000000, 144.000000)">
+            <rect id="Rectangle" stroke="#0E62FD" fill="#EDF5FF" x="0.5" y="0.5" width="134" height="41"></rect>
+            <text id="Text" font-family="IBMPlexSans-Bold, IBM Plex Sans" font-size="12" font-weight="bold" letter-spacing="0.32" fill="#161616">
+                <tspan x="11" y="12">Enterprise </tspan>
+                <tspan x="11" y="27">applications</tspan>
+            </text>
+        </g>
+        <g id="Technology-tile" transform="translate(330.000000, 194.000000)">
+            <rect id="Rectangle" stroke="#A8A8A8" x="0.5" y="0.5" width="134" height="41"></rect>
+            <text id="Text" font-family="IBMPlexSans, IBM Plex Sans" font-size="12" font-weight="normal" letter-spacing="0.32" fill="#161616">
+                <tspan x="11" y="12">Governance</tspan>
+            </text>
+        </g>
+        <g id="Technology-tile" transform="translate(330.000000, 246.000000)">
+            <rect id="Rectangle" stroke="#0E62FD" fill="#EDF5FF" x="0.5" y="0.5" width="134" height="41"></rect>
+            <text id="Text" font-family="IBMPlexSans-Bold, IBM Plex Sans" font-size="12" font-weight="bold" letter-spacing="0.32" fill="#161616">
+                <tspan x="11" y="12">Virtual servers</tspan>
+            </text>
+        </g>
+        <g id="Technology-tile" transform="translate(473.000000, 194.000000)">
+            <rect id="Rectangle" stroke="#A8A8A8" x="0.5" y="0.5" width="134" height="41"></rect>
+            <text id="Text" font-family="IBMPlexSans, IBM Plex Sans" font-size="12" font-weight="normal" letter-spacing="0.32" fill="#161616">
+                <tspan x="11" y="12">Analytics</tspan>
+            </text>
+        </g>
+        <g id="Technology-tile" transform="translate(616.000000, 194.000000)">
+            <rect id="Rectangle" stroke="#A8A8A8" x="0.5" y="0.5" width="134" height="41"></rect>
+            <text id="Text" font-family="IBMPlexSans, IBM Plex Sans" font-size="12" font-weight="normal" letter-spacing="0.32" fill="#161616">
+                <tspan x="11" y="12">Databases</tspan>
+            </text>
+        </g>
+        <g id="Technology-tile" transform="translate(616.000000, 245.000000)">
+            <rect id="Rectangle" stroke="#0E62FD" fill="#EDF5FF" x="0.5" y="0.5" width="134" height="41"></rect>
+            <text id="Text" font-family="IBMPlexSans-Bold, IBM Plex Sans" font-size="12" font-weight="bold" letter-spacing="0.32" fill="#161616">
+                <tspan x="11" y="12">Containers</tspan>
+            </text>
+        </g>
+        <g id="Technology-tile" transform="translate(616.000000, 295.000000)">
+            <rect id="Rectangle" stroke="#A8A8A8" x="0.5" y="0.5" width="134" height="41"></rect>
+            <text id="Text" font-family="IBMPlexSans, IBM Plex Sans" font-size="12" font-weight="normal" letter-spacing="0.32" fill="#161616">
+                <tspan x="11" y="12">Data migration</tspan>
+            </text>
+        </g>
+        <g id="Technology-tile" transform="translate(616.000000, 345.000000)">
+            <rect id="Rectangle" stroke="#A8A8A8" x="0.5" y="0.5" width="134" height="41"></rect>
+            <text id="Text" font-family="IBMPlexSans, IBM Plex Sans" font-size="12" font-weight="normal" letter-spacing="0.32" fill="#161616">
+                <tspan x="11" y="12">Cloud native </tspan>
+                <tspan x="11" y="27">connectivity</tspan>
+            </text>
+        </g>
+        <g id="Technology-tile" transform="translate(759.000000, 345.000000)">
+            <rect id="Rectangle" stroke="#A8A8A8" x="0.5" y="0.5" width="134" height="41"></rect>
+            <text id="Text" font-family="IBMPlexSans, IBM Plex Sans" font-size="12" font-weight="normal" letter-spacing="0.32" fill="#161616">
+                <tspan x="11" y="12">Network </tspan>
+                <tspan x="11" y="27">segmentation</tspan>
+            </text>
+        </g>
+        <g id="Technology-tile" transform="translate(759.000000, 245.000000)">
+            <rect id="Rectangle" stroke="#A8A8A8" x="0.5" y="0.5" width="134" height="41"></rect>
+            <text id="Text" font-family="IBMPlexSans, IBM Plex Sans" font-size="12" font-weight="normal" letter-spacing="0.32" fill="#161616">
+                <tspan x="11" y="12">Cloud Foundry</tspan>
+            </text>
+        </g>
+        <g id="Technology-tile" transform="translate(902.000000, 245.000000)">
+            <rect id="Rectangle" stroke="#0E62FD" fill="#EDF5FF" x="0.5" y="0.5" width="134" height="41"></rect>
+            <text id="Text" font-family="IBMPlexSans-Bold, IBM Plex Sans" font-size="12" font-weight="bold" letter-spacing="0.32" fill="#161616">
+                <tspan x="11" y="12">Serverless</tspan>
+            </text>
+        </g>
+        <g id="Technology-tile" transform="translate(902.000000, 345.000000)">
+            <rect id="Rectangle" stroke="#A8A8A8" x="0.5" y="0.5" width="134" height="41"></rect>
+            <text id="Text" font-family="IBMPlexSans, IBM Plex Sans" font-size="12" font-weight="normal" letter-spacing="0.32" fill="#161616">
+                <tspan x="11" y="12">CDN</tspan>
+            </text>
+        </g>
+        <g id="Technology-tile" transform="translate(616.000000, 144.000000)">
+            <rect id="Rectangle" stroke="#A8A8A8" x="0.5" y="0.5" width="134" height="41"></rect>
+            <text id="Text" font-family="IBMPlexSans, IBM Plex Sans" font-size="12" font-weight="normal" letter-spacing="0.32" fill="#161616">
+                <tspan x="11" y="12">Blockchain</tspan>
+            </text>
+        </g>
+        <g id="Technology-tile" transform="translate(759.000000, 194.000000)">
+            <rect id="Rectangle" stroke="#A8A8A8" x="0.5" y="0.5" width="134" height="41"></rect>
+            <text id="Text" font-family="IBMPlexSans, IBM Plex Sans" font-size="12" font-weight="normal" letter-spacing="0.32" fill="#161616">
+                <tspan x="11" y="12">Reporting &amp; </tspan>
+                <tspan x="11" y="27">visualization</tspan>
+            </text>
+        </g>
+        <g id="Technology-tile" transform="translate(473.000000, 246.000000)">
+            <rect id="Rectangle" stroke="#A8A8A8" x="0.5" y="0.5" width="134" height="41"></rect>
+            <text id="Text" font-family="IBMPlexSans, IBM Plex Sans" font-size="12" font-weight="normal" letter-spacing="0.32" fill="#161616">
+                <tspan x="11" y="12">VMware</tspan>
+            </text>
+        </g>
+        <g id="Technology-tile" transform="translate(330.000000, 295.000000)">
+            <rect id="Rectangle" stroke="#A8A8A8" x="0.5" y="0.5" width="134" height="41"></rect>
+            <text id="Text" font-family="IBMPlexSans, IBM Plex Sans" font-size="12" font-weight="normal" letter-spacing="0.32" fill="#161616">
+                <tspan x="11" y="12">Backup</tspan>
+            </text>
+        </g>
+        <g id="Technology-tile" transform="translate(473.000000, 295.000000)">
+            <rect id="Rectangle" stroke="#A8A8A8" x="0.5" y="0.5" width="134" height="41"></rect>
+            <text id="Text" font-family="IBMPlexSans, IBM Plex Sans" font-size="12" font-weight="normal" letter-spacing="0.32" fill="#161616">
+                <tspan x="11" y="12">Archive</tspan>
+            </text>
+        </g>
+        <g id="Technology-tile" transform="translate(473.000000, 345.000000)">
+            <rect id="Rectangle" stroke="#A8A8A8" x="0.5" y="0.5" width="134" height="41"></rect>
+            <text id="Text" font-family="IBMPlexSans, IBM Plex Sans" font-size="12" font-weight="normal" letter-spacing="0.32" fill="#161616">
+                <tspan x="11" y="12">Load balancing</tspan>
+            </text>
+        </g>
+        <g id="Technology-tile" transform="translate(473.000000, 395.000000)">
+            <rect id="Rectangle" stroke="#0E62FD" fill="#EDF5FF" x="0.5" y="0.5" width="134" height="41"></rect>
+            <text id="Text" font-family="IBMPlexSans-Bold, IBM Plex Sans" font-size="12" font-weight="bold" letter-spacing="0.32" fill="#161616">
+                <tspan x="11" y="12">Application </tspan>
+                <tspan x="11" y="27">security</tspan>
+            </text>
+        </g>
+        <g id="Technology-tile" transform="translate(616.000000, 395.000000)">
+            <rect id="Rectangle" stroke="#A8A8A8" x="0.5" y="0.5" width="134" height="41"></rect>
+            <text id="Text" font-family="IBMPlexSans, IBM Plex Sans" font-size="12" font-weight="normal" letter-spacing="0.32" fill="#161616">
+                <tspan x="11" y="12">Infrastructure &amp; </tspan>
+                <tspan x="11" y="27">endpoints</tspan>
+            </text>
+        </g>
+        <g id="Technology-tile" transform="translate(759.000000, 395.000000)">
+            <rect id="Rectangle" stroke="#A8A8A8" x="0.5" y="0.5" width="134" height="41"></rect>
+            <text id="Text" font-family="IBMPlexSans, IBM Plex Sans" font-size="12" font-weight="normal" letter-spacing="0.32" fill="#161616">
+                <tspan x="11" y="12">Threat detection </tspan>
+                <tspan x="11" y="27">&amp; response</tspan>
+            </text>
+        </g>
+        <g id="Technology-tile" transform="translate(902.000000, 395.000000)">
+            <rect id="Rectangle" stroke="#0E62FD" fill="#EDF5FF" x="0.5" y="0.5" width="134" height="41"></rect>
+            <text id="Text" font-family="IBMPlexSans-Bold, IBM Plex Sans" font-size="12" font-weight="bold" letter-spacing="0.32" fill="#161616">
+                <tspan x="11" y="12">Governance, risk </tspan>
+                <tspan x="11" y="27">&amp; compliance</tspan>
+            </text>
+        </g>
+        <g id="Technology-tile" transform="translate(1045.000000, 345.000000)">
+            <rect id="Rectangle" stroke="#A8A8A8" x="0.5" y="0.5" width="134" height="41"></rect>
+            <text id="Text" font-family="IBMPlexSans, IBM Plex Sans" font-size="12" font-weight="normal" letter-spacing="0.32" fill="#161616">
+                <tspan x="11" y="12">DNS</tspan>
+            </text>
+        </g>
+        <g id="Technology-tile" transform="translate(1045.000000, 546.000000)">
+            <rect id="Rectangle" stroke="#A8A8A8" x="0.5" y="0.5" width="134" height="41"></rect>
+            <text id="Text" font-family="IBMPlexSans, IBM Plex Sans" font-size="12" font-weight="normal" letter-spacing="0.32" fill="#161616">
+                <tspan x="11" y="12">Management</tspan>
+            </text>
+        </g>
+        <g id="Technology-tile" transform="translate(187.000000, 345.000000)">
+            <rect id="Rectangle" stroke="#A8A8A8" x="0.5" y="0.5" width="134" height="41"></rect>
+            <text id="Text" font-family="IBMPlexSans, IBM Plex Sans" font-size="12" font-weight="normal" letter-spacing="0.32" fill="#161616">
+                <tspan x="11" y="12">Enterprise </tspan>
+                <tspan x="11" y="27">connectivity</tspan>
+            </text>
+        </g>
+        <g id="Technology-tile" transform="translate(330.000000, 345.000000)">
+            <rect id="Rectangle" stroke="#A8A8A8" x="0.5" y="0.5" width="134" height="41"></rect>
+            <text id="Text" font-family="IBMPlexSans, IBM Plex Sans" font-size="12" font-weight="normal" letter-spacing="0.32" fill="#161616">
+                <tspan x="11" y="12">BYOIP/Edge </tspan>
+                <tspan x="11" y="27">Gateway</tspan>
+            </text>
+        </g>
+    </g>
+</svg>
