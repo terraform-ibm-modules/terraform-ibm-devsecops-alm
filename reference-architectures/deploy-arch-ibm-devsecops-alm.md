@@ -17,7 +17,7 @@ deployment-url: url
 
 docs: https://cloud.ibm.com/docs/solution-guide
 
-image_source: https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-alm/reference-architectures/deploy-arch-ibm-devsecops-alm.svg
+image_source: https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-alm/reference-architectures/diagram-deploy-arch-ibm-devsecops-alm-diagram.svg
 
 related_links:
   - title: 'DevSecOps for IBM Cloud'
@@ -57,14 +57,14 @@ deployment tools such as Satellite Config.
 ## Architecture diagram
 {: #architecture-diagram}
 
-WiP
-
-![Enter image alt text here.](example-architecture-diagram.svg "Title text that shows on hover here"){: caption="Figure 1. A description that prints on the page" caption-side="bottom"}
+![DevSecOps Application Lifecycle Management Arch Diagram](diagram-deploy-arch-ibm-devsecops-alm-diagram.svg "Architecture diagram for DevSecOps Application Lifecycle Management Deployable Architecture "){: caption="Figure 1. Architecture diagram for a set of DevSecOps CI/CD/CC toolchains using the Continuous Delivery service on IBM Cloud" caption-side="bottom"}
 
 ## Design requirements
 {: #design-requirements}
 
-WiP
+![Design requirements for the DevSecOps Application Lifecycle Management](heat-map-deploy-arch-ibm-devsecops-alm.svg "Design requirements"){: caption="Figure 2. Scope of the design requirements" caption-side="bottom"}
+
+
 
 ## Components
 {: #components}
@@ -76,7 +76,9 @@ If the architecture is large and includes several rows of the heat map, consider
 
 | Requirement | Component | Reasons for choice | Alternative choice |
 |-------------|-----------|--------------------|--------------------|
-|             |           |                    |                    |
+|     Continuous Integration Toolchain        |    Toolchain Service       |        The continuous integration toolchain and pipelines tests, scans and builds the deployable artifacts from the application repositories.             |                    |
+|     Continuous Deployment Toolchain         |    Toolchain Service       |        The continuous deployment toolchain and pipeline generates all of the evidence and change request summary content. The pipeline deploys the build artifacts to an environment, such as staging or production, and then collects, creates, and uploads all existing log files, evidence, and artifacts to the evidence locker.           |                    |
+|     Continuous Compliance Toolchain         |    Toolchain Service       |        The continuous compliance toolchain and pipeline periodically scans the deployed artifacts and their source repositories.            |                    |
 {: caption="Table 1. Architecture decisions" caption-side="bottom"}
 
 Note: The caption is required only if you're publishing the reference architecture in IBM Cloud Docs.
