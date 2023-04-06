@@ -49,7 +49,7 @@ Out of the box, DevSecOps also leverages popular scanning tools such as SonarQub
 ## Architecture diagram
 {: #architecture-diagram}
 
-![DevSecOps Application Lifecycle Management Arch Diagram](diagram-deploy-arch-ibm-devsecops-alm-diagram.svg "Architecture diagram for DevSecOps Application Lifecycle Management Deployable Architecture "){: caption="Figure 1. Architecture diagram for a set of DevSecOps CI/CD/CC toolchains using the Continuous Delivery service on IBM Cloud" caption-side="bottom"}
+![DevSecOps Application Lifecycle Management Arch Diagram](diagram-deploy-arch-ibm-devsecops-alm-diagram.svg "Architecture diagram for DevSecOps Application Lifecycle Management Deployable Architecture "){: caption="Figure 1. Architecture diagram for a set of DevSecOps CI/CD/CC toolchains using the Continuous Delivery service on IBM Cloud" caption-side="bottom"}{: external download="diagram-deploy-arch-ibm-devsecops-alm-diagram.svg"}
 
 ## Design requirements
 {: #design-requirements}
