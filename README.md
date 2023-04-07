@@ -102,12 +102,7 @@ See also [Required IAM access policies](#iamaccess).
 
 ## Reference architectures
 
-<!--
-Add links to any reference architectures for this module.
-(Usually in the `/reference-architectures` directory.)
-See "Reference architecture" in Authoring Guidelines in the public documentation at
-https://terraform-ibm-modules.github.io/documentation/#/implementation-guidelines?id=reference-architecture
--->
+![Architecture diagram for 'DevSecOps CI, CD, CC toolchains'.](/reference-architectures/diagram-deploy-arch-ibm-devsecops-alm-diagram.svg "Architecture diagram")
 
 ## Usage
 
