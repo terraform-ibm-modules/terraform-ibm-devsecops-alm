@@ -7,13 +7,13 @@
 
 variable "ibmcloud_api" {
   type        = string
-  description = "IBM Cloud API Endpoint"
+  description = "IBM Cloud API Endpoint."
   default     = "https://cloud.ibm.com"
 }
 
 variable "toolchain_region" {
   type        = string
-  description = "IBM Cloud region where your toolchain will be created"
+  description = "IBM Cloud region where your toolchain is be created."
   default     = "us-south"
 }
 
@@ -44,38 +44,38 @@ variable "issues_repo_url" {
 # tflint-ignore: terraform_unused_declarations
 variable "deployment_repo_url" {
   type        = string
-  description = "This is the repository to clone deployment for DevSecOps toolchain template"
+  description = "This is the repository to clone deployment for DevSecOps toolchain template."
   default     = ""
 }
 
 variable "ibmcloud_api_key" {
   type        = string
-  description = "IBM Cloud API KEY to fetch/post cloud resources in terraform. Not used in the pipeline, where a secret reference is used instead."
+  description = "API key used to create the toolchains. (See deployment guide.)"
   sensitive   = true
 }
 
 #SECRET PROVIDERS
 variable "sm_location" {
   type        = string
-  description = "The region location of the Secrets Manager instance"
+  description = "The region location of the Secrets Manager instance."
   default     = "us-south"
 }
 
 variable "sm_name" {
   type        = string
-  description = "The name of the Secret Managers instance"
+  description = "The name of the Secret Managers instance."
   default     = "sm-instance"
 }
 
 variable "sm_resource_group" {
   type        = string
-  description = "The resource group containing the Secrets Manager instance"
+  description = "The resource group containing the Secrets Manager instance."
   default     = "Default"
 }
 
 variable "sm_secret_group" {
   type        = string
-  description = "The secrets secret group in Secrets Manager"
+  description = "Group in Secrets Manager for organizing/grouping secrets."
   default     = "Default"
 }
 
@@ -97,24 +97,37 @@ variable "kp_location" {
   default     = "us-south"
 }
 
+variable "enable_key_protect" {
+  type        = bool
+  description = "Set to enable Key Protect Integrations. "
+  default     = false
+}
+
+variable "enable_secrets_manager" {
+  description = "Enable the Secrets Manager integrations."
+  type        = bool
+  default     = true
+}
+
 variable "toolchain_resource_group" {
   type        = string
-  description = "The resource group within which the toolchain will be created."
+  description = "The resource group within which the toolchain is created."
   default     = "Default"
 }
+
 
 ##### END OF COMMON VARIABLES ############
 ##### START OF CI VARIABLES ##############
 
 variable "ci_toolchain_resource_group" {
   type        = string
-  description = "The resource group within which the toolchain will be created."
+  description = "The resource group within which the toolchain is created."
   default     = ""
 }
 
 variable "ci_toolchain_name" {
   type        = string
-  description = "The name of the Toolchain."
+  description = "The name of the CI Toolchain."
   default     = "DevSecOps CI Toolchain - Terraform"
 }
 
@@ -126,7 +139,7 @@ variable "ci_toolchain_region" {
 
 variable "ci_toolchain_description" {
   type        = string
-  description = "Description for the Toolchain."
+  description = "Description for the CI Toolchain."
   default     = "Toolchain created with terraform template for DevSecOps CI Best Practices."
 }
 
@@ -138,19 +151,19 @@ variable "ci_app_name" {
 
 variable "ci_cluster_name" {
   type        = string
-  description = "Name of the Kubernetes cluster where the application will be deployed."
+  description = "Name of the Kubernetes cluster where the application is deployed. (can be the same cluster used for prod)"
   default     = "mycluster-free"
 }
 
 variable "ci_cluster_namespace" {
   type        = string
-  description = "Name of the Kubernetes cluster namespace where the application will be deployed."
-  default     = "default"
+  description = "Name of the Kubernetes cluster namespace where the application is deployed."
+  default     = "dev"
 }
 
 variable "ci_dev_region" {
   type        = string
-  description = "Region of the Kubernetes cluster where the application will be deployed."
+  description = "Region of the Kubernetes cluster where the application is deployed."
   default     = "ibm:yp:us-south"
 }
 
@@ -162,13 +175,13 @@ variable "ci_dev_resource_group" {
 
 variable "ci_registry_namespace" {
   type        = string
-  description = "Unique namespace within the IBM Cloud Container Registry where application image need to be stored."
+  description = "A unique namespace within the IBM Cloud Container Registry region where the application image is stored."
   default     = ""
 }
 
 variable "ci_registry_region" {
   type        = string
-  description = "IBM Cloud Region where the IBM Cloud Container Registry namespace is to be created."
+  description = "The IBM Cloud Region where the IBM Cloud Container Registry namespace is to be created."
   default     = "ibm:yp:us-south"
 }
 
@@ -187,7 +200,7 @@ variable "ci_authorization_policy_creation" {
 variable "ci_repositories_prefix" {
   type        = string
   description = "Prefix name for the cloned compliance repos."
-  default     = "compliance-tf"
+  default     = "compliance"
 }
 
 variable "create_ci_toolchain" {
@@ -197,14 +210,14 @@ variable "create_ci_toolchain" {
 }
 
 variable "ci_link_to_doi_toolchain" {
-  description = "Enable a link to a DevOps Insights instance in another toolchain, true or false."
+  description = "Enable a link to a DevOps Insights instance in another toolchain."
   type        = bool
   default     = false
 }
 
 variable "ci_doi_toolchain_id" {
   type        = string
-  description = "DevOps Insights Toolchain ID to link to."
+  description = "DevOps Insights toolchain ID to link to."
   default     = ""
 }
 
@@ -250,7 +263,7 @@ variable "ci_deployment_target" {
 
 variable "ci_code_engine_project" {
   type        = string
-  description = "The name of the Code Engine project to use (or create)"
+  description = "The name of the Code Engine project to use (or create)."
   default     = "DevSecOps_CE"
 }
 
@@ -290,25 +303,25 @@ variable "ci_code_engine_source" {
 
 variable "ci_app_repo_clone_from_url" {
   type        = string
-  description = "Override the default sample app by providing your own sample app url, which will be cloned into the app repo. Note, using clone_if_not_exists mode, so if the app repo already exists the repo contents are unchanged."
+  description = "Override the default sample app by providing your own sample app URL, which is cloned into the app repo. Note, using clone_if_not_exists mode, so if the app repo already exists the repo contents are unchanged."
   default     = ""
 }
 
 variable "ci_app_repo_clone_from_branch" {
   type        = string
-  description = "Used when app_repo_clone_from_url is provided, the default branch that will be used by the CI build, usually either main or master."
+  description = "Used when app_repo_clone_from_url is provided, the default branch that is used by the CI build, usually either main or master."
   default     = ""
 }
 
 variable "ci_app_repo_existing_url" {
   type        = string
-  description = "Override to bring your own existing application repository URL, which will be used directly instead of cloning the default sample."
+  description = "Override to bring your own existing application repository URL, which is used directly instead of cloning the default sample."
   default     = ""
 }
 
 variable "ci_app_repo_existing_branch" {
   type        = string
-  description = "Used when app_repo_existing_url is provided, the default branch that will be used by the CI build, usually either main or master."
+  description = "Used when app_repo_existing_url is provided, the default branch that is used by the CI build, usually either main or master."
   default     = ""
 }
 
@@ -341,19 +354,19 @@ variable "ci_app_repo_clone_to_git_id" {
 variable "ci_enable_key_protect" {
   type        = bool
   description = "Set to enable Key Protect Integration. "
-  default     = false
+  default     = null
 }
 
 variable "ci_enable_secrets_manager" {
   type        = bool
   description = "Set to enable Secrets Manager Integration."
-  default     = true
+  default     = null
 }
 
 variable "ci_sm_secret_group" {
   type        = string
   description = "The Secrets Manager secret group containing your secrets."
-  default     = "Default"
+  default     = ""
 }
 
 variable "ci_sm_resource_group" {
@@ -461,37 +474,37 @@ variable "ci_compliance_pipeline_group" {
 
 variable "ci_pipeline_config_repo_auth_type" {
   type        = string
-  description = "Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat'."
+  description = "Select the method of authentication that is used to access the Git provider. 'oauth' or 'pat'."
   default     = "oauth"
 }
 
 variable "ci_inventory_repo_auth_type" {
   type        = string
-  description = "Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat'."
+  description = "Select the method of authentication that is used to access the Git provider. 'oauth' or 'pat'."
   default     = "oauth"
 }
 
 variable "ci_issues_repo_auth_type" {
   type        = string
-  description = "Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat'."
+  description = "Select the method of authentication that is used to access the Git provider. 'oauth' or 'pat'."
   default     = "oauth"
 }
 
 variable "ci_evidence_repo_auth_type" {
   type        = string
-  description = "Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat'."
+  description = "Select the method of authentication that is used to access the Git provider. 'oauth' or 'pat'."
   default     = "oauth"
 }
 
 variable "ci_app_repo_auth_type" {
   type        = string
-  description = "Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat'."
+  description = "Select the method of authentication that is used to access the Git provider. 'oauth' or 'pat'."
   default     = "oauth"
 }
 
 variable "ci_compliance_pipeline_repo_auth_type" {
   type        = string
-  description = "Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat'."
+  description = "Select the method of authentication that is used to access the Git provider. 'oauth' or 'pat'."
   default     = "oauth"
 }
 
@@ -619,7 +632,7 @@ variable "ci_enable_slack" {
 
 variable "ci_slack_channel_name" {
   type        = string
-  description = "The Slack channel that notifications will be posted to."
+  description = "The Slack channel that notifications is posted to."
   default     = "my-channel"
 }
 
@@ -662,13 +675,13 @@ variable "ci_slack_toolchain_unbind" {
 #COS INTEGRATION
 variable "ci_cos_endpoint" {
   type        = string
-  description = "COS endpoint name"
+  description = "COS endpoint name."
   default     = ""
 }
 
 variable "ci_cos_bucket_name" {
   type        = string
-  description = "COS bucket name"
+  description = "COS bucket name."
   default     = ""
 }
 
@@ -677,13 +690,13 @@ variable "ci_cos_bucket_name" {
 
 variable "cd_toolchain_resource_group" {
   type        = string
-  description = "Resource group within which toolchain will be created."
+  description = "Resource group within which toolchain is created."
   default     = ""
 }
 
 variable "cd_toolchain_name" {
   type        = string
-  description = "Name of the Toolchain."
+  description = "The name of the CD Toolchain."
   default     = "DevSecOps CD Toolchain - Terraform"
 }
 
@@ -695,25 +708,25 @@ variable "cd_toolchain_region" {
 
 variable "cd_toolchain_description" {
   type        = string
-  description = "Description for the Toolchain."
+  description = "Description for the CD toolchain."
   default     = "Toolchain created with terraform template for DevSecOps CD Best Practices."
 }
 
 variable "cd_cluster_name" {
   type        = string
-  description = "Name of the Kubernetes cluster where the application will be deployed."
+  description = "Name of the Kubernetes cluster where the application is deployed."
   default     = "mycluster-free"
 }
 
 variable "cd_cluster_namespace" {
   type        = string
-  description = "Name of the Kubernetes cluster namespace where the application will be deployed."
+  description = "Name of the Kubernetes cluster namespace where the application is deployed."
   default     = "prod"
 }
 
 variable "cd_cluster_region" {
   type        = string
-  description = "Region of the Kubernetes cluster where the application will be deployed."
+  description = "Region of the Kubernetes cluster where the application is deployed."
   default     = "ibm:yp:us-south"
 }
 
@@ -731,7 +744,7 @@ variable "cd_change_management_repo" {
 
 variable "cd_change_repo_clone_from_url" {
   type        = string
-  description = "Override the default management repo , which will be cloned into the app repo. Note, using clone_if_not_exists mode, so if the app repo already exists the repo contents are unchanged."
+  description = "Override the default management repo , which is cloned into the app repo. Note, using clone_if_not_exists mode, so if the app repo already exists the repo contents are unchanged."
   default     = ""
 }
 
@@ -760,29 +773,29 @@ variable "cd_deployment_repo_clone_to_git_id" {
 }
 variable "cd_deployment_repo_clone_from_url" {
   type        = string
-  description = "Override the default sample app by providing your own sample deployment url, which will be cloned into the app repo. Note, using clone_if_not_exists mode, so if the app repo already exists the repo contents are unchanged."
+  description = "Override the default sample app by providing your own sample deployment URL, which is cloned into the app repo. Note, using clone_if_not_exists mode, so if the app repo already exists the repo contents are unchanged."
   default     = ""
 }
 
 variable "cd_deployment_repo_clone_from_branch" {
   type        = string
-  description = "Used when deployment_repo_clone_from_url is provided, the default branch that will be used by the CD build, usually either main or master."
+  description = "Used when deployment_repo_clone_from_url is provided, the default branch that is used by the CD build, usually either main or master."
   default     = ""
 }
 variable "cd_deployment_repo_existing_url" {
   type        = string
-  description = "Override to bring your own existing deployment repository URL, which will be used directly instead of cloning the default deployment sample."
+  description = "Override to bring your own existing deployment repository URL, which is used directly instead of cloning the default deployment sample."
   default     = ""
 }
 variable "cd_deployment_repo_existing_branch" {
   type        = string
-  description = "Used when deployment_repo_existing_url is provided, the default branch that will be used by the CD build, usually either main or master."
+  description = "Used when deployment_repo_existing_url is provided, the default branch that is by the CD build, usually either main or master."
   default     = ""
 }
 
 variable "cd_deployment_group" {
   type        = string
-  description = "Specify group for deployment"
+  description = "Specify group for deployment."
   default     = ""
 }
 
@@ -801,7 +814,7 @@ variable "cd_authorization_policy_creation" {
 variable "cd_repositories_prefix" {
   type        = string
   description = "Prefix name for the cloned compliance repos."
-  default     = "compliance-tf"
+  default     = "compliance"
 }
 
 variable "cd_compliance_base_image" {
@@ -812,7 +825,7 @@ variable "cd_compliance_base_image" {
 
 variable "cd_doi_toolchain_id" {
   type        = string
-  description = "DevOps Insights Toolchain ID to link to."
+  description = "DevOps Insights toolchain ID to link to."
   default     = ""
 }
 
@@ -837,19 +850,19 @@ variable "create_cd_toolchain" {
 variable "cd_enable_key_protect" {
   description = "Use the Key Protect integration."
   type        = bool
-  default     = false
+  default     = null
 }
 
 variable "cd_enable_secrets_manager" {
   description = "Use the Secrets Manager integration."
   type        = bool
-  default     = true
+  default     = null
 }
 
 variable "cd_sm_secret_group" {
   type        = string
   description = "The Secrets Manager secret group containing your secrets."
-  default     = "Default"
+  default     = ""
 }
 
 variable "cd_sm_resource_group" {
@@ -890,7 +903,7 @@ variable "cd_kp_location" {
 
 variable "cd_pipeline_config_repo_existing_url" {
   type        = string
-  description = "Specify a repository containing a custom pipeline-config.yaml file"
+  description = "Specify a repository containing a custom pipeline-config.yaml file."
   default     = ""
 }
 
@@ -902,7 +915,7 @@ variable "cd_pipeline_config_repo_clone_from_url" {
 
 variable "cd_pipeline_config_repo_branch" {
   type        = string
-  description = "Specify the branch containing the custom pipeline-config.yaml file"
+  description = "Specify the branch containing the custom pipeline-config.yaml file."
   default     = ""
 }
 
@@ -949,43 +962,43 @@ variable "cd_compliance_pipeline_group" {
 
 variable "cd_pipeline_config_repo_auth_type" {
   type        = string
-  description = "Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat'."
+  description = "Select the method of authentication that is used to access the Git provider. 'oauth' or 'pat'."
   default     = "oauth"
 }
 
 variable "cd_inventory_repo_auth_type" {
   type        = string
-  description = "Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat'."
+  description = "Select the method of authentication that is used to access the Git provider. 'oauth' or 'pat'."
   default     = "oauth"
 }
 
 variable "cd_issues_repo_auth_type" {
   type        = string
-  description = "Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat'."
+  description = "Select the method of authentication that is used to access the Git provider. 'oauth' or 'pat'."
   default     = "oauth"
 }
 
 variable "cd_evidence_repo_auth_type" {
   type        = string
-  description = "Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat'."
+  description = "Select the method of authentication that is used to access the Git provider. 'oauth' or 'pat'."
   default     = "oauth"
 }
 
 variable "cd_deployment_repo_auth_type" {
   type        = string
-  description = "Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat'."
+  description = "Select the method of authentication that is used to access the Git provider. 'oauth' or 'pat'."
   default     = "oauth"
 }
 
 variable "cd_compliance_pipeline_repo_auth_type" {
   type        = string
-  description = "Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat'."
+  description = "Select the method of authentication that is used to access the Git provider. 'oauth' or 'pat'."
   default     = "oauth"
 }
 
 variable "cd_change_management_repo_auth_type" {
   type        = string
-  description = "Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat'."
+  description = "Select the method of authentication that is used to access the Git provider. 'oauth' or 'pat'."
   default     = "oauth"
 }
 
@@ -1097,7 +1110,7 @@ variable "cd_scc_trigger_scan" {
 
 variable "cd_slack_notifications" {
   type        = string
-  description = "The switch that turns the Slack integration on or off."
+  description = "The switch to turn the Slack integration on or off."
   default     = "0"
 }
 
@@ -1195,7 +1208,7 @@ variable "cd_enable_slack" {
 
 variable "cd_slack_channel_name" {
   type        = string
-  description = "The Slack channel that notifications will be posted to."
+  description = "The Slack channel that notifications is posted to."
   default     = "my-channel"
 }
 
@@ -1238,13 +1251,13 @@ variable "cd_slack_toolchain_unbind" {
 #COS
 variable "cd_cos_endpoint" {
   type        = string
-  description = "COS endpoint name"
+  description = "COS endpoint name."
   default     = ""
 }
 
 variable "cd_cos_bucket_name" {
   type        = string
-  description = "COS bucket name"
+  description = "COS bucket name."
   default     = ""
 }
 
@@ -1253,13 +1266,13 @@ variable "cd_cos_bucket_name" {
 
 variable "cc_toolchain_resource_group" {
   type        = string
-  description = "Resource group within which toolchain will be created."
+  description = "Resource group within which the toolchain is created."
   default     = ""
 }
 
 variable "cc_toolchain_name" {
   type        = string
-  description = "Name of the Toolchain."
+  description = "The name of the CC Toolchain."
   default     = "DevSecOps CC Toolchain - Terraform"
 }
 
@@ -1271,7 +1284,7 @@ variable "cc_toolchain_region" {
 
 variable "cc_toolchain_description" {
   type        = string
-  description = "Description for the Toolchain."
+  description = "Description for the CC Toolchain."
   default     = "Toolchain created with terraform template for DevSecOps CC Best Practices."
 }
 
@@ -1296,19 +1309,19 @@ variable "create_cc_toolchain" {
 variable "cc_enable_key_protect" {
   description = "Enable the Key Protect integration."
   type        = bool
-  default     = false
+  default     = null
 }
 
 variable "cc_enable_secrets_manager" {
   description = "Enable the Secrets Manager integration."
   type        = bool
-  default     = true
+  default     = null
 }
 
 variable "cc_sm_secret_group" {
   type        = string
   description = "The Secrets Manager secret group containing your secrets."
-  default     = "Default"
+  default     = ""
 }
 
 variable "cc_sm_resource_group" {
@@ -1438,37 +1451,37 @@ variable "cc_compliance_pipeline_group" {
 
 variable "cc_pipeline_config_repo_auth_type" {
   type        = string
-  description = "Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat'."
+  description = "Select the method of authentication that is used to access the Git provider. 'oauth' or 'pat'."
   default     = "oauth"
 }
 
 variable "cc_inventory_repo_auth_type" {
   type        = string
-  description = "Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat'."
+  description = "Select the method of authentication that is used to access the Git provider. 'oauth' or 'pat'."
   default     = "oauth"
 }
 
 variable "cc_issues_repo_auth_type" {
   type        = string
-  description = "Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat'."
+  description = "Select the method of authentication that is used to access the Git provider. 'oauth' or 'pat'."
   default     = "oauth"
 }
 
 variable "cc_evidence_repo_auth_type" {
   type        = string
-  description = "Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat'"
+  description = "Select the method of authentication that is used to access the Git provider. 'oauth' or 'pat'"
   default     = "oauth"
 }
 
 variable "cc_app_repo_auth_type" {
   type        = string
-  description = "Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat'."
+  description = "Select the method of authentication that is used to access the Git provider. 'oauth' or 'pat'."
   default     = "oauth"
 }
 
 variable "cc_compliance_pipeline_repo_auth_type" {
   type        = string
-  description = "Select the method of authentication that will be used to access the git provider. 'oauth' or 'pat'."
+  description = "Select the method of authentication that is used to access the Git provider. 'oauth' or 'pat'."
   default     = "oauth"
 }
 
@@ -1600,7 +1613,7 @@ variable "cc_enable_slack" {
 
 variable "cc_slack_channel_name" {
   type        = string
-  description = "The Slack channel that notifications will be posted to."
+  description = "The Slack channel that notifications is posted to."
   default     = "my-channel"
 }
 
@@ -1655,14 +1668,14 @@ variable "cc_cos_bucket_name" {
 
 variable "cc_doi_toolchain_id" {
   type        = string
-  description = "DevOps Insights Toolchain ID to link to."
+  description = "DevOps Insights toolchain ID to link to."
   default     = ""
 }
 
 variable "cc_repositories_prefix" {
   type        = string
   description = "The prefix for the compliance repositories."
-  default     = "compliance-tf"
+  default     = "compliance"
 }
 
 variable "cc_compliance_base_image" {
