@@ -11,7 +11,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1437
+        "line": 1425
       }
     },
     "cc_app_repo_auth_type": {
@@ -24,7 +24,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1476
+        "line": 1464
       }
     },
     "cc_app_repo_branch": {
@@ -34,7 +34,7 @@
       "default": "master",
       "pos": {
         "filename": "variables.tf",
-        "line": 1399
+        "line": 1387
       }
     },
     "cc_app_repo_git_id": {
@@ -44,7 +44,7 @@
       "default": "",
       "pos": {
         "filename": "variables.tf",
-        "line": 1405
+        "line": 1393
       }
     },
     "cc_app_repo_git_provider": {
@@ -54,7 +54,7 @@
       "default": "hostedgit",
       "pos": {
         "filename": "variables.tf",
-        "line": 1393
+        "line": 1381
       }
     },
     "cc_app_repo_git_token_secret_name": {
@@ -67,7 +67,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1534
+        "line": 1522
       }
     },
     "cc_app_repo_url": {
@@ -77,7 +77,7 @@
       "default": "",
       "pos": {
         "filename": "variables.tf",
-        "line": 1387
+        "line": 1375
       }
     },
     "cc_authorization_policy_creation": {
@@ -92,7 +92,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1687
+        "line": 1675
       }
     },
     "cc_compliance_base_image": {
@@ -107,7 +107,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1681
+        "line": 1669
       },
       "max_length": 4096,
       "matches": "^.*$"
@@ -122,7 +122,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1443
+        "line": 1431
       }
     },
     "cc_compliance_pipeline_repo_auth_type": {
@@ -135,7 +135,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1482
+        "line": 1470
       }
     },
     "cc_compliance_pipeline_repo_git_token_secret_name": {
@@ -148,7 +148,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1522
+        "line": 1510
       }
     },
     "cc_cos_api_key_secret_name": {
@@ -162,7 +162,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1498
+        "line": 1486
       },
       "max_length": 4096,
       "matches": "^.*$"
@@ -178,7 +178,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1663
+        "line": 1651
       },
       "max_length": 4096,
       "matches": "^.*$"
@@ -194,7 +194,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1657
+        "line": 1645
       },
       "max_length": 4096,
       "matches": "^.*$"
@@ -210,7 +210,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1291
+        "line": 1279
       },
       "max_length": 4096,
       "matches": "^.*$"
@@ -222,7 +222,7 @@
       "default": "",
       "pos": {
         "filename": "variables.tf",
-        "line": 1669
+        "line": 1657
       }
     },
     "cc_enable_key_protect": {
@@ -238,7 +238,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1309
+        "line": 1297
       }
     },
     "cc_enable_secrets_manager": {
@@ -254,7 +254,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1315
+        "line": 1303
       }
     },
     "cc_enable_slack": {
@@ -268,7 +268,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1608
+        "line": 1596
       }
     },
     "cc_environment_tag": {
@@ -282,7 +282,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1723
+        "line": 1711
       },
       "max_length": 4096,
       "matches": "^.*$"
@@ -297,7 +297,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1425
+        "line": 1413
       }
     },
     "cc_evidence_repo_auth_type": {
@@ -310,7 +310,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1470
+        "line": 1458
       }
     },
     "cc_evidence_repo_git_token_secret_name": {
@@ -323,7 +323,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1510
+        "line": 1498
       }
     },
     "cc_inventory_group": {
@@ -336,7 +336,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1419
+        "line": 1407
       }
     },
     "cc_inventory_repo_auth_type": {
@@ -349,7 +349,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1458
+        "line": 1446
       }
     },
     "cc_inventory_repo_git_token_secret_name": {
@@ -362,7 +362,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1516
+        "line": 1504
       }
     },
     "cc_issues_group": {
@@ -375,7 +375,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1413
+        "line": 1401
       }
     },
     "cc_issues_repo_auth_type": {
@@ -388,7 +388,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1464
+        "line": 1452
       }
     },
     "cc_issues_repo_git_token_secret_name": {
@@ -401,7 +401,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1504
+        "line": 1492
       }
     },
     "cc_kp_location": {
@@ -416,7 +416,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1357
+        "line": 1345
       },
       "cloud_data_type": "region",
       "computed": true
@@ -433,7 +433,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1351
+        "line": 1339
       }
     },
     "cc_kp_resource_group": {
@@ -448,7 +448,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1345
+        "line": 1333
       },
       "cloud_data_type": "resource_group",
       "computed": true,
@@ -467,7 +467,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1297
+        "line": 1285
       }
     },
     "cc_opt_in_auto_close": {
@@ -481,7 +481,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1717
+        "line": 1705
       },
       "max_length": 4096,
       "matches": "^.*$"
@@ -497,7 +497,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1699
+        "line": 1687
       },
       "max_length": 4096,
       "matches": "^.*$"
@@ -513,7 +513,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1711
+        "line": 1699
       },
       "max_length": 4096,
       "matches": "^.*$"
@@ -529,7 +529,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1705
+        "line": 1693
       },
       "max_length": 4096,
       "matches": "^.*$"
@@ -544,7 +544,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1431
+        "line": 1419
       }
     },
     "cc_pipeline_config_path": {
@@ -558,7 +558,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1381
+        "line": 1369
       },
       "max_length": 4096,
       "matches": "^.*$"
@@ -573,7 +573,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1452
+        "line": 1440
       }
     },
     "cc_pipeline_config_repo_branch": {
@@ -586,7 +586,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1375
+        "line": 1363
       }
     },
     "cc_pipeline_config_repo_clone_from_url": {
@@ -601,7 +601,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1369
+        "line": 1357
       }
     },
     "cc_pipeline_config_repo_existing_url": {
@@ -616,7 +616,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1363
+        "line": 1351
       }
     },
     "cc_pipeline_config_repo_git_token_secret_name": {
@@ -629,7 +629,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1528
+        "line": 1516
       }
     },
     "cc_pipeline_debug": {
@@ -643,7 +643,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1693
+        "line": 1681
       },
       "max_length": 4096,
       "matches": "^.*$"
@@ -659,7 +659,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1492
+        "line": 1480
       },
       "max_length": 4096,
       "matches": "^.*$"
@@ -674,7 +674,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1675
+        "line": 1663
       }
     },
     "cc_scc_enable_scc": {
@@ -688,7 +688,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1568
+        "line": 1556
       }
     },
     "cc_scc_evidence_namespace": {
@@ -701,7 +701,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1574
+        "line": 1562
       }
     },
     "cc_scc_ibmcloud_api_key_secret_name": {
@@ -714,7 +714,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1540
+        "line": 1528
       }
     },
     "cc_scc_integration_name": {
@@ -727,7 +727,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1562
+        "line": 1550
       }
     },
     "cc_scc_profile": {
@@ -740,7 +740,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1550
+        "line": 1538
       }
     },
     "cc_scc_scope": {
@@ -753,7 +753,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1556
+        "line": 1544
       }
     },
     "cc_scc_trigger_scan": {
@@ -766,7 +766,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1580
+        "line": 1568
       }
     },
     "cc_slack_channel_name": {
@@ -779,7 +779,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1614
+        "line": 1602
       }
     },
     "cc_slack_notifications": {
@@ -793,7 +793,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1588
+        "line": 1576
       },
       "max_length": 4096,
       "matches": "^.*$"
@@ -808,7 +808,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1626
+        "line": 1614
       }
     },
     "cc_slack_pipeline_start": {
@@ -821,7 +821,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1632
+        "line": 1620
       }
     },
     "cc_slack_pipeline_success": {
@@ -834,7 +834,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1638
+        "line": 1626
       }
     },
     "cc_slack_team_name": {
@@ -847,7 +847,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1620
+        "line": 1608
       }
     },
     "cc_slack_toolchain_bind": {
@@ -860,7 +860,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1644
+        "line": 1632
       }
     },
     "cc_slack_toolchain_unbind": {
@@ -873,7 +873,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1650
+        "line": 1638
       }
     },
     "cc_slack_webhook_secret_name": {
@@ -886,7 +886,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1602
+        "line": 1590
       }
     },
     "cc_sm_location": {
@@ -901,7 +901,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1339
+        "line": 1327
       },
       "cloud_data_type": "region",
       "computed": true
@@ -918,7 +918,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1333
+        "line": 1321
       }
     },
     "cc_sm_resource_group": {
@@ -933,7 +933,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1327
+        "line": 1315
       },
       "cloud_data_type": "resource_group",
       "computed": true,
@@ -951,7 +951,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1321
+        "line": 1309
       }
     },
     "cc_sonarqube_config": {
@@ -965,7 +965,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1594
+        "line": 1582
       },
       "max_length": 4096,
       "matches": "^.*$"
@@ -980,7 +980,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1285
+        "line": 1273
       },
       "max_length": 500,
       "matches": "^(.*?)$"
@@ -996,7 +996,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1273
+        "line": 1261
       },
       "max_length": 128,
       "matches": "^([^\\x00-\\x7F]|[a-zA-Z0-9-._ ])+$"
@@ -1011,7 +1011,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1279
+        "line": 1267
       }
     },
     "cc_toolchain_resource_group": {
@@ -1024,7 +1024,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1267
+        "line": 1255
       },
       "cloud_data_type": "resource_group",
       "computed": true,
@@ -1043,7 +1043,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1178
+        "line": 1172
       },
       "max_length": 4096,
       "matches": "^.*$"
@@ -1060,7 +1060,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 808
+        "line": 802
       }
     },
     "cd_change_management_group": {
@@ -1073,7 +1073,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 802
+        "line": 796
       }
     },
     "cd_change_management_repo": {
@@ -1086,7 +1086,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 739
+        "line": 733
       }
     },
     "cd_change_management_repo_auth_type": {
@@ -1099,7 +1099,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 999
+        "line": 993
       }
     },
     "cd_change_management_repo_git_token_secret_name": {
@@ -1112,7 +1112,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1063
+        "line": 1057
       }
     },
     "cd_change_repo_clone_from_url": {
@@ -1125,7 +1125,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 745
+        "line": 739
       }
     },
     "cd_change_request_id": {
@@ -1139,7 +1139,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1136
+        "line": 1130
       },
       "max_length": 4096,
       "matches": "^.*$"
@@ -1207,7 +1207,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 820
+        "line": 814
       },
       "max_length": 4096,
       "matches": "^.*$"
@@ -1222,7 +1222,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 954
+        "line": 948
       }
     },
     "cd_compliance_pipeline_repo_auth_type": {
@@ -1235,7 +1235,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 993
+        "line": 987
       }
     },
     "cd_compliance_pipeline_repo_git_token_secret_name": {
@@ -1248,7 +1248,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1039
+        "line": 1033
       }
     },
     "cd_cos_api_key_secret_name": {
@@ -1262,7 +1262,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1015
+        "line": 1009
       },
       "max_length": 4096,
       "matches": "^.*$"
@@ -1278,7 +1278,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1258
+        "line": 1246
       },
       "max_length": 4096,
       "matches": "^.*$"
@@ -1294,7 +1294,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1252
+        "line": 1240
       },
       "max_length": 4096,
       "matches": "^.*$"
@@ -1310,7 +1310,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1124
+        "line": 1118
       },
       "max_length": 4096,
       "matches": "^.*$"
@@ -1325,20 +1325,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 796
-      }
-    },
-    "cd_deployment_repo": {
-      "name": "cd_deployment_repo",
-      "type": "string",
-      "description": "This repository contains scripts to perform deployment of a docker container for simple Node.js microservice using reference DevSecOps toolchain templates.",
-      "default": "",
-      "source": [
-        "module.devsecops_cd_toolchain"
-      ],
-      "pos": {
-        "filename": "variables.tf",
-        "line": 733
+        "line": 790
       }
     },
     "cd_deployment_repo_auth_type": {
@@ -1351,7 +1338,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 987
+        "line": 981
       }
     },
     "cd_deployment_repo_clone_from_branch": {
@@ -1364,7 +1351,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 780
+        "line": 774
       }
     },
     "cd_deployment_repo_clone_from_url": {
@@ -1377,7 +1364,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 774
+        "line": 768
       }
     },
     "cd_deployment_repo_clone_to_git_id": {
@@ -1390,7 +1377,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 769
+        "line": 763
       }
     },
     "cd_deployment_repo_clone_to_git_provider": {
@@ -1403,7 +1390,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 763
+        "line": 757
       }
     },
     "cd_deployment_repo_existing_branch": {
@@ -1416,7 +1403,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 790
+        "line": 784
       }
     },
     "cd_deployment_repo_existing_git_id": {
@@ -1429,7 +1416,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 757
+        "line": 751
       }
     },
     "cd_deployment_repo_existing_git_provider": {
@@ -1442,7 +1429,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 751
+        "line": 745
       }
     },
     "cd_deployment_repo_existing_url": {
@@ -1455,7 +1442,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 785
+        "line": 779
       }
     },
     "cd_deployment_repo_git_token_secret_name": {
@@ -1468,7 +1455,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1057
+        "line": 1051
       }
     },
     "cd_doi_environment": {
@@ -1482,7 +1469,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 832
+        "line": 826
       },
       "max_length": 4096,
       "matches": "^.*$"
@@ -1494,7 +1481,7 @@
       "default": "",
       "pos": {
         "filename": "variables.tf",
-        "line": 826
+        "line": 820
       }
     },
     "cd_emergency_label": {
@@ -1508,7 +1495,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1172
+        "line": 1166
       },
       "max_length": 4096,
       "matches": "^.*$"
@@ -1526,7 +1513,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 850
+        "line": 844
       }
     },
     "cd_enable_secrets_manager": {
@@ -1542,7 +1529,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 856
+        "line": 850
       }
     },
     "cd_enable_slack": {
@@ -1556,7 +1543,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1203
+        "line": 1191
       }
     },
     "cd_evidence_group": {
@@ -1569,7 +1556,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 942
+        "line": 936
       }
     },
     "cd_evidence_repo_auth_type": {
@@ -1582,7 +1569,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 981
+        "line": 975
       }
     },
     "cd_evidence_repo_git_token_secret_name": {
@@ -1595,7 +1582,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1027
+        "line": 1021
       }
     },
     "cd_inventory_group": {
@@ -1608,7 +1595,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 936
+        "line": 930
       }
     },
     "cd_inventory_repo_auth_type": {
@@ -1621,7 +1608,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 969
+        "line": 963
       }
     },
     "cd_inventory_repo_git_token_secret_name": {
@@ -1634,7 +1621,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1033
+        "line": 1027
       }
     },
     "cd_issues_group": {
@@ -1647,7 +1634,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 930
+        "line": 924
       }
     },
     "cd_issues_repo_auth_type": {
@@ -1660,7 +1647,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 975
+        "line": 969
       }
     },
     "cd_issues_repo_git_token_secret_name": {
@@ -1673,7 +1660,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1021
+        "line": 1015
       }
     },
     "cd_kp_location": {
@@ -1688,7 +1675,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 898
+        "line": 892
       },
       "cloud_data_type": "region",
       "computed": true
@@ -1705,7 +1692,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 892
+        "line": 886
       }
     },
     "cd_kp_resource_group": {
@@ -1720,7 +1707,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 886
+        "line": 880
       },
       "cloud_data_type": "resource_group",
       "computed": true,
@@ -1739,7 +1726,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 838
+        "line": 832
       }
     },
     "cd_merge_cra_sbom": {
@@ -1753,7 +1740,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1160
+        "line": 1154
       },
       "max_length": 4096,
       "matches": "^.*$"
@@ -1769,7 +1756,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1166
+        "line": 1160
       },
       "max_length": 4096,
       "matches": "^.*$"
@@ -1784,7 +1771,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 948
+        "line": 942
       }
     },
     "cd_pipeline_config_path": {
@@ -1798,7 +1785,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 922
+        "line": 916
       },
       "max_length": 4096,
       "matches": "^.*$"
@@ -1813,7 +1800,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 963
+        "line": 957
       }
     },
     "cd_pipeline_config_repo_branch": {
@@ -1826,7 +1813,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 916
+        "line": 910
       }
     },
     "cd_pipeline_config_repo_clone_from_url": {
@@ -1841,7 +1828,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 910
+        "line": 904
       }
     },
     "cd_pipeline_config_repo_existing_url": {
@@ -1856,7 +1843,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 904
+        "line": 898
       }
     },
     "cd_pipeline_config_repo_git_token_secret_name": {
@@ -1869,7 +1856,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1045
+        "line": 1039
       }
     },
     "cd_pipeline_debug": {
@@ -1882,7 +1869,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1184
+        "line": 1178
       }
     },
     "cd_pipeline_ibmcloud_api_key_secret_name": {
@@ -1896,23 +1883,10 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1009
+        "line": 1003
       },
       "max_length": 4096,
       "matches": "^.*$"
-    },
-    "cd_region": {
-      "name": "cd_region",
-      "type": "string",
-      "description": "The target region where the app is deployed.",
-      "default": "",
-      "source": [
-        "module.devsecops_cd_toolchain"
-      ],
-      "pos": {
-        "filename": "variables.tf",
-        "line": 1190
-      }
     },
     "cd_repositories_prefix": {
       "name": "cd_repositories_prefix",
@@ -1924,7 +1898,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 814
+        "line": 808
       }
     },
     "cd_satellite_cluster_group": {
@@ -1938,7 +1912,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1142
+        "line": 1136
       },
       "max_length": 4096,
       "matches": "^.*$"
@@ -1954,7 +1928,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1091
+        "line": 1085
       }
     },
     "cd_scc_evidence_namespace": {
@@ -1967,7 +1941,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1097
+        "line": 1091
       }
     },
     "cd_scc_ibmcloud_api_key_secret_name": {
@@ -1980,7 +1954,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1051
+        "line": 1045
       }
     },
     "cd_scc_integration_name": {
@@ -1993,7 +1967,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1085
+        "line": 1079
       }
     },
     "cd_scc_profile": {
@@ -2006,7 +1980,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1073
+        "line": 1067
       }
     },
     "cd_scc_scope": {
@@ -2019,7 +1993,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1079
+        "line": 1073
       }
     },
     "cd_scc_trigger_scan": {
@@ -2032,7 +2006,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1103
+        "line": 1097
       }
     },
     "cd_slack_channel_name": {
@@ -2045,7 +2019,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1209
+        "line": 1197
       }
     },
     "cd_slack_notifications": {
@@ -2058,7 +2032,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1111
+        "line": 1105
       }
     },
     "cd_slack_pipeline_fail": {
@@ -2071,7 +2045,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1221
+        "line": 1209
       }
     },
     "cd_slack_pipeline_start": {
@@ -2084,7 +2058,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1227
+        "line": 1215
       }
     },
     "cd_slack_pipeline_success": {
@@ -2097,7 +2071,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1233
+        "line": 1221
       }
     },
     "cd_slack_team_name": {
@@ -2110,7 +2084,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1215
+        "line": 1203
       }
     },
     "cd_slack_toolchain_bind": {
@@ -2123,7 +2097,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1239
+        "line": 1227
       }
     },
     "cd_slack_toolchain_unbind": {
@@ -2136,7 +2110,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1245
+        "line": 1233
       }
     },
     "cd_slack_webhook_secret_name": {
@@ -2149,7 +2123,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1197
+        "line": 1185
       }
     },
     "cd_sm_location": {
@@ -2164,7 +2138,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 880
+        "line": 874
       },
       "cloud_data_type": "region",
       "computed": true
@@ -2181,7 +2155,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 874
+        "line": 868
       }
     },
     "cd_sm_resource_group": {
@@ -2196,7 +2170,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 868
+        "line": 862
       },
       "cloud_data_type": "resource_group",
       "computed": true,
@@ -2214,7 +2188,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 862
+        "line": 856
       }
     },
     "cd_source_environment": {
@@ -2228,7 +2202,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1148
+        "line": 1142
       },
       "max_length": 4096,
       "matches": "^.*$"
@@ -2244,7 +2218,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1154
+        "line": 1148
       },
       "max_length": 4096,
       "matches": "^.*$"
@@ -2260,7 +2234,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1118
+        "line": 1112
       },
       "max_length": 4096,
       "matches": "^.*$"
@@ -2276,7 +2250,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1130
+        "line": 1124
       },
       "max_length": 4096,
       "matches": "^.*$"
@@ -3697,7 +3671,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1303
+        "line": 1291
       }
     },
     "create_cd_toolchain": {
@@ -3710,7 +3684,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 844
+        "line": 838
       }
     },
     "create_ci_toolchain": {
@@ -4167,7 +4141,7 @@
       },
       "pos": {
         "filename": "main.tf",
-        "line": 252
+        "line": 249
       }
     },
     "devsecops_cd_toolchain": {
@@ -4195,7 +4169,6 @@
         "count": "create_cd_toolchain",
         "customer_impact": "cd_customer_impact",
         "deployment_group": "cd_deployment_group",
-        "deployment_repo": "cd_deployment_repo",
         "deployment_repo_auth_type": "cd_deployment_repo_auth_type",
         "deployment_repo_clone_from_branch": "cd_deployment_repo_clone_from_branch",
         "deployment_repo_clone_from_url": "cd_deployment_repo_clone_from_url",
@@ -4237,7 +4210,6 @@
         "pipeline_config_repo_git_token_secret_name": "cd_pipeline_config_repo_git_token_secret_name",
         "pipeline_debug": "cd_pipeline_debug",
         "pipeline_ibmcloud_api_key_secret_name": "cd_pipeline_ibmcloud_api_key_secret_name",
-        "region": "cd_region",
         "repositories_prefix": "cd_repositories_prefix",
         "satellite_cluster_group": "cd_satellite_cluster_group",
         "scc_enable_scc": "cd_scc_enable_scc",
