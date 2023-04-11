@@ -1,0 +1,17 @@
+
+# APIKEY to run the Terraform script
+#ibmcloud_api_key        = ""
+toolchain_resource_group = "Default"
+toolchain_region         = "us-south"
+
+sm_name                  = "sm-compliance-secrets"
+sm_location              = "eu-gb"
+sm_resource_group        = "Default"
+sm_secret_group          = "Default"
+
+ci_registry_namespace    = "my-namespace"
+ci_registry_region       = "ibm:yp:jp-tok"
+ci_cluster_name          = "mycluster-free"
+ci_dev_region            = "ibm:yp:jp-tok"
+ci_dev_resource_group    = "Default"
+cd_cluster_name          = "mycluster-free"

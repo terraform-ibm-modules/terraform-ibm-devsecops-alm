@@ -88,7 +88,7 @@ variable "kp_resource_group" {
 variable "kp_name" {
   type        = string
   description = "Name of the Key Protect instance where the secrets are stored."
-  default     = "kp-compliance-secrets"
+  default     = "prodkeys"
 }
 
 variable "kp_location" {
@@ -341,13 +341,13 @@ variable "ci_app_repo_clone_to_git_id" {
 variable "ci_enable_key_protect" {
   type        = bool
   description = "Set to enable Key Protect Integration. "
-  default     = false
+  default     = true
 }
 
 variable "ci_enable_secrets_manager" {
   type        = bool
   description = "Set to enable Secrets Manager Integration."
-  default     = true
+  default     = false
 }
 
 variable "ci_sm_secret_group" {
@@ -831,7 +831,7 @@ variable "cd_link_to_doi_toolchain" {
 variable "create_cd_toolchain" {
   description = "Boolean flag which determines if the DevSecOps CD toolchain is created."
   type        = bool
-  default     = true
+  default     = false
 }
 
 variable "cd_enable_key_protect" {
@@ -1290,7 +1290,7 @@ variable "cc_link_to_doi_toolchain" {
 variable "create_cc_toolchain" {
   description = "Boolean flag which determines if the DevSecOps CC toolchain is created."
   type        = bool
-  default     = true
+  default     = false
 }
 
 variable "cc_enable_key_protect" {
