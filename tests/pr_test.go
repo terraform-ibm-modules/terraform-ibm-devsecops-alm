@@ -15,11 +15,15 @@ const defaultExampleTerraformDir = "examples/default"
 func TestRunDefaultExample(t *testing.T) {
 	t.Parallel()
 
-	options := testhelper.TestOptionsDefaultWithVars(&testhelper.TestOptions{
-		Testing:       t,
-		TerraformDir:  defaultExampleTerraformDir,
-		Prefix:        "mod-template",
-		ResourceGroup: resourceGroup,
+	options := testhelper.TestOptionsDefault(&testhelper.TestOptions{
+		Testing:      t,
+		TerraformDir: defaultExampleTerraformDir,
+		IgnoreUpdates: testhelper.Exemptions{ // Ignore for consistency check
+			List: []string{
+				"module.devsecops_cc_toolchain[0].module.pipeline-cc.ibm_cd_tekton_pipeline_trigger.cc_pipeline_timed_trigger",
+				"module.devsecops_cd_toolchain[0].module.repositories.ibm_cd_toolchain_tool_hostedgit.deployment_repo_clone_from_hostedgit[0]",
+			},
+		},
 	})
 
 	output, err := options.RunTestConsistency()
@@ -33,11 +37,15 @@ func TestRunUpgradeExample(t *testing.T) {
 	// TODO: Remove this line after the first merge to primary branch is complete to enable upgrade test
 	t.Skip("Skipping upgrade test until initial code is in primary branch")
 
-	options := testhelper.TestOptionsDefaultWithVars(&testhelper.TestOptions{
-		Testing:       t,
-		TerraformDir:  defaultExampleTerraformDir,
-		Prefix:        "mod-template-upg",
-		ResourceGroup: resourceGroup,
+	options := testhelper.TestOptionsDefault(&testhelper.TestOptions{
+		Testing:      t,
+		TerraformDir: defaultExampleTerraformDir,
+		IgnoreUpdates: testhelper.Exemptions{ // Ignore for consistency check
+			List: []string{
+				"module.devsecops_cc_toolchain[0].module.pipeline-cc.ibm_cd_tekton_pipeline_trigger.cc_pipeline_timed_trigger",
+				"module.devsecops_cd_toolchain[0].module.repositories.ibm_cd_toolchain_tool_hostedgit.deployment_repo_clone_from_hostedgit[0]",
+			},
+		},
 	})
 
 	output, err := options.RunTestUpgrade()

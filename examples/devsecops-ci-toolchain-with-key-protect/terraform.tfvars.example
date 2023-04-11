@@ -1,0 +1,27 @@
+
+# APIKEY to run the Terraform script
+ibmcloud_api_key            = ""
+toolchain_resource_group    = "Default"
+toolchain_region            = "us-south"
+
+# Disable creation of the DevSecOps CD and CC toolchains
+create_cd_toolchain         = false
+create_cc_toolchain         = false
+
+# Disable the default usage of Secrets Manager
+ci_enable_secrets_manager   = false
+
+# Enable Key Protect
+ci_enable_key_protect       = true
+
+# Key Protect details
+kp_name                     = "my-key-protect"  #Key Protect instance name
+kp_location                 = "us-south"  #Key Protect region/location
+kp_resource_group           = "Default"   #Resource group containing the Key Protect instance
+
+# Required Pipeline properties for running the pipelines in the toolchain
+ci_registry_namespace       = "my-namespace"
+ci_registry_region          = "ibm:yp:us-south"
+ci_cluster_name             = "mycluster-free"
+ci_dev_region               = "ibm:yp:us-south"
+ci_dev_resource_group       = "Default"

@@ -1,0 +1,34 @@
+
+
+# APIKEY to run the Terraform script
+ibmcloud_api_key            = ""
+toolchain_resource_group    = "Default"
+toolchain_region            = "us-south"
+
+# Secrets Manager details
+sm_name                     = "sm-compliance-secrets"
+sm_location                 = "eu-gb"
+sm_resource_group           = "Default"
+sm_secret_group             = "Default"
+
+
+# Clone your own app repo
+app_repo_clone_from_url     = "https://us-south.git.cloud.ibm.com/open-toolchain/hello-compliance-app"
+app_repo_clone_from_branch  =  "main"
+
+# Or Link to one of your existing app repos
+#app_repo_existing_url      = ""
+#app_repo_existing_branch   = ""
+
+# The above assumes a GRIT location
+# For app repos in Git
+# The additional variables are required
+#app_repo_existing_git_provider  = "githubconsolidated"
+#app_repo_existing_git_id        = "integrated"
+
+# Required Pipeline properties for running the pipelines in the toolchain
+ci_registry_namespace       = "my-namespace"
+ci_registry_region          = "ibm:yp:us-south"
+ci_cluster_name             = "mycluster-free"
+ci_dev_region               = "ibm:yp:us-south"
+ci_dev_resource_group       = "Default"
