@@ -12,8 +12,8 @@ module "devsecops_ci_toolchain" {
   compliance_base_image    = var.ci_compliance_base_image
 
   #SECRET PROVIDERS
-  enable_key_protect     = var.ci_enable_key_protect
-  enable_secrets_manager = var.ci_enable_secrets_manager
+  enable_key_protect     = (var.ci_enable_key_protect == null) ? var.enable_key_protect : var.ci_enable_key_protect
+  enable_secrets_manager = (var.ci_enable_secrets_manager == null) ? var.enable_secrets_manager : var.ci_enable_secrets_manager
   sm_name                = (var.ci_sm_name == "") ? var.sm_name : var.ci_sm_name
   sm_location            = (var.ci_sm_location == "") ? var.sm_location : var.ci_sm_location
   sm_resource_group      = (var.ci_sm_resource_group == "") ? var.sm_resource_group : var.ci_sm_resource_group
@@ -134,8 +134,8 @@ module "devsecops_cd_toolchain" {
   compliance_base_image    = var.cd_compliance_base_image
 
   #SECRET PROVIDERS
-  enable_key_protect     = var.cd_enable_key_protect
-  enable_secrets_manager = var.cd_enable_secrets_manager
+  enable_key_protect     = (var.cd_enable_key_protect == null) ? var.enable_key_protect : var.cd_enable_key_protect
+  enable_secrets_manager = (var.cd_enable_secrets_manager == null) ? var.enable_secrets_manager : var.cd_enable_secrets_manager
   sm_name                = (var.cd_sm_name == "") ? var.sm_name : var.cd_sm_name
   sm_location            = (var.cd_sm_location == "") ? var.sm_location : var.cd_sm_location
   sm_resource_group      = (var.cd_sm_resource_group == "") ? var.sm_resource_group : var.cd_sm_resource_group
@@ -262,8 +262,8 @@ module "devsecops_cc_toolchain" {
   authorization_policy_creation = var.cc_authorization_policy_creation
 
   #SECRET PROVIDERS
-  enable_key_protect     = var.cc_enable_key_protect
-  enable_secrets_manager = var.cc_enable_secrets_manager
+  enable_key_protect     = (var.cc_enable_key_protect == null) ? var.enable_key_protect : var.cc_enable_key_protect
+  enable_secrets_manager = (var.cc_enable_secrets_manager == null) ? var.enable_secrets_manager : var.cc_enable_secrets_manager
   sm_name                = (var.cc_sm_name == "") ? var.sm_name : var.cc_sm_name
   sm_location            = (var.cc_sm_location == "") ? var.sm_location : var.cc_sm_location
   sm_resource_group      = (var.cc_sm_resource_group == "") ? var.sm_resource_group : var.cc_sm_resource_group
