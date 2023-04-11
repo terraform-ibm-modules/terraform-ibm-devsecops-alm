@@ -1,6 +1,6 @@
 module "devsecops_ci_toolchain" {
   count            = var.create_ci_toolchain ? 1 : 0
-  source           = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-ci-toolchain?ref=v1.0.3"
+  source           = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-ci-toolchain?ref=v1.0.4-beta.1"
   ibmcloud_api_key = var.ibmcloud_api_key
 
   toolchain_name           = var.ci_toolchain_name
@@ -123,7 +123,7 @@ module "devsecops_ci_toolchain" {
 
 module "devsecops_cd_toolchain" {
   count            = var.create_cd_toolchain ? 1 : 0
-  source           = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain?ref=v1.0.3"
+  source           = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain?ref=v1.0.4-beta.1"
   ibmcloud_api_key = var.ibmcloud_api_key
 
   toolchain_name           = var.cd_toolchain_name
@@ -186,8 +186,6 @@ module "devsecops_cd_toolchain" {
   issues_repo_url    = try(module.devsecops_ci_toolchain[0].issues_repo_url, var.issues_repo_url)
   inventory_repo_url = try(module.devsecops_ci_toolchain[0].inventory_repo_url, var.inventory_repo_url)
 
-
-  deployment_repo                       = var.cd_deployment_repo
   change_management_repo                = var.cd_change_management_repo
   change_repo_clone_from_url            = var.cd_change_repo_clone_from_url
   deployment_repo_existing_git_provider = var.cd_deployment_repo_existing_git_provider
@@ -229,7 +227,6 @@ module "devsecops_cd_toolchain" {
   emergency_label               = var.cd_emergency_label
   app_version                   = var.cd_app_version
   pipeline_debug                = var.cd_pipeline_debug
-  region                        = var.cd_region
 
   #SLACK INTEGRATION
   enable_slack           = var.cd_enable_slack
@@ -251,7 +248,7 @@ module "devsecops_cd_toolchain" {
 
 module "devsecops_cc_toolchain" {
   count                         = var.create_cc_toolchain ? 1 : 0
-  source                        = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cc-toolchain?ref=v1.0.3"
+  source                        = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cc-toolchain?ref=v1.0.4-beta.1"
   ibmcloud_api_key              = var.ibmcloud_api_key
   toolchain_name                = var.cc_toolchain_name
   toolchain_description         = var.cc_toolchain_description

@@ -730,12 +730,6 @@ variable "cd_cluster_region" {
   default     = "ibm:yp:us-south"
 }
 
-variable "cd_deployment_repo" {
-  type        = string
-  description = "This repository contains scripts to perform deployment of a docker container for simple Node.js microservice using reference DevSecOps toolchain templates."
-  default     = ""
-}
-
 variable "cd_change_management_repo" {
   type        = string
   description = "This repository holds the change management requests created for the deployments."
@@ -1185,12 +1179,6 @@ variable "cd_pipeline_debug" {
   type        = string
   description = "'0' by default. Set to '1' to enable debug logging."
   default     = "0"
-}
-
-variable "cd_region" {
-  type        = string
-  description = "The target region where the app is deployed."
-  default     = ""
 }
 
 #SLACK

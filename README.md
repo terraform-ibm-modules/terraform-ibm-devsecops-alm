@@ -77,9 +77,9 @@ statement instead the previous block.
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_devsecops_cc_toolchain"></a> [devsecops\_cc\_toolchain](#module\_devsecops\_cc\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cc-toolchain | v1.0.3 |
-| <a name="module_devsecops_cd_toolchain"></a> [devsecops\_cd\_toolchain](#module\_devsecops\_cd\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain | v1.0.3 |
-| <a name="module_devsecops_ci_toolchain"></a> [devsecops\_ci\_toolchain](#module\_devsecops\_ci\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-ci-toolchain | v1.0.3 |
+| <a name="module_devsecops_cc_toolchain"></a> [devsecops\_cc\_toolchain](#module\_devsecops\_cc\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cc-toolchain | v1.0.4-beta.1 |
+| <a name="module_devsecops_cd_toolchain"></a> [devsecops\_cd\_toolchain](#module\_devsecops\_cd\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain | v1.0.4-beta.1 |
+| <a name="module_devsecops_ci_toolchain"></a> [devsecops\_ci\_toolchain](#module\_devsecops\_ci\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-ci-toolchain | v1.0.4-beta.1 |
 
 ## Resources
 
@@ -182,7 +182,6 @@ No resources.
 | <a name="input_cd_cos_endpoint"></a> [cd\_cos\_endpoint](#input\_cd\_cos\_endpoint) | COS endpoint name. | `string` | `""` | no |
 | <a name="input_cd_customer_impact"></a> [cd\_customer\_impact](#input\_cd\_customer\_impact) | Custom impact of the change request. | `string` | `"no_impact"` | no |
 | <a name="input_cd_deployment_group"></a> [cd\_deployment\_group](#input\_cd\_deployment\_group) | Specify group for deployment. | `string` | `""` | no |
-| <a name="input_cd_deployment_repo"></a> [cd\_deployment\_repo](#input\_cd\_deployment\_repo) | This repository contains scripts to perform deployment of a docker container for simple Node.js microservice using reference DevSecOps toolchain templates. | `string` | `""` | no |
 | <a name="input_cd_deployment_repo_auth_type"></a> [cd\_deployment\_repo\_auth\_type](#input\_cd\_deployment\_repo\_auth\_type) | Select the method of authentication that is used to access the Git provider. 'oauth' or 'pat'. | `string` | `"oauth"` | no |
 | <a name="input_cd_deployment_repo_clone_from_branch"></a> [cd\_deployment\_repo\_clone\_from\_branch](#input\_cd\_deployment\_repo\_clone\_from\_branch) | Used when deployment\_repo\_clone\_from\_url is provided, the default branch that is used by the CD build, usually either main or master. | `string` | `""` | no |
 | <a name="input_cd_deployment_repo_clone_from_url"></a> [cd\_deployment\_repo\_clone\_from\_url](#input\_cd\_deployment\_repo\_clone\_from\_url) | Override the default sample app by providing your own sample deployment URL, which is cloned into the app repo. Note, using clone\_if\_not\_exists mode, so if the app repo already exists the repo contents are unchanged. | `string` | `""` | no |
@@ -223,7 +222,6 @@ No resources.
 | <a name="input_cd_pipeline_config_repo_git_token_secret_name"></a> [cd\_pipeline\_config\_repo\_git\_token\_secret\_name](#input\_cd\_pipeline\_config\_repo\_git\_token\_secret\_name) | Name of the Git token secret in the secret provider. | `string` | `"git-token"` | no |
 | <a name="input_cd_pipeline_debug"></a> [cd\_pipeline\_debug](#input\_cd\_pipeline\_debug) | '0' by default. Set to '1' to enable debug logging. | `string` | `"0"` | no |
 | <a name="input_cd_pipeline_ibmcloud_api_key_secret_name"></a> [cd\_pipeline\_ibmcloud\_api\_key\_secret\_name](#input\_cd\_pipeline\_ibmcloud\_api\_key\_secret\_name) | Name of the Cloud API key secret in the secret provider. | `string` | `"ibmcloud-api-key"` | no |
-| <a name="input_cd_region"></a> [cd\_region](#input\_cd\_region) | The target region where the app is deployed. | `string` | `""` | no |
 | <a name="input_cd_repositories_prefix"></a> [cd\_repositories\_prefix](#input\_cd\_repositories\_prefix) | Prefix name for the cloned compliance repos. | `string` | `"compliance"` | no |
 | <a name="input_cd_satellite_cluster_group"></a> [cd\_satellite\_cluster\_group](#input\_cd\_satellite\_cluster\_group) | The Satellite cluster group | `string` | `""` | no |
 | <a name="input_cd_scc_enable_scc"></a> [cd\_scc\_enable\_scc](#input\_cd\_scc\_enable\_scc) | Enable the SCC integration. | `bool` | `false` | no |
