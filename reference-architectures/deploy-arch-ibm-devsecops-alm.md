@@ -45,6 +45,8 @@ The DevSecOps deployable architecture creates a set of DevOps Toolchains and pip
 
 Out of the box, DevSecOps also leverages popular scanning tools such as SonarQube, GoSec, OWASP Zap (dynamic scan), any unit test framework, and GPG signing. It can also be used with more tools such as external Git providers and artifact stores. DevSecOps supports hybrid deployments, in particular by using private pipeline workers, and can be interfaced with other deployment tools such as Satellite Config.
 
+For more details on DevSecOps with Continuous Delivery. See this topic: [DevSecOps with Continuous Delivery](https://cloud.ibm.com/docs/devsecops?topic=devsecops-devsecops_intro) 
+
 
 ## Architecture diagram
 {: #architecture-diagram}
