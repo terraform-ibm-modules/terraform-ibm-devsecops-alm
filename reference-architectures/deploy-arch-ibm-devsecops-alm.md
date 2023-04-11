@@ -39,6 +39,7 @@ content-type: reference-architecture
 {: toc-content-type="reference-architecture"}
 {: toc-industry="Technology"}
 {: toc-use-case="DevOps"}
+{: toc-version="1.0"}
 
 The DevSecOps deployable architecture creates a set of DevOps Toolchains and pipelines. DevSecOps uses Continuous Delivery (Git Repos and Issue Tracking, Tekton Pipelines, DevOps Insights, and Code Risk Analyzer), Secrets Manager, Key Protect, Cloud Object Storage, Container Registry and Vulnerability Advisor.
 {: shortdesc}
