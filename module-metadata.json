@@ -102,8 +102,8 @@
       "default": "",
       "required": true,
       "source": [
-        "module.devsecops_cc_toolchain.module.pipeline-cc.ibm_cd_tekton_pipeline_property.compliance_base_image.count",
-        "module.devsecops_cc_toolchain.module.pipeline-cc.ibm_cd_tekton_pipeline_property.compliance_base_image.value"
+        "module.devsecops_cc_toolchain.module.pipeline_cc.ibm_cd_tekton_pipeline_property.compliance_base_image.count",
+        "module.devsecops_cc_toolchain.module.pipeline_cc.ibm_cd_tekton_pipeline_property.compliance_base_image.value"
       ],
       "pos": {
         "filename": "variables.tf",
@@ -158,7 +158,7 @@
       "default": "cos-api-key",
       "required": true,
       "source": [
-        "module.devsecops_cc_toolchain.module.pipeline-cc.ibm_cd_tekton_pipeline_property.cos_api_key.value"
+        "module.devsecops_cc_toolchain.module.pipeline_cc.ibm_cd_tekton_pipeline_property.cos_api_key.value"
       ],
       "pos": {
         "filename": "variables.tf",
@@ -174,7 +174,7 @@
       "default": "",
       "required": true,
       "source": [
-        "module.devsecops_cc_toolchain.module.pipeline-cc.ibm_cd_tekton_pipeline_property.cos_bucket_name.value"
+        "module.devsecops_cc_toolchain.module.pipeline_cc.ibm_cd_tekton_pipeline_property.cos_bucket_name.value"
       ],
       "pos": {
         "filename": "variables.tf",
@@ -190,7 +190,7 @@
       "default": "",
       "required": true,
       "source": [
-        "module.devsecops_cc_toolchain.module.pipeline-cc.ibm_cd_tekton_pipeline_property.cos_endpoint.value"
+        "module.devsecops_cc_toolchain.module.pipeline_cc.ibm_cd_tekton_pipeline_property.cos_endpoint.value"
       ],
       "pos": {
         "filename": "variables.tf",
@@ -206,7 +206,7 @@
       "default": "",
       "required": true,
       "source": [
-        "module.devsecops_cc_toolchain.module.pipeline-cc.ibm_cd_tekton_pipeline_property.doi_environment.value"
+        "module.devsecops_cc_toolchain.module.pipeline_cc.ibm_cd_tekton_pipeline_property.doi_environment.value"
       ],
       "pos": {
         "filename": "variables.tf",
@@ -278,7 +278,7 @@
       "default": "prod_latest",
       "required": true,
       "source": [
-        "module.devsecops_cc_toolchain.module.pipeline-cc.ibm_cd_tekton_pipeline_property.cc_pipeline_environment-tag.value"
+        "module.devsecops_cc_toolchain.module.pipeline_cc.ibm_cd_tekton_pipeline_property.cc_pipeline_environment-tag.value"
       ],
       "pos": {
         "filename": "variables.tf",
@@ -477,7 +477,7 @@
       "default": "1",
       "required": true,
       "source": [
-        "module.devsecops_cc_toolchain.module.pipeline-cc.ibm_cd_tekton_pipeline_property.cc_pipeline_opt-in-auto-close.value"
+        "module.devsecops_cc_toolchain.module.pipeline_cc.ibm_cd_tekton_pipeline_property.cc_pipeline_opt-in-auto-close.value"
       ],
       "pos": {
         "filename": "variables.tf",
@@ -493,7 +493,7 @@
       "default": "",
       "required": true,
       "source": [
-        "module.devsecops_cc_toolchain.module.pipeline-cc.ibm_cd_tekton_pipeline_property.cc_pipeline_opt-in-dynamic-api-scan.value"
+        "module.devsecops_cc_toolchain.module.pipeline_cc.ibm_cd_tekton_pipeline_property.cc_pipeline_opt-in-dynamic-api-scan.value"
       ],
       "pos": {
         "filename": "variables.tf",
@@ -509,7 +509,7 @@
       "default": "",
       "required": true,
       "source": [
-        "module.devsecops_cc_toolchain.module.pipeline-cc.ibm_cd_tekton_pipeline_property.cc_pipeline_opt-in-dynamic-scan.value"
+        "module.devsecops_cc_toolchain.module.pipeline_cc.ibm_cd_tekton_pipeline_property.cc_pipeline_opt-in-dynamic-scan.value"
       ],
       "pos": {
         "filename": "variables.tf",
@@ -525,7 +525,7 @@
       "default": "",
       "required": true,
       "source": [
-        "module.devsecops_cc_toolchain.module.pipeline-cc.ibm_cd_tekton_pipeline_property.cc_pipeline_opt-in-dynamic-ui-scan.value"
+        "module.devsecops_cc_toolchain.module.pipeline_cc.ibm_cd_tekton_pipeline_property.cc_pipeline_opt-in-dynamic-ui-scan.value"
       ],
       "pos": {
         "filename": "variables.tf",
@@ -554,7 +554,7 @@
       "default": ".pipeline-config.yaml",
       "required": true,
       "source": [
-        "module.devsecops_cc_toolchain.module.pipeline-cc.ibm_cd_tekton_pipeline_property.pipeline_config.value"
+        "module.devsecops_cc_toolchain.module.pipeline_cc.ibm_cd_tekton_pipeline_property.pipeline_config.value"
       ],
       "pos": {
         "filename": "variables.tf",
@@ -596,7 +596,7 @@
       "default": "",
       "required": true,
       "source": [
-        "module.devsecops_cc_toolchain.module.pipeline-cc",
+        "module.devsecops_cc_toolchain.module.pipeline_cc",
         "module.devsecops_cc_toolchain.module.repositories.ibm_cd_toolchain_tool_hostedgit.pipeline_config_repo_clone_from_hostedgit.count"
       ],
       "pos": {
@@ -611,7 +611,7 @@
       "default": "",
       "required": true,
       "source": [
-        "module.devsecops_cc_toolchain.module.pipeline-cc",
+        "module.devsecops_cc_toolchain.module.pipeline_cc",
         "module.devsecops_cc_toolchain.module.repositories.ibm_cd_toolchain_tool_hostedgit.pipeline_config_repo_existing_hostedgit.count"
       ],
       "pos": {
@@ -639,7 +639,7 @@
       "default": "0",
       "required": true,
       "source": [
-        "module.devsecops_cc_toolchain.module.pipeline-cc.ibm_cd_tekton_pipeline_property.pipeline_debug.value"
+        "module.devsecops_cc_toolchain.module.pipeline_cc.ibm_cd_tekton_pipeline_property.pipeline_debug.value"
       ],
       "pos": {
         "filename": "variables.tf",
@@ -655,7 +655,7 @@
       "default": "ibmcloud-api-key",
       "required": true,
       "source": [
-        "module.devsecops_cc_toolchain.module.pipeline-cc.ibm_cd_tekton_pipeline_property.ibmcloud_api_key.value"
+        "module.devsecops_cc_toolchain.module.pipeline_cc.ibm_cd_tekton_pipeline_property.ibmcloud_api_key.value"
       ],
       "pos": {
         "filename": "variables.tf",
@@ -789,7 +789,7 @@
       "default": "0",
       "required": true,
       "source": [
-        "module.devsecops_cc_toolchain.module.pipeline-cc.ibm_cd_tekton_pipeline_property.slack_notifications.value"
+        "module.devsecops_cc_toolchain.module.pipeline_cc.ibm_cd_tekton_pipeline_property.slack_notifications.value"
       ],
       "pos": {
         "filename": "variables.tf",
@@ -961,7 +961,7 @@
       "default": "default",
       "required": true,
       "source": [
-        "module.devsecops_cc_toolchain.module.pipeline-cc.ibm_cd_tekton_pipeline_property.cc_pipeline_sonarqube-config.value"
+        "module.devsecops_cc_toolchain.module.pipeline_cc.ibm_cd_tekton_pipeline_property.cc_pipeline_sonarqube-config.value"
       ],
       "pos": {
         "filename": "variables.tf",
@@ -1039,7 +1039,7 @@
       "default": "v1",
       "required": true,
       "source": [
-        "module.devsecops_cd_toolchain.module.pipeline-cd.ibm_cd_tekton_pipeline_property.cd_pipeline_version.value"
+        "module.devsecops_cd_toolchain.module.pipeline_cd.ibm_cd_tekton_pipeline_property.cd_pipeline_version.value"
       ],
       "pos": {
         "filename": "variables.tf",
@@ -1135,7 +1135,7 @@
       "default": "notAvailable",
       "required": true,
       "source": [
-        "module.devsecops_cd_toolchain.module.pipeline-cd.ibm_cd_tekton_pipeline_property.cd_pipeline_change_request_id.value"
+        "module.devsecops_cd_toolchain.module.pipeline_cd.ibm_cd_tekton_pipeline_property.cd_pipeline_change_request_id.value"
       ],
       "pos": {
         "filename": "variables.tf",
@@ -1151,7 +1151,7 @@
       "default": "mycluster-free",
       "required": true,
       "source": [
-        "module.devsecops_cd_toolchain.module.pipeline-cd.ibm_cd_tekton_pipeline_property.cd_pipeline_cluster_name.value",
+        "module.devsecops_cd_toolchain.module.pipeline_cd.ibm_cd_tekton_pipeline_property.cd_pipeline_cluster_name.value",
         "module.devsecops_cd_toolchain.module.services"
       ],
       "pos": {
@@ -1168,7 +1168,7 @@
       "default": "prod",
       "required": true,
       "source": [
-        "module.devsecops_cd_toolchain.module.pipeline-cd.ibm_cd_tekton_pipeline_property.cd_pipeline_cluster_namespace.value",
+        "module.devsecops_cd_toolchain.module.pipeline_cd.ibm_cd_tekton_pipeline_property.cd_pipeline_cluster_namespace.value",
         "module.devsecops_cd_toolchain.module.services"
       ],
       "pos": {
@@ -1185,7 +1185,7 @@
       "default": "ibm:yp:us-south",
       "required": true,
       "source": [
-        "module.devsecops_cd_toolchain.module.pipeline-cd.ibm_cd_tekton_pipeline_property.cd_pipeline_cluster_region.value",
+        "module.devsecops_cd_toolchain.module.pipeline_cd.ibm_cd_tekton_pipeline_property.cd_pipeline_cluster_region.value",
         "module.devsecops_cd_toolchain.module.services"
       ],
       "pos": {
@@ -1202,8 +1202,8 @@
       "default": "",
       "required": true,
       "source": [
-        "module.devsecops_cd_toolchain.module.pipeline-cd.ibm_cd_tekton_pipeline_property.compliance_base_image.count",
-        "module.devsecops_cd_toolchain.module.pipeline-cd.ibm_cd_tekton_pipeline_property.compliance_base_image.value"
+        "module.devsecops_cd_toolchain.module.pipeline_cd.ibm_cd_tekton_pipeline_property.compliance_base_image.count",
+        "module.devsecops_cd_toolchain.module.pipeline_cd.ibm_cd_tekton_pipeline_property.compliance_base_image.value"
       ],
       "pos": {
         "filename": "variables.tf",
@@ -1258,7 +1258,7 @@
       "default": "cos-api-key",
       "required": true,
       "source": [
-        "module.devsecops_cd_toolchain.module.pipeline-cd.ibm_cd_tekton_pipeline_property.cd_pipeline_cos_api_key.value"
+        "module.devsecops_cd_toolchain.module.pipeline_cd.ibm_cd_tekton_pipeline_property.cd_pipeline_cos_api_key.value"
       ],
       "pos": {
         "filename": "variables.tf",
@@ -1274,7 +1274,7 @@
       "default": "",
       "required": true,
       "source": [
-        "module.devsecops_cd_toolchain.module.pipeline-cd.ibm_cd_tekton_pipeline_property.cd_pipeline_cos_bucket_name.value"
+        "module.devsecops_cd_toolchain.module.pipeline_cd.ibm_cd_tekton_pipeline_property.cd_pipeline_cos_bucket_name.value"
       ],
       "pos": {
         "filename": "variables.tf",
@@ -1290,7 +1290,7 @@
       "default": "",
       "required": true,
       "source": [
-        "module.devsecops_cd_toolchain.module.pipeline-cd.ibm_cd_tekton_pipeline_property.cd_pipeline_cos_endpoint.value"
+        "module.devsecops_cd_toolchain.module.pipeline_cd.ibm_cd_tekton_pipeline_property.cd_pipeline_cos_endpoint.value"
       ],
       "pos": {
         "filename": "variables.tf",
@@ -1306,7 +1306,7 @@
       "default": "no_impact",
       "required": true,
       "source": [
-        "module.devsecops_cd_toolchain.module.pipeline-cd.ibm_cd_tekton_pipeline_property.cd_pipeline_customer_impact.value"
+        "module.devsecops_cd_toolchain.module.pipeline_cd.ibm_cd_tekton_pipeline_property.cd_pipeline_customer_impact.value"
       ],
       "pos": {
         "filename": "variables.tf",
@@ -1478,7 +1478,7 @@
       "default": "",
       "required": true,
       "source": [
-        "module.devsecops_cd_toolchain.module.pipeline-cd.ibm_cd_tekton_pipeline_property.cd_pipeline_doi_environment.value"
+        "module.devsecops_cd_toolchain.module.pipeline_cd.ibm_cd_tekton_pipeline_property.cd_pipeline_doi_environment.value"
       ],
       "pos": {
         "filename": "variables.tf",
@@ -1504,7 +1504,7 @@
       "default": "EMERGENCY",
       "required": true,
       "source": [
-        "module.devsecops_cd_toolchain.module.pipeline-cd.ibm_cd_tekton_pipeline_property.cd_pipeline_emergency_label.value"
+        "module.devsecops_cd_toolchain.module.pipeline_cd.ibm_cd_tekton_pipeline_property.cd_pipeline_emergency_label.value"
       ],
       "pos": {
         "filename": "variables.tf",
@@ -1749,7 +1749,7 @@
       "default": "1",
       "required": true,
       "source": [
-        "module.devsecops_cd_toolchain.module.pipeline-cd.ibm_cd_tekton_pipeline_property.cd_pipeline_merge-cra-sbom.value"
+        "module.devsecops_cd_toolchain.module.pipeline_cd.ibm_cd_tekton_pipeline_property.cd_pipeline_merge-cra-sbom.value"
       ],
       "pos": {
         "filename": "variables.tf",
@@ -1765,7 +1765,7 @@
       "default": "1",
       "required": true,
       "source": [
-        "module.devsecops_cd_toolchain.module.pipeline-cd.ibm_cd_tekton_pipeline_property.cd_pipeline_opt-out-v1-evidence.value"
+        "module.devsecops_cd_toolchain.module.pipeline_cd.ibm_cd_tekton_pipeline_property.cd_pipeline_opt-out-v1-evidence.value"
       ],
       "pos": {
         "filename": "variables.tf",
@@ -1794,7 +1794,7 @@
       "default": ".pipeline-config.yaml",
       "required": true,
       "source": [
-        "module.devsecops_cd_toolchain.module.pipeline-cd.ibm_cd_tekton_pipeline_property.cd_pipeline_pipeline_config.value"
+        "module.devsecops_cd_toolchain.module.pipeline_cd.ibm_cd_tekton_pipeline_property.cd_pipeline_pipeline_config.value"
       ],
       "pos": {
         "filename": "variables.tf",
@@ -1836,7 +1836,7 @@
       "default": "",
       "required": true,
       "source": [
-        "module.devsecops_cd_toolchain.module.pipeline-cd",
+        "module.devsecops_cd_toolchain.module.pipeline_cd",
         "module.devsecops_cd_toolchain.module.repositories.ibm_cd_toolchain_tool_hostedgit.pipeline_config_repo_clone_from_hostedgit.count"
       ],
       "pos": {
@@ -1851,7 +1851,7 @@
       "default": "",
       "required": true,
       "source": [
-        "module.devsecops_cd_toolchain.module.pipeline-cd",
+        "module.devsecops_cd_toolchain.module.pipeline_cd",
         "module.devsecops_cd_toolchain.module.repositories.ibm_cd_toolchain_tool_hostedgit.pipeline_config_repo_existing_hostedgit.count"
       ],
       "pos": {
@@ -1878,7 +1878,7 @@
       "description": "'0' by default. Set to '1' to enable debug logging.",
       "default": "0",
       "source": [
-        "module.devsecops_cd_toolchain.module.pipeline-cd"
+        "module.devsecops_cd_toolchain.module.pipeline_cd"
       ],
       "pos": {
         "filename": "variables.tf",
@@ -1892,7 +1892,7 @@
       "default": "ibmcloud-api-key",
       "required": true,
       "source": [
-        "module.devsecops_cd_toolchain.module.pipeline-cd.ibm_cd_tekton_pipeline_property.cd_pipeline_ibmcloud_api_key.value"
+        "module.devsecops_cd_toolchain.module.pipeline_cd.ibm_cd_tekton_pipeline_property.cd_pipeline_ibmcloud_api_key.value"
       ],
       "pos": {
         "filename": "variables.tf",
@@ -1934,7 +1934,7 @@
       "default": "",
       "required": true,
       "source": [
-        "module.devsecops_cd_toolchain.module.pipeline-cd.ibm_cd_tekton_pipeline_property.cd_pipeline_satellite_cluster_group.value"
+        "module.devsecops_cd_toolchain.module.pipeline_cd.ibm_cd_tekton_pipeline_property.cd_pipeline_satellite_cluster_group.value"
       ],
       "pos": {
         "filename": "variables.tf",
@@ -2054,7 +2054,7 @@
       "description": "The switch to turn the Slack integration on or off.",
       "default": "0",
       "source": [
-        "module.devsecops_cd_toolchain.module.pipeline-cd"
+        "module.devsecops_cd_toolchain.module.pipeline_cd"
       ],
       "pos": {
         "filename": "variables.tf",
@@ -2224,7 +2224,7 @@
       "default": "master",
       "required": true,
       "source": [
-        "module.devsecops_cd_toolchain.module.pipeline-cd.ibm_cd_tekton_pipeline_property.cd_pipeline_source_environment.value"
+        "module.devsecops_cd_toolchain.module.pipeline_cd.ibm_cd_tekton_pipeline_property.cd_pipeline_source_environment.value"
       ],
       "pos": {
         "filename": "variables.tf",
@@ -2240,7 +2240,7 @@
       "default": "prod",
       "required": true,
       "source": [
-        "module.devsecops_cd_toolchain.module.pipeline-cd.ibm_cd_tekton_pipeline_property.cd_pipeline_target_environment.value"
+        "module.devsecops_cd_toolchain.module.pipeline_cd.ibm_cd_tekton_pipeline_property.cd_pipeline_target_environment.value"
       ],
       "pos": {
         "filename": "variables.tf",
@@ -2256,7 +2256,7 @@
       "default": "",
       "required": true,
       "source": [
-        "module.devsecops_cd_toolchain.module.pipeline-cd.ibm_cd_tekton_pipeline_property.cd_pipeline_target_environment_detail.value"
+        "module.devsecops_cd_toolchain.module.pipeline_cd.ibm_cd_tekton_pipeline_property.cd_pipeline_target_environment_detail.value"
       ],
       "pos": {
         "filename": "variables.tf",
@@ -2272,7 +2272,7 @@
       "default": "production",
       "required": true,
       "source": [
-        "module.devsecops_cd_toolchain.module.pipeline-cd.ibm_cd_tekton_pipeline_property.cd_pipeline_target_environment_purpose.value"
+        "module.devsecops_cd_toolchain.module.pipeline_cd.ibm_cd_tekton_pipeline_property.cd_pipeline_target_environment_purpose.value"
       ],
       "pos": {
         "filename": "variables.tf",
@@ -2320,7 +2320,7 @@
       "required": true,
       "source": [
         "module.devsecops_cd_toolchain.module.integrations",
-        "module.devsecops_cd_toolchain.module.pipeline-cd.ibm_cd_tekton_pipeline_property.cd_pipeline_region.value",
+        "module.devsecops_cd_toolchain.module.pipeline_cd.ibm_cd_tekton_pipeline_property.cd_pipeline_region.value",
         "module.devsecops_cd_toolchain.module.repositories",
         "module.devsecops_cd_toolchain.module.services"
       ],
@@ -2339,7 +2339,7 @@
       "source": [
         "module.devsecops_cd_toolchain.data.ibm_resource_group.resource_group.name",
         "module.devsecops_cd_toolchain.module.integrations",
-        "module.devsecops_cd_toolchain.module.pipeline-cd"
+        "module.devsecops_cd_toolchain.module.pipeline_cd"
       ],
       "pos": {
         "filename": "variables.tf",
@@ -2371,11 +2371,11 @@
       "default": "hello-compliance-app",
       "required": true,
       "source": [
-        "module.devsecops_ci_toolchain.module.pipeline-ci.ibm_cd_tekton_pipeline_property.ci_pipeline_app_name.value",
-        "module.devsecops_ci_toolchain.module.pipeline-ci.ibm_cd_tekton_pipeline_trigger_property.ci_pipeline_manual_trigger_property_app_name.value",
-        "module.devsecops_ci_toolchain.module.pipeline-ci.ibm_cd_tekton_pipeline_trigger_property.ci_pipeline_scm_trigger_property_app_name.value",
-        "module.devsecops_ci_toolchain.module.pipeline-ci.ibm_cd_tekton_pipeline_trigger_property.ci_pipeline_timed_trigger_property_app_name.value",
-        "module.devsecops_ci_toolchain.module.pipeline-pr.ibm_cd_tekton_pipeline_trigger_property.pr_pipeline_scm_trigger_property_app_name.value"
+        "module.devsecops_ci_toolchain.module.pipeline_ci.ibm_cd_tekton_pipeline_property.ci_pipeline_app_name.value",
+        "module.devsecops_ci_toolchain.module.pipeline_ci.ibm_cd_tekton_pipeline_trigger_property.ci_pipeline_manual_trigger_property_app_name.value",
+        "module.devsecops_ci_toolchain.module.pipeline_ci.ibm_cd_tekton_pipeline_trigger_property.ci_pipeline_scm_trigger_property_app_name.value",
+        "module.devsecops_ci_toolchain.module.pipeline_ci.ibm_cd_tekton_pipeline_trigger_property.ci_pipeline_timed_trigger_property_app_name.value",
+        "module.devsecops_ci_toolchain.module.pipeline_pr.ibm_cd_tekton_pipeline_trigger_property.pr_pipeline_scm_trigger_property_app_name.value"
       ],
       "pos": {
         "filename": "variables.tf",
@@ -2521,7 +2521,7 @@
       "default": "v1",
       "required": true,
       "source": [
-        "module.devsecops_ci_toolchain.module.pipeline-ci.ibm_cd_tekton_pipeline_property.ci_pipeline_version.value"
+        "module.devsecops_ci_toolchain.module.pipeline_ci.ibm_cd_tekton_pipeline_property.ci_pipeline_version.value"
       ],
       "pos": {
         "filename": "variables.tf",
@@ -2552,7 +2552,7 @@
       "default": "mycluster-free",
       "required": true,
       "source": [
-        "module.devsecops_ci_toolchain.module.pipeline-ci.ibm_cd_tekton_pipeline_property.ci_pipeline_cluster_name.value",
+        "module.devsecops_ci_toolchain.module.pipeline_ci.ibm_cd_tekton_pipeline_property.ci_pipeline_cluster_name.value",
         "module.devsecops_ci_toolchain.module.services"
       ],
       "pos": {
@@ -2569,7 +2569,7 @@
       "default": "dev",
       "required": true,
       "source": [
-        "module.devsecops_ci_toolchain.module.pipeline-ci.ibm_cd_tekton_pipeline_property.ci_pipeline_dev_cluster_namespace.value",
+        "module.devsecops_ci_toolchain.module.pipeline_ci.ibm_cd_tekton_pipeline_property.ci_pipeline_dev_cluster_namespace.value",
         "module.devsecops_ci_toolchain.module.services"
       ],
       "pos": {
@@ -2586,7 +2586,7 @@
       "default": "",
       "required": true,
       "source": [
-        "module.devsecops_ci_toolchain.module.pipeline-ci.ibm_cd_tekton_pipeline_property.ci_pipeline_code_engine_build_strategy.value"
+        "module.devsecops_ci_toolchain.module.pipeline_ci.ibm_cd_tekton_pipeline_property.ci_pipeline_code_engine_build_strategy.value"
       ],
       "pos": {
         "filename": "variables.tf",
@@ -2602,7 +2602,7 @@
       "default": "",
       "required": true,
       "source": [
-        "module.devsecops_ci_toolchain.module.pipeline-ci.ibm_cd_tekton_pipeline_property.ci_pipeline_code_engine_entity_type.value"
+        "module.devsecops_ci_toolchain.module.pipeline_ci.ibm_cd_tekton_pipeline_property.ci_pipeline_code_engine_entity_type.value"
       ],
       "pos": {
         "filename": "variables.tf",
@@ -2618,7 +2618,7 @@
       "default": "DevSecOps_CE",
       "required": true,
       "source": [
-        "module.devsecops_ci_toolchain.module.pipeline-ci.ibm_cd_tekton_pipeline_property.ci_pipeline_code_engine_project.value"
+        "module.devsecops_ci_toolchain.module.pipeline_ci.ibm_cd_tekton_pipeline_property.ci_pipeline_code_engine_project.value"
       ],
       "pos": {
         "filename": "variables.tf",
@@ -2634,7 +2634,7 @@
       "default": "ibm:yp:us-south",
       "required": true,
       "source": [
-        "module.devsecops_ci_toolchain.module.pipeline-ci.ibm_cd_tekton_pipeline_property.ci_pipeline_code_engine_region.value"
+        "module.devsecops_ci_toolchain.module.pipeline_ci.ibm_cd_tekton_pipeline_property.ci_pipeline_code_engine_region.value"
       ],
       "pos": {
         "filename": "variables.tf",
@@ -2650,7 +2650,7 @@
       "default": "Default",
       "required": true,
       "source": [
-        "module.devsecops_ci_toolchain.module.pipeline-ci.ibm_cd_tekton_pipeline_property.ci_pipeline_code_engine_resource_group.value"
+        "module.devsecops_ci_toolchain.module.pipeline_ci.ibm_cd_tekton_pipeline_property.ci_pipeline_code_engine_resource_group.value"
       ],
       "pos": {
         "filename": "variables.tf",
@@ -2666,7 +2666,7 @@
       "default": "",
       "required": true,
       "source": [
-        "module.devsecops_ci_toolchain.module.pipeline-ci.ibm_cd_tekton_pipeline_property.ci_pipeline_code_engine_source.value"
+        "module.devsecops_ci_toolchain.module.pipeline_ci.ibm_cd_tekton_pipeline_property.ci_pipeline_code_engine_source.value"
       ],
       "pos": {
         "filename": "variables.tf",
@@ -2681,10 +2681,10 @@
       "description": "Pipeline baseimage to run most of the built-in pipeline code.",
       "default": "",
       "source": [
-        "module.devsecops_ci_toolchain.module.pipeline-ci.ibm_cd_tekton_pipeline_property.ci_pipeline_base_image.count",
-        "module.devsecops_ci_toolchain.module.pipeline-ci.ibm_cd_tekton_pipeline_property.ci_pipeline_base_image.value",
-        "module.devsecops_ci_toolchain.module.pipeline-pr.ibm_cd_tekton_pipeline_property.pr_pipeline_base_image.count",
-        "module.devsecops_ci_toolchain.module.pipeline-pr.ibm_cd_tekton_pipeline_property.pr_pipeline_base_image.value"
+        "module.devsecops_ci_toolchain.module.pipeline_ci.ibm_cd_tekton_pipeline_property.ci_pipeline_base_image.count",
+        "module.devsecops_ci_toolchain.module.pipeline_ci.ibm_cd_tekton_pipeline_property.ci_pipeline_base_image.value",
+        "module.devsecops_ci_toolchain.module.pipeline_pr.ibm_cd_tekton_pipeline_property.pr_pipeline_base_image.count",
+        "module.devsecops_ci_toolchain.module.pipeline_pr.ibm_cd_tekton_pipeline_property.pr_pipeline_base_image.value"
       ],
       "pos": {
         "filename": "variables.tf",
@@ -2739,7 +2739,7 @@
       "default": "cos-api-key",
       "required": true,
       "source": [
-        "module.devsecops_ci_toolchain.module.pipeline-ci.ibm_cd_tekton_pipeline_property.ci_pipeline_cos_api_key_secret_name.value"
+        "module.devsecops_ci_toolchain.module.pipeline_ci.ibm_cd_tekton_pipeline_property.ci_pipeline_cos_api_key_secret_name.value"
       ],
       "pos": {
         "filename": "variables.tf",
@@ -2755,7 +2755,7 @@
       "default": "",
       "required": true,
       "source": [
-        "module.devsecops_ci_toolchain.module.pipeline-ci.ibm_cd_tekton_pipeline_property.ci_pipeline_cos_bucket_name.value"
+        "module.devsecops_ci_toolchain.module.pipeline_ci.ibm_cd_tekton_pipeline_property.ci_pipeline_cos_bucket_name.value"
       ],
       "pos": {
         "filename": "variables.tf",
@@ -2771,7 +2771,7 @@
       "default": "",
       "required": true,
       "source": [
-        "module.devsecops_ci_toolchain.module.pipeline-ci.ibm_cd_tekton_pipeline_property.ci_pipeline_cos_endpoint.value"
+        "module.devsecops_ci_toolchain.module.pipeline_ci.ibm_cd_tekton_pipeline_property.ci_pipeline_cos_endpoint.value"
       ],
       "pos": {
         "filename": "variables.tf",
@@ -2787,7 +2787,7 @@
       "default": "1",
       "required": true,
       "source": [
-        "module.devsecops_ci_toolchain.module.pipeline-ci.ibm_cd_tekton_pipeline_property.ci_pipeline_cra_generate_cyclonedx_format.value"
+        "module.devsecops_ci_toolchain.module.pipeline_ci.ibm_cd_tekton_pipeline_property.ci_pipeline_cra_generate_cyclonedx_format.value"
       ],
       "pos": {
         "filename": "variables.tf",
@@ -2803,7 +2803,7 @@
       "default": "",
       "required": true,
       "source": [
-        "module.devsecops_ci_toolchain.module.pipeline-ci.ibm_cd_tekton_pipeline_property.ci_pipeline_custom_image_tag.value"
+        "module.devsecops_ci_toolchain.module.pipeline_ci.ibm_cd_tekton_pipeline_property.ci_pipeline_custom_image_tag.value"
       ],
       "pos": {
         "filename": "variables.tf",
@@ -2819,16 +2819,16 @@
       "default": "cluster",
       "required": true,
       "source": [
-        "module.devsecops_ci_toolchain.module.pipeline-ci.ibm_cd_tekton_pipeline_property.ci_pipeline_cluster_name.count",
-        "module.devsecops_ci_toolchain.module.pipeline-ci.ibm_cd_tekton_pipeline_property.ci_pipeline_code_engine_build_strategy.count",
-        "module.devsecops_ci_toolchain.module.pipeline-ci.ibm_cd_tekton_pipeline_property.ci_pipeline_code_engine_entity_type.count",
-        "module.devsecops_ci_toolchain.module.pipeline-ci.ibm_cd_tekton_pipeline_property.ci_pipeline_code_engine_project.count",
-        "module.devsecops_ci_toolchain.module.pipeline-ci.ibm_cd_tekton_pipeline_property.ci_pipeline_code_engine_region.count",
-        "module.devsecops_ci_toolchain.module.pipeline-ci.ibm_cd_tekton_pipeline_property.ci_pipeline_code_engine_resource_group.count",
-        "module.devsecops_ci_toolchain.module.pipeline-ci.ibm_cd_tekton_pipeline_property.ci_pipeline_code_engine_source.count",
-        "module.devsecops_ci_toolchain.module.pipeline-ci.ibm_cd_tekton_pipeline_property.ci_pipeline_deployment_target.count",
-        "module.devsecops_ci_toolchain.module.pipeline-ci.ibm_cd_tekton_pipeline_property.ci_pipeline_deployment_target.value",
-        "module.devsecops_ci_toolchain.module.pipeline-ci.ibm_cd_tekton_pipeline_property.ci_pipeline_dev_cluster_namespace.count"
+        "module.devsecops_ci_toolchain.module.pipeline_ci.ibm_cd_tekton_pipeline_property.ci_pipeline_cluster_name.count",
+        "module.devsecops_ci_toolchain.module.pipeline_ci.ibm_cd_tekton_pipeline_property.ci_pipeline_code_engine_build_strategy.count",
+        "module.devsecops_ci_toolchain.module.pipeline_ci.ibm_cd_tekton_pipeline_property.ci_pipeline_code_engine_entity_type.count",
+        "module.devsecops_ci_toolchain.module.pipeline_ci.ibm_cd_tekton_pipeline_property.ci_pipeline_code_engine_project.count",
+        "module.devsecops_ci_toolchain.module.pipeline_ci.ibm_cd_tekton_pipeline_property.ci_pipeline_code_engine_region.count",
+        "module.devsecops_ci_toolchain.module.pipeline_ci.ibm_cd_tekton_pipeline_property.ci_pipeline_code_engine_resource_group.count",
+        "module.devsecops_ci_toolchain.module.pipeline_ci.ibm_cd_tekton_pipeline_property.ci_pipeline_code_engine_source.count",
+        "module.devsecops_ci_toolchain.module.pipeline_ci.ibm_cd_tekton_pipeline_property.ci_pipeline_deployment_target.count",
+        "module.devsecops_ci_toolchain.module.pipeline_ci.ibm_cd_tekton_pipeline_property.ci_pipeline_deployment_target.value",
+        "module.devsecops_ci_toolchain.module.pipeline_ci.ibm_cd_tekton_pipeline_property.ci_pipeline_dev_cluster_namespace.count"
       ],
       "pos": {
         "filename": "variables.tf",
@@ -2844,7 +2844,7 @@
       "default": "ibm:yp:us-south",
       "required": true,
       "source": [
-        "module.devsecops_ci_toolchain.module.pipeline-ci.ibm_cd_tekton_pipeline_property.ci_pipeline_dev_region.value"
+        "module.devsecops_ci_toolchain.module.pipeline_ci.ibm_cd_tekton_pipeline_property.ci_pipeline_dev_region.value"
       ],
       "pos": {
         "filename": "variables.tf",
@@ -2860,7 +2860,7 @@
       "default": "Default",
       "required": true,
       "source": [
-        "module.devsecops_ci_toolchain.module.pipeline-ci.ibm_cd_tekton_pipeline_property.ci_pipeline_dev_resource_group.value"
+        "module.devsecops_ci_toolchain.module.pipeline_ci.ibm_cd_tekton_pipeline_property.ci_pipeline_dev_resource_group.value"
       ],
       "pos": {
         "filename": "variables.tf",
@@ -2876,7 +2876,7 @@
       "default": "",
       "required": true,
       "source": [
-        "module.devsecops_ci_toolchain.module.pipeline-ci.ibm_cd_tekton_pipeline_property.ci_pipeline_doi_environment.value"
+        "module.devsecops_ci_toolchain.module.pipeline_ci.ibm_cd_tekton_pipeline_property.ci_pipeline_doi_environment.value"
       ],
       "pos": {
         "filename": "variables.tf",
@@ -2905,7 +2905,7 @@
       "default": "",
       "required": true,
       "source": [
-        "module.devsecops_ci_toolchain.module.pipeline-ci.ibm_cd_tekton_pipeline_property.ci_pipeline_doi_toolchain_id.value"
+        "module.devsecops_ci_toolchain.module.pipeline_ci.ibm_cd_tekton_pipeline_property.ci_pipeline_doi_toolchain_id.value"
       ],
       "pos": {
         "filename": "variables.tf",
@@ -3150,7 +3150,7 @@
       "default": "1",
       "required": true,
       "source": [
-        "module.devsecops_ci_toolchain.module.pipeline-ci.ibm_cd_tekton_pipeline_property.ci_pipeline_dynamic_api_environment.value"
+        "module.devsecops_ci_toolchain.module.pipeline_ci.ibm_cd_tekton_pipeline_property.ci_pipeline_dynamic_api_environment.value"
       ],
       "pos": {
         "filename": "variables.tf",
@@ -3166,7 +3166,7 @@
       "default": "1",
       "required": true,
       "source": [
-        "module.devsecops_ci_toolchain.module.pipeline-ci.ibm_cd_tekton_pipeline_property.ci_pipeline_dynamic_environment.value"
+        "module.devsecops_ci_toolchain.module.pipeline_ci.ibm_cd_tekton_pipeline_property.ci_pipeline_dynamic_environment.value"
       ],
       "pos": {
         "filename": "variables.tf",
@@ -3182,7 +3182,7 @@
       "default": "1",
       "required": true,
       "source": [
-        "module.devsecops_ci_toolchain.module.pipeline-ci.ibm_cd_tekton_pipeline_property.ci_pipeline_dynamic_ui_environment.value"
+        "module.devsecops_ci_toolchain.module.pipeline_ci.ibm_cd_tekton_pipeline_property.ci_pipeline_dynamic_ui_environment.value"
       ],
       "pos": {
         "filename": "variables.tf",
@@ -3198,7 +3198,7 @@
       "default": "1",
       "required": true,
       "source": [
-        "module.devsecops_ci_toolchain.module.pipeline-ci.ibm_cd_tekton_pipeline_property.ci_pipeline_sonar_environment.value"
+        "module.devsecops_ci_toolchain.module.pipeline_ci.ibm_cd_tekton_pipeline_property.ci_pipeline_sonar_environment.value"
       ],
       "pos": {
         "filename": "variables.tf",
@@ -3214,7 +3214,7 @@
       "default": "1",
       "required": true,
       "source": [
-        "module.devsecops_ci_toolchain.module.pipeline-ci.ibm_cd_tekton_pipeline_property.ci_pipeline_opt_out_v1_evidence.value"
+        "module.devsecops_ci_toolchain.module.pipeline_ci.ibm_cd_tekton_pipeline_property.ci_pipeline_opt_out_v1_evidence.value"
       ],
       "pos": {
         "filename": "variables.tf",
@@ -3243,8 +3243,8 @@
       "default": ".pipeline-config.yaml",
       "required": true,
       "source": [
-        "module.devsecops_ci_toolchain.module.pipeline-ci.ibm_cd_tekton_pipeline_property.ci_pipeline_pipeline_config.value",
-        "module.devsecops_ci_toolchain.module.pipeline-pr.ibm_cd_tekton_pipeline_property.pr_pipeline_pipeline_config.value"
+        "module.devsecops_ci_toolchain.module.pipeline_ci.ibm_cd_tekton_pipeline_property.ci_pipeline_pipeline_config.value",
+        "module.devsecops_ci_toolchain.module.pipeline_pr.ibm_cd_tekton_pipeline_property.pr_pipeline_pipeline_config.value"
       ],
       "pos": {
         "filename": "variables.tf",
@@ -3286,8 +3286,8 @@
       "default": "",
       "required": true,
       "source": [
-        "module.devsecops_ci_toolchain.module.pipeline-ci",
-        "module.devsecops_ci_toolchain.module.pipeline-pr",
+        "module.devsecops_ci_toolchain.module.pipeline_ci",
+        "module.devsecops_ci_toolchain.module.pipeline_pr",
         "module.devsecops_ci_toolchain.module.repositories.ibm_cd_toolchain_tool_hostedgit.pipeline_config_repo_clone_from_hostedgit.count"
       ],
       "pos": {
@@ -3302,10 +3302,10 @@
       "default": "",
       "required": true,
       "source": [
-        "module.devsecops_ci_toolchain.module.pipeline-ci.ibm_cd_tekton_pipeline_property.ci_pipeline_pipeline_config_repo.count",
-        "module.devsecops_ci_toolchain.module.pipeline-ci.ibm_cd_tekton_pipeline_property.ci_pipeline_pipeline_config_repo_default.count",
-        "module.devsecops_ci_toolchain.module.pipeline-pr.ibm_cd_tekton_pipeline_property.pr_pipeline_pipeline_config_repo.count",
-        "module.devsecops_ci_toolchain.module.pipeline-pr.ibm_cd_tekton_pipeline_property.pr_pipeline_pipeline_config_repo_default.count",
+        "module.devsecops_ci_toolchain.module.pipeline_ci.ibm_cd_tekton_pipeline_property.ci_pipeline_pipeline_config_repo.count",
+        "module.devsecops_ci_toolchain.module.pipeline_ci.ibm_cd_tekton_pipeline_property.ci_pipeline_pipeline_config_repo_default.count",
+        "module.devsecops_ci_toolchain.module.pipeline_pr.ibm_cd_tekton_pipeline_property.pr_pipeline_pipeline_config_repo.count",
+        "module.devsecops_ci_toolchain.module.pipeline_pr.ibm_cd_tekton_pipeline_property.pr_pipeline_pipeline_config_repo_default.count",
         "module.devsecops_ci_toolchain.module.repositories.ibm_cd_toolchain_tool_hostedgit.pipeline_config_repo_existing_hostedgit.count"
       ],
       "pos": {
@@ -3333,8 +3333,8 @@
       "default": "0",
       "required": true,
       "source": [
-        "module.devsecops_ci_toolchain.module.pipeline-ci.ibm_cd_tekton_pipeline_property.ci_pipeline_pipeline_debug.value",
-        "module.devsecops_ci_toolchain.module.pipeline-pr.ibm_cd_tekton_pipeline_property.pr_pipeline_pipeline_debug.value"
+        "module.devsecops_ci_toolchain.module.pipeline_ci.ibm_cd_tekton_pipeline_property.ci_pipeline_pipeline_debug.value",
+        "module.devsecops_ci_toolchain.module.pipeline_pr.ibm_cd_tekton_pipeline_property.pr_pipeline_pipeline_debug.value"
       ],
       "pos": {
         "filename": "variables.tf",
@@ -3350,8 +3350,8 @@
       "default": "ibmcloud-api-key",
       "required": true,
       "source": [
-        "module.devsecops_ci_toolchain.module.pipeline-ci.ibm_cd_tekton_pipeline_property.ci_pipeline_ibmcloud_api_key.value",
-        "module.devsecops_ci_toolchain.module.pipeline-pr.ibm_cd_tekton_pipeline_property.pr_pipeline_ibmcloud_api_key.value"
+        "module.devsecops_ci_toolchain.module.pipeline_ci.ibm_cd_tekton_pipeline_property.ci_pipeline_ibmcloud_api_key.value",
+        "module.devsecops_ci_toolchain.module.pipeline_pr.ibm_cd_tekton_pipeline_property.pr_pipeline_ibmcloud_api_key.value"
       ],
       "pos": {
         "filename": "variables.tf",
@@ -3367,7 +3367,7 @@
       "default": "",
       "required": true,
       "source": [
-        "module.devsecops_ci_toolchain.module.pipeline-ci.ibm_cd_tekton_pipeline_property.ci_pipeline_registry_namespace.value",
+        "module.devsecops_ci_toolchain.module.pipeline_ci.ibm_cd_tekton_pipeline_property.ci_pipeline_registry_namespace.value",
         "module.devsecops_ci_toolchain.module.services"
       ],
       "pos": {
@@ -3384,7 +3384,7 @@
       "default": "ibm:yp:us-south",
       "required": true,
       "source": [
-        "module.devsecops_ci_toolchain.module.pipeline-ci.ibm_cd_tekton_pipeline_property.ci_pipeline_registry_region.value",
+        "module.devsecops_ci_toolchain.module.pipeline_ci.ibm_cd_tekton_pipeline_property.ci_pipeline_registry_region.value",
         "module.devsecops_ci_toolchain.module.services"
       ],
       "pos": {
@@ -3414,7 +3414,7 @@
       "default": "signing_key",
       "required": true,
       "source": [
-        "module.devsecops_ci_toolchain.module.pipeline-ci.ibm_cd_tekton_pipeline_property.ci_pipeline_signing_key_secret_name.value"
+        "module.devsecops_ci_toolchain.module.pipeline_ci.ibm_cd_tekton_pipeline_property.ci_pipeline_signing_key_secret_name.value"
       ],
       "pos": {
         "filename": "variables.tf",
@@ -3443,8 +3443,8 @@
       "default": "0",
       "required": true,
       "source": [
-        "module.devsecops_ci_toolchain.module.pipeline-ci.ibm_cd_tekton_pipeline_property.ci_pipeline_slack_notifications.value",
-        "module.devsecops_ci_toolchain.module.pipeline-pr.ibm_cd_tekton_pipeline_property.pr_pipeline_slack_notifications.value"
+        "module.devsecops_ci_toolchain.module.pipeline_ci.ibm_cd_tekton_pipeline_property.ci_pipeline_slack_notifications.value",
+        "module.devsecops_ci_toolchain.module.pipeline_pr.ibm_cd_tekton_pipeline_property.pr_pipeline_slack_notifications.value"
       ],
       "pos": {
         "filename": "variables.tf",
@@ -3616,7 +3616,7 @@
       "default": "default",
       "required": true,
       "source": [
-        "module.devsecops_ci_toolchain.module.pipeline-ci.ibm_cd_tekton_pipeline_property.ci_pipeline_sonarqube-config.value"
+        "module.devsecops_ci_toolchain.module.pipeline_ci.ibm_cd_tekton_pipeline_property.ci_pipeline_sonarqube-config.value"
       ],
       "pos": {
         "filename": "variables.tf",
@@ -3773,11 +3773,11 @@
       "default": "https://cloud.ibm.com",
       "required": true,
       "source": [
-        "module.devsecops_cc_toolchain.module.pipeline-cc.ibm_cd_tekton_pipeline_property.ibmcloud_api.value",
-        "module.devsecops_cd_toolchain.module.pipeline-cd.ibm_cd_tekton_pipeline_property.cd_pipeline_ibm_cloud_api.value",
+        "module.devsecops_cc_toolchain.module.pipeline_cc.ibm_cd_tekton_pipeline_property.ibmcloud_api.value",
+        "module.devsecops_cd_toolchain.module.pipeline_cd.ibm_cd_tekton_pipeline_property.cd_pipeline_ibm_cloud_api.value",
         "module.devsecops_cd_toolchain.module.services",
-        "module.devsecops_ci_toolchain.module.pipeline-ci.ibm_cd_tekton_pipeline_property.ci_pipeline_ibm_cloud_api.value",
-        "module.devsecops_ci_toolchain.module.pipeline-pr.ibm_cd_tekton_pipeline_property.pr_pipeline_ibm_cloud_api.value"
+        "module.devsecops_ci_toolchain.module.pipeline_ci.ibm_cd_tekton_pipeline_property.ci_pipeline_ibm_cloud_api.value",
+        "module.devsecops_ci_toolchain.module.pipeline_pr.ibm_cd_tekton_pipeline_property.pr_pipeline_ibm_cloud_api.value"
       ],
       "pos": {
         "filename": "variables.tf",
@@ -3794,12 +3794,12 @@
       "sensitive": true,
       "source": [
         "module.devsecops_cc_toolchain.module.integrations",
-        "module.devsecops_cc_toolchain.module.pipeline-cc",
+        "module.devsecops_cc_toolchain.module.pipeline_cc",
         "module.devsecops_cd_toolchain.module.integrations",
-        "module.devsecops_cd_toolchain.module.pipeline-cd",
+        "module.devsecops_cd_toolchain.module.pipeline_cd",
         "module.devsecops_cd_toolchain.module.repositories",
-        "module.devsecops_ci_toolchain.module.pipeline-ci",
-        "module.devsecops_ci_toolchain.module.pipeline-pr"
+        "module.devsecops_ci_toolchain.module.pipeline_ci",
+        "module.devsecops_ci_toolchain.module.pipeline_pr"
       ],
       "pos": {
         "filename": "variables.tf",
@@ -3996,7 +3996,7 @@
   "module_calls": {
     "devsecops_cc_toolchain": {
       "name": "devsecops_cc_toolchain",
-      "source": "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cc-toolchain?ref=v1.0.3",
+      "source": "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cc-toolchain?ref=v1.0.4-beta.1",
       "attributes": {
         "app_group": "cc_app_group",
         "app_repo_auth_type": "cc_app_repo_auth_type",
@@ -4121,10 +4121,10 @@
         "cc_pipeline_id": {
           "name": "pipeline_id",
           "description": "String.",
-          "value": "module.pipeline-cc.pipeline_id",
+          "value": "module.pipeline_cc.pipeline_id",
           "pos": {
-            "filename": ".terraform/modules/devsecops_cc_toolchain/main.tf",
-            "line": 160
+            "filename": ".terraform/modules/devsecops_cc_toolchain/outputs.tf",
+            "line": 21
           },
           "type": "TypeString"
         },
@@ -4133,8 +4133,8 @@
           "description": "GUID of the Key Protect service instance in IBM Cloud",
           "value": "module.services.kp_instance_guid",
           "pos": {
-            "filename": ".terraform/modules/devsecops_cc_toolchain/main.tf",
-            "line": 156
+            "filename": ".terraform/modules/devsecops_cc_toolchain/outputs.tf",
+            "line": 16
           }
         },
         "pipeline_repo_url": {
@@ -4142,8 +4142,8 @@
           "description": "This repository url contains the tekton definitions for compliance pipelines",
           "value": "module.repositories.pipeline_repo_url",
           "pos": {
-            "filename": ".terraform/modules/devsecops_cc_toolchain/main.tf",
-            "line": 164
+            "filename": ".terraform/modules/devsecops_cc_toolchain/outputs.tf",
+            "line": 26
           }
         },
         "secrets_manager_instance_id": {
@@ -4151,16 +4151,17 @@
           "description": "GUID of the Secrets Manager service instance in IBM Cloud",
           "value": "module.services.sm_instance_guid",
           "pos": {
-            "filename": ".terraform/modules/devsecops_cc_toolchain/main.tf",
-            "line": 152
+            "filename": ".terraform/modules/devsecops_cc_toolchain/outputs.tf",
+            "line": 11
           }
         },
         "toolchain_id": {
           "name": "toolchain_id",
+          "description": "The CC toolchain ID.",
           "value": "ibm_cd_toolchain.toolchain_instance.id",
           "pos": {
-            "filename": ".terraform/modules/devsecops_cc_toolchain/main.tf",
-            "line": 148
+            "filename": ".terraform/modules/devsecops_cc_toolchain/outputs.tf",
+            "line": 6
           }
         }
       },
@@ -4171,7 +4172,7 @@
     },
     "devsecops_cd_toolchain": {
       "name": "devsecops_cd_toolchain",
-      "source": "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain?ref=v1.0.3",
+      "source": "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain?ref=v1.0.4-beta.1",
       "attributes": {
         "app_version": "cd_app_version",
         "authorization_policy_creation": "cd_authorization_policy_creation",
@@ -4319,10 +4320,10 @@
         "cd_pipeline_id": {
           "name": "pipeline_id",
           "description": "String.",
-          "value": "module.pipeline-cd.pipeline_id",
+          "value": "module.pipeline_cd.pipeline_id",
           "pos": {
-            "filename": ".terraform/modules/devsecops_cd_toolchain/main.tf",
-            "line": 203
+            "filename": ".terraform/modules/devsecops_cd_toolchain/outputs.tf",
+            "line": 35
           },
           "type": "TypeString"
         },
@@ -4330,8 +4331,8 @@
           "name": "change_management_repo_url",
           "value": "module.repositories.change_management_repo_url",
           "pos": {
-            "filename": ".terraform/modules/devsecops_cd_toolchain/main.tf",
-            "line": 199
+            "filename": ".terraform/modules/devsecops_cd_toolchain/outputs.tf",
+            "line": 30
           }
         },
         "deployment_repo_url": {
@@ -4339,8 +4340,8 @@
           "description": "The deployment repository instance url containing an application that can be built and deployed with the reference DevSecOps toolchain templates.",
           "value": "module.repositories.deployment_repo_url",
           "pos": {
-            "filename": ".terraform/modules/devsecops_cd_toolchain/main.tf",
-            "line": 195
+            "filename": ".terraform/modules/devsecops_cd_toolchain/outputs.tf",
+            "line": 25
           }
         },
         "key_protect_instance_id": {
@@ -4348,8 +4349,8 @@
           "description": "GUID of the Key Protect service instance in IBM Cloud",
           "value": "module.services.kp_instance_guid",
           "pos": {
-            "filename": ".terraform/modules/devsecops_cd_toolchain/main.tf",
-            "line": 191
+            "filename": ".terraform/modules/devsecops_cd_toolchain/outputs.tf",
+            "line": 20
           }
         },
         "pipeline_repo_url": {
@@ -4357,8 +4358,8 @@
           "description": "This repository url contains the tekton definitions for compliance pipelines",
           "value": "module.repositories.pipeline_repo_url",
           "pos": {
-            "filename": ".terraform/modules/devsecops_cd_toolchain/main.tf",
-            "line": 207
+            "filename": ".terraform/modules/devsecops_cd_toolchain/outputs.tf",
+            "line": 40
           }
         },
         "secret_tool": {
@@ -4366,8 +4367,8 @@
           "description": "Used as part of secret references to point to the secret store tool integration",
           "value": "module.integrations.secret_tool",
           "pos": {
-            "filename": ".terraform/modules/devsecops_cd_toolchain/main.tf",
-            "line": 183
+            "filename": ".terraform/modules/devsecops_cd_toolchain/outputs.tf",
+            "line": 10
           }
         },
         "secrets_manager_instance_id": {
@@ -4375,16 +4376,17 @@
           "description": "GUID of the Secrets Manager service instance in IBM Cloud",
           "value": "module.services.sm_instance_guid",
           "pos": {
-            "filename": ".terraform/modules/devsecops_cd_toolchain/main.tf",
-            "line": 187
+            "filename": ".terraform/modules/devsecops_cd_toolchain/outputs.tf",
+            "line": 15
           }
         },
         "toolchain_id": {
           "name": "toolchain_id",
+          "description": "The CD toolchain ID.",
           "value": "ibm_cd_toolchain.toolchain_instance.id",
           "pos": {
-            "filename": ".terraform/modules/devsecops_cd_toolchain/main.tf",
-            "line": 179
+            "filename": ".terraform/modules/devsecops_cd_toolchain/outputs.tf",
+            "line": 5
           }
         }
       },
@@ -4395,7 +4397,7 @@
     },
     "devsecops_ci_toolchain": {
       "name": "devsecops_ci_toolchain",
-      "source": "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-ci-toolchain?ref=v1.0.3",
+      "source": "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-ci-toolchain?ref=v1.0.4-beta.1",
       "attributes": {
         "app_group": "ci_app_group",
         "app_name": "ci_app_name",
@@ -4555,24 +4557,24 @@
           "description": "The app repo default branch that will be used by the CI build, usually either main or master.",
           "value": "module.repositories.app_repo_branch",
           "pos": {
-            "filename": ".terraform/modules/devsecops_ci_toolchain/main.tf",
-            "line": 263
+            "filename": ".terraform/modules/devsecops_ci_toolchain/outputs.tf",
+            "line": 83
           }
         },
         "app_repo_git_id": {
           "name": "app_repo_git_id",
           "value": "module.repositories.app_repo_git_id",
           "pos": {
-            "filename": ".terraform/modules/devsecops_ci_toolchain/main.tf",
-            "line": 268
+            "filename": ".terraform/modules/devsecops_ci_toolchain/outputs.tf",
+            "line": 88
           }
         },
         "app_repo_git_provider": {
           "name": "app_repo_git_provider",
           "value": "module.repositories.app_repo_git_provider",
           "pos": {
-            "filename": ".terraform/modules/devsecops_ci_toolchain/main.tf",
-            "line": 258
+            "filename": ".terraform/modules/devsecops_ci_toolchain/outputs.tf",
+            "line": 78
           }
         },
         "app_repo_url": {
@@ -4580,17 +4582,17 @@
           "description": "The app repository instance url containing an application that can be built and deployed with the reference DevSecOps toolchain templates.",
           "value": "module.repositories.app_repo_url",
           "pos": {
-            "filename": ".terraform/modules/devsecops_ci_toolchain/main.tf",
-            "line": 253
+            "filename": ".terraform/modules/devsecops_ci_toolchain/outputs.tf",
+            "line": 73
           }
         },
         "ci_pipeline_id": {
           "name": "pipeline_id",
           "description": "String.",
-          "value": "module.pipeline-ci.pipeline_id",
+          "value": "module.pipeline_ci.pipeline_id",
           "pos": {
-            "filename": ".terraform/modules/devsecops_ci_toolchain/main.tf",
-            "line": 206
+            "filename": ".terraform/modules/devsecops_ci_toolchain/outputs.tf",
+            "line": 20
           },
           "type": "TypeString"
         },
@@ -4599,8 +4601,8 @@
           "value": "module.repositories.evidence_repo",
           "sensitive": true,
           "pos": {
-            "filename": ".terraform/modules/devsecops_ci_toolchain/main.tf",
-            "line": 238
+            "filename": ".terraform/modules/devsecops_ci_toolchain/outputs.tf",
+            "line": 56
           }
         },
         "evidence_repo_url": {
@@ -4608,8 +4610,8 @@
           "description": "The evidence repository instance url, where evidence of the builds and scans are stored, ready for any compliance audit",
           "value": "module.repositories.evidence_repo_url",
           "pos": {
-            "filename": ".terraform/modules/devsecops_ci_toolchain/main.tf",
-            "line": 223
+            "filename": ".terraform/modules/devsecops_ci_toolchain/outputs.tf",
+            "line": 40
           }
         },
         "inventory_repo": {
@@ -4617,8 +4619,8 @@
           "value": "module.repositories.inventory_repo",
           "sensitive": true,
           "pos": {
-            "filename": ".terraform/modules/devsecops_ci_toolchain/main.tf",
-            "line": 233
+            "filename": ".terraform/modules/devsecops_ci_toolchain/outputs.tf",
+            "line": 50
           }
         },
         "inventory_repo_url": {
@@ -4626,8 +4628,8 @@
           "description": "The inventory repository instance url, with details of which artifact has been built and will be deployed",
           "value": "module.repositories.inventory_repo_url",
           "pos": {
-            "filename": ".terraform/modules/devsecops_ci_toolchain/main.tf",
-            "line": 218
+            "filename": ".terraform/modules/devsecops_ci_toolchain/outputs.tf",
+            "line": 35
           }
         },
         "issues_repo": {
@@ -4635,8 +4637,8 @@
           "value": "module.repositories.issues_repo",
           "sensitive": true,
           "pos": {
-            "filename": ".terraform/modules/devsecops_ci_toolchain/main.tf",
-            "line": 243
+            "filename": ".terraform/modules/devsecops_ci_toolchain/outputs.tf",
+            "line": 62
           }
         },
         "issues_repo_url": {
@@ -4644,8 +4646,8 @@
           "description": "The incident issues repository instance url, where issues are created when vulnerabilities and CVEs are detected",
           "value": "module.repositories.issues_repo_url",
           "pos": {
-            "filename": ".terraform/modules/devsecops_ci_toolchain/main.tf",
-            "line": 228
+            "filename": ".terraform/modules/devsecops_ci_toolchain/outputs.tf",
+            "line": 45
           }
         },
         "key_protect_instance_id": {
@@ -4653,8 +4655,8 @@
           "description": "GUID of the Key Protect service instance in IBM Cloud",
           "value": "module.services.kp_instance_guid",
           "pos": {
-            "filename": ".terraform/modules/devsecops_ci_toolchain/main.tf",
-            "line": 202
+            "filename": ".terraform/modules/devsecops_ci_toolchain/outputs.tf",
+            "line": 15
           }
         },
         "pipeline_repo_url": {
@@ -4662,17 +4664,17 @@
           "description": "This repository url contains the tekton definitions for compliance pipelines",
           "value": "module.repositories.pipeline_repo_url",
           "pos": {
-            "filename": ".terraform/modules/devsecops_ci_toolchain/main.tf",
-            "line": 248
+            "filename": ".terraform/modules/devsecops_ci_toolchain/outputs.tf",
+            "line": 68
           }
         },
         "pr_pipeline_id": {
           "name": "pipeline_id",
           "description": "String.",
-          "value": "module.pipeline-pr.pipeline_id",
+          "value": "module.pipeline_pr.pipeline_id",
           "pos": {
-            "filename": ".terraform/modules/devsecops_ci_toolchain/main.tf",
-            "line": 210
+            "filename": ".terraform/modules/devsecops_ci_toolchain/outputs.tf",
+            "line": 25
           },
           "type": "TypeString"
         },
@@ -4681,8 +4683,8 @@
           "description": "Used as part of secret references to point to the secret store tool integration",
           "value": "module.integrations.secret_tool",
           "pos": {
-            "filename": ".terraform/modules/devsecops_ci_toolchain/main.tf",
-            "line": 214
+            "filename": ".terraform/modules/devsecops_ci_toolchain/outputs.tf",
+            "line": 30
           }
         },
         "secrets_manager_instance_id": {
@@ -4690,16 +4692,17 @@
           "description": "GUID of the Secrets Manager service instance in IBM Cloud",
           "value": "module.services.sm_instance_guid",
           "pos": {
-            "filename": ".terraform/modules/devsecops_ci_toolchain/main.tf",
-            "line": 198
+            "filename": ".terraform/modules/devsecops_ci_toolchain/outputs.tf",
+            "line": 10
           }
         },
         "toolchain_id": {
           "name": "toolchain_id",
+          "description": "The CI toolchain ID.",
           "value": "ibm_cd_toolchain.toolchain_instance.id",
           "pos": {
-            "filename": ".terraform/modules/devsecops_ci_toolchain/main.tf",
-            "line": 194
+            "filename": ".terraform/modules/devsecops_ci_toolchain/outputs.tf",
+            "line": 5
           }
         }
       },
