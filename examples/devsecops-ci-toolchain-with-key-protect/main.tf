@@ -20,4 +20,7 @@ module "terraform_devsecops_alm" {
   sm_name                  = var.sm_name
   sm_location              = var.sm_location
   sm_secret_group          = var.sm_secret_group
+  create_ci_toolchain      = var.create_ci_toolchain
+  create_cd_toolchain      = var.create_cd_toolchain
+  create_cc_toolchain      = var.create_cc_toolchain
 }

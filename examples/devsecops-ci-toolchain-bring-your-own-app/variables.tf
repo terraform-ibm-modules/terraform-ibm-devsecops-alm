@@ -120,3 +120,57 @@ variable "sm_secret_group" {
   description = "Group in Secrets Manager for organizing/grouping secrets."
   default     = "Default"
 }
+
+variable "create_ci_toolchain" {
+  description = "Flag which determines if the DevSecOps CI toolchain is created. If this toolchain is not created then values must be set for the following variables, evidence_repo_url, issues_repo_url and inventory_repo_url."
+  type        = bool
+  default     = true
+}
+
+variable "create_cd_toolchain" {
+  description = "Boolean flag which determines if the DevSecOps CD toolchain is created."
+  type        = bool
+  default     = false
+}
+
+variable "create_cc_toolchain" {
+  description = "Boolean flag which determines if the DevSecOps CC toolchain is created."
+  type        = bool
+  default     = false
+}
+
+variable "ci_app_repo_clone_from_url" {
+  type        = string
+  description = "Override the default sample app by providing your own sample app URL, which is cloned into the app repo. Note, using clone_if_not_exists mode, so if the app repo already exists the repo contents are unchanged."
+  default     = ""
+}
+
+variable "ci_app_repo_clone_from_branch" {
+  type        = string
+  description = "Used when app_repo_clone_from_url is provided, the default branch that is used by the CI build, usually either main or master."
+  default     = ""
+}
+
+variable "ci_app_repo_existing_url" {
+  type        = string
+  description = "Override to bring your own existing application repository URL, which is used directly instead of cloning the default sample."
+  default     = ""
+}
+
+variable "ci_app_repo_existing_branch" {
+  type        = string
+  description = "Used when app_repo_existing_url is provided, the default branch that is used by the CI build, usually either main or master."
+  default     = ""
+}
+
+variable "ci_app_repo_existing_git_provider" {
+  type        = string
+  description = "By default 'hostedgit', else use 'githubconsolidated' or 'gitlab'."
+  default     = ""
+}
+
+variable "ci_app_repo_existing_git_id" {
+  type        = string
+  description = "By default absent, else custom server GUID, or other options for 'git_id' field in the browser UI."
+  default     = ""
+}

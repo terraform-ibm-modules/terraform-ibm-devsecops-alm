@@ -1,6 +1,6 @@
 module "devsecops_ci_toolchain" {
   count            = var.create_ci_toolchain ? 1 : 0
-  source           = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-ci-toolchain?ref=v1.0.3"
+  source           = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-ci-toolchain?ref=v1.0.4-beta.1"
   ibmcloud_api_key = var.ibmcloud_api_key
 
   toolchain_name           = var.ci_toolchain_name
@@ -12,8 +12,8 @@ module "devsecops_ci_toolchain" {
   compliance_base_image    = var.ci_compliance_base_image
 
   #SECRET PROVIDERS
-  enable_key_protect     = var.ci_enable_key_protect
-  enable_secrets_manager = var.ci_enable_secrets_manager
+  enable_key_protect     = (var.ci_enable_key_protect == null) ? var.enable_key_protect : var.ci_enable_key_protect
+  enable_secrets_manager = (var.ci_enable_secrets_manager == null) ? var.enable_secrets_manager : var.ci_enable_secrets_manager
   sm_name                = (var.ci_sm_name == "") ? var.sm_name : var.ci_sm_name
   sm_location            = (var.ci_sm_location == "") ? var.sm_location : var.ci_sm_location
   sm_resource_group      = (var.ci_sm_resource_group == "") ? var.sm_resource_group : var.ci_sm_resource_group
@@ -123,7 +123,7 @@ module "devsecops_ci_toolchain" {
 
 module "devsecops_cd_toolchain" {
   count            = var.create_cd_toolchain ? 1 : 0
-  source           = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain?ref=v1.0.3"
+  source           = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain?ref=v1.0.4-beta.2"
   ibmcloud_api_key = var.ibmcloud_api_key
 
   toolchain_name           = var.cd_toolchain_name
@@ -134,8 +134,8 @@ module "devsecops_cd_toolchain" {
   compliance_base_image    = var.cd_compliance_base_image
 
   #SECRET PROVIDERS
-  enable_key_protect     = var.cd_enable_key_protect
-  enable_secrets_manager = var.cd_enable_secrets_manager
+  enable_key_protect     = (var.cd_enable_key_protect == null) ? var.enable_key_protect : var.cd_enable_key_protect
+  enable_secrets_manager = (var.cd_enable_secrets_manager == null) ? var.enable_secrets_manager : var.cd_enable_secrets_manager
   sm_name                = (var.cd_sm_name == "") ? var.sm_name : var.cd_sm_name
   sm_location            = (var.cd_sm_location == "") ? var.sm_location : var.cd_sm_location
   sm_resource_group      = (var.cd_sm_resource_group == "") ? var.sm_resource_group : var.cd_sm_resource_group
@@ -153,7 +153,6 @@ module "devsecops_cd_toolchain" {
   compliance_pipeline_repo_git_token_secret_name = var.cd_compliance_pipeline_repo_git_token_secret_name
   pipeline_config_repo_git_token_secret_name     = var.cd_pipeline_config_repo_git_token_secret_name
   deployment_repo_git_token_secret_name          = var.cd_deployment_repo_git_token_secret_name
-  scc_ibmcloud_api_key_secret_name               = var.cd_scc_ibmcloud_api_key_secret_name
   change_management_repo_git_token_secret_name   = var.cd_change_management_repo_git_token_secret_name
   slack_webhook_secret_name                      = var.cd_slack_webhook_secret_name
 
@@ -186,8 +185,6 @@ module "devsecops_cd_toolchain" {
   issues_repo_url    = try(module.devsecops_ci_toolchain[0].issues_repo_url, var.issues_repo_url)
   inventory_repo_url = try(module.devsecops_ci_toolchain[0].inventory_repo_url, var.inventory_repo_url)
 
-
-  deployment_repo                       = var.cd_deployment_repo
   change_management_repo                = var.cd_change_management_repo
   change_repo_clone_from_url            = var.cd_change_repo_clone_from_url
   deployment_repo_existing_git_provider = var.cd_deployment_repo_existing_git_provider
@@ -200,12 +197,8 @@ module "devsecops_cd_toolchain" {
   deployment_repo_existing_branch       = var.cd_deployment_repo_existing_branch
 
   #SCC
-  scc_enable_scc         = var.cd_scc_enable_scc
-  scc_profile            = var.cd_scc_profile
-  scc_scope              = var.cd_scc_scope
-  scc_integration_name   = var.cd_scc_integration_name
-  scc_evidence_namespace = var.cd_scc_evidence_namespace
-  scc_trigger_scan       = var.cd_scc_trigger_scan
+  scc_enable_scc       = var.cd_scc_enable_scc
+  scc_integration_name = var.cd_scc_integration_name
 
   #OTHER INTEGRATIONS
   slack_notifications           = var.cd_slack_notifications
@@ -229,7 +222,6 @@ module "devsecops_cd_toolchain" {
   emergency_label               = var.cd_emergency_label
   app_version                   = var.cd_app_version
   pipeline_debug                = var.cd_pipeline_debug
-  region                        = var.cd_region
 
   #SLACK INTEGRATION
   enable_slack           = var.cd_enable_slack
@@ -251,7 +243,7 @@ module "devsecops_cd_toolchain" {
 
 module "devsecops_cc_toolchain" {
   count                         = var.create_cc_toolchain ? 1 : 0
-  source                        = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cc-toolchain?ref=v1.0.3"
+  source                        = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cc-toolchain?ref=v1.0.4-beta.2"
   ibmcloud_api_key              = var.ibmcloud_api_key
   toolchain_name                = var.cc_toolchain_name
   toolchain_description         = var.cc_toolchain_description
@@ -262,8 +254,8 @@ module "devsecops_cc_toolchain" {
   authorization_policy_creation = var.cc_authorization_policy_creation
 
   #SECRET PROVIDERS
-  enable_key_protect     = var.cc_enable_key_protect
-  enable_secrets_manager = var.cc_enable_secrets_manager
+  enable_key_protect     = (var.cc_enable_key_protect == null) ? var.enable_key_protect : var.cc_enable_key_protect
+  enable_secrets_manager = (var.cc_enable_secrets_manager == null) ? var.enable_secrets_manager : var.cc_enable_secrets_manager
   sm_name                = (var.cc_sm_name == "") ? var.sm_name : var.cc_sm_name
   sm_location            = (var.cc_sm_location == "") ? var.sm_location : var.cc_sm_location
   sm_resource_group      = (var.cc_sm_resource_group == "") ? var.sm_resource_group : var.cc_sm_resource_group
@@ -281,7 +273,6 @@ module "devsecops_cc_toolchain" {
   compliance_pipeline_repo_git_token_secret_name = var.cc_compliance_pipeline_repo_git_token_secret_name
   pipeline_config_repo_git_token_secret_name     = var.cc_pipeline_config_repo_git_token_secret_name
   app_repo_git_token_secret_name                 = var.cc_app_repo_git_token_secret_name
-  scc_ibmcloud_api_key_secret_name               = var.cc_scc_ibmcloud_api_key_secret_name
   slack_webhook_secret_name                      = var.cc_slack_webhook_secret_name
 
   #AUTH TYPE FOR REPOS
@@ -319,12 +310,8 @@ module "devsecops_cc_toolchain" {
   app_repo_git_id       = try(module.devsecops_ci_toolchain[0].app_repo_git_id, var.cc_app_repo_git_id)
 
   #SCC
-  scc_enable_scc         = var.cc_scc_enable_scc
-  scc_profile            = var.cc_scc_profile
-  scc_scope              = var.cc_scc_scope
-  scc_integration_name   = var.cc_scc_integration_name
-  scc_evidence_namespace = var.cc_scc_evidence_namespace
-  scc_trigger_scan       = var.cc_scc_trigger_scan
+  scc_enable_scc       = var.cc_scc_enable_scc
+  scc_integration_name = var.cc_scc_integration_name
 
   #OTHER INTEGRATIONS
   slack_notifications     = var.cc_slack_notifications
