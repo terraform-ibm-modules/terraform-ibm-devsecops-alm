@@ -229,7 +229,7 @@ No resources.
 | <a name="input_cd_sm_secret_group"></a> [cd\_sm\_secret\_group](#input\_cd\_sm\_secret\_group) | Group in Secrets Manager for organizing/grouping secrets. | `string` | `""` | no |
 | <a name="input_cd_source_environment"></a> [cd\_source\_environment](#input\_cd\_source\_environment) | The source environment that the app is promoted from. | `string` | `"master"` | no |
 | <a name="input_cd_target_environment"></a> [cd\_target\_environment](#input\_cd\_target\_environment) | The target environment that the app is deployed to. | `string` | `"prod"` | no |
-| <a name="input_cd_target_environment_detail"></a> [cd\_target\_environment\_detail](#input\_cd\_target\_environment\_detail) | Details of the environment being updated. | `string` | `""` | no |
+| <a name="input_cd_target_environment_detail"></a> [cd\_target\_environment\_detail](#input\_cd\_target\_environment\_detail) | Details of the environment being updated. | `string` | `"Production target environment"` | no |
 | <a name="input_cd_target_environment_purpose"></a> [cd\_target\_environment\_purpose](#input\_cd\_target\_environment\_purpose) | Purpose of the environment being updated. | `string` | `"production"` | no |
 | <a name="input_cd_toolchain_description"></a> [cd\_toolchain\_description](#input\_cd\_toolchain\_description) | Description for the CD toolchain. | `string` | `"Toolchain created with terraform template for DevSecOps CD Best Practices."` | no |
 | <a name="input_cd_toolchain_name"></a> [cd\_toolchain\_name](#input\_cd\_toolchain\_name) | The name of the CD Toolchain. | `string` | `"DevSecOps CD Toolchain - Terraform"` | no |

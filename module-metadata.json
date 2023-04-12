@@ -2097,7 +2097,7 @@
       "name": "cd_target_environment_detail",
       "type": "string",
       "description": "Details of the environment being updated.",
-      "default": "",
+      "default": "Production target environment",
       "required": true,
       "source": [
         "module.devsecops_cd_toolchain.module.pipeline_cd.ibm_cd_tekton_pipeline_property.cd_pipeline_target_environment_detail.value"

@@ -1083,7 +1083,7 @@ variable "cd_slack_notifications" {
 variable "cd_target_environment_detail" {
   description = "Details of the environment being updated."
   type        = string
-  default     = ""
+  default     = "Production target environment"
 }
 
 variable "cd_customer_impact" {
