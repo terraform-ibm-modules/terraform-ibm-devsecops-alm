@@ -15,6 +15,3 @@ jobs:
     if: ${{ github.event_name == 'workflow_dispatch' || (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success') }}
     uses: terraform-ibm-modules/common-pipeline-assets/.github/workflows/common-release.yml@v1.8.1
     secrets: inherit
-    with:
-      craTarget: "./"
-      craGoalIgnoreFile: "cra-tf-validate-ignore-goals.json"
