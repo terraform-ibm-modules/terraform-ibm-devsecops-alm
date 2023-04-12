@@ -77,8 +77,8 @@ statement instead the previous block.
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_devsecops_cc_toolchain"></a> [devsecops\_cc\_toolchain](#module\_devsecops\_cc\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cc-toolchain | v1.0.4-beta.1 |
-| <a name="module_devsecops_cd_toolchain"></a> [devsecops\_cd\_toolchain](#module\_devsecops\_cd\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain | v1.0.4-beta.1 |
+| <a name="module_devsecops_cc_toolchain"></a> [devsecops\_cc\_toolchain](#module\_devsecops\_cc\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cc-toolchain | v1.0.4-beta.2 |
+| <a name="module_devsecops_cd_toolchain"></a> [devsecops\_cd\_toolchain](#module\_devsecops\_cd\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain | v1.0.4-beta.2 |
 | <a name="module_devsecops_ci_toolchain"></a> [devsecops\_ci\_toolchain](#module\_devsecops\_ci\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-ci-toolchain | v1.0.4-beta.1 |
 
 ## Resources
@@ -138,12 +138,7 @@ No resources.
 | <a name="input_cc_pipeline_ibmcloud_api_key_secret_name"></a> [cc\_pipeline\_ibmcloud\_api\_key\_secret\_name](#input\_cc\_pipeline\_ibmcloud\_api\_key\_secret\_name) | Name of the Cloud API key secret in the secret provider. | `string` | `"ibmcloud-api-key"` | no |
 | <a name="input_cc_repositories_prefix"></a> [cc\_repositories\_prefix](#input\_cc\_repositories\_prefix) | The prefix for the compliance repositories. | `string` | `"compliance"` | no |
 | <a name="input_cc_scc_enable_scc"></a> [cc\_scc\_enable\_scc](#input\_cc\_scc\_enable\_scc) | Enable the SCC integration | `bool` | `false` | no |
-| <a name="input_cc_scc_evidence_namespace"></a> [cc\_scc\_evidence\_namespace](#input\_cc\_scc\_evidence\_namespace) | The kind of evidence to be displayed, cc or cd. | `string` | `"cc"` | no |
-| <a name="input_cc_scc_ibmcloud_api_key_secret_name"></a> [cc\_scc\_ibmcloud\_api\_key\_secret\_name](#input\_cc\_scc\_ibmcloud\_api\_key\_secret\_name) | Name of the Cloud API key secret in the secret provider. | `string` | `"ibmcloud-api-key"` | no |
 | <a name="input_cc_scc_integration_name"></a> [cc\_scc\_integration\_name](#input\_cc\_scc\_integration\_name) | The name of the SCC integration name. | `string` | `"Security and Compliance"` | no |
-| <a name="input_cc_scc_profile"></a> [cc\_scc\_profile](#input\_cc\_scc\_profile) | Security and Compliance Profile | `string` | `"compliance-profile"` | no |
-| <a name="input_cc_scc_scope"></a> [cc\_scc\_scope](#input\_cc\_scc\_scope) | Security and Compliance Scope | `string` | `"compliance-scope"` | no |
-| <a name="input_cc_scc_trigger_scan"></a> [cc\_scc\_trigger\_scan](#input\_cc\_scc\_trigger\_scan) | Can be set to 'enabled'. Note each scan may incur a charge. | `string` | `"disabled"` | no |
 | <a name="input_cc_slack_channel_name"></a> [cc\_slack\_channel\_name](#input\_cc\_slack\_channel\_name) | The Slack channel that notifications are posted to. | `string` | `"my-channel"` | no |
 | <a name="input_cc_slack_notifications"></a> [cc\_slack\_notifications](#input\_cc\_slack\_notifications) | The switch that turns the Slack integration on or off. | `string` | `"0"` | no |
 | <a name="input_cc_slack_pipeline_fail"></a> [cc\_slack\_pipeline\_fail](#input\_cc\_slack\_pipeline\_fail) | Generate pipeline failed notifications. | `bool` | `true` | no |
@@ -225,12 +220,7 @@ No resources.
 | <a name="input_cd_repositories_prefix"></a> [cd\_repositories\_prefix](#input\_cd\_repositories\_prefix) | Prefix name for the cloned compliance repos. | `string` | `"compliance"` | no |
 | <a name="input_cd_satellite_cluster_group"></a> [cd\_satellite\_cluster\_group](#input\_cd\_satellite\_cluster\_group) | The Satellite cluster group | `string` | `""` | no |
 | <a name="input_cd_scc_enable_scc"></a> [cd\_scc\_enable\_scc](#input\_cd\_scc\_enable\_scc) | Enable the SCC integration. | `bool` | `false` | no |
-| <a name="input_cd_scc_evidence_namespace"></a> [cd\_scc\_evidence\_namespace](#input\_cd\_scc\_evidence\_namespace) | The kind of evidence to be displayed, cc or cd. | `string` | `"cd"` | no |
-| <a name="input_cd_scc_ibmcloud_api_key_secret_name"></a> [cd\_scc\_ibmcloud\_api\_key\_secret\_name](#input\_cd\_scc\_ibmcloud\_api\_key\_secret\_name) | Name of the Cloud API key secret in the secret provider. | `string` | `"ibmcloud-api-key"` | no |
 | <a name="input_cd_scc_integration_name"></a> [cd\_scc\_integration\_name](#input\_cd\_scc\_integration\_name) | The name of the SCC integration name. | `string` | `"Security and Compliance"` | no |
-| <a name="input_cd_scc_profile"></a> [cd\_scc\_profile](#input\_cd\_scc\_profile) | Security and Compliance Profile | `string` | `"compliance-profile"` | no |
-| <a name="input_cd_scc_scope"></a> [cd\_scc\_scope](#input\_cd\_scc\_scope) | Security and Compliance Scope | `string` | `"compliance-scope"` | no |
-| <a name="input_cd_scc_trigger_scan"></a> [cd\_scc\_trigger\_scan](#input\_cd\_scc\_trigger\_scan) | Can be set to 'enabled'. Note each scan may incur a charge. | `string` | `"disabled"` | no |
 | <a name="input_cd_slack_channel_name"></a> [cd\_slack\_channel\_name](#input\_cd\_slack\_channel\_name) | The Slack channel that notifications are posted to. | `string` | `"my-channel"` | no |
 | <a name="input_cd_slack_notifications"></a> [cd\_slack\_notifications](#input\_cd\_slack\_notifications) | The switch to turn the Slack integration on or off. | `string` | `"0"` | no |
 | <a name="input_cd_slack_pipeline_fail"></a> [cd\_slack\_pipeline\_fail](#input\_cd\_slack\_pipeline\_fail) | Generate pipeline failed notifications. | `bool` | `true` | no |
