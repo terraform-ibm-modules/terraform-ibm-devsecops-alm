@@ -17,5 +17,4 @@ jobs:
     secrets: inherit
     with:
       craTarget: "examples/default"
-      craGoalIgnoreFile: "cra-tf-validate-ignore-goals.json"
       craEnvironmentVariables: "TF_VAR_enable_key_protect=true,TF_VAR_kp_name=prodkeys, TF_VAR_enable_secrets_manager=false"
