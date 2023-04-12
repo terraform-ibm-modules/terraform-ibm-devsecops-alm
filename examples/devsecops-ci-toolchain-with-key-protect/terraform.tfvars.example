@@ -1,27 +1,33 @@
 
 # APIKEY to run the Terraform script
-ibmcloud_api_key            = ""
-toolchain_resource_group    = "Default"
-toolchain_region            = "us-south"
+#ibmcloud_api_key        = ""
+toolchain_resource_group = "Default"
+toolchain_region         = "us-south"
 
-# Disable creation of the DevSecOps CD and CC toolchains
-create_cd_toolchain         = false
-create_cc_toolchain         = false
+# Controls which of the CI/CD/CC DevSecOps toolchains get created. Only CI in this example
+create_ci_toolchain      = true
+create_cd_toolchain      = false
+create_cc_toolchain      = false
 
-# Disable the default usage of Secrets Manager
-ci_enable_secrets_manager   = false
+# Required properties for using Key Protect
+enable_key_protect       = true
+kp_name                  = "prodkeys"
+kp_location              = "eu-gb"
+kp_resource_group        = "Default"
 
-# Enable Key Protect
-ci_enable_key_protect       = true
-
-# Key Protect details
-kp_name                     = "my-key-protect"  #Key Protect instance name
-kp_location                 = "us-south"  #Key Protect region/location
-kp_resource_group           = "Default"   #Resource group containing the Key Protect instance
+# Required properties for using Secrets Manager. Secrets Manager is disiabled in this example
+enable_secrets_manager   = false
+#sm_name                  = "sm-compliance-secrets"
+#sm_location              = "eu-gb"
+#sm_resource_group        = "Default"
+#sm_secret_group          = "Default"
 
 # Required Pipeline properties for running the pipelines in the toolchain
-ci_registry_namespace       = "my-namespace"
-ci_registry_region          = "ibm:yp:us-south"
-ci_cluster_name             = "mycluster-free"
-ci_dev_region               = "ibm:yp:us-south"
-ci_dev_resource_group       = "Default"
+ci_registry_namespace    = "my-namespace"
+ci_registry_region       = "ibm:yp:jp-tok"
+ci_cluster_name          = "mycluster-free"
+ci_dev_region            = "ibm:yp:jp-tok"
+ci_dev_resource_group    = "Default"
+ci_cluster_namespace     = "dev"
+cd_cluster_name          = "mycluster-free"
+cd_cluster_namespace     = "prod"

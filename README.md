@@ -62,8 +62,8 @@ statement instead the previous block.
 ## Examples
 
 - [ Default example](examples/default)
-- [ Default example](examples/devsecops-ci-toolchain-bring-your-own-app)
-- [ Default example](examples/devsecops-ci-toolchain-with-key-protect)
+- [ Bring your own app example](examples/devsecops-ci-toolchain-bring-your-own-app)
+- [ Key Protect and CI only example](examples/devsecops-ci-toolchain-with-key-protect)
 <!-- END EXAMPLES HOOK -->
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements

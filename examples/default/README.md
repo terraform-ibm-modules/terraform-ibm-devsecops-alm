@@ -1,8 +1,4 @@
 # Default example
 
-An end-to-end example that uses the module's default variable values.
-This example uses the IBM Cloud terraform provider to:
- - Create a new resource group if one is not passed in.
- - Create a new VPC in the resource group and region provided.
-
-<!-- Add your example and link to it from the module's main readme file. -->
+An end-to-end example that creates the DevSecOps CI, CD and CC toolchains. It exposes the minimum amount of variables that should be configured to get a working custom set of DevSecOps toolchains. This is the 'out of the box' setup. See the [DevSecOps docs](https://cloud.ibm.com/docs/devsecops?topic=devsecops-cd-devsecops-tekton-ci-compliance) for the prerequisites for running the toolchains.
+-
