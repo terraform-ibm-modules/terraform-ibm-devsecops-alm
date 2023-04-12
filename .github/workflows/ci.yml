@@ -16,6 +16,6 @@ jobs:
     uses: terraform-ibm-modules/common-pipeline-assets/.github/workflows/common-terraform-module-ci.yml@v1.8.1
     secrets: inherit
     with:
-      craTarget: "./"
+      craTarget: "examples/default"
       craGoalIgnoreFile: "cra-tf-validate-ignore-goals.json"
       craEnvironmentVariables: "TF_VAR_enable_key_protect=true,TF_VAR_kp_name=prodkeys, TF_VAR_enable_secrets_manager=false"
