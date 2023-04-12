@@ -694,7 +694,7 @@
     "cc_scc_integration_name": {
       "name": "cc_scc_integration_name",
       "type": "string",
-      "description": "The name of the SCC integration name.",
+      "description": "The name of the SCC integration.",
       "default": "Security and Compliance",
       "source": [
         "module.devsecops_cc_toolchain.module.integrations"
@@ -1869,7 +1869,7 @@
     "cd_scc_integration_name": {
       "name": "cd_scc_integration_name",
       "type": "string",
-      "description": "The name of the SCC integration name.",
+      "description": "The name of the SCC integration.",
       "default": "Security and Compliance",
       "source": [
         "module.devsecops_cd_toolchain.module.integrations"
@@ -3840,7 +3840,7 @@
   "module_calls": {
     "devsecops_cc_toolchain": {
       "name": "devsecops_cc_toolchain",
-      "source": "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cc-toolchain?ref=v1.0.4-beta.2",
+      "source": "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cc-toolchain?ref=v1.0.4",
       "attributes": {
         "app_group": "cc_app_group",
         "app_repo_auth_type": "cc_app_repo_auth_type",
@@ -4011,7 +4011,7 @@
     },
     "devsecops_cd_toolchain": {
       "name": "devsecops_cd_toolchain",
-      "source": "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain?ref=v1.0.4-beta.2",
+      "source": "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain?ref=v1.0.4",
       "attributes": {
         "app_version": "cd_app_version",
         "authorization_policy_creation": "cd_authorization_policy_creation",
@@ -4229,7 +4229,7 @@
     },
     "devsecops_ci_toolchain": {
       "name": "devsecops_ci_toolchain",
-      "source": "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-ci-toolchain?ref=v1.0.4-beta.1",
+      "source": "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-ci-toolchain?ref=v1.0.4",
       "attributes": {
         "app_group": "ci_app_group",
         "app_name": "ci_app_name",

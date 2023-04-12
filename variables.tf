@@ -1061,7 +1061,7 @@ variable "cd_change_management_repo_git_token_secret_name" {
 
 variable "cd_scc_integration_name" {
   type        = string
-  description = "The name of the SCC integration name."
+  description = "The name of the SCC integration."
   default     = "Security and Compliance"
 }
 
@@ -1502,7 +1502,7 @@ variable "cc_app_repo_git_token_secret_name" {
 
 variable "cc_scc_integration_name" {
   type        = string
-  description = "The name of the SCC integration name."
+  description = "The name of the SCC integration."
   default     = "Security and Compliance"
 }
 
