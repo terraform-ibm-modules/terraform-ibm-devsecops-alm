@@ -1042,12 +1042,6 @@ variable "cd_pipeline_config_repo_git_token_secret_name" {
   default     = "git-token"
 }
 
-variable "cd_scc_ibmcloud_api_key_secret_name" {
-  type        = string
-  description = "Name of the Cloud API key secret in the secret provider."
-  default     = "ibmcloud-api-key"
-}
-
 variable "cd_deployment_repo_git_token_secret_name" {
   type        = string
   description = "Name of the Git token secret in the secret provider."
@@ -1064,17 +1058,6 @@ variable "cd_change_management_repo_git_token_secret_name" {
 
 ######## SCC #####################################
 
-variable "cd_scc_profile" {
-  type        = string
-  description = "Security and Compliance Profile"
-  default     = "compliance-profile"
-}
-
-variable "cd_scc_scope" {
-  type        = string
-  description = "Security and Compliance Scope"
-  default     = "compliance-scope"
-}
 
 variable "cd_scc_integration_name" {
   type        = string
@@ -1086,18 +1069,6 @@ variable "cd_scc_enable_scc" {
   type        = bool
   description = "Enable the SCC integration."
   default     = false
-}
-
-variable "cd_scc_evidence_namespace" {
-  type        = string
-  description = "The kind of evidence to be displayed, cc or cd."
-  default     = "cd"
-}
-
-variable "cd_scc_trigger_scan" {
-  type        = string
-  description = "Can be set to 'enabled'. Note each scan may incur a charge."
-  default     = "disabled"
 }
 
 ######## End SCC ################################
@@ -1525,27 +1496,9 @@ variable "cc_app_repo_git_token_secret_name" {
   default     = "git-token"
 }
 
-variable "cc_scc_ibmcloud_api_key_secret_name" {
-  type        = string
-  description = "Name of the Cloud API key secret in the secret provider."
-  default     = "ibmcloud-api-key"
-}
-
 ######## End Secret Names #######################
 
 ######## SCC #####################################
-
-variable "cc_scc_profile" {
-  type        = string
-  description = "Security and Compliance Profile"
-  default     = "compliance-profile"
-}
-
-variable "cc_scc_scope" {
-  type        = string
-  description = "Security and Compliance Scope"
-  default     = "compliance-scope"
-}
 
 variable "cc_scc_integration_name" {
   type        = string
@@ -1557,18 +1510,6 @@ variable "cc_scc_enable_scc" {
   type        = bool
   description = "Enable the SCC integration"
   default     = false
-}
-
-variable "cc_scc_evidence_namespace" {
-  type        = string
-  description = "The kind of evidence to be displayed, cc or cd."
-  default     = "cc"
-}
-
-variable "cc_scc_trigger_scan" {
-  type        = string
-  description = "Can be set to 'enabled'. Note each scan may incur a charge."
-  default     = "disabled"
 }
 
 ######## End SCC ################################
