@@ -1,5 +1,5 @@
 {
-    "description": "The below ignore file is a test run",
+    "description": "Ignore goals list for Terraform IBM DevSecOps ALM",
     "scc_goals": [
     ]
 }
