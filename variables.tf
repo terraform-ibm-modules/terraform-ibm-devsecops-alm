@@ -333,7 +333,7 @@ variable "ci_app_repo_existing_git_provider" {
 
 variable "ci_app_repo_existing_git_id" {
   type        = string
-  description = "By default absent, else custom server GUID, or other options for 'git_id' field in the browser UI."
+  description = "By default absent, otherwise use custom server GUID, or other options for `git_id` field in the browser UI."
   default     = ""
 }
 
@@ -345,7 +345,7 @@ variable "ci_app_repo_clone_to_git_provider" {
 
 variable "ci_app_repo_clone_to_git_id" {
   type        = string
-  description = "By default absent, else custom server GUID, or other options for 'git_id' field in the browser UI."
+  description = "By default absent, otherwise use custom server GUID, or other options for `git_id` field in the browser UI."
   default     = ""
 }
 
@@ -435,37 +435,37 @@ variable "ci_pipeline_config_path" {
 
 variable "ci_app_group" {
   type        = string
-  description = "Specify Git user/group for your application."
+  description = "Specify Git user or group for your application."
   default     = ""
 }
 
 variable "ci_issues_group" {
   type        = string
-  description = "Specify Git user/group for issues repository."
+  description = "Specify Git user or group for issues repository."
   default     = ""
 }
 
 variable "ci_inventory_group" {
   type        = string
-  description = "Specify Git user/group for inventory repository."
+  description = "Specify Git user or group for inventory repository."
   default     = ""
 }
 
 variable "ci_evidence_group" {
   type        = string
-  description = "Specify Git user/group for evidence repository."
+  description = "Specify Git user or group for evidence repository."
   default     = ""
 }
 
 variable "ci_pipeline_config_group" {
   type        = string
-  description = "Specify user/group for pipeline config repo."
+  description = "Specify user or group for pipeline config repo."
   default     = ""
 }
 
 variable "ci_compliance_pipeline_group" {
   type        = string
-  description = "Specify user/group for compliance pipline repo."
+  description = "Specify user or group for compliance pipline repo."
   default     = ""
 }
 
@@ -923,31 +923,31 @@ variable "cd_pipeline_config_path" {
 
 variable "cd_issues_group" {
   type        = string
-  description = "Specify Git user/group for issues repository."
+  description = "Specify Git user or group for issues repository."
   default     = ""
 }
 
 variable "cd_inventory_group" {
   type        = string
-  description = "Specify Git user/group for inventory repository."
+  description = "Specify Git user or group for inventory repository."
   default     = ""
 }
 
 variable "cd_evidence_group" {
   type        = string
-  description = "Specify Git user/group for evidence repository."
+  description = "Specify Git user or group for evidence repository."
   default     = ""
 }
 
 variable "cd_pipeline_config_group" {
   type        = string
-  description = "Specify user/group for pipeline config repo."
+  description = "Specify user or group for pipeline config repo."
   default     = ""
 }
 
 variable "cd_compliance_pipeline_group" {
   type        = string
-  description = "Specify user/group for compliance pipline repo."
+  description = "Specify user or group for compliance pipline repo."
   default     = ""
 }
 
@@ -1371,37 +1371,37 @@ variable "cc_app_repo_git_id" {
 
 variable "cc_issues_group" {
   type        = string
-  description = "Specify Git user/group for issues repository."
+  description = "Specify Git user or group for issues repository."
   default     = ""
 }
 
 variable "cc_inventory_group" {
   type        = string
-  description = "Specify Git user/group for inventory repository."
+  description = "Specify Git user or group for inventory repository."
   default     = ""
 }
 
 variable "cc_evidence_group" {
   type        = string
-  description = "Specify Git user/group for evidence repository."
+  description = "Specify Git user or group for evidence repository."
   default     = ""
 }
 
 variable "cc_pipeline_config_group" {
   type        = string
-  description = "Specify user/group for pipeline config repo."
+  description = "Specify user or group for pipeline config repo."
   default     = ""
 }
 
 variable "cc_app_group" {
   type        = string
-  description = "Specify user/group for app repo."
+  description = "Specify user or group for app repo."
   default     = ""
 }
 
 variable "cc_compliance_pipeline_group" {
   type        = string
-  description = "Specify user/group for compliance pipline repo."
+  description = "Specify user or group for compliance pipline repo."
   default     = ""
 }
 
