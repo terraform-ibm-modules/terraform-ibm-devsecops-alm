@@ -230,12 +230,6 @@
       "type": "bool",
       "description": "Enable the Key Protect integration.",
       "default": false,
-      "required": true,
-      "source": [
-        "module.devsecops_cc_toolchain.module.integrations.ibm_cd_toolchain_tool_keyprotect.keyprotect.count",
-        "module.devsecops_cc_toolchain.module.services.data.ibm_resource_group.kp_resource_group.count",
-        "module.devsecops_cc_toolchain.module.services.data.ibm_resource_instance.key_protect_instance.count"
-      ],
       "pos": {
         "filename": "variables.tf",
         "line": 1268
@@ -245,13 +239,7 @@
       "name": "cc_enable_secrets_manager",
       "type": "bool",
       "description": "Enable the Secrets Manager integration.",
-      "default": true,
-      "required": true,
-      "source": [
-        "module.devsecops_cc_toolchain.module.integrations.ibm_cd_toolchain_tool_secretsmanager.secretsmanager.count",
-        "module.devsecops_cc_toolchain.module.services.data.ibm_resource_group.sm_resource_group.count",
-        "module.devsecops_cc_toolchain.module.services.data.ibm_resource_instance.secrets_manager_instance.count"
-      ],
+      "default": false,
       "pos": {
         "filename": "variables.tf",
         "line": 1274
@@ -1440,12 +1428,6 @@
       "type": "bool",
       "description": "Use the Key Protect integration.",
       "default": false,
-      "required": true,
-      "source": [
-        "module.devsecops_cd_toolchain.module.integrations.ibm_cd_toolchain_tool_keyprotect.keyprotect.count",
-        "module.devsecops_cd_toolchain.module.services.data.ibm_resource_group.kp_resource_group.count",
-        "module.devsecops_cd_toolchain.module.services.data.ibm_resource_instance.key_protect_instance.count"
-      ],
       "pos": {
         "filename": "variables.tf",
         "line": 844
@@ -1455,13 +1437,7 @@
       "name": "cd_enable_secrets_manager",
       "type": "bool",
       "description": "Use the Secrets Manager integration.",
-      "default": true,
-      "required": true,
-      "source": [
-        "module.devsecops_cd_toolchain.module.integrations.ibm_cd_toolchain_tool_secretsmanager.secretsmanager.count",
-        "module.devsecops_cd_toolchain.module.services.data.ibm_resource_group.sm_resource_group.count",
-        "module.devsecops_cd_toolchain.module.services.data.ibm_resource_instance.secrets_manager_instance.count"
-      ],
+      "default": false,
       "pos": {
         "filename": "variables.tf",
         "line": 850
@@ -2763,12 +2739,6 @@
       "type": "bool",
       "description": "Set to enable Key Protect Integration. ",
       "default": false,
-      "required": true,
-      "source": [
-        "module.devsecops_ci_toolchain.module.integrations.ibm_cd_toolchain_tool_keyprotect.keyprotect.count",
-        "module.devsecops_ci_toolchain.module.services.data.ibm_resource_group.kp_resource_group.count",
-        "module.devsecops_ci_toolchain.module.services.data.ibm_resource_instance.key_protect_instance.count"
-      ],
       "pos": {
         "filename": "variables.tf",
         "line": 354
@@ -2778,13 +2748,7 @@
       "name": "ci_enable_secrets_manager",
       "type": "bool",
       "description": "Set to enable Secrets Manager Integration.",
-      "default": true,
-      "required": true,
-      "source": [
-        "module.devsecops_ci_toolchain.module.integrations.ibm_cd_toolchain_tool_secretsmanager.secretsmanager.count",
-        "module.devsecops_ci_toolchain.module.services.data.ibm_resource_group.sm_resource_group.count",
-        "module.devsecops_ci_toolchain.module.services.data.ibm_resource_instance.secrets_manager_instance.count"
-      ],
+      "default": false,
       "pos": {
         "filename": "variables.tf",
         "line": 360
@@ -3855,8 +3819,6 @@
         "cos_endpoint": "cc_cos_endpoint",
         "count": "create_cc_toolchain",
         "doi_environment": "cc_doi_environment",
-        "enable_key_protect": "cc_enable_key_protect",
-        "enable_secrets_manager": "cc_enable_secrets_manager",
         "enable_slack": "cc_enable_slack",
         "environment_tag": "cc_environment_tag",
         "evidence_group": "cc_evidence_group",
@@ -4006,7 +3968,7 @@
       },
       "pos": {
         "filename": "main.tf",
-        "line": 244
+        "line": 254
       }
     },
     "devsecops_cd_toolchain": {
@@ -4046,8 +4008,6 @@
         "deployment_repo_git_token_secret_name": "cd_deployment_repo_git_token_secret_name",
         "doi_environment": "cd_doi_environment",
         "emergency_label": "cd_emergency_label",
-        "enable_key_protect": "cd_enable_key_protect",
-        "enable_secrets_manager": "cd_enable_secrets_manager",
         "enable_slack": "cd_enable_slack",
         "evidence_group": "cd_evidence_group",
         "evidence_repo_auth_type": "cd_evidence_repo_auth_type",
@@ -4224,7 +4184,7 @@
       },
       "pos": {
         "filename": "main.tf",
-        "line": 124
+        "line": 134
       }
     },
     "devsecops_ci_toolchain": {
@@ -4269,8 +4229,6 @@
         "doi_environment": "ci_doi_environment",
         "doi_toolchain_id": "ci_doi_toolchain_id",
         "doi_toolchain_id_pipeline_property": "ci_doi_toolchain_id_pipeline_property",
-        "enable_key_protect": "ci_enable_key_protect",
-        "enable_secrets_manager": "ci_enable_secrets_manager",
         "enable_slack": "ci_enable_slack",
         "evidence_group": "ci_evidence_group",
         "evidence_repo_auth_type": "ci_evidence_repo_auth_type",
@@ -4540,7 +4498,7 @@
       },
       "pos": {
         "filename": "main.tf",
-        "line": 1
+        "line": 11
       }
     }
   }

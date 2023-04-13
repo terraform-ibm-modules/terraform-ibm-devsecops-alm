@@ -1,3 +1,13 @@
+# workaround for Schematics automatically setting a null value to false for bool type
+# Issue for the enable_key_protect and enable_secrets_manager inputs as the logic fails with regard to
+# determing whether to use the enable_secrets_manager or the toolchain specific counter parts ci/cd/cc_enable_secrets_manager
+# this could be addressed manually by ticking a setting in Schematics for each of the inputs
+locals {
+  #setting all three toolchain specific parameters to false by default instead of null. If any of these values change then use the toolchain specific values.
+  use_sm_override = (var.ci_enable_secrets_manager == false) && (var.cd_enable_secrets_manager == false) && (var.cc_enable_secrets_manager == false) ? true : false
+  use_kp_override = (var.ci_enable_key_protect == false) && (var.cd_enable_key_protect == false) && (var.cc_enable_key_protect == false) ? true : false
+}
+
 module "devsecops_ci_toolchain" {
   count            = var.create_ci_toolchain ? 1 : 0
   source           = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-ci-toolchain?ref=v1.0.4"
@@ -12,8 +22,8 @@ module "devsecops_ci_toolchain" {
   compliance_base_image    = var.ci_compliance_base_image
 
   #SECRET PROVIDERS
-  enable_key_protect     = (var.ci_enable_key_protect == null) ? var.enable_key_protect : var.ci_enable_key_protect
-  enable_secrets_manager = (var.ci_enable_secrets_manager == null) ? var.enable_secrets_manager : var.ci_enable_secrets_manager
+  enable_key_protect     = (local.use_kp_override) ? var.enable_key_protect : var.ci_enable_key_protect
+  enable_secrets_manager = (local.use_sm_override) ? var.enable_secrets_manager : var.ci_enable_secrets_manager
   sm_name                = (var.ci_sm_name == "") ? var.sm_name : var.ci_sm_name
   sm_location            = (var.ci_sm_location == "") ? var.sm_location : var.ci_sm_location
   sm_resource_group      = (var.ci_sm_resource_group == "") ? var.sm_resource_group : var.ci_sm_resource_group
@@ -134,8 +144,8 @@ module "devsecops_cd_toolchain" {
   compliance_base_image    = var.cd_compliance_base_image
 
   #SECRET PROVIDERS
-  enable_key_protect     = (var.cd_enable_key_protect == null) ? var.enable_key_protect : var.cd_enable_key_protect
-  enable_secrets_manager = (var.cd_enable_secrets_manager == null) ? var.enable_secrets_manager : var.cd_enable_secrets_manager
+  enable_key_protect     = (local.use_kp_override) ? var.enable_key_protect : var.cd_enable_key_protect
+  enable_secrets_manager = (local.use_sm_override) ? var.enable_secrets_manager : var.cd_enable_secrets_manager
   sm_name                = (var.cd_sm_name == "") ? var.sm_name : var.cd_sm_name
   sm_location            = (var.cd_sm_location == "") ? var.sm_location : var.cd_sm_location
   sm_resource_group      = (var.cd_sm_resource_group == "") ? var.sm_resource_group : var.cd_sm_resource_group
@@ -254,8 +264,8 @@ module "devsecops_cc_toolchain" {
   authorization_policy_creation = var.cc_authorization_policy_creation
 
   #SECRET PROVIDERS
-  enable_key_protect     = (var.cc_enable_key_protect == null) ? var.enable_key_protect : var.cc_enable_key_protect
-  enable_secrets_manager = (var.cc_enable_secrets_manager == null) ? var.enable_secrets_manager : var.cc_enable_secrets_manager
+  enable_key_protect     = (local.use_kp_override) ? var.enable_key_protect : var.cc_enable_key_protect
+  enable_secrets_manager = (local.use_sm_override) ? var.enable_secrets_manager : var.cc_enable_secrets_manager
   sm_name                = (var.cc_sm_name == "") ? var.sm_name : var.cc_sm_name
   sm_location            = (var.cc_sm_location == "") ? var.sm_location : var.cc_sm_location
   sm_resource_group      = (var.cc_sm_resource_group == "") ? var.sm_resource_group : var.cc_sm_resource_group

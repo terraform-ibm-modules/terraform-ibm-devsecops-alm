@@ -100,8 +100,8 @@ No resources.
 | <a name="input_cc_cos_endpoint"></a> [cc\_cos\_endpoint](#input\_cc\_cos\_endpoint) | COS endpoint name. | `string` | `""` | no |
 | <a name="input_cc_doi_environment"></a> [cc\_doi\_environment](#input\_cc\_doi\_environment) | DevOps Insights environment for DevSecOps CD deployment. | `string` | `""` | no |
 | <a name="input_cc_doi_toolchain_id"></a> [cc\_doi\_toolchain\_id](#input\_cc\_doi\_toolchain\_id) | DevOps Insights toolchain ID to link to. | `string` | `""` | no |
-| <a name="input_cc_enable_key_protect"></a> [cc\_enable\_key\_protect](#input\_cc\_enable\_key\_protect) | Enable the Key Protect integration. | `bool` | `null` | no |
-| <a name="input_cc_enable_secrets_manager"></a> [cc\_enable\_secrets\_manager](#input\_cc\_enable\_secrets\_manager) | Enable the Secrets Manager integration. | `bool` | `null` | no |
+| <a name="input_cc_enable_key_protect"></a> [cc\_enable\_key\_protect](#input\_cc\_enable\_key\_protect) | Enable the Key Protect integration. | `bool` | `false` | no |
+| <a name="input_cc_enable_secrets_manager"></a> [cc\_enable\_secrets\_manager](#input\_cc\_enable\_secrets\_manager) | Enable the Secrets Manager integration. | `bool` | `false` | no |
 | <a name="input_cc_enable_slack"></a> [cc\_enable\_slack](#input\_cc\_enable\_slack) | Set to true to create the integration. | `bool` | `false` | no |
 | <a name="input_cc_environment_tag"></a> [cc\_environment\_tag](#input\_cc\_environment\_tag) | Tag name that represents the target environment in the inventory. Example: prod\_latest. | `string` | `"prod_latest"` | no |
 | <a name="input_cc_evidence_group"></a> [cc\_evidence\_group](#input\_cc\_evidence\_group) | Specify Git user or group for evidence repository. | `string` | `""` | no |
@@ -184,8 +184,8 @@ No resources.
 | <a name="input_cd_doi_environment"></a> [cd\_doi\_environment](#input\_cd\_doi\_environment) | DevOps Insights environment for DevSecOps CD deployment. | `string` | `""` | no |
 | <a name="input_cd_doi_toolchain_id"></a> [cd\_doi\_toolchain\_id](#input\_cd\_doi\_toolchain\_id) | DevOps Insights toolchain ID to link to. | `string` | `""` | no |
 | <a name="input_cd_emergency_label"></a> [cd\_emergency\_label](#input\_cd\_emergency\_label) | Identifies the pull request as an emergency. | `string` | `"EMERGENCY"` | no |
-| <a name="input_cd_enable_key_protect"></a> [cd\_enable\_key\_protect](#input\_cd\_enable\_key\_protect) | Use the Key Protect integration. | `bool` | `null` | no |
-| <a name="input_cd_enable_secrets_manager"></a> [cd\_enable\_secrets\_manager](#input\_cd\_enable\_secrets\_manager) | Use the Secrets Manager integration. | `bool` | `null` | no |
+| <a name="input_cd_enable_key_protect"></a> [cd\_enable\_key\_protect](#input\_cd\_enable\_key\_protect) | Use the Key Protect integration. | `bool` | `false` | no |
+| <a name="input_cd_enable_secrets_manager"></a> [cd\_enable\_secrets\_manager](#input\_cd\_enable\_secrets\_manager) | Use the Secrets Manager integration. | `bool` | `false` | no |
 | <a name="input_cd_enable_slack"></a> [cd\_enable\_slack](#input\_cd\_enable\_slack) | Default: false. Set to true to create the integration. | `bool` | `false` | no |
 | <a name="input_cd_evidence_group"></a> [cd\_evidence\_group](#input\_cd\_evidence\_group) | Specify Git user or group for evidence repository. | `string` | `""` | no |
 | <a name="input_cd_evidence_repo_auth_type"></a> [cd\_evidence\_repo\_auth\_type](#input\_cd\_evidence\_repo\_auth\_type) | Select the method of authentication that is used to access the Git provider. 'oauth' or 'pat'. | `string` | `"oauth"` | no |
@@ -273,8 +273,8 @@ No resources.
 | <a name="input_ci_doi_environment"></a> [ci\_doi\_environment](#input\_ci\_doi\_environment) | The DevOps Insights target environment. | `string` | `""` | no |
 | <a name="input_ci_doi_toolchain_id"></a> [ci\_doi\_toolchain\_id](#input\_ci\_doi\_toolchain\_id) | DevOps Insights toolchain ID to link to. | `string` | `""` | no |
 | <a name="input_ci_doi_toolchain_id_pipeline_property"></a> [ci\_doi\_toolchain\_id\_pipeline\_property](#input\_ci\_doi\_toolchain\_id\_pipeline\_property) | The DevOps Insights instance toolchain ID. | `string` | `""` | no |
-| <a name="input_ci_enable_key_protect"></a> [ci\_enable\_key\_protect](#input\_ci\_enable\_key\_protect) | Set to enable Key Protect Integration. | `bool` | `null` | no |
-| <a name="input_ci_enable_secrets_manager"></a> [ci\_enable\_secrets\_manager](#input\_ci\_enable\_secrets\_manager) | Set to enable Secrets Manager Integration. | `bool` | `null` | no |
+| <a name="input_ci_enable_key_protect"></a> [ci\_enable\_key\_protect](#input\_ci\_enable\_key\_protect) | Set to enable Key Protect Integration. | `bool` | `false` | no |
+| <a name="input_ci_enable_secrets_manager"></a> [ci\_enable\_secrets\_manager](#input\_ci\_enable\_secrets\_manager) | Set to enable Secrets Manager Integration. | `bool` | `false` | no |
 | <a name="input_ci_enable_slack"></a> [ci\_enable\_slack](#input\_ci\_enable\_slack) | Default: false. Set to true to create the integration. | `bool` | `false` | no |
 | <a name="input_ci_evidence_group"></a> [ci\_evidence\_group](#input\_ci\_evidence\_group) | Specify Git user or group for evidence repository. | `string` | `""` | no |
 | <a name="input_ci_evidence_repo_auth_type"></a> [ci\_evidence\_repo\_auth\_type](#input\_ci\_evidence\_repo\_auth\_type) | Select the method of authentication that is used to access the Git provider. 'oauth' or 'pat'. | `string` | `"oauth"` | no |

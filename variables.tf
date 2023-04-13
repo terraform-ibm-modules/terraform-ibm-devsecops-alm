@@ -354,13 +354,13 @@ variable "ci_app_repo_clone_to_git_id" {
 variable "ci_enable_key_protect" {
   type        = bool
   description = "Set to enable Key Protect Integration. "
-  default     = null
+  default     = false
 }
 
 variable "ci_enable_secrets_manager" {
   type        = bool
   description = "Set to enable Secrets Manager Integration."
-  default     = null
+  default     = false
 }
 
 variable "ci_sm_secret_group" {
@@ -844,13 +844,13 @@ variable "create_cd_toolchain" {
 variable "cd_enable_key_protect" {
   description = "Use the Key Protect integration."
   type        = bool
-  default     = null
+  default     = false
 }
 
 variable "cd_enable_secrets_manager" {
   description = "Use the Secrets Manager integration."
   type        = bool
-  default     = null
+  default     = false
 }
 
 variable "cd_sm_secret_group" {
@@ -1268,13 +1268,13 @@ variable "create_cc_toolchain" {
 variable "cc_enable_key_protect" {
   description = "Enable the Key Protect integration."
   type        = bool
-  default     = null
+  default     = false
 }
 
 variable "cc_enable_secrets_manager" {
   description = "Enable the Secrets Manager integration."
   type        = bool
-  default     = null
+  default     = false
 }
 
 variable "cc_sm_secret_group" {
