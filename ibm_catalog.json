@@ -517,7 +517,8 @@
 							"key": "cd_cluster_region",
 							"type": "string",
 							"default_value": "ibm:yp:us-south",
-							"description": "Region of the Kubernetes cluster where the application is deployed."
+							"description": "Region of the Kubernetes cluster where the application is deployed.",
+							"required": true
 						},
 						{
 							"key": "cd_compliance_base_image",
