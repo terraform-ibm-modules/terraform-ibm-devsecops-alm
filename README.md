@@ -3,10 +3,11 @@
 <!-- Update the title to match the module name and add a description -->
 ## DevSecOps Application Lifecycle Management
 <!-- UPDATE BADGE: Update the link for the following badge-->
-[![Implemented (No quality checks)](https://img.shields.io/badge/Status-Implemented%20(No%20quality%20checks)-yellowgreen)](https://terraform-ibm-modules.github.io/documentation/#/badge-status)
-[![Build status](https://github.com/terraform-ibm-modules/terraform-ibm-module-template/actions/workflows/ci.yml/badge.svg)](https://github.com/terraform-ibm-modules/terraform-ibm-module-template/actions/workflows/ci.yml)
+[![Implemented (No quality checks)]([![Stable (With quality checks)](https://img.shields.io/badge/Status-Stable%20(With%20quality%20checks)-green)](https://terraform-ibm-modules.github.io/documentation/#/badge-status)
+](https://terraform-ibm-modules.github.io/documentation/#/badge-status)
+[![Build status](https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-alm/actions/workflows/ci.yml/badge.svg)](https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-alm/actions/workflows/ci.yml)
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit)
-[![latest release](https://img.shields.io/github/v/release/terraform-ibm-modules/terraform-ibm-module-template?logo=GitHub&sort=semver)](https://github.com/terraform-ibm-modules/terraform-ibm-module-template/releases/latest)
+[![latest release](https://img.shields.io/github/v/release/terraform-ibm-modules/terraform-ibm-devsecops-alm?logo=GitHub&sort=semver)](https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-alm/releases/latest)
 [![Renovate enabled](https://img.shields.io/badge/renovate-enabled-brightgreen.svg)](https://renovatebot.com/)
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 
@@ -20,13 +21,6 @@ A Terraform module for provisioning the DevSecOps CI, CD, and CC toolchains.
 ![Architecture diagram for 'DevSecOps CI, CD, CC toolchains'.](/reference-architectures/diagram-deploy-arch-ibm-devsecops-alm-diagram.svg "Architecture diagram")
 
 ## Usage
-
-<!--
-Add an example of the use of the module in the following code block.
-
-Use real values instead of "var.<var_name>" or other placeholder values
-unless real values don't help users know what to change.
--->
 
 ```hcl
 ibmcloud_api_key          = "" #Set your API key
@@ -89,7 +83,7 @@ No resources.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_cc_app_group"></a> [cc\_app\_group](#input\_cc\_app\_group) | Specify user/group for app repo. | `string` | `""` | no |
+| <a name="input_cc_app_group"></a> [cc\_app\_group](#input\_cc\_app\_group) | Specify user or group for app repo. | `string` | `""` | no |
 | <a name="input_cc_app_repo_auth_type"></a> [cc\_app\_repo\_auth\_type](#input\_cc\_app\_repo\_auth\_type) | Select the method of authentication that is used to access the Git provider. 'oauth' or 'pat'. | `string` | `"oauth"` | no |
 | <a name="input_cc_app_repo_branch"></a> [cc\_app\_repo\_branch](#input\_cc\_app\_repo\_branch) | The default branch of the app repo. | `string` | `"master"` | no |
 | <a name="input_cc_app_repo_git_id"></a> [cc\_app\_repo\_git\_id](#input\_cc\_app\_repo\_git\_id) | The Git Id of the repository. | `string` | `""` | no |
@@ -98,7 +92,7 @@ No resources.
 | <a name="input_cc_app_repo_url"></a> [cc\_app\_repo\_url](#input\_cc\_app\_repo\_url) | This Git URL for the application repository. | `string` | `""` | no |
 | <a name="input_cc_authorization_policy_creation"></a> [cc\_authorization\_policy\_creation](#input\_cc\_authorization\_policy\_creation) | Disable Toolchain service to Secrets Manager Service authorization policy creation. | `string` | `""` | no |
 | <a name="input_cc_compliance_base_image"></a> [cc\_compliance\_base\_image](#input\_cc\_compliance\_base\_image) | Pipeline baseimage to run most of the built-in pipeline code. | `string` | `""` | no |
-| <a name="input_cc_compliance_pipeline_group"></a> [cc\_compliance\_pipeline\_group](#input\_cc\_compliance\_pipeline\_group) | Specify user/group for compliance pipline repo. | `string` | `""` | no |
+| <a name="input_cc_compliance_pipeline_group"></a> [cc\_compliance\_pipeline\_group](#input\_cc\_compliance\_pipeline\_group) | Specify user or group for compliance pipline repo. | `string` | `""` | no |
 | <a name="input_cc_compliance_pipeline_repo_auth_type"></a> [cc\_compliance\_pipeline\_repo\_auth\_type](#input\_cc\_compliance\_pipeline\_repo\_auth\_type) | Select the method of authentication that is used to access the Git provider. 'oauth' or 'pat'. | `string` | `"oauth"` | no |
 | <a name="input_cc_compliance_pipeline_repo_git_token_secret_name"></a> [cc\_compliance\_pipeline\_repo\_git\_token\_secret\_name](#input\_cc\_compliance\_pipeline\_repo\_git\_token\_secret\_name) | Name of the Git token secret in the secret provider. | `string` | `"git-token"` | no |
 | <a name="input_cc_cos_api_key_secret_name"></a> [cc\_cos\_api\_key\_secret\_name](#input\_cc\_cos\_api\_key\_secret\_name) | Name of the COS API key secret in the secret provider. | `string` | `"cos-api-key"` | no |
@@ -110,13 +104,13 @@ No resources.
 | <a name="input_cc_enable_secrets_manager"></a> [cc\_enable\_secrets\_manager](#input\_cc\_enable\_secrets\_manager) | Enable the Secrets Manager integration. | `bool` | `null` | no |
 | <a name="input_cc_enable_slack"></a> [cc\_enable\_slack](#input\_cc\_enable\_slack) | Set to true to create the integration. | `bool` | `false` | no |
 | <a name="input_cc_environment_tag"></a> [cc\_environment\_tag](#input\_cc\_environment\_tag) | Tag name that represents the target environment in the inventory. Example: prod\_latest. | `string` | `"prod_latest"` | no |
-| <a name="input_cc_evidence_group"></a> [cc\_evidence\_group](#input\_cc\_evidence\_group) | Specify Git user/group for evidence repository. | `string` | `""` | no |
+| <a name="input_cc_evidence_group"></a> [cc\_evidence\_group](#input\_cc\_evidence\_group) | Specify Git user or group for evidence repository. | `string` | `""` | no |
 | <a name="input_cc_evidence_repo_auth_type"></a> [cc\_evidence\_repo\_auth\_type](#input\_cc\_evidence\_repo\_auth\_type) | Select the method of authentication that is used to access the Git provider. 'oauth' or 'pat' | `string` | `"oauth"` | no |
 | <a name="input_cc_evidence_repo_git_token_secret_name"></a> [cc\_evidence\_repo\_git\_token\_secret\_name](#input\_cc\_evidence\_repo\_git\_token\_secret\_name) | Name of the Git token secret in the secret provider. | `string` | `"git-token"` | no |
-| <a name="input_cc_inventory_group"></a> [cc\_inventory\_group](#input\_cc\_inventory\_group) | Specify Git user/group for inventory repository. | `string` | `""` | no |
+| <a name="input_cc_inventory_group"></a> [cc\_inventory\_group](#input\_cc\_inventory\_group) | Specify Git user or group for inventory repository. | `string` | `""` | no |
 | <a name="input_cc_inventory_repo_auth_type"></a> [cc\_inventory\_repo\_auth\_type](#input\_cc\_inventory\_repo\_auth\_type) | Select the method of authentication that is used to access the Git provider. 'oauth' or 'pat'. | `string` | `"oauth"` | no |
 | <a name="input_cc_inventory_repo_git_token_secret_name"></a> [cc\_inventory\_repo\_git\_token\_secret\_name](#input\_cc\_inventory\_repo\_git\_token\_secret\_name) | Name of the Git token secret in the secret provider. | `string` | `"git-token"` | no |
-| <a name="input_cc_issues_group"></a> [cc\_issues\_group](#input\_cc\_issues\_group) | Specify Git user/group for issues repository. | `string` | `""` | no |
+| <a name="input_cc_issues_group"></a> [cc\_issues\_group](#input\_cc\_issues\_group) | Specify Git user or group for issues repository. | `string` | `""` | no |
 | <a name="input_cc_issues_repo_auth_type"></a> [cc\_issues\_repo\_auth\_type](#input\_cc\_issues\_repo\_auth\_type) | Select the method of authentication that is used to access the Git provider. 'oauth' or 'pat'. | `string` | `"oauth"` | no |
 | <a name="input_cc_issues_repo_git_token_secret_name"></a> [cc\_issues\_repo\_git\_token\_secret\_name](#input\_cc\_issues\_repo\_git\_token\_secret\_name) | Name of the Git token secret in the secret provider. | `string` | `"git-token"` | no |
 | <a name="input_cc_kp_location"></a> [cc\_kp\_location](#input\_cc\_kp\_location) | IBM Cloud location/region containing the Key Protect instance. | `string` | `""` | no |
@@ -127,7 +121,7 @@ No resources.
 | <a name="input_cc_opt_in_dynamic_api_scan"></a> [cc\_opt\_in\_dynamic\_api\_scan](#input\_cc\_opt\_in\_dynamic\_api\_scan) | To enable the OWASP Zap API scan. '1' enable or '0' disable. | `string` | `""` | no |
 | <a name="input_cc_opt_in_dynamic_scan"></a> [cc\_opt\_in\_dynamic\_scan](#input\_cc\_opt\_in\_dynamic\_scan) | To enable the OWASP Zap scan. '1' enable or '0' disable. | `string` | `""` | no |
 | <a name="input_cc_opt_in_dynamic_ui_scan"></a> [cc\_opt\_in\_dynamic\_ui\_scan](#input\_cc\_opt\_in\_dynamic\_ui\_scan) | To enable the OWASP Zap UI scan. '1' enable or '0' disable. | `string` | `""` | no |
-| <a name="input_cc_pipeline_config_group"></a> [cc\_pipeline\_config\_group](#input\_cc\_pipeline\_config\_group) | Specify user/group for pipeline config repo. | `string` | `""` | no |
+| <a name="input_cc_pipeline_config_group"></a> [cc\_pipeline\_config\_group](#input\_cc\_pipeline\_config\_group) | Specify user or group for pipeline config repo. | `string` | `""` | no |
 | <a name="input_cc_pipeline_config_path"></a> [cc\_pipeline\_config\_path](#input\_cc\_pipeline\_config\_path) | The name and path of the pipeline-config.yaml file within the pipeline-config repo. | `string` | `".pipeline-config.yaml"` | no |
 | <a name="input_cc_pipeline_config_repo_auth_type"></a> [cc\_pipeline\_config\_repo\_auth\_type](#input\_cc\_pipeline\_config\_repo\_auth\_type) | Select the method of authentication that is used to access the Git provider. 'oauth' or 'pat'. | `string` | `"oauth"` | no |
 | <a name="input_cc_pipeline_config_repo_branch"></a> [cc\_pipeline\_config\_repo\_branch](#input\_cc\_pipeline\_config\_repo\_branch) | Specify the branch containing the custom pipeline-config.yaml file. | `string` | `""` | no |
@@ -138,7 +132,7 @@ No resources.
 | <a name="input_cc_pipeline_ibmcloud_api_key_secret_name"></a> [cc\_pipeline\_ibmcloud\_api\_key\_secret\_name](#input\_cc\_pipeline\_ibmcloud\_api\_key\_secret\_name) | Name of the Cloud API key secret in the secret provider. | `string` | `"ibmcloud-api-key"` | no |
 | <a name="input_cc_repositories_prefix"></a> [cc\_repositories\_prefix](#input\_cc\_repositories\_prefix) | The prefix for the compliance repositories. | `string` | `"compliance"` | no |
 | <a name="input_cc_scc_enable_scc"></a> [cc\_scc\_enable\_scc](#input\_cc\_scc\_enable\_scc) | Enable the SCC integration | `bool` | `false` | no |
-| <a name="input_cc_scc_integration_name"></a> [cc\_scc\_integration\_name](#input\_cc\_scc\_integration\_name) | The name of the SCC integration name. | `string` | `"Security and Compliance"` | no |
+| <a name="input_cc_scc_integration_name"></a> [cc\_scc\_integration\_name](#input\_cc\_scc\_integration\_name) | The name of the SCC integration. | `string` | `"Security and Compliance"` | no |
 | <a name="input_cc_slack_channel_name"></a> [cc\_slack\_channel\_name](#input\_cc\_slack\_channel\_name) | The Slack channel that notifications are posted to. | `string` | `"my-channel"` | no |
 | <a name="input_cc_slack_notifications"></a> [cc\_slack\_notifications](#input\_cc\_slack\_notifications) | The switch that turns the Slack integration on or off. | `string` | `"0"` | no |
 | <a name="input_cc_slack_pipeline_fail"></a> [cc\_slack\_pipeline\_fail](#input\_cc\_slack\_pipeline\_fail) | Generate pipeline failed notifications. | `bool` | `true` | no |
@@ -169,7 +163,7 @@ No resources.
 | <a name="input_cd_cluster_namespace"></a> [cd\_cluster\_namespace](#input\_cd\_cluster\_namespace) | Name of the Kubernetes cluster namespace where the application is deployed. | `string` | `"prod"` | no |
 | <a name="input_cd_cluster_region"></a> [cd\_cluster\_region](#input\_cd\_cluster\_region) | Region of the Kubernetes cluster where the application is deployed. | `string` | `"ibm:yp:us-south"` | no |
 | <a name="input_cd_compliance_base_image"></a> [cd\_compliance\_base\_image](#input\_cd\_compliance\_base\_image) | Pipeline baseimage to run most of the built-in pipeline code. | `string` | `""` | no |
-| <a name="input_cd_compliance_pipeline_group"></a> [cd\_compliance\_pipeline\_group](#input\_cd\_compliance\_pipeline\_group) | Specify user/group for compliance pipline repo. | `string` | `""` | no |
+| <a name="input_cd_compliance_pipeline_group"></a> [cd\_compliance\_pipeline\_group](#input\_cd\_compliance\_pipeline\_group) | Specify user or group for compliance pipline repo. | `string` | `""` | no |
 | <a name="input_cd_compliance_pipeline_repo_auth_type"></a> [cd\_compliance\_pipeline\_repo\_auth\_type](#input\_cd\_compliance\_pipeline\_repo\_auth\_type) | Select the method of authentication that is used to access the Git provider. 'oauth' or 'pat'. | `string` | `"oauth"` | no |
 | <a name="input_cd_compliance_pipeline_repo_git_token_secret_name"></a> [cd\_compliance\_pipeline\_repo\_git\_token\_secret\_name](#input\_cd\_compliance\_pipeline\_repo\_git\_token\_secret\_name) | Name of the Git token secret in the secret provider. | `string` | `"git-token"` | no |
 | <a name="input_cd_cos_api_key_secret_name"></a> [cd\_cos\_api\_key\_secret\_name](#input\_cd\_cos\_api\_key\_secret\_name) | Name of the COS API key secret in the secret provider. | `string` | `"cos-api-key"` | no |
@@ -193,13 +187,13 @@ No resources.
 | <a name="input_cd_enable_key_protect"></a> [cd\_enable\_key\_protect](#input\_cd\_enable\_key\_protect) | Use the Key Protect integration. | `bool` | `null` | no |
 | <a name="input_cd_enable_secrets_manager"></a> [cd\_enable\_secrets\_manager](#input\_cd\_enable\_secrets\_manager) | Use the Secrets Manager integration. | `bool` | `null` | no |
 | <a name="input_cd_enable_slack"></a> [cd\_enable\_slack](#input\_cd\_enable\_slack) | Default: false. Set to true to create the integration. | `bool` | `false` | no |
-| <a name="input_cd_evidence_group"></a> [cd\_evidence\_group](#input\_cd\_evidence\_group) | Specify Git user/group for evidence repository. | `string` | `""` | no |
+| <a name="input_cd_evidence_group"></a> [cd\_evidence\_group](#input\_cd\_evidence\_group) | Specify Git user or group for evidence repository. | `string` | `""` | no |
 | <a name="input_cd_evidence_repo_auth_type"></a> [cd\_evidence\_repo\_auth\_type](#input\_cd\_evidence\_repo\_auth\_type) | Select the method of authentication that is used to access the Git provider. 'oauth' or 'pat'. | `string` | `"oauth"` | no |
 | <a name="input_cd_evidence_repo_git_token_secret_name"></a> [cd\_evidence\_repo\_git\_token\_secret\_name](#input\_cd\_evidence\_repo\_git\_token\_secret\_name) | Name of the Git token secret in the secret provider. | `string` | `"git-token"` | no |
-| <a name="input_cd_inventory_group"></a> [cd\_inventory\_group](#input\_cd\_inventory\_group) | Specify Git user/group for inventory repository. | `string` | `""` | no |
+| <a name="input_cd_inventory_group"></a> [cd\_inventory\_group](#input\_cd\_inventory\_group) | Specify Git user or group for inventory repository. | `string` | `""` | no |
 | <a name="input_cd_inventory_repo_auth_type"></a> [cd\_inventory\_repo\_auth\_type](#input\_cd\_inventory\_repo\_auth\_type) | Select the method of authentication that is used to access the Git provider. 'oauth' or 'pat'. | `string` | `"oauth"` | no |
 | <a name="input_cd_inventory_repo_git_token_secret_name"></a> [cd\_inventory\_repo\_git\_token\_secret\_name](#input\_cd\_inventory\_repo\_git\_token\_secret\_name) | Name of the Git token secret in the secret provider. | `string` | `"git-token"` | no |
-| <a name="input_cd_issues_group"></a> [cd\_issues\_group](#input\_cd\_issues\_group) | Specify Git user/group for issues repository. | `string` | `""` | no |
+| <a name="input_cd_issues_group"></a> [cd\_issues\_group](#input\_cd\_issues\_group) | Specify Git user or group for issues repository. | `string` | `""` | no |
 | <a name="input_cd_issues_repo_auth_type"></a> [cd\_issues\_repo\_auth\_type](#input\_cd\_issues\_repo\_auth\_type) | Select the method of authentication that is used to access the Git provider. 'oauth' or 'pat'. | `string` | `"oauth"` | no |
 | <a name="input_cd_issues_repo_git_token_secret_name"></a> [cd\_issues\_repo\_git\_token\_secret\_name](#input\_cd\_issues\_repo\_git\_token\_secret\_name) | Name of the Git token secret in the secret provider. | `string` | `"git-token"` | no |
 | <a name="input_cd_kp_location"></a> [cd\_kp\_location](#input\_cd\_kp\_location) | IBM Cloud location/region containing the Key Protect instance. | `string` | `""` | no |
@@ -208,7 +202,7 @@ No resources.
 | <a name="input_cd_link_to_doi_toolchain"></a> [cd\_link\_to\_doi\_toolchain](#input\_cd\_link\_to\_doi\_toolchain) | Enable a link to a DevOps Insights instance in another toolchain, true or false. | `bool` | `true` | no |
 | <a name="input_cd_merge_cra_sbom"></a> [cd\_merge\_cra\_sbom](#input\_cd\_merge\_cra\_sbom) | Merge the SBOM | `string` | `"1"` | no |
 | <a name="input_cd_opt_out_v1_evidence"></a> [cd\_opt\_out\_v1\_evidence](#input\_cd\_opt\_out\_v1\_evidence) | Opt out of evidence v1. | `string` | `"1"` | no |
-| <a name="input_cd_pipeline_config_group"></a> [cd\_pipeline\_config\_group](#input\_cd\_pipeline\_config\_group) | Specify user/group for pipeline config repo. | `string` | `""` | no |
+| <a name="input_cd_pipeline_config_group"></a> [cd\_pipeline\_config\_group](#input\_cd\_pipeline\_config\_group) | Specify user or group for pipeline config repo. | `string` | `""` | no |
 | <a name="input_cd_pipeline_config_path"></a> [cd\_pipeline\_config\_path](#input\_cd\_pipeline\_config\_path) | The name and path of the pipeline-config.yaml file within the pipeline-config repo. | `string` | `".pipeline-config.yaml"` | no |
 | <a name="input_cd_pipeline_config_repo_auth_type"></a> [cd\_pipeline\_config\_repo\_auth\_type](#input\_cd\_pipeline\_config\_repo\_auth\_type) | Select the method of authentication that is used to access the Git provider. 'oauth' or 'pat'. | `string` | `"oauth"` | no |
 | <a name="input_cd_pipeline_config_repo_branch"></a> [cd\_pipeline\_config\_repo\_branch](#input\_cd\_pipeline\_config\_repo\_branch) | Specify the branch containing the custom pipeline-config.yaml file. | `string` | `""` | no |
@@ -220,7 +214,7 @@ No resources.
 | <a name="input_cd_repositories_prefix"></a> [cd\_repositories\_prefix](#input\_cd\_repositories\_prefix) | Prefix name for the cloned compliance repos. | `string` | `"compliance"` | no |
 | <a name="input_cd_satellite_cluster_group"></a> [cd\_satellite\_cluster\_group](#input\_cd\_satellite\_cluster\_group) | The Satellite cluster group | `string` | `""` | no |
 | <a name="input_cd_scc_enable_scc"></a> [cd\_scc\_enable\_scc](#input\_cd\_scc\_enable\_scc) | Enable the SCC integration. | `bool` | `false` | no |
-| <a name="input_cd_scc_integration_name"></a> [cd\_scc\_integration\_name](#input\_cd\_scc\_integration\_name) | The name of the SCC integration name. | `string` | `"Security and Compliance"` | no |
+| <a name="input_cd_scc_integration_name"></a> [cd\_scc\_integration\_name](#input\_cd\_scc\_integration\_name) | The name of the SCC integration. | `string` | `"Security and Compliance"` | no |
 | <a name="input_cd_slack_channel_name"></a> [cd\_slack\_channel\_name](#input\_cd\_slack\_channel\_name) | The Slack channel that notifications are posted to. | `string` | `"my-channel"` | no |
 | <a name="input_cd_slack_notifications"></a> [cd\_slack\_notifications](#input\_cd\_slack\_notifications) | The switch to turn the Slack integration on or off. | `string` | `"0"` | no |
 | <a name="input_cd_slack_pipeline_fail"></a> [cd\_slack\_pipeline\_fail](#input\_cd\_slack\_pipeline\_fail) | Generate pipeline failed notifications. | `bool` | `true` | no |
@@ -236,21 +230,21 @@ No resources.
 | <a name="input_cd_sm_secret_group"></a> [cd\_sm\_secret\_group](#input\_cd\_sm\_secret\_group) | Group in Secrets Manager for organizing/grouping secrets. | `string` | `""` | no |
 | <a name="input_cd_source_environment"></a> [cd\_source\_environment](#input\_cd\_source\_environment) | The source environment that the app is promoted from. | `string` | `"master"` | no |
 | <a name="input_cd_target_environment"></a> [cd\_target\_environment](#input\_cd\_target\_environment) | The target environment that the app is deployed to. | `string` | `"prod"` | no |
-| <a name="input_cd_target_environment_detail"></a> [cd\_target\_environment\_detail](#input\_cd\_target\_environment\_detail) | Details of the environment being updated. | `string` | `""` | no |
+| <a name="input_cd_target_environment_detail"></a> [cd\_target\_environment\_detail](#input\_cd\_target\_environment\_detail) | Details of the environment being updated. | `string` | `"Production target environment"` | no |
 | <a name="input_cd_target_environment_purpose"></a> [cd\_target\_environment\_purpose](#input\_cd\_target\_environment\_purpose) | Purpose of the environment being updated. | `string` | `"production"` | no |
 | <a name="input_cd_toolchain_description"></a> [cd\_toolchain\_description](#input\_cd\_toolchain\_description) | Description for the CD toolchain. | `string` | `"Toolchain created with terraform template for DevSecOps CD Best Practices."` | no |
 | <a name="input_cd_toolchain_name"></a> [cd\_toolchain\_name](#input\_cd\_toolchain\_name) | The name of the CD Toolchain. | `string` | `"DevSecOps CD Toolchain - Terraform"` | no |
 | <a name="input_cd_toolchain_region"></a> [cd\_toolchain\_region](#input\_cd\_toolchain\_region) | The region containing the CI toolchain. | `string` | `""` | no |
 | <a name="input_cd_toolchain_resource_group"></a> [cd\_toolchain\_resource\_group](#input\_cd\_toolchain\_resource\_group) | Resource group within which toolchain is created. | `string` | `""` | no |
-| <a name="input_ci_app_group"></a> [ci\_app\_group](#input\_ci\_app\_group) | Specify Git user/group for your application. | `string` | `""` | no |
+| <a name="input_ci_app_group"></a> [ci\_app\_group](#input\_ci\_app\_group) | Specify Git user or group for your application. | `string` | `""` | no |
 | <a name="input_ci_app_name"></a> [ci\_app\_name](#input\_ci\_app\_name) | Name of the application image and inventory entry. | `string` | `"hello-compliance-app"` | no |
 | <a name="input_ci_app_repo_auth_type"></a> [ci\_app\_repo\_auth\_type](#input\_ci\_app\_repo\_auth\_type) | Select the method of authentication that is used to access the Git provider. 'oauth' or 'pat'. | `string` | `"oauth"` | no |
 | <a name="input_ci_app_repo_clone_from_branch"></a> [ci\_app\_repo\_clone\_from\_branch](#input\_ci\_app\_repo\_clone\_from\_branch) | Used when app\_repo\_clone\_from\_url is provided, the default branch that is used by the CI build, usually either main or master. | `string` | `""` | no |
 | <a name="input_ci_app_repo_clone_from_url"></a> [ci\_app\_repo\_clone\_from\_url](#input\_ci\_app\_repo\_clone\_from\_url) | Override the default sample app by providing your own sample app URL, which is cloned into the app repo. Note, using clone\_if\_not\_exists mode, so if the app repo already exists the repo contents are unchanged. | `string` | `""` | no |
-| <a name="input_ci_app_repo_clone_to_git_id"></a> [ci\_app\_repo\_clone\_to\_git\_id](#input\_ci\_app\_repo\_clone\_to\_git\_id) | By default absent, else custom server GUID, or other options for 'git\_id' field in the browser UI. | `string` | `""` | no |
+| <a name="input_ci_app_repo_clone_to_git_id"></a> [ci\_app\_repo\_clone\_to\_git\_id](#input\_ci\_app\_repo\_clone\_to\_git\_id) | By default absent, otherwise use custom server GUID, or other options for `git_id` field in the browser UI. | `string` | `""` | no |
 | <a name="input_ci_app_repo_clone_to_git_provider"></a> [ci\_app\_repo\_clone\_to\_git\_provider](#input\_ci\_app\_repo\_clone\_to\_git\_provider) | By default 'hostedgit', else use 'githubconsolidated' or 'gitlab'. | `string` | `""` | no |
 | <a name="input_ci_app_repo_existing_branch"></a> [ci\_app\_repo\_existing\_branch](#input\_ci\_app\_repo\_existing\_branch) | Used when app\_repo\_existing\_url is provided, the default branch that is used by the CI build, usually either main or master. | `string` | `""` | no |
-| <a name="input_ci_app_repo_existing_git_id"></a> [ci\_app\_repo\_existing\_git\_id](#input\_ci\_app\_repo\_existing\_git\_id) | By default absent, else custom server GUID, or other options for 'git\_id' field in the browser UI. | `string` | `""` | no |
+| <a name="input_ci_app_repo_existing_git_id"></a> [ci\_app\_repo\_existing\_git\_id](#input\_ci\_app\_repo\_existing\_git\_id) | By default absent, otherwise use custom server GUID, or other options for `git_id` field in the browser UI. | `string` | `""` | no |
 | <a name="input_ci_app_repo_existing_git_provider"></a> [ci\_app\_repo\_existing\_git\_provider](#input\_ci\_app\_repo\_existing\_git\_provider) | By default 'hostedgit', else use 'githubconsolidated' or 'gitlab'. | `string` | `""` | no |
 | <a name="input_ci_app_repo_existing_url"></a> [ci\_app\_repo\_existing\_url](#input\_ci\_app\_repo\_existing\_url) | Override to bring your own existing application repository URL, which is used directly instead of cloning the default sample. | `string` | `""` | no |
 | <a name="input_ci_app_repo_git_token_secret_name"></a> [ci\_app\_repo\_git\_token\_secret\_name](#input\_ci\_app\_repo\_git\_token\_secret\_name) | Name of the Git token secret in the secret provider. | `string` | `"git-token"` | no |
@@ -265,7 +259,7 @@ No resources.
 | <a name="input_ci_code_engine_resource_group"></a> [ci\_code\_engine\_resource\_group](#input\_ci\_code\_engine\_resource\_group) | The resource group of the Code Engine project. | `string` | `"Default"` | no |
 | <a name="input_ci_code_engine_source"></a> [ci\_code\_engine\_source](#input\_ci\_code\_engine\_source) | The path to the location of code to build in the repository. | `string` | `""` | no |
 | <a name="input_ci_compliance_base_image"></a> [ci\_compliance\_base\_image](#input\_ci\_compliance\_base\_image) | Pipeline baseimage to run most of the built-in pipeline code. | `string` | `""` | no |
-| <a name="input_ci_compliance_pipeline_group"></a> [ci\_compliance\_pipeline\_group](#input\_ci\_compliance\_pipeline\_group) | Specify user/group for compliance pipline repo. | `string` | `""` | no |
+| <a name="input_ci_compliance_pipeline_group"></a> [ci\_compliance\_pipeline\_group](#input\_ci\_compliance\_pipeline\_group) | Specify user or group for compliance pipline repo. | `string` | `""` | no |
 | <a name="input_ci_compliance_pipeline_repo_auth_type"></a> [ci\_compliance\_pipeline\_repo\_auth\_type](#input\_ci\_compliance\_pipeline\_repo\_auth\_type) | Select the method of authentication that is used to access the Git provider. 'oauth' or 'pat'. | `string` | `"oauth"` | no |
 | <a name="input_ci_compliance_pipeline_repo_git_token_secret_name"></a> [ci\_compliance\_pipeline\_repo\_git\_token\_secret\_name](#input\_ci\_compliance\_pipeline\_repo\_git\_token\_secret\_name) | Name of the Git token secret in the secret provider. | `string` | `"git-token"` | no |
 | <a name="input_ci_cos_api_key_secret_name"></a> [ci\_cos\_api\_key\_secret\_name](#input\_ci\_cos\_api\_key\_secret\_name) | Name of the COS API key secret in the secret provider. | `string` | `"cos-api-key"` | no |
@@ -282,13 +276,13 @@ No resources.
 | <a name="input_ci_enable_key_protect"></a> [ci\_enable\_key\_protect](#input\_ci\_enable\_key\_protect) | Set to enable Key Protect Integration. | `bool` | `null` | no |
 | <a name="input_ci_enable_secrets_manager"></a> [ci\_enable\_secrets\_manager](#input\_ci\_enable\_secrets\_manager) | Set to enable Secrets Manager Integration. | `bool` | `null` | no |
 | <a name="input_ci_enable_slack"></a> [ci\_enable\_slack](#input\_ci\_enable\_slack) | Default: false. Set to true to create the integration. | `bool` | `false` | no |
-| <a name="input_ci_evidence_group"></a> [ci\_evidence\_group](#input\_ci\_evidence\_group) | Specify Git user/group for evidence repository. | `string` | `""` | no |
+| <a name="input_ci_evidence_group"></a> [ci\_evidence\_group](#input\_ci\_evidence\_group) | Specify Git user or group for evidence repository. | `string` | `""` | no |
 | <a name="input_ci_evidence_repo_auth_type"></a> [ci\_evidence\_repo\_auth\_type](#input\_ci\_evidence\_repo\_auth\_type) | Select the method of authentication that is used to access the Git provider. 'oauth' or 'pat'. | `string` | `"oauth"` | no |
 | <a name="input_ci_evidence_repo_git_token_secret_name"></a> [ci\_evidence\_repo\_git\_token\_secret\_name](#input\_ci\_evidence\_repo\_git\_token\_secret\_name) | Name of the Git token secret in the secret provider. | `string` | `"git-token"` | no |
-| <a name="input_ci_inventory_group"></a> [ci\_inventory\_group](#input\_ci\_inventory\_group) | Specify Git user/group for inventory repository. | `string` | `""` | no |
+| <a name="input_ci_inventory_group"></a> [ci\_inventory\_group](#input\_ci\_inventory\_group) | Specify Git user or group for inventory repository. | `string` | `""` | no |
 | <a name="input_ci_inventory_repo_auth_type"></a> [ci\_inventory\_repo\_auth\_type](#input\_ci\_inventory\_repo\_auth\_type) | Select the method of authentication that is used to access the Git provider. 'oauth' or 'pat'. | `string` | `"oauth"` | no |
 | <a name="input_ci_inventory_repo_git_token_secret_name"></a> [ci\_inventory\_repo\_git\_token\_secret\_name](#input\_ci\_inventory\_repo\_git\_token\_secret\_name) | Name of the Git token secret in the secret provider. | `string` | `"git-token"` | no |
-| <a name="input_ci_issues_group"></a> [ci\_issues\_group](#input\_ci\_issues\_group) | Specify Git user/group for issues repository. | `string` | `""` | no |
+| <a name="input_ci_issues_group"></a> [ci\_issues\_group](#input\_ci\_issues\_group) | Specify Git user or group for issues repository. | `string` | `""` | no |
 | <a name="input_ci_issues_repo_auth_type"></a> [ci\_issues\_repo\_auth\_type](#input\_ci\_issues\_repo\_auth\_type) | Select the method of authentication that is used to access the Git provider. 'oauth' or 'pat'. | `string` | `"oauth"` | no |
 | <a name="input_ci_issues_repo_git_token_secret_name"></a> [ci\_issues\_repo\_git\_token\_secret\_name](#input\_ci\_issues\_repo\_git\_token\_secret\_name) | Name of the Git token secret in the secret provider. | `string` | `"git-token"` | no |
 | <a name="input_ci_kp_location"></a> [ci\_kp\_location](#input\_ci\_kp\_location) | IBM Cloud location/region containing the Key Protect instance. | `string` | `""` | no |
@@ -300,7 +294,7 @@ No resources.
 | <a name="input_ci_opt_in_dynamic_ui_scan"></a> [ci\_opt\_in\_dynamic\_ui\_scan](#input\_ci\_opt\_in\_dynamic\_ui\_scan) | To enable the OWASP Zap UI scan. '1' enable or '0' disable. | `string` | `"1"` | no |
 | <a name="input_ci_opt_in_sonar"></a> [ci\_opt\_in\_sonar](#input\_ci\_opt\_in\_sonar) | Opt in for Sonarqube | `string` | `"1"` | no |
 | <a name="input_ci_opt_out_v1_evidence"></a> [ci\_opt\_out\_v1\_evidence](#input\_ci\_opt\_out\_v1\_evidence) | Opt out of Evidence v1 | `string` | `"1"` | no |
-| <a name="input_ci_pipeline_config_group"></a> [ci\_pipeline\_config\_group](#input\_ci\_pipeline\_config\_group) | Specify user/group for pipeline config repo. | `string` | `""` | no |
+| <a name="input_ci_pipeline_config_group"></a> [ci\_pipeline\_config\_group](#input\_ci\_pipeline\_config\_group) | Specify user or group for pipeline config repo. | `string` | `""` | no |
 | <a name="input_ci_pipeline_config_path"></a> [ci\_pipeline\_config\_path](#input\_ci\_pipeline\_config\_path) | The name and path of the pipeline-config.yaml file within the pipeline-config repo. | `string` | `".pipeline-config.yaml"` | no |
 | <a name="input_ci_pipeline_config_repo_auth_type"></a> [ci\_pipeline\_config\_repo\_auth\_type](#input\_ci\_pipeline\_config\_repo\_auth\_type) | Select the method of authentication that is used to access the Git provider. 'oauth' or 'pat'. | `string` | `"oauth"` | no |
 | <a name="input_ci_pipeline_config_repo_branch"></a> [ci\_pipeline\_config\_repo\_branch](#input\_ci\_pipeline\_config\_repo\_branch) | Specify the branch containing the custom pipeline-config.yaml file. | `string` | `""` | no |

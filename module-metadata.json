@@ -4,7 +4,7 @@
     "cc_app_group": {
       "name": "cc_app_group",
       "type": "string",
-      "description": "Specify user/group for app repo.",
+      "description": "Specify user or group for app repo.",
       "default": "",
       "source": [
         "module.devsecops_cc_toolchain.module.repositories"
@@ -115,7 +115,7 @@
     "cc_compliance_pipeline_group": {
       "name": "cc_compliance_pipeline_group",
       "type": "string",
-      "description": "Specify user/group for compliance pipline repo.",
+      "description": "Specify user or group for compliance pipline repo.",
       "default": "",
       "source": [
         "module.devsecops_cc_toolchain.module.repositories"
@@ -290,7 +290,7 @@
     "cc_evidence_group": {
       "name": "cc_evidence_group",
       "type": "string",
-      "description": "Specify Git user/group for evidence repository.",
+      "description": "Specify Git user or group for evidence repository.",
       "default": "",
       "source": [
         "module.devsecops_cc_toolchain.module.repositories"
@@ -329,7 +329,7 @@
     "cc_inventory_group": {
       "name": "cc_inventory_group",
       "type": "string",
-      "description": "Specify Git user/group for inventory repository.",
+      "description": "Specify Git user or group for inventory repository.",
       "default": "",
       "source": [
         "module.devsecops_cc_toolchain.module.repositories"
@@ -368,7 +368,7 @@
     "cc_issues_group": {
       "name": "cc_issues_group",
       "type": "string",
-      "description": "Specify Git user/group for issues repository.",
+      "description": "Specify Git user or group for issues repository.",
       "default": "",
       "source": [
         "module.devsecops_cc_toolchain.module.repositories"
@@ -537,7 +537,7 @@
     "cc_pipeline_config_group": {
       "name": "cc_pipeline_config_group",
       "type": "string",
-      "description": "Specify user/group for pipeline config repo.",
+      "description": "Specify user or group for pipeline config repo.",
       "default": "",
       "source": [
         "module.devsecops_cc_toolchain.module.repositories"
@@ -694,7 +694,7 @@
     "cc_scc_integration_name": {
       "name": "cc_scc_integration_name",
       "type": "string",
-      "description": "The name of the SCC integration name.",
+      "description": "The name of the SCC integration.",
       "default": "Security and Compliance",
       "source": [
         "module.devsecops_cc_toolchain.module.integrations"
@@ -1150,7 +1150,7 @@
     "cd_compliance_pipeline_group": {
       "name": "cd_compliance_pipeline_group",
       "type": "string",
-      "description": "Specify user/group for compliance pipline repo.",
+      "description": "Specify user or group for compliance pipline repo.",
       "default": "",
       "source": [
         "module.devsecops_cd_toolchain.module.repositories"
@@ -1484,7 +1484,7 @@
     "cd_evidence_group": {
       "name": "cd_evidence_group",
       "type": "string",
-      "description": "Specify Git user/group for evidence repository.",
+      "description": "Specify Git user or group for evidence repository.",
       "default": "",
       "source": [
         "module.devsecops_cd_toolchain.module.repositories"
@@ -1523,7 +1523,7 @@
     "cd_inventory_group": {
       "name": "cd_inventory_group",
       "type": "string",
-      "description": "Specify Git user/group for inventory repository.",
+      "description": "Specify Git user or group for inventory repository.",
       "default": "",
       "source": [
         "module.devsecops_cd_toolchain.module.repositories"
@@ -1562,7 +1562,7 @@
     "cd_issues_group": {
       "name": "cd_issues_group",
       "type": "string",
-      "description": "Specify Git user/group for issues repository.",
+      "description": "Specify Git user or group for issues repository.",
       "default": "",
       "source": [
         "module.devsecops_cd_toolchain.module.repositories"
@@ -1699,7 +1699,7 @@
     "cd_pipeline_config_group": {
       "name": "cd_pipeline_config_group",
       "type": "string",
-      "description": "Specify user/group for pipeline config repo.",
+      "description": "Specify user or group for pipeline config repo.",
       "default": "",
       "source": [
         "module.devsecops_cd_toolchain.module.repositories"
@@ -1869,7 +1869,7 @@
     "cd_scc_integration_name": {
       "name": "cd_scc_integration_name",
       "type": "string",
-      "description": "The name of the SCC integration name.",
+      "description": "The name of the SCC integration.",
       "default": "Security and Compliance",
       "source": [
         "module.devsecops_cd_toolchain.module.integrations"
@@ -2097,7 +2097,7 @@
       "name": "cd_target_environment_detail",
       "type": "string",
       "description": "Details of the environment being updated.",
-      "default": "",
+      "default": "Production target environment",
       "required": true,
       "source": [
         "module.devsecops_cd_toolchain.module.pipeline_cd.ibm_cd_tekton_pipeline_property.cd_pipeline_target_environment_detail.value"
@@ -2198,7 +2198,7 @@
     "ci_app_group": {
       "name": "ci_app_group",
       "type": "string",
-      "description": "Specify Git user/group for your application.",
+      "description": "Specify Git user or group for your application.",
       "default": "",
       "source": [
         "module.devsecops_ci_toolchain.module.repositories"
@@ -2270,7 +2270,7 @@
     "ci_app_repo_clone_to_git_id": {
       "name": "ci_app_repo_clone_to_git_id",
       "type": "string",
-      "description": "By default absent, else custom server GUID, or other options for 'git_id' field in the browser UI.",
+      "description": "By default absent, otherwise use custom server GUID, or other options for `git_id` field in the browser UI.",
       "default": "",
       "source": [
         "module.devsecops_ci_toolchain.module.repositories"
@@ -2309,7 +2309,7 @@
     "ci_app_repo_existing_git_id": {
       "name": "ci_app_repo_existing_git_id",
       "type": "string",
-      "description": "By default absent, else custom server GUID, or other options for 'git_id' field in the browser UI.",
+      "description": "By default absent, otherwise use custom server GUID, or other options for `git_id` field in the browser UI.",
       "default": "",
       "source": [
         "module.devsecops_ci_toolchain.module.repositories"
@@ -2540,7 +2540,7 @@
     "ci_compliance_pipeline_group": {
       "name": "ci_compliance_pipeline_group",
       "type": "string",
-      "description": "Specify user/group for compliance pipline repo.",
+      "description": "Specify user or group for compliance pipline repo.",
       "default": "",
       "source": [
         "module.devsecops_ci_toolchain.module.repositories"
@@ -2807,7 +2807,7 @@
     "ci_evidence_group": {
       "name": "ci_evidence_group",
       "type": "string",
-      "description": "Specify Git user/group for evidence repository.",
+      "description": "Specify Git user or group for evidence repository.",
       "default": "",
       "source": [
         "module.devsecops_ci_toolchain.module.repositories"
@@ -2846,7 +2846,7 @@
     "ci_inventory_group": {
       "name": "ci_inventory_group",
       "type": "string",
-      "description": "Specify Git user/group for inventory repository.",
+      "description": "Specify Git user or group for inventory repository.",
       "default": "",
       "source": [
         "module.devsecops_ci_toolchain.module.repositories"
@@ -2885,7 +2885,7 @@
     "ci_issues_group": {
       "name": "ci_issues_group",
       "type": "string",
-      "description": "Specify Git user/group for issues repository.",
+      "description": "Specify Git user or group for issues repository.",
       "default": "",
       "source": [
         "module.devsecops_ci_toolchain.module.repositories"
@@ -3070,7 +3070,7 @@
     "ci_pipeline_config_group": {
       "name": "ci_pipeline_config_group",
       "type": "string",
-      "description": "Specify user/group for pipeline config repo.",
+      "description": "Specify user or group for pipeline config repo.",
       "default": "",
       "source": [
         "module.devsecops_ci_toolchain.module.repositories"
