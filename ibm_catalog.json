@@ -3,7 +3,7 @@
 		{
 			"label": "DevSecOps Application Lifecycle Management",
 			"name": "deploy-arch-ibm-devsecops-alm",
-			"version": "1.0.4",
+			"version": "1.0.5",
 			"product_kind": "solution",
 			"tags": [
 				"enterprise_app",
