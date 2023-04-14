@@ -1,0 +1,5 @@
+{
+    "description": "Ignore goals list for Terraform IBM DevSecOps ALM",
+    "scc_goals": [
+    ]
+}
