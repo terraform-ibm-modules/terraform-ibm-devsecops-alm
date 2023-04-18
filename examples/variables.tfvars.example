@@ -46,23 +46,23 @@ toolchain_region            = "us-south"
 #Set the Secrets Manager as the secrets provider
 #These parameters will apply to CI, CD and CC toolchains
 sm_name                     = "sm-compliance-secrets"
-sm_location                 = "eu-gb"
+sm_location                 = "us-south"
 sm_resource_group           = "Default"
 sm_secret_group             = "Default"
 
 #Can be set specically for a toolchain
 #ci_sm_name                     = "sm-compliance-secrets"
-#ci_sm_location                 = "eu-gb"
+#ci_sm_location                 = "us-south"
 #ci_sm_resource_group           = "Default"
 #ci_sm_secret_group             = "Default"
 
 #cd_sm_name                     = "sm-compliance-secrets"
-#cd_sm_location                 = "eu-gb"
+#cd_sm_location                 = "us-south"
 #cd_sm_resource_group           = "Default"
 #cd_sm_secret_group             = "Default"
 
 #cc_sm_name                     = "sm-compliance-secrets"
-#cc_sm_location                 = "eu-gb"
+#cc_sm_location                 = "us-south"
 #cc_sm_resource_group           = "Default"
 #cc_sm_secret_group             = "Default"
 

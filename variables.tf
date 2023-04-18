@@ -1068,7 +1068,7 @@ variable "cd_scc_integration_name" {
 variable "cd_scc_enable_scc" {
   type        = bool
   description = "Enable the SCC integration."
-  default     = false
+  default     = true
 }
 
 ######## End SCC ################################
@@ -1509,7 +1509,7 @@ variable "cc_scc_integration_name" {
 variable "cc_scc_enable_scc" {
   type        = bool
   description = "Enable the SCC integration"
-  default     = false
+  default     = true
 }
 
 ######## End SCC ################################

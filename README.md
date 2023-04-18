@@ -65,15 +65,15 @@ statement instead the previous block.
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0.0 |
-| <a name="requirement_ibm"></a> [ibm](#requirement\_ibm) | >=1.51.0 |
+| <a name="requirement_ibm"></a> [ibm](#requirement\_ibm) | 1.51.0 |
 
 ## Modules
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_devsecops_cc_toolchain"></a> [devsecops\_cc\_toolchain](#module\_devsecops\_cc\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cc-toolchain | v1.0.4 |
-| <a name="module_devsecops_cd_toolchain"></a> [devsecops\_cd\_toolchain](#module\_devsecops\_cd\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain | v1.0.4 |
-| <a name="module_devsecops_ci_toolchain"></a> [devsecops\_ci\_toolchain](#module\_devsecops\_ci\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-ci-toolchain | v1.0.4 |
+| <a name="module_devsecops_cc_toolchain"></a> [devsecops\_cc\_toolchain](#module\_devsecops\_cc\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cc-toolchain | v1.0.5-beta.1 |
+| <a name="module_devsecops_cd_toolchain"></a> [devsecops\_cd\_toolchain](#module\_devsecops\_cd\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain | v1.0.5-beta.1 |
+| <a name="module_devsecops_ci_toolchain"></a> [devsecops\_ci\_toolchain](#module\_devsecops\_ci\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-ci-toolchain | v1.0.5-beta.1 |
 
 ## Resources
 
@@ -131,7 +131,7 @@ No resources.
 | <a name="input_cc_pipeline_debug"></a> [cc\_pipeline\_debug](#input\_cc\_pipeline\_debug) | '0' by default. Set to '1' to enable debug logging. | `string` | `"0"` | no |
 | <a name="input_cc_pipeline_ibmcloud_api_key_secret_name"></a> [cc\_pipeline\_ibmcloud\_api\_key\_secret\_name](#input\_cc\_pipeline\_ibmcloud\_api\_key\_secret\_name) | Name of the Cloud API key secret in the secret provider. | `string` | `"ibmcloud-api-key"` | no |
 | <a name="input_cc_repositories_prefix"></a> [cc\_repositories\_prefix](#input\_cc\_repositories\_prefix) | The prefix for the compliance repositories. | `string` | `"compliance"` | no |
-| <a name="input_cc_scc_enable_scc"></a> [cc\_scc\_enable\_scc](#input\_cc\_scc\_enable\_scc) | Enable the SCC integration | `bool` | `false` | no |
+| <a name="input_cc_scc_enable_scc"></a> [cc\_scc\_enable\_scc](#input\_cc\_scc\_enable\_scc) | Enable the SCC integration | `bool` | `true` | no |
 | <a name="input_cc_scc_integration_name"></a> [cc\_scc\_integration\_name](#input\_cc\_scc\_integration\_name) | The name of the SCC integration. | `string` | `"Security and Compliance"` | no |
 | <a name="input_cc_slack_channel_name"></a> [cc\_slack\_channel\_name](#input\_cc\_slack\_channel\_name) | The Slack channel that notifications are posted to. | `string` | `"my-channel"` | no |
 | <a name="input_cc_slack_notifications"></a> [cc\_slack\_notifications](#input\_cc\_slack\_notifications) | The switch that turns the Slack integration on or off. | `string` | `"0"` | no |
@@ -213,7 +213,7 @@ No resources.
 | <a name="input_cd_pipeline_ibmcloud_api_key_secret_name"></a> [cd\_pipeline\_ibmcloud\_api\_key\_secret\_name](#input\_cd\_pipeline\_ibmcloud\_api\_key\_secret\_name) | Name of the Cloud API key secret in the secret provider. | `string` | `"ibmcloud-api-key"` | no |
 | <a name="input_cd_repositories_prefix"></a> [cd\_repositories\_prefix](#input\_cd\_repositories\_prefix) | Prefix name for the cloned compliance repos. | `string` | `"compliance"` | no |
 | <a name="input_cd_satellite_cluster_group"></a> [cd\_satellite\_cluster\_group](#input\_cd\_satellite\_cluster\_group) | The Satellite cluster group | `string` | `""` | no |
-| <a name="input_cd_scc_enable_scc"></a> [cd\_scc\_enable\_scc](#input\_cd\_scc\_enable\_scc) | Enable the SCC integration. | `bool` | `false` | no |
+| <a name="input_cd_scc_enable_scc"></a> [cd\_scc\_enable\_scc](#input\_cd\_scc\_enable\_scc) | Enable the SCC integration. | `bool` | `true` | no |
 | <a name="input_cd_scc_integration_name"></a> [cd\_scc\_integration\_name](#input\_cd\_scc\_integration\_name) | The name of the SCC integration. | `string` | `"Security and Compliance"` | no |
 | <a name="input_cd_slack_channel_name"></a> [cd\_slack\_channel\_name](#input\_cd\_slack\_channel\_name) | The Slack channel that notifications are posted to. | `string` | `"my-channel"` | no |
 | <a name="input_cd_slack_notifications"></a> [cd\_slack\_notifications](#input\_cd\_slack\_notifications) | The switch to turn the Slack integration on or off. | `string` | `"0"` | no |

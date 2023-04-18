@@ -11,6 +11,8 @@ import (
 // Use existing resource group
 const resourceGroup = "geretain-test-resources"
 const defaultExampleTerraformDir = "examples/default"
+const appExampleDir = "examples/devsecops-ci-toolchain-bring-your-own-app"
+const kpExampleDir = "examples/devsecops-ci-toolchain-with-key-protect"
 
 func TestRunDefaultExample(t *testing.T) {
 	t.Parallel()
@@ -18,6 +20,44 @@ func TestRunDefaultExample(t *testing.T) {
 	options := testhelper.TestOptionsDefault(&testhelper.TestOptions{
 		Testing:      t,
 		TerraformDir: defaultExampleTerraformDir,
+		IgnoreUpdates: testhelper.Exemptions{ // Ignore for consistency check
+			List: []string{
+				"module.terraform_devsecops_alm.module.devsecops_cc_toolchain[0].module.pipeline_cc.ibm_cd_tekton_pipeline_trigger.cc_pipeline_timed_trigger",
+				"module.terraform_devsecops_alm.module.devsecops_cd_toolchain[0].module.repositories.ibm_cd_toolchain_tool_hostedgit.deployment_repo_clone_from_hostedgit[0]",
+			},
+		},
+	})
+
+	output, err := options.RunTestConsistency()
+	assert.Nil(t, err, "This should not have errored")
+	assert.NotNil(t, output, "Expected some output")
+}
+
+func TestRunAppExample(t *testing.T) {
+	t.Parallel()
+
+	options := testhelper.TestOptionsDefault(&testhelper.TestOptions{
+		Testing:      t,
+		TerraformDir: appExampleDir,
+		IgnoreUpdates: testhelper.Exemptions{ // Ignore for consistency check
+			List: []string{
+				"module.terraform_devsecops_alm.module.devsecops_cc_toolchain[0].module.pipeline_cc.ibm_cd_tekton_pipeline_trigger.cc_pipeline_timed_trigger",
+				"module.terraform_devsecops_alm.module.devsecops_cd_toolchain[0].module.repositories.ibm_cd_toolchain_tool_hostedgit.deployment_repo_clone_from_hostedgit[0]",
+			},
+		},
+	})
+
+	output, err := options.RunTestConsistency()
+	assert.Nil(t, err, "This should not have errored")
+	assert.NotNil(t, output, "Expected some output")
+}
+
+func TestRunKPExample(t *testing.T) {
+	t.Parallel()
+
+	options := testhelper.TestOptionsDefault(&testhelper.TestOptions{
+		Testing:      t,
+		TerraformDir: kpExampleDir,
 		IgnoreUpdates: testhelper.Exemptions{ // Ignore for consistency check
 			List: []string{
 				"module.terraform_devsecops_alm.module.devsecops_cc_toolchain[0].module.pipeline_cc.ibm_cd_tekton_pipeline_trigger.cc_pipeline_timed_trigger",

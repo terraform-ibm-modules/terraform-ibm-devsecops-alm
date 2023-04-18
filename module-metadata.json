@@ -85,10 +85,8 @@
       "type": "string",
       "description": "Disable Toolchain service to Secrets Manager Service authorization policy creation.",
       "default": "",
-      "required": true,
       "source": [
-        "module.devsecops_cc_toolchain.module.integrations.ibm_iam_authorization_policy.toolchain_keyprotect_auth_policy.count",
-        "module.devsecops_cc_toolchain.module.integrations.ibm_iam_authorization_policy.toolchain_secretsmanager_auth_policy.count"
+        "module.devsecops_cc_toolchain.module.integrations"
       ],
       "pos": {
         "filename": "variables.tf",
@@ -669,7 +667,7 @@
       "name": "cc_scc_enable_scc",
       "type": "bool",
       "description": "Enable the SCC integration",
-      "default": false,
+      "default": true,
       "required": true,
       "source": [
         "module.devsecops_cc_toolchain.module.integrations.ibm_cd_toolchain_tool_securitycompliance.scc_tool.count"
@@ -976,10 +974,8 @@
       "type": "string",
       "description": "Disable Toolchain service to Secrets Manager Service authorization policy creation.",
       "default": "",
-      "required": true,
       "source": [
-        "module.devsecops_cd_toolchain.module.integrations.ibm_iam_authorization_policy.toolchain_keyprotect_auth_policy.count",
-        "module.devsecops_cd_toolchain.module.integrations.ibm_iam_authorization_policy.toolchain_secretsmanager_auth_policy.count"
+        "module.devsecops_cd_toolchain.module.integrations"
       ],
       "pos": {
         "filename": "variables.tf",
@@ -1832,7 +1828,7 @@
       "name": "cd_scc_enable_scc",
       "type": "bool",
       "description": "Enable the SCC integration.",
-      "default": false,
+      "default": true,
       "required": true,
       "source": [
         "module.devsecops_cd_toolchain.module.integrations.ibm_cd_toolchain_tool_securitycompliance.scc_tool.count"
@@ -2355,10 +2351,8 @@
       "type": "string",
       "description": "Disable Toolchain Service to Secrets Manager Service auhorization policy creation.",
       "default": "",
-      "required": true,
       "source": [
-        "module.devsecops_ci_toolchain.module.integrations.ibm_iam_authorization_policy.toolchain_keyprotect_auth_policy.count",
-        "module.devsecops_ci_toolchain.module.integrations.ibm_iam_authorization_policy.toolchain_secretsmanager_auth_policy.count"
+        "module.devsecops_ci_toolchain.module.integrations"
       ],
       "pos": {
         "filename": "variables.tf",
@@ -3790,7 +3784,7 @@
     "ibm": {
       "source": "IBM-Cloud/ibm",
       "version_constraints": [
-        "\u003e=1.51.0"
+        "1.51.0"
       ]
     }
   },
@@ -3804,7 +3798,7 @@
   "module_calls": {
     "devsecops_cc_toolchain": {
       "name": "devsecops_cc_toolchain",
-      "source": "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cc-toolchain?ref=v1.0.4",
+      "source": "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cc-toolchain?ref=v1.0.5-beta.1",
       "attributes": {
         "app_group": "cc_app_group",
         "app_repo_auth_type": "cc_app_repo_auth_type",
@@ -3973,7 +3967,7 @@
     },
     "devsecops_cd_toolchain": {
       "name": "devsecops_cd_toolchain",
-      "source": "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain?ref=v1.0.4",
+      "source": "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain?ref=v1.0.5-beta.1",
       "attributes": {
         "app_version": "cd_app_version",
         "authorization_policy_creation": "cd_authorization_policy_creation",
@@ -4189,7 +4183,7 @@
     },
     "devsecops_ci_toolchain": {
       "name": "devsecops_ci_toolchain",
-      "source": "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-ci-toolchain?ref=v1.0.4",
+      "source": "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-ci-toolchain?ref=v1.0.5-beta.1",
       "attributes": {
         "app_group": "ci_app_group",
         "app_name": "ci_app_name",
