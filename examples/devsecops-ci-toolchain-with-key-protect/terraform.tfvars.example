@@ -12,21 +12,21 @@ create_cc_toolchain      = false
 # Required properties for using Key Protect
 enable_key_protect       = true
 kp_name                  = "prodkeys"
-kp_location              = "eu-gb"
+kp_location              = "us-south"
 kp_resource_group        = "Default"
 
 # Required properties for using Secrets Manager. Secrets Manager is disiabled in this example
 enable_secrets_manager   = false
 #sm_name                  = "sm-compliance-secrets"
-#sm_location              = "eu-gb"
+#sm_location              = "us-south"
 #sm_resource_group        = "Default"
 #sm_secret_group          = "Default"
 
 # Required Pipeline properties for running the pipelines in the toolchain
 ci_registry_namespace    = "my-namespace"
-ci_registry_region       = "ibm:yp:jp-tok"
+ci_registry_region       = "ibm:yp:us-south"
 ci_cluster_name          = "mycluster-free"
-ci_dev_region            = "ibm:yp:jp-tok"
+ci_dev_region            = "ibm:yp:us-south"
 ci_dev_resource_group    = "Default"
 ci_cluster_namespace     = "dev"
 cd_cluster_name          = "mycluster-free"

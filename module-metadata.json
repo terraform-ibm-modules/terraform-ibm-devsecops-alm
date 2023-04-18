@@ -85,10 +85,8 @@
       "type": "string",
       "description": "Disable Toolchain service to Secrets Manager Service authorization policy creation.",
       "default": "",
-      "required": true,
       "source": [
-        "module.devsecops_cc_toolchain.module.integrations.ibm_iam_authorization_policy.toolchain_keyprotect_auth_policy.count",
-        "module.devsecops_cc_toolchain.module.integrations.ibm_iam_authorization_policy.toolchain_secretsmanager_auth_policy.count"
+        "module.devsecops_cc_toolchain.module.integrations"
       ],
       "pos": {
         "filename": "variables.tf",
@@ -230,12 +228,6 @@
       "type": "bool",
       "description": "Enable the Key Protect integration.",
       "default": false,
-      "required": true,
-      "source": [
-        "module.devsecops_cc_toolchain.module.integrations.ibm_cd_toolchain_tool_keyprotect.keyprotect.count",
-        "module.devsecops_cc_toolchain.module.services.data.ibm_resource_group.kp_resource_group.count",
-        "module.devsecops_cc_toolchain.module.services.data.ibm_resource_instance.key_protect_instance.count"
-      ],
       "pos": {
         "filename": "variables.tf",
         "line": 1268
@@ -245,13 +237,7 @@
       "name": "cc_enable_secrets_manager",
       "type": "bool",
       "description": "Enable the Secrets Manager integration.",
-      "default": true,
-      "required": true,
-      "source": [
-        "module.devsecops_cc_toolchain.module.integrations.ibm_cd_toolchain_tool_secretsmanager.secretsmanager.count",
-        "module.devsecops_cc_toolchain.module.services.data.ibm_resource_group.sm_resource_group.count",
-        "module.devsecops_cc_toolchain.module.services.data.ibm_resource_instance.secrets_manager_instance.count"
-      ],
+      "default": false,
       "pos": {
         "filename": "variables.tf",
         "line": 1274
@@ -681,7 +667,7 @@
       "name": "cc_scc_enable_scc",
       "type": "bool",
       "description": "Enable the SCC integration",
-      "default": false,
+      "default": true,
       "required": true,
       "source": [
         "module.devsecops_cc_toolchain.module.integrations.ibm_cd_toolchain_tool_securitycompliance.scc_tool.count"
@@ -988,10 +974,8 @@
       "type": "string",
       "description": "Disable Toolchain service to Secrets Manager Service authorization policy creation.",
       "default": "",
-      "required": true,
       "source": [
-        "module.devsecops_cd_toolchain.module.integrations.ibm_iam_authorization_policy.toolchain_keyprotect_auth_policy.count",
-        "module.devsecops_cd_toolchain.module.integrations.ibm_iam_authorization_policy.toolchain_secretsmanager_auth_policy.count"
+        "module.devsecops_cd_toolchain.module.integrations"
       ],
       "pos": {
         "filename": "variables.tf",
@@ -1440,12 +1424,6 @@
       "type": "bool",
       "description": "Use the Key Protect integration.",
       "default": false,
-      "required": true,
-      "source": [
-        "module.devsecops_cd_toolchain.module.integrations.ibm_cd_toolchain_tool_keyprotect.keyprotect.count",
-        "module.devsecops_cd_toolchain.module.services.data.ibm_resource_group.kp_resource_group.count",
-        "module.devsecops_cd_toolchain.module.services.data.ibm_resource_instance.key_protect_instance.count"
-      ],
       "pos": {
         "filename": "variables.tf",
         "line": 844
@@ -1455,13 +1433,7 @@
       "name": "cd_enable_secrets_manager",
       "type": "bool",
       "description": "Use the Secrets Manager integration.",
-      "default": true,
-      "required": true,
-      "source": [
-        "module.devsecops_cd_toolchain.module.integrations.ibm_cd_toolchain_tool_secretsmanager.secretsmanager.count",
-        "module.devsecops_cd_toolchain.module.services.data.ibm_resource_group.sm_resource_group.count",
-        "module.devsecops_cd_toolchain.module.services.data.ibm_resource_instance.secrets_manager_instance.count"
-      ],
+      "default": false,
       "pos": {
         "filename": "variables.tf",
         "line": 850
@@ -1856,7 +1828,7 @@
       "name": "cd_scc_enable_scc",
       "type": "bool",
       "description": "Enable the SCC integration.",
-      "default": false,
+      "default": true,
       "required": true,
       "source": [
         "module.devsecops_cd_toolchain.module.integrations.ibm_cd_toolchain_tool_securitycompliance.scc_tool.count"
@@ -2379,10 +2351,8 @@
       "type": "string",
       "description": "Disable Toolchain Service to Secrets Manager Service auhorization policy creation.",
       "default": "",
-      "required": true,
       "source": [
-        "module.devsecops_ci_toolchain.module.integrations.ibm_iam_authorization_policy.toolchain_keyprotect_auth_policy.count",
-        "module.devsecops_ci_toolchain.module.integrations.ibm_iam_authorization_policy.toolchain_secretsmanager_auth_policy.count"
+        "module.devsecops_ci_toolchain.module.integrations"
       ],
       "pos": {
         "filename": "variables.tf",
@@ -2763,12 +2733,6 @@
       "type": "bool",
       "description": "Set to enable Key Protect Integration. ",
       "default": false,
-      "required": true,
-      "source": [
-        "module.devsecops_ci_toolchain.module.integrations.ibm_cd_toolchain_tool_keyprotect.keyprotect.count",
-        "module.devsecops_ci_toolchain.module.services.data.ibm_resource_group.kp_resource_group.count",
-        "module.devsecops_ci_toolchain.module.services.data.ibm_resource_instance.key_protect_instance.count"
-      ],
       "pos": {
         "filename": "variables.tf",
         "line": 354
@@ -2778,13 +2742,7 @@
       "name": "ci_enable_secrets_manager",
       "type": "bool",
       "description": "Set to enable Secrets Manager Integration.",
-      "default": true,
-      "required": true,
-      "source": [
-        "module.devsecops_ci_toolchain.module.integrations.ibm_cd_toolchain_tool_secretsmanager.secretsmanager.count",
-        "module.devsecops_ci_toolchain.module.services.data.ibm_resource_group.sm_resource_group.count",
-        "module.devsecops_ci_toolchain.module.services.data.ibm_resource_instance.secrets_manager_instance.count"
-      ],
+      "default": false,
       "pos": {
         "filename": "variables.tf",
         "line": 360
@@ -3826,7 +3784,7 @@
     "ibm": {
       "source": "IBM-Cloud/ibm",
       "version_constraints": [
-        "\u003e=1.51.0"
+        "1.51.0"
       ]
     }
   },
@@ -3840,7 +3798,7 @@
   "module_calls": {
     "devsecops_cc_toolchain": {
       "name": "devsecops_cc_toolchain",
-      "source": "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cc-toolchain?ref=v1.0.4",
+      "source": "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cc-toolchain?ref=v1.0.5-beta.1",
       "attributes": {
         "app_group": "cc_app_group",
         "app_repo_auth_type": "cc_app_repo_auth_type",
@@ -3855,8 +3813,6 @@
         "cos_endpoint": "cc_cos_endpoint",
         "count": "create_cc_toolchain",
         "doi_environment": "cc_doi_environment",
-        "enable_key_protect": "cc_enable_key_protect",
-        "enable_secrets_manager": "cc_enable_secrets_manager",
         "enable_slack": "cc_enable_slack",
         "environment_tag": "cc_environment_tag",
         "evidence_group": "cc_evidence_group",
@@ -4006,12 +3962,12 @@
       },
       "pos": {
         "filename": "main.tf",
-        "line": 244
+        "line": 254
       }
     },
     "devsecops_cd_toolchain": {
       "name": "devsecops_cd_toolchain",
-      "source": "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain?ref=v1.0.4",
+      "source": "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain?ref=v1.0.5-beta.1",
       "attributes": {
         "app_version": "cd_app_version",
         "authorization_policy_creation": "cd_authorization_policy_creation",
@@ -4046,8 +4002,6 @@
         "deployment_repo_git_token_secret_name": "cd_deployment_repo_git_token_secret_name",
         "doi_environment": "cd_doi_environment",
         "emergency_label": "cd_emergency_label",
-        "enable_key_protect": "cd_enable_key_protect",
-        "enable_secrets_manager": "cd_enable_secrets_manager",
         "enable_slack": "cd_enable_slack",
         "evidence_group": "cd_evidence_group",
         "evidence_repo_auth_type": "cd_evidence_repo_auth_type",
@@ -4224,12 +4178,12 @@
       },
       "pos": {
         "filename": "main.tf",
-        "line": 124
+        "line": 134
       }
     },
     "devsecops_ci_toolchain": {
       "name": "devsecops_ci_toolchain",
-      "source": "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-ci-toolchain?ref=v1.0.4",
+      "source": "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-ci-toolchain?ref=v1.0.5-beta.1",
       "attributes": {
         "app_group": "ci_app_group",
         "app_name": "ci_app_name",
@@ -4269,8 +4223,6 @@
         "doi_environment": "ci_doi_environment",
         "doi_toolchain_id": "ci_doi_toolchain_id",
         "doi_toolchain_id_pipeline_property": "ci_doi_toolchain_id_pipeline_property",
-        "enable_key_protect": "ci_enable_key_protect",
-        "enable_secrets_manager": "ci_enable_secrets_manager",
         "enable_slack": "ci_enable_slack",
         "evidence_group": "ci_evidence_group",
         "evidence_repo_auth_type": "ci_evidence_repo_auth_type",
@@ -4540,7 +4492,7 @@
       },
       "pos": {
         "filename": "main.tf",
-        "line": 1
+        "line": 11
       }
     }
   }
