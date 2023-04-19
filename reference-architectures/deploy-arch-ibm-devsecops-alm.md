@@ -79,4 +79,4 @@ The following components are included that support the requirements. Alternative
 ## Next steps
 {: #next-steps}
 
-Install the DevSecOps application lifecycle management deployable architecture on this infrastructure.
+Install the DevSecOps application lifecycle management deployable architecture on this infrastructure. More information [here](https://cloud.ibm.com/docs/devsecops-alm?topic=devsecops-alm-devsecops-alm-dep)
