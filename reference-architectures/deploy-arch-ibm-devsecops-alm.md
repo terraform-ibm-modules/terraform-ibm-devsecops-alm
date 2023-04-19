@@ -1,7 +1,7 @@
 ---
 copyright:
   years: 2023
-target release date: "2023-04-19"
+lastupdated: "2023-04-19"
 
 keywords:
 
