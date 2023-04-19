@@ -572,6 +572,12 @@ variable "ci_signing_key_secret_name" {
   default     = "signing_key"
 }
 
+variable "ci_pipeline_dockerconfigjson_secret_name" {
+  type        = string
+  description = "Name of the pipeline docker config json secret in the secret provider."
+  default     = "pipeline_dockerconfigjson_secret_name"
+}
+
 ######## End Secret Names #######################
 
 variable "ci_opt_in_sonar" {
@@ -620,6 +626,12 @@ variable "ci_sonarqube_config" {
   type        = string
   description = "Runs a SonarQube scan in an isolated Docker-in-Docker container (default configuration) or in an existing Kubernetes cluster (custom configuration). Options: default or custom. Default is default."
   default     = "default"
+}
+
+variable "ci_enable_pipeline_dockerconfigjson" {
+  type        = bool
+  description = "Enable to add the pipeline-dockerconfigjson property to the pipeline properties."
+  default     = false
 }
 
 ######## SLACK INTEGRATION ###################
@@ -1054,6 +1066,12 @@ variable "cd_change_management_repo_git_token_secret_name" {
   default     = "git-token"
 }
 
+variable "cd_code_signing_cert_secret_name" {
+  type        = string
+  description = "Name of the code signing certificate secret in the secret provider."
+  default     = "code-signing-cert"
+}
+
 ######## End Secret Names #######################
 
 ######## SCC #####################################
@@ -1150,6 +1168,12 @@ variable "cd_pipeline_debug" {
   type        = string
   description = "'0' by default. Set to '1' to enable debug logging."
   default     = "0"
+}
+
+variable "cd_enable_signing_validation" {
+  type        = bool
+  description = "Enable to add the code-signing-certificate property to the pipeline properties."
+  default     = false
 }
 
 #SLACK
@@ -1496,6 +1520,12 @@ variable "cc_app_repo_git_token_secret_name" {
   default     = "git-token"
 }
 
+variable "cc_pipeline_dockerconfigjson_secret_name" {
+  type        = string
+  description = "Name of the pipeline docker config json secret in the secret provider."
+  default     = "pipeline_dockerconfigjson_secret_name"
+}
+
 ######## End Secret Names #######################
 
 ######## SCC #####################################
@@ -1653,6 +1683,12 @@ variable "cc_environment_tag" {
   type        = string
   description = "Tag name that represents the target environment in the inventory. Example: prod_latest."
   default     = "prod_latest"
+}
+
+variable "cc_enable_pipeline_dockerconfigjson" {
+  type        = bool
+  description = "Enable to add the pipeline-dockerconfigjson property to the pipeline properties."
+  default     = false
 }
 
 ##### END OF CC VARIABLES ################
