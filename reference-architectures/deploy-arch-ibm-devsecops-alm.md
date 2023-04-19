@@ -1,7 +1,7 @@
 ---
 copyright:
   years: 2023
-lastupdated: "2023-03-31"
+lastupdated: "2023-04-19"
 
 keywords:
 
@@ -12,6 +12,10 @@ authors:
   - name: Hua Yuen Hui
 
 version: 1.0
+
+# Whether the reference architecture is published to Cloud Docs production.
+# When set to false, the file is available only in staging. Default is false.
+production: true
 
 deployment-url: https://cloud.ibm.com/catalog/architecture/deploy-arch-ibm-devsecops-alm-e1c16cac-7ea8-413f-a819-67e3a3251e44-global
 
