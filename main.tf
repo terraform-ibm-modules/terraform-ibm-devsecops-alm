@@ -10,7 +10,7 @@ locals {
 
 module "devsecops_ci_toolchain" {
   count            = var.create_ci_toolchain ? 1 : 0
-  source           = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-ci-toolchain?ref=v1.0.5-beta.1"
+  source           = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-ci-toolchain?ref=v1.0.5"
   ibmcloud_api_key = var.ibmcloud_api_key
 
   toolchain_name           = var.ci_toolchain_name
@@ -43,6 +43,7 @@ module "devsecops_ci_toolchain" {
   slack_webhook_secret_name                      = var.ci_slack_webhook_secret_name
   app_repo_git_token_secret_name                 = var.ci_app_repo_git_token_secret_name
   signing_key_secret_name                        = var.ci_signing_key_secret_name
+  pipeline_dockerconfigjson_secret_name          = var.ci_pipeline_dockerconfigjson_secret_name
 
   #AUTH TYPE FOR REPOS
   pipeline_config_repo_auth_type     = var.ci_pipeline_config_repo_auth_type
@@ -88,6 +89,7 @@ module "devsecops_ci_toolchain" {
   app_version                        = var.ci_app_version
   slack_notifications                = var.ci_slack_notifications
   sonarqube_config                   = var.ci_sonarqube_config
+  enable_pipeline_dockerconfigjson   = var.ci_enable_pipeline_dockerconfigjson
 
   #APP REPO
   app_repo_clone_from_url        = var.ci_app_repo_clone_from_url
@@ -133,7 +135,7 @@ module "devsecops_ci_toolchain" {
 
 module "devsecops_cd_toolchain" {
   count            = var.create_cd_toolchain ? 1 : 0
-  source           = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain?ref=v1.0.5-beta.1"
+  source           = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain?ref=v1.0.5"
   ibmcloud_api_key = var.ibmcloud_api_key
 
   toolchain_name           = var.cd_toolchain_name
@@ -165,6 +167,7 @@ module "devsecops_cd_toolchain" {
   deployment_repo_git_token_secret_name          = var.cd_deployment_repo_git_token_secret_name
   change_management_repo_git_token_secret_name   = var.cd_change_management_repo_git_token_secret_name
   slack_webhook_secret_name                      = var.cd_slack_webhook_secret_name
+  code_signing_cert_secret_name                  = var.cd_code_signing_cert_secret_name
 
   #AUTH TYPE FOR REPOS
   pipeline_config_repo_auth_type     = var.cd_pipeline_config_repo_auth_type
@@ -232,6 +235,7 @@ module "devsecops_cd_toolchain" {
   emergency_label               = var.cd_emergency_label
   app_version                   = var.cd_app_version
   pipeline_debug                = var.cd_pipeline_debug
+  enable_signing_validation     = var.cd_enable_signing_validation
 
   #SLACK INTEGRATION
   enable_slack           = var.cd_enable_slack
@@ -253,7 +257,7 @@ module "devsecops_cd_toolchain" {
 
 module "devsecops_cc_toolchain" {
   count                         = var.create_cc_toolchain ? 1 : 0
-  source                        = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cc-toolchain?ref=v1.0.5-beta.1"
+  source                        = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cc-toolchain?ref=v1.0.5"
   ibmcloud_api_key              = var.ibmcloud_api_key
   toolchain_name                = var.cc_toolchain_name
   toolchain_description         = var.cc_toolchain_description
@@ -284,6 +288,7 @@ module "devsecops_cc_toolchain" {
   pipeline_config_repo_git_token_secret_name     = var.cc_pipeline_config_repo_git_token_secret_name
   app_repo_git_token_secret_name                 = var.cc_app_repo_git_token_secret_name
   slack_webhook_secret_name                      = var.cc_slack_webhook_secret_name
+  pipeline_dockerconfigjson_secret_name          = var.cc_pipeline_dockerconfigjson_secret_name
 
   #AUTH TYPE FOR REPOS
   pipeline_config_repo_auth_type     = var.cc_pipeline_config_repo_auth_type
@@ -324,16 +329,17 @@ module "devsecops_cc_toolchain" {
   scc_integration_name = var.cc_scc_integration_name
 
   #OTHER INTEGRATIONS
-  slack_notifications     = var.cc_slack_notifications
-  sonarqube_config        = var.cc_sonarqube_config
-  repositories_prefix     = var.cc_repositories_prefix
-  doi_toolchain_id        = try(module.devsecops_ci_toolchain[0].toolchain_id, var.cc_doi_toolchain_id)
-  pipeline_debug          = var.cc_pipeline_debug
-  opt_in_dynamic_api_scan = var.cc_opt_in_dynamic_api_scan
-  opt_in_dynamic_ui_scan  = var.cc_opt_in_dynamic_ui_scan
-  opt_in_dynamic_scan     = var.cc_opt_in_dynamic_scan
-  opt_in_auto_close       = var.cc_opt_in_auto_close
-  environment_tag         = var.cc_environment_tag
+  slack_notifications              = var.cc_slack_notifications
+  sonarqube_config                 = var.cc_sonarqube_config
+  repositories_prefix              = var.cc_repositories_prefix
+  doi_toolchain_id                 = try(module.devsecops_ci_toolchain[0].toolchain_id, var.cc_doi_toolchain_id)
+  pipeline_debug                   = var.cc_pipeline_debug
+  opt_in_dynamic_api_scan          = var.cc_opt_in_dynamic_api_scan
+  opt_in_dynamic_ui_scan           = var.cc_opt_in_dynamic_ui_scan
+  opt_in_dynamic_scan              = var.cc_opt_in_dynamic_scan
+  opt_in_auto_close                = var.cc_opt_in_auto_close
+  environment_tag                  = var.cc_environment_tag
+  enable_pipeline_dockerconfigjson = var.cc_enable_pipeline_dockerconfigjson
 
   #SLACK INTEGRATION
   enable_slack           = var.cc_enable_slack

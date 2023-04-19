@@ -71,9 +71,9 @@ statement instead the previous block.
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_devsecops_cc_toolchain"></a> [devsecops\_cc\_toolchain](#module\_devsecops\_cc\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cc-toolchain | v1.0.5-beta.1 |
-| <a name="module_devsecops_cd_toolchain"></a> [devsecops\_cd\_toolchain](#module\_devsecops\_cd\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain | v1.0.5-beta.1 |
-| <a name="module_devsecops_ci_toolchain"></a> [devsecops\_ci\_toolchain](#module\_devsecops\_ci\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-ci-toolchain | v1.0.5-beta.1 |
+| <a name="module_devsecops_cc_toolchain"></a> [devsecops\_cc\_toolchain](#module\_devsecops\_cc\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cc-toolchain | v1.0.5 |
+| <a name="module_devsecops_cd_toolchain"></a> [devsecops\_cd\_toolchain](#module\_devsecops\_cd\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain | v1.0.5 |
+| <a name="module_devsecops_ci_toolchain"></a> [devsecops\_ci\_toolchain](#module\_devsecops\_ci\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-ci-toolchain | v1.0.5 |
 
 ## Resources
 
@@ -101,6 +101,7 @@ No resources.
 | <a name="input_cc_doi_environment"></a> [cc\_doi\_environment](#input\_cc\_doi\_environment) | DevOps Insights environment for DevSecOps CD deployment. | `string` | `""` | no |
 | <a name="input_cc_doi_toolchain_id"></a> [cc\_doi\_toolchain\_id](#input\_cc\_doi\_toolchain\_id) | DevOps Insights toolchain ID to link to. | `string` | `""` | no |
 | <a name="input_cc_enable_key_protect"></a> [cc\_enable\_key\_protect](#input\_cc\_enable\_key\_protect) | Enable the Key Protect integration. | `bool` | `false` | no |
+| <a name="input_cc_enable_pipeline_dockerconfigjson"></a> [cc\_enable\_pipeline\_dockerconfigjson](#input\_cc\_enable\_pipeline\_dockerconfigjson) | Enable to add the pipeline-dockerconfigjson property to the pipeline properties. | `bool` | `false` | no |
 | <a name="input_cc_enable_secrets_manager"></a> [cc\_enable\_secrets\_manager](#input\_cc\_enable\_secrets\_manager) | Enable the Secrets Manager integration. | `bool` | `false` | no |
 | <a name="input_cc_enable_slack"></a> [cc\_enable\_slack](#input\_cc\_enable\_slack) | Set to true to create the integration. | `bool` | `false` | no |
 | <a name="input_cc_environment_tag"></a> [cc\_environment\_tag](#input\_cc\_environment\_tag) | Tag name that represents the target environment in the inventory. Example: prod\_latest. | `string` | `"prod_latest"` | no |
@@ -129,6 +130,7 @@ No resources.
 | <a name="input_cc_pipeline_config_repo_existing_url"></a> [cc\_pipeline\_config\_repo\_existing\_url](#input\_cc\_pipeline\_config\_repo\_existing\_url) | Specify a repository containing a custom pipeline-config.yaml file. | `string` | `""` | no |
 | <a name="input_cc_pipeline_config_repo_git_token_secret_name"></a> [cc\_pipeline\_config\_repo\_git\_token\_secret\_name](#input\_cc\_pipeline\_config\_repo\_git\_token\_secret\_name) | Name of the Git token secret in the secret provider. | `string` | `"git-token"` | no |
 | <a name="input_cc_pipeline_debug"></a> [cc\_pipeline\_debug](#input\_cc\_pipeline\_debug) | '0' by default. Set to '1' to enable debug logging. | `string` | `"0"` | no |
+| <a name="input_cc_pipeline_dockerconfigjson_secret_name"></a> [cc\_pipeline\_dockerconfigjson\_secret\_name](#input\_cc\_pipeline\_dockerconfigjson\_secret\_name) | Name of the pipeline docker config json secret in the secret provider. | `string` | `"pipeline_dockerconfigjson_secret_name"` | no |
 | <a name="input_cc_pipeline_ibmcloud_api_key_secret_name"></a> [cc\_pipeline\_ibmcloud\_api\_key\_secret\_name](#input\_cc\_pipeline\_ibmcloud\_api\_key\_secret\_name) | Name of the Cloud API key secret in the secret provider. | `string` | `"ibmcloud-api-key"` | no |
 | <a name="input_cc_repositories_prefix"></a> [cc\_repositories\_prefix](#input\_cc\_repositories\_prefix) | The prefix for the compliance repositories. | `string` | `"compliance"` | no |
 | <a name="input_cc_scc_enable_scc"></a> [cc\_scc\_enable\_scc](#input\_cc\_scc\_enable\_scc) | Enable the SCC integration | `bool` | `true` | no |
@@ -162,6 +164,7 @@ No resources.
 | <a name="input_cd_cluster_name"></a> [cd\_cluster\_name](#input\_cd\_cluster\_name) | Name of the Kubernetes cluster where the application is deployed. | `string` | `"mycluster-free"` | no |
 | <a name="input_cd_cluster_namespace"></a> [cd\_cluster\_namespace](#input\_cd\_cluster\_namespace) | Name of the Kubernetes cluster namespace where the application is deployed. | `string` | `"prod"` | no |
 | <a name="input_cd_cluster_region"></a> [cd\_cluster\_region](#input\_cd\_cluster\_region) | Region of the Kubernetes cluster where the application is deployed. | `string` | `"ibm:yp:us-south"` | no |
+| <a name="input_cd_code_signing_cert_secret_name"></a> [cd\_code\_signing\_cert\_secret\_name](#input\_cd\_code\_signing\_cert\_secret\_name) | Name of the code signing certificate secret in the secret provider. | `string` | `"code-signing-cert"` | no |
 | <a name="input_cd_compliance_base_image"></a> [cd\_compliance\_base\_image](#input\_cd\_compliance\_base\_image) | Pipeline baseimage to run most of the built-in pipeline code. | `string` | `""` | no |
 | <a name="input_cd_compliance_pipeline_group"></a> [cd\_compliance\_pipeline\_group](#input\_cd\_compliance\_pipeline\_group) | Specify user or group for compliance pipline repo. | `string` | `""` | no |
 | <a name="input_cd_compliance_pipeline_repo_auth_type"></a> [cd\_compliance\_pipeline\_repo\_auth\_type](#input\_cd\_compliance\_pipeline\_repo\_auth\_type) | Select the method of authentication that is used to access the Git provider. 'oauth' or 'pat'. | `string` | `"oauth"` | no |
@@ -186,6 +189,7 @@ No resources.
 | <a name="input_cd_emergency_label"></a> [cd\_emergency\_label](#input\_cd\_emergency\_label) | Identifies the pull request as an emergency. | `string` | `"EMERGENCY"` | no |
 | <a name="input_cd_enable_key_protect"></a> [cd\_enable\_key\_protect](#input\_cd\_enable\_key\_protect) | Use the Key Protect integration. | `bool` | `false` | no |
 | <a name="input_cd_enable_secrets_manager"></a> [cd\_enable\_secrets\_manager](#input\_cd\_enable\_secrets\_manager) | Use the Secrets Manager integration. | `bool` | `false` | no |
+| <a name="input_cd_enable_signing_validation"></a> [cd\_enable\_signing\_validation](#input\_cd\_enable\_signing\_validation) | Enable to add the code-signing-certificate property to the pipeline properties. | `bool` | `false` | no |
 | <a name="input_cd_enable_slack"></a> [cd\_enable\_slack](#input\_cd\_enable\_slack) | Default: false. Set to true to create the integration. | `bool` | `false` | no |
 | <a name="input_cd_evidence_group"></a> [cd\_evidence\_group](#input\_cd\_evidence\_group) | Specify Git user or group for evidence repository. | `string` | `""` | no |
 | <a name="input_cd_evidence_repo_auth_type"></a> [cd\_evidence\_repo\_auth\_type](#input\_cd\_evidence\_repo\_auth\_type) | Select the method of authentication that is used to access the Git provider. 'oauth' or 'pat'. | `string` | `"oauth"` | no |
@@ -274,6 +278,7 @@ No resources.
 | <a name="input_ci_doi_toolchain_id"></a> [ci\_doi\_toolchain\_id](#input\_ci\_doi\_toolchain\_id) | DevOps Insights toolchain ID to link to. | `string` | `""` | no |
 | <a name="input_ci_doi_toolchain_id_pipeline_property"></a> [ci\_doi\_toolchain\_id\_pipeline\_property](#input\_ci\_doi\_toolchain\_id\_pipeline\_property) | The DevOps Insights instance toolchain ID. | `string` | `""` | no |
 | <a name="input_ci_enable_key_protect"></a> [ci\_enable\_key\_protect](#input\_ci\_enable\_key\_protect) | Set to enable Key Protect Integration. | `bool` | `false` | no |
+| <a name="input_ci_enable_pipeline_dockerconfigjson"></a> [ci\_enable\_pipeline\_dockerconfigjson](#input\_ci\_enable\_pipeline\_dockerconfigjson) | Enable to add the pipeline-dockerconfigjson property to the pipeline properties. | `bool` | `false` | no |
 | <a name="input_ci_enable_secrets_manager"></a> [ci\_enable\_secrets\_manager](#input\_ci\_enable\_secrets\_manager) | Set to enable Secrets Manager Integration. | `bool` | `false` | no |
 | <a name="input_ci_enable_slack"></a> [ci\_enable\_slack](#input\_ci\_enable\_slack) | Default: false. Set to true to create the integration. | `bool` | `false` | no |
 | <a name="input_ci_evidence_group"></a> [ci\_evidence\_group](#input\_ci\_evidence\_group) | Specify Git user or group for evidence repository. | `string` | `""` | no |
@@ -302,6 +307,7 @@ No resources.
 | <a name="input_ci_pipeline_config_repo_existing_url"></a> [ci\_pipeline\_config\_repo\_existing\_url](#input\_ci\_pipeline\_config\_repo\_existing\_url) | Specify a repository containing a custom pipeline-config.yaml file. | `string` | `""` | no |
 | <a name="input_ci_pipeline_config_repo_git_token_secret_name"></a> [ci\_pipeline\_config\_repo\_git\_token\_secret\_name](#input\_ci\_pipeline\_config\_repo\_git\_token\_secret\_name) | Name of the Git token secret in the secret provider. | `string` | `"git-token"` | no |
 | <a name="input_ci_pipeline_debug"></a> [ci\_pipeline\_debug](#input\_ci\_pipeline\_debug) | '0' by default. Set to '1' to enable debug logging. | `string` | `"0"` | no |
+| <a name="input_ci_pipeline_dockerconfigjson_secret_name"></a> [ci\_pipeline\_dockerconfigjson\_secret\_name](#input\_ci\_pipeline\_dockerconfigjson\_secret\_name) | Name of the pipeline docker config json secret in the secret provider. | `string` | `"pipeline_dockerconfigjson_secret_name"` | no |
 | <a name="input_ci_pipeline_ibmcloud_api_key_secret_name"></a> [ci\_pipeline\_ibmcloud\_api\_key\_secret\_name](#input\_ci\_pipeline\_ibmcloud\_api\_key\_secret\_name) | Name of the Cloud API key secret in the secret provider. | `string` | `"ibmcloud-api-key"` | no |
 | <a name="input_ci_registry_namespace"></a> [ci\_registry\_namespace](#input\_ci\_registry\_namespace) | A unique namespace within the IBM Cloud Container Registry region where the application image is stored. | `string` | `""` | no |
 | <a name="input_ci_registry_region"></a> [ci\_registry\_region](#input\_ci\_registry\_region) | The IBM Cloud Region where the IBM Cloud Container Registry namespace is to be created. | `string` | `"ibm:yp:us-south"` | no |
