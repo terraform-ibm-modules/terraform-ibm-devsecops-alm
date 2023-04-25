@@ -40,7 +40,7 @@
     "cc_app_repo_git_id": {
       "name": "cc_app_repo_git_id",
       "type": "string",
-      "description": "The Git Id of the repository.",
+      "description": "By default absent, otherwise use custom server GUID, or other options for `git_id` field in the browser UI.",
       "default": "",
       "pos": {
         "filename": "variables.tf",
@@ -651,7 +651,7 @@
     "cc_pipeline_dockerconfigjson_secret_name": {
       "name": "cc_pipeline_dockerconfigjson_secret_name",
       "type": "string",
-      "description": "Name of the pipeline docker config json secret in the secret provider.",
+      "description": "Name of the pipeline docker config JSON secret in the secret provider.",
       "default": "pipeline_dockerconfigjson_secret_name",
       "required": true,
       "source": [
@@ -1067,7 +1067,7 @@
     "cd_change_repo_clone_from_url": {
       "name": "cd_change_repo_clone_from_url",
       "type": "string",
-      "description": "Override the default management repo , which is cloned into the app repo. Note, using clone_if_not_exists mode, so if the app repo already exists the repo contents are unchanged.",
+      "description": "Override the default management repo, which is cloned into the app repo. Note, using clone_if_not_exists mode, so if the app repo already exists the repo contents are unchanged.",
       "default": "",
       "source": [
         "module.devsecops_cd_toolchain.module.repositories"
@@ -2409,7 +2409,7 @@
     "ci_authorization_policy_creation": {
       "name": "ci_authorization_policy_creation",
       "type": "string",
-      "description": "Disable Toolchain Service to Secrets Manager Service auhorization policy creation.",
+      "description": "Disable Toolchain Service to Secrets Manager Service authorization policy creation.",
       "default": "",
       "source": [
         "module.devsecops_ci_toolchain.module.integrations"
@@ -3223,7 +3223,7 @@
     "ci_pipeline_dockerconfigjson_secret_name": {
       "name": "ci_pipeline_dockerconfigjson_secret_name",
       "type": "string",
-      "description": "Name of the pipeline docker config json secret in the secret provider.",
+      "description": "Name of the pipeline docker config JSON secret in the secret provider.",
       "default": "pipeline_dockerconfigjson_secret_name",
       "required": true,
       "source": [
