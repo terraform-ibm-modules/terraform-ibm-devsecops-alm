@@ -193,7 +193,7 @@ variable "ci_compliance_base_image" {
 
 variable "ci_authorization_policy_creation" {
   type        = string
-  description = "Disable Toolchain Service to Secrets Manager Service auhorization policy creation."
+  description = "Disable Toolchain Service to Secrets Manager Service authorization policy creation."
   default     = ""
 }
 
@@ -574,7 +574,7 @@ variable "ci_signing_key_secret_name" {
 
 variable "ci_pipeline_dockerconfigjson_secret_name" {
   type        = string
-  description = "Name of the pipeline docker config json secret in the secret provider."
+  description = "Name of the pipeline docker config JSON secret in the secret provider."
   default     = "pipeline_dockerconfigjson_secret_name"
 }
 
@@ -750,7 +750,7 @@ variable "cd_change_management_repo" {
 
 variable "cd_change_repo_clone_from_url" {
   type        = string
-  description = "Override the default management repo , which is cloned into the app repo. Note, using clone_if_not_exists mode, so if the app repo already exists the repo contents are unchanged."
+  description = "Override the default management repo, which is cloned into the app repo. Note, using clone_if_not_exists mode, so if the app repo already exists the repo contents are unchanged."
   default     = ""
 }
 
@@ -1387,7 +1387,7 @@ variable "cc_app_repo_branch" {
 
 variable "cc_app_repo_git_id" {
   type        = string
-  description = "The Git Id of the repository."
+  description = "By default absent, otherwise use custom server GUID, or other options for `git_id` field in the browser UI."
   default     = ""
 }
 
@@ -1522,7 +1522,7 @@ variable "cc_app_repo_git_token_secret_name" {
 
 variable "cc_pipeline_dockerconfigjson_secret_name" {
   type        = string
-  description = "Name of the pipeline docker config json secret in the secret provider."
+  description = "Name of the pipeline docker config JSON secret in the secret provider."
   default     = "pipeline_dockerconfigjson_secret_name"
 }
 
