@@ -4,7 +4,7 @@ go 1.20
 
 require (
 	github.com/stretchr/testify v1.8.3
-	github.com/terraform-ibm-modules/ibmcloud-terratest-wrapper v1.9.1
+	github.com/terraform-ibm-modules/ibmcloud-terratest-wrapper v1.9.2
 )
 
 require (
@@ -13,9 +13,9 @@ require (
 	cloud.google.com/go/compute/metadata v0.2.1 // indirect
 	cloud.google.com/go/iam v0.7.0 // indirect
 	cloud.google.com/go/storage v1.27.0 // indirect
-	github.com/IBM-Cloud/bluemix-go v0.0.0-20230426045943-5b1069b0d7ae // indirect
+	github.com/IBM-Cloud/bluemix-go v0.0.0-20230519111809-e0aad0085b1e // indirect
 	github.com/IBM-Cloud/power-go-client v1.2.3 // indirect
-	github.com/IBM/go-sdk-core/v5 v5.13.2 // indirect
+	github.com/IBM/go-sdk-core/v5 v5.13.3 // indirect
 	github.com/IBM/platform-services-go-sdk v0.37.4 // indirect
 	github.com/IBM/vpc-go-sdk v1.0.2 // indirect
 	github.com/Microsoft/go-winio v0.5.2 // indirect
@@ -53,7 +53,7 @@ require (
 	github.com/google/uuid v1.3.0 // indirect
 	github.com/googleapis/enterprise-certificate-proxy v0.2.0 // indirect
 	github.com/googleapis/gax-go/v2 v2.7.0 // indirect
-	github.com/gruntwork-io/terratest v0.41.24 // indirect
+	github.com/gruntwork-io/terratest v0.41.25 // indirect
 	github.com/hashicorp/errwrap v1.0.0 // indirect
 	github.com/hashicorp/go-cleanhttp v0.5.2 // indirect
 	github.com/hashicorp/go-getter v1.7.1 // indirect
