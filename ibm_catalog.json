@@ -111,951 +111,226 @@
 					},
 					"configuration": [
 						{
-							"key": "cc_app_group",
+							"key": "toolchain_name",
+							"type": "string",
+							"default_value": "DevSecOps",
+							"description": "Common element of the toolchain name. The toolchain names will be appended with `CI Toolchain` or `CD Toolchain` or `CC Toolchain` followed by a timestamp. Can explicitly be set using `ci_toolchain_name`, `cd_toolchain_name`, and `cc_toolchain_name`.",
+							"required": true
+						},
+						{
+							"key": "toolchain_region",
+							"type": "string",
+							"default_value": "us-south",
+							"description": "The region identifier that will be used, by default, for all resource creation and service instance lookup. This can be overridden on a per resource/service basis. See `ci_toolchain_region`,`cd_toolchain_region`,`cc_toolchain_region`, `ci_cluster_region`, `cd_cluster_region`, `ci_registry_region`.",
+							"required": true
+						},
+						{
+							"key": "toolchain_resource_group",
 							"type": "string",
 							"default_value": "",
-							"description": "Specify user or group for app repo."
+							"description": "The resource group that will be used, by default, for all resource creation and service instance lookups. This can be overridden on a per resource/service basis. See `ci_toolchain_resource_group`,`cd_toolchain_resource_group`,`cc_toolchain_resource_group`, `ci_cluster_resource_group`.",
+							"display_name": "Resource group",
+							"required": true,
+							"custom_config": {
+								"type": "resource_group",
+								"grouping": "deployment",
+								"original_grouping": "deployment",
+								"config_constraints": {
+									"identifier": "rg_name"
+								}
+							}
 						},
 						{
-							"key": "cc_app_repo_auth_type",
-							"type": "string",
-							"default_value": "oauth",
-							"description": "Select the method of authentication that is used to access the Git provider. 'oauth' or 'pat'."
-						},
-						{
-							"key": "cc_app_repo_branch",
-							"type": "string",
-							"default_value": "master",
-							"description": "The default branch of the app repo."
-						},
-						{
-							"key": "cc_app_repo_git_id",
+							"key": "registry_namespace",
 							"type": "string",
 							"default_value": "",
-							"description": "The Git Id of the repository."
+							"description": "A unique namespace within the IBM Cloud Container Registry region where the application image is stored.",
+							"required": true
 						},
 						{
-							"key": "cc_app_repo_git_provider",
+							"key": "cluster_name",
 							"type": "string",
-							"default_value": "hostedgit",
-							"description": "The type of the Git provider."
+							"default_value": "mycluster-free",
+							"description": "Name of the Kubernetes cluster where the application is deployed. This sets the same cluster for both CI and CD toolchains. See `ci_cluster_name` and `cd_cluster_name` to set different clusters. By default , the cluster namespace for CI will be set to `dev` and CD to `prod`. These can be changed using `ci_cluster_namespace` and `cd_cluster_namespace`.",
+							"required": true
 						},
 						{
-							"key": "cc_app_repo_git_token_secret_name",
+							"key": "sm_location",
 							"type": "string",
-							"default_value": "git-token",
-							"description": "Name of the Git token secret in the secret provider."
+							"default_value": "us-south",
+							"description": "The region location of the Secrets Manager instance. This applies to the CI, CD and CC Secret Manager integrations. See `ci_sm_location`, `cd_sm_location`, and `cc_sm_location` to set separately.",
+							"required": true
 						},
 						{
-							"key": "cc_app_repo_url",
+							"key": "sm_name",
+							"type": "string",
+							"default_value": "sm-instance",
+							"description": "The name of the Secret Managers instance. This applies to the CI, CD and CC Secret Manager integrations. See `ci_sm_name`, `cd_sm_name`, and `cc_sm_name` to set separately. ",
+							"required": true
+						},
+						{
+							"key": "sm_resource_group",
+							"type": "string",
+							"default_value": "Default",
+							"description": "The resource group containing the Secrets Manager instance. This applies to the CI, CD and CC Secret Manager integrations. See `ci_sm_resource_group`, `cd_sm_resource_group`, and `cc_sm_resource_group` to set separately.",
+							"required": true
+						},
+						{
+							"key": "sm_secret_group",
+							"type": "string",
+							"default_value": "Default",
+							"description": "Group in Secrets Manager for organizing/grouping secrets. This applies to the CI, CD and CC Secret Manager integrations. See `ci_sm_secret_group`, `cd_sm_secret_group`, and `cc_sm_secret_group` to set separately.",
+							"required": true
+						},
+						{
+							"key": "authorization_policy_creation",
 							"type": "string",
 							"default_value": "",
-							"description": "This Git URL for the application repository."
+							"description": "Disable Toolchain Service to Secrets Manager Service authorization policy creation. To disable set the value to `disabled`. This applies to the CI, CD, and CC toolchains. To set separately, see `ci_authorization_policy_creation`, `cd_authorization_policy_creation`, and `cc_authorization_policy_creation`."
 						},
 						{
-							"key": "cc_authorization_policy_creation",
+							"key": "cos_api_key_secret_name",
+							"type": "string",
+							"default_value": "cos-api-key",
+							"description": "To enable the use of COS, a secret name to a COS API key secret in the secret provider is required. In addition `cos_endpoint` and `cos_bucket_name` must be set. This setting sets the same API key for the COS settings in the CI, CD, and CC toolchains. See `ci_cos_api_key_secret_name`, `cd_cos_api_key_secret_name`, and `cc_cos_api_key_secret_name` to set separately."
+						},
+						{
+							"key": "cos_bucket_name",
 							"type": "string",
 							"default_value": "",
-							"description": "Disable Toolchain service to Secrets Manager Service authorization policy creation."
+							"description": "Set the name of your COS bucket. This applies the same COS bucket name for the CI, CD, and CC toolchains. See `ci_cos_bucket_name`, `cd_cos_bucket_name`, and `cc_cos_bucket_name` to set separately."
 						},
 						{
-							"key": "cc_compliance_base_image",
+							"key": "cos_endpoint",
+							"type": "string",
+							"default_value": "",
+							"description": "Set the Cloud Object Storage endpoint for accessing your COS bucket. This setting sets the same endpoint for COS in the CI, CD, and CC toolchains. See `ci_cos_endpoint`, `cd_cos_endpoint`, and `cc_cos_endpoint` to set the endpoints separately."
+						},
+						{
+							"key": "repo_git_token_secret_name",
+							"type": "string",
+							"default_value": "",
+							"description": "Name of the Git token secret in the secret provider. Specifying a secret name for the Git Token automatically sets the authentication type to `pat`."
+						},
+						{
+							"key": "repo_group",
+							"type": "string",
+							"default_value": "",
+							"description": "Specify Git user or group for your application. This must be set if the repository authentication type is `pat` (personal access token)."
+						},
+						{
+							"key": "enable_slack",
+							"type": "boolean",
+							"default_value": false,
+							"description": "Set to `true` to create the integration. This requires a valid `slack_channel_name`, `slack_team_name`, and a valid `webhook` (see `slack_webhook_secret_name`). This setting applies for CI, CD, and CC toolchains. To enable Slack separately, see `ci_enable_slack`, `cd_enable_slack`, and `cc_enable_slack`."
+						},
+						{
+							"key": "slack_channel_name",
+							"type": "string",
+							"default_value": "my-channel",
+							"description": "The Slack channel that notifications are posted to. This applies to the CI, CD, and CC toolchains. To set separately see `ci_slack_channel_name`, `cd_slack_channel_name`, and `cc_slack_channel_name`"
+						},
+						{
+							"key": "slack_team_name",
+							"type": "string",
+							"default_value": "my-team",
+							"description": "The Slack team name, which is the word or phrase before `.slack.com` in the team URL. This applies to the CI, CD, and CC toolchains. To set separately, see `ci_slack_team_name`, `cd_slack_team_name`, and `cc_slack_team_name`."
+						},
+						{
+							"key": "slack_webhook_secret_name",
+							"type": "string",
+							"default_value": "slack-webhook",
+							"description": "Name of the webhook secret for Slack in the secret provider. This applies to the CI, CD, and CC toolchains. To set separately, see `ci_slack_webhook_secret_name`, `cd_slack_webhook_secret_name`, and `cc_slack_webhook_secret_name`"
+						},
+						{
+							"key": "kp_location",
+							"type": "string",
+							"default_value": "us-south",
+							"description": "The region location of the Key Protect instance. This applies to the CI, CD and CC Key Protect integrations. See `ci_kp_location`, `cd_kp_location`, and `cc_kp_location` to set separately."
+						},
+						{
+							"key": "kp_name",
+							"type": "string",
+							"default_value": "kp-compliance-secrets",
+							"description": "Name of the Key Protect instance where the secrets are stored. This applies to the CI, CD and CC Key Protect integrations. See `ci_kp_name`, `cd_kp_name`, and `cc_kp_name` to set separately."
+						},
+						{
+							"key": "kp_resource_group",
+							"type": "string",
+							"default_value": "Default",
+							"description": "The resource group containing the Key Protect instance. This applies to the CI, CD and CC Key Protect integrations. See `ci_kp_resource_group`, `cd_kp_resource_group`, and `cc_kp_resource_group` to set separately."
+						},
+						{
+							"key": "create_ci_toolchain",
+							"type": "boolean",
+							"default_value": true,
+							"description": "Flag which determines if the DevSecOps CI toolchain is created. If this toolchain is not created then values must be set for the following variables, evidence_repo_url, issues_repo_url and inventory_repo_url."
+						},
+						{
+							"key": "create_cd_toolchain",
+							"type": "boolean",
+							"default_value": true,
+							"description": "Boolean flag which determines if the DevSecOps CD toolchain is created."
+						},
+						{
+							"key": "create_cc_toolchain",
+							"type": "boolean",
+							"default_value": true,
+							"description": "Boolean flag which determines if the DevSecOps CC toolchain is created."
+						},
+						{
+							"key": "inventory_repo_url",
+							"type": "string",
+							"default_value": "",
+							"description": "This is a template repository to clone compliance-inventory for reference DevSecOps toolchain templates."
+						},
+						{
+							"key": "issues_repo_url",
+							"type": "string",
+							"default_value": "",
+							"description": "This is a template repository to clone compliance-issues for reference DevSecOps toolchain templates."
+						},
+						{
+							"key": "evidence_repo_url",
+							"type": "string",
+							"default_value": "",
+							"description": "This is a template repository to clone compliance-evidence-locker for reference DevSecOps toolchain templates."
+						},
+						{
+							"key": "compliance_base_image",
 							"type": "string",
 							"default_value": "",
 							"description": "Pipeline baseimage to run most of the built-in pipeline code."
 						},
 						{
-							"key": "cc_compliance_pipeline_group",
-							"type": "string",
-							"default_value": "",
-							"description": "Specify user or group for compliance pipline repo."
-						},
-						{
-							"key": "cc_compliance_pipeline_repo_auth_type",
-							"type": "string",
-							"default_value": "oauth",
-							"description": "Select the method of authentication that is used to access the Git provider. 'oauth' or 'pat'."
-						},
-						{
-							"key": "cc_compliance_pipeline_repo_git_token_secret_name",
-							"type": "string",
-							"default_value": "git-token",
-							"description": "Name of the Git token secret in the secret provider."
-						},
-						{
-							"key": "cc_cos_api_key_secret_name",
-							"type": "string",
-							"default_value": "cos-api-key",
-							"description": "Name of the COS API key secret in the secret provider."
-						},
-						{
-							"key": "cc_cos_bucket_name",
-							"type": "string",
-							"default_value": "",
-							"description": "COS bucket name."
-						},
-						{
-							"key": "cc_cos_endpoint",
-							"type": "string",
-							"default_value": "",
-							"description": "COS endpoint name."
-						},
-						{
-							"key": "cc_doi_environment",
-							"type": "string",
-							"default_value": "",
-							"description": "DevOps Insights environment for DevSecOps CD deployment."
-						},
-						{
-							"key": "cc_doi_toolchain_id",
-							"type": "string",
-							"default_value": "",
-							"description": "DevOps Insights toolchain ID to link to."
-						},
-						{
-							"key": "cc_enable_key_protect",
+							"key": "enable_key_protect",
 							"type": "boolean",
 							"default_value": false,
-							"description": "Enable the Key Protect integration."
+							"description": "Set to enable Key Protect Integrations. "
 						},
 						{
-							"key": "cc_enable_pipeline_dockerconfigjson",
-							"type": "boolean",
-							"default_value": false,
-							"description": "Enable to add the pipeline-dockerconfigjson property to the pipeline properties."
-						},
-						{
-							"key": "cc_enable_secrets_manager",
-							"type": "boolean",
-							"default_value": false,
-							"description": "Enable the Secrets Manager integration."
-						},
-						{
-							"key": "cc_enable_slack",
-							"type": "boolean",
-							"default_value": false,
-							"description": "Set to true to create the integration."
-						},
-						{
-							"key": "cc_environment_tag",
-							"type": "string",
-							"default_value": "prod_latest",
-							"description": "Tag name that represents the target environment in the inventory. Example: prod_latest."
-						},
-						{
-							"key": "cc_evidence_group",
-							"type": "string",
-							"default_value": "",
-							"description": "Specify Git user or group for evidence repository."
-						},
-						{
-							"key": "cc_evidence_repo_auth_type",
-							"type": "string",
-							"default_value": "oauth",
-							"description": "Select the method of authentication that is used to access the Git provider. 'oauth' or 'pat'"
-						},
-						{
-							"key": "cc_evidence_repo_git_token_secret_name",
-							"type": "string",
-							"default_value": "git-token",
-							"description": "Name of the Git token secret in the secret provider."
-						},
-						{
-							"key": "cc_inventory_group",
-							"type": "string",
-							"default_value": "",
-							"description": "Specify Git user or group for inventory repository."
-						},
-						{
-							"key": "cc_inventory_repo_auth_type",
-							"type": "string",
-							"default_value": "oauth",
-							"description": "Select the method of authentication that is used to access the Git provider. 'oauth' or 'pat'."
-						},
-						{
-							"key": "cc_inventory_repo_git_token_secret_name",
-							"type": "string",
-							"default_value": "git-token",
-							"description": "Name of the Git token secret in the secret provider."
-						},
-						{
-							"key": "cc_issues_group",
-							"type": "string",
-							"default_value": "",
-							"description": "Specify Git user or group for issues repository."
-						},
-						{
-							"key": "cc_issues_repo_auth_type",
-							"type": "string",
-							"default_value": "oauth",
-							"description": "Select the method of authentication that is used to access the Git provider. 'oauth' or 'pat'."
-						},
-						{
-							"key": "cc_issues_repo_git_token_secret_name",
-							"type": "string",
-							"default_value": "git-token",
-							"description": "Name of the Git token secret in the secret provider."
-						},
-						{
-							"key": "cc_kp_location",
-							"type": "string",
-							"default_value": "",
-							"description": "IBM Cloud location/region containing the Key Protect instance."
-						},
-						{
-							"key": "cc_kp_name",
-							"type": "string",
-							"default_value": "",
-							"description": "Name of the Key Protect instance where the secrets are stored."
-						},
-						{
-							"key": "cc_kp_resource_group",
-							"type": "string",
-							"default_value": "",
-							"description": "The resource group containing the Key Protect instance for your secrets."
-						},
-						{
-							"key": "cc_link_to_doi_toolchain",
+							"key": "enable_secrets_manager",
 							"type": "boolean",
 							"default_value": true,
-							"description": "Enable a link to a DevOps Insights instance in another toolchain, true or false."
+							"description": "Enable the Secrets Manager integrations."
 						},
 						{
-							"key": "cc_opt_in_auto_close",
-							"type": "string",
-							"default_value": "1",
-							"description": "Enables auto-closing of issues coming from vulnerabilities, once the vulnerability is no longer detected by the CC pipeline run."
-						},
-						{
-							"key": "cc_opt_in_dynamic_api_scan",
-							"type": "string",
-							"default_value": "",
-							"description": "To enable the OWASP Zap API scan. '1' enable or '0' disable."
-						},
-						{
-							"key": "cc_opt_in_dynamic_scan",
-							"type": "string",
-							"default_value": "",
-							"description": "To enable the OWASP Zap scan. '1' enable or '0' disable."
-						},
-						{
-							"key": "cc_opt_in_dynamic_ui_scan",
-							"type": "string",
-							"default_value": "",
-							"description": "To enable the OWASP Zap UI scan. '1' enable or '0' disable."
-						},
-						{
-							"key": "cc_pipeline_config_group",
-							"type": "string",
-							"default_value": "",
-							"description": "Specify user or group for pipeline config repo."
-						},
-						{
-							"key": "cc_pipeline_config_path",
-							"type": "string",
-							"default_value": ".pipeline-config.yaml",
-							"description": "The name and path of the pipeline-config.yaml file within the pipeline-config repo."
-						},
-						{
-							"key": "cc_pipeline_config_repo_auth_type",
-							"type": "string",
-							"default_value": "oauth",
-							"description": "Select the method of authentication that is used to access the Git provider. 'oauth' or 'pat'."
-						},
-						{
-							"key": "cc_pipeline_config_repo_branch",
-							"type": "string",
-							"default_value": "",
-							"description": "Specify the branch containing the custom pipeline-config.yaml file."
-						},
-						{
-							"key": "cc_pipeline_config_repo_clone_from_url",
-							"type": "string",
-							"default_value": "",
-							"description": "Specify a repository containing a custom pipeline-config.yaml file."
-						},
-						{
-							"key": "cc_pipeline_config_repo_existing_url",
-							"type": "string",
-							"default_value": "",
-							"description": "Specify a repository containing a custom pipeline-config.yaml file."
-						},
-						{
-							"key": "cc_pipeline_config_repo_git_token_secret_name",
-							"type": "string",
-							"default_value": "git-token",
-							"description": "Name of the Git token secret in the secret provider."
-						},
-						{
-							"key": "cc_pipeline_debug",
-							"type": "string",
-							"default_value": "0",
-							"description": "'0' by default. Set to '1' to enable debug logging."
-						},
-						{
-							"key": "cc_pipeline_dockerconfigjson_secret_name",
-							"type": "string",
-							"default_value": "pipeline_dockerconfigjson_secret_name",
-							"description": "Name of the pipeline docker config json secret in the secret provider."
-						},
-						{
-							"key": "cc_pipeline_ibmcloud_api_key_secret_name",
-							"type": "string",
-							"default_value": "ibmcloud-api-key",
-							"description": "Name of the Cloud API key secret in the secret provider."
-						},
-						{
-							"key": "cc_repositories_prefix",
+							"key": "repositories_prefix",
 							"type": "string",
 							"default_value": "compliance",
 							"description": "The prefix for the compliance repositories."
 						},
 						{
-							"key": "cc_scc_enable_scc",
-							"type": "boolean",
-							"default_value": true,
-							"description": "Enable the SCC integration"
-						},
-						{
-							"key": "cc_scc_integration_name",
+							"key": "ibmcloud_api",
 							"type": "string",
-							"default_value": "Security and Compliance",
-							"description": "The name of the SCC integration."
+							"default_value": "https://cloud.ibm.com",
+							"description": "IBM Cloud API Endpoint."
 						},
 						{
-							"key": "cc_slack_channel_name",
-							"type": "string",
-							"default_value": "my-channel",
-							"description": "The Slack channel that notifications are posted to."
-						},
-						{
-							"key": "cc_slack_notifications",
-							"type": "string",
-							"default_value": "0",
-							"description": "The switch that turns the Slack integration on or off."
-						},
-						{
-							"key": "cc_slack_pipeline_fail",
-							"type": "boolean",
-							"default_value": true,
-							"description": "Generate pipeline failed notifications."
-						},
-						{
-							"key": "cc_slack_pipeline_start",
-							"type": "boolean",
-							"default_value": true,
-							"description": "Generate pipeline start notifications."
-						},
-						{
-							"key": "cc_slack_pipeline_success",
-							"type": "boolean",
-							"default_value": true,
-							"description": "Generate pipeline succeeded notifications."
-						},
-						{
-							"key": "cc_slack_team_name",
-							"type": "string",
-							"default_value": "my-team",
-							"description": "The Slack team name, which is the word or phrase before .slack.com in the team URL."
-						},
-						{
-							"key": "cc_slack_toolchain_bind",
-							"type": "boolean",
-							"default_value": true,
-							"description": "Generate tool added to toolchain notifications."
-						},
-						{
-							"key": "cc_slack_toolchain_unbind",
-							"type": "boolean",
-							"default_value": true,
-							"description": "Generate tool removed from toolchain notifications."
-						},
-						{
-							"key": "cc_slack_webhook_secret_name",
-							"type": "string",
-							"default_value": "slack-webhook",
-							"description": "Name of the webhook secret in the secret provider."
-						},
-						{
-							"key": "cc_sm_location",
-							"type": "string",
-							"default_value": "",
-							"description": "IBM Cloud location/region containing the Secrets Manager instance."
-						},
-						{
-							"key": "cc_sm_name",
-							"type": "string",
-							"default_value": "",
-							"description": "Name of the Secrets Manager instance where the secrets are stored."
-						},
-						{
-							"key": "cc_sm_resource_group",
-							"type": "string",
-							"default_value": "",
-							"description": "The resource group containing the Secrets Manager instance for your secrets."
-						},
-						{
-							"key": "cc_sm_secret_group",
-							"type": "string",
-							"default_value": "",
-							"description": "Group in Secrets Manager for organizing/grouping secrets."
-						},
-						{
-							"key": "cc_sonarqube_config",
-							"type": "string",
-							"default_value": "default",
-							"description": "Runs a SonarQube scan in an isolated Docker-in-Docker container (default configuration) or in an existing Kubernetes cluster (custom configuration). Options: default or custom. Default is default."
-						},
-						{
-							"key": "cc_toolchain_description",
-							"type": "string",
-							"default_value": "Toolchain created with terraform template for DevSecOps CC Best Practices.",
-							"description": "Description for the CC Toolchain."
-						},
-						{
-							"key": "cc_toolchain_name",
-							"type": "string",
-							"default_value": "DevSecOps CC Toolchain - Terraform",
-							"description": "The name of the CC Toolchain.",
+							"key": "ibmcloud_api_key",
+							"type": "password",
+							"description": "API key used to create the toolchains. (See deployment guide.)",
 							"required": true
-						},
-						{
-							"key": "cc_toolchain_region",
-							"type": "string",
-							"default_value": "",
-							"description": "The region containing the CI toolchain."
-						},
-						{
-							"key": "cc_toolchain_resource_group",
-							"type": "string",
-							"default_value": "",
-							"description": "Resource group within which the toolchain is created."
-						},
-						{
-							"key": "cd_app_version",
-							"type": "string",
-							"default_value": "v1",
-							"description": "The version of the app to deploy."
-						},
-						{
-							"key": "cd_authorization_policy_creation",
-							"type": "string",
-							"default_value": "",
-							"description": "Disable Toolchain service to Secrets Manager Service authorization policy creation."
-						},
-						{
-							"key": "cd_change_management_group",
-							"type": "string",
-							"default_value": "",
-							"description": "Specify group for change management repository"
-						},
-						{
-							"key": "cd_change_management_repo",
-							"type": "string",
-							"default_value": "",
-							"description": "This repository holds the change management requests created for the deployments."
-						},
-						{
-							"key": "cd_change_management_repo_auth_type",
-							"type": "string",
-							"default_value": "oauth",
-							"description": "Select the method of authentication that is used to access the Git provider. 'oauth' or 'pat'."
-						},
-						{
-							"key": "cd_change_management_repo_git_token_secret_name",
-							"type": "string",
-							"default_value": "git-token",
-							"description": "Name of the Git token secret in the secret provider."
-						},
-						{
-							"key": "cd_change_repo_clone_from_url",
-							"type": "string",
-							"default_value": "",
-							"description": "Override the default management repo , which is cloned into the app repo. Note, using clone_if_not_exists mode, so if the app repo already exists the repo contents are unchanged."
-						},
-						{
-							"key": "cd_change_request_id",
-							"type": "string",
-							"default_value": "notAvailable",
-							"description": "The ID of an open change request. If this parameter is set to 'notAvailable' by default, a change request is automatically created by the continuous deployment pipeline."
-						},
-						{
-							"key": "cd_cluster_name",
-							"type": "string",
-							"default_value": "mycluster-free",
-							"description": "Name of the Kubernetes cluster where the application is deployed.",
-							"required": true
-						},
-						{
-							"key": "cd_cluster_namespace",
-							"type": "string",
-							"default_value": "prod",
-							"description": "Name of the Kubernetes cluster namespace where the application is deployed.",
-							"required": true
-						},
-						{
-							"key": "cd_cluster_region",
-							"type": "string",
-							"default_value": "ibm:yp:us-south",
-							"description": "Region of the Kubernetes cluster where the application is deployed.",
-							"required": true
-						},
-						{
-							"key": "cd_code_signing_cert_secret_name",
-							"type": "string",
-							"default_value": "code-signing-cert",
-							"description": "Name of the code signing certificate secret in the secret provider."
-						},
-						{
-							"key": "cd_compliance_base_image",
-							"type": "string",
-							"default_value": "",
-							"description": "Pipeline baseimage to run most of the built-in pipeline code."
-						},
-						{
-							"key": "cd_compliance_pipeline_group",
-							"type": "string",
-							"default_value": "",
-							"description": "Specify user or group for compliance pipline repo."
-						},
-						{
-							"key": "cd_compliance_pipeline_repo_auth_type",
-							"type": "string",
-							"default_value": "oauth",
-							"description": "Select the method of authentication that is used to access the Git provider. 'oauth' or 'pat'."
-						},
-						{
-							"key": "cd_compliance_pipeline_repo_git_token_secret_name",
-							"type": "string",
-							"default_value": "git-token",
-							"description": "Name of the Git token secret in the secret provider."
-						},
-						{
-							"key": "cd_cos_api_key_secret_name",
-							"type": "string",
-							"default_value": "cos-api-key",
-							"description": "Name of the COS API key secret in the secret provider."
-						},
-						{
-							"key": "cd_cos_bucket_name",
-							"type": "string",
-							"default_value": "",
-							"description": "COS bucket name."
-						},
-						{
-							"key": "cd_cos_endpoint",
-							"type": "string",
-							"default_value": "",
-							"description": "COS endpoint name."
-						},
-						{
-							"key": "cd_customer_impact",
-							"type": "string",
-							"default_value": "no_impact",
-							"description": "Custom impact of the change request."
-						},
-						{
-							"key": "cd_deployment_group",
-							"type": "string",
-							"default_value": "",
-							"description": "Specify group for deployment."
-						},
-						{
-							"key": "cd_deployment_repo_auth_type",
-							"type": "string",
-							"default_value": "oauth",
-							"description": "Select the method of authentication that is used to access the Git provider. 'oauth' or 'pat'."
-						},
-						{
-							"key": "cd_deployment_repo_clone_from_branch",
-							"type": "string",
-							"default_value": "",
-							"description": "Used when deployment_repo_clone_from_url is provided, the default branch that is used by the CD build, usually either main or master."
-						},
-						{
-							"key": "cd_deployment_repo_clone_from_url",
-							"type": "string",
-							"default_value": "",
-							"description": "Override the default sample app by providing your own sample deployment URL, which is cloned into the app repo. Note, using clone_if_not_exists mode, so if the app repo already exists the repo contents are unchanged."
-						},
-						{
-							"key": "cd_deployment_repo_clone_to_git_id",
-							"type": "string",
-							"default_value": "",
-							"description": "By default absent, else custom server GUID, or other options for 'git_id' field in the browser UI."
-						},
-						{
-							"key": "cd_deployment_repo_clone_to_git_provider",
-							"type": "string",
-							"default_value": "",
-							"description": "By default 'hostedgit', else use 'githubconsolidated' or 'gitlab'."
-						},
-						{
-							"key": "cd_deployment_repo_existing_branch",
-							"type": "string",
-							"default_value": "",
-							"description": "Used when deployment_repo_existing_url is provided, the default branch that is by the CD build, usually either main or master."
-						},
-						{
-							"key": "cd_deployment_repo_existing_git_id",
-							"type": "string",
-							"default_value": "",
-							"description": "By default absent, else custom server GUID, or other options for 'git_id' field in the browser UI."
-						},
-						{
-							"key": "cd_deployment_repo_existing_git_provider",
-							"type": "string",
-							"default_value": "hostedgit",
-							"description": "By default 'hostedgit', else use 'githubconsolidated' or 'gitlab'."
-						},
-						{
-							"key": "cd_deployment_repo_existing_url",
-							"type": "string",
-							"default_value": "",
-							"description": "Override to bring your own existing deployment repository URL, which is used directly instead of cloning the default deployment sample."
-						},
-						{
-							"key": "cd_deployment_repo_git_token_secret_name",
-							"type": "string",
-							"default_value": "git-token",
-							"description": "Name of the Git token secret in the secret provider."
-						},
-						{
-							"key": "cd_doi_environment",
-							"type": "string",
-							"default_value": "",
-							"description": "DevOps Insights environment for DevSecOps CD deployment."
-						},
-						{
-							"key": "cd_doi_toolchain_id",
-							"type": "string",
-							"default_value": "",
-							"description": "DevOps Insights toolchain ID to link to."
-						},
-						{
-							"key": "cd_emergency_label",
-							"type": "string",
-							"default_value": "EMERGENCY",
-							"description": "Identifies the pull request as an emergency."
-						},
-						{
-							"key": "cd_enable_key_protect",
-							"type": "boolean",
-							"default_value": false,
-							"description": "Use the Key Protect integration."
-						},
-						{
-							"key": "cd_enable_secrets_manager",
-							"type": "boolean",
-							"default_value": false,
-							"description": "Use the Secrets Manager integration."
-						},
-						{
-							"key": "cd_enable_signing_validation",
-							"type": "boolean",
-							"default_value": false,
-							"description": "Enable to add the code-signing-certificate property to the pipeline properties."
-						},
-						{
-							"key": "cd_enable_slack",
-							"type": "boolean",
-							"default_value": false,
-							"description": "Default: false. Set to true to create the integration."
-						},
-						{
-							"key": "cd_evidence_group",
-							"type": "string",
-							"default_value": "",
-							"description": "Specify Git user or group for evidence repository."
-						},
-						{
-							"key": "cd_evidence_repo_auth_type",
-							"type": "string",
-							"default_value": "oauth",
-							"description": "Select the method of authentication that is used to access the Git provider. 'oauth' or 'pat'."
-						},
-						{
-							"key": "cd_evidence_repo_git_token_secret_name",
-							"type": "string",
-							"default_value": "git-token",
-							"description": "Name of the Git token secret in the secret provider."
-						},
-						{
-							"key": "cd_inventory_group",
-							"type": "string",
-							"default_value": "",
-							"description": "Specify Git user or group for inventory repository."
-						},
-						{
-							"key": "cd_inventory_repo_auth_type",
-							"type": "string",
-							"default_value": "oauth",
-							"description": "Select the method of authentication that is used to access the Git provider. 'oauth' or 'pat'."
-						},
-						{
-							"key": "cd_inventory_repo_git_token_secret_name",
-							"type": "string",
-							"default_value": "git-token",
-							"description": "Name of the Git token secret in the secret provider."
-						},
-						{
-							"key": "cd_issues_group",
-							"type": "string",
-							"default_value": "",
-							"description": "Specify Git user or group for issues repository."
-						},
-						{
-							"key": "cd_issues_repo_auth_type",
-							"type": "string",
-							"default_value": "oauth",
-							"description": "Select the method of authentication that is used to access the Git provider. 'oauth' or 'pat'."
-						},
-						{
-							"key": "cd_issues_repo_git_token_secret_name",
-							"type": "string",
-							"default_value": "git-token",
-							"description": "Name of the Git token secret in the secret provider."
-						},
-						{
-							"key": "cd_kp_location",
-							"type": "string",
-							"default_value": "",
-							"description": "IBM Cloud location/region containing the Key Protect instance."
-						},
-						{
-							"key": "cd_kp_name",
-							"type": "string",
-							"default_value": "",
-							"description": "Name of the Key Protect instance where the secrets are stored."
-						},
-						{
-							"key": "cd_kp_resource_group",
-							"type": "string",
-							"default_value": "",
-							"description": "The resource group containing the Key Protect instance for your secrets."
-						},
-						{
-							"key": "cd_link_to_doi_toolchain",
-							"type": "boolean",
-							"default_value": true,
-							"description": "Enable a link to a DevOps Insights instance in another toolchain, true or false."
-						},
-						{
-							"key": "cd_merge_cra_sbom",
-							"type": "string",
-							"default_value": "1",
-							"description": "Merge the SBOM"
-						},
-						{
-							"key": "cd_opt_out_v1_evidence",
-							"type": "string",
-							"default_value": "1",
-							"description": "Opt out of evidence v1."
-						},
-						{
-							"key": "cd_pipeline_config_group",
-							"type": "string",
-							"default_value": "",
-							"description": "Specify user or group for pipeline config repo."
-						},
-						{
-							"key": "cd_pipeline_config_path",
-							"type": "string",
-							"default_value": ".pipeline-config.yaml",
-							"description": "The name and path of the pipeline-config.yaml file within the pipeline-config repo."
-						},
-						{
-							"key": "cd_pipeline_config_repo_auth_type",
-							"type": "string",
-							"default_value": "oauth",
-							"description": "Select the method of authentication that is used to access the Git provider. 'oauth' or 'pat'."
-						},
-						{
-							"key": "cd_pipeline_config_repo_branch",
-							"type": "string",
-							"default_value": "",
-							"description": "Specify the branch containing the custom pipeline-config.yaml file."
-						},
-						{
-							"key": "cd_pipeline_config_repo_clone_from_url",
-							"type": "string",
-							"default_value": "",
-							"description": "Specify a repository containing a custom pipeline-config.yaml file."
-						},
-						{
-							"key": "cd_pipeline_config_repo_existing_url",
-							"type": "string",
-							"default_value": "",
-							"description": "Specify a repository containing a custom pipeline-config.yaml file."
-						},
-						{
-							"key": "cd_pipeline_config_repo_git_token_secret_name",
-							"type": "string",
-							"default_value": "git-token",
-							"description": "Name of the Git token secret in the secret provider."
-						},
-						{
-							"key": "cd_pipeline_debug",
-							"type": "string",
-							"default_value": "0",
-							"description": "'0' by default. Set to '1' to enable debug logging."
-						},
-						{
-							"key": "cd_pipeline_ibmcloud_api_key_secret_name",
-							"type": "string",
-							"default_value": "ibmcloud-api-key",
-							"description": "Name of the Cloud API key secret in the secret provider."
-						},
-						{
-							"key": "cd_repositories_prefix",
-							"type": "string",
-							"default_value": "compliance",
-							"description": "Prefix name for the cloned compliance repos."
-						},
-						{
-							"key": "cd_satellite_cluster_group",
-							"type": "string",
-							"default_value": "",
-							"description": "The Satellite cluster group"
-						},
-						{
-							"key": "cd_scc_enable_scc",
-							"type": "boolean",
-							"default_value": true,
-							"description": "Enable the SCC integration."
-						},
-						{
-							"key": "cd_scc_integration_name",
-							"type": "string",
-							"default_value": "Security and Compliance",
-							"description": "The name of the SCC integration."
-						},
-						{
-							"key": "cd_slack_channel_name",
-							"type": "string",
-							"default_value": "my-channel",
-							"description": "The Slack channel that notifications are posted to."
-						},
-						{
-							"key": "cd_slack_notifications",
-							"type": "string",
-							"default_value": "0",
-							"description": "The switch to turn the Slack integration on or off."
-						},
-						{
-							"key": "cd_slack_pipeline_fail",
-							"type": "boolean",
-							"default_value": true,
-							"description": "Generate pipeline failed notifications."
-						},
-						{
-							"key": "cd_slack_pipeline_start",
-							"type": "boolean",
-							"default_value": true,
-							"description": "Generate pipeline start notifications."
-						},
-						{
-							"key": "cd_slack_pipeline_success",
-							"type": "boolean",
-							"default_value": true,
-							"description": "Generate pipeline succeeded notifications."
-						},
-						{
-							"key": "cd_slack_team_name",
-							"type": "string",
-							"default_value": "my-team",
-							"description": "The Slack team name, which is the word or phrase before .slack.com in the team URL."
-						},
-						{
-							"key": "cd_slack_toolchain_bind",
-							"type": "boolean",
-							"default_value": true,
-							"description": "Generate tool added to toolchain notifications."
-						},
-						{
-							"key": "cd_slack_toolchain_unbind",
-							"type": "boolean",
-							"default_value": true,
-							"description": "Generate tool removed from toolchain notifications."
-						},
-						{
-							"key": "cd_slack_webhook_secret_name",
-							"type": "string",
-							"default_value": "slack-webhook",
-							"description": "Name of the webhook secret in the secret provider."
-						},
-						{
-							"key": "cd_sm_location",
-							"type": "string",
-							"default_value": "",
-							"description": "IBM Cloud location/region containing the Secrets Manager instance."
-						},
-						{
-							"key": "cd_sm_name",
-							"type": "string",
-							"default_value": "",
-							"description": "Name of the Secrets Manager instance where the secrets are stored."
-						},
-						{
-							"key": "cd_sm_resource_group",
-							"type": "string",
-							"default_value": "",
-							"description": "The resource group containing the Secrets Manager instance for your secrets."
-						},
-						{
-							"key": "cd_sm_secret_group",
-							"type": "string",
-							"default_value": "",
-							"description": "Group in Secrets Manager for organizing/grouping secrets."
-						},
-						{
-							"key": "cd_source_environment",
-							"type": "string",
-							"default_value": "master",
-							"description": "The source environment that the app is promoted from."
-						},
-						{
-							"key": "cd_target_environment",
-							"type": "string",
-							"default_value": "prod",
-							"description": "The target environment that the app is deployed to."
-						},
-						{
-							"key": "cd_target_environment_detail",
-							"type": "string",
-							"default_value": "Production target environment",
-							"description": "Details of the environment being updated."
-						},
-						{
-							"key": "cd_target_environment_purpose",
-							"type": "string",
-							"default_value": "production",
-							"description": "Purpose of the environment being updated."
-						},
-						{
-							"key": "cd_toolchain_description",
-							"type": "string",
-							"default_value": "Toolchain created with terraform template for DevSecOps CD Best Practices.",
-							"description": "Description for the CD toolchain."
-						},
-						{
-							"key": "cd_toolchain_name",
-							"type": "string",
-							"default_value": "DevSecOps CD Toolchain - Terraform",
-							"description": "The name of the CD Toolchain.",
-							"required": true
-						},
-						{
-							"key": "cd_toolchain_region",
-							"type": "string",
-							"default_value": "",
-							"description": "The region containing the CI toolchain."
-						},
-						{
-							"key": "cd_toolchain_resource_group",
-							"type": "string",
-							"default_value": "",
-							"description": "Resource group within which toolchain is created."
 						},
 						{
 							"key": "ci_app_group",
@@ -1072,7 +347,7 @@
 						{
 							"key": "ci_app_repo_auth_type",
 							"type": "string",
-							"default_value": "oauth",
+							"default_value": "",
 							"description": "Select the method of authentication that is used to access the Git provider. 'oauth' or 'pat'."
 						},
 						{
@@ -1126,7 +401,7 @@
 						{
 							"key": "ci_app_repo_git_token_secret_name",
 							"type": "string",
-							"default_value": "git-token",
+							"default_value": "",
 							"description": "Name of the Git token secret in the secret provider."
 						},
 						{
@@ -1139,21 +414,31 @@
 							"key": "ci_authorization_policy_creation",
 							"type": "string",
 							"default_value": "",
-							"description": "Disable Toolchain Service to Secrets Manager Service auhorization policy creation."
+							"description": "Disable Toolchain Service to Secrets Manager Service authorization policy creation."
 						},
 						{
 							"key": "ci_cluster_name",
 							"type": "string",
-							"default_value": "mycluster-free",
-							"description": "Name of the Kubernetes cluster where the application is deployed. (can be the same cluster used for prod)",
-							"required": true
+							"default_value": "",
+							"description": "Name of the Kubernetes cluster where the application is deployed. (can be the same cluster used for prod)"
 						},
 						{
 							"key": "ci_cluster_namespace",
 							"type": "string",
 							"default_value": "dev",
-							"description": "Name of the Kubernetes cluster namespace where the application is deployed.",
-							"required": true
+							"description": "Name of the Kubernetes cluster namespace where the application is deployed."
+						},
+						{
+							"key": "ci_cluster_region",
+							"type": "string",
+							"default_value": "",
+							"description": "Region of the Kubernetes cluster where the application is deployed. Use the short form of the regions. For example `us-south`."
+						},
+						{
+							"key": "ci_cluster_resource_group",
+							"type": "string",
+							"default_value": "",
+							"description": "The cluster resource group."
 						},
 						{
 							"key": "ci_code_engine_build_strategy",
@@ -1218,7 +503,7 @@
 						{
 							"key": "ci_cos_api_key_secret_name",
 							"type": "string",
-							"default_value": "cos-api-key",
+							"default_value": "",
 							"description": "Name of the COS API key secret in the secret provider."
 						},
 						{
@@ -1254,25 +539,14 @@
 						{
 							"key": "ci_dev_region",
 							"type": "string",
-							"default_value": "ibm:yp:us-south",
-							"description": "Region of the Kubernetes cluster where the application is deployed.",
-							"required": true
+							"default_value": "",
+							"description": "(Deprecated. Use `ci_cluster_region`) Region of the Kubernetes cluster where the application is deployed. Use the short form of the regions. For example `us-south`"
 						},
 						{
 							"key": "ci_dev_resource_group",
 							"type": "string",
 							"default_value": "",
-							"description": "The cluster resource group.",
-							"display_name": "Resource group",
-							"required": true,
-							"custom_config": {
-								"type": "resource_group",
-								"grouping": "deployment",
-								"original_grouping": "deployment",
-								"config_constraints": {
-									"identifier": "rg_name"
-								}
-							}
+							"description": "(Deprecated. Use `ci_cluster_resource_group`) The cluster resource group."
 						},
 						{
 							"key": "ci_doi_environment",
@@ -1325,13 +599,13 @@
 						{
 							"key": "ci_evidence_repo_auth_type",
 							"type": "string",
-							"default_value": "oauth",
+							"default_value": "",
 							"description": "Select the method of authentication that is used to access the Git provider. 'oauth' or 'pat'."
 						},
 						{
 							"key": "ci_evidence_repo_git_token_secret_name",
 							"type": "string",
-							"default_value": "git-token",
+							"default_value": "",
 							"description": "Name of the Git token secret in the secret provider."
 						},
 						{
@@ -1343,13 +617,13 @@
 						{
 							"key": "ci_inventory_repo_auth_type",
 							"type": "string",
-							"default_value": "oauth",
+							"default_value": "",
 							"description": "Select the method of authentication that is used to access the Git provider. 'oauth' or 'pat'."
 						},
 						{
 							"key": "ci_inventory_repo_git_token_secret_name",
 							"type": "string",
-							"default_value": "git-token",
+							"default_value": "",
 							"description": "Name of the Git token secret in the secret provider."
 						},
 						{
@@ -1361,13 +635,13 @@
 						{
 							"key": "ci_issues_repo_auth_type",
 							"type": "string",
-							"default_value": "oauth",
+							"default_value": "",
 							"description": "Select the method of authentication that is used to access the Git provider. 'oauth' or 'pat'."
 						},
 						{
 							"key": "ci_issues_repo_git_token_secret_name",
 							"type": "string",
-							"default_value": "git-token",
+							"default_value": "",
 							"description": "Name of the Git token secret in the secret provider."
 						},
 						{
@@ -1439,7 +713,7 @@
 						{
 							"key": "ci_pipeline_config_repo_auth_type",
 							"type": "string",
-							"default_value": "oauth",
+							"default_value": "",
 							"description": "Select the method of authentication that is used to access the Git provider. 'oauth' or 'pat'."
 						},
 						{
@@ -1463,7 +737,7 @@
 						{
 							"key": "ci_pipeline_config_repo_git_token_secret_name",
 							"type": "string",
-							"default_value": "git-token",
+							"default_value": "",
 							"description": "Name of the Git token secret in the secret provider."
 						},
 						{
@@ -1476,7 +750,7 @@
 							"key": "ci_pipeline_dockerconfigjson_secret_name",
 							"type": "string",
 							"default_value": "pipeline_dockerconfigjson_secret_name",
-							"description": "Name of the pipeline docker config json secret in the secret provider."
+							"description": "Name of the pipeline docker config JSON secret in the secret provider."
 						},
 						{
 							"key": "ci_pipeline_ibmcloud_api_key_secret_name",
@@ -1485,23 +759,15 @@
 							"description": "Name of the Cloud API key secret in the secret provider."
 						},
 						{
-							"key": "ci_registry_namespace",
-							"type": "string",
-							"default_value": "",
-							"description": "A unique namespace within the IBM Cloud Container Registry region where the application image is stored.",
-							"required": true
-						},
-						{
 							"key": "ci_registry_region",
 							"type": "string",
-							"default_value": "ibm:yp:us-south",
-							"description": "The IBM Cloud Region where the IBM Cloud Container Registry namespace is to be created.",
-							"required": true
+							"default_value": "",
+							"description": "The IBM Cloud Region where the IBM Cloud Container Registry namespace is to be created. Use the short form of the regions. For example `us-south`."
 						},
 						{
 							"key": "ci_repositories_prefix",
 							"type": "string",
-							"default_value": "compliance",
+							"default_value": "",
 							"description": "Prefix name for the cloned compliance repos."
 						},
 						{
@@ -1519,8 +785,8 @@
 						{
 							"key": "ci_slack_notifications",
 							"type": "string",
-							"default_value": "0",
-							"description": "The switch that turns the Slack integration on or off."
+							"default_value": "",
+							"description": "The switch that turns the Slack notification on (`1`) or off (`0`)."
 						},
 						{
 							"key": "ci_slack_pipeline_fail",
@@ -1544,7 +810,7 @@
 							"key": "ci_slack_team_name",
 							"type": "string",
 							"default_value": "my-team",
-							"description": "The Slack team name, which is the word or phrase before .slack.com in the team URL."
+							"description": "The Slack team name, which is the word or phrase before `.slack.com` in the team URL."
 						},
 						{
 							"key": "ci_slack_toolchain_bind",
@@ -1561,7 +827,7 @@
 						{
 							"key": "ci_slack_webhook_secret_name",
 							"type": "string",
-							"default_value": "slack-webhook",
+							"default_value": "",
 							"description": "Name of the webhook secret in the secret provider."
 						},
 						{
@@ -1603,15 +869,14 @@
 						{
 							"key": "ci_toolchain_name",
 							"type": "string",
-							"default_value": "DevSecOps CI Toolchain - Terraform",
-							"description": "The name of the CI Toolchain.",
-							"required": true
+							"default_value": "",
+							"description": "The name of the CI Toolchain."
 						},
 						{
 							"key": "ci_toolchain_region",
 							"type": "string",
 							"default_value": "",
-							"description": "The region containing the CI toolchain."
+							"description": "The region containing the CI toolchain. Use the short form of the regions. For example `us-south`."
 						},
 						{
 							"key": "ci_toolchain_resource_group",
@@ -1620,22 +885,532 @@
 							"description": "The resource group within which the toolchain is created."
 						},
 						{
-							"key": "create_cc_toolchain",
-							"type": "boolean",
-							"default_value": true,
-							"description": "Boolean flag which determines if the DevSecOps CC toolchain is created."
+							"key": "cd_app_version",
+							"type": "string",
+							"default_value": "v1",
+							"description": "The version of the app to deploy."
 						},
 						{
-							"key": "create_cd_toolchain",
-							"type": "boolean",
-							"default_value": true,
-							"description": "Boolean flag which determines if the DevSecOps CD toolchain is created."
+							"key": "cd_authorization_policy_creation",
+							"type": "string",
+							"default_value": "",
+							"description": "Disable Toolchain service to Secrets Manager Service authorization policy creation."
 						},
 						{
-							"key": "create_ci_toolchain",
+							"key": "cd_change_management_group",
+							"type": "string",
+							"default_value": "",
+							"description": "Specify group for change management repository"
+						},
+						{
+							"key": "cd_change_management_repo",
+							"type": "string",
+							"default_value": "",
+							"description": "This repository holds the change management requests created for the deployments."
+						},
+						{
+							"key": "cd_change_management_repo_auth_type",
+							"type": "string",
+							"default_value": "",
+							"description": "Select the method of authentication that is used to access the Git provider. 'oauth' or 'pat'."
+						},
+						{
+							"key": "cd_change_management_repo_git_token_secret_name",
+							"type": "string",
+							"default_value": "",
+							"description": "Name of the Git token secret in the secret provider."
+						},
+						{
+							"key": "cd_change_repo_clone_from_url",
+							"type": "string",
+							"default_value": "",
+							"description": "Override the default management repo, which is cloned into the app repo. Note, using clone_if_not_exists mode, so if the app repo already exists the repo contents are unchanged."
+						},
+						{
+							"key": "cd_change_request_id",
+							"type": "string",
+							"default_value": "notAvailable",
+							"description": "The ID of an open change request. If this parameter is set to 'notAvailable' by default, a change request is automatically created by the continuous deployment pipeline."
+						},
+						{
+							"key": "cd_cluster_name",
+							"type": "string",
+							"default_value": "",
+							"description": "Name of the Kubernetes cluster where the application is deployed."
+						},
+						{
+							"key": "cd_cluster_namespace",
+							"type": "string",
+							"default_value": "prod",
+							"description": "Name of the Kubernetes cluster namespace where the application is deployed."
+						},
+						{
+							"key": "cd_cluster_region",
+							"type": "string",
+							"default_value": "",
+							"description": "Region of the Kubernetes cluster where the application is deployed. Use the short form of the regions. For example `us-south`."
+						},
+						{
+							"key": "cd_code_signing_cert_secret_name",
+							"type": "string",
+							"default_value": "code-signing-cert",
+							"description": "Name of the code signing certificate secret in the secret provider."
+						},
+						{
+							"key": "cd_compliance_base_image",
+							"type": "string",
+							"default_value": "",
+							"description": "Pipeline baseimage to run most of the built-in pipeline code."
+						},
+						{
+							"key": "cd_compliance_pipeline_group",
+							"type": "string",
+							"default_value": "",
+							"description": "Specify user or group for compliance pipline repo."
+						},
+						{
+							"key": "cd_compliance_pipeline_repo_auth_type",
+							"type": "string",
+							"default_value": "oauth",
+							"description": "Select the method of authentication that is used to access the Git provider. 'oauth' or 'pat'."
+						},
+						{
+							"key": "cd_compliance_pipeline_repo_git_token_secret_name",
+							"type": "string",
+							"default_value": "git-token",
+							"description": "Name of the Git token secret in the secret provider."
+						},
+						{
+							"key": "cd_cos_api_key_secret_name",
+							"type": "string",
+							"default_value": "",
+							"description": "Name of the COS API key secret in the secret provider."
+						},
+						{
+							"key": "cd_cos_bucket_name",
+							"type": "string",
+							"default_value": "",
+							"description": "COS bucket name."
+						},
+						{
+							"key": "cd_cos_endpoint",
+							"type": "string",
+							"default_value": "",
+							"description": "COS endpoint name."
+						},
+						{
+							"key": "cd_customer_impact",
+							"type": "string",
+							"default_value": "no_impact",
+							"description": "Custom impact of the change request."
+						},
+						{
+							"key": "cd_deployment_group",
+							"type": "string",
+							"default_value": "",
+							"description": "Specify group for deployment."
+						},
+						{
+							"key": "cd_deployment_repo_auth_type",
+							"type": "string",
+							"default_value": "",
+							"description": "Select the method of authentication that is used to access the Git provider. 'oauth' or 'pat'."
+						},
+						{
+							"key": "cd_deployment_repo_clone_from_branch",
+							"type": "string",
+							"default_value": "",
+							"description": "Used when deployment_repo_clone_from_url is provided, the default branch that is used by the CD build, usually either main or master."
+						},
+						{
+							"key": "cd_deployment_repo_clone_from_url",
+							"type": "string",
+							"default_value": "",
+							"description": "Override the default sample app by providing your own sample deployment URL, which is cloned into the app repo. Note, using clone_if_not_exists mode, so if the app repo already exists the repo contents are unchanged."
+						},
+						{
+							"key": "cd_deployment_repo_clone_to_git_id",
+							"type": "string",
+							"default_value": "",
+							"description": "By default absent, else custom server GUID, or other options for 'git_id' field in the browser UI."
+						},
+						{
+							"key": "cd_deployment_repo_clone_to_git_provider",
+							"type": "string",
+							"default_value": "",
+							"description": "By default 'hostedgit', else use 'githubconsolidated' or 'gitlab'."
+						},
+						{
+							"key": "cd_deployment_repo_existing_branch",
+							"type": "string",
+							"default_value": "",
+							"description": "Used when deployment_repo_existing_url is provided, the default branch that is by the CD build, usually either main or master."
+						},
+						{
+							"key": "cd_deployment_repo_existing_git_id",
+							"type": "string",
+							"default_value": "",
+							"description": "By default absent, else custom server GUID, or other options for 'git_id' field in the browser UI."
+						},
+						{
+							"key": "cd_deployment_repo_existing_git_provider",
+							"type": "string",
+							"default_value": "hostedgit",
+							"description": "By default 'hostedgit', else use 'githubconsolidated' or 'gitlab'."
+						},
+						{
+							"key": "cd_deployment_repo_existing_url",
+							"type": "string",
+							"default_value": "",
+							"description": "Override to bring your own existing deployment repository URL, which is used directly instead of cloning the default deployment sample."
+						},
+						{
+							"key": "cd_deployment_repo_git_token_secret_name",
+							"type": "string",
+							"default_value": "",
+							"description": "Name of the Git token secret in the secret provider."
+						},
+						{
+							"key": "cd_doi_environment",
+							"type": "string",
+							"default_value": "",
+							"description": "DevOps Insights environment for DevSecOps CD deployment."
+						},
+						{
+							"key": "cd_doi_toolchain_id",
+							"type": "string",
+							"default_value": "",
+							"description": "DevOps Insights toolchain ID to link to."
+						},
+						{
+							"key": "cd_emergency_label",
+							"type": "string",
+							"default_value": "EMERGENCY",
+							"description": "Identifies the pull request as an emergency."
+						},
+						{
+							"key": "cd_enable_key_protect",
+							"type": "boolean",
+							"default_value": false,
+							"description": "Use the Key Protect integration."
+						},
+						{
+							"key": "cd_enable_secrets_manager",
+							"type": "boolean",
+							"default_value": false,
+							"description": "Use the Secrets Manager integration."
+						},
+						{
+							"key": "cd_enable_signing_validation",
+							"type": "boolean",
+							"default_value": false,
+							"description": "Enable to add the code-signing-certificate property to the pipeline properties."
+						},
+						{
+							"key": "cd_enable_slack",
+							"type": "boolean",
+							"default_value": false,
+							"description": "Default: false. Set to true to create the integration."
+						},
+						{
+							"key": "cd_evidence_group",
+							"type": "string",
+							"default_value": "",
+							"description": "Specify Git user or group for evidence repository."
+						},
+						{
+							"key": "cd_evidence_repo_auth_type",
+							"type": "string",
+							"default_value": "",
+							"description": "Select the method of authentication that is used to access the Git provider. 'oauth' or 'pat'."
+						},
+						{
+							"key": "cd_evidence_repo_git_token_secret_name",
+							"type": "string",
+							"default_value": "",
+							"description": "Name of the Git token secret in the secret provider."
+						},
+						{
+							"key": "cd_inventory_group",
+							"type": "string",
+							"default_value": "",
+							"description": "Specify Git user or group for inventory repository."
+						},
+						{
+							"key": "cd_inventory_repo_auth_type",
+							"type": "string",
+							"default_value": "",
+							"description": "Select the method of authentication that is used to access the Git provider. 'oauth' or 'pat'."
+						},
+						{
+							"key": "cd_inventory_repo_git_token_secret_name",
+							"type": "string",
+							"default_value": "",
+							"description": "Name of the Git token secret in the secret provider."
+						},
+						{
+							"key": "cd_issues_group",
+							"type": "string",
+							"default_value": "",
+							"description": "Specify Git user or group for issues repository."
+						},
+						{
+							"key": "cd_issues_repo_auth_type",
+							"type": "string",
+							"default_value": "",
+							"description": "Select the method of authentication that is used to access the Git provider. 'oauth' or 'pat'."
+						},
+						{
+							"key": "cd_issues_repo_git_token_secret_name",
+							"type": "string",
+							"default_value": "",
+							"description": "Name of the Git token secret in the secret provider."
+						},
+						{
+							"key": "cd_kp_location",
+							"type": "string",
+							"default_value": "",
+							"description": "IBM Cloud location/region containing the Key Protect instance."
+						},
+						{
+							"key": "cd_kp_name",
+							"type": "string",
+							"default_value": "",
+							"description": "Name of the Key Protect instance where the secrets are stored."
+						},
+						{
+							"key": "cd_kp_resource_group",
+							"type": "string",
+							"default_value": "",
+							"description": "The resource group containing the Key Protect instance for your secrets."
+						},
+						{
+							"key": "cd_link_to_doi_toolchain",
 							"type": "boolean",
 							"default_value": true,
-							"description": "Flag which determines if the DevSecOps CI toolchain is created. If this toolchain is not created then values must be set for the following variables, evidence_repo_url, issues_repo_url and inventory_repo_url."
+							"description": "Enable a link to a DevOps Insights instance in another toolchain, true or false."
+						},
+						{
+							"key": "cd_merge_cra_sbom",
+							"type": "string",
+							"default_value": "1",
+							"description": "Merge the SBOM"
+						},
+						{
+							"key": "cd_opt_out_v1_evidence",
+							"type": "string",
+							"default_value": "1",
+							"description": "Opt out of evidence v1."
+						},
+						{
+							"key": "cd_pipeline_config_group",
+							"type": "string",
+							"default_value": "",
+							"description": "Specify user or group for pipeline config repo."
+						},
+						{
+							"key": "cd_pipeline_config_path",
+							"type": "string",
+							"default_value": ".pipeline-config.yaml",
+							"description": "The name and path of the pipeline-config.yaml file within the pipeline-config repo."
+						},
+						{
+							"key": "cd_pipeline_config_repo_auth_type",
+							"type": "string",
+							"default_value": "",
+							"description": "Select the method of authentication that is used to access the Git provider. 'oauth' or 'pat'."
+						},
+						{
+							"key": "cd_pipeline_config_repo_branch",
+							"type": "string",
+							"default_value": "",
+							"description": "Specify the branch containing the custom pipeline-config.yaml file."
+						},
+						{
+							"key": "cd_pipeline_config_repo_clone_from_url",
+							"type": "string",
+							"default_value": "",
+							"description": "Specify a repository containing a custom pipeline-config.yaml file."
+						},
+						{
+							"key": "cd_pipeline_config_repo_existing_url",
+							"type": "string",
+							"default_value": "",
+							"description": "Specify a repository containing a custom pipeline-config.yaml file."
+						},
+						{
+							"key": "cd_pipeline_config_repo_git_token_secret_name",
+							"type": "string",
+							"default_value": "",
+							"description": "Name of the Git token secret in the secret provider."
+						},
+						{
+							"key": "cd_pipeline_debug",
+							"type": "string",
+							"default_value": "0",
+							"description": "'0' by default. Set to '1' to enable debug logging."
+						},
+						{
+							"key": "cd_pipeline_ibmcloud_api_key_secret_name",
+							"type": "string",
+							"default_value": "ibmcloud-api-key",
+							"description": "Name of the Cloud API key secret in the secret provider."
+						},
+						{
+							"key": "cd_region",
+							"type": "string",
+							"default_value": "",
+							"description": "IBM Cloud region used to prefix the `prod_latest` inventory repo branch."
+						},
+						{
+							"key": "cd_repositories_prefix",
+							"type": "string",
+							"default_value": "",
+							"description": "Prefix name for the cloned compliance repos."
+						},
+						{
+							"key": "cd_satellite_cluster_group",
+							"type": "string",
+							"default_value": "",
+							"description": "The Satellite cluster group"
+						},
+						{
+							"key": "cd_scc_enable_scc",
+							"type": "boolean",
+							"default_value": true,
+							"description": "Enable the SCC integration."
+						},
+						{
+							"key": "cd_scc_integration_name",
+							"type": "string",
+							"default_value": "Security and Compliance",
+							"description": "The name of the SCC integration."
+						},
+						{
+							"key": "cd_slack_channel_name",
+							"type": "string",
+							"default_value": "my-channel",
+							"description": "The Slack channel that notifications are posted to."
+						},
+						{
+							"key": "cd_slack_notifications",
+							"type": "string",
+							"default_value": "",
+							"description": "The switch that turns the Slack notification on (`1`) or off (`0`)."
+						},
+						{
+							"key": "cd_slack_pipeline_fail",
+							"type": "boolean",
+							"default_value": true,
+							"description": "Generate pipeline failed notifications."
+						},
+						{
+							"key": "cd_slack_pipeline_start",
+							"type": "boolean",
+							"default_value": true,
+							"description": "Generate pipeline start notifications."
+						},
+						{
+							"key": "cd_slack_pipeline_success",
+							"type": "boolean",
+							"default_value": true,
+							"description": "Generate pipeline succeeded notifications."
+						},
+						{
+							"key": "cd_slack_team_name",
+							"type": "string",
+							"default_value": "my-team",
+							"description": "The Slack team name, which is the word or phrase before .slack.com in the team URL."
+						},
+						{
+							"key": "cd_slack_toolchain_bind",
+							"type": "boolean",
+							"default_value": true,
+							"description": "Generate tool added to toolchain notifications."
+						},
+						{
+							"key": "cd_slack_toolchain_unbind",
+							"type": "boolean",
+							"default_value": true,
+							"description": "Generate tool removed from toolchain notifications."
+						},
+						{
+							"key": "cd_slack_webhook_secret_name",
+							"type": "string",
+							"default_value": "",
+							"description": "Name of the webhook secret in the secret provider."
+						},
+						{
+							"key": "cd_sm_location",
+							"type": "string",
+							"default_value": "",
+							"description": "IBM Cloud location/region containing the Secrets Manager instance."
+						},
+						{
+							"key": "cd_sm_name",
+							"type": "string",
+							"default_value": "",
+							"description": "Name of the Secrets Manager instance where the secrets are stored."
+						},
+						{
+							"key": "cd_sm_resource_group",
+							"type": "string",
+							"default_value": "",
+							"description": "The resource group containing the Secrets Manager instance for your secrets."
+						},
+						{
+							"key": "cd_sm_secret_group",
+							"type": "string",
+							"default_value": "",
+							"description": "Group in Secrets Manager for organizing/grouping secrets."
+						},
+						{
+							"key": "cd_source_environment",
+							"type": "string",
+							"default_value": "master",
+							"description": "The source environment that the app is promoted from."
+						},
+						{
+							"key": "cd_target_environment",
+							"type": "string",
+							"default_value": "prod",
+							"description": "The target environment that the app is deployed to."
+						},
+						{
+							"key": "cd_target_environment_detail",
+							"type": "string",
+							"default_value": "Production target environment",
+							"description": "Details of the environment being updated."
+						},
+						{
+							"key": "cd_target_environment_purpose",
+							"type": "string",
+							"default_value": "production",
+							"description": "Purpose of the environment being updated."
+						},
+						{
+							"key": "cd_toolchain_description",
+							"type": "string",
+							"default_value": "Toolchain created with terraform template for DevSecOps CD Best Practices.",
+							"description": "Description for the CD toolchain."
+						},
+						{
+							"key": "cd_toolchain_name",
+							"type": "string",
+							"default_value": "",
+							"description": "The name of the CD Toolchain."
+						},
+						{
+							"key": "cd_toolchain_region",
+							"type": "string",
+							"default_value": "",
+							"description": "The region containing the CI toolchain. Use the short form of the regions. For example `us-south`."
+						},
+						{
+							"key": "cd_toolchain_resource_group",
+							"type": "string",
+							"default_value": "",
+							"description": "Resource group within which toolchain is created."
 						},
 						{
 							"key": "deployment_repo_url",
@@ -1644,127 +1419,443 @@
 							"description": "This is the repository to clone deployment for DevSecOps toolchain template."
 						},
 						{
-							"key": "enable_key_protect",
+							"key": "cc_app_group",
+							"type": "string",
+							"default_value": "",
+							"description": "Specify user or group for app repo."
+						},
+						{
+							"key": "cc_app_repo_auth_type",
+							"type": "string",
+							"default_value": "",
+							"description": "Select the method of authentication that is used to access the Git provider. 'oauth' or 'pat'."
+						},
+						{
+							"key": "cc_app_repo_branch",
+							"type": "string",
+							"default_value": "master",
+							"description": "The default branch of the app repo."
+						},
+						{
+							"key": "cc_app_repo_git_id",
+							"type": "string",
+							"default_value": "",
+							"description": "The Git Id of the repository."
+						},
+						{
+							"key": "cc_app_repo_git_provider",
+							"type": "string",
+							"default_value": "hostedgit",
+							"description": "The type of the Git provider."
+						},
+						{
+							"key": "cc_app_repo_git_token_secret_name",
+							"type": "string",
+							"default_value": "",
+							"description": "Name of the Git token secret in the secret provider."
+						},
+						{
+							"key": "cc_app_repo_url",
+							"type": "string",
+							"default_value": "",
+							"description": "This Git URL for the application repository."
+						},
+						{
+							"key": "cc_authorization_policy_creation",
+							"type": "string",
+							"default_value": "",
+							"description": "Disable Toolchain service to Secrets Manager Service authorization policy creation."
+						},
+						{
+							"key": "cc_compliance_base_image",
+							"type": "string",
+							"default_value": "",
+							"description": "Pipeline baseimage to run most of the built-in pipeline code."
+						},
+						{
+							"key": "cc_compliance_pipeline_group",
+							"type": "string",
+							"default_value": "",
+							"description": "Specify user or group for compliance pipline repo."
+						},
+						{
+							"key": "cc_compliance_pipeline_repo_auth_type",
+							"type": "string",
+							"default_value": "oauth",
+							"description": "Select the method of authentication that is used to access the Git provider. 'oauth' or 'pat'."
+						},
+						{
+							"key": "cc_compliance_pipeline_repo_git_token_secret_name",
+							"type": "string",
+							"default_value": "git-token",
+							"description": "Name of the Git token secret in the secret provider."
+						},
+						{
+							"key": "cc_cos_api_key_secret_name",
+							"type": "string",
+							"default_value": "",
+							"description": "Name of the COS API key secret in the secret provider."
+						},
+						{
+							"key": "cc_cos_bucket_name",
+							"type": "string",
+							"default_value": "",
+							"description": "COS bucket name."
+						},
+						{
+							"key": "cc_cos_endpoint",
+							"type": "string",
+							"default_value": "",
+							"description": "COS endpoint name."
+						},
+						{
+							"key": "cc_doi_environment",
+							"type": "string",
+							"default_value": "",
+							"description": "DevOps Insights environment for DevSecOps CD deployment."
+						},
+						{
+							"key": "cc_doi_toolchain_id",
+							"type": "string",
+							"default_value": "",
+							"description": "DevOps Insights toolchain ID to link to."
+						},
+						{
+							"key": "cc_enable_key_protect",
 							"type": "boolean",
 							"default_value": false,
-							"description": "Set to enable Key Protect Integrations. "
+							"description": "Enable the Key Protect integration."
 						},
 						{
-							"key": "enable_secrets_manager",
+							"key": "cc_enable_pipeline_dockerconfigjson",
 							"type": "boolean",
-							"default_value": true,
-							"description": "Enable the Secrets Manager integrations."
+							"default_value": false,
+							"description": "Enable to add the pipeline-dockerconfigjson property to the pipeline properties."
 						},
 						{
-							"key": "evidence_repo_url",
+							"key": "cc_enable_secrets_manager",
+							"type": "boolean",
+							"default_value": false,
+							"description": "Enable the Secrets Manager integration."
+						},
+						{
+							"key": "cc_enable_slack",
+							"type": "boolean",
+							"default_value": false,
+							"description": "Set to true to create the integration."
+						},
+						{
+							"key": "cc_environment_tag",
+							"type": "string",
+							"default_value": "prod_latest",
+							"description": "Tag name that represents the target environment in the inventory. Example: prod_latest."
+						},
+						{
+							"key": "cc_evidence_group",
 							"type": "string",
 							"default_value": "",
-							"description": "This is a template repository to clone compliance-evidence-locker for reference DevSecOps toolchain templates."
+							"description": "Specify Git user or group for evidence repository."
 						},
 						{
-							"key": "ibmcloud_api",
-							"type": "string",
-							"default_value": "https://cloud.ibm.com",
-							"description": "IBM Cloud API Endpoint."
-						},
-						{
-							"key": "ibmcloud_api_key",
-							"type": "password",
-							"description": "API key used to create the toolchains. (See deployment guide.)",
-							"required": true
-						},
-						{
-							"key": "inventory_repo_url",
+							"key": "cc_evidence_repo_auth_type",
 							"type": "string",
 							"default_value": "",
-							"description": "This is a template repository to clone compliance-inventory for reference DevSecOps toolchain templates."
+							"description": "Select the method of authentication that is used to access the Git provider. 'oauth' or 'pat'"
 						},
 						{
-							"key": "issues_repo_url",
+							"key": "cc_evidence_repo_git_token_secret_name",
 							"type": "string",
 							"default_value": "",
-							"description": "This is a template repository to clone compliance-issues for reference DevSecOps toolchain templates."
+							"description": "Name of the Git token secret in the secret provider."
 						},
 						{
-							"key": "kp_location",
+							"key": "cc_inventory_group",
 							"type": "string",
-							"default_value": "us-south",
+							"default_value": "",
+							"description": "Specify Git user or group for inventory repository."
+						},
+						{
+							"key": "cc_inventory_repo_auth_type",
+							"type": "string",
+							"default_value": "",
+							"description": "Select the method of authentication that is used to access the Git provider. 'oauth' or 'pat'."
+						},
+						{
+							"key": "cc_inventory_repo_git_token_secret_name",
+							"type": "string",
+							"default_value": "",
+							"description": "Name of the Git token secret in the secret provider."
+						},
+						{
+							"key": "cc_issues_group",
+							"type": "string",
+							"default_value": "",
+							"description": "Specify Git user or group for issues repository."
+						},
+						{
+							"key": "cc_issues_repo_auth_type",
+							"type": "string",
+							"default_value": "",
+							"description": "Select the method of authentication that is used to access the Git provider. 'oauth' or 'pat'."
+						},
+						{
+							"key": "cc_issues_repo_git_token_secret_name",
+							"type": "string",
+							"default_value": "",
+							"description": "Name of the Git token secret in the secret provider."
+						},
+						{
+							"key": "cc_kp_location",
+							"type": "string",
+							"default_value": "",
 							"description": "IBM Cloud location/region containing the Key Protect instance."
 						},
 						{
-							"key": "kp_name",
+							"key": "cc_kp_name",
 							"type": "string",
-							"default_value": "kp-compliance-secrets",
+							"default_value": "",
 							"description": "Name of the Key Protect instance where the secrets are stored."
 						},
 						{
-							"key": "kp_resource_group",
+							"key": "cc_kp_resource_group",
 							"type": "string",
-							"default_value": "Default",
+							"default_value": "",
 							"description": "The resource group containing the Key Protect instance for your secrets."
 						},
 						{
-							"key": "sm_location",
-							"type": "string",
-							"default_value": "us-south",
-							"description": "The region location of the Secrets Manager instance.",
-							"required": true
+							"key": "cc_link_to_doi_toolchain",
+							"type": "boolean",
+							"default_value": true,
+							"description": "Enable a link to a DevOps Insights instance in another toolchain, true or false."
 						},
 						{
-							"key": "sm_name",
+							"key": "cc_opt_in_auto_close",
 							"type": "string",
-							"default_value": "sm-instance",
-							"description": "The name of the Secret Managers instance.",
-							"required": true
+							"default_value": "1",
+							"description": "Enables auto-closing of issues coming from vulnerabilities, once the vulnerability is no longer detected by the CC pipeline run."
 						},
 						{
-							"key": "sm_resource_group",
+							"key": "cc_opt_in_dynamic_api_scan",
 							"type": "string",
 							"default_value": "",
-							"description": "The resource group containing the Secrets Manager instance.",
-							"display_name": "Resource group",
-							"required": true,
-							"custom_config": {
-								"type": "resource_group",
-								"grouping": "deployment",
-								"original_grouping": "deployment",
-								"config_constraints": {
-									"identifier": "rg_name"
-								}
-							}
+							"description": "To enable the OWASP Zap API scan. '1' enable or '0' disable."
 						},
 						{
-							"key": "sm_secret_group",
-							"type": "string",
-							"default_value": "Default",
-							"description": "Group in Secrets Manager for organizing/grouping secrets.",
-							"required": true
-						},
-						{
-							"key": "toolchain_region",
-							"type": "string",
-							"default_value": "us-south",
-							"description": "IBM Cloud region where your toolchain is created.",
-							"required": true
-						},
-						{
-							"key": "toolchain_resource_group",
+							"key": "cc_opt_in_dynamic_scan",
 							"type": "string",
 							"default_value": "",
-							"description": "The resource group within which the toolchain is created.",
-							"display_name": "Resource group",
-							"required": true,
-							"custom_config": {
-								"type": "resource_group",
-								"grouping": "deployment",
-								"original_grouping": "deployment",
-								"config_constraints": {
-									"identifier": "rg_name"
-								}
-							}
+							"description": "To enable the OWASP Zap scan. '1' enable or '0' disable."
+						},
+						{
+							"key": "cc_opt_in_dynamic_ui_scan",
+							"type": "string",
+							"default_value": "",
+							"description": "To enable the OWASP Zap UI scan. '1' enable or '0' disable."
+						},
+						{
+							"key": "cc_pipeline_config_group",
+							"type": "string",
+							"default_value": "",
+							"description": "Specify user or group for pipeline config repo."
+						},
+						{
+							"key": "cc_pipeline_config_path",
+							"type": "string",
+							"default_value": ".pipeline-config.yaml",
+							"description": "The name and path of the pipeline-config.yaml file within the pipeline-config repo."
+						},
+						{
+							"key": "cc_pipeline_config_repo_auth_type",
+							"type": "string",
+							"default_value": "",
+							"description": "Select the method of authentication that is used to access the Git provider. 'oauth' or 'pat'."
+						},
+						{
+							"key": "cc_pipeline_config_repo_branch",
+							"type": "string",
+							"default_value": "",
+							"description": "Specify the branch containing the custom pipeline-config.yaml file."
+						},
+						{
+							"key": "cc_pipeline_config_repo_clone_from_url",
+							"type": "string",
+							"default_value": "",
+							"description": "Specify a repository containing a custom pipeline-config.yaml file."
+						},
+						{
+							"key": "cc_pipeline_config_repo_existing_url",
+							"type": "string",
+							"default_value": "",
+							"description": "Specify a repository containing a custom pipeline-config.yaml file."
+						},
+						{
+							"key": "cc_pipeline_config_repo_git_token_secret_name",
+							"type": "string",
+							"default_value": "",
+							"description": "Name of the Git token secret in the secret provider."
+						},
+						{
+							"key": "cc_pipeline_debug",
+							"type": "string",
+							"default_value": "0",
+							"description": "'0' by default. Set to '1' to enable debug logging."
+						},
+						{
+							"key": "cc_pipeline_dockerconfigjson_secret_name",
+							"type": "string",
+							"default_value": "pipeline_dockerconfigjson_secret_name",
+							"description": "Name of the pipeline docker config JSON secret in the secret provider."
+						},
+						{
+							"key": "cc_pipeline_ibmcloud_api_key_secret_name",
+							"type": "string",
+							"default_value": "ibmcloud-api-key",
+							"description": "Name of the Cloud API key secret in the secret provider."
+						},
+						{
+							"key": "cc_repositories_prefix",
+							"type": "string",
+							"default_value": "",
+							"description": "The prefix for the compliance repositories."
+						},
+						{
+							"key": "cc_scc_enable_scc",
+							"type": "boolean",
+							"default_value": true,
+							"description": "Enable the SCC integration"
+						},
+						{
+							"key": "cc_scc_integration_name",
+							"type": "string",
+							"default_value": "Security and Compliance",
+							"description": "The name of the SCC integration."
+						},
+						{
+							"key": "cc_slack_channel_name",
+							"type": "string",
+							"default_value": "my-channel",
+							"description": "The Slack channel that notifications are posted to."
+						},
+						{
+							"key": "cc_slack_notifications",
+							"type": "string",
+							"default_value": "",
+							"description": "The switch that turns the Slack notification on (`1`) or off (`0`)."
+						},
+						{
+							"key": "cc_slack_pipeline_fail",
+							"type": "boolean",
+							"default_value": true,
+							"description": "Generate pipeline failed notifications."
+						},
+						{
+							"key": "cc_slack_pipeline_start",
+							"type": "boolean",
+							"default_value": true,
+							"description": "Generate pipeline start notifications."
+						},
+						{
+							"key": "cc_slack_pipeline_success",
+							"type": "boolean",
+							"default_value": true,
+							"description": "Generate pipeline succeeded notifications."
+						},
+						{
+							"key": "cc_slack_team_name",
+							"type": "string",
+							"default_value": "my-team",
+							"description": "The Slack team name, which is the word or phrase before .slack.com in the team URL."
+						},
+						{
+							"key": "cc_slack_toolchain_bind",
+							"type": "boolean",
+							"default_value": true,
+							"description": "Generate tool added to toolchain notifications."
+						},
+						{
+							"key": "cc_slack_toolchain_unbind",
+							"type": "boolean",
+							"default_value": true,
+							"description": "Generate tool removed from toolchain notifications."
+						},
+						{
+							"key": "cc_slack_webhook_secret_name",
+							"type": "string",
+							"default_value": "",
+							"description": "Name of the webhook secret in the secret provider."
+						},
+						{
+							"key": "cc_sm_location",
+							"type": "string",
+							"default_value": "",
+							"description": "IBM Cloud location/region containing the Secrets Manager instance."
+						},
+						{
+							"key": "cc_sm_name",
+							"type": "string",
+							"default_value": "",
+							"description": "Name of the Secrets Manager instance where the secrets are stored."
+						},
+						{
+							"key": "cc_sm_resource_group",
+							"type": "string",
+							"default_value": "",
+							"description": "The resource group containing the Secrets Manager instance for your secrets."
+						},
+						{
+							"key": "cc_sm_secret_group",
+							"type": "string",
+							"default_value": "",
+							"description": "Group in Secrets Manager for organizing/grouping secrets."
+						},
+						{
+							"key": "cc_sonarqube_config",
+							"type": "string",
+							"default_value": "default",
+							"description": "Runs a SonarQube scan in an isolated Docker-in-Docker container (default configuration) or in an existing Kubernetes cluster (custom configuration). Options: default or custom. Default is default."
+						},
+						{
+							"key": "cc_toolchain_description",
+							"type": "string",
+							"default_value": "Toolchain created with terraform template for DevSecOps CC Best Practices.",
+							"description": "Description for the CC Toolchain."
+						},
+						{
+							"key": "cc_toolchain_name",
+							"type": "string",
+							"default_value": "",
+							"description": "The name of the CC Toolchain."
+						},
+						{
+							"key": "cc_toolchain_region",
+							"type": "string",
+							"default_value": "",
+							"description": "The region containing the CI toolchain. Use the short form of the regions. For example `us-south`."
+						},
+						{
+							"key": "cc_toolchain_resource_group",
+							"type": "string",
+							"default_value": "",
+							"description": "Resource group within which the toolchain is created."
+						},
+						{
+							"key": "environment_prefix",
+							"type": "string",
+							"default_value": "ibm:yp:",
+							"description": "By default `ibm:yp:`. This will be set as the prefix to regions automatically where required. For example `ibm:yp:us-south`."
+						},
+						{
+							"key": "slack_notifications",
+							"type": "string",
+							"default_value": "",
+							"description": "This is enabled automatically when a Slack integration is created. The switch overrides the Slack notifications. Set `1` for on and `0` for off. This applies to the CI, CD, and CC toolchains. To set separately, see `ci_slack_notifications`, `cd_slack_notifications`, and `cc_slack_notifications`."
 						}
 					],
 					"outputs": [
+						{
+							"key": "compliance_ci_toolchain_id",
+							"description": "The ID of the Compliance CI Toolchain"
+						},
 						{
 							"key": "compliance_cd_toolchain_id",
 							"description": "The ID of the Compliance CD Toolchain"
@@ -1788,10 +1879,6 @@
 						{
 							"key": "app_repo_url",
 							"description": "The App Repo URL"
-						},
-						{
-							"key": "compliance_ci_toolchain_id",
-							"description": "The ID of the Compliance CI Toolchain"
 						}
 					],
 					"install_type": "fullstack"
