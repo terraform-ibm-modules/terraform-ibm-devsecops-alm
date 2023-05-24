@@ -1,6 +1,16 @@
 {
   "path": ".",
   "variables": {
+    "authorization_policy_creation": {
+      "name": "authorization_policy_creation",
+      "type": "string",
+      "description": "Disable Toolchain Service to Secrets Manager Service authorization policy creation. To disable set the value to `disabled`. This applies to the CI, CD, and CC toolchains. To set separately, see `ci_authorization_policy_creation`, `cd_authorization_policy_creation`, and `cc_authorization_policy_creation`.",
+      "default": "",
+      "pos": {
+        "filename": "variables.tf",
+        "line": 154
+      }
+    },
     "cc_app_group": {
       "name": "cc_app_group",
       "type": "string",
@@ -11,20 +21,20 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1420
+        "line": 1527
       }
     },
     "cc_app_repo_auth_type": {
       "name": "cc_app_repo_auth_type",
       "type": "string",
       "description": "Select the method of authentication that is used to access the Git provider. 'oauth' or 'pat'.",
-      "default": "oauth",
+      "default": "",
       "source": [
         "module.devsecops_cc_toolchain.module.repositories"
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1459
+        "line": 1566
       }
     },
     "cc_app_repo_branch": {
@@ -34,17 +44,17 @@
       "default": "master",
       "pos": {
         "filename": "variables.tf",
-        "line": 1382
+        "line": 1489
       }
     },
     "cc_app_repo_git_id": {
       "name": "cc_app_repo_git_id",
       "type": "string",
-      "description": "By default absent, otherwise use custom server GUID, or other options for `git_id` field in the browser UI.",
+      "description": "The Git Id of the repository.",
       "default": "",
       "pos": {
         "filename": "variables.tf",
-        "line": 1388
+        "line": 1495
       }
     },
     "cc_app_repo_git_provider": {
@@ -54,20 +64,20 @@
       "default": "hostedgit",
       "pos": {
         "filename": "variables.tf",
-        "line": 1376
+        "line": 1483
       }
     },
     "cc_app_repo_git_token_secret_name": {
       "name": "cc_app_repo_git_token_secret_name",
       "type": "string",
       "description": "Name of the Git token secret in the secret provider.",
-      "default": "git-token",
+      "default": "",
       "source": [
         "module.devsecops_cc_toolchain.module.repositories"
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1517
+        "line": 1624
       }
     },
     "cc_app_repo_url": {
@@ -77,7 +87,7 @@
       "default": "",
       "pos": {
         "filename": "variables.tf",
-        "line": 1370
+        "line": 1477
       }
     },
     "cc_authorization_policy_creation": {
@@ -90,7 +100,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1646
+        "line": 1753
       }
     },
     "cc_compliance_base_image": {
@@ -105,7 +115,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1640
+        "line": 1747
       },
       "max_length": 4096,
       "matches": "^.*$"
@@ -120,7 +130,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1426
+        "line": 1533
       }
     },
     "cc_compliance_pipeline_repo_auth_type": {
@@ -133,7 +143,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1465
+        "line": 1572
       }
     },
     "cc_compliance_pipeline_repo_git_token_secret_name": {
@@ -146,21 +156,21 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1505
+        "line": 1612
       }
     },
     "cc_cos_api_key_secret_name": {
       "name": "cc_cos_api_key_secret_name",
       "type": "string",
       "description": "Name of the COS API key secret in the secret provider.",
-      "default": "cos-api-key",
+      "default": "",
       "required": true,
       "source": [
         "module.devsecops_cc_toolchain.module.pipeline_cc.ibm_cd_tekton_pipeline_property.cos_api_key.value"
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1481
+        "line": 1588
       },
       "max_length": 4096,
       "matches": "^.*$"
@@ -176,7 +186,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1622
+        "line": 1729
       },
       "max_length": 4096,
       "matches": "^.*$"
@@ -192,7 +202,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1616
+        "line": 1723
       },
       "max_length": 4096,
       "matches": "^.*$"
@@ -208,7 +218,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1274
+        "line": 1381
       },
       "max_length": 4096,
       "matches": "^.*$"
@@ -220,7 +230,7 @@
       "default": "",
       "pos": {
         "filename": "variables.tf",
-        "line": 1628
+        "line": 1735
       }
     },
     "cc_enable_key_protect": {
@@ -230,7 +240,7 @@
       "default": false,
       "pos": {
         "filename": "variables.tf",
-        "line": 1292
+        "line": 1399
       }
     },
     "cc_enable_pipeline_dockerconfigjson": {
@@ -244,7 +254,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1688
+        "line": 1795
       }
     },
     "cc_enable_secrets_manager": {
@@ -254,7 +264,7 @@
       "default": false,
       "pos": {
         "filename": "variables.tf",
-        "line": 1298
+        "line": 1405
       }
     },
     "cc_enable_slack": {
@@ -262,13 +272,9 @@
       "type": "bool",
       "description": "Set to true to create the integration.",
       "default": false,
-      "required": true,
-      "source": [
-        "module.devsecops_cc_toolchain.module.integrations.ibm_cd_toolchain_tool_slack.slack_tool.count"
-      ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1567
+        "line": 1674
       }
     },
     "cc_environment_tag": {
@@ -282,7 +288,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1682
+        "line": 1789
       },
       "max_length": 4096,
       "matches": "^.*$"
@@ -297,33 +303,33 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1408
+        "line": 1515
       }
     },
     "cc_evidence_repo_auth_type": {
       "name": "cc_evidence_repo_auth_type",
       "type": "string",
       "description": "Select the method of authentication that is used to access the Git provider. 'oauth' or 'pat'",
-      "default": "oauth",
+      "default": "",
       "source": [
         "module.devsecops_cc_toolchain.module.repositories"
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1453
+        "line": 1560
       }
     },
     "cc_evidence_repo_git_token_secret_name": {
       "name": "cc_evidence_repo_git_token_secret_name",
       "type": "string",
       "description": "Name of the Git token secret in the secret provider.",
-      "default": "git-token",
+      "default": "",
       "source": [
         "module.devsecops_cc_toolchain.module.repositories"
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1493
+        "line": 1600
       }
     },
     "cc_inventory_group": {
@@ -336,33 +342,33 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1402
+        "line": 1509
       }
     },
     "cc_inventory_repo_auth_type": {
       "name": "cc_inventory_repo_auth_type",
       "type": "string",
       "description": "Select the method of authentication that is used to access the Git provider. 'oauth' or 'pat'.",
-      "default": "oauth",
+      "default": "",
       "source": [
         "module.devsecops_cc_toolchain.module.repositories"
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1441
+        "line": 1548
       }
     },
     "cc_inventory_repo_git_token_secret_name": {
       "name": "cc_inventory_repo_git_token_secret_name",
       "type": "string",
       "description": "Name of the Git token secret in the secret provider.",
-      "default": "git-token",
+      "default": "",
       "source": [
         "module.devsecops_cc_toolchain.module.repositories"
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1499
+        "line": 1606
       }
     },
     "cc_issues_group": {
@@ -375,33 +381,33 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1396
+        "line": 1503
       }
     },
     "cc_issues_repo_auth_type": {
       "name": "cc_issues_repo_auth_type",
       "type": "string",
       "description": "Select the method of authentication that is used to access the Git provider. 'oauth' or 'pat'.",
-      "default": "oauth",
+      "default": "",
       "source": [
         "module.devsecops_cc_toolchain.module.repositories"
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1447
+        "line": 1554
       }
     },
     "cc_issues_repo_git_token_secret_name": {
       "name": "cc_issues_repo_git_token_secret_name",
       "type": "string",
       "description": "Name of the Git token secret in the secret provider.",
-      "default": "git-token",
+      "default": "",
       "source": [
         "module.devsecops_cc_toolchain.module.repositories"
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1487
+        "line": 1594
       }
     },
     "cc_kp_location": {
@@ -409,17 +415,10 @@
       "type": "string",
       "description": "IBM Cloud location/region containing the Key Protect instance.",
       "default": "",
-      "required": true,
-      "source": [
-        "module.devsecops_cc_toolchain.module.integrations",
-        "module.devsecops_cc_toolchain.module.services.data.ibm_resource_instance.key_protect_instance.location"
-      ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1340
-      },
-      "cloud_data_type": "region",
-      "computed": true
+        "line": 1447
+      }
     },
     "cc_kp_name": {
       "name": "cc_kp_name",
@@ -433,7 +432,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1334
+        "line": 1441
       }
     },
     "cc_kp_resource_group": {
@@ -448,7 +447,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1328
+        "line": 1435
       },
       "cloud_data_type": "resource_group",
       "computed": true,
@@ -461,13 +460,14 @@
       "type": "bool",
       "description": "Enable a link to a DevOps Insights instance in another toolchain, true or false.",
       "default": true,
+      "required": true,
       "source": [
         "module.devsecops_cc_toolchain.module.integrations.ibm_cd_toolchain_tool_custom.link_to_insights.count",
         "module.devsecops_cc_toolchain.module.integrations.ibm_cd_toolchain_tool_devopsinsights.insights_tool.count"
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1280
+        "line": 1387
       }
     },
     "cc_opt_in_auto_close": {
@@ -481,7 +481,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1676
+        "line": 1783
       },
       "max_length": 4096,
       "matches": "^.*$"
@@ -497,7 +497,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1658
+        "line": 1765
       },
       "max_length": 4096,
       "matches": "^.*$"
@@ -513,7 +513,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1670
+        "line": 1777
       },
       "max_length": 4096,
       "matches": "^.*$"
@@ -529,7 +529,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1664
+        "line": 1771
       },
       "max_length": 4096,
       "matches": "^.*$"
@@ -544,7 +544,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1414
+        "line": 1521
       }
     },
     "cc_pipeline_config_path": {
@@ -558,7 +558,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1364
+        "line": 1471
       },
       "max_length": 4096,
       "matches": "^.*$"
@@ -567,13 +567,13 @@
       "name": "cc_pipeline_config_repo_auth_type",
       "type": "string",
       "description": "Select the method of authentication that is used to access the Git provider. 'oauth' or 'pat'.",
-      "default": "oauth",
+      "default": "",
       "source": [
         "module.devsecops_cc_toolchain.module.repositories"
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1435
+        "line": 1542
       }
     },
     "cc_pipeline_config_repo_branch": {
@@ -586,7 +586,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1358
+        "line": 1465
       }
     },
     "cc_pipeline_config_repo_clone_from_url": {
@@ -594,14 +594,13 @@
       "type": "string",
       "description": "Specify a repository containing a custom pipeline-config.yaml file.",
       "default": "",
-      "required": true,
       "source": [
         "module.devsecops_cc_toolchain.module.pipeline_cc",
-        "module.devsecops_cc_toolchain.module.repositories.ibm_cd_toolchain_tool_hostedgit.pipeline_config_repo_clone_from_hostedgit.count"
+        "module.devsecops_cc_toolchain.module.repositories"
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1352
+        "line": 1459
       }
     },
     "cc_pipeline_config_repo_existing_url": {
@@ -609,27 +608,26 @@
       "type": "string",
       "description": "Specify a repository containing a custom pipeline-config.yaml file.",
       "default": "",
-      "required": true,
       "source": [
         "module.devsecops_cc_toolchain.module.pipeline_cc",
-        "module.devsecops_cc_toolchain.module.repositories.ibm_cd_toolchain_tool_hostedgit.pipeline_config_repo_existing_hostedgit.count"
+        "module.devsecops_cc_toolchain.module.repositories"
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1346
+        "line": 1453
       }
     },
     "cc_pipeline_config_repo_git_token_secret_name": {
       "name": "cc_pipeline_config_repo_git_token_secret_name",
       "type": "string",
       "description": "Name of the Git token secret in the secret provider.",
-      "default": "git-token",
+      "default": "",
       "source": [
         "module.devsecops_cc_toolchain.module.repositories"
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1511
+        "line": 1618
       }
     },
     "cc_pipeline_debug": {
@@ -643,7 +641,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1652
+        "line": 1759
       },
       "max_length": 4096,
       "matches": "^.*$"
@@ -659,7 +657,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1523
+        "line": 1630
       },
       "max_length": 4096,
       "matches": "^.*$"
@@ -675,7 +673,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1475
+        "line": 1582
       },
       "max_length": 4096,
       "matches": "^.*$"
@@ -684,13 +682,13 @@
       "name": "cc_repositories_prefix",
       "type": "string",
       "description": "The prefix for the compliance repositories.",
-      "default": "compliance",
+      "default": "",
       "source": [
         "module.devsecops_cc_toolchain.module.repositories"
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1634
+        "line": 1741
       }
     },
     "cc_scc_enable_scc": {
@@ -704,7 +702,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1539
+        "line": 1646
       }
     },
     "cc_scc_integration_name": {
@@ -717,7 +715,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1533
+        "line": 1640
       }
     },
     "cc_slack_channel_name": {
@@ -730,24 +728,18 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1573
+        "line": 1680
       }
     },
     "cc_slack_notifications": {
       "name": "cc_slack_notifications",
       "type": "string",
-      "description": "The switch that turns the Slack integration on or off.",
-      "default": "0",
-      "required": true,
-      "source": [
-        "module.devsecops_cc_toolchain.module.pipeline_cc.ibm_cd_tekton_pipeline_property.slack_notifications.value"
-      ],
+      "description": "The switch that turns the Slack notification on (`1`) or off (`0`).",
+      "default": "",
       "pos": {
         "filename": "variables.tf",
-        "line": 1547
-      },
-      "max_length": 4096,
-      "matches": "^.*$"
+        "line": 1654
+      }
     },
     "cc_slack_pipeline_fail": {
       "name": "cc_slack_pipeline_fail",
@@ -759,7 +751,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1585
+        "line": 1692
       }
     },
     "cc_slack_pipeline_start": {
@@ -772,7 +764,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1591
+        "line": 1698
       }
     },
     "cc_slack_pipeline_success": {
@@ -785,7 +777,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1597
+        "line": 1704
       }
     },
     "cc_slack_team_name": {
@@ -798,7 +790,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1579
+        "line": 1686
       }
     },
     "cc_slack_toolchain_bind": {
@@ -811,7 +803,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1603
+        "line": 1710
       }
     },
     "cc_slack_toolchain_unbind": {
@@ -824,20 +816,20 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1609
+        "line": 1716
       }
     },
     "cc_slack_webhook_secret_name": {
       "name": "cc_slack_webhook_secret_name",
       "type": "string",
       "description": "Name of the webhook secret in the secret provider.",
-      "default": "slack-webhook",
+      "default": "",
       "source": [
         "module.devsecops_cc_toolchain.module.integrations"
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1561
+        "line": 1668
       }
     },
     "cc_sm_location": {
@@ -848,11 +840,13 @@
       "required": true,
       "source": [
         "module.devsecops_cc_toolchain.module.integrations",
+        "module.devsecops_cc_toolchain.module.integrations",
+        "module.devsecops_cc_toolchain.module.services.data.ibm_resource_instance.key_protect_instance.location",
         "module.devsecops_cc_toolchain.module.services.data.ibm_resource_instance.secrets_manager_instance.location"
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1322
+        "line": 1429
       },
       "cloud_data_type": "region",
       "computed": true
@@ -869,7 +863,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1316
+        "line": 1423
       }
     },
     "cc_sm_resource_group": {
@@ -884,7 +878,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1310
+        "line": 1417
       },
       "cloud_data_type": "resource_group",
       "computed": true,
@@ -902,7 +896,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1304
+        "line": 1411
       }
     },
     "cc_sonarqube_config": {
@@ -916,7 +910,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1553
+        "line": 1660
       },
       "max_length": 4096,
       "matches": "^.*$"
@@ -931,7 +925,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1268
+        "line": 1375
       },
       "max_length": 500,
       "matches": "^(.*?)$"
@@ -940,14 +934,14 @@
       "name": "cc_toolchain_name",
       "type": "string",
       "description": "The name of the CC Toolchain.",
-      "default": "DevSecOps CC Toolchain - Terraform",
+      "default": "",
       "required": true,
       "source": [
         "module.devsecops_cc_toolchain.ibm_cd_toolchain.toolchain_instance.name"
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1256
+        "line": 1363
       },
       "max_length": 128,
       "matches": "^([^\\x00-\\x7F]|[a-zA-Z0-9-._ ])+$"
@@ -955,14 +949,14 @@
     "cc_toolchain_region": {
       "name": "cc_toolchain_region",
       "type": "string",
-      "description": "The region containing the CI toolchain.",
+      "description": "The region containing the CI toolchain. Use the short form of the regions. For example `us-south`.",
       "default": "",
       "source": [
         "module.devsecops_cc_toolchain.module.repositories"
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1262
+        "line": 1369
       }
     },
     "cc_toolchain_resource_group": {
@@ -975,7 +969,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1250
+        "line": 1357
       },
       "cloud_data_type": "resource_group",
       "computed": true,
@@ -994,7 +988,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1161
+        "line": 1268
       },
       "max_length": 4096,
       "matches": "^.*$"
@@ -1009,7 +1003,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 814
+        "line": 921
       }
     },
     "cd_change_management_group": {
@@ -1022,7 +1016,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 808
+        "line": 915
       }
     },
     "cd_change_management_repo": {
@@ -1035,33 +1029,33 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 745
+        "line": 852
       }
     },
     "cd_change_management_repo_auth_type": {
       "name": "cd_change_management_repo_auth_type",
       "type": "string",
       "description": "Select the method of authentication that is used to access the Git provider. 'oauth' or 'pat'.",
-      "default": "oauth",
+      "default": "",
       "source": [
         "module.devsecops_cd_toolchain.module.repositories"
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1005
+        "line": 1112
       }
     },
     "cd_change_management_repo_git_token_secret_name": {
       "name": "cd_change_management_repo_git_token_secret_name",
       "type": "string",
       "description": "Name of the Git token secret in the secret provider.",
-      "default": "git-token",
+      "default": "",
       "source": [
         "module.devsecops_cd_toolchain.module.repositories"
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1063
+        "line": 1170
       }
     },
     "cd_change_repo_clone_from_url": {
@@ -1074,7 +1068,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 751
+        "line": 858
       }
     },
     "cd_change_request_id": {
@@ -1088,7 +1082,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1119
+        "line": 1226
       },
       "max_length": 4096,
       "matches": "^.*$"
@@ -1097,15 +1091,14 @@
       "name": "cd_cluster_name",
       "type": "string",
       "description": "Name of the Kubernetes cluster where the application is deployed.",
-      "default": "mycluster-free",
+      "default": "",
       "required": true,
       "source": [
-        "module.devsecops_cd_toolchain.module.pipeline_cd.ibm_cd_tekton_pipeline_property.cd_pipeline_cluster_name.value",
-        "module.devsecops_cd_toolchain.module.services"
+        "module.devsecops_cd_toolchain.module.pipeline_cd.ibm_cd_tekton_pipeline_property.cd_pipeline_cluster_name.value"
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 727
+        "line": 828
       },
       "max_length": 4096,
       "matches": "^.*$"
@@ -1117,12 +1110,11 @@
       "default": "prod",
       "required": true,
       "source": [
-        "module.devsecops_cd_toolchain.module.pipeline_cd.ibm_cd_tekton_pipeline_property.cd_pipeline_cluster_namespace.value",
-        "module.devsecops_cd_toolchain.module.services"
+        "module.devsecops_cd_toolchain.module.pipeline_cd.ibm_cd_tekton_pipeline_property.cd_pipeline_cluster_namespace.value"
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 733
+        "line": 834
       },
       "max_length": 4096,
       "matches": "^.*$"
@@ -1130,16 +1122,15 @@
     "cd_cluster_region": {
       "name": "cd_cluster_region",
       "type": "string",
-      "description": "Region of the Kubernetes cluster where the application is deployed.",
-      "default": "ibm:yp:us-south",
+      "description": "Region of the Kubernetes cluster where the application is deployed. Use the short form of the regions. For example `us-south`.",
+      "default": "",
       "required": true,
       "source": [
-        "module.devsecops_cd_toolchain.module.pipeline_cd.ibm_cd_tekton_pipeline_property.cd_pipeline_cluster_region.value",
-        "module.devsecops_cd_toolchain.module.services"
+        "module.devsecops_cd_toolchain.module.pipeline_cd.ibm_cd_tekton_pipeline_property.cd_pipeline_cluster_region.value"
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 739
+        "line": 840
       },
       "max_length": 4096,
       "matches": "^.*$"
@@ -1155,7 +1146,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1069
+        "line": 1176
       },
       "max_length": 4096,
       "matches": "^.*$"
@@ -1172,7 +1163,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 826
+        "line": 933
       },
       "max_length": 4096,
       "matches": "^.*$"
@@ -1187,7 +1178,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 960
+        "line": 1067
       }
     },
     "cd_compliance_pipeline_repo_auth_type": {
@@ -1200,7 +1191,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 999
+        "line": 1106
       }
     },
     "cd_compliance_pipeline_repo_git_token_secret_name": {
@@ -1213,21 +1204,21 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1045
+        "line": 1152
       }
     },
     "cd_cos_api_key_secret_name": {
       "name": "cd_cos_api_key_secret_name",
       "type": "string",
       "description": "Name of the COS API key secret in the secret provider.",
-      "default": "cos-api-key",
+      "default": "",
       "required": true,
       "source": [
         "module.devsecops_cd_toolchain.module.pipeline_cd.ibm_cd_tekton_pipeline_property.cd_pipeline_cos_api_key.value"
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1021
+        "line": 1128
       },
       "max_length": 4096,
       "matches": "^.*$"
@@ -1243,7 +1234,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1241
+        "line": 1348
       },
       "max_length": 4096,
       "matches": "^.*$"
@@ -1259,7 +1250,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1235
+        "line": 1342
       },
       "max_length": 4096,
       "matches": "^.*$"
@@ -1275,7 +1266,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1107
+        "line": 1214
       },
       "max_length": 4096,
       "matches": "^.*$"
@@ -1290,20 +1281,20 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 802
+        "line": 909
       }
     },
     "cd_deployment_repo_auth_type": {
       "name": "cd_deployment_repo_auth_type",
       "type": "string",
       "description": "Select the method of authentication that is used to access the Git provider. 'oauth' or 'pat'.",
-      "default": "oauth",
+      "default": "",
       "source": [
         "module.devsecops_cd_toolchain.module.repositories"
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 993
+        "line": 1100
       }
     },
     "cd_deployment_repo_clone_from_branch": {
@@ -1316,7 +1307,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 786
+        "line": 893
       }
     },
     "cd_deployment_repo_clone_from_url": {
@@ -1329,7 +1320,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 780
+        "line": 887
       }
     },
     "cd_deployment_repo_clone_to_git_id": {
@@ -1342,7 +1333,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 775
+        "line": 882
       }
     },
     "cd_deployment_repo_clone_to_git_provider": {
@@ -1355,7 +1346,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 769
+        "line": 876
       }
     },
     "cd_deployment_repo_existing_branch": {
@@ -1368,7 +1359,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 796
+        "line": 903
       }
     },
     "cd_deployment_repo_existing_git_id": {
@@ -1381,7 +1372,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 763
+        "line": 870
       }
     },
     "cd_deployment_repo_existing_git_provider": {
@@ -1394,7 +1385,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 757
+        "line": 864
       }
     },
     "cd_deployment_repo_existing_url": {
@@ -1407,20 +1398,20 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 791
+        "line": 898
       }
     },
     "cd_deployment_repo_git_token_secret_name": {
       "name": "cd_deployment_repo_git_token_secret_name",
       "type": "string",
       "description": "Name of the Git token secret in the secret provider.",
-      "default": "git-token",
+      "default": "",
       "source": [
         "module.devsecops_cd_toolchain.module.repositories"
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1057
+        "line": 1164
       }
     },
     "cd_doi_environment": {
@@ -1434,7 +1425,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 838
+        "line": 945
       },
       "max_length": 4096,
       "matches": "^.*$"
@@ -1446,7 +1437,7 @@
       "default": "",
       "pos": {
         "filename": "variables.tf",
-        "line": 832
+        "line": 939
       }
     },
     "cd_emergency_label": {
@@ -1460,7 +1451,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1155
+        "line": 1262
       },
       "max_length": 4096,
       "matches": "^.*$"
@@ -1472,7 +1463,7 @@
       "default": false,
       "pos": {
         "filename": "variables.tf",
-        "line": 856
+        "line": 963
       }
     },
     "cd_enable_secrets_manager": {
@@ -1482,7 +1473,7 @@
       "default": false,
       "pos": {
         "filename": "variables.tf",
-        "line": 862
+        "line": 969
       }
     },
     "cd_enable_signing_validation": {
@@ -1496,7 +1487,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1173
+        "line": 1280
       }
     },
     "cd_enable_slack": {
@@ -1504,13 +1495,9 @@
       "type": "bool",
       "description": "Default: false. Set to true to create the integration.",
       "default": false,
-      "required": true,
-      "source": [
-        "module.devsecops_cd_toolchain.module.integrations.ibm_cd_toolchain_tool_slack.slack_tool.count"
-      ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1186
+        "line": 1293
       }
     },
     "cd_evidence_group": {
@@ -1523,33 +1510,33 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 948
+        "line": 1055
       }
     },
     "cd_evidence_repo_auth_type": {
       "name": "cd_evidence_repo_auth_type",
       "type": "string",
       "description": "Select the method of authentication that is used to access the Git provider. 'oauth' or 'pat'.",
-      "default": "oauth",
+      "default": "",
       "source": [
         "module.devsecops_cd_toolchain.module.repositories"
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 987
+        "line": 1094
       }
     },
     "cd_evidence_repo_git_token_secret_name": {
       "name": "cd_evidence_repo_git_token_secret_name",
       "type": "string",
       "description": "Name of the Git token secret in the secret provider.",
-      "default": "git-token",
+      "default": "",
       "source": [
         "module.devsecops_cd_toolchain.module.repositories"
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1033
+        "line": 1140
       }
     },
     "cd_inventory_group": {
@@ -1562,33 +1549,33 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 942
+        "line": 1049
       }
     },
     "cd_inventory_repo_auth_type": {
       "name": "cd_inventory_repo_auth_type",
       "type": "string",
       "description": "Select the method of authentication that is used to access the Git provider. 'oauth' or 'pat'.",
-      "default": "oauth",
+      "default": "",
       "source": [
         "module.devsecops_cd_toolchain.module.repositories"
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 975
+        "line": 1082
       }
     },
     "cd_inventory_repo_git_token_secret_name": {
       "name": "cd_inventory_repo_git_token_secret_name",
       "type": "string",
       "description": "Name of the Git token secret in the secret provider.",
-      "default": "git-token",
+      "default": "",
       "source": [
         "module.devsecops_cd_toolchain.module.repositories"
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1039
+        "line": 1146
       }
     },
     "cd_issues_group": {
@@ -1601,33 +1588,33 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 936
+        "line": 1043
       }
     },
     "cd_issues_repo_auth_type": {
       "name": "cd_issues_repo_auth_type",
       "type": "string",
       "description": "Select the method of authentication that is used to access the Git provider. 'oauth' or 'pat'.",
-      "default": "oauth",
+      "default": "",
       "source": [
         "module.devsecops_cd_toolchain.module.repositories"
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 981
+        "line": 1088
       }
     },
     "cd_issues_repo_git_token_secret_name": {
       "name": "cd_issues_repo_git_token_secret_name",
       "type": "string",
       "description": "Name of the Git token secret in the secret provider.",
-      "default": "git-token",
+      "default": "",
       "source": [
         "module.devsecops_cd_toolchain.module.repositories"
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1027
+        "line": 1134
       }
     },
     "cd_kp_location": {
@@ -1642,7 +1629,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 904
+        "line": 1011
       },
       "cloud_data_type": "region",
       "computed": true
@@ -1659,7 +1646,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 898
+        "line": 1005
       }
     },
     "cd_kp_resource_group": {
@@ -1674,7 +1661,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 892
+        "line": 999
       },
       "cloud_data_type": "resource_group",
       "computed": true,
@@ -1693,7 +1680,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 844
+        "line": 951
       }
     },
     "cd_merge_cra_sbom": {
@@ -1707,7 +1694,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1143
+        "line": 1250
       },
       "max_length": 4096,
       "matches": "^.*$"
@@ -1723,7 +1710,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1149
+        "line": 1256
       },
       "max_length": 4096,
       "matches": "^.*$"
@@ -1738,7 +1725,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 954
+        "line": 1061
       }
     },
     "cd_pipeline_config_path": {
@@ -1752,7 +1739,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 928
+        "line": 1035
       },
       "max_length": 4096,
       "matches": "^.*$"
@@ -1761,13 +1748,13 @@
       "name": "cd_pipeline_config_repo_auth_type",
       "type": "string",
       "description": "Select the method of authentication that is used to access the Git provider. 'oauth' or 'pat'.",
-      "default": "oauth",
+      "default": "",
       "source": [
         "module.devsecops_cd_toolchain.module.repositories"
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 969
+        "line": 1076
       }
     },
     "cd_pipeline_config_repo_branch": {
@@ -1780,7 +1767,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 922
+        "line": 1029
       }
     },
     "cd_pipeline_config_repo_clone_from_url": {
@@ -1788,14 +1775,13 @@
       "type": "string",
       "description": "Specify a repository containing a custom pipeline-config.yaml file.",
       "default": "",
-      "required": true,
       "source": [
         "module.devsecops_cd_toolchain.module.pipeline_cd",
-        "module.devsecops_cd_toolchain.module.repositories.ibm_cd_toolchain_tool_hostedgit.pipeline_config_repo_clone_from_hostedgit.count"
+        "module.devsecops_cd_toolchain.module.repositories"
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 916
+        "line": 1023
       }
     },
     "cd_pipeline_config_repo_existing_url": {
@@ -1803,27 +1789,26 @@
       "type": "string",
       "description": "Specify a repository containing a custom pipeline-config.yaml file.",
       "default": "",
-      "required": true,
       "source": [
         "module.devsecops_cd_toolchain.module.pipeline_cd",
-        "module.devsecops_cd_toolchain.module.repositories.ibm_cd_toolchain_tool_hostedgit.pipeline_config_repo_existing_hostedgit.count"
+        "module.devsecops_cd_toolchain.module.repositories"
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 910
+        "line": 1017
       }
     },
     "cd_pipeline_config_repo_git_token_secret_name": {
       "name": "cd_pipeline_config_repo_git_token_secret_name",
       "type": "string",
       "description": "Name of the Git token secret in the secret provider.",
-      "default": "git-token",
+      "default": "",
       "source": [
         "module.devsecops_cd_toolchain.module.repositories"
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1051
+        "line": 1158
       }
     },
     "cd_pipeline_debug": {
@@ -1836,7 +1821,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1167
+        "line": 1274
       }
     },
     "cd_pipeline_ibmcloud_api_key_secret_name": {
@@ -1850,7 +1835,23 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1015
+        "line": 1122
+      },
+      "max_length": 4096,
+      "matches": "^.*$"
+    },
+    "cd_region": {
+      "name": "cd_region",
+      "type": "string",
+      "description": "IBM Cloud region used to prefix the `prod_latest` inventory repo branch.",
+      "default": "",
+      "required": true,
+      "source": [
+        "module.devsecops_cd_toolchain.module.pipeline_cd.ibm_cd_tekton_pipeline_property.cd_pipeline_region.value"
+      ],
+      "pos": {
+        "filename": "variables.tf",
+        "line": 846
       },
       "max_length": 4096,
       "matches": "^.*$"
@@ -1859,13 +1860,13 @@
       "name": "cd_repositories_prefix",
       "type": "string",
       "description": "Prefix name for the cloned compliance repos.",
-      "default": "compliance",
+      "default": "",
       "source": [
         "module.devsecops_cd_toolchain.module.repositories"
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 820
+        "line": 927
       }
     },
     "cd_satellite_cluster_group": {
@@ -1879,7 +1880,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1125
+        "line": 1232
       },
       "max_length": 4096,
       "matches": "^.*$"
@@ -1895,7 +1896,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1086
+        "line": 1193
       }
     },
     "cd_scc_integration_name": {
@@ -1908,7 +1909,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1080
+        "line": 1187
       }
     },
     "cd_slack_channel_name": {
@@ -1921,20 +1922,17 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1192
+        "line": 1299
       }
     },
     "cd_slack_notifications": {
       "name": "cd_slack_notifications",
       "type": "string",
-      "description": "The switch to turn the Slack integration on or off.",
-      "default": "0",
-      "source": [
-        "module.devsecops_cd_toolchain.module.pipeline_cd"
-      ],
+      "description": "The switch that turns the Slack notification on (`1`) or off (`0`).",
+      "default": "",
       "pos": {
         "filename": "variables.tf",
-        "line": 1094
+        "line": 1201
       }
     },
     "cd_slack_pipeline_fail": {
@@ -1947,7 +1945,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1204
+        "line": 1311
       }
     },
     "cd_slack_pipeline_start": {
@@ -1960,7 +1958,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1210
+        "line": 1317
       }
     },
     "cd_slack_pipeline_success": {
@@ -1973,7 +1971,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1216
+        "line": 1323
       }
     },
     "cd_slack_team_name": {
@@ -1986,7 +1984,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1198
+        "line": 1305
       }
     },
     "cd_slack_toolchain_bind": {
@@ -1999,7 +1997,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1222
+        "line": 1329
       }
     },
     "cd_slack_toolchain_unbind": {
@@ -2012,20 +2010,20 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1228
+        "line": 1335
       }
     },
     "cd_slack_webhook_secret_name": {
       "name": "cd_slack_webhook_secret_name",
       "type": "string",
       "description": "Name of the webhook secret in the secret provider.",
-      "default": "slack-webhook",
+      "default": "",
       "source": [
         "module.devsecops_cd_toolchain.module.integrations"
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1180
+        "line": 1287
       }
     },
     "cd_sm_location": {
@@ -2040,7 +2038,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 886
+        "line": 993
       },
       "cloud_data_type": "region",
       "computed": true
@@ -2057,7 +2055,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 880
+        "line": 987
       }
     },
     "cd_sm_resource_group": {
@@ -2072,7 +2070,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 874
+        "line": 981
       },
       "cloud_data_type": "resource_group",
       "computed": true,
@@ -2090,7 +2088,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 868
+        "line": 975
       }
     },
     "cd_source_environment": {
@@ -2104,7 +2102,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1131
+        "line": 1238
       },
       "max_length": 4096,
       "matches": "^.*$"
@@ -2120,7 +2118,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1137
+        "line": 1244
       },
       "max_length": 4096,
       "matches": "^.*$"
@@ -2136,7 +2134,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1101
+        "line": 1208
       },
       "max_length": 4096,
       "matches": "^.*$"
@@ -2152,7 +2150,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1113
+        "line": 1220
       },
       "max_length": 4096,
       "matches": "^.*$"
@@ -2167,7 +2165,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 721
+        "line": 822
       },
       "max_length": 500,
       "matches": "^(.*?)$"
@@ -2176,14 +2174,14 @@
       "name": "cd_toolchain_name",
       "type": "string",
       "description": "The name of the CD Toolchain.",
-      "default": "DevSecOps CD Toolchain - Terraform",
+      "default": "",
       "required": true,
       "source": [
         "module.devsecops_cd_toolchain.ibm_cd_toolchain.toolchain_instance.name"
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 709
+        "line": 810
       },
       "max_length": 128,
       "matches": "^([^\\x00-\\x7F]|[a-zA-Z0-9-._ ])+$"
@@ -2191,21 +2189,16 @@
     "cd_toolchain_region": {
       "name": "cd_toolchain_region",
       "type": "string",
-      "description": "The region containing the CI toolchain.",
+      "description": "The region containing the CI toolchain. Use the short form of the regions. For example `us-south`.",
       "default": "",
-      "required": true,
       "source": [
         "module.devsecops_cd_toolchain.module.integrations",
-        "module.devsecops_cd_toolchain.module.pipeline_cd.ibm_cd_tekton_pipeline_property.cd_pipeline_region.value",
-        "module.devsecops_cd_toolchain.module.repositories",
-        "module.devsecops_cd_toolchain.module.services"
+        "module.devsecops_cd_toolchain.module.repositories"
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 715
-      },
-      "max_length": 4096,
-      "matches": "^.*$"
+        "line": 816
+      }
     },
     "cd_toolchain_resource_group": {
       "name": "cd_toolchain_resource_group",
@@ -2219,7 +2212,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 703
+        "line": 804
       },
       "cloud_data_type": "resource_group",
       "computed": true,
@@ -2237,7 +2230,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 436
+        "line": 537
       }
     },
     "ci_app_name": {
@@ -2255,7 +2248,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 146
+        "line": 235
       },
       "max_length": 4096,
       "matches": "^.*$"
@@ -2264,13 +2257,13 @@
       "name": "ci_app_repo_auth_type",
       "type": "string",
       "description": "Select the method of authentication that is used to access the Git provider. 'oauth' or 'pat'.",
-      "default": "oauth",
+      "default": "",
       "source": [
         "module.devsecops_ci_toolchain.module.repositories"
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 499
+        "line": 600
       }
     },
     "ci_app_repo_clone_from_branch": {
@@ -2283,7 +2276,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 310
+        "line": 411
       }
     },
     "ci_app_repo_clone_from_url": {
@@ -2296,7 +2289,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 304
+        "line": 405
       }
     },
     "ci_app_repo_clone_to_git_id": {
@@ -2309,7 +2302,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 346
+        "line": 447
       }
     },
     "ci_app_repo_clone_to_git_provider": {
@@ -2322,7 +2315,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 340
+        "line": 441
       }
     },
     "ci_app_repo_existing_branch": {
@@ -2335,7 +2328,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 322
+        "line": 423
       }
     },
     "ci_app_repo_existing_git_id": {
@@ -2348,7 +2341,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 334
+        "line": 435
       }
     },
     "ci_app_repo_existing_git_provider": {
@@ -2361,7 +2354,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 328
+        "line": 429
       }
     },
     "ci_app_repo_existing_url": {
@@ -2374,20 +2367,20 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 316
+        "line": 417
       }
     },
     "ci_app_repo_git_token_secret_name": {
       "name": "ci_app_repo_git_token_secret_name",
       "type": "string",
       "description": "Name of the Git token secret in the secret provider.",
-      "default": "git-token",
+      "default": "",
       "source": [
         "module.devsecops_ci_toolchain.module.repositories"
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 563
+        "line": 664
       }
     },
     "ci_app_version": {
@@ -2401,7 +2394,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 613
+        "line": 714
       },
       "max_length": 4096,
       "matches": "^.*$"
@@ -2416,14 +2409,14 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 194
+        "line": 295
       }
     },
     "ci_cluster_name": {
       "name": "ci_cluster_name",
       "type": "string",
       "description": "Name of the Kubernetes cluster where the application is deployed. (can be the same cluster used for prod)",
-      "default": "mycluster-free",
+      "default": "",
       "required": true,
       "source": [
         "module.devsecops_ci_toolchain.module.pipeline_ci.ibm_cd_tekton_pipeline_property.ci_pipeline_cluster_name.value",
@@ -2431,7 +2424,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 152
+        "line": 241
       },
       "max_length": 4096,
       "matches": "^.*$"
@@ -2448,7 +2441,33 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 158
+        "line": 247
+      },
+      "max_length": 4096,
+      "matches": "^.*$"
+    },
+    "ci_cluster_region": {
+      "name": "ci_cluster_region",
+      "type": "string",
+      "description": "Region of the Kubernetes cluster where the application is deployed. Use the short form of the regions. For example `us-south`.",
+      "default": "",
+      "pos": {
+        "filename": "variables.tf",
+        "line": 259
+      }
+    },
+    "ci_cluster_resource_group": {
+      "name": "ci_cluster_resource_group",
+      "type": "string",
+      "description": "The cluster resource group.",
+      "default": "",
+      "required": true,
+      "source": [
+        "module.devsecops_ci_toolchain.module.pipeline_ci.ibm_cd_tekton_pipeline_property.ci_pipeline_dev_resource_group.value"
+      ],
+      "pos": {
+        "filename": "variables.tf",
+        "line": 271
       },
       "max_length": 4096,
       "matches": "^.*$"
@@ -2464,7 +2483,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 288
+        "line": 389
       },
       "max_length": 4096,
       "matches": "^.*$"
@@ -2480,7 +2499,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 282
+        "line": 383
       },
       "max_length": 4096,
       "matches": "^.*$"
@@ -2496,7 +2515,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 264
+        "line": 365
       },
       "max_length": 4096,
       "matches": "^.*$"
@@ -2512,7 +2531,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 270
+        "line": 371
       },
       "max_length": 4096,
       "matches": "^.*$"
@@ -2528,7 +2547,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 276
+        "line": 377
       },
       "max_length": 4096,
       "matches": "^.*$"
@@ -2544,7 +2563,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 294
+        "line": 395
       },
       "max_length": 4096,
       "matches": "^.*$"
@@ -2554,6 +2573,7 @@
       "type": "string",
       "description": "Pipeline baseimage to run most of the built-in pipeline code.",
       "default": "",
+      "required": true,
       "source": [
         "module.devsecops_ci_toolchain.module.pipeline_ci.ibm_cd_tekton_pipeline_property.ci_pipeline_base_image.count",
         "module.devsecops_ci_toolchain.module.pipeline_ci.ibm_cd_tekton_pipeline_property.ci_pipeline_base_image.value",
@@ -2562,7 +2582,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 188
+        "line": 289
       },
       "max_length": 4096,
       "matches": "^.*$"
@@ -2577,7 +2597,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 466
+        "line": 567
       }
     },
     "ci_compliance_pipeline_repo_auth_type": {
@@ -2590,7 +2610,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 505
+        "line": 606
       }
     },
     "ci_compliance_pipeline_repo_git_token_secret_name": {
@@ -2603,21 +2623,21 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 545
+        "line": 646
       }
     },
     "ci_cos_api_key_secret_name": {
       "name": "ci_cos_api_key_secret_name",
       "type": "string",
       "description": "Name of the COS API key secret in the secret provider.",
-      "default": "cos-api-key",
+      "default": "",
       "required": true,
       "source": [
         "module.devsecops_ci_toolchain.module.pipeline_ci.ibm_cd_tekton_pipeline_property.ci_pipeline_cos_api_key_secret_name.value"
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 521
+        "line": 622
       },
       "max_length": 4096,
       "matches": "^.*$"
@@ -2633,7 +2653,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 694
+        "line": 795
       },
       "max_length": 4096,
       "matches": "^.*$"
@@ -2649,7 +2669,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 688
+        "line": 789
       },
       "max_length": 4096,
       "matches": "^.*$"
@@ -2665,7 +2685,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 601
+        "line": 702
       },
       "max_length": 4096,
       "matches": "^.*$"
@@ -2681,7 +2701,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 607
+        "line": 708
       },
       "max_length": 4096,
       "matches": "^.*$"
@@ -2706,7 +2726,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 256
+        "line": 357
       },
       "max_length": 4096,
       "matches": "^.*$"
@@ -2714,34 +2734,22 @@
     "ci_dev_region": {
       "name": "ci_dev_region",
       "type": "string",
-      "description": "Region of the Kubernetes cluster where the application is deployed.",
-      "default": "ibm:yp:us-south",
-      "required": true,
-      "source": [
-        "module.devsecops_ci_toolchain.module.pipeline_ci.ibm_cd_tekton_pipeline_property.ci_pipeline_dev_region.value"
-      ],
+      "description": "(Deprecated. Use `ci_cluster_region`) Region of the Kubernetes cluster where the application is deployed. Use the short form of the regions. For example `us-south`",
+      "default": "",
       "pos": {
         "filename": "variables.tf",
-        "line": 164
-      },
-      "max_length": 4096,
-      "matches": "^.*$"
+        "line": 253
+      }
     },
     "ci_dev_resource_group": {
       "name": "ci_dev_resource_group",
       "type": "string",
-      "description": "The cluster resource group.",
-      "default": "Default",
-      "required": true,
-      "source": [
-        "module.devsecops_ci_toolchain.module.pipeline_ci.ibm_cd_tekton_pipeline_property.ci_pipeline_dev_resource_group.value"
-      ],
+      "description": "(Deprecated. Use `ci_cluster_resource_group`) The cluster resource group.",
+      "default": "",
       "pos": {
         "filename": "variables.tf",
-        "line": 170
-      },
-      "max_length": 4096,
-      "matches": "^.*$"
+        "line": 265
+      }
     },
     "ci_doi_environment": {
       "name": "ci_doi_environment",
@@ -2754,7 +2762,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 589
+        "line": 690
       },
       "max_length": 4096,
       "matches": "^.*$"
@@ -2769,7 +2777,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 218
+        "line": 319
       }
     },
     "ci_doi_toolchain_id_pipeline_property": {
@@ -2783,7 +2791,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 595
+        "line": 696
       },
       "max_length": 4096,
       "matches": "^.*$"
@@ -2795,7 +2803,7 @@
       "default": false,
       "pos": {
         "filename": "variables.tf",
-        "line": 354
+        "line": 455
       }
     },
     "ci_enable_pipeline_dockerconfigjson": {
@@ -2810,7 +2818,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 631
+        "line": 732
       }
     },
     "ci_enable_secrets_manager": {
@@ -2820,7 +2828,7 @@
       "default": false,
       "pos": {
         "filename": "variables.tf",
-        "line": 360
+        "line": 461
       }
     },
     "ci_enable_slack": {
@@ -2828,13 +2836,9 @@
       "type": "bool",
       "description": "Default: false. Set to true to create the integration.",
       "default": false,
-      "required": true,
-      "source": [
-        "module.devsecops_ci_toolchain.module.integrations.ibm_cd_toolchain_tool_slack.slack_tool.count"
-      ],
       "pos": {
         "filename": "variables.tf",
-        "line": 639
+        "line": 740
       }
     },
     "ci_evidence_group": {
@@ -2847,33 +2851,33 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 454
+        "line": 555
       }
     },
     "ci_evidence_repo_auth_type": {
       "name": "ci_evidence_repo_auth_type",
       "type": "string",
       "description": "Select the method of authentication that is used to access the Git provider. 'oauth' or 'pat'.",
-      "default": "oauth",
+      "default": "",
       "source": [
         "module.devsecops_ci_toolchain.module.repositories"
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 493
+        "line": 594
       }
     },
     "ci_evidence_repo_git_token_secret_name": {
       "name": "ci_evidence_repo_git_token_secret_name",
       "type": "string",
       "description": "Name of the Git token secret in the secret provider.",
-      "default": "git-token",
+      "default": "",
       "source": [
         "module.devsecops_ci_toolchain.module.repositories"
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 533
+        "line": 634
       }
     },
     "ci_inventory_group": {
@@ -2886,33 +2890,33 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 448
+        "line": 549
       }
     },
     "ci_inventory_repo_auth_type": {
       "name": "ci_inventory_repo_auth_type",
       "type": "string",
       "description": "Select the method of authentication that is used to access the Git provider. 'oauth' or 'pat'.",
-      "default": "oauth",
+      "default": "",
       "source": [
         "module.devsecops_ci_toolchain.module.repositories"
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 481
+        "line": 582
       }
     },
     "ci_inventory_repo_git_token_secret_name": {
       "name": "ci_inventory_repo_git_token_secret_name",
       "type": "string",
       "description": "Name of the Git token secret in the secret provider.",
-      "default": "git-token",
+      "default": "",
       "source": [
         "module.devsecops_ci_toolchain.module.repositories"
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 539
+        "line": 640
       }
     },
     "ci_issues_group": {
@@ -2925,33 +2929,33 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 442
+        "line": 543
       }
     },
     "ci_issues_repo_auth_type": {
       "name": "ci_issues_repo_auth_type",
       "type": "string",
       "description": "Select the method of authentication that is used to access the Git provider. 'oauth' or 'pat'.",
-      "default": "oauth",
+      "default": "",
       "source": [
         "module.devsecops_ci_toolchain.module.repositories"
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 487
+        "line": 588
       }
     },
     "ci_issues_repo_git_token_secret_name": {
       "name": "ci_issues_repo_git_token_secret_name",
       "type": "string",
       "description": "Name of the Git token secret in the secret provider.",
-      "default": "git-token",
+      "default": "",
       "source": [
         "module.devsecops_ci_toolchain.module.repositories"
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 527
+        "line": 628
       }
     },
     "ci_kp_location": {
@@ -2966,7 +2970,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 402
+        "line": 503
       },
       "cloud_data_type": "region",
       "computed": true
@@ -2983,7 +2987,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 396
+        "line": 497
       }
     },
     "ci_kp_resource_group": {
@@ -2998,7 +3002,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 390
+        "line": 491
       },
       "cloud_data_type": "resource_group",
       "computed": true,
@@ -3011,13 +3015,14 @@
       "type": "bool",
       "description": "Enable a link to a DevOps Insights instance in another toolchain.",
       "default": false,
+      "required": true,
       "source": [
         "module.devsecops_ci_toolchain.module.integrations.ibm_cd_toolchain_tool_custom.link_to_insights.count",
         "module.devsecops_ci_toolchain.module.integrations.ibm_cd_toolchain_tool_devopsinsights.insights_tool.count"
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 212
+        "line": 313
       }
     },
     "ci_opt_in_dynamic_api_scan": {
@@ -3031,7 +3036,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 230
+        "line": 331
       },
       "max_length": 4096,
       "matches": "^.*$"
@@ -3047,7 +3052,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 242
+        "line": 343
       },
       "max_length": 4096,
       "matches": "^.*$"
@@ -3063,7 +3068,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 236
+        "line": 337
       },
       "max_length": 4096,
       "matches": "^.*$"
@@ -3079,7 +3084,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 583
+        "line": 684
       },
       "max_length": 4096,
       "matches": "^.*$"
@@ -3095,7 +3100,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 248
+        "line": 349
       },
       "max_length": 4096,
       "matches": "^.*$"
@@ -3110,7 +3115,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 460
+        "line": 561
       }
     },
     "ci_pipeline_config_path": {
@@ -3125,7 +3130,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 428
+        "line": 529
       },
       "max_length": 4096,
       "matches": "^.*$"
@@ -3134,13 +3139,13 @@
       "name": "ci_pipeline_config_repo_auth_type",
       "type": "string",
       "description": "Select the method of authentication that is used to access the Git provider. 'oauth' or 'pat'.",
-      "default": "oauth",
+      "default": "",
       "source": [
         "module.devsecops_ci_toolchain.module.repositories"
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 475
+        "line": 576
       }
     },
     "ci_pipeline_config_repo_branch": {
@@ -3153,7 +3158,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 422
+        "line": 523
       }
     },
     "ci_pipeline_config_repo_clone_from_url": {
@@ -3161,15 +3166,14 @@
       "type": "string",
       "description": "Specify a repository containing a custom pipeline-config.yaml file.",
       "default": "",
-      "required": true,
       "source": [
         "module.devsecops_ci_toolchain.module.pipeline_ci",
         "module.devsecops_ci_toolchain.module.pipeline_pr",
-        "module.devsecops_ci_toolchain.module.repositories.ibm_cd_toolchain_tool_hostedgit.pipeline_config_repo_clone_from_hostedgit.count"
+        "module.devsecops_ci_toolchain.module.repositories"
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 416
+        "line": 517
       }
     },
     "ci_pipeline_config_repo_existing_url": {
@@ -3183,24 +3187,24 @@
         "module.devsecops_ci_toolchain.module.pipeline_ci.ibm_cd_tekton_pipeline_property.ci_pipeline_pipeline_config_repo_default.count",
         "module.devsecops_ci_toolchain.module.pipeline_pr.ibm_cd_tekton_pipeline_property.pr_pipeline_pipeline_config_repo.count",
         "module.devsecops_ci_toolchain.module.pipeline_pr.ibm_cd_tekton_pipeline_property.pr_pipeline_pipeline_config_repo_default.count",
-        "module.devsecops_ci_toolchain.module.repositories.ibm_cd_toolchain_tool_hostedgit.pipeline_config_repo_existing_hostedgit.count"
+        "module.devsecops_ci_toolchain.module.repositories"
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 410
+        "line": 511
       }
     },
     "ci_pipeline_config_repo_git_token_secret_name": {
       "name": "ci_pipeline_config_repo_git_token_secret_name",
       "type": "string",
       "description": "Name of the Git token secret in the secret provider.",
-      "default": "git-token",
+      "default": "",
       "source": [
         "module.devsecops_ci_toolchain.module.repositories"
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 551
+        "line": 652
       }
     },
     "ci_pipeline_debug": {
@@ -3215,7 +3219,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 224
+        "line": 325
       },
       "max_length": 4096,
       "matches": "^.*$"
@@ -3232,7 +3236,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 575
+        "line": 676
       },
       "max_length": 4096,
       "matches": "^.*$"
@@ -3249,24 +3253,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 515
-      },
-      "max_length": 4096,
-      "matches": "^.*$"
-    },
-    "ci_registry_namespace": {
-      "name": "ci_registry_namespace",
-      "type": "string",
-      "description": "A unique namespace within the IBM Cloud Container Registry region where the application image is stored.",
-      "default": "",
-      "required": true,
-      "source": [
-        "module.devsecops_ci_toolchain.module.pipeline_ci.ibm_cd_tekton_pipeline_property.ci_pipeline_registry_namespace.value",
-        "module.devsecops_ci_toolchain.module.services"
-      ],
-      "pos": {
-        "filename": "variables.tf",
-        "line": 176
+        "line": 616
       },
       "max_length": 4096,
       "matches": "^.*$"
@@ -3274,8 +3261,8 @@
     "ci_registry_region": {
       "name": "ci_registry_region",
       "type": "string",
-      "description": "The IBM Cloud Region where the IBM Cloud Container Registry namespace is to be created.",
-      "default": "ibm:yp:us-south",
+      "description": "The IBM Cloud Region where the IBM Cloud Container Registry namespace is to be created. Use the short form of the regions. For example `us-south`.",
+      "default": "",
       "required": true,
       "source": [
         "module.devsecops_ci_toolchain.module.pipeline_ci.ibm_cd_tekton_pipeline_property.ci_pipeline_registry_region.value",
@@ -3283,7 +3270,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 182
+        "line": 283
       },
       "max_length": 4096,
       "matches": "^.*$"
@@ -3292,13 +3279,13 @@
       "name": "ci_repositories_prefix",
       "type": "string",
       "description": "Prefix name for the cloned compliance repos.",
-      "default": "compliance",
+      "default": "",
       "source": [
         "module.devsecops_ci_toolchain.module.repositories"
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 200
+        "line": 301
       }
     },
     "ci_signing_key_secret_name": {
@@ -3312,7 +3299,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 569
+        "line": 670
       },
       "max_length": 4096,
       "matches": "^.*$"
@@ -3327,25 +3314,18 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 645
+        "line": 746
       }
     },
     "ci_slack_notifications": {
       "name": "ci_slack_notifications",
       "type": "string",
-      "description": "The switch that turns the Slack integration on or off.",
-      "default": "0",
-      "required": true,
-      "source": [
-        "module.devsecops_ci_toolchain.module.pipeline_ci.ibm_cd_tekton_pipeline_property.ci_pipeline_slack_notifications.value",
-        "module.devsecops_ci_toolchain.module.pipeline_pr.ibm_cd_tekton_pipeline_property.pr_pipeline_slack_notifications.value"
-      ],
+      "description": "The switch that turns the Slack notification on (`1`) or off (`0`).",
+      "default": "",
       "pos": {
         "filename": "variables.tf",
-        "line": 619
-      },
-      "max_length": 4096,
-      "matches": "^.*$"
+        "line": 720
+      }
     },
     "ci_slack_pipeline_fail": {
       "name": "ci_slack_pipeline_fail",
@@ -3357,7 +3337,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 657
+        "line": 758
       }
     },
     "ci_slack_pipeline_start": {
@@ -3370,7 +3350,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 663
+        "line": 764
       }
     },
     "ci_slack_pipeline_success": {
@@ -3383,20 +3363,20 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 669
+        "line": 770
       }
     },
     "ci_slack_team_name": {
       "name": "ci_slack_team_name",
       "type": "string",
-      "description": "The Slack team name, which is the word or phrase before .slack.com in the team URL.",
+      "description": "The Slack team name, which is the word or phrase before `.slack.com` in the team URL.",
       "default": "my-team",
       "source": [
         "module.devsecops_ci_toolchain.module.integrations"
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 651
+        "line": 752
       }
     },
     "ci_slack_toolchain_bind": {
@@ -3409,7 +3389,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 675
+        "line": 776
       }
     },
     "ci_slack_toolchain_unbind": {
@@ -3422,20 +3402,20 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 681
+        "line": 782
       }
     },
     "ci_slack_webhook_secret_name": {
       "name": "ci_slack_webhook_secret_name",
       "type": "string",
       "description": "Name of the webhook secret in the secret provider.",
-      "default": "slack-webhook",
+      "default": "",
       "source": [
         "module.devsecops_ci_toolchain.module.integrations"
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 557
+        "line": 658
       }
     },
     "ci_sm_location": {
@@ -3450,7 +3430,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 384
+        "line": 485
       },
       "cloud_data_type": "region",
       "computed": true
@@ -3467,7 +3447,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 378
+        "line": 479
       }
     },
     "ci_sm_resource_group": {
@@ -3482,7 +3462,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 372
+        "line": 473
       },
       "cloud_data_type": "resource_group",
       "computed": true,
@@ -3500,7 +3480,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 366
+        "line": 467
       }
     },
     "ci_sonarqube_config": {
@@ -3514,7 +3494,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 625
+        "line": 726
       },
       "max_length": 4096,
       "matches": "^.*$"
@@ -3529,7 +3509,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 140
+        "line": 229
       },
       "max_length": 500,
       "matches": "^(.*?)$"
@@ -3538,14 +3518,14 @@
       "name": "ci_toolchain_name",
       "type": "string",
       "description": "The name of the CI Toolchain.",
-      "default": "DevSecOps CI Toolchain - Terraform",
+      "default": "",
       "required": true,
       "source": [
         "module.devsecops_ci_toolchain.ibm_cd_toolchain.toolchain_instance.name"
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 128
+        "line": 217
       },
       "max_length": 128,
       "matches": "^([^\\x00-\\x7F]|[a-zA-Z0-9-._ ])+$"
@@ -3553,14 +3533,14 @@
     "ci_toolchain_region": {
       "name": "ci_toolchain_region",
       "type": "string",
-      "description": "The region containing the CI toolchain.",
+      "description": "The region containing the CI toolchain. Use the short form of the regions. For example `us-south`.",
       "default": "",
       "source": [
         "module.devsecops_ci_toolchain.module.repositories"
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 134
+        "line": 223
       }
     },
     "ci_toolchain_resource_group": {
@@ -3573,13 +3553,63 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 122
+        "line": 211
       },
       "cloud_data_type": "resource_group",
       "computed": true,
       "cloud_data_range": [
         "resolved_to:name"
       ]
+    },
+    "cluster_name": {
+      "name": "cluster_name",
+      "type": "string",
+      "description": "Name of the Kubernetes cluster where the application is deployed. This sets the same cluster for both CI and CD toolchains. See `ci_cluster_name` and `cd_cluster_name` to set different clusters. By default , the cluster namespace for CI will be set to `dev` and CD to `prod`. These can be changed using `ci_cluster_namespace` and `cd_cluster_namespace`.",
+      "default": "mycluster-free",
+      "pos": {
+        "filename": "variables.tf",
+        "line": 196
+      }
+    },
+    "compliance_base_image": {
+      "name": "compliance_base_image",
+      "type": "string",
+      "description": "Pipeline baseimage to run most of the built-in pipeline code.",
+      "default": "",
+      "pos": {
+        "filename": "variables.tf",
+        "line": 190
+      }
+    },
+    "cos_api_key_secret_name": {
+      "name": "cos_api_key_secret_name",
+      "type": "string",
+      "description": "To enable the use of COS, a secret name to a COS API key secret in the secret provider is required. In addition `cos_endpoint` and `cos_bucket_name` must be set. This setting sets the same API key for the COS settings in the CI, CD, and CC toolchains. See `ci_cos_api_key_secret_name`, `cd_cos_api_key_secret_name`, and `cc_cos_api_key_secret_name` to set separately.",
+      "default": "cos-api-key",
+      "pos": {
+        "filename": "variables.tf",
+        "line": 20
+      }
+    },
+    "cos_bucket_name": {
+      "name": "cos_bucket_name",
+      "type": "string",
+      "description": "Set the name of your COS bucket. This applies the same COS bucket name for the CI, CD, and CC toolchains. See `ci_cos_bucket_name`, `cd_cos_bucket_name`, and `cc_cos_bucket_name` to set separately.",
+      "default": "",
+      "pos": {
+        "filename": "variables.tf",
+        "line": 124
+      }
+    },
+    "cos_endpoint": {
+      "name": "cos_endpoint",
+      "type": "string",
+      "description": "Set the Cloud Object Storage endpoint for accessing your COS bucket. This setting sets the same endpoint for COS in the CI, CD, and CC toolchains. See `ci_cos_endpoint`, `cd_cos_endpoint`, and `cc_cos_endpoint` to set the endpoints separately.",
+      "default": "",
+      "pos": {
+        "filename": "variables.tf",
+        "line": 118
+      }
     },
     "create_cc_toolchain": {
       "name": "create_cc_toolchain",
@@ -3591,7 +3621,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 1286
+        "line": 1393
       }
     },
     "create_cd_toolchain": {
@@ -3604,7 +3634,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 850
+        "line": 957
       }
     },
     "create_ci_toolchain": {
@@ -3617,7 +3647,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 206
+        "line": 307
       }
     },
     "deployment_repo_url": {
@@ -3649,6 +3679,32 @@
         "filename": "variables.tf",
         "line": 106
       }
+    },
+    "enable_slack": {
+      "name": "enable_slack",
+      "type": "bool",
+      "description": "Set to `true` to create the integration. This requires a valid `slack_channel_name`, `slack_team_name`, and a valid `webhook` (see `slack_webhook_secret_name`). This setting applies for CI, CD, and CC toolchains. To enable Slack separately, see `ci_enable_slack`, `cd_enable_slack`, and `cc_enable_slack`.",
+      "default": false,
+      "pos": {
+        "filename": "variables.tf",
+        "line": 130
+      }
+    },
+    "environment_prefix": {
+      "name": "environment_prefix",
+      "type": "string",
+      "description": "By default `ibm:yp:`. This will be set as the prefix to regions automatically where required. For example `ibm:yp:us-south`.",
+      "default": "ibm:yp:",
+      "required": true,
+      "source": [
+        "module.devsecops_ci_toolchain.module.pipeline_ci.ibm_cd_tekton_pipeline_property.ci_pipeline_dev_region.value"
+      ],
+      "pos": {
+        "filename": "variables.tf",
+        "line": 184
+      },
+      "max_length": 4096,
+      "matches": "^.*$"
     },
     "evidence_repo_url": {
       "name": "evidence_repo_url",
@@ -3723,7 +3779,7 @@
     "kp_location": {
       "name": "kp_location",
       "type": "string",
-      "description": "IBM Cloud location/region containing the Key Protect instance.",
+      "description": "The region location of the Key Protect instance. This applies to the CI, CD and CC Key Protect integrations. See `ci_kp_location`, `cd_kp_location`, and `cc_kp_location` to set separately.",
       "default": "us-south",
       "pos": {
         "filename": "variables.tf",
@@ -3733,7 +3789,7 @@
     "kp_name": {
       "name": "kp_name",
       "type": "string",
-      "description": "Name of the Key Protect instance where the secrets are stored.",
+      "description": "Name of the Key Protect instance where the secrets are stored. This applies to the CI, CD and CC Key Protect integrations. See `ci_kp_name`, `cd_kp_name`, and `cc_kp_name` to set separately.",
       "default": "kp-compliance-secrets",
       "pos": {
         "filename": "variables.tf",
@@ -3743,17 +3799,104 @@
     "kp_resource_group": {
       "name": "kp_resource_group",
       "type": "string",
-      "description": "The resource group containing the Key Protect instance for your secrets.",
+      "description": "The resource group containing the Key Protect instance. This applies to the CI, CD and CC Key Protect integrations. See `ci_kp_resource_group`, `cd_kp_resource_group`, and `cc_kp_resource_group` to set separately.",
       "default": "Default",
       "pos": {
         "filename": "variables.tf",
         "line": 82
       }
     },
+    "registry_namespace": {
+      "name": "registry_namespace",
+      "type": "string",
+      "description": "A unique namespace within the IBM Cloud Container Registry region where the application image is stored.",
+      "default": "",
+      "required": true,
+      "source": [
+        "module.devsecops_ci_toolchain.module.pipeline_ci.ibm_cd_tekton_pipeline_property.ci_pipeline_registry_namespace.value",
+        "module.devsecops_ci_toolchain.module.services"
+      ],
+      "pos": {
+        "filename": "variables.tf",
+        "line": 277
+      },
+      "max_length": 4096,
+      "matches": "^.*$"
+    },
+    "repo_git_token_secret_name": {
+      "name": "repo_git_token_secret_name",
+      "type": "string",
+      "description": "Name of the Git token secret in the secret provider. Specifying a secret name for the Git Token automatically sets the authentication type to `pat`.",
+      "default": "",
+      "pos": {
+        "filename": "variables.tf",
+        "line": 172
+      }
+    },
+    "repo_group": {
+      "name": "repo_group",
+      "type": "string",
+      "description": "Specify Git user or group for your application. This must be set if the repository authentication type is `pat` (personal access token).",
+      "default": "",
+      "pos": {
+        "filename": "variables.tf",
+        "line": 166
+      }
+    },
+    "repositories_prefix": {
+      "name": "repositories_prefix",
+      "type": "string",
+      "description": "Prefix name for the cloned compliance repos.",
+      "default": "compliance",
+      "pos": {
+        "filename": "variables.tf",
+        "line": 202
+      }
+    },
+    "slack_channel_name": {
+      "name": "slack_channel_name",
+      "type": "string",
+      "description": "The Slack channel that notifications are posted to. This applies to the CI, CD, and CC toolchains. To set separately see `ci_slack_channel_name`, `cd_slack_channel_name`, and `cc_slack_channel_name`",
+      "default": "my-channel",
+      "pos": {
+        "filename": "variables.tf",
+        "line": 136
+      }
+    },
+    "slack_notifications": {
+      "name": "slack_notifications",
+      "type": "string",
+      "description": "This is enabled automatically when a Slack integration is created. The switch overrides the Slack notifications. Set `1` for on and `0` for off. This applies to the CI, CD, and CC toolchains. To set separately, see `ci_slack_notifications`, `cd_slack_notifications`, and `cc_slack_notifications`.",
+      "default": "",
+      "pos": {
+        "filename": "variables.tf",
+        "line": 160
+      }
+    },
+    "slack_team_name": {
+      "name": "slack_team_name",
+      "type": "string",
+      "description": "The Slack team name, which is the word or phrase before `.slack.com` in the team URL. This applies to the CI, CD, and CC toolchains. To set separately, see `ci_slack_team_name`, `cd_slack_team_name`, and `cc_slack_team_name`.",
+      "default": "my-team",
+      "pos": {
+        "filename": "variables.tf",
+        "line": 142
+      }
+    },
+    "slack_webhook_secret_name": {
+      "name": "slack_webhook_secret_name",
+      "type": "string",
+      "description": "Name of the webhook secret for Slack in the secret provider. This applies to the CI, CD, and CC toolchains. To set separately, see `ci_slack_webhook_secret_name`, `cd_slack_webhook_secret_name`, and `cc_slack_webhook_secret_name`",
+      "default": "slack-webhook",
+      "pos": {
+        "filename": "variables.tf",
+        "line": 148
+      }
+    },
     "sm_location": {
       "name": "sm_location",
       "type": "string",
-      "description": "The region location of the Secrets Manager instance.",
+      "description": "The region location of the Secrets Manager instance. This applies to the CI, CD and CC Secret Manager integrations. See `ci_sm_location`, `cd_sm_location`, and `cc_sm_location` to set separately.",
       "default": "us-south",
       "pos": {
         "filename": "variables.tf",
@@ -3763,7 +3906,7 @@
     "sm_name": {
       "name": "sm_name",
       "type": "string",
-      "description": "The name of the Secret Managers instance.",
+      "description": "The name of the Secret Managers instance. This applies to the CI, CD and CC Secret Manager integrations. See `ci_sm_name`, `cd_sm_name`, and `cc_sm_name` to set separately. ",
       "default": "sm-instance",
       "pos": {
         "filename": "variables.tf",
@@ -3773,7 +3916,7 @@
     "sm_resource_group": {
       "name": "sm_resource_group",
       "type": "string",
-      "description": "The resource group containing the Secrets Manager instance.",
+      "description": "The resource group containing the Secrets Manager instance. This applies to the CI, CD and CC Secret Manager integrations. See `ci_sm_resource_group`, `cd_sm_resource_group`, and `cc_sm_resource_group` to set separately.",
       "default": "Default",
       "pos": {
         "filename": "variables.tf",
@@ -3783,17 +3926,27 @@
     "sm_secret_group": {
       "name": "sm_secret_group",
       "type": "string",
-      "description": "Group in Secrets Manager for organizing/grouping secrets.",
+      "description": "Group in Secrets Manager for organizing/grouping secrets. This applies to the CI, CD and CC Secret Manager integrations. See `ci_sm_secret_group`, `cd_sm_secret_group`, and `cc_sm_secret_group` to set separately.",
       "default": "Default",
       "pos": {
         "filename": "variables.tf",
         "line": 76
       }
     },
+    "toolchain_name": {
+      "name": "toolchain_name",
+      "type": "string",
+      "description": "Common element of the toolchain name. The toolchain names will be appended with `CI Toolchain` or `CD Toolchain` or `CC Toolchain` followed by a timestamp. Can explicitly be set using `ci_toolchain_name`, `cd_toolchain_name`, and `cc_toolchain_name`.",
+      "default": "DevSecOps",
+      "pos": {
+        "filename": "variables.tf",
+        "line": 178
+      }
+    },
     "toolchain_region": {
       "name": "toolchain_region",
       "type": "string",
-      "description": "IBM Cloud region where your toolchain is created.",
+      "description": "The region identifier that will be used, by default, for all resource creation and service instance lookup. This can be overridden on a per resource/service basis. See `ci_toolchain_region`,`cd_toolchain_region`,`cc_toolchain_region`, `ci_cluster_region`, `cd_cluster_region`, `ci_registry_region`.",
       "default": "us-south",
       "pos": {
         "filename": "variables.tf",
@@ -3803,7 +3956,7 @@
     "toolchain_resource_group": {
       "name": "toolchain_resource_group",
       "type": "string",
-      "description": "The resource group within which the toolchain is created.",
+      "description": "The resource group that will be used, by default, for all resource creation and service instance lookups. This can be overridden on a per resource/service basis. See `ci_toolchain_resource_group`,`cd_toolchain_resource_group`,`cc_toolchain_resource_group`, `ci_cluster_resource_group`.",
       "default": "Default",
       "pos": {
         "filename": "variables.tf",
@@ -3876,7 +4029,7 @@
     "ibm": {
       "source": "IBM-Cloud/ibm",
       "version_constraints": [
-        "\u003e=1.51.0"
+        "\u003e=1.52.1"
       ]
     }
   },
@@ -3890,7 +4043,7 @@
   "module_calls": {
     "devsecops_cc_toolchain": {
       "name": "devsecops_cc_toolchain",
-      "source": "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cc-toolchain?ref=v1.0.5",
+      "source": "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cc-toolchain?ref=v1.0.6-beta.2",
       "attributes": {
         "app_group": "cc_app_group",
         "app_repo_auth_type": "cc_app_repo_auth_type",
@@ -3906,7 +4059,6 @@
         "count": "create_cc_toolchain",
         "doi_environment": "cc_doi_environment",
         "enable_pipeline_dockerconfigjson": "cc_enable_pipeline_dockerconfigjson",
-        "enable_slack": "cc_enable_slack",
         "environment_tag": "cc_environment_tag",
         "evidence_group": "cc_evidence_group",
         "evidence_repo_auth_type": "cc_evidence_repo_auth_type",
@@ -3919,7 +4071,7 @@
         "issues_group": "cc_issues_group",
         "issues_repo_auth_type": "cc_issues_repo_auth_type",
         "issues_repo_git_token_secret_name": "cc_issues_repo_git_token_secret_name",
-        "kp_location": "cc_kp_location",
+        "kp_location": "cc_sm_location",
         "kp_name": "cc_kp_name",
         "kp_resource_group": "cc_kp_resource_group",
         "link_to_doi_toolchain": "cc_link_to_doi_toolchain",
@@ -3941,7 +4093,6 @@
         "scc_enable_scc": "cc_scc_enable_scc",
         "scc_integration_name": "cc_scc_integration_name",
         "slack_channel_name": "cc_slack_channel_name",
-        "slack_notifications": "cc_slack_notifications",
         "slack_pipeline_fail": "cc_slack_pipeline_fail",
         "slack_pipeline_start": "cc_slack_pipeline_start",
         "slack_pipeline_success": "cc_slack_pipeline_success",
@@ -3985,7 +4136,7 @@
           },
           "pos": {
             "filename": ".terraform/modules/devsecops_cc_toolchain/main.tf",
-            "line": 49
+            "line": 56
           }
         }
       },
@@ -4056,12 +4207,12 @@
       },
       "pos": {
         "filename": "main.tf",
-        "line": 258
+        "line": 284
       }
     },
     "devsecops_cd_toolchain": {
       "name": "devsecops_cd_toolchain",
-      "source": "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain?ref=v1.0.5",
+      "source": "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain?ref=v1.0.6-beta.2",
       "attributes": {
         "app_version": "cd_app_version",
         "authorization_policy_creation": "cd_authorization_policy_creation",
@@ -4098,7 +4249,6 @@
         "doi_environment": "cd_doi_environment",
         "emergency_label": "cd_emergency_label",
         "enable_signing_validation": "cd_enable_signing_validation",
-        "enable_slack": "cd_enable_slack",
         "evidence_group": "cd_evidence_group",
         "evidence_repo_auth_type": "cd_evidence_repo_auth_type",
         "evidence_repo_git_token_secret_name": "cd_evidence_repo_git_token_secret_name",
@@ -4125,12 +4275,12 @@
         "pipeline_config_repo_git_token_secret_name": "cd_pipeline_config_repo_git_token_secret_name",
         "pipeline_debug": "cd_pipeline_debug",
         "pipeline_ibmcloud_api_key_secret_name": "cd_pipeline_ibmcloud_api_key_secret_name",
+        "region": "cd_region",
         "repositories_prefix": "cd_repositories_prefix",
         "satellite_cluster_group": "cd_satellite_cluster_group",
         "scc_enable_scc": "cd_scc_enable_scc",
         "scc_integration_name": "cd_scc_integration_name",
         "slack_channel_name": "cd_slack_channel_name",
-        "slack_notifications": "cd_slack_notifications",
         "slack_pipeline_fail": "cd_slack_pipeline_fail",
         "slack_pipeline_start": "cd_slack_pipeline_start",
         "slack_pipeline_success": "cd_slack_pipeline_success",
@@ -4177,7 +4327,7 @@
           },
           "pos": {
             "filename": ".terraform/modules/devsecops_cd_toolchain/main.tf",
-            "line": 61
+            "line": 69
           }
         }
       },
@@ -4274,12 +4424,12 @@
       },
       "pos": {
         "filename": "main.tf",
-        "line": 136
+        "line": 161
       }
     },
     "devsecops_ci_toolchain": {
       "name": "devsecops_ci_toolchain",
-      "source": "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-ci-toolchain?ref=v1.0.5",
+      "source": "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-ci-toolchain?ref=v1.0.6-beta.2",
       "attributes": {
         "app_group": "ci_app_group",
         "app_name": "ci_app_name",
@@ -4314,13 +4464,12 @@
         "cra_generate_cyclonedx_format": "ci_cra_generate_cyclonedx_format",
         "custom_image_tag": "ci_custom_image_tag",
         "deployment_target": "ci_deployment_target",
-        "dev_region": "ci_dev_region",
-        "dev_resource_group": "ci_dev_resource_group",
+        "dev_region": "environment_prefix",
+        "dev_resource_group": "ci_cluster_resource_group",
         "doi_environment": "ci_doi_environment",
         "doi_toolchain_id": "ci_doi_toolchain_id",
         "doi_toolchain_id_pipeline_property": "ci_doi_toolchain_id_pipeline_property",
         "enable_pipeline_dockerconfigjson": "ci_enable_pipeline_dockerconfigjson",
-        "enable_slack": "ci_enable_slack",
         "evidence_group": "ci_evidence_group",
         "evidence_repo_auth_type": "ci_evidence_repo_auth_type",
         "evidence_repo_git_token_secret_name": "ci_evidence_repo_git_token_secret_name",
@@ -4351,12 +4500,11 @@
         "pipeline_debug": "ci_pipeline_debug",
         "pipeline_dockerconfigjson_secret_name": "ci_pipeline_dockerconfigjson_secret_name",
         "pipeline_ibmcloud_api_key_secret_name": "ci_pipeline_ibmcloud_api_key_secret_name",
-        "registry_namespace": "ci_registry_namespace",
+        "registry_namespace": "registry_namespace",
         "registry_region": "ci_registry_region",
         "repositories_prefix": "ci_repositories_prefix",
         "signing_key_secret_name": "ci_signing_key_secret_name",
         "slack_channel_name": "ci_slack_channel_name",
-        "slack_notifications": "ci_slack_notifications",
         "slack_pipeline_fail": "ci_slack_pipeline_fail",
         "slack_pipeline_start": "ci_slack_pipeline_start",
         "slack_pipeline_success": "ci_slack_pipeline_success",
@@ -4400,7 +4548,7 @@
           },
           "pos": {
             "filename": ".terraform/modules/devsecops_ci_toolchain/main.tf",
-            "line": 50
+            "line": 61
           }
         },
         "ibm_cd_toolchain_tool_pipeline.pr_pipeline": {
@@ -4412,7 +4560,7 @@
           },
           "pos": {
             "filename": ".terraform/modules/devsecops_ci_toolchain/main.tf",
-            "line": 118
+            "line": 133
           }
         }
       },
@@ -4480,6 +4628,7 @@
         },
         "evidence_repo": {
           "name": "evidence_repo",
+          "description": "The evidence repository instance url, where evidence of the builds and scans are stored, ready for any compliance audit",
           "value": "module.repositories.evidence_repo",
           "sensitive": true,
           "pos": {
@@ -4498,6 +4647,7 @@
         },
         "inventory_repo": {
           "name": "inventory_repo",
+          "description": "The inventory repository instance url, with details of which artifact has been built and will be deployed",
           "value": "module.repositories.inventory_repo",
           "sensitive": true,
           "pos": {
@@ -4516,6 +4666,7 @@
         },
         "issues_repo": {
           "name": "issues_repo",
+          "description": "The incident issues repository instance url, where issues are created when vulnerabilities and CVEs are detected",
           "value": "module.repositories.issues_repo",
           "sensitive": true,
           "pos": {
@@ -4590,7 +4741,7 @@
       },
       "pos": {
         "filename": "main.tf",
-        "line": 11
+        "line": 37
       }
     }
   }
