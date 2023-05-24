@@ -24,6 +24,9 @@ func TestRunDefaultExample(t *testing.T) {
 			List: []string{
 				"module.terraform_devsecops_alm.module.devsecops_cc_toolchain[0].module.pipeline_cc.ibm_cd_tekton_pipeline_trigger.cc_pipeline_timed_trigger",
 				"module.terraform_devsecops_alm.module.devsecops_cd_toolchain[0].module.repositories.ibm_cd_toolchain_tool_hostedgit.deployment_repo_clone_from_hostedgit[0]",
+				"module.terraform_devsecops_alm.module.devsecops_ci_toolchain[0].ibm_cd_toolchain.toolchain_instance",
+				"module.terraform_devsecops_alm.module.devsecops_cd_toolchain[0].ibm_cd_toolchain.toolchain_instance",
+				"module.terraform_devsecops_alm.module.devsecops_cc_toolchain[0].ibm_cd_toolchain.toolchain_instance",
 			},
 		},
 	})
@@ -41,8 +44,7 @@ func TestRunAppExample(t *testing.T) {
 		TerraformDir: appExampleDir,
 		IgnoreUpdates: testhelper.Exemptions{ // Ignore for consistency check
 			List: []string{
-				"module.terraform_devsecops_alm.module.devsecops_cc_toolchain[0].module.pipeline_cc.ibm_cd_tekton_pipeline_trigger.cc_pipeline_timed_trigger",
-				"module.terraform_devsecops_alm.module.devsecops_cd_toolchain[0].module.repositories.ibm_cd_toolchain_tool_hostedgit.deployment_repo_clone_from_hostedgit[0]",
+				"module.terraform_devsecops_alm.module.devsecops_ci_toolchain[0].ibm_cd_toolchain.toolchain_instance",
 			},
 		},
 	})
@@ -60,8 +62,7 @@ func TestRunKPExample(t *testing.T) {
 		TerraformDir: kpExampleDir,
 		IgnoreUpdates: testhelper.Exemptions{ // Ignore for consistency check
 			List: []string{
-				"module.terraform_devsecops_alm.module.devsecops_cc_toolchain[0].module.pipeline_cc.ibm_cd_tekton_pipeline_trigger.cc_pipeline_timed_trigger",
-				"module.terraform_devsecops_alm.module.devsecops_cd_toolchain[0].module.repositories.ibm_cd_toolchain_tool_hostedgit.deployment_repo_clone_from_hostedgit[0]",
+				"module.terraform_devsecops_alm.module.devsecops_ci_toolchain[0].ibm_cd_toolchain.toolchain_instance",
 			},
 		},
 	})
@@ -84,6 +85,9 @@ func TestRunUpgradeExample(t *testing.T) {
 			List: []string{
 				"module.terraform_devsecops_alm.module.devsecops_cc_toolchain[0].module.pipeline_cc.ibm_cd_tekton_pipeline_trigger.cc_pipeline_timed_trigger",
 				"module.terraform_devsecops_alm.module.devsecops_cd_toolchain[0].module.repositories.ibm_cd_toolchain_tool_hostedgit.deployment_repo_clone_from_hostedgit[0]",
+				"module.terraform_devsecops_alm.module.devsecops_ci_toolchain[0].ibm_cd_toolchain.toolchain_instance",
+				"module.terraform_devsecops_alm.module.devsecops_cd_toolchain[0].ibm_cd_toolchain.toolchain_instance",
+				"module.terraform_devsecops_alm.module.devsecops_cc_toolchain[0].ibm_cd_toolchain.toolchain_instance",
 			},
 		},
 	})

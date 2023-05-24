@@ -23,24 +23,18 @@ A Terraform module for provisioning the DevSecOps CI, CD, and CC toolchains.
 ## Usage
 
 ```hcl
-ibmcloud_api_key          = "" #Set your API key
-ci_toolchain_name         = "DevSecOps CI Toolchain - Terraform"
-cd_toolchain_name         = "DevSecOps CD Toolchain - Terraform"
-cc_toolchain_name         = "DevSecOps CC Toolchain - Terraform"
-toolchain_resource_group  = "Default"
-toolchain_region          = "jp-tok" #Region short name only
-ci_registry_namespace     = "tektonhh"
-ci_registry_region        = "ibm:yp:jp-tok"
-sm_name                   = "sm-compliance-secrets" #Secrets Manager instance name
-sm_location               = "eu-gb"
-sm_resource_group         = "Default"
-sm_secret_group           = "Default"
-ci_cluster_name           = "mycluster-free"
-ci_cluster_namespace      = "dev"
-ci_dev_region             = "ibm:yp:jp-tok"
-ci_dev_resource_group     = "Default"
-cd_cluster_name           = "mycluster-free"
-cd_cluster_namespace      = "prod"
+module "terraform_devsecops_alm" {
+  source                   = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-alm?ref=v1.0.4"
+  toolchain_region         = var.toolchain_region
+  toolchain_resource_group = var.toolchain_resource_group
+  registry_namespace       = var.registry_namespace
+  cluster_name             = var.cluster_name
+  sm_resource_group        = var.sm_resource_group
+  sm_name                  = var.sm_name
+  sm_location              = var.sm_location
+  sm_secret_group          = var.sm_secret_group
+}
+
 ```
 
 ## Required IAM access policies
