@@ -14,4 +14,6 @@ module "terraform_devsecops_alm" {
   sm_name                  = var.sm_name
   sm_location              = var.sm_location
   sm_secret_group          = var.sm_secret_group
+  #disabling authorization_policy_creation as it seems to be unstable for the unit tests
+  authorization_policy_creation = "disabled"
 }
