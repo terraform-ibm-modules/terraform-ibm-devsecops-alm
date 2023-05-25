@@ -19,52 +19,16 @@ variable "toolchain_region" {
   default     = "us-south"
 }
 
-variable "ci_registry_namespace" {
+variable "registry_namespace" {
   type        = string
   description = "Unique namespace within the IBM Cloud Container Registry where application image need to be stored."
   default     = "my-registry-namespace"
 }
 
-variable "ci_registry_region" {
-  type        = string
-  description = "The IBM Cloud Region where the IBM Cloud Container Registry namespace is to be created."
-  default     = "ibm:yp:us-south"
-}
-
-variable "ci_cluster_name" {
-  type        = string
-  description = "Name of the Kubernetes cluster where the application will be deployed."
-  default     = "mycluster-free"
-}
-
-variable "ci_cluster_namespace" {
-  type        = string
-  description = "Name of the Kubernetes cluster namespace where the application will be deployed."
-  default     = "dev"
-}
-
-variable "ci_dev_region" {
-  type        = string
-  description = "Region of the Kubernetes cluster where the application will be deployed."
-  default     = "ibm:yp:us-south"
-}
-
-variable "ci_dev_resource_group" {
-  type        = string
-  description = "The cluster resource group."
-  default     = "Default"
-}
-
-variable "cd_cluster_name" {
+variable "cluster_name" {
   type        = string
   description = "Name of the Kubernetes cluster where the application is deployed."
   default     = "mycluster-free"
-}
-
-variable "cd_cluster_namespace" {
-  type        = string
-  description = "Name of the Kubernetes cluster namespace where the application is deployed."
-  default     = "prod"
 }
 
 variable "enable_key_protect" {
