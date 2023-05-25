@@ -210,7 +210,7 @@
 							"key": "repo_git_token_secret_name",
 							"type": "string",
 							"default_value": "",
-							"description": "Name of the Git token secret in the secret provider. Specifying a secret name for the Git Token automatically sets the authentication type to `pat`."
+							"description": "Name of the Git token secret in the secret provider. Specifying a secret name for the Git Token automatically sets the authentication type to `pat` for all repos. Can be overridden with the respective repo auth type params."
 						},
 						{
 							"key": "repo_group",
@@ -325,6 +325,12 @@
 							"type": "string",
 							"default_value": "https://cloud.ibm.com",
 							"description": "IBM Cloud API Endpoint."
+						},
+						{
+							"key": "peer_review_compliance",
+							"type": "string",
+							"default_value": "",
+							"description": "Disabled by default. Set to `1` to enable peer review evidence collection. This parameter will apply to the CI, CD and CC pipelines. Can be set individually with `ci_peer_review_compliance`, `cd_peer_review_compliance`, `cc_peer_review_compliance`."
 						},
 						{
 							"key": "ibmcloud_api_key",
@@ -491,13 +497,13 @@
 						{
 							"key": "ci_compliance_pipeline_repo_auth_type",
 							"type": "string",
-							"default_value": "oauth",
+							"default_value": "",
 							"description": "Select the method of authentication that is used to access the Git provider. 'oauth' or 'pat'."
 						},
 						{
 							"key": "ci_compliance_pipeline_repo_git_token_secret_name",
 							"type": "string",
-							"default_value": "git-token",
+							"default_value": "",
 							"description": "Name of the Git token secret in the secret provider."
 						},
 						{
@@ -699,6 +705,12 @@
 							"description": "Opt out of Evidence v1"
 						},
 						{
+							"key": "ci_peer_review_compliance",
+							"type": "string",
+							"default_value": "",
+							"description": "Disabled by default. Set to `1` to enable peer review evidence collection."
+						},
+						{
 							"key": "ci_pipeline_config_group",
 							"type": "string",
 							"default_value": "",
@@ -757,6 +769,12 @@
 							"type": "string",
 							"default_value": "ibmcloud-api-key",
 							"description": "Name of the Cloud API key secret in the secret provider."
+						},
+						{
+							"key": "ci_registry_namespace",
+							"type": "string",
+							"default_value": "",
+							"description": "A unique namespace within the IBM Cloud Container Registry region where the application image is stored."
 						},
 						{
 							"key": "ci_registry_region",
@@ -971,13 +989,13 @@
 						{
 							"key": "cd_compliance_pipeline_repo_auth_type",
 							"type": "string",
-							"default_value": "oauth",
+							"default_value": "",
 							"description": "Select the method of authentication that is used to access the Git provider. 'oauth' or 'pat'."
 						},
 						{
 							"key": "cd_compliance_pipeline_repo_git_token_secret_name",
 							"type": "string",
-							"default_value": "git-token",
+							"default_value": "",
 							"description": "Name of the Git token secret in the secret provider."
 						},
 						{
@@ -1201,6 +1219,12 @@
 							"type": "string",
 							"default_value": "1",
 							"description": "Opt out of evidence v1."
+						},
+						{
+							"key": "cd_peer_review_compliance",
+							"type": "string",
+							"default_value": "",
+							"description": "Disabled by default. Set to `1` to enable peer review evidence collection."
 						},
 						{
 							"key": "cd_pipeline_config_group",
@@ -1481,13 +1505,13 @@
 						{
 							"key": "cc_compliance_pipeline_repo_auth_type",
 							"type": "string",
-							"default_value": "oauth",
+							"default_value": "",
 							"description": "Select the method of authentication that is used to access the Git provider. 'oauth' or 'pat'."
 						},
 						{
 							"key": "cc_compliance_pipeline_repo_git_token_secret_name",
 							"type": "string",
-							"default_value": "git-token",
+							"default_value": "",
 							"description": "Name of the Git token secret in the secret provider."
 						},
 						{
@@ -1547,7 +1571,7 @@
 						{
 							"key": "cc_environment_tag",
 							"type": "string",
-							"default_value": "prod_latest",
+							"default_value": "",
 							"description": "Tag name that represents the target environment in the inventory. Example: prod_latest."
 						},
 						{
@@ -1651,6 +1675,12 @@
 							"type": "string",
 							"default_value": "",
 							"description": "To enable the OWASP Zap UI scan. '1' enable or '0' disable."
+						},
+						{
+							"key": "cc_peer_review_compliance",
+							"type": "string",
+							"default_value": "",
+							"description": "Disabled by default. Set to `1` to enable peer review evidence collection."
 						},
 						{
 							"key": "cc_pipeline_config_group",

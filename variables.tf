@@ -171,7 +171,7 @@ variable "repo_group" {
 
 variable "repo_git_token_secret_name" {
   type        = string
-  description = "Name of the Git token secret in the secret provider. Specifying a secret name for the Git Token automatically sets the authentication type to `pat`."
+  description = "Name of the Git token secret in the secret provider. Specifying a secret name for the Git Token automatically sets the authentication type to `pat` for all repos. Can be overridden with the respective repo auth type params."
   default     = ""
 }
 
@@ -203,6 +203,12 @@ variable "repositories_prefix" {
   type        = string
   description = "Prefix name for the cloned compliance repos."
   default     = "compliance"
+}
+
+variable "peer_review_compliance" {
+  type        = string
+  description = "Set to `0` to disable. Set to `1` to enable peer review evidence collection. This parameter will apply to the CI, CD and CC pipelines. Can be set individually with `ci_peer_review_compliance`, `cd_peer_review_compliance`, `cc_peer_review_compliance`."
+  default     = ""
 }
 
 ##### END OF COMMON VARIABLES ############
@@ -280,6 +286,13 @@ variable "registry_namespace" {
   default     = ""
 }
 
+#maintaining for historic reasons
+variable "ci_registry_namespace" {
+  type        = string
+  description = "A unique namespace within the IBM Cloud Container Registry region where the application image is stored."
+  default     = ""
+}
+
 variable "ci_registry_region" {
   type        = string
   description = "The IBM Cloud Region where the IBM Cloud Container Registry namespace is to be created. Use the short form of the regions. For example `us-south`."
@@ -350,6 +363,12 @@ variable "ci_opt_out_v1_evidence" {
   type        = string
   description = "Opt out of Evidence v1"
   default     = "1"
+}
+
+variable "ci_peer_review_compliance" {
+  type        = string
+  description = "Set to `0` to disable. Set to `1` to enable peer review evidence collection."
+  default     = ""
 }
 
 ######## Deployment Strategy ##################
@@ -606,7 +625,7 @@ variable "ci_app_repo_auth_type" {
 variable "ci_compliance_pipeline_repo_auth_type" {
   type        = string
   description = "Select the method of authentication that is used to access the Git provider. 'oauth' or 'pat'."
-  default     = "oauth"
+  default     = ""
 }
 
 ######## End Repo auth type ######################
@@ -646,7 +665,7 @@ variable "ci_inventory_repo_git_token_secret_name" {
 variable "ci_compliance_pipeline_repo_git_token_secret_name" {
   type        = string
   description = "Name of the Git token secret in the secret provider."
-  default     = "git-token"
+  default     = ""
 }
 
 variable "ci_pipeline_config_repo_git_token_secret_name" {
@@ -1106,7 +1125,7 @@ variable "cd_deployment_repo_auth_type" {
 variable "cd_compliance_pipeline_repo_auth_type" {
   type        = string
   description = "Select the method of authentication that is used to access the Git provider. 'oauth' or 'pat'."
-  default     = "oauth"
+  default     = ""
 }
 
 variable "cd_change_management_repo_auth_type" {
@@ -1152,7 +1171,7 @@ variable "cd_inventory_repo_git_token_secret_name" {
 variable "cd_compliance_pipeline_repo_git_token_secret_name" {
   type        = string
   description = "Name of the Git token secret in the secret provider."
-  default     = "git-token"
+  default     = ""
 }
 
 variable "cd_pipeline_config_repo_git_token_secret_name" {
@@ -1348,6 +1367,12 @@ variable "cd_cos_endpoint" {
 variable "cd_cos_bucket_name" {
   type        = string
   description = "COS bucket name."
+  default     = ""
+}
+
+variable "cd_peer_review_compliance" {
+  type        = string
+  description = "Set to `0` to disable. Set to `1` to enable peer review evidence collection."
   default     = ""
 }
 
@@ -1572,7 +1597,7 @@ variable "cc_app_repo_auth_type" {
 variable "cc_compliance_pipeline_repo_auth_type" {
   type        = string
   description = "Select the method of authentication that is used to access the Git provider. 'oauth' or 'pat'."
-  default     = "oauth"
+  default     = ""
 }
 
 ######## End Repo auth type ######################
@@ -1612,7 +1637,7 @@ variable "cc_inventory_repo_git_token_secret_name" {
 variable "cc_compliance_pipeline_repo_git_token_secret_name" {
   type        = string
   description = "Name of the Git token secret in the secret provider."
-  default     = "git-token"
+  default     = ""
 }
 
 variable "cc_pipeline_config_repo_git_token_secret_name" {
@@ -1789,13 +1814,19 @@ variable "cc_opt_in_auto_close" {
 variable "cc_environment_tag" {
   type        = string
   description = "Tag name that represents the target environment in the inventory. Example: prod_latest."
-  default     = "prod_latest"
+  default     = ""
 }
 
 variable "cc_enable_pipeline_dockerconfigjson" {
   type        = bool
   description = "Enable to add the pipeline-dockerconfigjson property to the pipeline properties."
   default     = false
+}
+
+variable "cc_peer_review_compliance" {
+  type        = string
+  description = "Set to `0` to disable. Set to `1` to enable peer review evidence collection."
+  default     = ""
 }
 
 ##### END OF CC VARIABLES ################
