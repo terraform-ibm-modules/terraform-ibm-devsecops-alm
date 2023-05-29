@@ -280,6 +280,12 @@ variable "registry_namespace" {
   default     = ""
 }
 
+variable "ci_registry_namespace" {
+  type        = string
+  description = "A unique namespace within the IBM Cloud Container Registry region where the application image is stored. (deprecated. Use `registry_namespace`)"
+  default     = ""
+}
+
 variable "ci_registry_region" {
   type        = string
   description = "The IBM Cloud Region where the IBM Cloud Container Registry namespace is to be created. Use the short form of the regions. For example `us-south`."
@@ -746,13 +752,13 @@ variable "ci_enable_slack" {
 variable "ci_slack_channel_name" {
   type        = string
   description = "The Slack channel that notifications are posted to."
-  default     = "my-channel"
+  default     = ""
 }
 
 variable "ci_slack_team_name" {
   type        = string
   description = "The Slack team name, which is the word or phrase before `.slack.com` in the team URL."
-  default     = "my-team"
+  default     = ""
 }
 
 variable "ci_slack_pipeline_fail" {
@@ -1299,13 +1305,13 @@ variable "cd_enable_slack" {
 variable "cd_slack_channel_name" {
   type        = string
   description = "The Slack channel that notifications are posted to."
-  default     = "my-channel"
+  default     = ""
 }
 
 variable "cd_slack_team_name" {
   type        = string
   description = "The Slack team name, which is the word or phrase before .slack.com in the team URL."
-  default     = "my-team"
+  default     = ""
 }
 
 variable "cd_slack_pipeline_fail" {
@@ -1680,13 +1686,13 @@ variable "cc_enable_slack" {
 variable "cc_slack_channel_name" {
   type        = string
   description = "The Slack channel that notifications are posted to."
-  default     = "my-channel"
+  default     = ""
 }
 
 variable "cc_slack_team_name" {
   type        = string
   description = "The Slack team name, which is the word or phrase before .slack.com in the team URL."
-  default     = "my-team"
+  default     = ""
 }
 
 variable "cc_slack_pipeline_fail" {
