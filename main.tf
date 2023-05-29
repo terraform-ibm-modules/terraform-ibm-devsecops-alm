@@ -382,6 +382,32 @@ module "devsecops_cc_toolchain" {
   cos_endpoint    = (var.cc_cos_endpoint == "") ? var.cos_endpoint : var.cc_cos_endpoint
   cos_bucket_name = (var.cc_cos_bucket_name == "") ? var.cos_bucket_name : var.cc_cos_bucket_name
 }
+
+#move to CI/CD/CC modules for next release
+resource "ibm_cd_tekton_pipeline_property" "ci_pipeline_peer_review_compliance" {
+  count       = (var.peer_review_compliance == "" && var.ci_peer_review_compliance == "") ? 0 : 1
+  name        = "peer-review-compliance"
+  type        = "text"
+  value       = (var.ci_peer_review_compliance == "") ? var.peer_review_compliance : var.ci_peer_review_compliance
+  pipeline_id = module.devsecops_ci_toolchain[0].ci_pipeline_id
+}
+
+resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_peer_review_compliance" {
+  count       = (var.peer_review_compliance == "" && var.cd_peer_review_compliance == "") ? 0 : 1
+  name        = "peer-review-compliance"
+  type        = "text"
+  value       = (var.cd_peer_review_compliance == "") ? var.peer_review_compliance : var.cd_peer_review_compliance
+  pipeline_id = module.devsecops_cd_toolchain[0].cd_pipeline_id
+}
+
+resource "ibm_cd_tekton_pipeline_property" "cc_pipeline_peer_review_compliance" {
+  count       = (var.peer_review_compliance == "" && var.cc_peer_review_compliance == "") ? 0 : 1
+  name        = "peer-review-compliance"
+  type        = "text"
+  value       = (var.cc_peer_review_compliance == "") ? var.peer_review_compliance : var.cc_peer_review_compliance
+  pipeline_id = module.devsecops_cc_toolchain[0].cc_pipeline_id
+}
+
 #############################################################
 ## Example resources to extend the ci_toolchain created above
 #############################################################

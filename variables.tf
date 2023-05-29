@@ -205,6 +205,12 @@ variable "repositories_prefix" {
   default     = "compliance"
 }
 
+variable "peer_review_compliance" {
+  type        = string
+  description = "Set to `0` to disable. Set to `1` to enable peer review evidence collection. This parameter will apply to the CI, CD and CC pipelines. Can be set individually with `ci_peer_review_compliance`, `cd_peer_review_compliance`, `cc_peer_review_compliance`."
+  default     = ""
+}
+
 ##### END OF COMMON VARIABLES ############
 ##### START OF CI VARIABLES ##############
 
@@ -356,6 +362,12 @@ variable "ci_opt_out_v1_evidence" {
   type        = string
   description = "Opt out of Evidence v1"
   default     = "1"
+}
+
+variable "ci_peer_review_compliance" {
+  type        = string
+  description = "Set to `0` to disable. Set to `1` to enable peer review evidence collection."
+  default     = ""
 }
 
 ######## Deployment Strategy ##################
@@ -1289,6 +1301,12 @@ variable "cd_enable_signing_validation" {
   default     = false
 }
 
+variable "cd_peer_review_compliance" {
+  type        = string
+  description = "Set to `0` to disable. Set to `1` to enable peer review evidence collection."
+  default     = ""
+}
+
 #SLACK
 variable "cd_slack_webhook_secret_name" {
   type        = string
@@ -1802,6 +1820,12 @@ variable "cc_enable_pipeline_dockerconfigjson" {
   type        = bool
   description = "Enable to add the pipeline-dockerconfigjson property to the pipeline properties."
   default     = false
+}
+
+variable "cc_peer_review_compliance" {
+  type        = string
+  description = "Set to `0` to disable. Set to `1` to enable peer review evidence collection."
+  default     = ""
 }
 
 ##### END OF CC VARIABLES ################

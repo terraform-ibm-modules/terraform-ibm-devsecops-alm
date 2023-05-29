@@ -315,6 +315,12 @@
 							"description": "Enable the Secrets Manager integrations."
 						},
 						{
+							"key": "peer_review_compliance",
+							"type": "string",
+							"default_value": "",
+							"description": "Disabled by default. Set to `1` to enable peer review evidence collection. This parameter will apply to the CI, CD and CC pipelines. Can be set individually with `ci_peer_review_compliance`, `cd_peer_review_compliance`, `cc_peer_review_compliance`."
+						},
+						{
 							"key": "repositories_prefix",
 							"type": "string",
 							"default_value": "compliance",
@@ -697,6 +703,12 @@
 							"type": "string",
 							"default_value": "1",
 							"description": "Opt out of Evidence v1"
+						},
+						{
+							"key": "ci_peer_review_compliance",
+							"type": "string",
+							"default_value": "",
+							"description": "Disabled by default. Set to `1` to enable peer review evidence collection."
 						},
 						{
 							"key": "ci_pipeline_config_group",
@@ -1209,6 +1221,12 @@
 							"description": "Opt out of evidence v1."
 						},
 						{
+							"key": "cd_peer_review_compliance",
+							"type": "string",
+							"default_value": "",
+							"description": "Disabled by default. Set to `1` to enable peer review evidence collection."
+						},
+						{
 							"key": "cd_pipeline_config_group",
 							"type": "string",
 							"default_value": "",
@@ -1657,6 +1675,12 @@
 							"type": "string",
 							"default_value": "",
 							"description": "To enable the OWASP Zap UI scan. '1' enable or '0' disable."
+						},
+						{
+							"key": "cc_peer_review_compliance",
+							"type": "string",
+							"default_value": "",
+							"description": "Disabled by default. Set to `1` to enable peer review evidence collection."
 						},
 						{
 							"key": "cc_pipeline_config_group",
