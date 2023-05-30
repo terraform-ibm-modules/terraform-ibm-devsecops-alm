@@ -281,7 +281,7 @@
       "name": "cc_environment_tag",
       "type": "string",
       "description": "Tag name that represents the target environment in the inventory. Example: prod_latest.",
-      "default": "prod_latest",
+      "default": "",
       "required": true,
       "source": [
         "module.devsecops_cc_toolchain.module.pipeline_cc.ibm_cd_tekton_pipeline_property.cc_pipeline_environment-tag.value"
@@ -1846,13 +1846,16 @@
       "type": "string",
       "description": "'0' by default. Set to '1' to enable debug logging.",
       "default": "0",
+      "required": true,
       "source": [
-        "module.devsecops_cd_toolchain.module.pipeline_cd"
+        "module.devsecops_cd_toolchain.module.pipeline_cd.ibm_cd_tekton_pipeline_property.cd_pipeline_pipeline_debug.value"
       ],
       "pos": {
         "filename": "variables.tf",
         "line": 1292
-      }
+      },
+      "max_length": 4096,
+      "matches": "^.*$"
     },
     "cd_pipeline_ibmcloud_api_key_secret_name": {
       "name": "cd_pipeline_ibmcloud_api_key_secret_name",
@@ -4040,31 +4043,61 @@
       "description": "The App Repo URL",
       "pos": {
         "filename": "outputs.tf",
-        "line": 35
+        "line": 56
       }
     },
     "compliance_cc_toolchain_id": {
       "name": "compliance_cc_toolchain_id",
       "description": "The ID of the Compliance CC Toolchain",
+      "value": "local.compliance_cc_toolchain_id",
       "pos": {
         "filename": "outputs.tf",
-        "line": 15
+        "line": 26
+      }
+    },
+    "compliance_cc_toolchain_url": {
+      "name": "compliance_cc_toolchain_url",
+      "description": "The Compliance CC Toolchain URL",
+      "value": "local.compliance_cc_toolchain_url",
+      "pos": {
+        "filename": "outputs.tf",
+        "line": 71
       }
     },
     "compliance_cd_toolchain_id": {
       "name": "compliance_cd_toolchain_id",
       "description": "The ID of the Compliance CD Toolchain",
+      "value": "local.compliance_cd_toolchain_id",
       "pos": {
         "filename": "outputs.tf",
-        "line": 10
+        "line": 21
+      }
+    },
+    "compliance_cd_toolchain_url": {
+      "name": "compliance_cd_toolchain_url",
+      "description": "The Compliance CD Toolchain URL",
+      "value": "local.compliance_cd_toolchain_url",
+      "pos": {
+        "filename": "outputs.tf",
+        "line": 66
       }
     },
     "compliance_ci_toolchain_id": {
       "name": "compliance_ci_toolchain_id",
       "description": "The ID of the Compliance CI Toolchain",
+      "value": "local.compliance_ci_toolchain_id",
       "pos": {
         "filename": "outputs.tf",
-        "line": 5
+        "line": 16
+      }
+    },
+    "compliance_ci_toolchain_url": {
+      "name": "compliance_ci_toolchain_url",
+      "description": "The Compliance CI Toolchain URL",
+      "value": "local.compliance_ci_toolchain_url",
+      "pos": {
+        "filename": "outputs.tf",
+        "line": 61
       }
     },
     "evidence_repo_url": {
@@ -4072,7 +4105,7 @@
       "description": "The Evidence Repo URL",
       "pos": {
         "filename": "outputs.tf",
-        "line": 20
+        "line": 41
       }
     },
     "inventory_repo_url": {
@@ -4080,7 +4113,7 @@
       "description": "The Inventory Repo URL",
       "pos": {
         "filename": "outputs.tf",
-        "line": 30
+        "line": 51
       }
     },
     "issues_repo_url": {
@@ -4088,7 +4121,23 @@
       "description": "The Issues Repo URL",
       "pos": {
         "filename": "outputs.tf",
-        "line": 25
+        "line": 46
+      }
+    },
+    "key_protect_instance_id": {
+      "name": "key_protect_instance_id",
+      "description": "The Key Protect Instance ID",
+      "pos": {
+        "filename": "outputs.tf",
+        "line": 36
+      }
+    },
+    "secrets_manager_instance_id": {
+      "name": "secrets_manager_instance_id",
+      "description": "The Secrets Manage Instance ID",
+      "pos": {
+        "filename": "outputs.tf",
+        "line": 31
       }
     }
   },
@@ -4331,7 +4380,7 @@
     },
     "devsecops_cd_toolchain": {
       "name": "devsecops_cd_toolchain",
-      "source": "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain?ref=v1.0.6",
+      "source": "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain?ref=v1.0.7",
       "attributes": {
         "app_version": "cd_app_version",
         "authorization_policy_creation": "cd_authorization_policy_creation",

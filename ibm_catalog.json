@@ -1571,7 +1571,7 @@
 						{
 							"key": "cc_environment_tag",
 							"type": "string",
-							"default_value": "prod_latest",
+							"default_value": "",
 							"description": "Tag name that represents the target environment in the inventory. Example: prod_latest."
 						},
 						{

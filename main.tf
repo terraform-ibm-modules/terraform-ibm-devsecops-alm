@@ -161,7 +161,7 @@ module "devsecops_ci_toolchain" {
 
 module "devsecops_cd_toolchain" {
   count            = var.create_cd_toolchain ? 1 : 0
-  source           = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain?ref=v1.0.6"
+  source           = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain?ref=v1.0.7"
   ibmcloud_api_key = var.ibmcloud_api_key
 
   toolchain_name           = (var.cd_toolchain_name == "") ? format("${var.toolchain_name} %s", format("CD Toolchain - %s", local.toolchain_ts)) : var.cd_toolchain_name
@@ -262,7 +262,7 @@ module "devsecops_cd_toolchain" {
   app_version                   = var.cd_app_version
   pipeline_debug                = var.cd_pipeline_debug
   enable_signing_validation     = var.cd_enable_signing_validation
-  region                        = var.cd_region
+  region                        = (var.cd_region == "") ? var.toolchain_region : var.cd_region
 
   #SLACK INTEGRATION
   enable_slack           = (local.use_slack_enable_override) ? local.enable_slack : var.cd_enable_slack
@@ -365,7 +365,7 @@ module "devsecops_cc_toolchain" {
   opt_in_dynamic_ui_scan           = var.cc_opt_in_dynamic_ui_scan
   opt_in_dynamic_scan              = var.cc_opt_in_dynamic_scan
   opt_in_auto_close                = var.cc_opt_in_auto_close
-  environment_tag                  = var.cc_environment_tag
+  environment_tag                  = (var.cc_environment_tag == "") ? format("%s_prod_latest", var.toolchain_region) : var.cc_environment_tag
   enable_pipeline_dockerconfigjson = var.cc_enable_pipeline_dockerconfigjson
 
   #SLACK INTEGRATION
