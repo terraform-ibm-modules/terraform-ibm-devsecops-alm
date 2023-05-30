@@ -8,24 +8,25 @@ locals {
   use_kp_override           = (var.ci_enable_key_protect == false) && (var.cd_enable_key_protect == false) && (var.cc_enable_key_protect == false) ? true : false
   use_slack_enable_override = (var.ci_enable_slack == false) && (var.cd_enable_slack == false) && (var.cc_enable_slack == false) ? true : false
 
+  enable_slack = try(var.enable_slack, false)
   ci_slack_notification_state = (
     (var.ci_slack_notifications != "") ? var.ci_slack_notifications :
     (var.slack_notifications != "") ? var.slack_notifications :
-    (local.use_slack_enable_override) && (var.enable_slack) ? "1" :
+    (local.use_slack_enable_override) && (local.enable_slack) ? "1" :
     (var.ci_enable_slack) ? "1" : "0"
   )
 
   cd_slack_notification_state = (
     (var.cd_slack_notifications != "") ? var.cd_slack_notifications :
     (var.slack_notifications != "") ? var.slack_notifications :
-    (local.use_slack_enable_override) && (var.enable_slack) ? "1" :
+    (local.use_slack_enable_override) && (local.enable_slack) ? "1" :
     (var.cd_enable_slack) ? "1" : "0"
   )
 
   cc_slack_notification_state = (
     (var.cc_slack_notifications != "") ? var.cc_slack_notifications :
     (var.slack_notifications != "") ? var.slack_notifications :
-    (local.use_slack_enable_override) && (var.enable_slack) ? "1" :
+    (local.use_slack_enable_override) && (local.enable_slack) ? "1" :
     (var.cc_enable_slack) ? "1" : "0"
   )
 
@@ -42,7 +43,7 @@ module "devsecops_ci_toolchain" {
   toolchain_region         = (var.ci_toolchain_region == "") ? var.toolchain_region : replace(replace(var.ci_toolchain_region, "ibm:yp:", ""), "ibm:ys1:", "")
   toolchain_resource_group = (var.ci_toolchain_resource_group == "") ? var.toolchain_resource_group : var.ci_toolchain_resource_group
   toolchain_description    = var.ci_toolchain_description
-  registry_namespace       = var.registry_namespace
+  registry_namespace       = (var.registry_namespace != "") ? var.registry_namespace : var.ci_registry_namespace
   ibmcloud_api             = var.ibmcloud_api
   compliance_base_image    = (var.ci_compliance_base_image == "") ? var.compliance_base_image : var.ci_compliance_base_image
 
@@ -140,7 +141,7 @@ module "devsecops_ci_toolchain" {
 
 
   #SLACK INTEGRATION
-  enable_slack           = (local.use_slack_enable_override) ? var.enable_slack : var.ci_enable_slack
+  enable_slack           = (local.use_slack_enable_override) ? local.enable_slack : var.ci_enable_slack
   slack_channel_name     = (var.ci_slack_channel_name == "") ? var.slack_channel_name : var.ci_slack_channel_name
   slack_team_name        = (var.ci_slack_team_name == "") ? var.slack_team_name : var.ci_slack_team_name
   slack_pipeline_fail    = var.ci_slack_pipeline_fail
@@ -264,7 +265,7 @@ module "devsecops_cd_toolchain" {
   region                        = var.cd_region
 
   #SLACK INTEGRATION
-  enable_slack           = (local.use_slack_enable_override) ? var.enable_slack : var.cd_enable_slack
+  enable_slack           = (local.use_slack_enable_override) ? local.enable_slack : var.cd_enable_slack
   slack_channel_name     = (var.cd_slack_channel_name == "") ? var.slack_channel_name : var.cd_slack_channel_name
   slack_team_name        = (var.cd_slack_team_name == "") ? var.slack_team_name : var.cd_slack_team_name
   slack_pipeline_fail    = var.cd_slack_pipeline_fail
@@ -368,7 +369,7 @@ module "devsecops_cc_toolchain" {
   enable_pipeline_dockerconfigjson = var.cc_enable_pipeline_dockerconfigjson
 
   #SLACK INTEGRATION
-  enable_slack           = (local.use_slack_enable_override) ? var.enable_slack : var.cc_enable_slack
+  enable_slack           = (local.use_slack_enable_override) ? local.enable_slack : var.cc_enable_slack
   slack_channel_name     = (var.cc_slack_channel_name == "") ? var.slack_channel_name : var.cc_slack_channel_name
   slack_team_name        = (var.cc_slack_team_name == "") ? var.slack_team_name : var.cc_slack_team_name
   slack_pipeline_fail    = var.cc_slack_pipeline_fail
@@ -381,6 +382,32 @@ module "devsecops_cc_toolchain" {
   cos_endpoint    = (var.cc_cos_endpoint == "") ? var.cos_endpoint : var.cc_cos_endpoint
   cos_bucket_name = (var.cc_cos_bucket_name == "") ? var.cos_bucket_name : var.cc_cos_bucket_name
 }
+
+#move to CI/CD/CC modules for next release
+resource "ibm_cd_tekton_pipeline_property" "ci_pipeline_peer_review_compliance" {
+  count       = (var.peer_review_compliance == "" && var.ci_peer_review_compliance == "") ? 0 : 1
+  name        = "peer-review-compliance"
+  type        = "text"
+  value       = (var.ci_peer_review_compliance == "") ? var.peer_review_compliance : var.ci_peer_review_compliance
+  pipeline_id = module.devsecops_ci_toolchain[0].ci_pipeline_id
+}
+
+resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_peer_review_compliance" {
+  count       = (var.peer_review_compliance == "" && var.cd_peer_review_compliance == "") ? 0 : 1
+  name        = "peer-review-compliance"
+  type        = "text"
+  value       = (var.cd_peer_review_compliance == "") ? var.peer_review_compliance : var.cd_peer_review_compliance
+  pipeline_id = module.devsecops_cd_toolchain[0].cd_pipeline_id
+}
+
+resource "ibm_cd_tekton_pipeline_property" "cc_pipeline_peer_review_compliance" {
+  count       = (var.peer_review_compliance == "" && var.cc_peer_review_compliance == "") ? 0 : 1
+  name        = "peer-review-compliance"
+  type        = "text"
+  value       = (var.cc_peer_review_compliance == "") ? var.peer_review_compliance : var.cc_peer_review_compliance
+  pipeline_id = module.devsecops_cc_toolchain[0].cc_pipeline_id
+}
+
 #############################################################
 ## Example resources to extend the ci_toolchain created above
 #############################################################

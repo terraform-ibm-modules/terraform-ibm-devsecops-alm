@@ -136,13 +136,13 @@ variable "enable_slack" {
 variable "slack_channel_name" {
   type        = string
   description = "The Slack channel that notifications are posted to. This applies to the CI, CD, and CC toolchains. To set separately see `ci_slack_channel_name`, `cd_slack_channel_name`, and `cc_slack_channel_name`"
-  default     = "my-channel"
+  default     = ""
 }
 
 variable "slack_team_name" {
   type        = string
   description = "The Slack team name, which is the word or phrase before `.slack.com` in the team URL. This applies to the CI, CD, and CC toolchains. To set separately, see `ci_slack_team_name`, `cd_slack_team_name`, and `cc_slack_team_name`."
-  default     = "my-team"
+  default     = ""
 }
 
 variable "slack_webhook_secret_name" {
@@ -203,6 +203,12 @@ variable "repositories_prefix" {
   type        = string
   description = "Prefix name for the cloned compliance repos."
   default     = "compliance"
+}
+
+variable "peer_review_compliance" {
+  type        = string
+  description = "Set to `0` to disable. Set to `1` to enable peer review evidence collection. This parameter will apply to the CI, CD and CC pipelines. Can be set individually with `ci_peer_review_compliance`, `cd_peer_review_compliance`, `cc_peer_review_compliance`."
+  default     = ""
 }
 
 ##### END OF COMMON VARIABLES ############
@@ -280,6 +286,12 @@ variable "registry_namespace" {
   default     = ""
 }
 
+variable "ci_registry_namespace" {
+  type        = string
+  description = "A unique namespace within the IBM Cloud Container Registry region where the application image is stored. (deprecated. Use `registry_namespace`)"
+  default     = ""
+}
+
 variable "ci_registry_region" {
   type        = string
   description = "The IBM Cloud Region where the IBM Cloud Container Registry namespace is to be created. Use the short form of the regions. For example `us-south`."
@@ -350,6 +362,12 @@ variable "ci_opt_out_v1_evidence" {
   type        = string
   description = "Opt out of Evidence v1"
   default     = "1"
+}
+
+variable "ci_peer_review_compliance" {
+  type        = string
+  description = "Set to `0` to disable. Set to `1` to enable peer review evidence collection."
+  default     = ""
 }
 
 ######## Deployment Strategy ##################
@@ -746,13 +764,13 @@ variable "ci_enable_slack" {
 variable "ci_slack_channel_name" {
   type        = string
   description = "The Slack channel that notifications are posted to."
-  default     = "my-channel"
+  default     = ""
 }
 
 variable "ci_slack_team_name" {
   type        = string
   description = "The Slack team name, which is the word or phrase before `.slack.com` in the team URL."
-  default     = "my-team"
+  default     = ""
 }
 
 variable "ci_slack_pipeline_fail" {
@@ -1283,6 +1301,12 @@ variable "cd_enable_signing_validation" {
   default     = false
 }
 
+variable "cd_peer_review_compliance" {
+  type        = string
+  description = "Set to `0` to disable. Set to `1` to enable peer review evidence collection."
+  default     = ""
+}
+
 #SLACK
 variable "cd_slack_webhook_secret_name" {
   type        = string
@@ -1299,13 +1323,13 @@ variable "cd_enable_slack" {
 variable "cd_slack_channel_name" {
   type        = string
   description = "The Slack channel that notifications are posted to."
-  default     = "my-channel"
+  default     = ""
 }
 
 variable "cd_slack_team_name" {
   type        = string
   description = "The Slack team name, which is the word or phrase before .slack.com in the team URL."
-  default     = "my-team"
+  default     = ""
 }
 
 variable "cd_slack_pipeline_fail" {
@@ -1680,13 +1704,13 @@ variable "cc_enable_slack" {
 variable "cc_slack_channel_name" {
   type        = string
   description = "The Slack channel that notifications are posted to."
-  default     = "my-channel"
+  default     = ""
 }
 
 variable "cc_slack_team_name" {
   type        = string
   description = "The Slack team name, which is the word or phrase before .slack.com in the team URL."
-  default     = "my-team"
+  default     = ""
 }
 
 variable "cc_slack_pipeline_fail" {
@@ -1796,6 +1820,12 @@ variable "cc_enable_pipeline_dockerconfigjson" {
   type        = bool
   description = "Enable to add the pipeline-dockerconfigjson property to the pipeline properties."
   default     = false
+}
+
+variable "cc_peer_review_compliance" {
+  type        = string
+  description = "Set to `0` to disable. Set to `1` to enable peer review evidence collection."
+  default     = ""
 }
 
 ##### END OF CC VARIABLES ################
