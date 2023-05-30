@@ -66,7 +66,7 @@ statement instead the previous block.
 | Name | Source | Version |
 |------|--------|---------|
 | <a name="module_devsecops_cc_toolchain"></a> [devsecops\_cc\_toolchain](#module\_devsecops\_cc\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cc-toolchain | v1.0.6 |
-| <a name="module_devsecops_cd_toolchain"></a> [devsecops\_cd\_toolchain](#module\_devsecops\_cd\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain | v1.0.6 |
+| <a name="module_devsecops_cd_toolchain"></a> [devsecops\_cd\_toolchain](#module\_devsecops\_cd\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain | v1.0.7 |
 | <a name="module_devsecops_ci_toolchain"></a> [devsecops\_ci\_toolchain](#module\_devsecops\_ci\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-ci-toolchain | v1.0.6 |
 
 ## Resources
@@ -380,11 +380,16 @@ statement instead the previous block.
 |------|-------------|
 | <a name="output_app_repo_url"></a> [app\_repo\_url](#output\_app\_repo\_url) | The App Repo URL |
 | <a name="output_compliance_cc_toolchain_id"></a> [compliance\_cc\_toolchain\_id](#output\_compliance\_cc\_toolchain\_id) | The ID of the Compliance CC Toolchain |
+| <a name="output_compliance_cc_toolchain_url"></a> [compliance\_cc\_toolchain\_url](#output\_compliance\_cc\_toolchain\_url) | The Compliance CC Toolchain URL |
 | <a name="output_compliance_cd_toolchain_id"></a> [compliance\_cd\_toolchain\_id](#output\_compliance\_cd\_toolchain\_id) | The ID of the Compliance CD Toolchain |
+| <a name="output_compliance_cd_toolchain_url"></a> [compliance\_cd\_toolchain\_url](#output\_compliance\_cd\_toolchain\_url) | The Compliance CD Toolchain URL |
 | <a name="output_compliance_ci_toolchain_id"></a> [compliance\_ci\_toolchain\_id](#output\_compliance\_ci\_toolchain\_id) | The ID of the Compliance CI Toolchain |
+| <a name="output_compliance_ci_toolchain_url"></a> [compliance\_ci\_toolchain\_url](#output\_compliance\_ci\_toolchain\_url) | The Compliance CI Toolchain URL |
 | <a name="output_evidence_repo_url"></a> [evidence\_repo\_url](#output\_evidence\_repo\_url) | The Evidence Repo URL |
 | <a name="output_inventory_repo_url"></a> [inventory\_repo\_url](#output\_inventory\_repo\_url) | The Inventory Repo URL |
 | <a name="output_issues_repo_url"></a> [issues\_repo\_url](#output\_issues\_repo\_url) | The Issues Repo URL |
+| <a name="output_key_protect_instance_id"></a> [key\_protect\_instance\_id](#output\_key\_protect\_instance\_id) | The Key Protect Instance ID |
+| <a name="output_secrets_manager_instance_id"></a> [secrets\_manager\_instance\_id](#output\_secrets\_manager\_instance\_id) | The Secrets Manage Instance ID |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 <!-- BEGIN CONTRIBUTING HOOK -->
 
