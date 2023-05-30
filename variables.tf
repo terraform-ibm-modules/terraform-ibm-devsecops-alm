@@ -624,7 +624,7 @@ variable "ci_app_repo_auth_type" {
 variable "ci_compliance_pipeline_repo_auth_type" {
   type        = string
   description = "Select the method of authentication that is used to access the Git provider. 'oauth' or 'pat'."
-  default     = "oauth"
+  default     = ""
 }
 
 ######## End Repo auth type ######################
@@ -664,7 +664,7 @@ variable "ci_inventory_repo_git_token_secret_name" {
 variable "ci_compliance_pipeline_repo_git_token_secret_name" {
   type        = string
   description = "Name of the Git token secret in the secret provider."
-  default     = "git-token"
+  default     = ""
 }
 
 variable "ci_pipeline_config_repo_git_token_secret_name" {
@@ -1124,7 +1124,7 @@ variable "cd_deployment_repo_auth_type" {
 variable "cd_compliance_pipeline_repo_auth_type" {
   type        = string
   description = "Select the method of authentication that is used to access the Git provider. 'oauth' or 'pat'."
-  default     = "oauth"
+  default     = ""
 }
 
 variable "cd_change_management_repo_auth_type" {
@@ -1170,7 +1170,7 @@ variable "cd_inventory_repo_git_token_secret_name" {
 variable "cd_compliance_pipeline_repo_git_token_secret_name" {
   type        = string
   description = "Name of the Git token secret in the secret provider."
-  default     = "git-token"
+  default     = ""
 }
 
 variable "cd_pipeline_config_repo_git_token_secret_name" {
@@ -1596,7 +1596,7 @@ variable "cc_app_repo_auth_type" {
 variable "cc_compliance_pipeline_repo_auth_type" {
   type        = string
   description = "Select the method of authentication that is used to access the Git provider. 'oauth' or 'pat'."
-  default     = "oauth"
+  default     = ""
 }
 
 ######## End Repo auth type ######################
@@ -1636,7 +1636,7 @@ variable "cc_inventory_repo_git_token_secret_name" {
 variable "cc_compliance_pipeline_repo_git_token_secret_name" {
   type        = string
   description = "Name of the Git token secret in the secret provider."
-  default     = "git-token"
+  default     = ""
 }
 
 variable "cc_pipeline_config_repo_git_token_secret_name" {
