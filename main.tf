@@ -337,7 +337,7 @@ module "devsecops_cc_toolchain" {
   evidence_group            = (var.cc_evidence_group == "") ? var.repo_group : var.cc_evidence_group
   pipeline_config_group     = (var.cc_pipeline_config_group == "") ? var.repo_group : var.cc_pipeline_config_group
   compliance_pipeline_group = var.cc_compliance_pipeline_group
-  app_group                 = var.cc_app_group
+  app_group                 = (var.cc_app_group == "") ? var.repo_group : var.cc_app_group
 
   doi_environment       = var.cc_doi_environment
   link_to_doi_toolchain = var.cc_link_to_doi_toolchain
