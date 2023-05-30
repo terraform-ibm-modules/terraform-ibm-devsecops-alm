@@ -136,13 +136,13 @@ variable "enable_slack" {
 variable "slack_channel_name" {
   type        = string
   description = "The Slack channel that notifications are posted to. This applies to the CI, CD, and CC toolchains. To set separately see `ci_slack_channel_name`, `cd_slack_channel_name`, and `cc_slack_channel_name`"
-  default     = "my-channel"
+  default     = ""
 }
 
 variable "slack_team_name" {
   type        = string
   description = "The Slack team name, which is the word or phrase before `.slack.com` in the team URL. This applies to the CI, CD, and CC toolchains. To set separately, see `ci_slack_team_name`, `cd_slack_team_name`, and `cc_slack_team_name`."
-  default     = "my-team"
+  default     = ""
 }
 
 variable "slack_webhook_secret_name" {
