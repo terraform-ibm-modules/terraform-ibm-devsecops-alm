@@ -1813,7 +1813,7 @@ variable "cc_opt_in_auto_close" {
 variable "cc_environment_tag" {
   type        = string
   description = "Tag name that represents the target environment in the inventory. Example: prod_latest."
-  default     = "prod_latest"
+  default     = ""
 }
 
 variable "cc_enable_pipeline_dockerconfigjson" {

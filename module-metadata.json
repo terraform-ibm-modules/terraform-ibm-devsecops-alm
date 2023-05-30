@@ -281,7 +281,7 @@
       "name": "cc_environment_tag",
       "type": "string",
       "description": "Tag name that represents the target environment in the inventory. Example: prod_latest.",
-      "default": "prod_latest",
+      "default": "",
       "required": true,
       "source": [
         "module.devsecops_cc_toolchain.module.pipeline_cc.ibm_cd_tekton_pipeline_property.cc_pipeline_environment-tag.value"
