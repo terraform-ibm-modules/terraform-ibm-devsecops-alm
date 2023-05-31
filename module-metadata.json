@@ -137,7 +137,7 @@
       "name": "cc_compliance_pipeline_repo_auth_type",
       "type": "string",
       "description": "Select the method of authentication that is used to access the Git provider. 'oauth' or 'pat'.",
-      "default": "oauth",
+      "default": "",
       "source": [
         "module.devsecops_cc_toolchain.module.repositories"
       ],
@@ -150,7 +150,7 @@
       "name": "cc_compliance_pipeline_repo_git_token_secret_name",
       "type": "string",
       "description": "Name of the Git token secret in the secret provider.",
-      "default": "git-token",
+      "default": "",
       "source": [
         "module.devsecops_cc_toolchain.module.repositories"
       ],
@@ -1200,7 +1200,7 @@
       "name": "cd_compliance_pipeline_repo_auth_type",
       "type": "string",
       "description": "Select the method of authentication that is used to access the Git provider. 'oauth' or 'pat'.",
-      "default": "oauth",
+      "default": "",
       "source": [
         "module.devsecops_cd_toolchain.module.repositories"
       ],
@@ -1213,7 +1213,7 @@
       "name": "cd_compliance_pipeline_repo_git_token_secret_name",
       "type": "string",
       "description": "Name of the Git token secret in the secret provider.",
-      "default": "git-token",
+      "default": "",
       "source": [
         "module.devsecops_cd_toolchain.module.repositories"
       ],
@@ -2637,7 +2637,7 @@
       "name": "ci_compliance_pipeline_repo_auth_type",
       "type": "string",
       "description": "Select the method of authentication that is used to access the Git provider. 'oauth' or 'pat'.",
-      "default": "oauth",
+      "default": "",
       "source": [
         "module.devsecops_ci_toolchain.module.repositories"
       ],
@@ -2650,7 +2650,7 @@
       "name": "ci_compliance_pipeline_repo_git_token_secret_name",
       "type": "string",
       "description": "Name of the Git token secret in the secret provider.",
-      "default": "git-token",
+      "default": "",
       "source": [
         "module.devsecops_ci_toolchain.module.repositories"
       ],
