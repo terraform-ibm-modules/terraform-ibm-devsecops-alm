@@ -211,6 +211,12 @@ variable "peer_review_compliance" {
   default     = ""
 }
 
+variable "event_notifications_crn" {
+  type        = string
+  description = "Set the Event Notifications CRN to create an Events Notification integration. This paramater will apply to the CI, CD and CC toolchains. Can be set individually with `ci_event_notifications_crn`, `cd_event_notifications_crn`, `cc_event_notifications_crn`."
+  default     = ""
+}
+
 ##### END OF COMMON VARIABLES ############
 ##### START OF CI VARIABLES ##############
 
@@ -816,6 +822,13 @@ variable "ci_cos_bucket_name" {
   default     = ""
 }
 
+##### EVENT NOTIFICATIONS ################
+variable "ci_event_notifications_crn" {
+  type        = string
+  description = "Set the Event Notifications CRN to create an Events Notification integration."
+  default     = ""
+}
+
 ##### END OF CI VARIABLES ################
 ##### START OF CD VARIABLES ##############
 
@@ -1376,6 +1389,14 @@ variable "cd_cos_bucket_name" {
 }
 
 ##### END OF CD VARIABLES ################
+
+##### EVENT NOTIFICATIONS ################
+variable "cd_event_notifications_crn" {
+  type        = string
+  description = "Set the Event Notifications CRN to create an Events Notification integration."
+  default     = ""
+}
+
 ##### START OF CC VARIABLES ##############
 
 variable "cc_toolchain_resource_group" {
@@ -1825,6 +1846,13 @@ variable "cc_enable_pipeline_dockerconfigjson" {
 variable "cc_peer_review_compliance" {
   type        = string
   description = "Set to `0` to disable. Set to `1` to enable peer review evidence collection."
+  default     = ""
+}
+
+##### EVENT NOTIFICATIONS ################
+variable "cc_event_notifications_crn" {
+  type        = string
+  description = "Set the Event Notifications CRN to create an Events Notification integration."
   default     = ""
 }
 

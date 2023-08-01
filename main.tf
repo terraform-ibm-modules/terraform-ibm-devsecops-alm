@@ -36,7 +36,7 @@ locals {
 
 module "devsecops_ci_toolchain" {
   count                    = var.create_ci_toolchain ? 1 : 0
-  source                   = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-ci-toolchain?ref=v1.0.6"
+  source                   = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-ci-toolchain?ref=v1.0.7-beta.4"
   ibmcloud_api_key         = var.ibmcloud_api_key
   toolchain_name           = (var.ci_toolchain_name == "") ? format("${var.toolchain_name}%s", "-CI-Toolchain") : var.ci_toolchain_name
   toolchain_region         = (var.ci_toolchain_region == "") ? var.toolchain_region : replace(replace(var.ci_toolchain_region, "ibm:yp:", ""), "ibm:ys1:", "")
@@ -153,6 +153,8 @@ module "devsecops_ci_toolchain" {
   cos_endpoint    = (var.ci_cos_endpoint == "") ? var.cos_endpoint : var.ci_cos_endpoint
   cos_bucket_name = (var.ci_cos_bucket_name == "") ? var.cos_bucket_name : var.ci_cos_bucket_name
 
+  #EVENT NOTIFICATIONS
+  event_notifications_crn = (var.ci_event_notifications_crn == "") ? var.event_notifications_crn : var.ci_event_notifications_crn
   #DEVOPS INSIGHTS
   link_to_doi_toolchain = var.ci_link_to_doi_toolchain
 
@@ -160,7 +162,7 @@ module "devsecops_ci_toolchain" {
 
 module "devsecops_cd_toolchain" {
   count            = var.create_cd_toolchain ? 1 : 0
-  source           = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain?ref=v1.0.7"
+  source           = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain?ref=v1.0.8-beta.1"
   ibmcloud_api_key = var.ibmcloud_api_key
 
   toolchain_name           = (var.cd_toolchain_name == "") ? format("${var.toolchain_name}%s", "-CD-Toolchain") : var.cd_toolchain_name
@@ -277,13 +279,14 @@ module "devsecops_cd_toolchain" {
   cos_endpoint    = (var.cd_cos_endpoint == "") ? var.cos_endpoint : var.cd_cos_endpoint
   cos_bucket_name = (var.cd_cos_bucket_name == "") ? var.cos_bucket_name : var.cd_cos_bucket_name
 
-
+  #EVENT NOTIFICATIONS
+  event_notifications_crn = (var.cd_event_notifications_crn == "") ? var.event_notifications_crn : var.cd_event_notifications_crn
 
 }
 
 module "devsecops_cc_toolchain" {
   count                         = var.create_cc_toolchain ? 1 : 0
-  source                        = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cc-toolchain?ref=v1.0.6"
+  source                        = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cc-toolchain?ref=v1.0.7-beta.1"
   ibmcloud_api_key              = var.ibmcloud_api_key
   toolchain_name                = (var.cc_toolchain_name == "") ? format("${var.toolchain_name}%s", "-CC-Toolchain") : var.cc_toolchain_name
   toolchain_description         = var.cc_toolchain_description
@@ -380,6 +383,9 @@ module "devsecops_cc_toolchain" {
   #COS INTEGRATION
   cos_endpoint    = (var.cc_cos_endpoint == "") ? var.cos_endpoint : var.cc_cos_endpoint
   cos_bucket_name = (var.cc_cos_bucket_name == "") ? var.cos_bucket_name : var.cc_cos_bucket_name
+
+  #EVENT NOTIFICATIONS
+  event_notifications_crn = (var.cc_event_notifications_crn == "") ? var.event_notifications_crn : var.cc_event_notifications_crn
 }
 
 #move to CI/CD/CC modules for next release

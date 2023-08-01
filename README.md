@@ -57,15 +57,15 @@ statement instead the previous block.
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0.0 |
-| <a name="requirement_ibm"></a> [ibm](#requirement\_ibm) | >=1.52.1 |
+| <a name="requirement_ibm"></a> [ibm](#requirement\_ibm) | >=1.55.0 |
 
 ### Modules
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_devsecops_cc_toolchain"></a> [devsecops\_cc\_toolchain](#module\_devsecops\_cc\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cc-toolchain | v1.0.6 |
-| <a name="module_devsecops_cd_toolchain"></a> [devsecops\_cd\_toolchain](#module\_devsecops\_cd\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain | v1.0.7 |
-| <a name="module_devsecops_ci_toolchain"></a> [devsecops\_ci\_toolchain](#module\_devsecops\_ci\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-ci-toolchain | v1.0.6 |
+| <a name="module_devsecops_cc_toolchain"></a> [devsecops\_cc\_toolchain](#module\_devsecops\_cc\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cc-toolchain | v1.0.7-beta.1 |
+| <a name="module_devsecops_cd_toolchain"></a> [devsecops\_cd\_toolchain](#module\_devsecops\_cd\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain | v1.0.8-beta.1 |
+| <a name="module_devsecops_ci_toolchain"></a> [devsecops\_ci\_toolchain](#module\_devsecops\_ci\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-ci-toolchain | v1.0.7-beta.4 |
 
 ### Resources
 
@@ -102,6 +102,7 @@ statement instead the previous block.
 | <a name="input_cc_enable_secrets_manager"></a> [cc\_enable\_secrets\_manager](#input\_cc\_enable\_secrets\_manager) | Enable the Secrets Manager integration. | `bool` | `false` | no |
 | <a name="input_cc_enable_slack"></a> [cc\_enable\_slack](#input\_cc\_enable\_slack) | Set to true to create the integration. | `bool` | `false` | no |
 | <a name="input_cc_environment_tag"></a> [cc\_environment\_tag](#input\_cc\_environment\_tag) | Tag name that represents the target environment in the inventory. Example: prod\_latest. | `string` | `""` | no |
+| <a name="input_cc_event_notifications_crn"></a> [cc\_event\_notifications\_crn](#input\_cc\_event\_notifications\_crn) | Set the Event Notifications CRN to create an Events Notification integration. | `string` | `""` | no |
 | <a name="input_cc_evidence_group"></a> [cc\_evidence\_group](#input\_cc\_evidence\_group) | Specify Git user or group for evidence repository. | `string` | `""` | no |
 | <a name="input_cc_evidence_repo_auth_type"></a> [cc\_evidence\_repo\_auth\_type](#input\_cc\_evidence\_repo\_auth\_type) | Select the method of authentication that is used to access the Git provider. 'oauth' or 'pat' | `string` | `""` | no |
 | <a name="input_cc_evidence_repo_git_token_secret_name"></a> [cc\_evidence\_repo\_git\_token\_secret\_name](#input\_cc\_evidence\_repo\_git\_token\_secret\_name) | Name of the Git token secret in the secret provider. | `string` | `""` | no |
@@ -189,6 +190,7 @@ statement instead the previous block.
 | <a name="input_cd_enable_secrets_manager"></a> [cd\_enable\_secrets\_manager](#input\_cd\_enable\_secrets\_manager) | Use the Secrets Manager integration. | `bool` | `false` | no |
 | <a name="input_cd_enable_signing_validation"></a> [cd\_enable\_signing\_validation](#input\_cd\_enable\_signing\_validation) | Enable to add the code-signing-certificate property to the pipeline properties. | `bool` | `false` | no |
 | <a name="input_cd_enable_slack"></a> [cd\_enable\_slack](#input\_cd\_enable\_slack) | Default: false. Set to true to create the integration. | `bool` | `false` | no |
+| <a name="input_cd_event_notifications_crn"></a> [cd\_event\_notifications\_crn](#input\_cd\_event\_notifications\_crn) | Set the Event Notifications CRN to create an Events Notification integration. | `string` | `""` | no |
 | <a name="input_cd_evidence_group"></a> [cd\_evidence\_group](#input\_cd\_evidence\_group) | Specify Git user or group for evidence repository. | `string` | `""` | no |
 | <a name="input_cd_evidence_repo_auth_type"></a> [cd\_evidence\_repo\_auth\_type](#input\_cd\_evidence\_repo\_auth\_type) | Select the method of authentication that is used to access the Git provider. 'oauth' or 'pat'. | `string` | `""` | no |
 | <a name="input_cd_evidence_repo_git_token_secret_name"></a> [cd\_evidence\_repo\_git\_token\_secret\_name](#input\_cd\_evidence\_repo\_git\_token\_secret\_name) | Name of the Git token secret in the secret provider. | `string` | `""` | no |
@@ -283,6 +285,7 @@ statement instead the previous block.
 | <a name="input_ci_enable_pipeline_dockerconfigjson"></a> [ci\_enable\_pipeline\_dockerconfigjson](#input\_ci\_enable\_pipeline\_dockerconfigjson) | Enable to add the pipeline-dockerconfigjson property to the pipeline properties. | `bool` | `false` | no |
 | <a name="input_ci_enable_secrets_manager"></a> [ci\_enable\_secrets\_manager](#input\_ci\_enable\_secrets\_manager) | Set to enable Secrets Manager Integration. | `bool` | `false` | no |
 | <a name="input_ci_enable_slack"></a> [ci\_enable\_slack](#input\_ci\_enable\_slack) | Default: false. Set to true to create the integration. | `bool` | `false` | no |
+| <a name="input_ci_event_notifications_crn"></a> [ci\_event\_notifications\_crn](#input\_ci\_event\_notifications\_crn) | Set the Event Notifications CRN to create an Events Notification integration. | `string` | `""` | no |
 | <a name="input_ci_evidence_group"></a> [ci\_evidence\_group](#input\_ci\_evidence\_group) | Specify Git user or group for evidence repository. | `string` | `""` | no |
 | <a name="input_ci_evidence_repo_auth_type"></a> [ci\_evidence\_repo\_auth\_type](#input\_ci\_evidence\_repo\_auth\_type) | Select the method of authentication that is used to access the Git provider. 'oauth' or 'pat'. | `string` | `""` | no |
 | <a name="input_ci_evidence_repo_git_token_secret_name"></a> [ci\_evidence\_repo\_git\_token\_secret\_name](#input\_ci\_evidence\_repo\_git\_token\_secret\_name) | Name of the Git token secret in the secret provider. | `string` | `""` | no |
@@ -347,6 +350,7 @@ statement instead the previous block.
 | <a name="input_enable_secrets_manager"></a> [enable\_secrets\_manager](#input\_enable\_secrets\_manager) | Enable the Secrets Manager integrations. | `bool` | `true` | no |
 | <a name="input_enable_slack"></a> [enable\_slack](#input\_enable\_slack) | Set to `true` to create the integration. This requires a valid `slack_channel_name`, `slack_team_name`, and a valid `webhook` (see `slack_webhook_secret_name`). This setting applies for CI, CD, and CC toolchains. To enable Slack separately, see `ci_enable_slack`, `cd_enable_slack`, and `cc_enable_slack`. | `bool` | `false` | no |
 | <a name="input_environment_prefix"></a> [environment\_prefix](#input\_environment\_prefix) | By default `ibm:yp:`. This will be set as the prefix to regions automatically where required. For example `ibm:yp:us-south`. | `string` | `"ibm:yp:"` | no |
+| <a name="input_event_notifications_crn"></a> [event\_notifications\_crn](#input\_event\_notifications\_crn) | Set the Event Notifications CRN to create an Events Notification integration. This paramater will apply to the CI, CD and CC toolchains. Can be set individually with `ci_event_notifications_crn`, `cd_event_notifications_crn`, `cc_event_notifications_crn`. | `string` | `""` | no |
 | <a name="input_evidence_repo_url"></a> [evidence\_repo\_url](#input\_evidence\_repo\_url) | This is a template repository to clone compliance-evidence-locker for reference DevSecOps toolchain templates. | `string` | `""` | no |
 | <a name="input_ibmcloud_api"></a> [ibmcloud\_api](#input\_ibmcloud\_api) | IBM Cloud API Endpoint. | `string` | `"https://cloud.ibm.com"` | no |
 | <a name="input_ibmcloud_api_key"></a> [ibmcloud\_api\_key](#input\_ibmcloud\_api\_key) | API key used to create the toolchains. (See deployment guide.) | `string` | n/a | yes |
