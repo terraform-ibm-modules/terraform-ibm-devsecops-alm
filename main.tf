@@ -32,6 +32,10 @@ locals {
 
   repo_auth_type               = (var.repo_git_token_secret_name == "") ? "oauth" : "pat"
   calculated_ci_cluster_region = (var.ci_dev_region != "") ? var.ci_dev_region : (var.ci_cluster_region != "") ? var.ci_cluster_region : var.toolchain_region
+
+  inventory_repo_existing_url = (var.inventory_repo_existing_url != "") ? var.inventory_repo_existing_url : var.inventory_repo_url
+  evidence_repo_existing_url = (var.evidence_repo_existing_url != "") ? var.evidence_repo_existing_url : var.evidence_repo_url
+  issues_repo_existing_url = (var.issues_repo_existing_url != "") ? var.issues_repo_existing_url : var.issues_repo_url
 }
 
 module "devsecops_ci_toolchain" {
@@ -60,13 +64,7 @@ module "devsecops_ci_toolchain" {
   #SECRET NAMES
   pipeline_ibmcloud_api_key_secret_name          = var.ci_pipeline_ibmcloud_api_key_secret_name
   cos_api_key_secret_name                        = (var.ci_cos_api_key_secret_name == "") ? var.cos_api_key_secret_name : var.ci_cos_api_key_secret_name
-  issues_repo_git_token_secret_name              = (var.ci_issues_repo_git_token_secret_name == "") ? var.repo_git_token_secret_name : var.ci_issues_repo_git_token_secret_name
-  evidence_repo_git_token_secret_name            = (var.ci_evidence_repo_git_token_secret_name == "") ? var.repo_git_token_secret_name : var.ci_evidence_repo_git_token_secret_name
-  inventory_repo_git_token_secret_name           = (var.ci_inventory_repo_git_token_secret_name == "") ? var.repo_git_token_secret_name : var.ci_inventory_repo_git_token_secret_name
-  compliance_pipeline_repo_git_token_secret_name = (var.ci_compliance_pipeline_repo_git_token_secret_name == "") ? var.repo_git_token_secret_name : var.ci_compliance_pipeline_repo_git_token_secret_name
-  pipeline_config_repo_git_token_secret_name     = (var.ci_pipeline_config_repo_git_token_secret_name == "") ? var.repo_git_token_secret_name : var.ci_pipeline_config_repo_git_token_secret_name
   slack_webhook_secret_name                      = (var.ci_slack_webhook_secret_name == "") ? var.slack_webhook_secret_name : var.ci_slack_webhook_secret_name
-  app_repo_git_token_secret_name                 = (var.ci_app_repo_git_token_secret_name == "") ? var.repo_git_token_secret_name : var.ci_app_repo_git_token_secret_name
   signing_key_secret_name                        = var.ci_signing_key_secret_name
   pipeline_dockerconfigjson_secret_name          = var.ci_pipeline_dockerconfigjson_secret_name
 
@@ -78,11 +76,13 @@ module "devsecops_ci_toolchain" {
   app_repo_auth_type                 = (var.ci_app_repo_auth_type == "") ? local.repo_auth_type : var.ci_app_repo_auth_type
   compliance_pipeline_repo_auth_type = (var.ci_compliance_pipeline_repo_auth_type == "") ? local.repo_auth_type : var.ci_compliance_pipeline_repo_auth_type
 
-  #PIPELINE CONFIG REPO
-  pipeline_config_repo_existing_url   = var.ci_pipeline_config_repo_existing_url
-  pipeline_config_repo_clone_from_url = var.ci_pipeline_config_repo_clone_from_url
-  pipeline_config_repo_branch         = var.ci_pipeline_config_repo_branch
-  pipeline_config_path                = var.ci_pipeline_config_path
+  #REPO GIT SECRET NAMES
+  issues_repo_git_token_secret_name              = (var.ci_issues_repo_git_token_secret_name == "") ? var.repo_git_token_secret_name : var.ci_issues_repo_git_token_secret_name
+  evidence_repo_git_token_secret_name            = (var.ci_evidence_repo_git_token_secret_name == "") ? var.repo_git_token_secret_name : var.ci_evidence_repo_git_token_secret_name
+  inventory_repo_git_token_secret_name           = (var.ci_inventory_repo_git_token_secret_name == "") ? var.repo_git_token_secret_name : var.ci_inventory_repo_git_token_secret_name
+  compliance_pipeline_repo_git_token_secret_name = (var.ci_compliance_pipeline_repo_git_token_secret_name == "") ? var.repo_git_token_secret_name : var.ci_compliance_pipeline_repo_git_token_secret_name
+  pipeline_config_repo_git_token_secret_name     = (var.ci_pipeline_config_repo_git_token_secret_name == "") ? var.repo_git_token_secret_name : var.ci_pipeline_config_repo_git_token_secret_name
+  app_repo_git_token_secret_name                 = (var.ci_app_repo_git_token_secret_name == "") ? var.repo_git_token_secret_name : var.ci_app_repo_git_token_secret_name
 
   #GROUPS/USERS FOR REPOS
   app_group                 = (var.ci_app_group == "") ? var.repo_group : var.ci_app_group
@@ -91,6 +91,43 @@ module "devsecops_ci_toolchain" {
   evidence_group            = (var.ci_evidence_group == "") ? var.repo_group : var.ci_evidence_group
   pipeline_config_group     = (var.ci_pipeline_config_group == "") ? var.repo_group : var.ci_pipeline_config_group
   compliance_pipeline_group = (var.ci_compliance_pipeline_group == "") ? var.repo_group : var.ci_compliance_pipeline_group
+
+  #APP REPO
+  app_repo_clone_from_url        = var.ci_app_repo_clone_from_url
+  app_repo_clone_from_branch     = var.ci_app_repo_clone_from_branch
+  app_repo_existing_url          = var.ci_app_repo_existing_url
+  app_repo_existing_branch       = var.ci_app_repo_existing_branch
+  app_repo_existing_git_provider = var.ci_app_repo_existing_git_provider
+  app_repo_existing_git_id       = var.ci_app_repo_existing_git_id
+  app_repo_clone_to_git_provider = var.ci_app_repo_clone_to_git_provider
+  app_repo_clone_to_git_id       = var.ci_app_repo_clone_to_git_id
+
+  #PIPELINE CONFIG REPO
+  pipeline_config_repo_existing_url   = var.ci_pipeline_config_repo_existing_url
+  pipeline_config_repo_clone_from_url = var.ci_pipeline_config_repo_clone_from_url
+  pipeline_config_repo_branch         = var.ci_pipeline_config_repo_branch
+  pipeline_config_path                = var.ci_pipeline_config_path
+
+  #EVIDENCE REPO
+  evidence_repo_name              = var.evidence_repo_name
+  evidence_repo_existing_url      = var.evidence_repo_existing_url
+  evidence_repo_git_provider      = var.evidence_repo_existing_git_provider
+  evidence_repo_git_id            = var.evidence_repo_existing_git_id
+  evidence_repo_integration_owner = var.evidence_repo_integration_owner
+
+  #ISSUES REPO
+  issues_repo_name              = var.issues_repo_name
+  issues_repo_existing_url      = var.issues_repo_existing_url
+  issues_repo_git_provider      = var.issues_repo_existing_git_provider
+  issues_repo_git_id            = var.issues_repo_existing_git_id
+  issues_repo_integration_owner = var.issues_repo_integration_owner
+
+  #INVENTORY REPO
+  inventory_repo_name              = var.inventory_repo_name
+  inventory_repo_existing_url      = var.inventory_repo_existing_url
+  inventory_repo_git_provider      = var.inventory_repo_existing_git_provider
+  inventory_repo_git_id            = var.inventory_repo_existing_git_id
+  inventory_repo_integration_owner = var.inventory_repo_integration_owner
 
   app_name                           = var.ci_app_name
   dev_region                         = format("${var.environment_prefix}%s", replace(replace(local.calculated_ci_cluster_region, "ibm:yp:", ""), "ibm:ys1:", ""))
@@ -115,16 +152,6 @@ module "devsecops_ci_toolchain" {
   slack_notifications                = local.ci_slack_notification_state
   sonarqube_config                   = var.ci_sonarqube_config
   enable_pipeline_dockerconfigjson   = var.ci_enable_pipeline_dockerconfigjson
-
-  #APP REPO
-  app_repo_clone_from_url        = var.ci_app_repo_clone_from_url
-  app_repo_clone_from_branch     = var.ci_app_repo_clone_from_branch
-  app_repo_existing_url          = var.ci_app_repo_existing_url
-  app_repo_existing_branch       = var.ci_app_repo_existing_branch
-  app_repo_existing_git_provider = var.ci_app_repo_existing_git_provider
-  app_repo_existing_git_id       = var.ci_app_repo_existing_git_id
-  app_repo_clone_to_git_provider = var.ci_app_repo_clone_to_git_provider
-  app_repo_clone_to_git_id       = var.ci_app_repo_clone_to_git_id
 
   #CODE ENGINE
   code_engine_project        = var.ci_code_engine_project
@@ -155,9 +182,32 @@ module "devsecops_ci_toolchain" {
 
   #EVENT NOTIFICATIONS
   event_notifications_crn = (var.ci_event_notifications_crn == "") ? var.event_notifications_crn : var.ci_event_notifications_crn
+  event_notifications_tool_name = var.event_notifications_tool_name
+
+  #INTEGRATION NAMES
+  sm_integration_name          = var.sm_integration_name
+  kp_integration_name          = var.kp_integration_name
+  slack_integration_name       = var.slack_integration_name
+  artifactory_integration_name =  var.artifactory_integration_name
+  privateworker_name           = var.privateworker_name
+
   #DEVOPS INSIGHTS
   link_to_doi_toolchain = var.ci_link_to_doi_toolchain
 
+  #TRIGGER PROPERTIES
+  trigger_git_name             = var.ci_trigger_git_name
+  trigger_git_enable           = var.ci_trigger_git_enable
+  trigger_timed_name           = var.ci_trigger_timed_name
+  trigger_timed_enable         = var.ci_trigger_timed_enable
+  trigger_timed_cron_schedule  = var.ci_trigger_timed_cron_schedule
+  trigger_manual_name          = var.ci_trigger_manual_name
+  trigger_manual_enable        = var.ci_trigger_manual_enable
+  trigger_pr_git_name          = var.ci_trigger_pr_git_name
+  trigger_pr_git_enable        = var.ci_trigger_pr_git_enable
+  trigger_manual_pruner_name   = var.ci_trigger_manual_pruner_name
+  trigger_manual_pruner_enable = var.ci_trigger_manual_pruner_enable
+  trigger_timed_pruner_name    = var.ci_trigger_timed_pruner_name
+  trigger_timed_pruner_enable  = var.ci_trigger_timed_pruner_enable
 }
 
 module "devsecops_cd_toolchain" {
@@ -205,12 +255,6 @@ module "devsecops_cd_toolchain" {
   compliance_pipeline_repo_auth_type = (var.cd_compliance_pipeline_repo_auth_type == "") ? local.repo_auth_type : var.cd_compliance_pipeline_repo_auth_type
   change_management_repo_auth_type   = (var.cd_change_management_repo_auth_type == "") ? local.repo_auth_type : var.cd_change_management_repo_auth_type
 
-  #PIPELINE CONFIG REPO
-  pipeline_config_repo_existing_url   = var.cd_pipeline_config_repo_existing_url
-  pipeline_config_repo_clone_from_url = var.cd_pipeline_config_repo_clone_from_url
-  pipeline_config_repo_branch         = var.cd_pipeline_config_repo_branch
-  pipeline_config_path                = var.cd_pipeline_config_path
-
   #GROUPS/USERS FOR REPOS
   issues_group              = (var.cd_issues_group == "") ? var.repo_group : var.cd_issues_group
   inventory_group           = (var.cd_inventory_group == "") ? var.repo_group : var.cd_inventory_group
@@ -220,13 +264,38 @@ module "devsecops_cd_toolchain" {
   deployment_group          = (var.cd_deployment_group == "") ? var.repo_group : var.cd_deployment_group
   change_management_group   = (var.cd_change_management_group == "") ? var.repo_group : var.cd_change_management_group
 
+  #PIPELINE CONFIG REPO
+  pipeline_config_repo_existing_url   = var.cd_pipeline_config_repo_existing_url
+  pipeline_config_repo_clone_from_url = var.cd_pipeline_config_repo_clone_from_url
+  pipeline_config_repo_branch         = var.cd_pipeline_config_repo_branch
+  pipeline_config_path                = var.cd_pipeline_config_path
 
-  evidence_repo_url  = try(module.devsecops_ci_toolchain[0].evidence_repo_url, var.evidence_repo_url)
-  issues_repo_url    = try(module.devsecops_ci_toolchain[0].issues_repo_url, var.issues_repo_url)
-  inventory_repo_url = try(module.devsecops_ci_toolchain[0].inventory_repo_url, var.inventory_repo_url)
+  #EVIDENCE REPO
+  evidence_repo_name              = var.evidence_repo_name
+  evidence_repo_url               = try(module.devsecops_ci_toolchain[0].evidence_repo_url, local.evidence_repo_existing_url)
+  evidence_repo_git_provider      = var.evidence_repo_existing_git_provider
+  evidence_repo_git_id            = var.evidence_repo_existing_git_id
+  evidence_repo_integration_owner = var.evidence_repo_integration_owner
 
+  #ISSUES REPO
+  issues_repo_name              = var.issues_repo_name
+  issues_repo_url               = try(module.devsecops_ci_toolchain[0].issues_repo_url, local.issues_repo_existing_url)
+  issues_repo_git_provider      = var.issues_repo_existing_git_provider
+  issues_repo_git_id            = var.issues_repo_existing_git_id
+  issues_repo_integration_owner = var.issues_repo_integration_owner
+
+  #INVENTORY REPO
+  inventory_repo_name              = var.inventory_repo_name
+  inventory_repo_url               = try(module.devsecops_ci_toolchain[0].inventory_repo_url, local.inventory_repo_existing_url)
+  inventory_repo_git_provider      = var.inventory_repo_existing_git_provider
+  inventory_repo_git_id            = var.inventory_repo_existing_git_id
+  inventory_repo_integration_owner = var.inventory_repo_integration_owner
+
+  #CHANGE MANAGEMENT REPO
   change_management_repo                = var.cd_change_management_repo
   change_repo_clone_from_url            = var.cd_change_repo_clone_from_url
+
+  #DEPLOYMENT REPO
   deployment_repo_existing_git_provider = var.cd_deployment_repo_existing_git_provider
   deployment_repo_existing_git_id       = var.cd_deployment_repo_existing_git_id
   deployment_repo_clone_to_git_provider = var.cd_deployment_repo_clone_to_git_provider
@@ -281,7 +350,27 @@ module "devsecops_cd_toolchain" {
 
   #EVENT NOTIFICATIONS
   event_notifications_crn = (var.cd_event_notifications_crn == "") ? var.event_notifications_crn : var.cd_event_notifications_crn
+  event_notifications_tool_name = var.event_notifications_tool_name
 
+  #INTEGRATION NAMES
+  sm_integration_name          = var.sm_integration_name
+  kp_integration_name          = var.kp_integration_name
+  slack_integration_name       = var.slack_integration_name
+
+  #TRIGGER PROPERTIES
+  trigger_git_name                = var.cd_trigger_git_name
+  trigger_git_enable              = var.cd_trigger_git_enable
+  trigger_timed_name              = var.cd_trigger_timed_name
+  trigger_timed_enable            = var.cd_trigger_timed_enable
+  trigger_timed_cron_schedule     = var.cd_trigger_timed_cron_schedule
+  trigger_manual_name             = var.cd_trigger_manual_name
+  trigger_manual_enable           = var.cd_trigger_manual_enable
+  trigger_manual_promotion_name   = var.cd_trigger_manual_promotion_name
+  trigger_manual_promotion_enable = var.cd_trigger_manual_promotion_enable
+  trigger_manual_pruner_name      = var.cd_trigger_manual_pruner_name
+  trigger_manual_pruner_enable    = var.cd_trigger_manual_pruner_enable
+  trigger_timed_pruner_name       = var.cd_trigger_timed_pruner_name
+  trigger_timed_pruner_enable     = var.cd_trigger_timed_pruner_enable
 }
 
 module "devsecops_cc_toolchain" {
@@ -327,12 +416,6 @@ module "devsecops_cc_toolchain" {
   app_repo_auth_type                 = (var.cc_app_repo_auth_type == "") ? local.repo_auth_type : var.cc_app_repo_auth_type
   compliance_pipeline_repo_auth_type = (var.cc_compliance_pipeline_repo_auth_type == "") ? local.repo_auth_type : var.cc_compliance_pipeline_repo_auth_type
 
-  #PIPELINE CONFIG REPO
-  pipeline_config_repo_existing_url   = var.cc_pipeline_config_repo_existing_url
-  pipeline_config_repo_clone_from_url = var.cc_pipeline_config_repo_clone_from_url
-  pipeline_config_repo_branch         = var.cc_pipeline_config_repo_branch
-  pipeline_config_path                = var.cc_pipeline_config_path
-
   #GROUPS/USERS FOR REPOS
   issues_group              = (var.cc_issues_group == "") ? var.repo_group : var.cc_issues_group
   inventory_group           = (var.cc_inventory_group == "") ? var.repo_group : var.cc_inventory_group
@@ -344,14 +427,38 @@ module "devsecops_cc_toolchain" {
   doi_environment       = var.cc_doi_environment
   link_to_doi_toolchain = var.cc_link_to_doi_toolchain
 
-  evidence_repo_url  = try(module.devsecops_ci_toolchain[0].evidence_repo_url, var.evidence_repo_url)
-  inventory_repo_url = try(module.devsecops_ci_toolchain[0].inventory_repo_url, var.inventory_repo_url)
-  issues_repo_url    = try(module.devsecops_ci_toolchain[0].issues_repo_url, var.issues_repo_url)
+  #PIPELINE CONFIG REPO
+  pipeline_config_repo_existing_url   = var.cc_pipeline_config_repo_existing_url
+  pipeline_config_repo_clone_from_url = var.cc_pipeline_config_repo_clone_from_url
+  pipeline_config_repo_branch         = var.cc_pipeline_config_repo_branch
+  pipeline_config_path                = var.cc_pipeline_config_path
 
+  #APP REPO
   app_repo_url          = try(module.devsecops_ci_toolchain[0].app_repo_url, var.cc_app_repo_url)
   app_repo_git_provider = try(module.devsecops_ci_toolchain[0].app_repo_git_provider, var.cc_app_repo_git_provider)
   app_repo_branch       = try(module.devsecops_ci_toolchain[0].app_repo_branch, var.cc_app_repo_branch)
   app_repo_git_id       = try(module.devsecops_ci_toolchain[0].app_repo_git_id, var.cc_app_repo_git_id)
+
+  #EVIDENCE REPO
+  evidence_repo_name              = var.evidence_repo_name
+  evidence_repo_url               = try(module.devsecops_ci_toolchain[0].evidence_repo_url, local.evidence_repo_existing_url)
+  evidence_repo_git_provider      = var.evidence_repo_existing_git_provider
+  evidence_repo_git_id            = var.evidence_repo_existing_git_id
+  evidence_repo_integration_owner = var.evidence_repo_integration_owner
+
+  #ISSUES REPO
+  issues_repo_name              = var.issues_repo_name
+  issues_repo_url               = try(module.devsecops_ci_toolchain[0].issues_repo_url, local.issues_repo_existing_url)
+  issues_repo_git_provider      = var.issues_repo_existing_git_provider
+  issues_repo_git_id            = var.issues_repo_existing_git_id
+  issues_repo_integration_owner = var.issues_repo_integration_owner
+
+  #INVENTORY REPO
+  inventory_repo_name              = var.inventory_repo_name
+  inventory_repo_url               = try(module.devsecops_ci_toolchain[0].inventory_repo_url, local.inventory_repo_existing_url)
+  inventory_repo_git_provider      = var.inventory_repo_existing_git_provider
+  inventory_repo_git_id            = var.inventory_repo_existing_git_id
+  inventory_repo_integration_owner = var.inventory_repo_integration_owner
 
   #SCC
   scc_enable_scc       = var.cc_scc_enable_scc
@@ -386,6 +493,23 @@ module "devsecops_cc_toolchain" {
 
   #EVENT NOTIFICATIONS
   event_notifications_crn = (var.cc_event_notifications_crn == "") ? var.event_notifications_crn : var.cc_event_notifications_crn
+  event_notifications_tool_name = var.event_notifications_tool_name
+
+  #INTEGRATION NAMES
+  sm_integration_name          = var.sm_integration_name
+  kp_integration_name          = var.kp_integration_name
+  slack_integration_name       = var.slack_integration_name
+  
+  #TRIGGER PROPERTIES
+  trigger_timed_name           = var.cc_trigger_timed_name
+  trigger_timed_enable         = var.cc_trigger_timed_enable
+  trigger_timed_cron_schedule  = var.cc_trigger_timed_cron_schedule
+  trigger_manual_name          = var.cc_trigger_manual_name
+  trigger_manual_enable        = var.cc_trigger_manual_enable
+  trigger_manual_pruner_name   = var.cc_trigger_manual_pruner_name
+  trigger_manual_pruner_enable = var.cc_trigger_manual_pruner_enable
+  trigger_timed_pruner_name    = var.cc_trigger_timed_pruner_name
+  trigger_timed_pruner_enable  = var.cc_trigger_timed_pruner_enable
 }
 
 #move to CI/CD/CC modules for next release

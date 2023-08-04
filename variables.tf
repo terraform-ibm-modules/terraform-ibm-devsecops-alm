@@ -25,19 +25,121 @@ variable "cos_api_key_secret_name" {
 
 variable "inventory_repo_url" {
   type        = string
-  description = "This is a template repository to clone compliance-inventory for reference DevSecOps toolchain templates."
+  description = "Deprecated: Use `inventory_repo_existing_url`. This is a template repository to clone compliance-inventory for reference DevSecOps toolchain templates."
   default     = ""
 }
 
 variable "evidence_repo_url" {
   type        = string
-  description = "This is a template repository to clone compliance-evidence-locker for reference DevSecOps toolchain templates."
+  description = "Deprecated: Use `evidence_repo_existing_url`. This is a template repository to clone compliance-evidence-locker for reference DevSecOps toolchain templates."
   default     = ""
 }
 
 variable "issues_repo_url" {
   type        = string
+  description = "Deprecated: Use `issues_repo_existing_url`. This is a template repository to clone compliance-issues for reference DevSecOps toolchain templates."
+  default     = ""
+}
+
+variable "evidence_repo_name" {
+  type        = string
+  description = "The repository name."
+  default     = ""
+}
+
+variable "evidence_repo_existing_url" {
+  type        = string
+  description = "This is a template repository to clone compliance-evidence-locker for reference DevSecOps toolchain templates."
+  default     = ""
+}
+
+variable "evidence_repo_existing_git_provider" {
+  type        = string
+  default     = "hostedgit"
+  description = "Git provider for evidence repo"
+  validation {
+    condition     = contains(["hostedgit", "githubconsolidated", "gitlab"], var.evidence_repo_existing_git_provider)
+    error_message = "Must be either \"hostedgit\" or \"gitlab\" or \"githubconsolidated\" for evidence repo."
+  }
+}
+
+variable "evidence_repo_existing_git_id" {
+  type        = string
+  description = "Set this value to `github` for github.com, or to the GUID of a custom GitHub Enterprise server."
+  default     = ""
+}
+
+variable "evidence_repo_integration_owner" {
+  type        = string
+  description = "The name of the integration owner."
+  default     = ""
+}
+
+variable "issues_repo_name" {
+  type        = string
+  description = "The repository name."
+  default     = ""
+}
+
+variable "issues_repo_existing_url" {
+  type        = string
   description = "This is a template repository to clone compliance-issues for reference DevSecOps toolchain templates."
+  default     = ""
+}
+
+variable "issues_repo_existing_git_provider" {
+  type        = string
+  default     = "hostedgit"
+  description = "Git provider for issue repo "
+  validation {
+    condition     = contains(["hostedgit", "githubconsolidated", "gitlab"], var.issues_repo_existing_git_provider)
+    error_message = "Must be either \"hostedgit\" or \"gitlab\" or \"githubconsolidated\" for issue repo."
+  }
+}
+
+variable "issues_repo_existing_git_id" {
+  type        = string
+  description = "Set this value to `github` for github.com, or to the GUID of a custom GitHub Enterprise server."
+  default     = ""
+}
+
+variable "issues_repo_integration_owner" {
+  type        = string
+  description = "The name of the integration owner."
+  default     = ""
+}
+
+variable "inventory_repo_name" {
+  type        = string
+  description = "The repository name."
+  default     = ""
+}
+
+variable "inventory_repo_existing_url" {
+  type        = string
+  description = "This is a template repository to clone compliance-inventory for reference DevSecOps toolchain templates."
+  default     = ""
+}
+
+variable "inventory_repo_existing_git_provider" {
+  type        = string
+  default     = "hostedgit"
+  description = "Git provider for inventory repo"
+  validation {
+    condition     = contains(["hostedgit", "githubconsolidated", "gitlab"], var.inventory_repo_existing_git_provider)
+    error_message = "Must be either \"hostedgit\" or \"gitlab\" or \"githubconsolidated\" for Inventory repo."
+  }
+}
+
+variable "inventory_repo_existing_git_id" {
+  type        = string
+  description = "Set this value to `github` for github.com, or to the GUID of a custom GitHub Enterprise server."
+  default     = ""
+}
+
+variable "inventory_repo_integration_owner" {
+  type        = string
+  description = "The name of the integration owner."
   default     = ""
 }
 
@@ -211,10 +313,46 @@ variable "peer_review_compliance" {
   default     = ""
 }
 
+variable "event_notifications_tool_name" {
+  type        = string
+  description = "The name of the Event Notifications integration."
+  default     = "Event Notifications"
+}
+
 variable "event_notifications_crn" {
   type        = string
   description = "Set the Event Notifications CRN to create an Events Notification integration. This paramater will apply to the CI, CD and CC toolchains. Can be set individually with `ci_event_notifications_crn`, `cd_event_notifications_crn`, `cc_event_notifications_crn`."
   default     = ""
+}
+
+variable "sm_integration_name" {
+  type        = string
+  description = "The name of the Secrets Manager integration."
+  default     = "sm-compliance-secrets"
+}
+
+variable "kp_integration_name" {
+  type        = string
+  description = "The name of the Key Protect integration."
+  default     = "kp-compliance-secrets"
+}
+
+variable "slack_integration_name" {
+  type        = string
+  description = "The name of the Slack integration."
+  default     = "slack-compliance"
+}
+
+variable "artifactory_integration_name" {
+  type        = string
+  default     = "artifactory-dockerconfigjson"
+  description = "The name of the Artifactory tool integration"
+}
+
+variable "privateworker_name" {
+  type        = string
+  description = "The name of the private worker integration."
+  default     = "Private Worker"
 }
 
 ##### END OF COMMON VARIABLES ############
@@ -374,6 +512,78 @@ variable "ci_peer_review_compliance" {
   type        = string
   description = "Set to `0` to disable. Set to `1` to enable peer review evidence collection."
   default     = ""
+}
+
+####### CI Trigger properties ###################
+variable "ci_trigger_git_name" {
+  type        = string
+  description = "The name of the CI pipeline GIT trigger."
+  default     = "Git CI Trigger"
+}
+variable "ci_trigger_git_enable" {
+  type        = bool
+  description = "Set to `true` to enable the CI pipeline Git trigger."
+  default     = true
+}
+
+variable "ci_trigger_timed_name" {
+  type        = string
+  description = "The name of the CI pipeline Timed trigger."
+  default     = "Git CI Timed Trigger"
+}
+variable "ci_trigger_timed_enable" {
+  type        = bool
+  description = "Set to `true` to enable the CI pipeline Timed trigger."
+  default     = false
+}
+variable "ci_trigger_timed_cron_schedule" {
+  type        = string
+  description = "Only needed for timer triggers. Cron expression that indicates when this trigger will activate. Maximum frequency is every 5 minutes. The string is based on UNIX crontab syntax: minute, hour, day of month, month, day of week. Example: 0 *_/2 * * * - every 2 hours."
+  default     = "0 4 * * *"
+}
+
+variable "ci_trigger_manual_name" {
+  type        = string
+  description = "The name of the CI pipeline Manual trigger."
+  default     = "Manual Trigger"
+}
+variable "ci_trigger_manual_enable" {
+  type        = bool
+  description = "Set to `true` to enable the CI pipeline Manual trigger."
+  default     = true
+}
+
+variable "ci_trigger_pr_git_name" {
+  type        = string
+  description = "The name of the PR pipeline GIT trigger."
+  default     = "Git PR Trigger"
+}
+variable "ci_trigger_pr_git_enable" {
+  type        = bool
+  description = "Set to `true` to enable the PR pipeline Git trigger."
+  default     = true
+}
+
+variable "ci_trigger_manual_pruner_name" {
+  type        = string
+  description = "The name of the manual Pruner trigger."
+  default     = "Evidence Pruner Manual Trigger"
+}
+variable "ci_trigger_manual_pruner_enable" {
+  type        = bool
+  description = "Set to `true` to enable the manual Pruner trigger."
+  default     = true
+}
+
+variable "ci_trigger_timed_pruner_name" {
+  type        = string
+  description = "The name of the timed Pruner trigger."
+  default     = "Evidence Pruner Timed Trigger"
+}
+variable "ci_trigger_timed_pruner_enable" {
+  type        = bool
+  description = "Set to `true` to enable the timed Pruner trigger."
+  default     = false
 }
 
 ######## Deployment Strategy ##################
@@ -1211,7 +1421,78 @@ variable "cd_code_signing_cert_secret_name" {
 }
 
 ######## End Secret Names #######################
+####### Trigger properties ###################
+variable "cd_trigger_git_name" {
+  type        = string
+  description = "The name of the CD pipeline GIT trigger."
+  default     = "Git CD Trigger"
+}
+variable "cd_trigger_git_enable" {
+  type        = bool
+  description = "Set to `true` to enable the CD pipeline Git trigger."
+  default     = false
+}
 
+variable "cd_trigger_timed_name" {
+  type        = string
+  description = "The name of the CD pipeline Timed trigger."
+  default     = "Git CD Timed Trigger"
+}
+variable "cd_trigger_timed_enable" {
+  type        = bool
+  description = "Set to `true` to enable the CD pipeline Timed trigger."
+  default     = false
+}
+variable "cd_trigger_timed_cron_schedule" {
+  type        = string
+  description = "Only needed for timer triggers. Cron expression that indicates when this trigger will activate. Maximum frequency is every 5 minutes. The string is based on UNIX crontab syntax: minute, hour, day of month, month, day of week. Example: 0 *_/2 * * * - every 2 hours."
+  default     = "0 4 * * *"
+}
+
+variable "cd_trigger_manual_name" {
+  type        = string
+  description = "The name of the CI pipeline Manual trigger."
+  default     = "Manual CD Trigger"
+}
+variable "cd_trigger_manual_enable" {
+  type        = bool
+  description = "Set to `true` to enable the CD pipeline Manual trigger."
+  default     = true
+}
+
+variable "cd_trigger_manual_promotion_name" {
+  type        = string
+  description = "The name of the CD pipeline Manual Promotion trigger."
+  default     = "Manual Promotion Trigger"
+}
+variable "cd_trigger_manual_promotion_enable" {
+  type        = bool
+  description = "Set to `true` to enable the CD pipeline Manual Promotion trigger."
+  default     = true
+}
+
+variable "cd_trigger_manual_pruner_name" {
+  type        = string
+  description = "The name of the manual Pruner trigger."
+  default     = "Evidence Pruner Manual Trigger"
+}
+
+variable "cd_trigger_manual_pruner_enable" {
+  type        = bool
+  description = "Set to `true` to enable the manual Pruner trigger."
+  default     = true
+}
+
+variable "cd_trigger_timed_pruner_name" {
+  type        = string
+  description = "The name of the timed Pruner trigger."
+  default     = "Evidence Pruner Timed Trigger"
+}
+variable "cd_trigger_timed_pruner_enable" {
+  type        = bool
+  description = "Set to `true` to enable the timed Pruner trigger."
+  default     = false
+}
 ######## SCC #####################################
 
 
@@ -1679,6 +1960,56 @@ variable "cc_pipeline_dockerconfigjson_secret_name" {
 }
 
 ######## End Secret Names #######################
+
+#########Trigger Properties ##########
+variable  "cc_trigger_timed_name" {
+  type        = string
+  description = "The name of the CC pipeline Timed trigger."
+  default     = "CC Timed Trigger"
+}
+variable "cc_trigger_timed_enable" {
+  type        = bool
+  description = "Set to `true` to enable the CI pipeline Timed trigger."
+  default     = false
+}
+variable "cc_trigger_timed_cron_schedule" {
+  type        = string
+  description = "Only needed for timer triggers. Cron expression that indicates when this trigger will activate. Maximum frequency is every 5 minutes. The string is based on UNIX crontab syntax: minute, hour, day of month, month, day of week. Example: 0 *_/2 * * * - every 2 hours."
+  default     = "0 4 * * *"
+}
+
+variable  "cc_trigger_manual_name" {
+  type        = string
+  description = "The name of the CC pipeline Manual trigger."
+  default     = "CC Manual Trigger"
+}
+variable "cc_trigger_manual_enable" {
+  type        = bool
+  description = "Set to `true` to enable the CC pipeline Manual trigger."
+  default     = true
+}
+
+variable "cc_trigger_manual_pruner_name" {
+  type        = string
+  description = "The name of the manual Pruner trigger."
+  default     = "Evidence Pruner Manual Trigger"
+}
+variable "cc_trigger_manual_pruner_enable" {
+  type        = bool
+  description = "Set to `true` to enable the manual Pruner trigger."
+  default     = true
+}
+
+variable "cc_trigger_timed_pruner_name" {
+  type        = string
+  description = "The name of the timed Pruner trigger."
+  default     = "Evidence Pruner Timed Trigger"
+}
+variable "cc_trigger_timed_pruner_enable" {
+  type        = bool
+  description = "Set to `true` to enable the timed Pruner trigger."
+  default     = false
+}
 
 ######## SCC #####################################
 

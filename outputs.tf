@@ -73,4 +73,23 @@ output "compliance_cc_toolchain_url" {
   value       = local.compliance_cc_toolchain_url
 }
 
+output "ci_pipeline_id" {
+  description = "The CI pipeline Id"
+  value       = try(module.devsecops_ci_toolchain[0].ci_pipeline_id, "")
+}
+
+output "cd_pipeline_id" {
+  description = "The CD pipeline Id"
+  value       = try(module.devsecops_cd_toolchain[0].cd_pipeline_id, "")
+}
+
+output "cc_pipeline_id" {
+  description = "The CC pipeline Id"
+  value       = try(module.devsecops_cc_toolchain[0].cc_pipeline_id, "")
+}
+
+output "pr_pipeline_id" {
+  description = "The PR pipeline Id"
+  value       = try(module.devsecops_ci_toolchain[0].pr_pipeline_id, "")
+}
 #############################################################################
