@@ -1962,7 +1962,7 @@ variable "cc_pipeline_dockerconfigjson_secret_name" {
 ######## End Secret Names #######################
 
 #########Trigger Properties ##########
-variable  "cc_trigger_timed_name" {
+variable "cc_trigger_timed_name" {
   type        = string
   description = "The name of the CC pipeline Timed trigger."
   default     = "CC Timed Trigger"
@@ -1978,7 +1978,7 @@ variable "cc_trigger_timed_cron_schedule" {
   default     = "0 4 * * *"
 }
 
-variable  "cc_trigger_manual_name" {
+variable "cc_trigger_manual_name" {
   type        = string
   description = "The name of the CC pipeline Manual trigger."
   default     = "CC Manual Trigger"

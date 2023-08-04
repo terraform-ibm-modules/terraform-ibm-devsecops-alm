@@ -34,8 +34,8 @@ locals {
   calculated_ci_cluster_region = (var.ci_dev_region != "") ? var.ci_dev_region : (var.ci_cluster_region != "") ? var.ci_cluster_region : var.toolchain_region
 
   inventory_repo_existing_url = (var.inventory_repo_existing_url != "") ? var.inventory_repo_existing_url : var.inventory_repo_url
-  evidence_repo_existing_url = (var.evidence_repo_existing_url != "") ? var.evidence_repo_existing_url : var.evidence_repo_url
-  issues_repo_existing_url = (var.issues_repo_existing_url != "") ? var.issues_repo_existing_url : var.issues_repo_url
+  evidence_repo_existing_url  = (var.evidence_repo_existing_url != "") ? var.evidence_repo_existing_url : var.evidence_repo_url
+  issues_repo_existing_url    = (var.issues_repo_existing_url != "") ? var.issues_repo_existing_url : var.issues_repo_url
 }
 
 module "devsecops_ci_toolchain" {
@@ -62,11 +62,11 @@ module "devsecops_ci_toolchain" {
   kp_resource_group      = (var.ci_kp_resource_group != "") ? var.ci_kp_resource_group : (var.kp_resource_group != "") ? var.kp_resource_group : var.toolchain_resource_group
 
   #SECRET NAMES
-  pipeline_ibmcloud_api_key_secret_name          = var.ci_pipeline_ibmcloud_api_key_secret_name
-  cos_api_key_secret_name                        = (var.ci_cos_api_key_secret_name == "") ? var.cos_api_key_secret_name : var.ci_cos_api_key_secret_name
-  slack_webhook_secret_name                      = (var.ci_slack_webhook_secret_name == "") ? var.slack_webhook_secret_name : var.ci_slack_webhook_secret_name
-  signing_key_secret_name                        = var.ci_signing_key_secret_name
-  pipeline_dockerconfigjson_secret_name          = var.ci_pipeline_dockerconfigjson_secret_name
+  pipeline_ibmcloud_api_key_secret_name = var.ci_pipeline_ibmcloud_api_key_secret_name
+  cos_api_key_secret_name               = (var.ci_cos_api_key_secret_name == "") ? var.cos_api_key_secret_name : var.ci_cos_api_key_secret_name
+  slack_webhook_secret_name             = (var.ci_slack_webhook_secret_name == "") ? var.slack_webhook_secret_name : var.ci_slack_webhook_secret_name
+  signing_key_secret_name               = var.ci_signing_key_secret_name
+  pipeline_dockerconfigjson_secret_name = var.ci_pipeline_dockerconfigjson_secret_name
 
   #AUTH TYPE FOR REPOS
   pipeline_config_repo_auth_type     = (var.ci_pipeline_config_repo_auth_type == "") ? local.repo_auth_type : var.ci_pipeline_config_repo_auth_type
@@ -181,14 +181,14 @@ module "devsecops_ci_toolchain" {
   cos_bucket_name = (var.ci_cos_bucket_name == "") ? var.cos_bucket_name : var.ci_cos_bucket_name
 
   #EVENT NOTIFICATIONS
-  event_notifications_crn = (var.ci_event_notifications_crn == "") ? var.event_notifications_crn : var.ci_event_notifications_crn
+  event_notifications_crn       = (var.ci_event_notifications_crn == "") ? var.event_notifications_crn : var.ci_event_notifications_crn
   event_notifications_tool_name = var.event_notifications_tool_name
 
   #INTEGRATION NAMES
   sm_integration_name          = var.sm_integration_name
   kp_integration_name          = var.kp_integration_name
   slack_integration_name       = var.slack_integration_name
-  artifactory_integration_name =  var.artifactory_integration_name
+  artifactory_integration_name = var.artifactory_integration_name
   privateworker_name           = var.privateworker_name
 
   #DEVOPS INSIGHTS
@@ -292,8 +292,8 @@ module "devsecops_cd_toolchain" {
   inventory_repo_integration_owner = var.inventory_repo_integration_owner
 
   #CHANGE MANAGEMENT REPO
-  change_management_repo                = var.cd_change_management_repo
-  change_repo_clone_from_url            = var.cd_change_repo_clone_from_url
+  change_management_repo     = var.cd_change_management_repo
+  change_repo_clone_from_url = var.cd_change_repo_clone_from_url
 
   #DEPLOYMENT REPO
   deployment_repo_existing_git_provider = var.cd_deployment_repo_existing_git_provider
@@ -349,13 +349,13 @@ module "devsecops_cd_toolchain" {
   cos_bucket_name = (var.cd_cos_bucket_name == "") ? var.cos_bucket_name : var.cd_cos_bucket_name
 
   #EVENT NOTIFICATIONS
-  event_notifications_crn = (var.cd_event_notifications_crn == "") ? var.event_notifications_crn : var.cd_event_notifications_crn
+  event_notifications_crn       = (var.cd_event_notifications_crn == "") ? var.event_notifications_crn : var.cd_event_notifications_crn
   event_notifications_tool_name = var.event_notifications_tool_name
 
   #INTEGRATION NAMES
-  sm_integration_name          = var.sm_integration_name
-  kp_integration_name          = var.kp_integration_name
-  slack_integration_name       = var.slack_integration_name
+  sm_integration_name    = var.sm_integration_name
+  kp_integration_name    = var.kp_integration_name
+  slack_integration_name = var.slack_integration_name
 
   #TRIGGER PROPERTIES
   trigger_git_name                = var.cd_trigger_git_name
@@ -492,14 +492,14 @@ module "devsecops_cc_toolchain" {
   cos_bucket_name = (var.cc_cos_bucket_name == "") ? var.cos_bucket_name : var.cc_cos_bucket_name
 
   #EVENT NOTIFICATIONS
-  event_notifications_crn = (var.cc_event_notifications_crn == "") ? var.event_notifications_crn : var.cc_event_notifications_crn
+  event_notifications_crn       = (var.cc_event_notifications_crn == "") ? var.event_notifications_crn : var.cc_event_notifications_crn
   event_notifications_tool_name = var.event_notifications_tool_name
 
   #INTEGRATION NAMES
-  sm_integration_name          = var.sm_integration_name
-  kp_integration_name          = var.kp_integration_name
-  slack_integration_name       = var.slack_integration_name
-  
+  sm_integration_name    = var.sm_integration_name
+  kp_integration_name    = var.kp_integration_name
+  slack_integration_name = var.slack_integration_name
+
   #TRIGGER PROPERTIES
   trigger_timed_name           = var.cc_trigger_timed_name
   trigger_timed_enable         = var.cc_trigger_timed_enable
