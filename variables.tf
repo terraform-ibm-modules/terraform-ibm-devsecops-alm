@@ -25,19 +25,19 @@ variable "cos_api_key_secret_name" {
 
 variable "inventory_repo_url" {
   type        = string
-  description = "Deprecated: Use `inventory_repo_existing_url`. This is a template repository to clone compliance-inventory for reference DevSecOps toolchain templates."
+  description = "Deprecated: Use `inventory_repo_existing_url`. This is a template repository to link compliance-inventory for reference DevSecOps toolchain templates."
   default     = ""
 }
 
 variable "evidence_repo_url" {
   type        = string
-  description = "Deprecated: Use `evidence_repo_existing_url`. This is a template repository to clone compliance-evidence-locker for reference DevSecOps toolchain templates."
+  description = "Deprecated: Use `evidence_repo_existing_url`. This is a template repository to link compliance-evidence-locker for reference DevSecOps toolchain templates."
   default     = ""
 }
 
 variable "issues_repo_url" {
   type        = string
-  description = "Deprecated: Use `issues_repo_existing_url`. This is a template repository to clone compliance-issues for reference DevSecOps toolchain templates."
+  description = "Deprecated: Use `issues_repo_existing_url`. This is a template repository to link compliance-issues for reference DevSecOps toolchain templates."
   default     = ""
 }
 
