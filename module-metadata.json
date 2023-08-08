@@ -195,6 +195,7 @@
       "default": "",
       "required": true,
       "source": [
+        "module.devsecops_cc_toolchain.module.pipeline_cc.ibm_cd_tekton_pipeline_property.cos_api_key.count",
         "module.devsecops_cc_toolchain.module.pipeline_cc.ibm_cd_tekton_pipeline_property.cos_bucket_name.value"
       ],
       "pos": {
@@ -1416,6 +1417,7 @@
       "default": "",
       "required": true,
       "source": [
+        "module.devsecops_cd_toolchain.module.pipeline_cd.ibm_cd_tekton_pipeline_property.cd_pipeline_cos_api_key.count",
         "module.devsecops_cd_toolchain.module.pipeline_cd.ibm_cd_tekton_pipeline_property.cd_pipeline_cos_bucket_name.value"
       ],
       "pos": {
@@ -1906,16 +1908,13 @@
       "type": "string",
       "description": "Opt out of evidence v1.",
       "default": "1",
-      "required": true,
       "source": [
-        "module.devsecops_cd_toolchain.module.pipeline_cd.ibm_cd_tekton_pipeline_property.cd_pipeline_opt-out-v1-evidence.value"
+        "module.devsecops_cd_toolchain"
       ],
       "pos": {
         "filename": "variables.tf",
         "line": 1568
-      },
-      "max_length": 4096,
-      "matches": "^.*$"
+      }
     },
     "cd_peer_review_compliance": {
       "name": "cd_peer_review_compliance",
@@ -3075,6 +3074,7 @@
       "default": "",
       "required": true,
       "source": [
+        "module.devsecops_ci_toolchain.module.pipeline_ci.ibm_cd_tekton_pipeline_property.ci_pipeline_cos_api_key_secret_name.count",
         "module.devsecops_ci_toolchain.module.pipeline_ci.ibm_cd_tekton_pipeline_property.ci_pipeline_cos_bucket_name.value"
       ],
       "pos": {
@@ -3537,16 +3537,13 @@
       "type": "string",
       "description": "Opt out of Evidence v1",
       "default": "1",
-      "required": true,
       "source": [
-        "module.devsecops_ci_toolchain.module.pipeline_ci.ibm_cd_tekton_pipeline_property.ci_pipeline_opt_out_v1_evidence.value"
+        "module.devsecops_ci_toolchain"
       ],
       "pos": {
         "filename": "variables.tf",
         "line": 505
-      },
-      "max_length": 4096,
-      "matches": "^.*$"
+      }
     },
     "ci_peer_review_compliance": {
       "name": "ci_peer_review_compliance",
@@ -5162,7 +5159,7 @@
   "module_calls": {
     "devsecops_cc_toolchain": {
       "name": "devsecops_cc_toolchain",
-      "source": "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cc-toolchain?ref=v1.0.7-beta.1",
+      "source": "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cc-toolchain?ref=v1.0.7-beta.2",
       "attributes": {
         "app_group": "cc_app_group",
         "app_repo_auth_type": "cc_app_repo_auth_type",
@@ -5433,7 +5430,7 @@
     },
     "devsecops_cd_toolchain": {
       "name": "devsecops_cd_toolchain",
-      "source": "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain?ref=v1.0.8-beta.1",
+      "source": "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain?ref=v1.0.8-beta.2",
       "attributes": {
         "app_version": "cd_app_version",
         "authorization_policy_creation": "cd_authorization_policy_creation",
@@ -5738,7 +5735,7 @@
     },
     "devsecops_ci_toolchain": {
       "name": "devsecops_ci_toolchain",
-      "source": "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-ci-toolchain?ref=v1.0.7-beta.4",
+      "source": "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-ci-toolchain?ref=v1.0.7-beta.5",
       "attributes": {
         "app_group": "ci_app_group",
         "app_name": "ci_app_name",
@@ -5904,7 +5901,7 @@
           },
           "pos": {
             "filename": ".terraform/modules/devsecops_ci_toolchain/main.tf",
-            "line": 288
+            "line": 287
           }
         }
       },
