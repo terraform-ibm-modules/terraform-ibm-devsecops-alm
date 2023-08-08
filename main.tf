@@ -142,7 +142,6 @@ module "devsecops_ci_toolchain" {
   opt_in_dynamic_api_scan            = var.ci_opt_in_dynamic_api_scan
   opt_in_dynamic_ui_scan             = var.ci_opt_in_dynamic_ui_scan
   opt_in_dynamic_scan                = var.ci_opt_in_dynamic_scan
-  opt_out_v1_evidence                = var.ci_opt_out_v1_evidence
   opt_in_sonar                       = var.ci_opt_in_sonar
   doi_environment                    = var.ci_doi_environment
   doi_toolchain_id_pipeline_property = var.ci_doi_toolchain_id_pipeline_property
@@ -327,7 +326,6 @@ module "devsecops_cd_toolchain" {
   source_environment            = var.cd_source_environment
   target_environment            = var.cd_target_environment
   merge_cra_sbom                = var.cd_merge_cra_sbom
-  opt_out_v1_evidence           = var.cd_opt_out_v1_evidence
   emergency_label               = var.cd_emergency_label
   app_version                   = var.cd_app_version
   pipeline_debug                = var.cd_pipeline_debug

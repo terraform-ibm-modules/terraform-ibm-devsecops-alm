@@ -502,12 +502,6 @@ variable "ci_opt_in_dynamic_scan" {
   default     = "1"
 }
 
-variable "ci_opt_out_v1_evidence" {
-  type        = string
-  description = "Opt out of Evidence v1"
-  default     = "1"
-}
-
 variable "ci_peer_review_compliance" {
   type        = string
   description = "Set to `0` to disable. Set to `1` to enable peer review evidence collection."
@@ -1562,12 +1556,6 @@ variable "cd_target_environment" {
 variable "cd_merge_cra_sbom" {
   type        = string
   description = "Merge the SBOM"
-  default     = "1"
-}
-
-variable "cd_opt_out_v1_evidence" {
-  type        = string
-  description = "Opt out of evidence v1."
   default     = "1"
 }
 

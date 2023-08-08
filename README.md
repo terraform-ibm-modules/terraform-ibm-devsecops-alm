@@ -215,7 +215,6 @@ statement instead the previous block.
 | <a name="input_cd_kp_resource_group"></a> [cd\_kp\_resource\_group](#input\_cd\_kp\_resource\_group) | The resource group containing the Key Protect instance for your secrets. | `string` | `""` | no |
 | <a name="input_cd_link_to_doi_toolchain"></a> [cd\_link\_to\_doi\_toolchain](#input\_cd\_link\_to\_doi\_toolchain) | Enable a link to a DevOps Insights instance in another toolchain, true or false. | `bool` | `true` | no |
 | <a name="input_cd_merge_cra_sbom"></a> [cd\_merge\_cra\_sbom](#input\_cd\_merge\_cra\_sbom) | Merge the SBOM | `string` | `"1"` | no |
-| <a name="input_cd_opt_out_v1_evidence"></a> [cd\_opt\_out\_v1\_evidence](#input\_cd\_opt\_out\_v1\_evidence) | Opt out of evidence v1. | `string` | `"1"` | no |
 | <a name="input_cd_peer_review_compliance"></a> [cd\_peer\_review\_compliance](#input\_cd\_peer\_review\_compliance) | Set to `0` to disable. Set to `1` to enable peer review evidence collection. | `string` | `""` | no |
 | <a name="input_cd_pipeline_config_group"></a> [cd\_pipeline\_config\_group](#input\_cd\_pipeline\_config\_group) | Specify user or group for pipeline config repo. | `string` | `""` | no |
 | <a name="input_cd_pipeline_config_path"></a> [cd\_pipeline\_config\_path](#input\_cd\_pipeline\_config\_path) | The name and path of the pipeline-config.yaml file within the pipeline-config repo. | `string` | `".pipeline-config.yaml"` | no |
@@ -326,7 +325,6 @@ statement instead the previous block.
 | <a name="input_ci_opt_in_dynamic_scan"></a> [ci\_opt\_in\_dynamic\_scan](#input\_ci\_opt\_in\_dynamic\_scan) | To enable the OWASP Zap scan. '1' enable or '0' disable. | `string` | `"1"` | no |
 | <a name="input_ci_opt_in_dynamic_ui_scan"></a> [ci\_opt\_in\_dynamic\_ui\_scan](#input\_ci\_opt\_in\_dynamic\_ui\_scan) | To enable the OWASP Zap UI scan. '1' enable or '0' disable. | `string` | `"1"` | no |
 | <a name="input_ci_opt_in_sonar"></a> [ci\_opt\_in\_sonar](#input\_ci\_opt\_in\_sonar) | Opt in for Sonarqube | `string` | `"1"` | no |
-| <a name="input_ci_opt_out_v1_evidence"></a> [ci\_opt\_out\_v1\_evidence](#input\_ci\_opt\_out\_v1\_evidence) | Opt out of Evidence v1 | `string` | `"1"` | no |
 | <a name="input_ci_peer_review_compliance"></a> [ci\_peer\_review\_compliance](#input\_ci\_peer\_review\_compliance) | Set to `0` to disable. Set to `1` to enable peer review evidence collection. | `string` | `""` | no |
 | <a name="input_ci_pipeline_config_group"></a> [ci\_pipeline\_config\_group](#input\_ci\_pipeline\_config\_group) | Specify user or group for pipeline config repo. | `string` | `""` | no |
 | <a name="input_ci_pipeline_config_path"></a> [ci\_pipeline\_config\_path](#input\_ci\_pipeline\_config\_path) | The name and path of the pipeline-config.yaml file within the pipeline-config repo. | `string` | `".pipeline-config.yaml"` | no |
