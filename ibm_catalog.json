@@ -1698,7 +1698,7 @@
 						{
 							"key": "cd_trigger_git_enable",
 							"type": "boolean",
-							"default_value": false,
+							"default_value": "false",
 							"description": "Set to `true` to enable the CD pipeline Git trigger.",
 							"required": false
 						},
