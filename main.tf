@@ -211,7 +211,7 @@ module "devsecops_ci_toolchain" {
 
 module "devsecops_cd_toolchain" {
   count            = var.create_cd_toolchain ? 1 : 0
-  source           = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain?ref=v1.0.8-beta.2"
+  source           = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain?ref=v1.0.8-beta.3"
   ibmcloud_api_key = var.ibmcloud_api_key
 
   toolchain_name           = (var.cd_toolchain_name == "") ? format("${var.toolchain_name}%s", "-CD-Toolchain") : var.cd_toolchain_name
@@ -373,7 +373,7 @@ module "devsecops_cd_toolchain" {
 
 module "devsecops_cc_toolchain" {
   count                         = var.create_cc_toolchain ? 1 : 0
-  source                        = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cc-toolchain?ref=v1.0.7-beta.2"
+  source                        = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cc-toolchain?ref=v1.0.7-beta.3"
   ibmcloud_api_key              = var.ibmcloud_api_key
   toolchain_name                = (var.cc_toolchain_name == "") ? format("${var.toolchain_name}%s", "-CC-Toolchain") : var.cc_toolchain_name
   toolchain_description         = var.cc_toolchain_description
