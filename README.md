@@ -63,8 +63,8 @@ statement instead the previous block.
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_devsecops_cc_toolchain"></a> [devsecops\_cc\_toolchain](#module\_devsecops\_cc\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cc-toolchain | v1.0.7-beta.2 |
-| <a name="module_devsecops_cd_toolchain"></a> [devsecops\_cd\_toolchain](#module\_devsecops\_cd\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain | v1.0.8-beta.2 |
+| <a name="module_devsecops_cc_toolchain"></a> [devsecops\_cc\_toolchain](#module\_devsecops\_cc\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cc-toolchain | v1.0.7-beta.3 |
+| <a name="module_devsecops_cd_toolchain"></a> [devsecops\_cd\_toolchain](#module\_devsecops\_cd\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain | v1.0.8-beta.4 |
 | <a name="module_devsecops_ci_toolchain"></a> [devsecops\_ci\_toolchain](#module\_devsecops\_ci\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-ci-toolchain | v1.0.7-beta.5 |
 
 ### Resources
@@ -90,6 +90,7 @@ statement instead the previous block.
 | <a name="input_cc_app_repo_url"></a> [cc\_app\_repo\_url](#input\_cc\_app\_repo\_url) | This Git URL for the application repository. | `string` | `""` | no |
 | <a name="input_cc_authorization_policy_creation"></a> [cc\_authorization\_policy\_creation](#input\_cc\_authorization\_policy\_creation) | Disable Toolchain service to Secrets Manager Service authorization policy creation. | `string` | `""` | no |
 | <a name="input_cc_compliance_base_image"></a> [cc\_compliance\_base\_image](#input\_cc\_compliance\_base\_image) | Pipeline baseimage to run most of the built-in pipeline code. | `string` | `""` | no |
+| <a name="input_cc_compliance_pipeline_branch"></a> [cc\_compliance\_pipeline\_branch](#input\_cc\_compliance\_pipeline\_branch) | The CC Pipeline Compliance Pipeline branch. | `string` | `""` | no |
 | <a name="input_cc_compliance_pipeline_group"></a> [cc\_compliance\_pipeline\_group](#input\_cc\_compliance\_pipeline\_group) | Specify user or group for compliance pipline repo. | `string` | `""` | no |
 | <a name="input_cc_compliance_pipeline_repo_auth_type"></a> [cc\_compliance\_pipeline\_repo\_auth\_type](#input\_cc\_compliance\_pipeline\_repo\_auth\_type) | Select the method of authentication that is used to access the Git provider. 'oauth' or 'pat'. | `string` | `""` | no |
 | <a name="input_cc_compliance_pipeline_repo_git_token_secret_name"></a> [cc\_compliance\_pipeline\_repo\_git\_token\_secret\_name](#input\_cc\_compliance\_pipeline\_repo\_git\_token\_secret\_name) | Name of the Git token secret in the secret provider. | `string` | `""` | no |
@@ -175,6 +176,7 @@ statement instead the previous block.
 | <a name="input_cd_cluster_region"></a> [cd\_cluster\_region](#input\_cd\_cluster\_region) | Region of the Kubernetes cluster where the application is deployed. Use the short form of the regions. For example `us-south`. | `string` | `""` | no |
 | <a name="input_cd_code_signing_cert_secret_name"></a> [cd\_code\_signing\_cert\_secret\_name](#input\_cd\_code\_signing\_cert\_secret\_name) | Name of the code signing certificate secret in the secret provider. | `string` | `"code-signing-cert"` | no |
 | <a name="input_cd_compliance_base_image"></a> [cd\_compliance\_base\_image](#input\_cd\_compliance\_base\_image) | Pipeline baseimage to run most of the built-in pipeline code. | `string` | `""` | no |
+| <a name="input_cd_compliance_pipeline_branch"></a> [cd\_compliance\_pipeline\_branch](#input\_cd\_compliance\_pipeline\_branch) | The CD Pipeline Compliance Pipeline branch. | `string` | `""` | no |
 | <a name="input_cd_compliance_pipeline_group"></a> [cd\_compliance\_pipeline\_group](#input\_cd\_compliance\_pipeline\_group) | Specify user or group for compliance pipline repo. | `string` | `""` | no |
 | <a name="input_cd_compliance_pipeline_repo_auth_type"></a> [cd\_compliance\_pipeline\_repo\_auth\_type](#input\_cd\_compliance\_pipeline\_repo\_auth\_type) | Select the method of authentication that is used to access the Git provider. 'oauth' or 'pat'. | `string` | `""` | no |
 | <a name="input_cd_compliance_pipeline_repo_git_token_secret_name"></a> [cd\_compliance\_pipeline\_repo\_git\_token\_secret\_name](#input\_cd\_compliance\_pipeline\_repo\_git\_token\_secret\_name) | Name of the Git token secret in the secret provider. | `string` | `""` | no |
@@ -289,7 +291,9 @@ statement instead the previous block.
 | <a name="input_ci_code_engine_resource_group"></a> [ci\_code\_engine\_resource\_group](#input\_ci\_code\_engine\_resource\_group) | The resource group of the Code Engine project. | `string` | `"Default"` | no |
 | <a name="input_ci_code_engine_source"></a> [ci\_code\_engine\_source](#input\_ci\_code\_engine\_source) | The path to the location of code to build in the repository. | `string` | `""` | no |
 | <a name="input_ci_compliance_base_image"></a> [ci\_compliance\_base\_image](#input\_ci\_compliance\_base\_image) | Pipeline baseimage to run most of the built-in pipeline code. | `string` | `""` | no |
+| <a name="input_ci_compliance_pipeline_branch"></a> [ci\_compliance\_pipeline\_branch](#input\_ci\_compliance\_pipeline\_branch) | The CI Pipeline Compliance Pipeline branch. | `string` | `""` | no |
 | <a name="input_ci_compliance_pipeline_group"></a> [ci\_compliance\_pipeline\_group](#input\_ci\_compliance\_pipeline\_group) | Specify user or group for compliance pipline repo. | `string` | `""` | no |
+| <a name="input_ci_compliance_pipeline_pr_branch"></a> [ci\_compliance\_pipeline\_pr\_branch](#input\_ci\_compliance\_pipeline\_pr\_branch) | The PR Pipeline Compliance Pipeline branch. | `string` | `""` | no |
 | <a name="input_ci_compliance_pipeline_repo_auth_type"></a> [ci\_compliance\_pipeline\_repo\_auth\_type](#input\_ci\_compliance\_pipeline\_repo\_auth\_type) | Select the method of authentication that is used to access the Git provider. 'oauth' or 'pat'. | `string` | `""` | no |
 | <a name="input_ci_compliance_pipeline_repo_git_token_secret_name"></a> [ci\_compliance\_pipeline\_repo\_git\_token\_secret\_name](#input\_ci\_compliance\_pipeline\_repo\_git\_token\_secret\_name) | Name of the Git token secret in the secret provider. | `string` | `""` | no |
 | <a name="input_ci_cos_api_key_secret_name"></a> [ci\_cos\_api\_key\_secret\_name](#input\_ci\_cos\_api\_key\_secret\_name) | Name of the COS API key secret in the secret provider. | `string` | `""` | no |
@@ -373,6 +377,7 @@ statement instead the previous block.
 | <a name="input_ci_trigger_timed_pruner_name"></a> [ci\_trigger\_timed\_pruner\_name](#input\_ci\_trigger\_timed\_pruner\_name) | The name of the timed Pruner trigger. | `string` | `"Evidence Pruner Timed Trigger"` | no |
 | <a name="input_cluster_name"></a> [cluster\_name](#input\_cluster\_name) | Name of the Kubernetes cluster where the application is deployed. This sets the same cluster for both CI and CD toolchains. See `ci_cluster_name` and `cd_cluster_name` to set different clusters. By default , the cluster namespace for CI will be set to `dev` and CD to `prod`. These can be changed using `ci_cluster_namespace` and `cd_cluster_namespace`. | `string` | `"mycluster-free"` | no |
 | <a name="input_compliance_base_image"></a> [compliance\_base\_image](#input\_compliance\_base\_image) | Pipeline baseimage to run most of the built-in pipeline code. | `string` | `""` | no |
+| <a name="input_compliance_pipeline_branch"></a> [compliance\_pipeline\_branch](#input\_compliance\_pipeline\_branch) | The Compliance Pipeline branch. | `string` | `"open-v9"` | no |
 | <a name="input_cos_api_key_secret_name"></a> [cos\_api\_key\_secret\_name](#input\_cos\_api\_key\_secret\_name) | To enable the use of COS, a secret name to a COS API key secret in the secret provider is required. In addition `cos_endpoint` and `cos_bucket_name` must be set. This setting sets the same API key for the COS settings in the CI, CD, and CC toolchains. See `ci_cos_api_key_secret_name`, `cd_cos_api_key_secret_name`, and `cc_cos_api_key_secret_name` to set separately. | `string` | `"cos-api-key"` | no |
 | <a name="input_cos_bucket_name"></a> [cos\_bucket\_name](#input\_cos\_bucket\_name) | Set the name of your COS bucket. This applies the same COS bucket name for the CI, CD, and CC toolchains. See `ci_cos_bucket_name`, `cd_cos_bucket_name`, and `cc_cos_bucket_name` to set separately. | `string` | `""` | no |
 | <a name="input_cos_endpoint"></a> [cos\_endpoint](#input\_cos\_endpoint) | Set the Cloud Object Storage endpoint for accessing your COS bucket. This setting sets the same endpoint for COS in the CI, CD, and CC toolchains. See `ci_cos_endpoint`, `cd_cos_endpoint`, and `cc_cos_endpoint` to set the endpoints separately. | `string` | `""` | no |

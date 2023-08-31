@@ -307,6 +307,12 @@ variable "repositories_prefix" {
   default     = "compliance"
 }
 
+variable "compliance_pipeline_branch" {
+  type        = string
+  description = "The Compliance Pipeline branch."
+  default     = "open-v9"
+}
+
 variable "peer_review_compliance" {
   type        = string
   description = "Set to `0` to disable. Set to `1` to enable peer review evidence collection. This parameter will apply to the CI, CD and CC pipelines. Can be set individually with `ci_peer_review_compliance`, `cd_peer_review_compliance`, `cc_peer_review_compliance`."
@@ -451,6 +457,18 @@ variable "ci_compliance_base_image" {
 variable "ci_authorization_policy_creation" {
   type        = string
   description = "Disable Toolchain Service to Secrets Manager Service authorization policy creation."
+  default     = ""
+}
+
+variable "ci_compliance_pipeline_branch" {
+  type        = string
+  description = "The CI Pipeline Compliance Pipeline branch."
+  default     = ""
+}
+
+variable "ci_compliance_pipeline_pr_branch" {
+  type        = string
+  description = "The PR Pipeline Compliance Pipeline branch."
   default     = ""
 }
 
@@ -1156,6 +1174,12 @@ variable "cd_change_management_group" {
 variable "cd_authorization_policy_creation" {
   type        = string
   description = "Disable Toolchain service to Secrets Manager Service authorization policy creation."
+  default     = ""
+}
+
+variable "cd_compliance_pipeline_branch" {
+  type        = string
+  description = "The CD Pipeline Compliance Pipeline branch."
   default     = ""
 }
 
@@ -2117,6 +2141,12 @@ variable "cc_compliance_base_image" {
 variable "cc_authorization_policy_creation" {
   type        = string
   description = "Disable Toolchain service to Secrets Manager Service authorization policy creation."
+  default     = ""
+}
+
+variable "cc_compliance_pipeline_branch" {
+  type        = string
+  description = "The CC Pipeline Compliance Pipeline branch."
   default     = ""
 }
 

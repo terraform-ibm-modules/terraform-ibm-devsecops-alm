@@ -49,6 +49,8 @@ module "devsecops_ci_toolchain" {
   registry_namespace       = (var.registry_namespace != "") ? var.registry_namespace : var.ci_registry_namespace
   ibmcloud_api             = var.ibmcloud_api
   compliance_base_image    = (var.ci_compliance_base_image == "") ? var.compliance_base_image : var.ci_compliance_base_image
+  ci_pipeline_branch       = (var.ci_compliance_pipeline_branch == "") ? var.compliance_pipeline_branch : var.ci_compliance_pipeline_branch
+  pr_pipeline_branch       = (var.ci_compliance_pipeline_pr_branch == "") ? var.compliance_pipeline_branch : var.ci_compliance_pipeline_pr_branch
 
   #SECRET PROVIDERS
   enable_key_protect     = (local.use_kp_override) ? var.enable_key_protect : var.ci_enable_key_protect
@@ -211,7 +213,7 @@ module "devsecops_ci_toolchain" {
 
 module "devsecops_cd_toolchain" {
   count            = var.create_cd_toolchain ? 1 : 0
-  source           = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain?ref=v1.0.8-beta.3"
+  source           = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain?ref=v1.0.8-beta.4"
   ibmcloud_api_key = var.ibmcloud_api_key
 
   toolchain_name           = (var.cd_toolchain_name == "") ? format("${var.toolchain_name}%s", "-CD-Toolchain") : var.cd_toolchain_name
@@ -220,6 +222,7 @@ module "devsecops_cd_toolchain" {
   toolchain_resource_group = (var.cd_toolchain_resource_group == "") ? var.toolchain_resource_group : var.cd_toolchain_resource_group
   ibmcloud_api             = var.ibmcloud_api
   compliance_base_image    = (var.cd_compliance_base_image == "") ? var.compliance_base_image : var.cd_compliance_base_image
+  pipeline_branch          = (var.cd_compliance_pipeline_branch == "") ? var.compliance_pipeline_branch : var.cd_compliance_pipeline_branch
 
   #SECRET PROVIDERS
   enable_key_protect     = (local.use_kp_override) ? var.enable_key_protect : var.cd_enable_key_protect
@@ -382,6 +385,7 @@ module "devsecops_cc_toolchain" {
   ibmcloud_api                  = var.ibmcloud_api
   compliance_base_image         = (var.cc_compliance_base_image == "") ? var.compliance_base_image : var.cc_compliance_base_image
   authorization_policy_creation = (var.cc_authorization_policy_creation == "") ? var.authorization_policy_creation : var.cc_authorization_policy_creation
+  pipeline_branch               = (var.cc_compliance_pipeline_branch == "") ? var.compliance_pipeline_branch : var.cc_compliance_pipeline_branch
 
   #SECRET PROVIDERS
   enable_key_protect     = (local.use_kp_override) ? var.enable_key_protect : var.cc_enable_key_protect

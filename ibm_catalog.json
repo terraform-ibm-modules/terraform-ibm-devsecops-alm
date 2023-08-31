@@ -219,6 +219,12 @@
 							"description": "Specify Git user or group for your application. This must be set if the repository authentication type is `pat` (personal access token)."
 						},
 						{
+							"key": "compliance_pipeline_branch",
+							"type": "string",
+							"default_value": "open-v9",
+							"description": "The Compliance Pipeline branch."
+						},
+						{
 							"key": "create_ci_toolchain",
 							"type": "boolean",
 							"default_value": true,
@@ -575,6 +581,18 @@
 							"type": "string",
 							"default_value": "",
 							"description": "Disable Toolchain Service to Secrets Manager Service authorization policy creation."
+						},
+						{
+							"key": "ci_compliance_pipeline_branch",
+							"type": "string",
+							"default_value": "",
+							"description": "The CI Pipeline Compliance Pipeline branch."
+						},
+						{
+							"key": "ci_compliance_pipeline_pr_branch",
+							"type": "string",
+							"default_value": "",
+							"description": "The PR Pipeline Compliance Pipeline branch."
 						},
 						{
 							"key": "ci_cluster_name",
@@ -1233,6 +1251,12 @@
 							"description": "Pipeline baseimage to run most of the built-in pipeline code."
 						},
 						{
+							"key": "cd_compliance_pipeline_branch",
+							"type": "string",
+							"default_value": "",
+							"description": "The CD Pipeline Compliance Pipeline branch."
+						},
+						{
 							"key": "cd_compliance_pipeline_group",
 							"type": "string",
 							"default_value": "",
@@ -1845,6 +1869,12 @@
 							"type": "string",
 							"default_value": "",
 							"description": "Pipeline baseimage to run most of the built-in pipeline code."
+						},
+						{
+							"key": "cc_compliance_pipeline_branch",
+							"type": "string",
+							"default_value": "",
+							"description": "The CC Pipeline Compliance Pipeline branch."
 						},
 						{
 							"key": "cc_compliance_pipeline_group",
