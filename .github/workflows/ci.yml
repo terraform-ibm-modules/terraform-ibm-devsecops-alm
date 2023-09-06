@@ -9,7 +9,6 @@ jobs:
   call-terraform-ci-pipeline:
     uses: terraform-ibm-modules/common-pipeline-assets/.github/workflows/common-terraform-module-ci-v2.yml@v1.17.0
     secrets: inherit
-#     with:
-#       craSCCv2: true
-#       craTarget: "./"
-#       craEnvironmentVariables: "TF_VAR_enable_key_protect=true,TF_VAR_kp_name=prodkeys, TF_VAR_enable_secrets_manager=false"
+    with:
+      craSCCv2: true
+      craConfigYamlFile: "cra-config.yaml"
