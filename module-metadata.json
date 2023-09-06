@@ -5136,6 +5136,11 @@
       ]
     }
   },
+  "provider_configs": {
+    "ibm": {
+      "name": "ibm"
+    }
+  },
   "managed_resources": {
     "ibm_cd_tekton_pipeline_property.cc_pipeline_peer_review_compliance": {
       "mode": "managed",
