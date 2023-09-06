@@ -6,6 +6,3 @@ CRA_TARGETS:
     PROFILE_ID: "0e6e7b5a-817d-4344-ab6f-e5d7a9c49520" # SCC profile ID (currently set to the FSCloud 1.4.0 profile).
     SCC_INSTANCE_ID: "293a81bc-b706-4a2b-b2f8-36010a0373f6" # The SCC instance ID to use to download profile for CRA scan. If not provided, a default global value will be used.
     SCC_REGION: "us-south" # The IBM Cloud region that the SCC instance is in. If not provided, a default global value will be used.
-    # CRA_ENVIRONMENT_VARIABLES:  # An optional map of environment variables for CRA, where the key is the variable name and value is the value. Useful for providing TF_VARs.
-    #   TF_VAR_sample: "sample value"
-    #   TF_VAR_other:  "another value"
