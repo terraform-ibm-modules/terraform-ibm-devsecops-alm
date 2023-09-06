@@ -34,7 +34,7 @@ variable "cluster_name" {
 variable "enable_key_protect" {
   type        = bool
   description = "Set to enable Key Protect Integrations. "
-  default     = true
+  default     = false
 }
 
 variable "enable_secrets_manager" {
