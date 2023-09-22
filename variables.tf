@@ -277,6 +277,12 @@ variable "repo_git_token_secret_name" {
   default     = ""
 }
 
+variable "repo_secret_group" {
+  type        = string
+  description = "Secret group in Secrets Manager that contains the secret for the repo. This variable will set the same secret group for all the repositories. Can be overriden on a per secret group basis. Only applies when using Secrets Manager."
+  default     = ""
+}
+
 variable "toolchain_name" {
   type        = string
   description = "Common element of the toolchain name. The toolchain names will be appended with `CI Toolchain` or `CD Toolchain` or `CC Toolchain` followed by a timestamp. Can explicitly be set using `ci_toolchain_name`, `cd_toolchain_name`, and `cc_toolchain_name`."
@@ -349,17 +355,49 @@ variable "slack_integration_name" {
   default     = "slack-compliance"
 }
 
-variable "artifactory_integration_name" {
+variable "scc_attachment_id" {
   type        = string
-  default     = "artifactory-dockerconfigjson"
-  description = "The name of the Artifactory tool integration"
+  description = "An attachment ID. An attachment is configured under a profile to define how a scan will be run. To find the attachment ID, in the browser, in the attachments list, click on the attachment link, and a panel appears with a button to copy the attachment ID. This parameter is only relevant when the `scc_use_profile_attachment` parameter is enabled."
+  default     = ""
 }
 
-variable "privateworker_name" {
+variable "scc_instance_crn" {
   type        = string
-  description = "The name of the private worker integration."
-  default     = "Private Worker"
+  description = "The Security and Compliance Center service instance CRN (Cloud Resource Name). This parameter is only relevant when the `scc_use_profile_attachment` parameter is enabled. The value must match the regular expression."
+  default     = ""
 }
+
+variable "scc_profile_name" {
+  type        = string
+  description = "The name of a Security and Compliance Center profile. Use the `IBM Cloud for Financial Services` profile, which contains the DevSecOps Toolchain rules. Or use a user-authored customized profile that has been configured to contain those rules. This parameter is only relevant when the `scc_use_profile_attachment` parameter is enabled."
+  default     = ""
+}
+
+variable "scc_profile_version" {
+  type        = string
+  description = "The version of a Security and Compliance Center profile, in SemVer format, like `0.0.0`. This parameter is only relevant when the `scc_use_profile_attachment` parameter is enabled."
+  default     = ""
+}
+
+variable "scc_scc_api_key_secret_name" {
+  type        = string
+  description = "The Security and Compliance Center api-key secret in the secret provider."
+  default     = "scc-api-key"
+}
+
+variable "scc_scc_api_key_secret_group" {
+  type        = string
+  description = "Secret group prefix for the Security and Compliance tool secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
+  default     = ""
+}
+
+variable "scc_use_profile_attachment" {
+  type        = string
+  description = "Set to `enabled` to enable use profile with attachment, so that the scripts in the pipeline can interact with the Security and Compliance Center service. When enabled, other parameters become relevant; `scc_scc_scc_api_key_secret_name`, `scc_instance_crn`, `scc_profile_name`, `scc_profile_version`, `scc_attachment_id`. Can individually be `enabled` and `disabled` in the CD and CC toolchains using `cd_scc_use_profile_attachment` and `cc_scc_use_profile_attachment`."
+  default     = "disabled"
+}
+
+
 
 ##### END OF COMMON VARIABLES ############
 ##### START OF CI VARIABLES ##############
@@ -752,6 +790,78 @@ variable "ci_kp_location" {
   default     = ""
 }
 
+variable "ci_pipeline_ibmcloud_api_key_secret_group" {
+  type        = string
+  description = "Secret group prefix for the pipeline ibmcloud API key secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
+  default     = ""
+}
+
+variable "ci_signing_key_secret_group" {
+  type        = string
+  description = "Secret group prefix for the signing key secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
+  default     = ""
+}
+
+variable "ci_cos_api_key_secret_group" {
+  type        = string
+  description = "Secret group prefix for the COS API key secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
+  default     = ""
+}
+
+variable "ci_slack_webhook_secret_group" {
+  type        = string
+  description = "Secret group prefix for the Slack webhook secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
+  default     = ""
+}
+
+variable "ci_pipeline_dockerconfigjson_secret_group" {
+  type        = string
+  description = "Secret group prefix for the pipeline DockerConfigJson secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
+  default     = ""
+}
+
+variable "ci_pipeline_git_token_secret_group" {
+  type        = string
+  description = "Secret group prefix for the pipeline Git token secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
+  default     = ""
+}
+
+variable "ci_app_repo_secret_group" {
+  type        = string
+  description = "Secret group prefix for the App repo secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
+  default     = ""
+}
+
+variable "ci_issues_repo_secret_group" {
+  type        = string
+  description = "Secret group prefix for the Issues repo secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
+  default     = ""
+}
+
+variable "ci_inventory_repo_secret_group" {
+  type        = string
+  description = "Secret group prefix for the Inventory repo secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
+  default     = ""
+}
+
+variable "ci_evidence_repo_secret_group" {
+  type        = string
+  description = "Secret group prefix for the Evidence repo secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
+  default     = ""
+}
+
+variable "ci_compliance_pipeline_repo_secret_group" {
+  type        = string
+  description = "Secret group prefix for the Compliance Pipeline repo secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
+  default     = ""
+}
+
+variable "ci_pipeline_config_repo_secret_group" {
+  type        = string
+  description = "Secret group prefix for the Pipeline Config repo secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
+  default     = ""
+}
+
 ######## PIPELINE CONFIG REPO ####################
 
 variable "ci_pipeline_config_repo_existing_url" {
@@ -925,6 +1035,12 @@ variable "ci_pipeline_dockerconfigjson_secret_name" {
   default     = "pipeline_dockerconfigjson_secret_name"
 }
 
+variable "ci_pipeline_git_token_secret_name" {
+  type        = string
+  description = "Name of the pipeline Git token secret in the secret provider."
+  default     = "pipeline-git-token"
+}
+
 ######## End Secret Names #######################
 
 variable "ci_opt_in_sonar" {
@@ -969,10 +1085,41 @@ variable "ci_slack_notifications" {
   default     = ""
 }
 
+######SonarQube ############################
 variable "ci_sonarqube_config" {
   type        = string
   description = "Runs a SonarQube scan in an isolated Docker-in-Docker container (default configuration) or in an existing Kubernetes cluster (custom configuration). Options: default or custom. Default is default."
   default     = "default"
+}
+
+variable "ci_sonarqube_integration_name" {
+  type        = string
+  description = "The name of the SonarQube integration."
+  default     = "SonarQube"
+}
+
+variable "ci_sonarqube_user" {
+  type        = string
+  description = "The name of the SonarQube user."
+  default     = ""
+}
+
+variable "ci_sonarqube_secret_name" {
+  type        = string
+  description = "The name of the SonarQube secret."
+  default     = "sonarqube-secret"
+}
+
+variable "ci_sonarqube_is_blind_connection" {
+  type        = string
+  description = "When set to `true`, instructs IBM Cloud Continuous Delivery to not validate the configuration of this integration. Set this to true if the SonarQube server is not addressable on the public internet."
+  default     = true
+}
+
+variable "ci_sonarqube_server_url" {
+  type        = string
+  description = "The URL to the SonarQube server."
+  default     = ""
 }
 
 variable "ci_enable_pipeline_dockerconfigjson" {
@@ -1102,12 +1249,6 @@ variable "cd_region" {
   default     = ""
 }
 
-variable "cd_change_management_repo" {
-  type        = string
-  description = "This repository holds the change management requests created for the deployments."
-  default     = ""
-}
-
 variable "cd_change_repo_clone_from_url" {
   type        = string
   description = "Override the default management repo, which is cloned into the app repo. Note, using clone_if_not_exists mode, so if the app repo already exists the repo contents are unchanged."
@@ -1234,6 +1375,72 @@ variable "cd_enable_secrets_manager" {
 variable "cd_sm_secret_group" {
   type        = string
   description = "Group in Secrets Manager for organizing/grouping secrets."
+  default     = ""
+}
+
+variable "cd_slack_webhook_secret_group" {
+  type        = string
+  description = "Secret group prefix for the Slack webhook secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
+  default     = ""
+}
+
+variable "cd_change_management_repo_secret_group" {
+  type        = string
+  description = "Secret group prefix for the Change Management repo secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
+  default     = ""
+}
+
+variable "cd_deployment_repo_secret_group" {
+  type        = string
+  description = "Secret group prefix for the Deployment repo secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
+  default     = ""
+}
+
+variable "cd_issues_repo_secret_group" {
+  type        = string
+  description = "Secret group prefix for the Issues repo secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
+  default     = ""
+}
+
+variable "cd_inventory_repo_secret_group" {
+  type        = string
+  description = "Secret group prefix for the Inventory repo secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
+  default     = ""
+}
+
+variable "cd_evidence_repo_secret_group" {
+  type        = string
+  description = "Secret group prefix for the Evidence repo secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
+  default     = ""
+}
+
+variable "cd_compliance_pipeline_repo_secret_group" {
+  type        = string
+  description = "Secret group prefix for the Compliance Pipeline repo secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
+  default     = ""
+}
+
+variable "cd_pipeline_config_repo_secret_group" {
+  type        = string
+  description = "Secret group prefix for the Pipeline Config repo secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
+  default     = ""
+}
+
+variable "cd_cos_api_key_secret_group" {
+  type        = string
+  description = "Secret group prefix for the COS API key secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
+  default     = ""
+}
+
+variable "cd_pipeline_ibmcloud_api_key_secret_group" {
+  type        = string
+  description = "Secret group prefix for the pipeline ibmcloud API key secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
+  default     = ""
+}
+
+variable "cd_pipeline_git_token_secret_group" {
+  type        = string
+  description = "Secret group prefix for the pipeline Git token secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
   default     = ""
 }
 
@@ -1432,10 +1639,16 @@ variable "cd_change_management_repo_git_token_secret_name" {
   default     = ""
 }
 
-variable "cd_code_signing_cert_secret_name" {
+variable "cd_code_signing_cert" {
   type        = string
-  description = "Name of the code signing certificate secret in the secret provider."
-  default     = "code-signing-cert"
+  description = "The base64 encoded GPG public key."
+  default     = ""
+}
+
+variable "cd_pipeline_git_token_secret_name" {
+  type        = string
+  description = "Name of the pipeline Git token secret in the secret provider."
+  default     = "pipeline-git-token"
 }
 
 ######## End Secret Names #######################
@@ -1522,8 +1735,14 @@ variable "cd_scc_integration_name" {
 
 variable "cd_scc_enable_scc" {
   type        = bool
-  description = "Enable the SCC integration."
+  description = "Adds the SCC tool integration to the toolchain."
   default     = true
+}
+
+variable "cd_scc_use_profile_attachment" {
+  type        = string
+  description = "Set to `enabled` to enable use profile with attachment, so that the scripts in the pipeline can interact with the Security and Compliance Center service. When enabled, other parameters become relevant; `scc_scc_api_key_secret_name`, `scc_instance_crn`, `scc_profile_name`, `scc_profile_version`, `scc_attachment_id`."
+  default     = ""
 }
 
 ######## End SCC ################################
@@ -1599,12 +1818,6 @@ variable "cd_pipeline_debug" {
   type        = string
   description = "'0' by default. Set to '1' to enable debug logging."
   default     = "0"
-}
-
-variable "cd_enable_signing_validation" {
-  type        = bool
-  description = "Enable to add the code-signing-certificate property to the pipeline properties."
-  default     = false
 }
 
 variable "cd_peer_review_compliance" {
@@ -1749,6 +1962,66 @@ variable "cc_enable_secrets_manager" {
 variable "cc_sm_secret_group" {
   type        = string
   description = "Group in Secrets Manager for organizing/grouping secrets."
+  default     = ""
+}
+
+variable "cc_pipeline_ibmcloud_api_key_secret_group" {
+  type        = string
+  description = "Secret group prefix for the pipeline ibmcloud API key secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
+  default     = ""
+}
+
+variable "cc_cos_api_key_secret_group" {
+  type        = string
+  description = "Secret group prefix for the COS API key secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
+  default     = ""
+}
+
+variable "cc_slack_webhook_secret_group" {
+  type        = string
+  description = "Secret group prefix for the Slack webhook secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
+  default     = ""
+}
+
+variable "cc_pipeline_dockerconfigjson_secret_group" {
+  type        = string
+  description = "Secret group prefix for the pipeline DockerConfigJson secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
+  default     = ""
+}
+
+variable "cc_app_repo_secret_group" {
+  type        = string
+  description = "Secret group prefix for the App repo secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
+  default     = ""
+}
+
+variable "cc_issues_repo_secret_group" {
+  type        = string
+  description = "Secret group prefix for the Issues repo secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
+  default     = ""
+}
+
+variable "cc_inventory_repo_secret_group" {
+  type        = string
+  description = "Secret group prefix for the Inventory repo secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
+  default     = ""
+}
+
+variable "cc_evidence_repo_secret_group" {
+  type        = string
+  description = "Secret group prefix for the Evidence repo secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
+  default     = ""
+}
+
+variable "cc_compliance_pipeline_repo_secret_group" {
+  type        = string
+  description = "Secret group prefix for the Compliance Pipeline repo secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
+  default     = ""
+}
+
+variable "cc_pipeline_config_repo_secret_group" {
+  type        = string
+  description = "Secret group prefix for the Pipeline Config repo secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
   default     = ""
 }
 
@@ -2033,8 +2306,14 @@ variable "cc_scc_integration_name" {
 
 variable "cc_scc_enable_scc" {
   type        = bool
-  description = "Enable the SCC integration"
+  description = "Adds the SCC tool integration to the toolchain."
   default     = true
+}
+
+variable "cc_scc_use_profile_attachment" {
+  type        = string
+  description = "Set to `enabled` to enable use profile with attachment, so that the scripts in the pipeline can interact with the Security and Compliance Center service. When enabled, other parameters become relevant; `scc_scc_scc_api_key_secret_name`, `scc_instance_crn`, `scc_profile_name`, `scc_profile_version`, `scc_attachment_id`."
+  default     = ""
 }
 
 ######## End SCC ################################
@@ -2042,6 +2321,37 @@ variable "cc_scc_enable_scc" {
 variable "cc_slack_notifications" {
   type        = string
   description = "The switch that turns the Slack notification on (`1`) or off (`0`)."
+  default     = ""
+}
+
+######SonarQube ############################
+variable "cc_sonarqube_integration_name" {
+  type        = string
+  description = "The name of the SonarQube integration."
+  default     = "SonarQube"
+}
+
+variable "cc_sonarqube_user" {
+  type        = string
+  description = "The name of the SonarQube user."
+  default     = ""
+}
+
+variable "cc_sonarqube_secret_name" {
+  type        = string
+  description = "The name of the SonarQube secret."
+  default     = "sonarqube-secret"
+}
+
+variable "cc_sonarqube_is_blind_connection" {
+  type        = string
+  description = "When set to `true`, instructs IBM Cloud Continuous Delivery to not validate the configuration of this integration. Set this to true if the SonarQube server is not addressable on the public internet."
+  default     = true
+}
+
+variable "cc_sonarqube_server_url" {
+  type        = string
+  description = "The URL to the SonarQube server."
   default     = ""
 }
 
