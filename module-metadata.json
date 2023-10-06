@@ -5778,11 +5778,6 @@
       ]
     }
   },
-  "provider_configs": {
-    "ibm": {
-      "name": "ibm"
-    }
-  },
   "managed_resources": {},
   "data_resources": {},
   "module_calls": {
