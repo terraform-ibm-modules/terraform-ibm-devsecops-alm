@@ -70,13 +70,13 @@ variable "create_ci_toolchain" {
 variable "create_cd_toolchain" {
   description = "Boolean flag which determines if the DevSecOps CD toolchain is created."
   type        = bool
-  default     = false
+  default     = true
 }
 
 variable "create_cc_toolchain" {
   description = "Boolean flag which determines if the DevSecOps CC toolchain is created."
   type        = bool
-  default     = false
+  default     = true
 }
 
 variable "ci_app_repo_clone_from_url" {

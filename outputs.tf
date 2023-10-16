@@ -49,17 +49,17 @@ output "app_repo_url" {
 
 output "compliance_ci_toolchain_url" {
   description = "The Compliance CI Toolchain URL"
-  value       = module.devsecops_ci_toolchain[0].toolchain_url
+  value       = try(module.devsecops_ci_toolchain[0].toolchain_url, "")
 }
 
 output "compliance_cd_toolchain_url" {
   description = "The Compliance CD Toolchain URL"
-  value       = module.devsecops_cd_toolchain[0].toolchain_url
+  value       = try(module.devsecops_cd_toolchain[0].toolchain_url, "")
 }
 
 output "compliance_cc_toolchain_url" {
   description = "The Compliance CC Toolchain URL"
-  value       = module.devsecops_cc_toolchain[0].toolchain_url
+  value       = try(module.devsecops_cc_toolchain[0].toolchain_url, "")
 }
 
 output "ci_pipeline_id" {

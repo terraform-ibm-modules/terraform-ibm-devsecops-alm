@@ -45,6 +45,7 @@ func TestRunAppExample(t *testing.T) {
 		IgnoreUpdates: testhelper.Exemptions{ // Ignore for consistency check
 			List: []string{
 				"module.terraform_devsecops_alm.module.devsecops_ci_toolchain[0].ibm_cd_toolchain.toolchain_instance",
+				"module.terraform_devsecops_alm.module.devsecops_cc_toolchain[0].module.pipeline_cc.ibm_cd_tekton_pipeline_trigger.cc_pipeline_timed_trigger",
 			},
 		},
 	})
@@ -63,6 +64,7 @@ func TestRunKPExample(t *testing.T) {
 		IgnoreUpdates: testhelper.Exemptions{ // Ignore for consistency check
 			List: []string{
 				"module.terraform_devsecops_alm.module.devsecops_ci_toolchain[0].ibm_cd_toolchain.toolchain_instance",
+				"module.terraform_devsecops_alm.module.devsecops_cc_toolchain[0].module.pipeline_cc.ibm_cd_tekton_pipeline_trigger.cc_pipeline_timed_trigger",
 			},
 		},
 	})
