@@ -5673,14 +5673,12 @@
       }
     },
     "compliance_cc_toolchain_url": {
-      "name": "toolchain_url",
-      "description": "The CC toolchain URL.",
-      "value": "module.devsecops_cc_toolchain.toolchain_url",
+      "name": "compliance_cc_toolchain_url",
+      "description": "The Compliance CC Toolchain URL",
       "pos": {
         "filename": "outputs.tf",
         "line": 60
-      },
-      "type": "TypeString"
+      }
     },
     "compliance_cd_toolchain_id": {
       "name": "compliance_cd_toolchain_id",
@@ -5691,14 +5689,12 @@
       }
     },
     "compliance_cd_toolchain_url": {
-      "name": "toolchain_url",
-      "description": "The CD toolchain URL.",
-      "value": "module.devsecops_cd_toolchain.toolchain_url",
+      "name": "compliance_cd_toolchain_url",
+      "description": "The Compliance CD Toolchain URL",
       "pos": {
         "filename": "outputs.tf",
         "line": 55
-      },
-      "type": "TypeString"
+      }
     },
     "compliance_ci_toolchain_id": {
       "name": "compliance_ci_toolchain_id",
@@ -5709,14 +5705,12 @@
       }
     },
     "compliance_ci_toolchain_url": {
-      "name": "toolchain_url",
-      "description": "The CI toolchain URL.",
-      "value": "module.devsecops_ci_toolchain.toolchain_url",
+      "name": "compliance_ci_toolchain_url",
+      "description": "The Compliance CI Toolchain URL",
       "pos": {
         "filename": "outputs.tf",
         "line": 50
-      },
-      "type": "TypeString"
+      }
     },
     "evidence_repo_url": {
       "name": "evidence_repo_url",
