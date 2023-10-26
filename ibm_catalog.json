@@ -26,6 +26,9 @@
 			"flavors": [
 				{
 					"usage": "ibmcloud_api_key          = \"\" #Set your API key\nci_toolchain_name         = \"DevSecOps CI Toolchain - Terraform\"\ncd_toolchain_name         = \"DevSecOps CD Toolchain - Terraform\"\ncc_toolchain_name         = \"DevSecOps CC Toolchain - Terraform\"\ntoolchain_resource_group  = \"Default\"\ntoolchain_region          = \"jp-tok\" #Region short name only\nci_registry_namespace     = \"tektonhh\"\nci_registry_region        = \"ibm:yp:jp-tok\"\nsm_name                   = \"sm-compliance-secrets\" #Secrets Manager instance name\nsm_location               = \"eu-gb\"\nsm_resource_group         = \"Default\"\nsm_secret_group           = \"Default\"\nci_cluster_name           = \"mycluster-free\"\nci_cluster_namespace      = \"dev\"\nci_dev_region             = \"ibm:yp:jp-tok\"\nci_dev_resource_group     = \"Default\"\ncd_cluster_name           = \"mycluster-free\"\ncd_cluster_namespace      = \"prod\"",
+					"label": "DevSecOps",
+					"name": "devsecops",
+					"working_directory": "./",
 					"compliance": {
 						"authority": "scc-v3",
 						"controls": [
@@ -3025,7 +3028,7 @@
 				{
 					"usage": "ibmcloud_api_key          = \"\" #Set your API key\nci_toolchain_name         = \"DevSecOps CI Toolchain - Terraform\"\ncd_toolchain_name         = \"DevSecOps CD Toolchain - Terraform\"\ncc_toolchain_name         = \"DevSecOps CC Toolchain - Terraform\"\ntoolchain_resource_group  = \"Default\"\ntoolchain_region          = \"jp-tok\" #Region short name only\nci_registry_namespace     = \"tektonhh\"\nci_registry_region        = \"ibm:yp:jp-tok\"\nsm_name                   = \"sm-compliance-secrets\" #Secrets Manager instance name\nsm_location               = \"eu-gb\"\nsm_resource_group         = \"Default\"\nsm_secret_group           = \"Default\"\nci_cluster_name           = \"mycluster-free\"\nci_cluster_namespace      = \"dev\"\nci_dev_region             = \"ibm:yp:jp-tok\"\nci_dev_resource_group     = \"Default\"\ncd_cluster_name           = \"mycluster-free\"\ncd_cluster_namespace      = \"prod\"",
 					"label": "DevSecOps Code Engine",
-					"name": "devsecops_ce",
+					"name": "devsecopsce",
 					"working_directory": "code-engine",
 					"compliance": {
 						"authority": "scc-v3",
@@ -3538,7 +3541,7 @@
 							"type": "string",
 							"default_value": "mycluster-free",
 							"description": "Name of the Kubernetes cluster where the application is deployed. This sets the same cluster for both CI and CD toolchains. See `ci_cluster_name` and `cd_cluster_name` to set different clusters. By default , the cluster namespace for CI will be set to `dev` and CD to `prod`. These can be changed using `ci_cluster_namespace` and `cd_cluster_namespace`.",
-							"required": true
+							"required": false
 						},
 						{
 							"key": "authorization_policy_creation",
