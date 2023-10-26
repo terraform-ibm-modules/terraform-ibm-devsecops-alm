@@ -664,12 +664,6 @@ variable "ci_code_engine_resource_group" {
   default     = "Default"
 }
 
-variable "ci_code_engine_entity_type" {
-  type        = string
-  description = "Type of Code Engine entity to create/update as part of deployment. Default type is 'application'. Set as 'job' for 'job' type."
-  default     = ""
-}
-
 variable "ci_code_engine_build_strategy" {
   type        = string
   description = "The build strategy for the Code Engine entity. Default strategy is 'dockerfile'. Set as 'buildpacks' for 'buildpacks' build."

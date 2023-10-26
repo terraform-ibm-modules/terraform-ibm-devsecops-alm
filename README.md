@@ -63,9 +63,9 @@ statement instead the previous block.
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_devsecops_cc_toolchain"></a> [devsecops\_cc\_toolchain](#module\_devsecops\_cc\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cc-toolchain | v1.0.8 |
-| <a name="module_devsecops_cd_toolchain"></a> [devsecops\_cd\_toolchain](#module\_devsecops\_cd\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain | v1.0.9 |
-| <a name="module_devsecops_ci_toolchain"></a> [devsecops\_ci\_toolchain](#module\_devsecops\_ci\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-ci-toolchain | v1.0.8 |
+| <a name="module_devsecops_cc_toolchain"></a> [devsecops\_cc\_toolchain](#module\_devsecops\_cc\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cc-toolchain | v1.0.9-beta.1 |
+| <a name="module_devsecops_cd_toolchain"></a> [devsecops\_cd\_toolchain](#module\_devsecops\_cd\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain | v1.1.0-beta.3 |
+| <a name="module_devsecops_ci_toolchain"></a> [devsecops\_ci\_toolchain](#module\_devsecops\_ci\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-ci-toolchain | v1.0.9-beta.4 |
 
 ### Resources
 
@@ -308,7 +308,6 @@ No resources.
 | <a name="input_ci_cluster_region"></a> [ci\_cluster\_region](#input\_ci\_cluster\_region) | Region of the Kubernetes cluster where the application is deployed. Use the short form of the regions. For example `us-south`. | `string` | `""` | no |
 | <a name="input_ci_cluster_resource_group"></a> [ci\_cluster\_resource\_group](#input\_ci\_cluster\_resource\_group) | The cluster resource group. | `string` | `""` | no |
 | <a name="input_ci_code_engine_build_strategy"></a> [ci\_code\_engine\_build\_strategy](#input\_ci\_code\_engine\_build\_strategy) | The build strategy for the Code Engine entity. Default strategy is 'dockerfile'. Set as 'buildpacks' for 'buildpacks' build. | `string` | `""` | no |
-| <a name="input_ci_code_engine_entity_type"></a> [ci\_code\_engine\_entity\_type](#input\_ci\_code\_engine\_entity\_type) | Type of Code Engine entity to create/update as part of deployment. Default type is 'application'. Set as 'job' for 'job' type. | `string` | `""` | no |
 | <a name="input_ci_code_engine_project"></a> [ci\_code\_engine\_project](#input\_ci\_code\_engine\_project) | The name of the Code Engine project to use (or create). | `string` | `"DevSecOps_CE"` | no |
 | <a name="input_ci_code_engine_region"></a> [ci\_code\_engine\_region](#input\_ci\_code\_engine\_region) | The region to create/lookup for the Code Engine project. | `string` | `"ibm:yp:us-south"` | no |
 | <a name="input_ci_code_engine_resource_group"></a> [ci\_code\_engine\_resource\_group](#input\_ci\_code\_engine\_resource\_group) | The resource group of the Code Engine project. | `string` | `"Default"` | no |

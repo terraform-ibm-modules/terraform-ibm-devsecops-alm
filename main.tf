@@ -181,7 +181,6 @@ module "devsecops_ci_toolchain" {
   code_engine_project        = var.ci_code_engine_project
   code_engine_region         = var.ci_code_engine_region
   code_engine_resource_group = var.ci_code_engine_resource_group
-  code_engine_entity_type    = var.ci_code_engine_entity_type
   code_engine_build_strategy = var.ci_code_engine_build_strategy
   code_engine_source         = var.ci_code_engine_source
 
