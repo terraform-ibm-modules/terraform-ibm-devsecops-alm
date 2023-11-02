@@ -25,7 +25,6 @@
 			],
 			"flavors": [
 				{
-					"usage": "ibmcloud_api_key          = \"\" #Set your API key\nci_toolchain_name         = \"DevSecOps CI Toolchain - Terraform\"\ncd_toolchain_name         = \"DevSecOps CD Toolchain - Terraform\"\ncc_toolchain_name         = \"DevSecOps CC Toolchain - Terraform\"\ntoolchain_resource_group  = \"Default\"\ntoolchain_region          = \"jp-tok\" #Region short name only\nci_registry_namespace     = \"tektonhh\"\nci_registry_region        = \"ibm:yp:jp-tok\"\nsm_name                   = \"sm-compliance-secrets\" #Secrets Manager instance name\nsm_location               = \"eu-gb\"\nsm_resource_group         = \"Default\"\nsm_secret_group           = \"Default\"\nci_cluster_name           = \"mycluster-free\"\nci_cluster_namespace      = \"dev\"\nci_dev_region             = \"ibm:yp:jp-tok\"\nci_dev_resource_group     = \"Default\"\ncd_cluster_name           = \"mycluster-free\"\ncd_cluster_namespace      = \"prod\"",
 					"compliance": {
 						"authority": "scc-v3",
 						"controls": [
