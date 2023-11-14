@@ -8,6 +8,12 @@ locals {
   use_kp_override           = (var.ci_enable_key_protect == false) && (var.cd_enable_key_protect == false) && (var.cc_enable_key_protect == false) ? true : false
   use_slack_enable_override = (var.ci_enable_slack == false) && (var.cd_enable_slack == false) && (var.cc_enable_slack == false) ? true : false
 
+  git_fr2 = "https://private.eu-fr2.git.cloud.ibm.com"
+  compliance_pipelines_git_server = (
+    (var.toolchain_region == "eu-fr2") ? local.git_fr2
+    : format("https://%s.git.cloud.ibm.com", var.toolchain_region)
+  )
+
   enable_slack = try(var.enable_slack, false)
   ci_slack_notification_state = (
     (var.ci_slack_notifications != "") ? var.ci_slack_notifications :
@@ -30,6 +36,12 @@ locals {
     (var.cc_enable_slack) ? "1" : "0"
   )
 
+  app_source_repo_url = (
+    (var.ci_app_repo_clone_from_url != "") ? var.ci_app_repo_clone_from_url :
+    format("%s/open-toolchain/code-engine-compliance-app.git", local.compliance_pipelines_git_server)
+  )
+
+  code_engine_app_branch       = "main"
   repo_auth_type               = (var.repo_git_token_secret_name == "") ? "oauth" : "pat"
   calculated_ci_cluster_region = (var.ci_dev_region != "") ? var.ci_dev_region : (var.ci_cluster_region != "") ? var.ci_cluster_region : var.toolchain_region
 
@@ -40,7 +52,7 @@ locals {
 
 module "devsecops_ci_toolchain" {
   count                    = var.create_ci_toolchain ? 1 : 0
-  source                   = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-ci-toolchain?ref=v1.0.9-beta.9"
+  source                   = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-ci-toolchain?ref=v1.0.9-beta.4"
   ibmcloud_api_key         = var.ibmcloud_api_key
   toolchain_name           = (var.ci_toolchain_name == "") ? format("${var.toolchain_name}%s", "-CI-Toolchain") : var.ci_toolchain_name
   toolchain_region         = (var.ci_toolchain_region == "") ? var.toolchain_region : replace(replace(var.ci_toolchain_region, "ibm:yp:", ""), "ibm:ys1:", "")
@@ -117,8 +129,8 @@ module "devsecops_ci_toolchain" {
   compliance_pipeline_group = (var.ci_compliance_pipeline_group == "") ? var.repo_group : var.ci_compliance_pipeline_group
 
   #APP REPO
-  app_repo_clone_from_url        = var.ci_app_repo_clone_from_url
-  app_repo_clone_from_branch     = var.ci_app_repo_clone_from_branch
+  app_repo_clone_from_url        = local.app_source_repo_url
+  app_repo_clone_from_branch     = (var.ci_app_repo_clone_from_branch == "") ? local.code_engine_app_branch : var.ci_app_repo_clone_from_branch
   app_repo_existing_url          = var.ci_app_repo_existing_url
   app_repo_existing_branch       = var.ci_app_repo_existing_branch
   app_repo_existing_git_provider = var.ci_app_repo_existing_git_provider
@@ -178,13 +190,41 @@ module "devsecops_ci_toolchain" {
   peer_review_compliance             = (var.ci_peer_review_compliance == "") ? var.peer_review_compliance : var.ci_peer_review_compliance
 
   #CODE ENGINE
-  code_engine_project        = var.ci_code_engine_project
-  code_engine_region         = var.ci_code_engine_region
-  code_engine_resource_group = var.ci_code_engine_resource_group
-  code_engine_build_strategy = var.ci_code_engine_build_strategy
-  code_engine_source         = var.ci_code_engine_source
+  #code_engine_entity_type    = var.ci_code_engine_entity_type
 
-  deployment_target = var.ci_deployment_target
+  #CODE ENGINE
+  deployment_target                   = (var.ci_deployment_target == "") ? var.deployment_target : var.ci_deployment_target
+  code_engine_project                 = (var.ci_code_engine_project == "") ? var.code_engine_project : var.ci_code_engine_project
+  code_engine_region                  = (var.ci_code_engine_region == "") ? var.toolchain_region : var.ci_code_engine_region
+  code_engine_resource_group          = (var.ci_code_engine_resource_group == "") ? var.toolchain_resource_group : var.ci_code_engine_resource_group
+  code_engine_build_strategy          = var.ci_code_engine_build_strategy
+  code_engine_build_use_native_docker = var.ci_code_engine_build_use_native_docker
+  code_engine_build_size              = var.ci_code_engine_build_size
+  code_engine_build_timeout           = var.ci_code_engine_build_timeout
+  code_engine_wait_timeout            = var.ci_code_engine_wait_timeout
+  code_engine_context_dir             = var.ci_code_engine_context_dir
+  code_engine_dockerfile              = var.ci_code_engine_dockerfile
+  code_engine_image_name              = var.ci_code_engine_image_name
+  code_engine_registry_domain         = var.ci_code_engine_registry_domain
+  code_engine_source                  = var.ci_code_engine_source
+  code_engine_binding_resource_group  = var.ci_code_engine_binding_resource_group
+  code_engine_deployment_type         = var.ci_code_engine_deployment_type
+  code_engine_cpu                     = var.ci_code_engine_cpu
+  code_engine_memory                  = var.ci_code_engine_memory
+  code_engine_ephemeral_storage       = var.ci_code_engine_ephemeral_storage
+  code_engine_job_maxexecutiontime    = var.ci_code_engine_job_maxexecutiontime
+  code_engine_job_retrylimit          = var.ci_code_engine_job_retrylimit
+  code_engine_job_instances           = var.ci_code_engine_job_instances
+  code_engine_app_port                = var.ci_code_engine_app_port
+  code_engine_app_min_scale           = var.ci_code_engine_app_min_scale
+  code_engine_app_max_scale           = var.ci_code_engine_app_max_scale
+  code_engine_app_deployment_timeout  = var.ci_code_engine_app_deployment_timeout
+  code_engine_app_concurrency         = var.ci_code_engine_app_concurrency
+  code_engine_app_visibility          = var.ci_code_engine_app_visibility
+  code_engine_env_from_configmaps     = var.ci_code_engine_env_from_configmaps
+  code_engine_env_from_secrets        = var.ci_code_engine_env_from_secrets
+  code_engine_remove_refs             = var.ci_code_engine_remove_refs
+  code_engine_service_bindings        = var.ci_code_engine_service_bindings
 
   #OTHER INTEGRATIONS
 
@@ -239,7 +279,7 @@ module "devsecops_ci_toolchain" {
 
 module "devsecops_cd_toolchain" {
   count            = var.create_cd_toolchain ? 1 : 0
-  source           = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain?ref=v1.1.0-beta.5"
+  source           = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain?ref=v1.1.0-beta.3"
   ibmcloud_api_key = var.ibmcloud_api_key
 
   toolchain_name           = (var.cd_toolchain_name == "") ? format("${var.toolchain_name}%s", "-CD-Toolchain") : var.cd_toolchain_name
@@ -347,14 +387,14 @@ module "devsecops_cd_toolchain" {
   change_repo_clone_from_url = var.cd_change_repo_clone_from_url
 
   #DEPLOYMENT REPO
-  deployment_repo_existing_git_provider = var.cd_deployment_repo_existing_git_provider
-  deployment_repo_existing_git_id       = var.cd_deployment_repo_existing_git_id
+  deployment_repo_existing_git_provider = (var.cd_deployment_repo_existing_git_provider == "") ? try(module.devsecops_ci_toolchain[0].app_repo_git_provider, "") : var.cd_deployment_repo_existing_git_provider
+  deployment_repo_existing_git_id       = (var.cd_deployment_repo_existing_git_id == "") ? try(module.devsecops_ci_toolchain[0].app_repo_git_id, "") : var.cd_deployment_repo_existing_git_id
   deployment_repo_clone_to_git_provider = var.cd_deployment_repo_clone_to_git_provider
   deployment_repo_clone_to_git_id       = var.cd_deployment_repo_clone_to_git_id
   deployment_repo_clone_from_url        = var.cd_deployment_repo_clone_from_url
   deployment_repo_clone_from_branch     = var.cd_deployment_repo_clone_from_branch
-  deployment_repo_existing_url          = var.cd_deployment_repo_existing_url
-  deployment_repo_existing_branch       = var.cd_deployment_repo_existing_branch
+  deployment_repo_existing_url          = (var.cd_deployment_repo_existing_url == "") ? try(module.devsecops_ci_toolchain[0].app_repo_url, "") : var.cd_deployment_repo_existing_url
+  deployment_repo_existing_branch       = (var.cd_deployment_repo_existing_branch == "") ? try(module.devsecops_ci_toolchain[0].app_repo_branch, "") : var.cd_deployment_repo_existing_branch
 
   #SCC
   scc_enable_scc       = var.cd_scc_enable_scc
@@ -427,11 +467,35 @@ module "devsecops_cd_toolchain" {
   trigger_manual_pruner_enable    = var.cd_trigger_manual_pruner_enable
   trigger_timed_pruner_name       = var.cd_trigger_timed_pruner_name
   trigger_timed_pruner_enable     = var.cd_trigger_timed_pruner_enable
+
+  #CODE ENGINE
+  deployment_target                  = (var.cd_deployment_target == "") ? var.deployment_target : var.cd_deployment_target
+  code_engine_project                = (var.cd_code_engine_project == "") ? var.code_engine_project : var.cd_code_engine_project
+  code_engine_region                 = (var.cd_code_engine_region == "") ? var.toolchain_region : var.cd_code_engine_region
+  code_engine_resource_group         = (var.cd_code_engine_resource_group == "") ? var.toolchain_resource_group : var.cd_code_engine_resource_group
+  code_engine_binding_resource_group = var.cd_code_engine_binding_resource_group
+  code_engine_deployment_type        = var.cd_code_engine_deployment_type
+  code_engine_cpu                    = var.cd_code_engine_cpu
+  code_engine_memory                 = var.cd_code_engine_memory
+  code_engine_ephemeral_storage      = var.cd_code_engine_ephemeral_storage
+  code_engine_job_maxexecutiontime   = var.cd_code_engine_job_maxexecutiontime
+  code_engine_job_retrylimit         = var.cd_code_engine_job_retrylimit
+  code_engine_job_instances          = var.cd_code_engine_job_instances
+  code_engine_app_port               = var.cd_code_engine_app_port
+  code_engine_app_min_scale          = var.cd_code_engine_app_min_scale
+  code_engine_app_max_scale          = var.cd_code_engine_app_max_scale
+  code_engine_app_deployment_timeout = var.cd_code_engine_app_deployment_timeout
+  code_engine_app_concurrency        = var.cd_code_engine_app_concurrency
+  code_engine_app_visibility         = var.cd_code_engine_app_visibility
+  code_engine_env_from_configmaps    = var.cd_code_engine_env_from_configmaps
+  code_engine_env_from_secrets       = var.cd_code_engine_env_from_secrets
+  code_engine_remove_refs            = var.cd_code_engine_remove_refs
+  code_engine_service_bindings       = var.cd_code_engine_service_bindings
 }
 
 module "devsecops_cc_toolchain" {
   count                         = var.create_cc_toolchain ? 1 : 0
-  source                        = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cc-toolchain?ref=v1.0.9-beta.2"
+  source                        = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cc-toolchain?ref=v1.0.9-beta.1"
   ibmcloud_api_key              = var.ibmcloud_api_key
   toolchain_name                = (var.cc_toolchain_name == "") ? format("${var.toolchain_name}%s", "-CC-Toolchain") : var.cc_toolchain_name
   toolchain_description         = var.cc_toolchain_description

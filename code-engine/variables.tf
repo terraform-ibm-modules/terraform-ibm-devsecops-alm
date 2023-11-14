@@ -398,6 +398,18 @@ variable "scc_use_profile_attachment" {
 }
 
 
+variable "deployment_target" {
+  type        = string
+  description = "The deployment target, 'cluster' or 'code-engine'. Applies to both the CI and CD toolchains. To set individually use  `ci_deployment_target` and `cd_deployment_target`."
+  default     = "code-engine"
+}
+
+######## Code Engine Vars #####################
+variable "code_engine_project" {
+  type        = string
+  description = "The name of the Code Engine project to use. Created if it does not exist. Applies to both the CI and CD toolchains. To set individually use `ci_code_engine_project` and `cd_code_engine_project`."
+  default     = ""
+}
 
 ##### END OF COMMON VARIABLES ############
 ##### START OF CI VARIABLES ##############
@@ -641,38 +653,199 @@ variable "ci_trigger_timed_pruner_enable" {
 variable "ci_deployment_target" {
   type        = string
   description = "The deployment target, cluster or code-engine."
-  default     = "cluster"
+  default     = ""
 }
 
 ######## Code Engine Vars #####################
-
 variable "ci_code_engine_project" {
   type        = string
-  description = "The name of the Code Engine project to use (or create)."
-  default     = "DevSecOps_CE"
+  description = "The name of the Code Engine project to use for CI. Created if it does not exist."
+  default     = "Sample_CI_Project"
 }
 
 variable "ci_code_engine_region" {
   type        = string
   description = "The region to create/lookup for the Code Engine project."
-  default     = "ibm:yp:us-south"
+  default     = ""
 }
 
 variable "ci_code_engine_resource_group" {
   type        = string
   description = "The resource group of the Code Engine project."
-  default     = "Default"
+  default     = ""
 }
 
 variable "ci_code_engine_build_strategy" {
   type        = string
-  description = "The build strategy for the Code Engine entity. Default strategy is 'dockerfile'. Set as 'buildpacks' for 'buildpacks' build."
+  description = "The build strategy for the Code Engine component. It can be `dockerfile` or `buildpacks`."
+  default     = "dockerfile"
+}
+
+variable "ci_code_engine_build_use_native_docker" {
+  type        = string
+  description = "Property to opt-in for using native docker build capabilities as opposed to use Code Engine build to containerize the source. Note this setting only takes effect if the build-strategy is set to `dockerfile`. Valid values are `true` and `false`."
+  default     = "false"
+}
+
+variable "ci_code_engine_build_size" {
+  type        = string
+  description = "The size to use for the build, which determines the amount of resources used. Valid values include `small`, `medium`, `large`, `xlarge`."
+  default     = "large"
+}
+
+variable "ci_code_engine_build_timeout" {
+  type        = string
+  description = "The amount of time, in seconds, that can pass before the build run must succeed or fail."
+  default     = "1200"
+}
+
+variable "ci_code_engine_wait_timeout" {
+  type        = string
+  description = "The maximum timeout for the CLI operation to wait."
+  default     = "1300"
+}
+
+variable "ci_code_engine_context_dir" {
+  type        = string
+  description = "The directory in the repository that contains the buildpacks file or the Dockerfile."
+  default     = "."
+}
+
+variable "ci_code_engine_dockerfile" {
+  type        = string
+  description = "The path to the `Dockerfile`. Specify this option only if the name is other than `Dockerfile`"
+  default     = "Dockerfile"
+}
+
+variable "ci_code_engine_image_name" {
+  type        = string
+  description = "Name of the image that is built."
+  default     = "code-engine-compliance-app"
+}
+
+variable "ci_code_engine_registry_domain" {
+  type        = string
+  description = "The container registry URL domain that is used to build and tag the image. Useful when using private-endpoint container registry."
   default     = ""
 }
 
 variable "ci_code_engine_source" {
   type        = string
-  description = "The path to the location of code to build in the repository."
+  description = "The path to the location of code to build in the repository. Defaults to the root of source code repository."
+  default     = ""
+}
+
+variable "ci_code_engine_binding_resource_group" {
+  type        = string
+  description = "The name of a resource group to use for authentication for the service bindings of the Code Engine project. A service ID is created with Operator and Manager roles for all services in this resource group. Use '*' to specify all resource groups in this account. "
+  default     = ""
+}
+
+variable "ci_code_engine_deployment_type" {
+  type        = string
+  description = "type of Code Engine component to create/update as part of deployment. It can be either `application` or `job`."
+  default     = "application"
+}
+
+variable "ci_code_engine_cpu" {
+  type        = string
+  description = "The amount of CPU set for the instance of the application or job. "
+  default     = "0.25"
+}
+
+variable "ci_code_engine_memory" {
+  type        = string
+  description = "The amount of memory set for the instance of the application or job. Use M for megabytes or G for gigabytes."
+  default     = "0.5G"
+}
+
+variable "ci_code_engine_ephemeral_storage" {
+  type        = string
+  description = "The amount of ephemeral storage to set for the instance of the application or for the runs of the job. Use M for megabytes or G for gigabytes."
+  default     = "0.4G"
+}
+
+variable "ci_code_engine_job_maxexecutiontime" {
+  type        = string
+  description = "The maximum execution time in seconds for runs of the job."
+  default     = "7200"
+}
+
+variable "ci_code_engine_job_retrylimit" {
+  type        = string
+  description = "The number of times to rerun an instance of the job before the job is marked as failed."
+  default     = "3"
+}
+
+variable "ci_code_engine_job_instances" {
+  type        = string
+  description = "Specifies the number of instances that are used for runs of the job. When you use this option, the system converts to array indices. For example, if you specify instances of 5, the system converts to array-indices of 0 - 4. This option can only be specified if the --array-indices option is not specified. The default value is 1."
+  default     = "1"
+}
+
+variable "ci_code_engine_app_port" {
+  type        = string
+  description = "The port where the application listens. The format is `[NAME:]PORT`, where `[NAME:]` is optional. If `[NAME:]` is specified, valid values are `h2c`, or `http1`. When `[NAME:]` is not specified or is `http1`, the port uses `HTTP/1.1`. When `[NAME:]` is `h2c`, the port uses unencrypted `HTTP/2`."
+  default     = "8080"
+}
+
+variable "ci_code_engine_app_min_scale" {
+  type        = string
+  description = "The minimum number of instances that can be used for this application. This option is useful to ensure that no instances are running when not needed."
+  default     = "0"
+}
+
+variable "ci_code_engine_app_max_scale" {
+  type        = string
+  description = "The maximum number of instances that can be used for this application. If you set this value to 0, the application scales as needed. The application scaling is limited only by the instances per the resource quota for the project of your application."
+  default     = "1"
+}
+
+variable "ci_code_engine_app_deployment_timeout" {
+  type        = string
+  description = "The maximum timeout for the application deployment."
+  default     = "300"
+}
+
+variable "ci_code_engine_app_concurrency" {
+  type        = string
+  description = "The maximum number of requests that can be processed concurrently per instance."
+  default     = "100"
+}
+
+variable "ci_code_engine_app_visibility" {
+  type        = string
+  description = "The visibility for the application. Valid values are public, private and project. Setting a visibility of public means that your app can receive requests from the public internet or from components within the Code Engine project. Setting a visibility of private means that your app is not accessible from the public internet and network access is only possible from other IBM Cloud using Virtual Private Endpoints (VPE) or Code Engine components that are running in the same project. Visibility can only be private if the project supports application private visibility. Setting a visibility of project means that your app is not accessible from the public internet and network access is only possible from other Code Engine components that are running in the same project."
+  default     = "public"
+}
+
+#variable "ci_code_engine_CE_ENV_\<XXXX\>" {
+#  type        = string
+#  description = "Pipeline/trigger property (secured or not) to provide value for code engine environment variable <XXXX>."
+#  default     = ""
+#}
+
+variable "ci_code_engine_env_from_configmaps" {
+  type        = string
+  description = "Semi-colon separated list of configmaps to set environment variables."
+  default     = ""
+}
+
+variable "ci_code_engine_env_from_secrets" {
+  type        = string
+  description = "Semi-colon separated list of secrets to set environment variables."
+  default     = ""
+}
+
+variable "ci_code_engine_remove_refs" {
+  type        = string
+  description = "Remove references to unspecified configuration resources (configmap/secret) references (pulled from env-from-configmaps, env-from-secrets along with auto-managed by CD)."
+  default     = "false"
+}
+
+variable "ci_code_engine_service_bindings" {
+  type        = string
+  description = "JSON array including service name(s) (as a simple JSON string."
   default     = ""
 }
 
@@ -1896,6 +2069,149 @@ variable "cd_event_notifications_crn" {
   description = "Set the Event Notifications CRN to create an Events Notification integration."
   default     = ""
 }
+#######Code Engine #####################
+
+######## Deployment Strategy ##################
+
+variable "cd_deployment_target" {
+  type        = string
+  description = "The deployment target, 'cluster' or 'code-engine'."
+  default     = ""
+}
+
+######## Code Engine Vars #####################
+variable "cd_code_engine_project" {
+  type        = string
+  description = "The name of the Code Engine project to use for CD. Created if it does not exist."
+  default     = "Sample_CD_Project"
+}
+
+variable "cd_code_engine_region" {
+  type        = string
+  description = "The region to create/lookup for the Code Engine project."
+  default     = ""
+}
+
+variable "cd_code_engine_resource_group" {
+  type        = string
+  description = "The resource group of the Code Engine project."
+  default     = ""
+}
+
+variable "cd_code_engine_binding_resource_group" {
+  type        = string
+  description = "The name of a resource group to use for authentication for the service bindings of the Code Engine project. A service ID is created with Operator and Manager roles for all services in this resource group. Use '*' to specify all resource groups in this account. "
+  default     = ""
+}
+
+variable "cd_code_engine_deployment_type" {
+  type        = string
+  description = "type of Code Engine component to create/update as part of deployment. It can be either `application` or `job`."
+  default     = "application"
+}
+
+variable "cd_code_engine_cpu" {
+  type        = string
+  description = "The amount of CPU set for the instance of the application or job. "
+  default     = "0.25"
+}
+
+variable "cd_code_engine_memory" {
+  type        = string
+  description = "The amount of memory set for the instance of the application or job. Use M for megabytes or G for gigabytes."
+  default     = "0.5G"
+}
+
+variable "cd_code_engine_ephemeral_storage" {
+  type        = string
+  description = "The amount of ephemeral storage to set for the instance of the application or for the runs of the job. Use M for megabytes or G for gigabytes."
+  default     = "0.4G"
+}
+
+variable "cd_code_engine_job_maxexecutiontime" {
+  type        = string
+  description = "The maximum execution time in seconds for runs of the job."
+  default     = "7200"
+}
+
+variable "cd_code_engine_job_retrylimit" {
+  type        = string
+  description = "The number of times to rerun an instance of the job before the job is marked as failed."
+  default     = "3"
+}
+
+variable "cd_code_engine_job_instances" {
+  type        = string
+  description = "Specifies the number of instances that are used for runs of the job. When you use this option, the system converts to array indices. For example, if you specify instances of 5, the system converts to array-indices of 0 - 4. This option can only be specified if the --array-indices option is not specified. The default value is 1."
+  default     = "1"
+}
+
+variable "cd_code_engine_app_port" {
+  type        = string
+  description = "The port where the application listens. The format is `[NAME:]PORT`, where `[NAME:]` is optional. If `[NAME:]` is specified, valid values are `h2c`, or `http1`. When `[NAME:]` is not specified or is `http1`, the port uses `HTTP/1.1`. When `[NAME:]` is `h2c`, the port uses unencrypted `HTTP/2`."
+  default     = "8080"
+}
+
+variable "cd_code_engine_app_min_scale" {
+  type        = string
+  description = "The minimum number of instances that can be used for this application. This option is useful to ensure that no instances are running when not needed."
+  default     = "0"
+}
+
+variable "cd_code_engine_app_max_scale" {
+  type        = string
+  description = "The maximum number of instances that can be used for this application. If you set this value to 0, the application scales as needed. The application scaling is limited only by the instances per the resource quota for the project of your application."
+  default     = "1"
+}
+
+variable "cd_code_engine_app_deployment_timeout" {
+  type        = string
+  description = "The maximum timeout for the application deployment."
+  default     = "300"
+}
+
+variable "cd_code_engine_app_concurrency" {
+  type        = string
+  description = "The maximum number of requests that can be processed concurrently per instance."
+  default     = "100"
+}
+
+variable "cd_code_engine_app_visibility" {
+  type        = string
+  description = "The visibility for the application. Valid values are public, private and project. Setting a visibility of public means that your app can receive requests from the public internet or from components within the Code Engine project. Setting a visibility of private means that your app is not accessible from the public internet and network access is only possible from other IBM Cloud using Virtual Private Endpoints (VPE) or Code Engine components that are running in the same project. Visibility can only be private if the project supports application private visibility. Setting a visibility of project means that your app is not accessible from the public internet and network access is only possible from other Code Engine components that are running in the same project."
+  default     = "public"
+}
+
+#variable "cd_code_engine_CE_ENV_\<XXXX\>" {
+#  type        = string
+#  description = "Pipeline/trigger property (secured or not) to provide value for code engine environment variable <XXXX>."
+#  default     = ""
+#}
+
+variable "cd_code_engine_env_from_configmaps" {
+  type        = string
+  description = "Semi-colon separated list of configmaps to set environment variables."
+  default     = ""
+}
+
+variable "cd_code_engine_env_from_secrets" {
+  type        = string
+  description = "Semi-colon separated list of secrets to set environment variables."
+  default     = ""
+}
+
+variable "cd_code_engine_remove_refs" {
+  type        = string
+  description = "Remove references to unspecified configuration resources (configmap/secret) references (pulled from env-from-configmaps, env-from-secrets along with auto-managed by CD)."
+  default     = "false"
+}
+
+variable "cd_code_engine_service_bindings" {
+  type        = string
+  description = "JSON array including service name(s) (as a simple JSON string."
+  default     = ""
+}
+
 
 ##### START OF CC VARIABLES ##############
 
