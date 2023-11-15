@@ -21,4 +21,4 @@ repository:
   # Uncomment this description property
   # and update the description to the current repo description.
   description: "This is the DevSecOps Application Lifecycle Management Deployable Architecture"
-  topics: terraform, ibm-cloud, DA, deployable-architecture
+  topics: terraform, ibm-cloud, deployable-architecture
