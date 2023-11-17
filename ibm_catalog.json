@@ -33,7 +33,7 @@
 							{
 								"profile": {
 									"name": "IBM Cloud Framework for Financial Services",
-									"version": "1.6.0"
+									"version": "1.5.0"
 								},
 								"names": [
 									"CM-2(0)",
@@ -3071,7 +3071,7 @@
 							{
 								"profile": {
 									"name": "IBM Cloud Framework for Financial Services",
-									"version": "1.6.0"
+									"version": "1.5.0"
 								},
 								"names": [
 									"CM-2(0)",
