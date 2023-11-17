@@ -668,6 +668,28 @@ module "devsecops_cc_toolchain" {
   trigger_timed_pruner_enable  = var.cc_trigger_timed_pruner_enable
 }
 
+#############Auto Remediation Support ######################
+resource "ibm_cd_tekton_pipeline_property" "cc_pipeline_opt_in_cra_auto_remediation" {
+  name        = "opt-in-cra-auto-remediation"
+  type        = "text"
+  value       = var.cc_opt_in_cra_auto_remediation
+  pipeline_id = module.devsecops_cc_toolchain[0].cc_pipeline_id
+}
+
+resource "ibm_cd_tekton_pipeline_property" "cc_pipeline_opt_in_cra_auto_remediation_force" {
+  name        = "opt-in-cra-auto-remediation-force"
+  type        = "text"
+  value       = var.cc_opt_in_cra_auto_remediation_force
+  pipeline_id = module.devsecops_cc_toolchain[0].cc_pipeline_id
+}
+
+resource "ibm_cd_tekton_pipeline_property" "cc_pipeline_opt_in_cra_auto_remediation_enabled_repos" {
+  name        = "opt-in-cra-auto-remediation-enabled-repos"
+  type        = "text"
+  value       = var.cc_opt_in_cra_auto_remediation_enabled_repos
+  pipeline_id = module.devsecops_cc_toolchain[0].cc_pipeline_id
+}
+
 #############################################################
 ## Example resources to extend the ci_toolchain created above
 #############################################################

@@ -24,7 +24,7 @@
 				}
 			],
 			"flavors": [
-				{	"label": "DevSecOps",
+				{	"label": "Deploy to Kubernetes",
 					"name": "devsecops",
 					"working_directory": "./",
 					"compliance": {
@@ -33,7 +33,7 @@
 							{
 								"profile": {
 									"name": "IBM Cloud Framework for Financial Services",
-									"version": "1.2.0"
+									"version": "1.6.0"
 								},
 								"names": [
 									"CM-2(0)",
@@ -112,19 +112,11 @@
 						"features": [
                             {
                                 "title": "Kubernetes",
-                                "description": "Yes"
+                                "description": "IBM Cloud Kubernetes Service is a managed offering to create your own cluster of compute hosts where you can deploy and manage containerized apps on IBM Cloud."
                             },
                             {
-                                "title": "Code Engine",
-                                "description": "No"
-                            },
-                            {
-                                "title": "Deploy an application to Kubernetes using the DevSecOps pipelines.",
-                                "description": "Yes"
-                            },
-                            {
-                                "title": "Deploy an application to Code Engine using the DevSecOps pipelines.",
-                                "description": "No"
+                                "title": "Application",
+                                "description": "Deploy a sample Node app to Kubernetes using DevSecOps best practices."
                             }
                         ]
 					},
@@ -331,7 +323,7 @@
 							"key": "scc_profile_name",
 							"type": "string",
 							"default_value": "",
-							"description": "The name of a Security and Compliance Center profile. Use the `IBM Cloud for Financial Services` profile, which contains the DevSecOps Toolchain rules. Or use a user-authored customized profile that has been configured to contain those rules. This parameter is only relevant when the `scc_use_profile_attachment` parameter is enabled.",
+							"description": "The name of a Security and Compliance Center profile. Use the `IBM Cloud Framework for Financial Services` profile, which contains the DevSecOps Toolchain rules. Or use a user-authored customized profile that has been configured to contain those rules. This parameter is only relevant when the `scc_use_profile_attachment` parameter is enabled.",
 							"required": false
 						},
 						{
@@ -2588,6 +2580,27 @@
 							"required": false
 						},
 						{
+							"key": "cc_opt_in_cra_auto_remediation",
+							"type": "boolean",
+							"default_value": false,
+							"description": "Enables auto-remediation for your pipeline. Set to `true` to enable.",
+							"required": false
+						},
+						{
+							"key": "cc_opt_in_cra_auto_remediation_force",
+							"type": "boolean",
+							"default_value": false,
+							"description": "Forces a major package update as part of the pull request that is opened.",
+							"required": false
+						},
+						{
+							"key": "cc_opt_in_cra_auto_remediation_enabled_repos",
+							"type": "string",
+							"default_value": "",
+							"description": "Specifies specific repos where you want to enable auto-remediation.",
+							"required": false
+						},
+						{
 							"key": "cc_opt_in_dynamic_api_scan",
 							"type": "string",
 							"default_value": "",
@@ -3049,7 +3062,7 @@
 					"install_type": "fullstack"
 				},
 				{
-					"label": "DevSecOps Code Engine",
+					"label": "Deploy to Code Engine",
 					"name": "devsecopsce",
 					"working_directory": "code-engine",
 					"compliance": {
@@ -3058,7 +3071,7 @@
 							{
 								"profile": {
 									"name": "IBM Cloud Framework for Financial Services",
-									"version": "1.2.0"
+									"version": "1.6.0"
 								},
 								"names": [
 									"CM-2(0)",
@@ -3136,20 +3149,12 @@
 						],
 						"features": [
                             {
-                                "title": "Kubernetes",
-                                "description": "No"
-                            },
-                            {
                                 "title": "Code Engine",
-                                "description": "Yes"
+                                "description": "IBM Cloud Code Engine is a fully managed, serverless platform."
                             },
                             {
-                                "title": "Deploy an application to Kubernetes using the DevSecOps pipelines.",
-                                "description": "No"
-                            },
-                            {
-                                "title": "Deploy an application to Code Engine using the DevSecOps pipelines.",
-                                "description": "Yes"
+                                "title": "Application",
+                                "description": "Deploy a sample Go app to Code Engine using DevSecOps best practices."
                             }
                         ]
 					},
@@ -3185,24 +3190,24 @@
 							}
 						},
 						{
+							"key": "registry_namespace",
+							"type": "string",
+							"default_value": "",
+							"description": "A unique namespace within the IBM Cloud Container Registry region where the application image is stored.",
+							"required": true
+						},
+						{
 							"key": "ci_code_engine_project",
 							"type": "string",
 							"default_value": "Sample_CI_Project",
-							"description": "The name of the Code Engine project to use for CI. Created if it does not exist.",
+							"description": "The name of the Code Engine project to use for the CI pipeline build. The project is created if it does not already exist.",
 							"required": true
 						},
 						{
 							"key": "cd_code_engine_project",
 							"type": "string",
 							"default_value": "Sample_CD_Project",
-							"description": "The name of the Code Engine project to use for CD. Created if it does not exist.",
-							"required": true
-						},
-						{
-							"key": "ci_code_engine_context_dir",
-							"type": "string",
-							"default_value": "dockerfile-strategy",
-							"description": "The directory in the repository that contains the buildpacks file or the Dockerfile.",
+							"description": "The name of the Code Engine project to use for the CD pipeline promoted code. The project is created if it does not already exist.",
 							"required": true
 						},
 						{
@@ -3231,6 +3236,13 @@
 							"type": "string",
 							"default_value": "Default",
 							"description": "Group in Secrets Manager for organizing/grouping secrets. This applies to the CI, CD and CC Secret Manager integrations. See `ci_sm_secret_group`, `cd_sm_secret_group`, and `cc_sm_secret_group` to set separately.",
+							"required": true
+						},
+						{
+							"key": "ci_code_engine_context_dir",
+							"type": "string",
+							"default_value": "dockerfile-strategy",
+							"description": "The directory in the repository that contains the buildpacks file or the Dockerfile.",
 							"required": true
 						},
 						{
@@ -3570,13 +3582,6 @@
 							"required": false
 						},
 						{
-							"key": "registry_namespace",
-							"type": "string",
-							"default_value": "",
-							"description": "A unique namespace within the IBM Cloud Container Registry region where the application image is stored.",
-							"required": true
-						},
-						{
 							"key": "cluster_name",
 							"type": "string",
 							"default_value": "mycluster-free",
@@ -3713,7 +3718,7 @@
 							"key": "scc_profile_name",
 							"type": "string",
 							"default_value": "",
-							"description": "The name of a Security and Compliance Center profile. Use the `IBM Cloud for Financial Services` profile, which contains the DevSecOps Toolchain rules. Or use a user-authored customized profile that has been configured to contain those rules. This parameter is only relevant when the `scc_use_profile_attachment` parameter is enabled.",
+							"description": "The name of a Security and Compliance Center profile. Use the `IBM Cloud Framework for Financial Services` profile, which contains the DevSecOps Toolchain rules. Or use a user-authored customized profile that has been configured to contain those rules. This parameter is only relevant when the `scc_use_profile_attachment` parameter is enabled.",
 							"required": false
 						},
 						{
@@ -5925,6 +5930,27 @@
 							"type": "string",
 							"default_value": "1",
 							"description": "Enables auto-closing of issues coming from vulnerabilities, once the vulnerability is no longer detected by the CC pipeline run.",
+							"required": false
+						},
+						{
+							"key": "cc_opt_in_cra_auto_remediation",
+							"type": "boolean",
+							"default_value": false,
+							"description": "Enables auto-remediation for your pipeline. Set to `true` to enable.",
+							"required": false
+						},
+						{
+							"key": "cc_opt_in_cra_auto_remediation_force",
+							"type": "boolean",
+							"default_value": false,
+							"description": "Forces a major package update as part of the pull request that is opened.",
+							"required": false
+						},
+						{
+							"key": "cc_opt_in_cra_auto_remediation_enabled_repos",
+							"type": "string",
+							"default_value": "",
+							"description": "Specifies specific repos where you want to enable auto-remediation.",
 							"required": false
 						},
 						{

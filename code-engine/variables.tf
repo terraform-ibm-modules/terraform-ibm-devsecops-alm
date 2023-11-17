@@ -369,7 +369,7 @@ variable "scc_instance_crn" {
 
 variable "scc_profile_name" {
   type        = string
-  description = "The name of a Security and Compliance Center profile. Use the `IBM Cloud for Financial Services` profile, which contains the DevSecOps Toolchain rules. Or use a user-authored customized profile that has been configured to contain those rules. This parameter is only relevant when the `scc_use_profile_attachment` parameter is enabled."
+  description = "The name of a Security and Compliance Center profile. Use the `IBM Cloud Framework for Financial Services` profile, which contains the DevSecOps Toolchain rules. Or use a user-authored customized profile that has been configured to contain those rules. This parameter is only relevant when the `scc_use_profile_attachment` parameter is enabled."
   default     = ""
 }
 
@@ -659,7 +659,7 @@ variable "ci_deployment_target" {
 ######## Code Engine Vars #####################
 variable "ci_code_engine_project" {
   type        = string
-  description = "The name of the Code Engine project to use for CI. Created if it does not exist."
+  description = "The name of the Code Engine project to use for the CI pipeline build. The project is created if it does not already exist."
   default     = "Sample_CI_Project"
 }
 
@@ -2082,7 +2082,7 @@ variable "cd_deployment_target" {
 ######## Code Engine Vars #####################
 variable "cd_code_engine_project" {
   type        = string
-  description = "The name of the Code Engine project to use for CD. Created if it does not exist."
+  description = "The name of the Code Engine project to use for the CD pipeline promoted code. The project is created if it does not already exist."
   default     = "Sample_CD_Project"
 }
 
@@ -2815,6 +2815,26 @@ variable "cc_enable_pipeline_dockerconfigjson" {
 variable "cc_peer_review_compliance" {
   type        = string
   description = "Set to `0` to disable. Set to `1` to enable peer review evidence collection."
+  default     = ""
+}
+
+########## AUTO REMEDIATION #################
+
+variable "cc_opt_in_cra_auto_remediation" {
+  type        = bool
+  description = "Enables auto-remediation for your pipeline. Set to `true` to enable."
+  default     = false
+}
+
+variable "cc_opt_in_cra_auto_remediation_force" {
+  type        = bool
+  description = "Forces a major package update as part of the pull request that is opened."
+  default     = false
+}
+
+variable "cc_opt_in_cra_auto_remediation_enabled_repos" {
+  type        = string
+  description = "Specifies specific repos where you want to enable auto-remediation."
   default     = ""
 }
 

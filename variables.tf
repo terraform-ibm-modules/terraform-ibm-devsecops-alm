@@ -369,7 +369,7 @@ variable "scc_instance_crn" {
 
 variable "scc_profile_name" {
   type        = string
-  description = "The name of a Security and Compliance Center profile. Use the `IBM Cloud for Financial Services` profile, which contains the DevSecOps Toolchain rules. Or use a user-authored customized profile that has been configured to contain those rules. This parameter is only relevant when the `scc_use_profile_attachment` parameter is enabled."
+  description = "The name of a Security and Compliance Center profile. Use the `IBM Cloud Framework for Financial Services` profile, which contains the DevSecOps Toolchain rules. Or use a user-authored customized profile that has been configured to contain those rules. This parameter is only relevant when the `scc_use_profile_attachment` parameter is enabled."
   default     = ""
 }
 
@@ -2506,6 +2506,26 @@ variable "cc_peer_review_compliance" {
 variable "cc_event_notifications_crn" {
   type        = string
   description = "Set the Event Notifications CRN to create an Events Notification integration."
+  default     = ""
+}
+
+########## AUTO REMEDIATION #################
+
+variable "cc_opt_in_cra_auto_remediation" {
+  type        = bool
+  description = "Enables auto-remediation for your pipeline. Set to `true` to enable."
+  default     = false
+}
+
+variable "cc_opt_in_cra_auto_remediation_force" {
+  type        = bool
+  description = "Forces a major package update as part of the pull request that is opened."
+  default     = false
+}
+
+variable "cc_opt_in_cra_auto_remediation_enabled_repos" {
+  type        = string
+  description = "Specifies specific repos where you want to enable auto-remediation."
   default     = ""
 }
 
