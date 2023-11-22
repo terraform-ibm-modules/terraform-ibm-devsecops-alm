@@ -316,13 +316,13 @@ variable "repositories_prefix" {
 variable "compliance_pipeline_branch" {
   type        = string
   description = "The Compliance Pipeline branch."
-  default     = "open-v9"
+  default     = "open-v10"
 }
 
 variable "peer_review_compliance" {
   type        = string
   description = "Set to `0` to disable. Set to `1` to enable peer review evidence collection. This parameter will apply to the CI, CD and CC pipelines. Can be set individually with `ci_peer_review_compliance`, `cd_peer_review_compliance`, `cc_peer_review_compliance`."
-  default     = ""
+  default     = "1"
 }
 
 variable "event_notifications_tool_name" {

@@ -252,7 +252,7 @@
 						{
 							"key": "compliance_pipeline_branch",
 							"type": "string",
-							"default_value": "open-v9",
+							"default_value": "open-v10",
 							"description": "The Compliance Pipeline branch.",
 							"required": false
 						},
@@ -301,7 +301,7 @@
 						{
 							"key": "peer_review_compliance",
 							"type": "string",
-							"default_value": "",
+							"default_value": "1",
 							"description": "Set to `0` to disable. Set to `1` to enable peer review evidence collection. This parameter will apply to the CI, CD and CC pipelines. Can be set individually with `ci_peer_review_compliance`, `cd_peer_review_compliance`, `cc_peer_review_compliance`.",
 							"required": false
 						},
@@ -3647,7 +3647,7 @@
 						{
 							"key": "compliance_pipeline_branch",
 							"type": "string",
-							"default_value": "open-v9",
+							"default_value": "open-v10",
 							"description": "The Compliance Pipeline branch.",
 							"required": false
 						},
@@ -3696,7 +3696,7 @@
 						{
 							"key": "peer_review_compliance",
 							"type": "string",
-							"default_value": "",
+							"default_value": "1",
 							"description": "Set to `0` to disable. Set to `1` to enable peer review evidence collection. This parameter will apply to the CI, CD and CC pipelines. Can be set individually with `ci_peer_review_compliance`, `cd_peer_review_compliance`, `cc_peer_review_compliance`.",
 							"required": false
 						},
