@@ -116,7 +116,7 @@
                             },
                             {
                                 "title": "Application",
-                                "description": "Deploy a sample Node app to Kubernetes using DevSecOps best practices."
+                                "description": "Deploy a sample application to Kubernetes using DevSecOps best practices."
                             }
                         ]
 					},
@@ -722,13 +722,6 @@
 							"type": "string",
 							"default_value": "",
 							"description": "The build strategy for the Code Engine entity. Default strategy is 'dockerfile'. Set as 'buildpacks' for 'buildpacks' build.",
-							"required": false
-						},
-						{
-							"key": "ci_code_engine_entity_type",
-							"type": "string",
-							"default_value": "",
-							"description": "Type of Code Engine entity to create/update as part of deployment. Default type is 'application'. Set as 'job' for 'job' type.",
 							"required": false
 						},
 						{
@@ -3154,7 +3147,7 @@
                             },
                             {
                                 "title": "Application",
-                                "description": "Deploy a sample Go app to Code Engine using DevSecOps best practices."
+                                "description": "Deploy a sample application to Code Engine using DevSecOps best practices."
                             }
                         ]
 					},
@@ -3243,7 +3236,7 @@
 							"type": "string",
 							"default_value": "dockerfile-strategy",
 							"description": "The directory in the repository that contains the buildpacks file or the Dockerfile.",
-							"required": true
+							"required": false
 						},
 						{
 							"key": "ci_code_engine_image_name",
