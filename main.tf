@@ -176,7 +176,8 @@ module "devsecops_ci_toolchain" {
   sonarqube_config                   = var.ci_sonarqube_config
   enable_pipeline_dockerconfigjson   = var.ci_enable_pipeline_dockerconfigjson
   peer_review_compliance             = (var.ci_peer_review_compliance == "") ? var.peer_review_compliance : var.ci_peer_review_compliance
-
+  enable_pr_pipeline                 = true
+  enable_ci_pipeline                 = true
   #CODE ENGINE
   code_engine_project         = var.ci_code_engine_project
   code_engine_region          = var.ci_code_engine_region
@@ -345,7 +346,8 @@ module "devsecops_cd_toolchain" {
   inventory_repo_integration_owner = var.inventory_repo_integration_owner
 
   #CHANGE MANAGEMENT REPO
-  change_repo_clone_from_url = var.cd_change_repo_clone_from_url
+  change_repo_clone_from_url    = var.cd_change_repo_clone_from_url
+  enable_change_management_repo = true
 
   #DEPLOYMENT REPO
   deployment_repo_existing_git_provider = var.cd_deployment_repo_existing_git_provider
