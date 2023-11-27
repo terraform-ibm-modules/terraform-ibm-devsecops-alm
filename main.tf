@@ -606,6 +606,7 @@ module "devsecops_cc_toolchain" {
 
 #############Auto Remediation Support ######################
 resource "ibm_cd_tekton_pipeline_property" "cc_pipeline_opt_in_cra_auto_remediation" {
+  depends_on  = [module.devsecops_cc_toolchain]
   name        = "opt-in-cra-auto-remediation"
   type        = "text"
   value       = var.cc_opt_in_cra_auto_remediation
@@ -613,6 +614,7 @@ resource "ibm_cd_tekton_pipeline_property" "cc_pipeline_opt_in_cra_auto_remediat
 }
 
 resource "ibm_cd_tekton_pipeline_property" "cc_pipeline_opt_in_cra_auto_remediation_force" {
+  depends_on  = [module.devsecops_cc_toolchain]
   name        = "opt-in-cra-auto-remediation-force"
   type        = "text"
   value       = var.cc_opt_in_cra_auto_remediation_force
@@ -620,6 +622,7 @@ resource "ibm_cd_tekton_pipeline_property" "cc_pipeline_opt_in_cra_auto_remediat
 }
 
 resource "ibm_cd_tekton_pipeline_property" "cc_pipeline_opt_in_cra_auto_remediation_enabled_repos" {
+  depends_on  = [module.devsecops_cc_toolchain]
   name        = "opt-in-cra-auto-remediation-enabled-repos"
   type        = "text"
   value       = var.cc_opt_in_cra_auto_remediation_enabled_repos
