@@ -179,12 +179,12 @@ module "devsecops_ci_toolchain" {
   #enable_pr_pipeline                 = true
   #enable_ci_pipeline                 = true
   #CODE ENGINE
-  code_engine_project         = var.ci_code_engine_project
-  code_engine_region          = var.ci_code_engine_region
-  code_engine_resource_group  = var.ci_code_engine_resource_group
-  code_engine_build_strategy  = var.ci_code_engine_build_strategy
-  code_engine_source          = var.ci_code_engine_source
-  code_engine_deployment_type = var.ci_code_engine_entity_type
+  code_engine_project        = var.ci_code_engine_project
+  code_engine_region         = var.ci_code_engine_region
+  code_engine_resource_group = var.ci_code_engine_resource_group
+  code_engine_build_strategy = var.ci_code_engine_build_strategy
+  code_engine_source         = var.ci_code_engine_source
+  code_engine_entity_type    = var.ci_code_engine_entity_type
 
   deployment_target = var.ci_deployment_target
 
