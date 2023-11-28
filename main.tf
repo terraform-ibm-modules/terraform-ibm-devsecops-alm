@@ -40,7 +40,7 @@ locals {
 
 module "devsecops_ci_toolchain" {
   count                    = var.create_ci_toolchain ? 1 : 0
-  source                   = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-ci-toolchain?ref=v1.0.9"
+  source                   = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-ci-toolchain?ref=v1.0.9-beta.5"
   ibmcloud_api_key         = var.ibmcloud_api_key
   toolchain_name           = (var.ci_toolchain_name == "") ? format("${var.toolchain_name}%s", "-CI-Toolchain") : var.ci_toolchain_name
   toolchain_region         = (var.ci_toolchain_region == "") ? var.toolchain_region : replace(replace(var.ci_toolchain_region, "ibm:yp:", ""), "ibm:ys1:", "")
@@ -176,8 +176,8 @@ module "devsecops_ci_toolchain" {
   sonarqube_config                   = var.ci_sonarqube_config
   enable_pipeline_dockerconfigjson   = var.ci_enable_pipeline_dockerconfigjson
   peer_review_compliance             = (var.ci_peer_review_compliance == "") ? var.peer_review_compliance : var.ci_peer_review_compliance
-  enable_pr_pipeline                 = true
-  enable_ci_pipeline                 = true
+  #enable_pr_pipeline                 = true
+  #enable_ci_pipeline                 = true
   #CODE ENGINE
   code_engine_project         = var.ci_code_engine_project
   code_engine_region          = var.ci_code_engine_region
