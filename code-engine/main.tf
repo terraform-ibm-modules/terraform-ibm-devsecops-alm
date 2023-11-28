@@ -190,7 +190,6 @@ module "devsecops_ci_toolchain" {
   peer_review_compliance             = (var.ci_peer_review_compliance == "") ? var.peer_review_compliance : var.ci_peer_review_compliance
 
   #CODE ENGINE
-  #code_engine_entity_type    = var.ci_code_engine_entity_type
 
   #CODE ENGINE
   deployment_target                   = (var.ci_deployment_target == "") ? var.deployment_target : var.ci_deployment_target
