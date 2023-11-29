@@ -111,10 +111,6 @@
 						],
 						"features": [
                             {
-                                "title": "Kubernetes",
-                                "description": "IBM Cloud Kubernetes Service is a managed offering to create your own cluster of compute hosts where you can deploy and manage containerized apps on IBM Cloud."
-                            },
-                            {
                                 "title": "Application",
                                 "description": "Deploy a sample application to Kubernetes using DevSecOps best practices."
                             }
@@ -3141,10 +3137,6 @@
 							}
 						],
 						"features": [
-                            {
-                                "title": "Code Engine",
-                                "description": "IBM Cloud Code Engine is a fully managed, serverless platform."
-                            },
                             {
                                 "title": "Application",
                                 "description": "Deploy a sample application to Code Engine using DevSecOps best practices."
