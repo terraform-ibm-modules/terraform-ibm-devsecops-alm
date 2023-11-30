@@ -16,24 +16,7 @@ A Terraform module for provisioning the DevSecOps CI, CD, and CC toolchains.
 
 ## Reference architectures
 
-![Architecture diagram for 'DevSecOps CI, CD, CC toolchains'.](/reference-architectures/diagram-deploy-arch-ibm-devsecops-alm-diagram.svg "Architecture diagram")
-
-## Usage
-
-```hcl
-module "terraform_devsecops_alm" {
-  source                   = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-alm?ref=v1.0.4"
-  toolchain_region         = var.toolchain_region
-  toolchain_resource_group = var.toolchain_resource_group
-  registry_namespace       = var.registry_namespace
-  cluster_name             = var.cluster_name
-  sm_resource_group        = var.sm_resource_group
-  sm_name                  = var.sm_name
-  sm_location              = var.sm_location
-  sm_secret_group          = var.sm_secret_group
-}
-
-```
+![Architecture diagram for 'DevSecOps CI, CD, CC toolchains'.](../reference-architectures/diagram-deploy-arch-ibm-devsecops-alm-diagram.svg "Architecture diagram")
 
 ## Required IAM access policies
 
@@ -45,13 +28,7 @@ statement instead the previous block.
 <!-- No permissions are needed to run this module.-->
 <!-- END MODULE HOOK -->
 <!-- BEGIN EXAMPLES HOOK -->
-## Examples
 
-- [ Default example](examples/default)
-- [ Bring your own app example](examples/devsecops-ci-toolchain-bring-your-own-app)
-- [ Key Protect and CI only example](examples/devsecops-ci-toolchain-with-key-protect)
-<!-- END EXAMPLES HOOK -->
-<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ### Requirements
 
 | Name | Version |
@@ -63,9 +40,9 @@ statement instead the previous block.
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_devsecops_cc_toolchain"></a> [devsecops\_cc\_toolchain](#module\_devsecops\_cc\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cc-toolchain | v1.0.9 |
-| <a name="module_devsecops_cd_toolchain"></a> [devsecops\_cd\_toolchain](#module\_devsecops\_cd\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain | v1.1.1 |
-| <a name="module_devsecops_ci_toolchain"></a> [devsecops\_ci\_toolchain](#module\_devsecops\_ci\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-ci-toolchain | v1.1.0 |
+| <a name="module_devsecops_cc_toolchain"></a> [devsecops\_cc\_toolchain](#module\_devsecops\_cc\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cc-toolchain | v1.0.9|
+| <a name="module_devsecops_cd_toolchain"></a> [devsecops\_cd\_toolchain](#module\_devsecops\_cd\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain | v1.1.0 |
+| <a name="module_devsecops_ci_toolchain"></a> [devsecops\_ci\_toolchain](#module\_devsecops\_ci\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-ci-toolchain | v1.0.9 |
 
 ### Resources
 
@@ -192,6 +169,27 @@ statement instead the previous block.
 | <a name="input_cd_cluster_name"></a> [cd\_cluster\_name](#input\_cd\_cluster\_name) | Name of the Kubernetes cluster where the application is deployed. | `string` | `""` | no |
 | <a name="input_cd_cluster_namespace"></a> [cd\_cluster\_namespace](#input\_cd\_cluster\_namespace) | Name of the Kubernetes cluster namespace where the application is deployed. | `string` | `"prod"` | no |
 | <a name="input_cd_cluster_region"></a> [cd\_cluster\_region](#input\_cd\_cluster\_region) | Region of the Kubernetes cluster where the application is deployed. Use the short form of the regions. For example `us-south`. | `string` | `""` | no |
+| <a name="input_cd_code_engine_app_concurrency"></a> [cd\_code\_engine\_app\_concurrency](#input\_cd\_code\_engine\_app\_concurrency) | The maximum number of requests that can be processed concurrently per instance. | `string` | `"100"` | no |
+| <a name="input_cd_code_engine_app_deployment_timeout"></a> [cd\_code\_engine\_app\_deployment\_timeout](#input\_cd\_code\_engine\_app\_deployment\_timeout) | The maximum timeout for the application deployment. | `string` | `"300"` | no |
+| <a name="input_cd_code_engine_app_max_scale"></a> [cd\_code\_engine\_app\_max\_scale](#input\_cd\_code\_engine\_app\_max\_scale) | The maximum number of instances that can be used for this application. If you set this value to 0, the application scales as needed. The application scaling is limited only by the instances per the resource quota for the project of your application. | `string` | `"1"` | no |
+| <a name="input_cd_code_engine_app_min_scale"></a> [cd\_code\_engine\_app\_min\_scale](#input\_cd\_code\_engine\_app\_min\_scale) | The minimum number of instances that can be used for this application. This option is useful to ensure that no instances are running when not needed. | `string` | `"0"` | no |
+| <a name="input_cd_code_engine_app_port"></a> [cd\_code\_engine\_app\_port](#input\_cd\_code\_engine\_app\_port) | The port where the application listens. The format is `[NAME:]PORT`, where `[NAME:]` is optional. If `[NAME:]` is specified, valid values are `h2c`, or `http1`. When `[NAME:]` is not specified or is `http1`, the port uses `HTTP/1.1`. When `[NAME:]` is `h2c`, the port uses unencrypted `HTTP/2`. | `string` | `"8080"` | no |
+| <a name="input_cd_code_engine_app_visibility"></a> [cd\_code\_engine\_app\_visibility](#input\_cd\_code\_engine\_app\_visibility) | The visibility for the application. Valid values are public, private and project. Setting a visibility of public means that your app can receive requests from the public internet or from components within the Code Engine project. Setting a visibility of private means that your app is not accessible from the public internet and network access is only possible from other IBM Cloud using Virtual Private Endpoints (VPE) or Code Engine components that are running in the same project. Visibility can only be private if the project supports application private visibility. Setting a visibility of project means that your app is not accessible from the public internet and network access is only possible from other Code Engine components that are running in the same project. | `string` | `"public"` | no |
+| <a name="input_cd_code_engine_binding_resource_group"></a> [cd\_code\_engine\_binding\_resource\_group](#input\_cd\_code\_engine\_binding\_resource\_group) | The name of a resource group to use for authentication for the service bindings of the Code Engine project. A service ID is created with Operator and Manager roles for all services in this resource group. Use '*' to specify all resource groups in this account. | `string` | `""` | no |
+| <a name="input_cd_code_engine_cpu"></a> [cd\_code\_engine\_cpu](#input\_cd\_code\_engine\_cpu) | The amount of CPU set for the instance of the application or job. | `string` | `"0.25"` | no |
+| <a name="input_cd_code_engine_deployment_type"></a> [cd\_code\_engine\_deployment\_type](#input\_cd\_code\_engine\_deployment\_type) | type of Code Engine component to create/update as part of deployment. It can be either `application` or `job`. | `string` | `"application"` | no |
+| <a name="input_cd_code_engine_env_from_configmaps"></a> [cd\_code\_engine\_env\_from\_configmaps](#input\_cd\_code\_engine\_env\_from\_configmaps) | Semi-colon separated list of configmaps to set environment variables. | `string` | `""` | no |
+| <a name="input_cd_code_engine_env_from_secrets"></a> [cd\_code\_engine\_env\_from\_secrets](#input\_cd\_code\_engine\_env\_from\_secrets) | Semi-colon separated list of secrets to set environment variables. | `string` | `""` | no |
+| <a name="input_cd_code_engine_ephemeral_storage"></a> [cd\_code\_engine\_ephemeral\_storage](#input\_cd\_code\_engine\_ephemeral\_storage) | The amount of ephemeral storage to set for the instance of the application or for the runs of the job. Use M for megabytes or G for gigabytes. | `string` | `"0.4G"` | no |
+| <a name="input_cd_code_engine_job_instances"></a> [cd\_code\_engine\_job\_instances](#input\_cd\_code\_engine\_job\_instances) | Specifies the number of instances that are used for runs of the job. When you use this option, the system converts to array indices. For example, if you specify instances of 5, the system converts to array-indices of 0 - 4. This option can only be specified if the --array-indices option is not specified. The default value is 1. | `string` | `"1"` | no |
+| <a name="input_cd_code_engine_job_maxexecutiontime"></a> [cd\_code\_engine\_job\_maxexecutiontime](#input\_cd\_code\_engine\_job\_maxexecutiontime) | The maximum execution time in seconds for runs of the job. | `string` | `"7200"` | no |
+| <a name="input_cd_code_engine_job_retrylimit"></a> [cd\_code\_engine\_job\_retrylimit](#input\_cd\_code\_engine\_job\_retrylimit) | The number of times to rerun an instance of the job before the job is marked as failed. | `string` | `"3"` | no |
+| <a name="input_cd_code_engine_memory"></a> [cd\_code\_engine\_memory](#input\_cd\_code\_engine\_memory) | The amount of memory set for the instance of the application or job. Use M for megabytes or G for gigabytes. | `string` | `"0.5G"` | no |
+| <a name="input_cd_code_engine_project"></a> [cd\_code\_engine\_project](#input\_cd\_code\_engine\_project) | The name of the Code Engine project to use for the CD pipeline promoted code. The project is created if it does not already exist. | `string` | `"Sample_CD_Project"` | no |
+| <a name="input_cd_code_engine_region"></a> [cd\_code\_engine\_region](#input\_cd\_code\_engine\_region) | The region to create/lookup for the Code Engine project. | `string` | `""` | no |
+| <a name="input_cd_code_engine_remove_refs"></a> [cd\_code\_engine\_remove\_refs](#input\_cd\_code\_engine\_remove\_refs) | Remove references to unspecified configuration resources (configmap/secret) references (pulled from env-from-configmaps, env-from-secrets along with auto-managed by CD). | `string` | `"false"` | no |
+| <a name="input_cd_code_engine_resource_group"></a> [cd\_code\_engine\_resource\_group](#input\_cd\_code\_engine\_resource\_group) | The resource group of the Code Engine project. | `string` | `""` | no |
+| <a name="input_cd_code_engine_service_bindings"></a> [cd\_code\_engine\_service\_bindings](#input\_cd\_code\_engine\_service\_bindings) | JSON array including service name(s) (as a simple JSON string. | `string` | `""` | no |
 | <a name="input_cd_code_signing_cert"></a> [cd\_code\_signing\_cert](#input\_cd\_code\_signing\_cert) | The base64 encoded GPG public key. | `string` | `""` | no |
 | <a name="input_cd_compliance_base_image"></a> [cd\_compliance\_base\_image](#input\_cd\_compliance\_base\_image) | Pipeline baseimage to run most of the built-in pipeline code. | `string` | `""` | no |
 | <a name="input_cd_compliance_pipeline_branch"></a> [cd\_compliance\_pipeline\_branch](#input\_cd\_compliance\_pipeline\_branch) | The CD Pipeline Compliance Pipeline branch. | `string` | `""` | no |
@@ -216,6 +214,7 @@ statement instead the previous block.
 | <a name="input_cd_deployment_repo_existing_url"></a> [cd\_deployment\_repo\_existing\_url](#input\_cd\_deployment\_repo\_existing\_url) | Override to bring your own existing deployment repository URL, which is used directly instead of cloning the default deployment sample. | `string` | `""` | no |
 | <a name="input_cd_deployment_repo_git_token_secret_name"></a> [cd\_deployment\_repo\_git\_token\_secret\_name](#input\_cd\_deployment\_repo\_git\_token\_secret\_name) | Name of the Git token secret in the secret provider. | `string` | `""` | no |
 | <a name="input_cd_deployment_repo_secret_group"></a> [cd\_deployment\_repo\_secret\_group](#input\_cd\_deployment\_repo\_secret\_group) | Secret group prefix for the Deployment repo secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`. | `string` | `""` | no |
+| <a name="input_cd_deployment_target"></a> [cd\_deployment\_target](#input\_cd\_deployment\_target) | The deployment target, 'cluster' or 'code-engine'. | `string` | `""` | no |
 | <a name="input_cd_doi_environment"></a> [cd\_doi\_environment](#input\_cd\_doi\_environment) | DevOps Insights environment for DevSecOps CD deployment. | `string` | `""` | no |
 | <a name="input_cd_doi_toolchain_id"></a> [cd\_doi\_toolchain\_id](#input\_cd\_doi\_toolchain\_id) | DevOps Insights toolchain ID to link to. | `string` | `""` | no |
 | <a name="input_cd_emergency_label"></a> [cd\_emergency\_label](#input\_cd\_emergency\_label) | Identifies the pull request as an emergency. | `string` | `"EMERGENCY"` | no |
@@ -314,12 +313,37 @@ statement instead the previous block.
 | <a name="input_ci_cluster_namespace"></a> [ci\_cluster\_namespace](#input\_ci\_cluster\_namespace) | Name of the Kubernetes cluster namespace where the application is deployed. | `string` | `"dev"` | no |
 | <a name="input_ci_cluster_region"></a> [ci\_cluster\_region](#input\_ci\_cluster\_region) | Region of the Kubernetes cluster where the application is deployed. Use the short form of the regions. For example `us-south`. | `string` | `""` | no |
 | <a name="input_ci_cluster_resource_group"></a> [ci\_cluster\_resource\_group](#input\_ci\_cluster\_resource\_group) | The cluster resource group. | `string` | `""` | no |
-| <a name="input_ci_code_engine_build_strategy"></a> [ci\_code\_engine\_build\_strategy](#input\_ci\_code\_engine\_build\_strategy) | The build strategy for the Code Engine entity. Default strategy is 'dockerfile'. Set as 'buildpacks' for 'buildpacks' build. | `string` | `""` | no |
-| <a name="input_ci_code_engine_entity_type"></a> [ci\_code\_engine\_entity\_type](#input\_ci\_code\_engine\_entity\_type) | Deprecated: See Code Engine variant and `ci_code_engine_deployment_type`. Type of Code Engine entity to create/update as part of deployment. Default type is 'application'. Set as 'job' for 'job' type. | `string` | `""` | no |
-| <a name="input_ci_code_engine_project"></a> [ci\_code\_engine\_project](#input\_ci\_code\_engine\_project) | The name of the Code Engine project to use (or create). | `string` | `"DevSecOps_CE"` | no |
-| <a name="input_ci_code_engine_region"></a> [ci\_code\_engine\_region](#input\_ci\_code\_engine\_region) | The region to create/lookup for the Code Engine project. | `string` | `"ibm:yp:us-south"` | no |
-| <a name="input_ci_code_engine_resource_group"></a> [ci\_code\_engine\_resource\_group](#input\_ci\_code\_engine\_resource\_group) | The resource group of the Code Engine project. | `string` | `"Default"` | no |
-| <a name="input_ci_code_engine_source"></a> [ci\_code\_engine\_source](#input\_ci\_code\_engine\_source) | The path to the location of code to build in the repository. | `string` | `""` | no |
+| <a name="input_ci_code_engine_app_concurrency"></a> [ci\_code\_engine\_app\_concurrency](#input\_ci\_code\_engine\_app\_concurrency) | The maximum number of requests that can be processed concurrently per instance. | `string` | `"100"` | no |
+| <a name="input_ci_code_engine_app_deployment_timeout"></a> [ci\_code\_engine\_app\_deployment\_timeout](#input\_ci\_code\_engine\_app\_deployment\_timeout) | The maximum timeout for the application deployment. | `string` | `"300"` | no |
+| <a name="input_ci_code_engine_app_max_scale"></a> [ci\_code\_engine\_app\_max\_scale](#input\_ci\_code\_engine\_app\_max\_scale) | The maximum number of instances that can be used for this application. If you set this value to 0, the application scales as needed. The application scaling is limited only by the instances per the resource quota for the project of your application. | `string` | `"1"` | no |
+| <a name="input_ci_code_engine_app_min_scale"></a> [ci\_code\_engine\_app\_min\_scale](#input\_ci\_code\_engine\_app\_min\_scale) | The minimum number of instances that can be used for this application. This option is useful to ensure that no instances are running when not needed. | `string` | `"0"` | no |
+| <a name="input_ci_code_engine_app_port"></a> [ci\_code\_engine\_app\_port](#input\_ci\_code\_engine\_app\_port) | The port where the application listens. The format is `[NAME:]PORT`, where `[NAME:]` is optional. If `[NAME:]` is specified, valid values are `h2c`, or `http1`. When `[NAME:]` is not specified or is `http1`, the port uses `HTTP/1.1`. When `[NAME:]` is `h2c`, the port uses unencrypted `HTTP/2`. | `string` | `"8080"` | no |
+| <a name="input_ci_code_engine_app_visibility"></a> [ci\_code\_engine\_app\_visibility](#input\_ci\_code\_engine\_app\_visibility) | The visibility for the application. Valid values are public, private and project. Setting a visibility of public means that your app can receive requests from the public internet or from components within the Code Engine project. Setting a visibility of private means that your app is not accessible from the public internet and network access is only possible from other IBM Cloud using Virtual Private Endpoints (VPE) or Code Engine components that are running in the same project. Visibility can only be private if the project supports application private visibility. Setting a visibility of project means that your app is not accessible from the public internet and network access is only possible from other Code Engine components that are running in the same project. | `string` | `"public"` | no |
+| <a name="input_ci_code_engine_binding_resource_group"></a> [ci\_code\_engine\_binding\_resource\_group](#input\_ci\_code\_engine\_binding\_resource\_group) | The name of a resource group to use for authentication for the service bindings of the Code Engine project. A service ID is created with Operator and Manager roles for all services in this resource group. Use '*' to specify all resource groups in this account. | `string` | `""` | no |
+| <a name="input_ci_code_engine_build_size"></a> [ci\_code\_engine\_build\_size](#input\_ci\_code\_engine\_build\_size) | The size to use for the build, which determines the amount of resources used. Valid values include `small`, `medium`, `large`, `xlarge`. | `string` | `"large"` | no |
+| <a name="input_ci_code_engine_build_strategy"></a> [ci\_code\_engine\_build\_strategy](#input\_ci\_code\_engine\_build\_strategy) | The build strategy for the Code Engine component. It can be `dockerfile` or `buildpacks`. | `string` | `"dockerfile"` | no |
+| <a name="input_ci_code_engine_build_timeout"></a> [ci\_code\_engine\_build\_timeout](#input\_ci\_code\_engine\_build\_timeout) | The amount of time, in seconds, that can pass before the build run must succeed or fail. | `string` | `"1200"` | no |
+| <a name="input_ci_code_engine_build_use_native_docker"></a> [ci\_code\_engine\_build\_use\_native\_docker](#input\_ci\_code\_engine\_build\_use\_native\_docker) | Property to opt-in for using native docker build capabilities as opposed to use Code Engine build to containerize the source. Note this setting only takes effect if the build-strategy is set to `dockerfile`. Valid values are `true` and `false`. | `string` | `"false"` | no |
+| <a name="input_ci_code_engine_context_dir"></a> [ci\_code\_engine\_context\_dir](#input\_ci\_code\_engine\_context\_dir) | The directory in the repository that contains the buildpacks file or the Dockerfile. | `string` | `"."` | no |
+| <a name="input_ci_code_engine_cpu"></a> [ci\_code\_engine\_cpu](#input\_ci\_code\_engine\_cpu) | The amount of CPU set for the instance of the application or job. | `string` | `"0.25"` | no |
+| <a name="input_ci_code_engine_deployment_type"></a> [ci\_code\_engine\_deployment\_type](#input\_ci\_code\_engine\_deployment\_type) | type of Code Engine component to create/update as part of deployment. It can be either `application` or `job`. | `string` | `"application"` | no |
+| <a name="input_ci_code_engine_dockerfile"></a> [ci\_code\_engine\_dockerfile](#input\_ci\_code\_engine\_dockerfile) | The path to the `Dockerfile`. Specify this option only if the name is other than `Dockerfile` | `string` | `"Dockerfile"` | no |
+| <a name="input_ci_code_engine_env_from_configmaps"></a> [ci\_code\_engine\_env\_from\_configmaps](#input\_ci\_code\_engine\_env\_from\_configmaps) | Semi-colon separated list of configmaps to set environment variables. | `string` | `""` | no |
+| <a name="input_ci_code_engine_env_from_secrets"></a> [ci\_code\_engine\_env\_from\_secrets](#input\_ci\_code\_engine\_env\_from\_secrets) | Semi-colon separated list of secrets to set environment variables. | `string` | `""` | no |
+| <a name="input_ci_code_engine_ephemeral_storage"></a> [ci\_code\_engine\_ephemeral\_storage](#input\_ci\_code\_engine\_ephemeral\_storage) | The amount of ephemeral storage to set for the instance of the application or for the runs of the job. Use M for megabytes or G for gigabytes. | `string` | `"0.4G"` | no |
+| <a name="input_ci_code_engine_image_name"></a> [ci\_code\_engine\_image\_name](#input\_ci\_code\_engine\_image\_name) | Name of the image that is built. | `string` | `"code-engine-compliance-app"` | no |
+| <a name="input_ci_code_engine_job_instances"></a> [ci\_code\_engine\_job\_instances](#input\_ci\_code\_engine\_job\_instances) | Specifies the number of instances that are used for runs of the job. When you use this option, the system converts to array indices. For example, if you specify instances of 5, the system converts to array-indices of 0 - 4. This option can only be specified if the --array-indices option is not specified. The default value is 1. | `string` | `"1"` | no |
+| <a name="input_ci_code_engine_job_maxexecutiontime"></a> [ci\_code\_engine\_job\_maxexecutiontime](#input\_ci\_code\_engine\_job\_maxexecutiontime) | The maximum execution time in seconds for runs of the job. | `string` | `"7200"` | no |
+| <a name="input_ci_code_engine_job_retrylimit"></a> [ci\_code\_engine\_job\_retrylimit](#input\_ci\_code\_engine\_job\_retrylimit) | The number of times to rerun an instance of the job before the job is marked as failed. | `string` | `"3"` | no |
+| <a name="input_ci_code_engine_memory"></a> [ci\_code\_engine\_memory](#input\_ci\_code\_engine\_memory) | The amount of memory set for the instance of the application or job. Use M for megabytes or G for gigabytes. | `string` | `"0.5G"` | no |
+| <a name="input_ci_code_engine_project"></a> [ci\_code\_engine\_project](#input\_ci\_code\_engine\_project) | The name of the Code Engine project to use for the CI pipeline build. The project is created if it does not already exist. | `string` | `"Sample_CI_Project"` | no |
+| <a name="input_ci_code_engine_region"></a> [ci\_code\_engine\_region](#input\_ci\_code\_engine\_region) | The region to create/lookup for the Code Engine project. | `string` | `""` | no |
+| <a name="input_ci_code_engine_registry_domain"></a> [ci\_code\_engine\_registry\_domain](#input\_ci\_code\_engine\_registry\_domain) | The container registry URL domain that is used to build and tag the image. Useful when using private-endpoint container registry. | `string` | `""` | no |
+| <a name="input_ci_code_engine_remove_refs"></a> [ci\_code\_engine\_remove\_refs](#input\_ci\_code\_engine\_remove\_refs) | Remove references to unspecified configuration resources (configmap/secret) references (pulled from env-from-configmaps, env-from-secrets along with auto-managed by CD). | `string` | `"false"` | no |
+| <a name="input_ci_code_engine_resource_group"></a> [ci\_code\_engine\_resource\_group](#input\_ci\_code\_engine\_resource\_group) | The resource group of the Code Engine project. | `string` | `""` | no |
+| <a name="input_ci_code_engine_service_bindings"></a> [ci\_code\_engine\_service\_bindings](#input\_ci\_code\_engine\_service\_bindings) | JSON array including service name(s) (as a simple JSON string. | `string` | `""` | no |
+| <a name="input_ci_code_engine_source"></a> [ci\_code\_engine\_source](#input\_ci\_code\_engine\_source) | The path to the location of code to build in the repository. Defaults to the root of source code repository. | `string` | `""` | no |
+| <a name="input_ci_code_engine_wait_timeout"></a> [ci\_code\_engine\_wait\_timeout](#input\_ci\_code\_engine\_wait\_timeout) | The maximum timeout for the CLI operation to wait. | `string` | `"1300"` | no |
 | <a name="input_ci_compliance_base_image"></a> [ci\_compliance\_base\_image](#input\_ci\_compliance\_base\_image) | Pipeline baseimage to run most of the built-in pipeline code. | `string` | `""` | no |
 | <a name="input_ci_compliance_pipeline_branch"></a> [ci\_compliance\_pipeline\_branch](#input\_ci\_compliance\_pipeline\_branch) | The CI Pipeline Compliance Pipeline branch. | `string` | `""` | no |
 | <a name="input_ci_compliance_pipeline_group"></a> [ci\_compliance\_pipeline\_group](#input\_ci\_compliance\_pipeline\_group) | Specify user or group for compliance pipline repo. | `string` | `""` | no |
@@ -333,7 +357,7 @@ statement instead the previous block.
 | <a name="input_ci_cos_endpoint"></a> [ci\_cos\_endpoint](#input\_ci\_cos\_endpoint) | COS endpoint name. | `string` | `""` | no |
 | <a name="input_ci_cra_generate_cyclonedx_format"></a> [ci\_cra\_generate\_cyclonedx\_format](#input\_ci\_cra\_generate\_cyclonedx\_format) | If set to 1, CRA also generates the BOM in cyclonedx format (defaults to 1). | `string` | `"1"` | no |
 | <a name="input_ci_custom_image_tag"></a> [ci\_custom\_image\_tag](#input\_ci\_custom\_image\_tag) | The custom tag for the image in a comma-separated list. | `string` | `""` | no |
-| <a name="input_ci_deployment_target"></a> [ci\_deployment\_target](#input\_ci\_deployment\_target) | The deployment target, cluster or code-engine. | `string` | `"cluster"` | no |
+| <a name="input_ci_deployment_target"></a> [ci\_deployment\_target](#input\_ci\_deployment\_target) | The deployment target, cluster or code-engine. | `string` | `""` | no |
 | <a name="input_ci_dev_region"></a> [ci\_dev\_region](#input\_ci\_dev\_region) | (Deprecated. Use `ci_cluster_region`) Region of the Kubernetes cluster where the application is deployed. Use the short form of the regions. For example `us-south` | `string` | `""` | no |
 | <a name="input_ci_dev_resource_group"></a> [ci\_dev\_resource\_group](#input\_ci\_dev\_resource\_group) | (Deprecated. Use `ci_cluster_resource_group`) The cluster resource group. | `string` | `""` | no |
 | <a name="input_ci_doi_environment"></a> [ci\_doi\_environment](#input\_ci\_doi\_environment) | The DevOps Insights target environment. | `string` | `""` | no |
@@ -423,8 +447,9 @@ statement instead the previous block.
 | <a name="input_ci_trigger_timed_pruner_enable"></a> [ci\_trigger\_timed\_pruner\_enable](#input\_ci\_trigger\_timed\_pruner\_enable) | Set to `true` to enable the timed Pruner trigger. | `bool` | `false` | no |
 | <a name="input_ci_trigger_timed_pruner_name"></a> [ci\_trigger\_timed\_pruner\_name](#input\_ci\_trigger\_timed\_pruner\_name) | The name of the timed Pruner trigger. | `string` | `"Evidence Pruner Timed Trigger"` | no |
 | <a name="input_cluster_name"></a> [cluster\_name](#input\_cluster\_name) | Name of the Kubernetes cluster where the application is deployed. This sets the same cluster for both CI and CD toolchains. See `ci_cluster_name` and `cd_cluster_name` to set different clusters. By default , the cluster namespace for CI will be set to `dev` and CD to `prod`. These can be changed using `ci_cluster_namespace` and `cd_cluster_namespace`. | `string` | `"mycluster-free"` | no |
+| <a name="input_code_engine_project"></a> [code\_engine\_project](#input\_code\_engine\_project) | The name of the Code Engine project to use. Created if it does not exist. Applies to both the CI and CD toolchains. To set individually use `ci_code_engine_project` and `cd_code_engine_project`. | `string` | `""` | no |
 | <a name="input_compliance_base_image"></a> [compliance\_base\_image](#input\_compliance\_base\_image) | Pipeline baseimage to run most of the built-in pipeline code. | `string` | `""` | no |
-| <a name="input_compliance_pipeline_branch"></a> [compliance\_pipeline\_branch](#input\_compliance\_pipeline\_branch) | The Compliance Pipeline branch. | `string` | `"open-v10"` | no |
+| <a name="input_compliance_pipeline_branch"></a> [compliance\_pipeline\_branch](#input\_compliance\_pipeline\_branch) | The Compliance Pipeline branch. | `string` | `"open-v9"` | no |
 | <a name="input_cos_api_key_secret_name"></a> [cos\_api\_key\_secret\_name](#input\_cos\_api\_key\_secret\_name) | To enable the use of COS, a secret name to a COS API key secret in the secret provider is required. In addition `cos_endpoint` and `cos_bucket_name` must be set. This setting sets the same API key for the COS settings in the CI, CD, and CC toolchains. See `ci_cos_api_key_secret_name`, `cd_cos_api_key_secret_name`, and `cc_cos_api_key_secret_name` to set separately. | `string` | `"cos-api-key"` | no |
 | <a name="input_cos_bucket_name"></a> [cos\_bucket\_name](#input\_cos\_bucket\_name) | Set the name of your COS bucket. This applies the same COS bucket name for the CI, CD, and CC toolchains. See `ci_cos_bucket_name`, `cd_cos_bucket_name`, and `cc_cos_bucket_name` to set separately. | `string` | `""` | no |
 | <a name="input_cos_endpoint"></a> [cos\_endpoint](#input\_cos\_endpoint) | Set the Cloud Object Storage endpoint for accessing your COS bucket. This setting sets the same endpoint for COS in the CI, CD, and CC toolchains. See `ci_cos_endpoint`, `cd_cos_endpoint`, and `cc_cos_endpoint` to set the endpoints separately. | `string` | `""` | no |
@@ -432,6 +457,7 @@ statement instead the previous block.
 | <a name="input_create_cd_toolchain"></a> [create\_cd\_toolchain](#input\_create\_cd\_toolchain) | Boolean flag which determines if the DevSecOps CD toolchain is created. | `bool` | `true` | no |
 | <a name="input_create_ci_toolchain"></a> [create\_ci\_toolchain](#input\_create\_ci\_toolchain) | Flag which determines if the DevSecOps CI toolchain is created. If this toolchain is not created then values must be set for the following variables, evidence\_repo\_url, issues\_repo\_url and inventory\_repo\_url. | `bool` | `true` | no |
 | <a name="input_deployment_repo_url"></a> [deployment\_repo\_url](#input\_deployment\_repo\_url) | This is the repository to clone deployment for DevSecOps toolchain template. | `string` | `""` | no |
+| <a name="input_deployment_target"></a> [deployment\_target](#input\_deployment\_target) | The deployment target, 'cluster' or 'code-engine'. Applies to both the CI and CD toolchains. To set individually use  `ci_deployment_target` and `cd_deployment_target`. | `string` | `"code-engine"` | no |
 | <a name="input_enable_key_protect"></a> [enable\_key\_protect](#input\_enable\_key\_protect) | Set to enable Key Protect Integrations. | `bool` | `false` | no |
 | <a name="input_enable_secrets_manager"></a> [enable\_secrets\_manager](#input\_enable\_secrets\_manager) | Enable the Secrets Manager integrations. | `bool` | `true` | no |
 | <a name="input_enable_slack"></a> [enable\_slack](#input\_enable\_slack) | Set to `true` to create the integration. This requires a valid `slack_channel_name`, `slack_team_name`, and a valid `webhook` (see `slack_webhook_secret_name`). This setting applies for CI, CD, and CC toolchains. To enable Slack separately, see `ci_enable_slack`, `cd_enable_slack`, and `cc_enable_slack`. | `bool` | `false` | no |
@@ -462,7 +488,7 @@ statement instead the previous block.
 | <a name="input_kp_location"></a> [kp\_location](#input\_kp\_location) | The region location of the Key Protect instance. This applies to the CI, CD and CC Key Protect integrations. See `ci_kp_location`, `cd_kp_location`, and `cc_kp_location` to set separately. | `string` | `"us-south"` | no |
 | <a name="input_kp_name"></a> [kp\_name](#input\_kp\_name) | Name of the Key Protect instance where the secrets are stored. This applies to the CI, CD and CC Key Protect integrations. See `ci_kp_name`, `cd_kp_name`, and `cc_kp_name` to set separately. | `string` | `"kp-compliance-secrets"` | no |
 | <a name="input_kp_resource_group"></a> [kp\_resource\_group](#input\_kp\_resource\_group) | The resource group containing the Key Protect instance. This applies to the CI, CD and CC Key Protect integrations. See `ci_kp_resource_group`, `cd_kp_resource_group`, and `cc_kp_resource_group` to set separately. | `string` | `"Default"` | no |
-| <a name="input_peer_review_compliance"></a> [peer\_review\_compliance](#input\_peer\_review\_compliance) | Set to `0` to disable. Set to `1` to enable peer review evidence collection. This parameter will apply to the CI, CD and CC pipelines. Can be set individually with `ci_peer_review_compliance`, `cd_peer_review_compliance`, `cc_peer_review_compliance`. | `string` | `"1"` | no |
+| <a name="input_peer_review_compliance"></a> [peer\_review\_compliance](#input\_peer\_review\_compliance) | Set to `0` to disable. Set to `1` to enable peer review evidence collection. This parameter will apply to the CI, CD and CC pipelines. Can be set individually with `ci_peer_review_compliance`, `cd_peer_review_compliance`, `cc_peer_review_compliance`. | `string` | `""` | no |
 | <a name="input_registry_namespace"></a> [registry\_namespace](#input\_registry\_namespace) | A unique namespace within the IBM Cloud Container Registry region where the application image is stored. | `string` | `""` | no |
 | <a name="input_repo_git_token_secret_name"></a> [repo\_git\_token\_secret\_name](#input\_repo\_git\_token\_secret\_name) | Name of the Git token secret in the secret provider. Specifying a secret name for the Git Token automatically sets the authentication type to `pat`. | `string` | `""` | no |
 | <a name="input_repo_group"></a> [repo\_group](#input\_repo\_group) | Specify Git user or group for your application. This must be set if the repository authentication type is `pat` (personal access token). | `string` | `""` | no |
