@@ -217,6 +217,12 @@ variable "toolchain_resource_group" {
   default     = "Default"
 }
 
+variable "gosec_repo_ssh_key_secret_group" {
+  type        = string
+  description = "Secret group prefix for the gosec private repository ssh key secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
+  default     = ""
+}
+
 variable "cos_endpoint" {
   type        = string
   description = "Set the Cloud Object Storage endpoint for accessing your COS bucket. This setting sets the same endpoint for COS in the CI, CD, and CC toolchains. See `ci_cos_endpoint`, `cd_cos_endpoint`, and `cc_cos_endpoint` to set the endpoints separately."
@@ -251,6 +257,12 @@ variable "slack_webhook_secret_name" {
   type        = string
   description = "Name of the webhook secret for Slack in the secret provider. This applies to the CI, CD, and CC toolchains. To set separately, see `ci_slack_webhook_secret_name`, `cd_slack_webhook_secret_name`, and `cc_slack_webhook_secret_name`"
   default     = "slack-webhook"
+}
+
+variable "gosec_repo_ssh_key_secret_name" {
+  type        = string
+  default     = "git-ssh-key"
+  description = "Name of the SSH key token for the private repository in the secret provider."
 }
 
 variable "authorization_policy_creation" {
@@ -298,6 +310,12 @@ variable "environment_prefix" {
 variable "compliance_base_image" {
   type        = string
   description = "Pipeline baseimage to run most of the built-in pipeline code."
+  default     = ""
+}
+
+variable "pipeline_git_tag" {
+  type        = string
+  description = "The GIT tag within the pipeline definitions repository for the Compliance Pipelines."
   default     = ""
 }
 
@@ -393,10 +411,21 @@ variable "scc_scc_api_key_secret_group" {
 
 variable "scc_use_profile_attachment" {
   type        = string
-  description = "Set to `enabled` to enable use profile with attachment, so that the scripts in the pipeline can interact with the Security and Compliance Center service. When enabled, other parameters become relevant; `scc_scc_scc_api_key_secret_name`, `scc_instance_crn`, `scc_profile_name`, `scc_profile_version`, `scc_attachment_id`. Can individually be `enabled` and `disabled` in the CD and CC toolchains using `cd_scc_use_profile_attachment` and `cc_scc_use_profile_attachment`."
+  description = "Set to `enabled` to enable use profile with attachment, so that the scripts in the pipeline can interact with the Security and Compliance Center service. When enabled, other parameters become relevant; `scc_scc_api_key_secret_name`, `scc_instance_crn`, `scc_profile_name`, `scc_profile_version`, `scc_attachment_id`. Can individually be `enabled` and `disabled` in the CD and CC toolchains using `cd_scc_use_profile_attachment` and `cc_scc_use_profile_attachment`."
   default     = "disabled"
 }
 
+variable "opt_in_gosec" {
+  type        = string
+  description = "Enables gosec scans"
+  default     = ""
+}
+
+variable "gosec_private_repository_host" {
+  type        = string
+  description = "Your private repository base URL."
+  default     = ""
+}
 
 variable "deployment_target" {
   type        = string
@@ -522,6 +551,18 @@ variable "ci_compliance_pipeline_pr_branch" {
   default     = ""
 }
 
+variable "ci_pipeline_git_tag" {
+  type        = string
+  description = "The GIT tag within the pipeline definitions repository for the Compliance CI Pipeline."
+  default     = ""
+}
+
+variable "pr_pipeline_git_tag" {
+  type        = string
+  description = "The GIT tag within the pipeline definitions repository for the Compliance PR Pipeline."
+  default     = ""
+}
+
 variable "ci_repositories_prefix" {
   type        = string
   description = "Prefix name for the cloned compliance repos."
@@ -573,6 +614,18 @@ variable "ci_opt_in_dynamic_scan" {
 variable "ci_peer_review_compliance" {
   type        = string
   description = "Set to `0` to disable. Set to `1` to enable peer review evidence collection."
+  default     = ""
+}
+
+variable "ci_opt_in_gosec" {
+  type        = string
+  description = "Enables gosec scans"
+  default     = ""
+}
+
+variable "ci_gosec_private_repository_host" {
+  type        = string
+  description = "Your private repository base URL."
   default     = ""
 }
 
@@ -1029,6 +1082,12 @@ variable "ci_pipeline_config_repo_secret_group" {
   default     = ""
 }
 
+variable "ci_gosec_repo_ssh_key_secret_group" {
+  type        = string
+  description = "Secret group prefix for the gosec private repository ssh key secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
+  default     = ""
+}
+
 ######## PIPELINE CONFIG REPO ####################
 
 variable "ci_pipeline_config_repo_existing_url" {
@@ -1206,6 +1265,12 @@ variable "ci_pipeline_git_token_secret_name" {
   type        = string
   description = "Name of the pipeline Git token secret in the secret provider."
   default     = "pipeline-git-token"
+}
+
+variable "ci_gosec_repo_ssh_key_secret_name" {
+  type        = string
+  default     = "git-ssh-key"
+  description = "Name of the SSH key token for the private repository in the secret provider."
 }
 
 ######## End Secret Names #######################
@@ -1488,6 +1553,12 @@ variable "cd_authorization_policy_creation" {
 variable "cd_compliance_pipeline_branch" {
   type        = string
   description = "The CD Pipeline Compliance Pipeline branch."
+  default     = ""
+}
+
+variable "cd_pipeline_git_tag" {
+  type        = string
+  description = "The GIT tag within the pipeline definitions repository for the Compliance CD Pipeline."
   default     = ""
 }
 
@@ -2269,6 +2340,12 @@ variable "cc_enable_secrets_manager" {
   default     = false
 }
 
+variable "cc_gosec_repo_ssh_key_secret_group" {
+  type        = string
+  description = "Secret group prefix for the gosec private repository ssh key secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
+  default     = ""
+}
+
 variable "cc_sm_secret_group" {
   type        = string
   description = "Group in Secrets Manager for organizing/grouping secrets."
@@ -2554,6 +2631,12 @@ variable "cc_pipeline_dockerconfigjson_secret_name" {
   default     = "pipeline_dockerconfigjson_secret_name"
 }
 
+variable "cc_gosec_repo_ssh_key_secret_name" {
+  type        = string
+  default     = "git-ssh-key"
+  description = "Name of the SSH key token for the private repository in the secret provider."
+}
+
 ######## End Secret Names #######################
 
 #########Trigger Properties ##########
@@ -2622,7 +2705,7 @@ variable "cc_scc_enable_scc" {
 
 variable "cc_scc_use_profile_attachment" {
   type        = string
-  description = "Set to `enabled` to enable use profile with attachment, so that the scripts in the pipeline can interact with the Security and Compliance Center service. When enabled, other parameters become relevant; `scc_scc_scc_api_key_secret_name`, `scc_instance_crn`, `scc_profile_name`, `scc_profile_version`, `scc_attachment_id`."
+  description = "Set to `enabled` to enable use profile with attachment, so that the scripts in the pipeline can interact with the Security and Compliance Center service. When enabled, other parameters become relevant; `scc_scc_api_key_secret_name`, `scc_instance_crn`, `scc_profile_name`, `scc_profile_version`, `scc_attachment_id`."
   default     = ""
 }
 
@@ -2770,6 +2853,12 @@ variable "cc_compliance_pipeline_branch" {
   default     = ""
 }
 
+variable "cc_pipeline_git_tag" {
+  type        = string
+  description = "The GIT tag within the pipeline definitions repository for the Compliance CC Pipeline."
+  default     = ""
+}
+
 variable "cc_pipeline_debug" {
   type        = string
   description = "'0' by default. Set to '1' to enable debug logging."
@@ -2791,6 +2880,18 @@ variable "cc_opt_in_dynamic_ui_scan" {
 variable "cc_opt_in_dynamic_scan" {
   type        = string
   description = "To enable the OWASP Zap scan. '1' enable or '0' disable."
+  default     = ""
+}
+
+variable "cc_opt_in_gosec" {
+  type        = string
+  description = "Enables gosec scans"
+  default     = ""
+}
+
+variable "cc_gosec_private_repository_host" {
+  type        = string
+  description = "Your private repository base URL."
   default     = ""
 }
 

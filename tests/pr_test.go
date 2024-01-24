@@ -23,6 +23,8 @@ func TestRunDefaultExample(t *testing.T) {
 		IgnoreUpdates: testhelper.Exemptions{ // Ignore for consistency check
 			List: []string{
 				"module.terraform_devsecops_alm.module.devsecops_cc_toolchain[0].module.pipeline_cc.ibm_cd_tekton_pipeline_trigger.cc_pipeline_timed_trigger",
+				"module.terraform_devsecops_alm.module.devsecops_cd_toolchain[0].module.integrations.ibm_cd_toolchain_tool_securitycompliance.scc_tool[0]",
+				"module.terraform_devsecops_alm.module.devsecops_cc_toolchain[0].module.integrations.ibm_cd_toolchain_tool_securitycompliance.scc_tool[0]",
 			},
 		},
 		TerraformVars: map[string]interface{}{
@@ -44,8 +46,9 @@ func TestRunAppExample(t *testing.T) {
 		TerraformDir: appExampleDir,
 		IgnoreUpdates: testhelper.Exemptions{ // Ignore for consistency check
 			List: []string{
-				"module.terraform_devsecops_alm.module.devsecops_ci_toolchain[0].ibm_cd_toolchain.toolchain_instance",
 				"module.terraform_devsecops_alm.module.devsecops_cc_toolchain[0].module.pipeline_cc.ibm_cd_tekton_pipeline_trigger.cc_pipeline_timed_trigger",
+				"module.terraform_devsecops_alm.module.devsecops_cd_toolchain[0].module.integrations.ibm_cd_toolchain_tool_securitycompliance.scc_tool[0]",
+				"module.terraform_devsecops_alm.module.devsecops_cc_toolchain[0].module.integrations.ibm_cd_toolchain_tool_securitycompliance.scc_tool[0]",
 			},
 		},
 	})
@@ -63,8 +66,9 @@ func TestRunKPExample(t *testing.T) {
 		TerraformDir: kpExampleDir,
 		IgnoreUpdates: testhelper.Exemptions{ // Ignore for consistency check
 			List: []string{
-				"module.terraform_devsecops_alm.module.devsecops_ci_toolchain[0].ibm_cd_toolchain.toolchain_instance",
 				"module.terraform_devsecops_alm.module.devsecops_cc_toolchain[0].module.pipeline_cc.ibm_cd_tekton_pipeline_trigger.cc_pipeline_timed_trigger",
+				"module.terraform_devsecops_alm.module.devsecops_cd_toolchain[0].module.integrations.ibm_cd_toolchain_tool_securitycompliance.scc_tool[0]",
+				"module.terraform_devsecops_alm.module.devsecops_cc_toolchain[0].module.integrations.ibm_cd_toolchain_tool_securitycompliance.scc_tool[0]",
 			},
 		},
 	})
@@ -84,13 +88,7 @@ func TestRunUpgradeExample(t *testing.T) {
 		Testing:      t,
 		TerraformDir: defaultExampleTerraformDir,
 		IgnoreUpdates: testhelper.Exemptions{ // Ignore for consistency check
-			List: []string{
-				"module.terraform_devsecops_alm.module.devsecops_cc_toolchain[0].module.pipeline_cc.ibm_cd_tekton_pipeline_trigger.cc_pipeline_timed_trigger",
-				"module.terraform_devsecops_alm.module.devsecops_cd_toolchain[0].module.repositories.ibm_cd_toolchain_tool_hostedgit.deployment_repo_clone_from_hostedgit[0]",
-				"module.terraform_devsecops_alm.module.devsecops_ci_toolchain[0].ibm_cd_toolchain.toolchain_instance",
-				"module.terraform_devsecops_alm.module.devsecops_cd_toolchain[0].ibm_cd_toolchain.toolchain_instance",
-				"module.terraform_devsecops_alm.module.devsecops_cc_toolchain[0].ibm_cd_toolchain.toolchain_instance",
-			},
+			List: []string{},
 		},
 	})
 

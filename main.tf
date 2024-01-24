@@ -40,7 +40,7 @@ locals {
 
 module "devsecops_ci_toolchain" {
   count                    = var.create_ci_toolchain ? 1 : 0
-  source                   = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-ci-toolchain?ref=v1.1.0"
+  source                   = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-ci-toolchain?ref=v1.1.1"
   ibmcloud_api_key         = var.ibmcloud_api_key
   toolchain_name           = (var.ci_toolchain_name == "") ? format("${var.toolchain_name}%s", "-CI-Toolchain") : var.ci_toolchain_name
   toolchain_region         = (var.ci_toolchain_region == "") ? var.toolchain_region : replace(replace(var.ci_toolchain_region, "ibm:yp:", ""), "ibm:ys1:", "")
@@ -51,6 +51,8 @@ module "devsecops_ci_toolchain" {
   compliance_base_image    = (var.ci_compliance_base_image == "") ? var.compliance_base_image : var.ci_compliance_base_image
   ci_pipeline_branch       = (var.ci_compliance_pipeline_branch == "") ? var.compliance_pipeline_branch : var.ci_compliance_pipeline_branch
   pr_pipeline_branch       = (var.ci_compliance_pipeline_pr_branch == "") ? var.compliance_pipeline_branch : var.ci_compliance_pipeline_pr_branch
+  ci_pipeline_git_tag      = (var.ci_pipeline_git_tag == "") ? var.pipeline_git_tag : var.ci_pipeline_git_tag
+  pr_pipeline_git_tag      = (var.pr_pipeline_git_tag == "") ? var.pipeline_git_tag : var.pr_pipeline_git_tag
 
   #SECRET PROVIDERS
   enable_key_protect     = (local.use_kp_override) ? var.enable_key_protect : var.ci_enable_key_protect
@@ -99,6 +101,9 @@ module "devsecops_ci_toolchain" {
 
   app_repo_git_token_secret_name = (var.ci_app_repo_git_token_secret_name == "") ? var.repo_git_token_secret_name : var.ci_app_repo_git_token_secret_name
   app_repo_secret_group          = (var.ci_app_repo_secret_group == "") ? var.repo_secret_group : var.ci_app_repo_secret_group
+
+  gosec_private_repository_ssh_key_secret_name  = (var.ci_gosec_repo_ssh_key_secret_name == "") ? var.gosec_repo_ssh_key_secret_name : var.ci_gosec_repo_ssh_key_secret_name
+  gosec_private_repository_ssh_key_secret_group = (var.ci_gosec_repo_ssh_key_secret_group == "") ? var.gosec_repo_ssh_key_secret_group : var.ci_gosec_repo_ssh_key_secret_group
 
   #AUTH TYPE FOR REPOS
   pipeline_config_repo_auth_type     = (var.ci_pipeline_config_repo_auth_type == "") ? local.repo_auth_type : var.ci_pipeline_config_repo_auth_type
@@ -176,6 +181,7 @@ module "devsecops_ci_toolchain" {
   sonarqube_config                   = var.ci_sonarqube_config
   enable_pipeline_dockerconfigjson   = var.ci_enable_pipeline_dockerconfigjson
   peer_review_compliance             = (var.ci_peer_review_compliance == "") ? var.peer_review_compliance : var.ci_peer_review_compliance
+
   #CODE ENGINE
   code_engine_project         = var.ci_code_engine_project
   code_engine_region          = var.ci_code_engine_region
@@ -197,6 +203,10 @@ module "devsecops_ci_toolchain" {
   slack_pipeline_success = var.ci_slack_pipeline_success
   slack_toolchain_bind   = var.ci_slack_toolchain_bind
   slack_toolchain_unbind = var.ci_slack_toolchain_unbind
+
+  #GOSEC
+  gosec_private_repository_host = (var.ci_gosec_private_repository_host == "") ? var.gosec_private_repository_host : var.ci_gosec_private_repository_host
+  opt_in_gosec                  = (var.ci_opt_in_gosec == "") ? var.opt_in_gosec : var.ci_opt_in_gosec
 
   #SONARQUBE
   sonarqube_integration_name    = var.ci_sonarqube_integration_name
@@ -239,7 +249,7 @@ module "devsecops_ci_toolchain" {
 
 module "devsecops_cd_toolchain" {
   count            = var.create_cd_toolchain ? 1 : 0
-  source           = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain?ref=v1.1.1"
+  source           = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain?ref=v1.1.2"
   ibmcloud_api_key = var.ibmcloud_api_key
 
   toolchain_name           = (var.cd_toolchain_name == "") ? format("${var.toolchain_name}%s", "-CD-Toolchain") : var.cd_toolchain_name
@@ -249,6 +259,7 @@ module "devsecops_cd_toolchain" {
   ibmcloud_api             = var.ibmcloud_api
   compliance_base_image    = (var.cd_compliance_base_image == "") ? var.compliance_base_image : var.cd_compliance_base_image
   pipeline_branch          = (var.cd_compliance_pipeline_branch == "") ? var.compliance_pipeline_branch : var.cd_compliance_pipeline_branch
+  pipeline_git_tag         = (var.cd_pipeline_git_tag == "") ? var.pipeline_git_tag : var.cd_pipeline_git_tag
 
   #SECRET PROVIDERS
   enable_key_protect     = (local.use_kp_override) ? var.enable_key_protect : var.cd_enable_key_protect
@@ -432,7 +443,7 @@ module "devsecops_cd_toolchain" {
 
 module "devsecops_cc_toolchain" {
   count                         = var.create_cc_toolchain ? 1 : 0
-  source                        = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cc-toolchain?ref=v1.0.9"
+  source                        = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cc-toolchain?ref=v1.1.0"
   ibmcloud_api_key              = var.ibmcloud_api_key
   toolchain_name                = (var.cc_toolchain_name == "") ? format("${var.toolchain_name}%s", "-CC-Toolchain") : var.cc_toolchain_name
   toolchain_description         = var.cc_toolchain_description
@@ -442,6 +453,7 @@ module "devsecops_cc_toolchain" {
   compliance_base_image         = (var.cc_compliance_base_image == "") ? var.compliance_base_image : var.cc_compliance_base_image
   authorization_policy_creation = (var.cc_authorization_policy_creation == "") ? var.authorization_policy_creation : var.cc_authorization_policy_creation
   pipeline_branch               = (var.cc_compliance_pipeline_branch == "") ? var.compliance_pipeline_branch : var.cc_compliance_pipeline_branch
+  pipeline_git_tag              = (var.cc_pipeline_git_tag == "") ? var.pipeline_git_tag : var.cc_pipeline_git_tag
 
   #SECRET PROVIDERS
   enable_key_protect     = (local.use_kp_override) ? var.enable_key_protect : var.cc_enable_key_protect
@@ -487,6 +499,10 @@ module "devsecops_cc_toolchain" {
 
   scc_scc_api_key_secret_name  = var.scc_scc_api_key_secret_name
   scc_scc_api_key_secret_group = var.scc_scc_api_key_secret_group
+
+
+  gosec_private_repository_ssh_key_secret_name  = (var.cc_gosec_repo_ssh_key_secret_name == "") ? var.gosec_repo_ssh_key_secret_name : var.cc_gosec_repo_ssh_key_secret_name
+  gosec_private_repository_ssh_key_secret_group = (var.cc_gosec_repo_ssh_key_secret_group == "") ? var.gosec_repo_ssh_key_secret_group : var.cc_gosec_repo_ssh_key_secret_group
 
   #AUTH TYPE FOR REPOS
   pipeline_config_repo_auth_type     = (var.cc_pipeline_config_repo_auth_type == "") ? local.repo_auth_type : var.cc_pipeline_config_repo_auth_type
@@ -585,6 +601,10 @@ module "devsecops_cc_toolchain" {
   sm_integration_name    = var.sm_integration_name
   kp_integration_name    = var.kp_integration_name
   slack_integration_name = var.slack_integration_name
+
+  #GOSEC
+  gosec_private_repository_host = (var.cc_gosec_private_repository_host == "") ? var.gosec_private_repository_host : var.cc_gosec_private_repository_host
+  opt_in_gosec                  = (var.cc_opt_in_gosec == "") ? var.opt_in_gosec : var.cc_opt_in_gosec
 
   #SONARQUBE
   sonarqube_integration_name    = var.cc_sonarqube_integration_name
