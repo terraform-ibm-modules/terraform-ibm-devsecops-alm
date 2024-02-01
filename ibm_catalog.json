@@ -3343,6 +3343,20 @@
 							"required": true
 						},
 						{
+							"key": "ci_code_engine_deployment_type",
+							"type": "string",
+							"default_value": "application",
+							"description": "Type of Code Engine component to create/update as part of deployment. It can be either `application` or `job`.",
+							"required": false
+						},
+						{
+							"key": "ci_code_engine_build_strategy",
+							"type": "string",
+							"default_value": "",
+							"description": "The build strategy for the Code Engine entity. Default strategy is 'dockerfile'. Set as 'buildpacks' for 'buildpacks' build.",
+							"required": false
+						},
+						{
 							"key": "ci_code_engine_context_dir",
 							"type": "string",
 							"default_value": "dockerfile-strategy",
@@ -3431,13 +3445,6 @@
 							"type": "string",
 							"default_value": "0.25",
 							"description": "The amount of CPU set for the instance of the application or job. ",
-							"required": false
-						},
-						{
-							"key": "ci_code_engine_deployment_type",
-							"type": "string",
-							"default_value": "application",
-							"description": "type of Code Engine component to create/update as part of deployment. It can be either `application` or `job`.",
 							"required": false
 						},
 						{
