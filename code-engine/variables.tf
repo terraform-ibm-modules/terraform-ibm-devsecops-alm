@@ -13,7 +13,7 @@ variable "ibmcloud_api" {
 
 variable "toolchain_region" {
   type        = string
-  description = "The region identifier that will be used, by default, for all resource creation and service instance lookup. This can be overridden on a per resource/service basis. See `ci_toolchain_region`,`cd_toolchain_region`,`cc_toolchain_region`, `ci_cluster_region`, `cd_cluster_region`, `ci_registry_region`."
+  description = "The region identifier that will be used, by default, for all resource creation and service instance lookup. This can be overridden on a per resource/service basis. See `ci_toolchain_region`,`cd_toolchain_region`,`cc_toolchain_region`, `ci_registry_region`."
   default     = "us-south"
 }
 
@@ -213,7 +213,7 @@ variable "enable_secrets_manager" {
 
 variable "toolchain_resource_group" {
   type        = string
-  description = "The resource group that will be used, by default, for all resource creation and service instance lookups. This can be overridden on a per resource/service basis. See `ci_toolchain_resource_group`,`cd_toolchain_resource_group`,`cc_toolchain_resource_group`, `ci_cluster_resource_group`."
+  description = "The resource group that will be used, by default, for all resource creation and service instance lookups. This can be overridden on a per resource/service basis. See `ci_toolchain_resource_group`,`cd_toolchain_resource_group`,`cc_toolchain_resource_group`."
   default     = "Default"
 }
 
@@ -317,12 +317,6 @@ variable "pipeline_git_tag" {
   type        = string
   description = "The GIT tag within the pipeline definitions repository for the Compliance Pipelines."
   default     = ""
-}
-
-variable "cluster_name" {
-  type        = string
-  description = "Name of the Kubernetes cluster where the application is deployed. This sets the same cluster for both CI and CD toolchains. See `ci_cluster_name` and `cd_cluster_name` to set different clusters. By default , the cluster namespace for CI will be set to `dev` and CD to `prod`. These can be changed using `ci_cluster_namespace` and `cd_cluster_namespace`."
-  default     = "mycluster-free"
 }
 
 variable "repositories_prefix" {
@@ -471,42 +465,6 @@ variable "ci_app_name" {
   type        = string
   description = "Name of the application image and inventory entry."
   default     = "hello-compliance-app"
-}
-
-variable "ci_cluster_name" {
-  type        = string
-  description = "Name of the Kubernetes cluster where the application is deployed. (can be the same cluster used for prod)"
-  default     = ""
-}
-
-variable "ci_cluster_namespace" {
-  type        = string
-  description = "Name of the Kubernetes cluster namespace where the application is deployed."
-  default     = "dev"
-}
-
-variable "ci_dev_region" {
-  type        = string
-  description = "(Deprecated. Use `ci_cluster_region`) Region of the Kubernetes cluster where the application is deployed. Use the short form of the regions. For example `us-south`"
-  default     = ""
-}
-
-variable "ci_cluster_region" {
-  type        = string
-  description = "Region of the Kubernetes cluster where the application is deployed. Use the short form of the regions. For example `us-south`."
-  default     = ""
-}
-
-variable "ci_dev_resource_group" {
-  type        = string
-  description = "(Deprecated. Use `ci_cluster_resource_group`) The cluster resource group."
-  default     = ""
-}
-
-variable "ci_cluster_resource_group" {
-  type        = string
-  description = "The cluster resource group."
-  default     = ""
 }
 
 variable "registry_namespace" {
@@ -1457,24 +1415,6 @@ variable "cd_toolchain_description" {
   default     = "Toolchain created with terraform template for DevSecOps CD Best Practices."
 }
 
-variable "cd_cluster_name" {
-  type        = string
-  description = "Name of the Kubernetes cluster where the application is deployed."
-  default     = ""
-}
-
-variable "cd_cluster_namespace" {
-  type        = string
-  description = "Name of the Kubernetes cluster namespace where the application is deployed."
-  default     = "prod"
-}
-
-variable "cd_cluster_region" {
-  type        = string
-  description = "Region of the Kubernetes cluster where the application is deployed. Use the short form of the regions. For example `us-south`."
-  default     = ""
-}
-
 variable "cd_region" {
   type        = string
   description = "IBM Cloud region used to prefix the `prod_latest` inventory repo branch."
@@ -2014,12 +1954,6 @@ variable "cd_change_request_id" {
   type        = string
   description = "The ID of an open change request. If this parameter is set to 'notAvailable' by default, a change request is automatically created by the continuous deployment pipeline."
   default     = "notAvailable"
-}
-
-variable "cd_satellite_cluster_group" {
-  type        = string
-  description = "The Satellite cluster group"
-  default     = ""
 }
 
 variable "cd_source_environment" {

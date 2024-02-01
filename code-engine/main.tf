@@ -41,9 +41,8 @@ locals {
     format("%s/open-toolchain/code-engine-compliance-app.git", local.compliance_pipelines_git_server)
   )
 
-  code_engine_app_branch       = "main"
-  repo_auth_type               = (var.repo_git_token_secret_name == "") ? "oauth" : "pat"
-  calculated_ci_cluster_region = (var.ci_dev_region != "") ? var.ci_dev_region : (var.ci_cluster_region != "") ? var.ci_cluster_region : var.toolchain_region
+  code_engine_app_branch = "main"
+  repo_auth_type         = (var.repo_git_token_secret_name == "") ? "oauth" : "pat"
 
   inventory_repo_existing_url = (var.inventory_repo_existing_url != "") ? var.inventory_repo_existing_url : var.inventory_repo_url
   evidence_repo_existing_url  = (var.evidence_repo_existing_url != "") ? var.evidence_repo_existing_url : var.evidence_repo_url
@@ -171,10 +170,6 @@ module "devsecops_ci_toolchain" {
   inventory_repo_integration_owner = var.inventory_repo_integration_owner
 
   app_name                           = var.ci_app_name
-  dev_region                         = format("${var.environment_prefix}%s", replace(replace(local.calculated_ci_cluster_region, "ibm:yp:", ""), "ibm:ys1:", ""))
-  dev_resource_group                 = (var.ci_cluster_resource_group != "") ? var.ci_cluster_resource_group : (var.ci_dev_resource_group != "") ? var.ci_dev_resource_group : var.toolchain_resource_group
-  cluster_name                       = (var.ci_cluster_name == "") ? var.cluster_name : var.ci_cluster_name
-  cluster_namespace                  = var.ci_cluster_namespace
   registry_region                    = (var.ci_registry_region == "") ? format("${var.environment_prefix}%s", var.toolchain_region) : format("${var.environment_prefix}%s", replace(replace(var.ci_registry_region, "ibm:yp:", ""), "ibm:ys1:", ""))
   authorization_policy_creation      = (var.ci_authorization_policy_creation == "") ? var.authorization_policy_creation : var.ci_authorization_policy_creation
   repositories_prefix                = (var.ci_repositories_prefix == "") ? var.repositories_prefix : var.ci_repositories_prefix
@@ -411,9 +406,6 @@ module "devsecops_cd_toolchain" {
 
   #OTHER INTEGRATIONS
   slack_notifications           = local.cd_slack_notification_state
-  cluster_name                  = (var.cd_cluster_name == "") ? var.cluster_name : var.cd_cluster_name
-  cluster_namespace             = var.cd_cluster_namespace
-  cluster_region                = (var.cd_cluster_region == "") ? format("${var.environment_prefix}%s", var.toolchain_region) : format("${var.environment_prefix}%s", replace(replace(var.cd_cluster_region, "ibm:yp:", ""), "ibm:ys1:", ""))
   repositories_prefix           = (var.cd_repositories_prefix == "") ? var.repositories_prefix : var.cd_repositories_prefix
   authorization_policy_creation = (var.cd_authorization_policy_creation == "") ? var.authorization_policy_creation : var.cd_authorization_policy_creation
   doi_environment               = var.cd_doi_environment
@@ -423,7 +415,6 @@ module "devsecops_cd_toolchain" {
   customer_impact               = var.cd_customer_impact
   target_environment_purpose    = var.cd_target_environment_purpose
   change_request_id             = var.cd_change_request_id
-  satellite_cluster_group       = var.cd_satellite_cluster_group
   source_environment            = var.cd_source_environment
   target_environment            = var.cd_target_environment
   merge_cra_sbom                = var.cd_merge_cra_sbom
