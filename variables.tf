@@ -277,7 +277,7 @@ variable "repo_git_token_secret_crn" {
   description = "The CRN for the repositories Git Token."
   default     = ""
   validation {
-    condition     = startswith(var.repo_git_token_crn, "crn:") || var.repo_git_token_crn == ""
+    condition     = startswith(var.repo_git_token_secret_crn, "crn:") || var.repo_git_token_secret_crn == ""
     error_message = "Must be a CRN or left empty."
   }
 }
@@ -2049,7 +2049,7 @@ variable "cd_pipeline_doi_api_key_secret_name" {
 
 ######## End Secret Names #######################
 ######## CRN secrets ############################
-variable "sm_instance_crn" {
+variable "cd_sm_instance_crn" {
   type        = string
   description = "The CRN of the Secrets Manager instance."
   default     = ""
