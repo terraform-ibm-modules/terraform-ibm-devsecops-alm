@@ -190,6 +190,13 @@
 							"required": true
 						},
 						{
+							"key": "sm_instance_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN of the Secrets Manager instance. Will apply to CI, CD and CC toolchains unless set individually.",
+							"required": false
+						},
+						{
 							"key": "authorization_policy_creation",
 							"type": "string",
 							"default_value": "",
@@ -243,6 +250,62 @@
 							"type": "string",
 							"default_value": "compliance",
 							"description": "Prefix name for the cloned compliance repos.",
+							"required": false
+						},
+						{
+							"key": "repo_git_token_secret_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN for the repositories Git Token. Applies to the CI, CD and CC toolchains. Can be set independently using the toolchain specific version of the variable.",
+							"required": false
+						},
+						{
+							"key": "pipeline_ibmcloud_api_key_secret_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN for the IBMCloud apikey. Applies to the CI, CD and CC toolchains. Can be set independently using the toolchain specific version of the variable.",
+							"required": false
+						},
+						{
+							"key": "pipeline_doi_api_key_secret_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN for the pipeline DOI apikey. Applies to the CI, CD and CC toolchains. Can be set independently using the toolchain specific version of the variable.",
+							"required": false
+						},
+						{
+							"key": "sonarqube_secret_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN for the SonarQube secret. Applies to the CI and CC toolchains. Can be set independently using the toolchain specific version of the variable.",
+							"required": false
+						},
+						{
+							"key": "gosec_private_repository_ssh_key_secret_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN for the GoSec repository secret. Applies to the CI and CC toolchains. Can be set independently using the toolchain specific version of the variable.",
+							"required": false
+						},
+						{
+							"key": "cos_api_key_secret_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN for the Cloud Object Storage apikey. Applies to the CI, CD and CC toolchains. Can be set independently using the toolchain specific version of the variable.",
+							"required": false
+						},
+						{
+							"key": "scc_scc_api_key_secret_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN for the SCC apikey. Applies to the CD and CC toolchains. Can be set independently using the toolchain specific version of the variable.",
+							"required": false
+						},
+						{
+							"key": "slack_webhook_secret_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN for the SCC apikey. Applies to the CI, CD and CC toolchains. Can be set independently using the toolchain specific version of the variable.",
 							"required": false
 						},
 						{
@@ -578,6 +641,20 @@
 							"type": "string",
 							"default_value": "",
 							"description": "Secret group prefix for the gosec private repository ssh key secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`.",
+							"required": false
+						},
+						{
+							"key": "pipeline_doi_api_key_secret_name",
+							"type": "string",
+							"default_value": "",
+							"description": "Name of the Cloud API key secret in the secret provider to access the toolchain containing the Devops Insights instance. This will apply to the CI, CD and CC toolchains.",
+							"required": false
+						},
+						{
+							"key": "pipeline_doi_api_key_secret_group",
+							"type": "string",
+							"default_value": "",
+							"description": "Secret group prefix for the pipeline DOI api key. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`. Applies to the CI, CD and CC toolchains.",
 							"required": false
 						},
 						{
@@ -1232,6 +1309,20 @@
 							"required": false
 						},
 						{
+							"key": "ci_pipeline_doi_api_key_secret_group",
+							"type": "string",
+							"default_value": "",
+							"description": "Secret group prefix for the pipeline DOI api key. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`.",
+							"required": false
+						},
+						{
+							"key": "ci_pipeline_doi_api_key_secret_name",
+							"type": "string",
+							"default_value": "",
+							"description": "Name of the Cloud API key secret in the secret provider to access the toolchain containing the Devops Insights instance.",
+							"required": false
+						},
+						{
 							"key": "ci_pipeline_ibmcloud_api_key_secret_group",
 							"type": "string",
 							"default_value": "",
@@ -1243,6 +1334,132 @@
 							"type": "string",
 							"default_value": "ibmcloud-api-key",
 							"description": "Name of the Cloud API key secret in the secret provider.",
+							"required": false
+						},
+						{
+							"key": "ci_sm_instance_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN of the Secrets Manager instance.",
+							"required": false
+						},
+						{
+							"key": "ci_app_repo_git_token_secret_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN for the app repository Git Token.",
+							"required": false
+						},
+						{
+							"key": "ci_issues_repo_git_token_secret_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN for the Issues repository Git Token.",
+							"required": false
+						},
+						{
+							"key": "ci_evidence_repo_git_token_secret_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN for the Evidence repository Git Token.",
+							"required": false
+						},
+						{
+							"key": "ci_inventory_repo_git_token_secret_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN for the Inventory repository Git Token.",
+							"required": false
+						},
+						{
+							"key": "ci_compliance_pipeline_repo_git_token_secret_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN for the Compliance Pipeline repository Git Token.",
+							"required": false
+						},
+						{
+							"key": "ci_pipeline_config_repo_git_token_secret_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN for the Pipeline Config repository Git Token.",
+							"required": false
+						},
+						{
+							"key": "ci_cos_api_key_secret_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN for the Cloud Object Storage apikey.",
+							"required": false
+						},
+						{
+							"key": "ci_pipeline_ibmcloud_api_key_secret_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN for the IBMCloud apikey.",
+							"required": false
+						},
+						{
+							"key": "ci_signing_key_secret_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN for Signing Key secret.",
+							"required": false
+						},
+						{
+							"key": "ci_pipeline_dockerconfigjson_secret_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN for Dockerconfig json secret..",
+							"required": false
+						},
+						{
+							"key": "ci_slack_webhook_secret_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN for the Slack Webhook secret.",
+							"required": false
+						},
+						{
+							"key": "ci_privateworker_credentials_secret_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN for the Private Worker secret secret.",
+							"required": false
+						},
+						{
+							"key": "ci_artifactory_token_secret_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN for the Artifactory secret.",
+							"required": false
+						},
+						{
+							"key": "ci_pipeline_git_token_secret_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN for the Git Token pipeline property.",
+							"required": false
+						},
+						{
+							"key": "ci_pipeline_doi_api_key_secret_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN for the pipeline DOI apikey.",
+							"required": false
+						},
+						{
+							"key": "ci_sonarqube_secret_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN for the SonarQube secret.",
+							"required": false
+						},
+						{
+							"key": "ci_gosec_private_repository_ssh_key_secret_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN for the GoSec repository secret.",
 							"required": false
 						},
 						{
@@ -2058,6 +2275,118 @@
 							"required": false
 						},
 						{
+							"key": "cd_sm_instance_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN of the Secrets Manager instance.",
+							"required": false
+						},
+						{
+							"key": "cd_pipeline_doi_api_key_secret_group",
+							"type": "string",
+							"default_value": "",
+							"description": "Secret group prefix for the pipeline DOI api key. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`.",
+							"required": false
+						},
+						{
+							"key": "cd_pipeline_doi_api_key_secret_name",
+							"type": "string",
+							"default_value": "",
+							"description": "Name of the Cloud API key secret in the secret provider to access the toolchain containing the Devops Insights instance.",
+							"required": false
+						},
+						{
+							"key": "cd_deployment_repo_git_token_secret_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN for the Deployment repository Git Token.",
+							"required": false
+						},
+						{
+							"key": "cd_change_management_repo_git_token_secret_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN for the Change Managemenrt repository Git Token.",
+							"required": false
+						},
+						{
+							"key": "cd_issues_repo_git_token_secret_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN for the Issues repository Git Token.",
+							"required": false
+						},
+						{
+							"key": "cd_evidence_repo_git_token_secret_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN for the Evidence repository Git Token.",
+							"required": false
+						},
+						{
+							"key": "cd_inventory_repo_git_token_secret_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN for the Inventory repository Git Token.",
+							"required": false
+						},
+						{
+							"key": "cd_compliance_pipeline_repo_git_token_secret_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN for the Compliance Pipeline repository Git Token.",
+							"required": false
+						},
+						{
+							"key": "cd_pipeline_config_repo_git_token_secret_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN for the Config repository Git Token.",
+							"required": false
+						},
+						{
+							"key": "cd_cos_api_key_secret_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN for the Cloud Object Storage apikey.",
+							"required": false
+						},
+						{
+							"key": "cd_pipeline_ibmcloud_api_key_secret_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN for the pipeline apikey.",
+							"required": false
+						},
+						{
+							"key": "cd_slack_webhook_secret_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN for the Slack webhook secret.",
+							"required": false
+						},
+						{
+							"key": "cd_artifactory_token_secret_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN for the Artifactory secret.",
+							"required": false
+						},
+						{
+							"key": "cd_pipeline_git_token_secret_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN for the Git Token secret in the pipeline properties.",
+							"required": false
+						},
+						{
+							"key": "cd_pipeline_doi_api_key_secret_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN for the DOI apikey.",
+							"required": false
+						},
+						{
 							"key": "cd_region",
 							"type": "string",
 							"default_value": "",
@@ -2828,6 +3157,132 @@
 							"required": false
 						},
 						{
+							"key": "cc_sm_instance_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN of the Secrets Manager instance.",
+							"required": false
+						},
+						{
+							"key": "cc_pipeline_doi_api_key_secret_group",
+							"type": "string",
+							"default_value": "",
+							"description": "Secret group prefix for the pipeline DOI api key. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`.",
+							"required": false
+						},
+						{
+							"key": "cc_pipeline_doi_api_key_secret_name",
+							"type": "string",
+							"default_value": "",
+							"description": "Name of the Cloud API key secret in the secret provider to access the toolchain containing the Devops Insights instance.",
+							"required": false
+						},
+						{
+							"key": "cc_app_repo_git_token_secret_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN for the app repository Git Token.",
+							"required": false
+						},
+						{
+							"key": "cc_issues_repo_git_token_secret_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN for the Issues repository Git Token.",
+							"required": false
+						},
+						{
+							"key": "cc_evidence_repo_git_token_secret_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN for the Evidence repository Git Token.",
+							"required": false
+						},
+						{
+							"key": "cc_inventory_repo_git_token_secret_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN for the Inventory repository Git Token.",
+							"required": false
+						},
+						{
+							"key": "cc_compliance_pipeline_repo_git_token_secret_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN for the Compliance Pipeline repository Git Token.",
+							"required": false
+						},
+						{
+							"key": "cc_pipeline_config_repo_git_token_secret_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN for the Pipeline Config repository Git Token.",
+							"required": false
+						},
+						{
+							"key": "cc_cos_api_key_secret_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN for the Cloud Object Storage apikey.",
+							"required": false
+						},
+						{
+							"key": "cc_pipeline_ibmcloud_api_key_secret_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN for the IBMCloud apikey.",
+							"required": false
+						},
+						{
+							"key": "cc_pipeline_dockerconfigjson_secret_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN for the Dockerconfig json secret.",
+							"required": false
+						},
+						{
+							"key": "cc_slack_webhook_secret_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN for Slack Webhook secret.",
+							"required": false
+						},
+						{
+							"key": "cc_artifactory_token_secret_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN for the Artifactory secret.",
+							"required": false
+						},
+						{
+							"key": "cc_pipeline_git_token_secret_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN for pipeline Git token property.",
+							"required": false
+						},
+						{
+							"key": "cc_sonarqube_secret_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN for the SonarQube secret.",
+							"required": false
+						},
+						{
+							"key": "cc_pipeline_doi_api_key_secret_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN for the pipeline DOI apikey.",
+							"required": false
+						},
+						{
+							"key": "cc_gosec_private_repository_ssh_key_secret_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN for the Deployment repository Git Token.",
+							"required": false
+						},
+						{
 							"key": "cc_repositories_prefix",
 							"type": "string",
 							"default_value": "",
@@ -3343,6 +3798,13 @@
 							"required": true
 						},
 						{
+							"key": "sm_instance_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN of the Secrets Manager instance. Will apply to CI, CD and CC toolchains unless set individually.",
+							"required": false
+						},
+						{
 							"key": "ci_code_engine_deployment_type",
 							"type": "string",
 							"default_value": "application",
@@ -3742,6 +4204,62 @@
 							"required": false
 						},
 						{
+							"key": "repo_git_token_secret_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN for the repositories Git Token. Applies to the CI, CD and CC toolchains. Can be set independently using the toolchain specific version of the variable.",
+							"required": false
+						},
+						{
+							"key": "pipeline_ibmcloud_api_key_secret_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN for the IBMCloud apikey. Applies to the CI, CD and CC toolchains. Can be set independently using the toolchain specific version of the variable.",
+							"required": false
+						},
+						{
+							"key": "pipeline_doi_api_key_secret_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN for the pipeline DOI apikey. Applies to the CI, CD and CC toolchains. Can be set independently using the toolchain specific version of the variable.",
+							"required": false
+						},
+						{
+							"key": "sonarqube_secret_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN for the SonarQube secret. Applies to the CI and CC toolchains. Can be set independently using the toolchain specific version of the variable.",
+							"required": false
+						},
+						{
+							"key": "gosec_private_repository_ssh_key_secret_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN for the GoSec repository secret. Applies to the CI and CC toolchains. Can be set independently using the toolchain specific version of the variable.",
+							"required": false
+						},
+						{
+							"key": "cos_api_key_secret_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN for the Cloud Object Storage apikey. Applies to the CI, CD and CC toolchains. Can be set independently using the toolchain specific version of the variable.",
+							"required": false
+						},
+						{
+							"key": "scc_scc_api_key_secret_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN for the SCC apikey. Applies to the CD and CC toolchains. Can be set independently using the toolchain specific version of the variable.",
+							"required": false
+						},
+						{
+							"key": "slack_webhook_secret_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN for the SCC apikey. Applies to the CI, CD and CC toolchains. Can be set independently using the toolchain specific version of the variable.",
+							"required": false
+						},
+						{
 							"key": "repositories_prefix",
 							"type": "string",
 							"default_value": "compliance",
@@ -4081,6 +4599,20 @@
 							"type": "string",
 							"default_value": "",
 							"description": "Secret group prefix for the gosec private repository ssh key secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`.",
+							"required": false
+						},
+						{
+							"key": "pipeline_doi_api_key_secret_name",
+							"type": "string",
+							"default_value": "",
+							"description": "Name of the Cloud API key secret in the secret provider to access the toolchain containing the Devops Insights instance. This will apply to the CI, CD and CC toolchains.",
+							"required": false
+						},
+						{
+							"key": "pipeline_doi_api_key_secret_group",
+							"type": "string",
+							"default_value": "",
+							"description": "Secret group prefix for the pipeline DOI api key. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`. Applies to the CI, CD and CC toolchains.",
 							"required": false
 						},
 						{
@@ -4669,6 +5201,146 @@
 							"type": "string",
 							"default_value": "ibmcloud-api-key",
 							"description": "Name of the Cloud API key secret in the secret provider.",
+							"required": false
+						},
+						{
+							"key": "ci_sm_instance_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN of the Secrets Manager instance.",
+							"required": false
+						},
+						{
+							"key": "ci_app_repo_git_token_secret_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN for the app repository Git Token.",
+							"required": false
+						},
+						{
+							"key": "ci_issues_repo_git_token_secret_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN for the Issues repository Git Token.",
+							"required": false
+						},
+						{
+							"key": "ci_evidence_repo_git_token_secret_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN for the Evidence repository Git Token.",
+							"required": false
+						},
+						{
+							"key": "ci_inventory_repo_git_token_secret_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN for the Inventory repository Git Token.",
+							"required": false
+						},
+						{
+							"key": "ci_compliance_pipeline_repo_git_token_secret_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN for the Compliance Pipeline repository Git Token.",
+							"required": false
+						},
+						{
+							"key": "ci_pipeline_config_repo_git_token_secret_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN for the Pipeline Config repository Git Token.",
+							"required": false
+						},
+						{
+							"key": "ci_cos_api_key_secret_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN for the Cloud Object Storage apikey.",
+							"required": false
+						},
+						{
+							"key": "ci_pipeline_ibmcloud_api_key_secret_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN for the IBMCloud apikey.",
+							"required": false
+						},
+						{
+							"key": "ci_signing_key_secret_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN for Signing Key secret.",
+							"required": false
+						},
+						{
+							"key": "ci_pipeline_dockerconfigjson_secret_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN for Dockerconfig json secret..",
+							"required": false
+						},
+						{
+							"key": "ci_slack_webhook_secret_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN for the Slack Webhook secret.",
+							"required": false
+						},
+						{
+							"key": "ci_privateworker_credentials_secret_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN for the Private Worker secret secret.",
+							"required": false
+						},
+						{
+							"key": "ci_artifactory_token_secret_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN for the Artifactory secret.",
+							"required": false
+						},
+						{
+							"key": "ci_pipeline_git_token_secret_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN for the Git Token pipeline property.",
+							"required": false
+						},
+						{
+							"key": "ci_pipeline_doi_api_key_secret_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN for the pipeline DOI apikey.",
+							"required": false
+						},
+						{
+							"key": "ci_sonarqube_secret_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN for the SonarQube secret.",
+							"required": false
+						},
+						{
+							"key": "ci_gosec_private_repository_ssh_key_secret_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN for the GoSec repository secret.",
+							"required": false
+						},
+						{
+							"key": "ci_pipeline_doi_api_key_secret_group",
+							"type": "string",
+							"default_value": "",
+							"description": "Secret group prefix for the pipeline DOI api key. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`.",
+							"required": false
+						},
+						{
+							"key": "ci_pipeline_doi_api_key_secret_name",
+							"type": "string",
+							"default_value": "",
+							"description": "Name of the Cloud API key secret in the secret provider to access the toolchain containing the Devops Insights instance.",
 							"required": false
 						},
 						{
@@ -5470,6 +6142,118 @@
 							"required": false
 						},
 						{
+							"key": "cd_sm_instance_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN of the Secrets Manager instance.",
+							"required": false
+						},
+						{
+							"key": "cd_pipeline_doi_api_key_secret_group",
+							"type": "string",
+							"default_value": "",
+							"description": "Secret group prefix for the pipeline DOI api key. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`.",
+							"required": false
+						},
+						{
+							"key": "cd_pipeline_doi_api_key_secret_name",
+							"type": "string",
+							"default_value": "",
+							"description": "Name of the Cloud API key secret in the secret provider to access the toolchain containing the Devops Insights instance.",
+							"required": false
+						},
+						{
+							"key": "cd_deployment_repo_git_token_secret_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN for the Deployment repository Git Token.",
+							"required": false
+						},
+						{
+							"key": "cd_change_management_repo_git_token_secret_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN for the Change Managemenrt repository Git Token.",
+							"required": false
+						},
+						{
+							"key": "cd_issues_repo_git_token_secret_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN for the Issues repository Git Token.",
+							"required": false
+						},
+						{
+							"key": "cd_evidence_repo_git_token_secret_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN for the Evidence repository Git Token.",
+							"required": false
+						},
+						{
+							"key": "cd_inventory_repo_git_token_secret_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN for the Inventory repository Git Token.",
+							"required": false
+						},
+						{
+							"key": "cd_compliance_pipeline_repo_git_token_secret_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN for the Compliance Pipeline repository Git Token.",
+							"required": false
+						},
+						{
+							"key": "cd_pipeline_config_repo_git_token_secret_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN for the Config repository Git Token.",
+							"required": false
+						},
+						{
+							"key": "cd_cos_api_key_secret_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN for the Cloud Object Storage apikey.",
+							"required": false
+						},
+						{
+							"key": "cd_pipeline_ibmcloud_api_key_secret_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN for the pipeline apikey.",
+							"required": false
+						},
+						{
+							"key": "cd_slack_webhook_secret_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN for the Slack webhook secret.",
+							"required": false
+						},
+						{
+							"key": "cd_artifactory_token_secret_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN for the Artifactory secret.",
+							"required": false
+						},
+						{
+							"key": "cd_pipeline_git_token_secret_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN for the Git Token secret in the pipeline properties.",
+							"required": false
+						},
+						{
+							"key": "cd_pipeline_doi_api_key_secret_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN for the DOI apikey.",
+							"required": false
+						},
+						{
 							"key": "cd_region",
 							"type": "string",
 							"default_value": "",
@@ -6230,6 +7014,132 @@
 							"type": "string",
 							"default_value": "ibmcloud-api-key",
 							"description": "Name of the Cloud API key secret in the secret provider.",
+							"required": false
+						},
+						{
+							"key": "cc_pipeline_doi_api_key_secret_group",
+							"type": "string",
+							"default_value": "",
+							"description": "Secret group prefix for the pipeline DOI api key. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`.",
+							"required": false
+						},
+						{
+							"key": "cc_pipeline_doi_api_key_secret_name",
+							"type": "string",
+							"default_value": "",
+							"description": "Name of the Cloud API key secret in the secret provider to access the toolchain containing the Devops Insights instance.",
+							"required": false
+						},
+						{
+							"key": "cc_sm_instance_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN of the Secrets Manager instance.",
+							"required": false
+						},
+						{
+							"key": "cc_app_repo_git_token_secret_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN for the app repository Git Token.",
+							"required": false
+						},
+						{
+							"key": "cc_issues_repo_git_token_secret_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN for the Issues repository Git Token.",
+							"required": false
+						},
+						{
+							"key": "cc_evidence_repo_git_token_secret_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN for the Evidence repository Git Token.",
+							"required": false
+						},
+						{
+							"key": "cc_inventory_repo_git_token_secret_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN for the Inventory repository Git Token.",
+							"required": false
+						},
+						{
+							"key": "cc_compliance_pipeline_repo_git_token_secret_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN for the Compliance Pipeline repository Git Token.",
+							"required": false
+						},
+						{
+							"key": "cc_pipeline_config_repo_git_token_secret_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN for the Pipeline Config repository Git Token.",
+							"required": false
+						},
+						{
+							"key": "cc_cos_api_key_secret_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN for the Cloud Object Storage apikey.",
+							"required": false
+						},
+						{
+							"key": "cc_pipeline_ibmcloud_api_key_secret_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN for the IBMCloud apikey.",
+							"required": false
+						},
+						{
+							"key": "cc_pipeline_dockerconfigjson_secret_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN for the Dockerconfig json secret.",
+							"required": false
+						},
+						{
+							"key": "cc_slack_webhook_secret_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN for Slack Webhook secret.",
+							"required": false
+						},
+						{
+							"key": "cc_artifactory_token_secret_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN for the Artifactory secret.",
+							"required": false
+						},
+						{
+							"key": "cc_pipeline_git_token_secret_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN for pipeline Git token property.",
+							"required": false
+						},
+						{
+							"key": "cc_sonarqube_secret_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN for the SonarQube secret.",
+							"required": false
+						},
+						{
+							"key": "cc_pipeline_doi_api_key_secret_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN for the pipeline DOI apikey.",
+							"required": false
+						},
+						{
+							"key": "cc_gosec_private_repository_ssh_key_secret_crn",
+							"type": "string",
+							"default_value": "",
+							"description": "The CRN for the Deployment repository Git Token.",
 							"required": false
 						},
 						{
