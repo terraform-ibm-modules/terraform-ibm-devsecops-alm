@@ -351,7 +351,7 @@ variable "scc_scc_api_key_secret_crn" {
 variable "slack_webhook_secret_crn" {
   type        = string
   sensitive   = true
-  description = "The CRN for the Slack Webhook secret."
+  description = "The CRN for the Slack webhook secret."
   default     = ""
   validation {
     condition     = startswith(var.slack_webhook_secret_crn, "crn:") || var.slack_webhook_secret_crn == ""
@@ -1346,7 +1346,7 @@ variable "ci_pipeline_dockerconfigjson_secret_crn" {
 variable "ci_slack_webhook_secret_crn" {
   type        = string
   sensitive   = true
-  description = "The CRN for the Slack Webhook secret."
+  description = "The CRN for the Slack webhook secret."
   default     = ""
   validation {
     condition     = startswith(var.ci_slack_webhook_secret_crn, "crn:") || var.ci_slack_webhook_secret_crn == ""
@@ -1834,6 +1834,12 @@ variable "cd_pipeline_doi_api_key_secret_group" {
   default     = ""
 }
 
+variable "cd_code_signing_cert_secret_group" {
+  type        = string
+  description = "Secret group prefix for the pipeline Public signing key cert secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
+  default     = ""
+}
+
 variable "cd_sm_resource_group" {
   type        = string
   description = "The resource group containing the Secrets Manager instance for your secrets."
@@ -1981,6 +1987,12 @@ variable "cd_pipeline_ibmcloud_api_key_secret_name" {
   default     = "ibmcloud-api-key"
 }
 
+variable "cd_code_signing_cert_secret_name" {
+  type        = string
+  description = "Name of the Cloud API key secret in the secret provider."
+  default     = "code-signing-cert"
+}
+
 variable "cd_cos_api_key_secret_name" {
   type        = string
   description = "Name of the COS API key secret in the secret provider."
@@ -2029,12 +2041,6 @@ variable "cd_change_management_repo_git_token_secret_name" {
   default     = ""
 }
 
-variable "cd_code_signing_cert" {
-  type        = string
-  description = "The base64 encoded GPG public key."
-  default     = ""
-}
-
 variable "cd_pipeline_git_token_secret_name" {
   type        = string
   description = "Name of the pipeline Git token secret in the secret provider."
@@ -2048,6 +2054,21 @@ variable "cd_pipeline_doi_api_key_secret_name" {
 }
 
 ######## End Secret Names #######################
+
+
+variable "cd_code_signing_cert" {
+  type        = string
+  sensitive   = true
+  description = "The base64 encoded GPG public key. This is stored in a pipeline secret property. To use a secrets provider see `cd_enable_signing_validation`."
+  default     = ""
+}
+
+variable "cd_enable_signing_validation" {
+  type        = bool
+  description = "Set to `true` to enable code signing validation with a public signing key stored in a secrets provider. By default this expects the secret to be called `code-signing-cert`. See `cd_code_signing_cert_secret_name`."
+  default     = false
+}
+
 ######## CRN secrets ############################
 variable "cd_sm_instance_crn" {
   type        = string
@@ -2069,7 +2090,7 @@ variable "cd_deployment_repo_git_token_secret_crn" {
 variable "cd_change_management_repo_git_token_secret_crn" {
   type        = string
   sensitive   = true
-  description = "The CRN for the Change Managemenrt repository Git Token."
+  description = "The CRN for the Change Management repository Git Token."
   default     = ""
   validation {
     condition     = startswith(var.cd_change_management_repo_git_token_secret_crn, "crn:") || var.cd_change_management_repo_git_token_secret_crn == ""
@@ -2150,6 +2171,17 @@ variable "cd_pipeline_ibmcloud_api_key_secret_crn" {
   default     = ""
   validation {
     condition     = startswith(var.cd_pipeline_ibmcloud_api_key_secret_crn, "crn:") || var.cd_pipeline_ibmcloud_api_key_secret_crn == ""
+    error_message = "Must be a CRN or left empty."
+  }
+}
+
+variable "cd_code_signing_cert_secret_crn" {
+  type        = string
+  sensitive   = true
+  description = "The CRN for the public signing key cert in the secrets provider."
+  default     = ""
+  validation {
+    condition     = startswith(var.cd_code_signing_cert_secret_crn, "crn:") || var.cd_code_signing_cert_secret_crn == ""
     error_message = "Must be a CRN or left empty."
   }
 }
@@ -2935,7 +2967,7 @@ variable "cc_pipeline_dockerconfigjson_secret_crn" {
 variable "cc_slack_webhook_secret_crn" {
   type        = string
   sensitive   = true
-  description = "The CRN for Slack Webhook secret."
+  description = "The CRN for Slack webhook secret."
   default     = ""
   validation {
     condition     = startswith(var.cc_slack_webhook_secret_crn, "crn:") || var.cc_slack_webhook_secret_crn == ""

@@ -1417,7 +1417,7 @@
 							"key": "ci_slack_webhook_secret_crn",
 							"type": "string",
 							"default_value": "",
-							"description": "The CRN for the Slack Webhook secret.",
+							"description": "The CRN for the Slack webhook secret.",
 							"required": false
 						},
 						{
@@ -2306,7 +2306,7 @@
 							"key": "cd_change_management_repo_git_token_secret_crn",
 							"type": "string",
 							"default_value": "",
-							"description": "The CRN for the Change Managemenrt repository Git Token.",
+							"description": "The CRN for the Change Management repository Git Token.",
 							"required": false
 						},
 						{
@@ -3244,7 +3244,7 @@
 							"key": "cc_slack_webhook_secret_crn",
 							"type": "string",
 							"default_value": "",
-							"description": "The CRN for Slack Webhook secret.",
+							"description": "The CRN for Slack webhook secret.",
 							"required": false
 						},
 						{
@@ -5284,7 +5284,7 @@
 							"key": "ci_slack_webhook_secret_crn",
 							"type": "string",
 							"default_value": "",
-							"description": "The CRN for the Slack Webhook secret.",
+							"description": "The CRN for the Slack webhook secret.",
 							"required": false
 						},
 						{
@@ -6173,7 +6173,7 @@
 							"key": "cd_change_management_repo_git_token_secret_crn",
 							"type": "string",
 							"default_value": "",
-							"description": "The CRN for the Change Managemenrt repository Git Token.",
+							"description": "The CRN for the Change Management repository Git Token.",
 							"required": false
 						},
 						{
@@ -7104,7 +7104,7 @@
 							"key": "cc_slack_webhook_secret_crn",
 							"type": "string",
 							"default_value": "",
-							"description": "The CRN for Slack Webhook secret.",
+							"description": "The CRN for Slack webhook secret.",
 							"required": false
 						},
 						{

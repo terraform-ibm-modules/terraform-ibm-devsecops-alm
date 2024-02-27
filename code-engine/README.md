@@ -41,7 +41,7 @@ statement instead the previous block.
 | Name | Source | Version |
 |------|--------|---------|
 | <a name="module_devsecops_cc_toolchain"></a> [devsecops\_cc\_toolchain](#module\_devsecops\_cc\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cc-toolchain | v1.1.1 |
-| <a name="module_devsecops_cd_toolchain"></a> [devsecops\_cd\_toolchain](#module\_devsecops\_cd\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain | v1.1.3 |
+| <a name="module_devsecops_cd_toolchain"></a> [devsecops\_cd\_toolchain](#module\_devsecops\_cd\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain | v1.1.4 |
 | <a name="module_devsecops_ci_toolchain"></a> [devsecops\_ci\_toolchain](#module\_devsecops\_ci\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-ci-toolchain | v1.1.2 |
 
 ### Resources
@@ -212,7 +212,10 @@ statement instead the previous block.
 | <a name="input_cd_code_engine_remove_refs"></a> [cd\_code\_engine\_remove\_refs](#input\_cd\_code\_engine\_remove\_refs) | Remove references to unspecified configuration resources (configmap/secret) references (pulled from env-from-configmaps, env-from-secrets along with auto-managed by CD). | `string` | `"false"` | no |
 | <a name="input_cd_code_engine_resource_group"></a> [cd\_code\_engine\_resource\_group](#input\_cd\_code\_engine\_resource\_group) | The resource group of the Code Engine project. | `string` | `""` | no |
 | <a name="input_cd_code_engine_service_bindings"></a> [cd\_code\_engine\_service\_bindings](#input\_cd\_code\_engine\_service\_bindings) | JSON array including service name(s) (as a simple JSON string. | `string` | `""` | no |
-| <a name="input_cd_code_signing_cert"></a> [cd\_code\_signing\_cert](#input\_cd\_code\_signing\_cert) | The base64 encoded GPG public key. | `string` | `""` | no |
+| <a name="input_cd_code_signing_cert"></a> [cd\_code\_signing\_cert](#input\_cd\_code\_signing\_cert) | The base64 encoded GPG public key. This is stored in a pipeline secret property. To use a secrets provider see `cd_enable_signing_validation`. | `string` | `""` | no |
+| <a name="input_cd_code_signing_cert_secret_crn"></a> [cd\_code\_signing\_cert\_secret\_crn](#input\_cd\_code\_signing\_cert\_secret\_crn) | The CRN for the public signing key cert in the secrets provider. | `string` | `""` | no |
+| <a name="input_cd_code_signing_cert_secret_group"></a> [cd\_code\_signing\_cert\_secret\_group](#input\_cd\_code\_signing\_cert\_secret\_group) | Secret group prefix for the pipeline Public signing key cert secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`. | `string` | `""` | no |
+| <a name="input_cd_code_signing_cert_secret_name"></a> [cd\_code\_signing\_cert\_secret\_name](#input\_cd\_code\_signing\_cert\_secret\_name) | Name of the Cloud API key secret in the secret provider. | `string` | `"code-signing-cert"` | no |
 | <a name="input_cd_compliance_base_image"></a> [cd\_compliance\_base\_image](#input\_cd\_compliance\_base\_image) | Pipeline baseimage to run most of the built-in pipeline code. | `string` | `""` | no |
 | <a name="input_cd_compliance_pipeline_branch"></a> [cd\_compliance\_pipeline\_branch](#input\_cd\_compliance\_pipeline\_branch) | The CD Pipeline Compliance Pipeline branch. | `string` | `""` | no |
 | <a name="input_cd_compliance_pipeline_group"></a> [cd\_compliance\_pipeline\_group](#input\_cd\_compliance\_pipeline\_group) | Specify user or group for compliance pipline repo. | `string` | `""` | no |
@@ -245,6 +248,7 @@ statement instead the previous block.
 | <a name="input_cd_emergency_label"></a> [cd\_emergency\_label](#input\_cd\_emergency\_label) | Identifies the pull request as an emergency. | `string` | `"EMERGENCY"` | no |
 | <a name="input_cd_enable_key_protect"></a> [cd\_enable\_key\_protect](#input\_cd\_enable\_key\_protect) | Use the Key Protect integration. | `bool` | `false` | no |
 | <a name="input_cd_enable_secrets_manager"></a> [cd\_enable\_secrets\_manager](#input\_cd\_enable\_secrets\_manager) | Use the Secrets Manager integration. | `bool` | `false` | no |
+| <a name="input_cd_enable_signing_validation"></a> [cd\_enable\_signing\_validation](#input\_cd\_enable\_signing\_validation) | Set to `true` to enable code signing validation with a public signing key stored in a secrets provider. By default this expects the secret to be called `code-signing-cert`. See `cd_code_signing_cert_secret_name`. | `bool` | `false` | no |
 | <a name="input_cd_enable_slack"></a> [cd\_enable\_slack](#input\_cd\_enable\_slack) | Default: false. Set to true to create the integration. | `bool` | `false` | no |
 | <a name="input_cd_event_notifications_crn"></a> [cd\_event\_notifications\_crn](#input\_cd\_event\_notifications\_crn) | Set the Event Notifications CRN to create an Events Notification integration. | `string` | `""` | no |
 | <a name="input_cd_evidence_group"></a> [cd\_evidence\_group](#input\_cd\_evidence\_group) | Specify Git user or group for evidence repository. | `string` | `""` | no |

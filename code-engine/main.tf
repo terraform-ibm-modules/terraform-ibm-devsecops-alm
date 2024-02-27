@@ -51,7 +51,7 @@ locals {
 
 module "devsecops_ci_toolchain" {
   count                    = var.create_ci_toolchain ? 1 : 0
-  source                   = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-ci-toolchain?ref=huayuenh/crn-support"
+  source                   = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-ci-toolchain?ref=v1.1.2"
   ibmcloud_api_key         = var.ibmcloud_api_key
   toolchain_name           = (var.ci_toolchain_name == "") ? format("${var.toolchain_name}%s", "-CI-Toolchain") : var.ci_toolchain_name
   toolchain_region         = (var.ci_toolchain_region == "") ? var.toolchain_region : replace(replace(var.ci_toolchain_region, "ibm:yp:", ""), "ibm:ys1:", "")
@@ -305,7 +305,7 @@ module "devsecops_ci_toolchain" {
 
 module "devsecops_cd_toolchain" {
   count            = var.create_cd_toolchain ? 1 : 0
-  source           = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain?ref=huayuenh/sm-crn"
+  source           = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain?ref=v1.1.4"
   ibmcloud_api_key = var.ibmcloud_api_key
 
   toolchain_name           = (var.cd_toolchain_name == "") ? format("${var.toolchain_name}%s", "-CD-Toolchain") : var.cd_toolchain_name
@@ -369,6 +369,10 @@ module "devsecops_cd_toolchain" {
   pipeline_doi_api_key_secret_name  = (var.cd_pipeline_doi_api_key_secret_name == "") ? var.pipeline_doi_api_key_secret_name : var.cd_pipeline_doi_api_key_secret_name
   pipeline_doi_api_key_secret_group = (var.cd_pipeline_doi_api_key_secret_group == "") ? var.pipeline_doi_api_key_secret_group : var.cd_pipeline_doi_api_key_secret_group
 
+  code_signing_cert_secret_name  = var.cd_code_signing_cert_secret_name
+  code_signing_cert_secret_group = var.cd_code_signing_cert_secret_group
+  enable_signing_validation      = var.cd_enable_signing_validation
+
   # CRN SECRETS
   deployment_repo_git_token_secret_crn          = (var.cd_deployment_repo_git_token_secret_crn == "") ? var.repo_git_token_secret_crn : var.cd_deployment_repo_git_token_secret_crn
   change_management_repo_git_token_secret_crn   = (var.cd_change_management_repo_git_token_secret_crn == "") ? var.repo_git_token_secret_crn : var.cd_change_management_repo_git_token_secret_crn
@@ -382,6 +386,7 @@ module "devsecops_cd_toolchain" {
   slack_webhook_secret_crn                      = (var.cd_slack_webhook_secret_crn == "") ? var.slack_webhook_secret_crn : var.cd_slack_webhook_secret_crn
   privateworker_credentials_secret_crn          = var.cd_privateworker_credentials_secret_crn
   artifactory_token_secret_crn                  = var.cd_artifactory_token_secret_crn
+  code_signing_cert_secret_crn                  = var.cd_code_signing_cert_secret_crn
   scc_scc_api_key_secret_crn                    = var.scc_scc_api_key_secret_crn
   pipeline_git_token_secret_crn                 = var.cd_pipeline_git_token_secret_crn
   pipeline_doi_api_key_secret_crn               = (var.cd_pipeline_doi_api_key_secret_crn == "") ? var.pipeline_doi_api_key_secret_crn : var.cd_pipeline_doi_api_key_secret_crn
@@ -539,7 +544,7 @@ module "devsecops_cd_toolchain" {
 
 module "devsecops_cc_toolchain" {
   count                         = var.create_cc_toolchain ? 1 : 0
-  source                        = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cc-toolchain?ref=huayuenh/crn-support"
+  source                        = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cc-toolchain?ref=v1.1.1"
   ibmcloud_api_key              = var.ibmcloud_api_key
   toolchain_name                = (var.cc_toolchain_name == "") ? format("${var.toolchain_name}%s", "-CC-Toolchain") : var.cc_toolchain_name
   toolchain_description         = var.cc_toolchain_description

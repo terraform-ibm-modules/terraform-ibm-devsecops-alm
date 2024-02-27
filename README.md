@@ -64,7 +64,7 @@ statement instead the previous block.
 | Name | Source | Version |
 |------|--------|---------|
 | <a name="module_devsecops_cc_toolchain"></a> [devsecops\_cc\_toolchain](#module\_devsecops\_cc\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cc-toolchain | v1.1.1 |
-| <a name="module_devsecops_cd_toolchain"></a> [devsecops\_cd\_toolchain](#module\_devsecops\_cd\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain | v1.1.3 |
+| <a name="module_devsecops_cd_toolchain"></a> [devsecops\_cd\_toolchain](#module\_devsecops\_cd\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain | v1.1.4 |
 | <a name="module_devsecops_ci_toolchain"></a> [devsecops\_ci\_toolchain](#module\_devsecops\_ci\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-ci-toolchain | v1.1.2 |
 
 ### Resources
@@ -176,7 +176,7 @@ statement instead the previous block.
 | <a name="input_cc_slack_team_name"></a> [cc\_slack\_team\_name](#input\_cc\_slack\_team\_name) | The Slack team name, which is the word or phrase before .slack.com in the team URL. | `string` | `""` | no |
 | <a name="input_cc_slack_toolchain_bind"></a> [cc\_slack\_toolchain\_bind](#input\_cc\_slack\_toolchain\_bind) | Generate tool added to toolchain notifications. | `bool` | `true` | no |
 | <a name="input_cc_slack_toolchain_unbind"></a> [cc\_slack\_toolchain\_unbind](#input\_cc\_slack\_toolchain\_unbind) | Generate tool removed from toolchain notifications. | `bool` | `true` | no |
-| <a name="input_cc_slack_webhook_secret_crn"></a> [cc\_slack\_webhook\_secret\_crn](#input\_cc\_slack\_webhook\_secret\_crn) | The CRN for Slack Webhook secret. | `string` | `""` | no |
+| <a name="input_cc_slack_webhook_secret_crn"></a> [cc\_slack\_webhook\_secret\_crn](#input\_cc\_slack\_webhook\_secret\_crn) | The CRN for Slack webhook secret. | `string` | `""` | no |
 | <a name="input_cc_slack_webhook_secret_group"></a> [cc\_slack\_webhook\_secret\_group](#input\_cc\_slack\_webhook\_secret\_group) | Secret group prefix for the Slack webhook secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`. | `string` | `""` | no |
 | <a name="input_cc_slack_webhook_secret_name"></a> [cc\_slack\_webhook\_secret\_name](#input\_cc\_slack\_webhook\_secret\_name) | Name of the webhook secret in the secret provider. | `string` | `""` | no |
 | <a name="input_cc_sm_instance_crn"></a> [cc\_sm\_instance\_crn](#input\_cc\_sm\_instance\_crn) | The CRN of the Secrets Manager instance. | `string` | `""` | no |
@@ -209,7 +209,7 @@ statement instead the previous block.
 | <a name="input_cd_authorization_policy_creation"></a> [cd\_authorization\_policy\_creation](#input\_cd\_authorization\_policy\_creation) | Disable Toolchain service to Secrets Manager Service authorization policy creation. | `string` | `""` | no |
 | <a name="input_cd_change_management_group"></a> [cd\_change\_management\_group](#input\_cd\_change\_management\_group) | Specify group for change management repository | `string` | `""` | no |
 | <a name="input_cd_change_management_repo_auth_type"></a> [cd\_change\_management\_repo\_auth\_type](#input\_cd\_change\_management\_repo\_auth\_type) | Select the method of authentication that is used to access the Git provider. 'oauth' or 'pat'. | `string` | `""` | no |
-| <a name="input_cd_change_management_repo_git_token_secret_crn"></a> [cd\_change\_management\_repo\_git\_token\_secret\_crn](#input\_cd\_change\_management\_repo\_git\_token\_secret\_crn) | The CRN for the Change Managemenrt repository Git Token. | `string` | `""` | no |
+| <a name="input_cd_change_management_repo_git_token_secret_crn"></a> [cd\_change\_management\_repo\_git\_token\_secret\_crn](#input\_cd\_change\_management\_repo\_git\_token\_secret\_crn) | The CRN for the Change Management repository Git Token. | `string` | `""` | no |
 | <a name="input_cd_change_management_repo_git_token_secret_name"></a> [cd\_change\_management\_repo\_git\_token\_secret\_name](#input\_cd\_change\_management\_repo\_git\_token\_secret\_name) | Name of the Git token secret in the secret provider. | `string` | `""` | no |
 | <a name="input_cd_change_management_repo_secret_group"></a> [cd\_change\_management\_repo\_secret\_group](#input\_cd\_change\_management\_repo\_secret\_group) | Secret group prefix for the Change Management repo secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`. | `string` | `""` | no |
 | <a name="input_cd_change_repo_clone_from_url"></a> [cd\_change\_repo\_clone\_from\_url](#input\_cd\_change\_repo\_clone\_from\_url) | Override the default management repo, which is cloned into the app repo. Note, using clone\_if\_not\_exists mode, so if the app repo already exists the repo contents are unchanged. | `string` | `""` | no |
@@ -217,7 +217,10 @@ statement instead the previous block.
 | <a name="input_cd_cluster_name"></a> [cd\_cluster\_name](#input\_cd\_cluster\_name) | Name of the Kubernetes cluster where the application is deployed. | `string` | `""` | no |
 | <a name="input_cd_cluster_namespace"></a> [cd\_cluster\_namespace](#input\_cd\_cluster\_namespace) | Name of the Kubernetes cluster namespace where the application is deployed. | `string` | `"prod"` | no |
 | <a name="input_cd_cluster_region"></a> [cd\_cluster\_region](#input\_cd\_cluster\_region) | Region of the Kubernetes cluster where the application is deployed. Use the short form of the regions. For example `us-south`. | `string` | `""` | no |
-| <a name="input_cd_code_signing_cert"></a> [cd\_code\_signing\_cert](#input\_cd\_code\_signing\_cert) | The base64 encoded GPG public key. | `string` | `""` | no |
+| <a name="input_cd_code_signing_cert"></a> [cd\_code\_signing\_cert](#input\_cd\_code\_signing\_cert) | The base64 encoded GPG public key. This is stored in a pipeline secret property. To use a secrets provider see `cd_enable_signing_validation`. | `string` | `""` | no |
+| <a name="input_cd_code_signing_cert_secret_crn"></a> [cd\_code\_signing\_cert\_secret\_crn](#input\_cd\_code\_signing\_cert\_secret\_crn) | The CRN for the public signing key cert in the secrets provider. | `string` | `""` | no |
+| <a name="input_cd_code_signing_cert_secret_group"></a> [cd\_code\_signing\_cert\_secret\_group](#input\_cd\_code\_signing\_cert\_secret\_group) | Secret group prefix for the pipeline Public signing key cert secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`. | `string` | `""` | no |
+| <a name="input_cd_code_signing_cert_secret_name"></a> [cd\_code\_signing\_cert\_secret\_name](#input\_cd\_code\_signing\_cert\_secret\_name) | Name of the Cloud API key secret in the secret provider. | `string` | `"code-signing-cert"` | no |
 | <a name="input_cd_compliance_base_image"></a> [cd\_compliance\_base\_image](#input\_cd\_compliance\_base\_image) | Pipeline baseimage to run most of the built-in pipeline code. | `string` | `""` | no |
 | <a name="input_cd_compliance_pipeline_branch"></a> [cd\_compliance\_pipeline\_branch](#input\_cd\_compliance\_pipeline\_branch) | The CD Pipeline Compliance Pipeline branch. | `string` | `""` | no |
 | <a name="input_cd_compliance_pipeline_group"></a> [cd\_compliance\_pipeline\_group](#input\_cd\_compliance\_pipeline\_group) | Specify user or group for compliance pipline repo. | `string` | `""` | no |
@@ -249,6 +252,7 @@ statement instead the previous block.
 | <a name="input_cd_emergency_label"></a> [cd\_emergency\_label](#input\_cd\_emergency\_label) | Identifies the pull request as an emergency. | `string` | `"EMERGENCY"` | no |
 | <a name="input_cd_enable_key_protect"></a> [cd\_enable\_key\_protect](#input\_cd\_enable\_key\_protect) | Use the Key Protect integration. | `bool` | `false` | no |
 | <a name="input_cd_enable_secrets_manager"></a> [cd\_enable\_secrets\_manager](#input\_cd\_enable\_secrets\_manager) | Use the Secrets Manager integration. | `bool` | `false` | no |
+| <a name="input_cd_enable_signing_validation"></a> [cd\_enable\_signing\_validation](#input\_cd\_enable\_signing\_validation) | Set to `true` to enable code signing validation with a public signing key stored in a secrets provider. By default this expects the secret to be called `code-signing-cert`. See `cd_code_signing_cert_secret_name`. | `bool` | `false` | no |
 | <a name="input_cd_enable_slack"></a> [cd\_enable\_slack](#input\_cd\_enable\_slack) | Default: false. Set to true to create the integration. | `bool` | `false` | no |
 | <a name="input_cd_event_notifications_crn"></a> [cd\_event\_notifications\_crn](#input\_cd\_event\_notifications\_crn) | Set the Event Notifications CRN to create an Events Notification integration. | `string` | `""` | no |
 | <a name="input_cd_evidence_group"></a> [cd\_evidence\_group](#input\_cd\_evidence\_group) | Specify Git user or group for evidence repository. | `string` | `""` | no |
@@ -456,7 +460,7 @@ statement instead the previous block.
 | <a name="input_ci_slack_team_name"></a> [ci\_slack\_team\_name](#input\_ci\_slack\_team\_name) | The Slack team name, which is the word or phrase before `.slack.com` in the team URL. | `string` | `""` | no |
 | <a name="input_ci_slack_toolchain_bind"></a> [ci\_slack\_toolchain\_bind](#input\_ci\_slack\_toolchain\_bind) | Generate tool added to toolchain notifications. | `bool` | `true` | no |
 | <a name="input_ci_slack_toolchain_unbind"></a> [ci\_slack\_toolchain\_unbind](#input\_ci\_slack\_toolchain\_unbind) | Generate tool removed from toolchain notifications. | `bool` | `true` | no |
-| <a name="input_ci_slack_webhook_secret_crn"></a> [ci\_slack\_webhook\_secret\_crn](#input\_ci\_slack\_webhook\_secret\_crn) | The CRN for the Slack Webhook secret. | `string` | `""` | no |
+| <a name="input_ci_slack_webhook_secret_crn"></a> [ci\_slack\_webhook\_secret\_crn](#input\_ci\_slack\_webhook\_secret\_crn) | The CRN for the Slack webhook secret. | `string` | `""` | no |
 | <a name="input_ci_slack_webhook_secret_group"></a> [ci\_slack\_webhook\_secret\_group](#input\_ci\_slack\_webhook\_secret\_group) | Secret group prefix for the Slack webhook secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`. | `string` | `""` | no |
 | <a name="input_ci_slack_webhook_secret_name"></a> [ci\_slack\_webhook\_secret\_name](#input\_ci\_slack\_webhook\_secret\_name) | Name of the webhook secret in the secret provider. | `string` | `""` | no |
 | <a name="input_ci_sm_instance_crn"></a> [ci\_sm\_instance\_crn](#input\_ci\_sm\_instance\_crn) | The CRN of the Secrets Manager instance for the CI toolchain. | `string` | `""` | no |
@@ -559,7 +563,7 @@ statement instead the previous block.
 | <a name="input_slack_integration_name"></a> [slack\_integration\_name](#input\_slack\_integration\_name) | The name of the Slack integration. | `string` | `"slack-compliance"` | no |
 | <a name="input_slack_notifications"></a> [slack\_notifications](#input\_slack\_notifications) | This is enabled automatically when a Slack integration is created. The switch overrides the Slack notifications. Set `1` for on and `0` for off. This applies to the CI, CD, and CC toolchains. To set separately, see `ci_slack_notifications`, `cd_slack_notifications`, and `cc_slack_notifications`. | `string` | `""` | no |
 | <a name="input_slack_team_name"></a> [slack\_team\_name](#input\_slack\_team\_name) | The Slack team name, which is the word or phrase before `.slack.com` in the team URL. This applies to the CI, CD, and CC toolchains. To set separately, see `ci_slack_team_name`, `cd_slack_team_name`, and `cc_slack_team_name`. | `string` | `""` | no |
-| <a name="input_slack_webhook_secret_crn"></a> [slack\_webhook\_secret\_crn](#input\_slack\_webhook\_secret\_crn) | The CRN for the Slack Webhook secret. | `string` | `""` | no |
+| <a name="input_slack_webhook_secret_crn"></a> [slack\_webhook\_secret\_crn](#input\_slack\_webhook\_secret\_crn) | The CRN for the Slack webhook secret. | `string` | `""` | no |
 | <a name="input_slack_webhook_secret_name"></a> [slack\_webhook\_secret\_name](#input\_slack\_webhook\_secret\_name) | Name of the webhook secret for Slack in the secret provider. This applies to the CI, CD, and CC toolchains. To set separately, see `ci_slack_webhook_secret_name`, `cd_slack_webhook_secret_name`, and `cc_slack_webhook_secret_name` | `string` | `"slack-webhook"` | no |
 | <a name="input_sm_instance_crn"></a> [sm\_instance\_crn](#input\_sm\_instance\_crn) | The CRN of the Secrets Manager instance. Will apply to CI, CD and CC toolchains unless set individually. | `string` | `""` | no |
 | <a name="input_sm_integration_name"></a> [sm\_integration\_name](#input\_sm\_integration\_name) | The name of the Secrets Manager integration. | `string` | `"sm-compliance-secrets"` | no |
