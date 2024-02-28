@@ -41,9 +41,8 @@ locals {
     format("%s/open-toolchain/code-engine-compliance-app.git", local.compliance_pipelines_git_server)
   )
 
-  code_engine_app_branch       = "main"
-  repo_auth_type               = (var.repo_git_token_secret_name == "") ? "oauth" : "pat"
-  calculated_ci_cluster_region = (var.ci_dev_region != "") ? var.ci_dev_region : (var.ci_cluster_region != "") ? var.ci_cluster_region : var.toolchain_region
+  code_engine_app_branch = "main"
+  repo_auth_type         = ((var.repo_git_token_secret_name == "") && (var.repo_git_token_secret_crn == "")) ? "oauth" : "pat"
 
   inventory_repo_existing_url = (var.inventory_repo_existing_url != "") ? var.inventory_repo_existing_url : var.inventory_repo_url
   evidence_repo_existing_url  = (var.evidence_repo_existing_url != "") ? var.evidence_repo_existing_url : var.evidence_repo_url
@@ -52,7 +51,7 @@ locals {
 
 module "devsecops_ci_toolchain" {
   count                    = var.create_ci_toolchain ? 1 : 0
-  source                   = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-ci-toolchain?ref=v1.1.0-beta.2"
+  source                   = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-ci-toolchain?ref=v1.1.2"
   ibmcloud_api_key         = var.ibmcloud_api_key
   toolchain_name           = (var.ci_toolchain_name == "") ? format("${var.toolchain_name}%s", "-CI-Toolchain") : var.ci_toolchain_name
   toolchain_region         = (var.ci_toolchain_region == "") ? var.toolchain_region : replace(replace(var.ci_toolchain_region, "ibm:yp:", ""), "ibm:ys1:", "")
@@ -63,6 +62,8 @@ module "devsecops_ci_toolchain" {
   compliance_base_image    = (var.ci_compliance_base_image == "") ? var.compliance_base_image : var.ci_compliance_base_image
   ci_pipeline_branch       = (var.ci_compliance_pipeline_branch == "") ? var.compliance_pipeline_branch : var.ci_compliance_pipeline_branch
   pr_pipeline_branch       = (var.ci_compliance_pipeline_pr_branch == "") ? var.compliance_pipeline_branch : var.ci_compliance_pipeline_pr_branch
+  ci_pipeline_git_tag      = (var.ci_pipeline_git_tag == "") ? var.pipeline_git_tag : var.ci_pipeline_git_tag
+  pr_pipeline_git_tag      = (var.pr_pipeline_git_tag == "") ? var.pipeline_git_tag : var.pr_pipeline_git_tag
 
   #SECRET PROVIDERS
   enable_key_protect     = (local.use_kp_override) ? var.enable_key_protect : var.ci_enable_key_protect
@@ -74,6 +75,7 @@ module "devsecops_ci_toolchain" {
   kp_name                = (var.ci_kp_name == "") ? var.kp_name : var.ci_kp_name
   kp_location            = (var.ci_kp_location == "") ? replace(replace(var.kp_location, "ibm:yp:", ""), "ibm:ys1:", "") : replace(replace(var.ci_kp_location, "ibm:yp:", ""), "ibm:ys1:", "")
   kp_resource_group      = (var.ci_kp_resource_group != "") ? var.ci_kp_resource_group : (var.kp_resource_group != "") ? var.kp_resource_group : var.toolchain_resource_group
+  sm_instance_crn        = (var.ci_sm_instance_crn != "") ? var.ci_sm_instance_crn : var.sm_instance_crn
 
   #SECRET NAMES
   pipeline_ibmcloud_api_key_secret_name  = var.ci_pipeline_ibmcloud_api_key_secret_name
@@ -111,6 +113,31 @@ module "devsecops_ci_toolchain" {
 
   app_repo_git_token_secret_name = (var.ci_app_repo_git_token_secret_name == "") ? var.repo_git_token_secret_name : var.ci_app_repo_git_token_secret_name
   app_repo_secret_group          = (var.ci_app_repo_secret_group == "") ? var.repo_secret_group : var.ci_app_repo_secret_group
+
+  gosec_private_repository_ssh_key_secret_name  = (var.ci_gosec_repo_ssh_key_secret_name == "") ? var.gosec_repo_ssh_key_secret_name : var.ci_gosec_repo_ssh_key_secret_name
+  gosec_private_repository_ssh_key_secret_group = (var.ci_gosec_repo_ssh_key_secret_group == "") ? var.gosec_repo_ssh_key_secret_group : var.ci_gosec_repo_ssh_key_secret_group
+
+  pipeline_doi_api_key_secret_name  = (var.ci_pipeline_doi_api_key_secret_name == "") ? var.pipeline_doi_api_key_secret_name : var.ci_pipeline_doi_api_key_secret_name
+  pipeline_doi_api_key_secret_group = (var.ci_pipeline_doi_api_key_secret_group == "") ? var.pipeline_doi_api_key_secret_group : var.ci_pipeline_doi_api_key_secret_group
+
+  # CRN SECRETS
+  app_repo_git_token_secret_crn                 = (var.ci_app_repo_git_token_secret_crn == "") ? var.repo_git_token_secret_crn : var.ci_app_repo_git_token_secret_crn
+  issues_repo_git_token_secret_crn              = (var.ci_issues_repo_git_token_secret_crn == "") ? var.repo_git_token_secret_crn : var.ci_issues_repo_git_token_secret_crn
+  evidence_repo_git_token_secret_crn            = (var.ci_evidence_repo_git_token_secret_crn == "") ? var.repo_git_token_secret_crn : var.ci_evidence_repo_git_token_secret_crn
+  inventory_repo_git_token_secret_crn           = (var.ci_inventory_repo_git_token_secret_crn == "") ? var.repo_git_token_secret_crn : var.ci_inventory_repo_git_token_secret_crn
+  compliance_pipeline_repo_git_token_secret_crn = (var.ci_compliance_pipeline_repo_git_token_secret_crn == "") ? var.repo_git_token_secret_crn : var.ci_pipeline_config_repo_git_token_secret_crn
+  pipeline_config_repo_git_token_secret_crn     = (var.ci_pipeline_config_repo_git_token_secret_crn == "") ? var.repo_git_token_secret_crn : var.ci_pipeline_config_repo_git_token_secret_crn
+  cos_api_key_secret_crn                        = (var.ci_cos_api_key_secret_crn == "") ? var.cos_api_key_secret_crn : var.ci_cos_api_key_secret_crn
+  pipeline_ibmcloud_api_key_secret_crn          = (var.ci_pipeline_ibmcloud_api_key_secret_crn == "") ? var.pipeline_ibmcloud_api_key_secret_crn : var.ci_pipeline_ibmcloud_api_key_secret_crn
+  signing_key_secret_crn                        = var.ci_signing_key_secret_crn
+  pipeline_dockerconfigjson_secret_crn          = var.ci_pipeline_dockerconfigjson_secret_crn
+  slack_webhook_secret_crn                      = (var.ci_slack_webhook_secret_crn == "") ? var.slack_webhook_secret_crn : var.ci_slack_webhook_secret_crn
+  privateworker_credentials_secret_crn          = var.ci_privateworker_credentials_secret_crn
+  artifactory_token_secret_crn                  = var.ci_artifactory_token_secret_crn
+  pipeline_git_token_secret_crn                 = var.ci_pipeline_git_token_secret_crn
+  pipeline_doi_api_key_secret_crn               = var.ci_pipeline_doi_api_key_secret_crn
+  sonarqube_secret_crn                          = (var.ci_sonarqube_secret_crn == "") ? var.sonarqube_secret_crn : var.ci_sonarqube_secret_crn
+  gosec_private_repository_ssh_key_secret_crn   = (var.ci_gosec_private_repository_ssh_key_secret_crn == "") ? var.gosec_private_repository_ssh_key_secret_crn : var.ci_gosec_private_repository_ssh_key_secret_crn
 
   #AUTH TYPE FOR REPOS
   pipeline_config_repo_auth_type     = (var.ci_pipeline_config_repo_auth_type == "") ? local.repo_auth_type : var.ci_pipeline_config_repo_auth_type
@@ -166,10 +193,6 @@ module "devsecops_ci_toolchain" {
   inventory_repo_integration_owner = var.inventory_repo_integration_owner
 
   app_name                           = var.ci_app_name
-  dev_region                         = format("${var.environment_prefix}%s", replace(replace(local.calculated_ci_cluster_region, "ibm:yp:", ""), "ibm:ys1:", ""))
-  dev_resource_group                 = (var.ci_cluster_resource_group != "") ? var.ci_cluster_resource_group : (var.ci_dev_resource_group != "") ? var.ci_dev_resource_group : var.toolchain_resource_group
-  cluster_name                       = (var.ci_cluster_name == "") ? var.cluster_name : var.ci_cluster_name
-  cluster_namespace                  = var.ci_cluster_namespace
   registry_region                    = (var.ci_registry_region == "") ? format("${var.environment_prefix}%s", var.toolchain_region) : format("${var.environment_prefix}%s", replace(replace(var.ci_registry_region, "ibm:yp:", ""), "ibm:ys1:", ""))
   authorization_policy_creation      = (var.ci_authorization_policy_creation == "") ? var.authorization_policy_creation : var.ci_authorization_policy_creation
   repositories_prefix                = (var.ci_repositories_prefix == "") ? var.repositories_prefix : var.ci_repositories_prefix
@@ -237,6 +260,10 @@ module "devsecops_ci_toolchain" {
   slack_toolchain_bind   = var.ci_slack_toolchain_bind
   slack_toolchain_unbind = var.ci_slack_toolchain_unbind
 
+  #GOSEC
+  gosec_private_repository_host = (var.ci_gosec_private_repository_host == "") ? var.gosec_private_repository_host : var.ci_gosec_private_repository_host
+  opt_in_gosec                  = (var.ci_opt_in_gosec == "") ? var.opt_in_gosec : var.ci_opt_in_gosec
+
   #SONARQUBE
   sonarqube_integration_name    = var.ci_sonarqube_integration_name
   sonarqube_user                = var.ci_sonarqube_user
@@ -278,7 +305,7 @@ module "devsecops_ci_toolchain" {
 
 module "devsecops_cd_toolchain" {
   count            = var.create_cd_toolchain ? 1 : 0
-  source           = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain?ref=v1.1.1"
+  source           = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain?ref=v1.1.4"
   ibmcloud_api_key = var.ibmcloud_api_key
 
   toolchain_name           = (var.cd_toolchain_name == "") ? format("${var.toolchain_name}%s", "-CD-Toolchain") : var.cd_toolchain_name
@@ -288,6 +315,7 @@ module "devsecops_cd_toolchain" {
   ibmcloud_api             = var.ibmcloud_api
   compliance_base_image    = (var.cd_compliance_base_image == "") ? var.compliance_base_image : var.cd_compliance_base_image
   pipeline_branch          = (var.cd_compliance_pipeline_branch == "") ? var.compliance_pipeline_branch : var.cd_compliance_pipeline_branch
+  pipeline_git_tag         = (var.cd_pipeline_git_tag == "") ? var.pipeline_git_tag : var.cd_pipeline_git_tag
 
   #SECRET PROVIDERS
   enable_key_protect     = (local.use_kp_override) ? var.enable_key_protect : var.cd_enable_key_protect
@@ -299,6 +327,7 @@ module "devsecops_cd_toolchain" {
   kp_name                = (var.cd_kp_name == "") ? var.kp_name : var.cd_kp_name
   kp_location            = (var.cd_kp_location == "") ? replace(replace(var.kp_location, "ibm:yp:", ""), "ibm:ys1:", "") : replace(replace(var.cd_kp_location, "ibm:yp:", ""), "ibm:ys1:", "")
   kp_resource_group      = (var.cd_kp_resource_group != "") ? var.cd_kp_resource_group : (var.kp_resource_group != "") ? var.kp_resource_group : var.toolchain_resource_group
+  sm_instance_crn        = (var.cd_sm_instance_crn != "") ? var.cd_sm_instance_crn : var.sm_instance_crn
 
   #SECRET NAMES AND SECRET GROUPS
   pipeline_ibmcloud_api_key_secret_name  = var.cd_pipeline_ibmcloud_api_key_secret_name
@@ -336,6 +365,31 @@ module "devsecops_cd_toolchain" {
 
   pipeline_git_token_secret_name  = var.cd_pipeline_git_token_secret_name
   pipeline_git_token_secret_group = var.cd_pipeline_git_token_secret_group
+
+  pipeline_doi_api_key_secret_name  = (var.cd_pipeline_doi_api_key_secret_name == "") ? var.pipeline_doi_api_key_secret_name : var.cd_pipeline_doi_api_key_secret_name
+  pipeline_doi_api_key_secret_group = (var.cd_pipeline_doi_api_key_secret_group == "") ? var.pipeline_doi_api_key_secret_group : var.cd_pipeline_doi_api_key_secret_group
+
+  code_signing_cert_secret_name  = var.cd_code_signing_cert_secret_name
+  code_signing_cert_secret_group = var.cd_code_signing_cert_secret_group
+  enable_signing_validation      = var.cd_enable_signing_validation
+
+  # CRN SECRETS
+  deployment_repo_git_token_secret_crn          = (var.cd_deployment_repo_git_token_secret_crn == "") ? var.repo_git_token_secret_crn : var.cd_deployment_repo_git_token_secret_crn
+  change_management_repo_git_token_secret_crn   = (var.cd_change_management_repo_git_token_secret_crn == "") ? var.repo_git_token_secret_crn : var.cd_change_management_repo_git_token_secret_crn
+  issues_repo_git_token_secret_crn              = (var.cd_issues_repo_git_token_secret_crn == "") ? var.repo_git_token_secret_crn : var.cd_issues_repo_git_token_secret_crn
+  evidence_repo_git_token_secret_crn            = (var.cd_evidence_repo_git_token_secret_crn == "") ? var.repo_git_token_secret_crn : var.cd_evidence_repo_git_token_secret_crn
+  inventory_repo_git_token_secret_crn           = (var.cd_inventory_repo_git_token_secret_crn == "") ? var.repo_git_token_secret_crn : var.cd_inventory_repo_git_token_secret_crn
+  compliance_pipeline_repo_git_token_secret_crn = (var.cd_compliance_pipeline_repo_git_token_secret_crn == "") ? var.repo_git_token_secret_crn : var.cd_compliance_pipeline_repo_git_token_secret_crn
+  pipeline_config_repo_git_token_secret_crn     = (var.cd_pipeline_config_repo_git_token_secret_crn == "") ? var.repo_git_token_secret_crn : var.cd_pipeline_config_repo_git_token_secret_crn
+  cos_api_key_secret_crn                        = (var.cd_cos_api_key_secret_crn == "") ? var.cos_api_key_secret_crn : var.cd_cos_api_key_secret_crn
+  pipeline_ibmcloud_api_key_secret_crn          = (var.cd_pipeline_ibmcloud_api_key_secret_crn == "") ? var.pipeline_ibmcloud_api_key_secret_crn : var.cd_pipeline_ibmcloud_api_key_secret_crn
+  slack_webhook_secret_crn                      = (var.cd_slack_webhook_secret_crn == "") ? var.slack_webhook_secret_crn : var.cd_slack_webhook_secret_crn
+  privateworker_credentials_secret_crn          = var.cd_privateworker_credentials_secret_crn
+  artifactory_token_secret_crn                  = var.cd_artifactory_token_secret_crn
+  code_signing_cert_secret_crn                  = var.cd_code_signing_cert_secret_crn
+  scc_scc_api_key_secret_crn                    = var.scc_scc_api_key_secret_crn
+  pipeline_git_token_secret_crn                 = var.cd_pipeline_git_token_secret_crn
+  pipeline_doi_api_key_secret_crn               = (var.cd_pipeline_doi_api_key_secret_crn == "") ? var.pipeline_doi_api_key_secret_crn : var.cd_pipeline_doi_api_key_secret_crn
 
   #AUTH TYPE FOR REPOS
   pipeline_config_repo_auth_type     = (var.cd_pipeline_config_repo_auth_type == "") ? local.repo_auth_type : var.cd_pipeline_config_repo_auth_type
@@ -401,9 +455,6 @@ module "devsecops_cd_toolchain" {
 
   #OTHER INTEGRATIONS
   slack_notifications           = local.cd_slack_notification_state
-  cluster_name                  = (var.cd_cluster_name == "") ? var.cluster_name : var.cd_cluster_name
-  cluster_namespace             = var.cd_cluster_namespace
-  cluster_region                = (var.cd_cluster_region == "") ? format("${var.environment_prefix}%s", var.toolchain_region) : format("${var.environment_prefix}%s", replace(replace(var.cd_cluster_region, "ibm:yp:", ""), "ibm:ys1:", ""))
   repositories_prefix           = (var.cd_repositories_prefix == "") ? var.repositories_prefix : var.cd_repositories_prefix
   authorization_policy_creation = (var.cd_authorization_policy_creation == "") ? var.authorization_policy_creation : var.cd_authorization_policy_creation
   doi_environment               = var.cd_doi_environment
@@ -413,7 +464,6 @@ module "devsecops_cd_toolchain" {
   customer_impact               = var.cd_customer_impact
   target_environment_purpose    = var.cd_target_environment_purpose
   change_request_id             = var.cd_change_request_id
-  satellite_cluster_group       = var.cd_satellite_cluster_group
   source_environment            = var.cd_source_environment
   target_environment            = var.cd_target_environment
   merge_cra_sbom                = var.cd_merge_cra_sbom
@@ -494,7 +544,7 @@ module "devsecops_cd_toolchain" {
 
 module "devsecops_cc_toolchain" {
   count                         = var.create_cc_toolchain ? 1 : 0
-  source                        = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cc-toolchain?ref=v1.0.9"
+  source                        = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cc-toolchain?ref=v1.1.1"
   ibmcloud_api_key              = var.ibmcloud_api_key
   toolchain_name                = (var.cc_toolchain_name == "") ? format("${var.toolchain_name}%s", "-CC-Toolchain") : var.cc_toolchain_name
   toolchain_description         = var.cc_toolchain_description
@@ -504,6 +554,7 @@ module "devsecops_cc_toolchain" {
   compliance_base_image         = (var.cc_compliance_base_image == "") ? var.compliance_base_image : var.cc_compliance_base_image
   authorization_policy_creation = (var.cc_authorization_policy_creation == "") ? var.authorization_policy_creation : var.cc_authorization_policy_creation
   pipeline_branch               = (var.cc_compliance_pipeline_branch == "") ? var.compliance_pipeline_branch : var.cc_compliance_pipeline_branch
+  pipeline_git_tag              = (var.cc_pipeline_git_tag == "") ? var.pipeline_git_tag : var.cc_pipeline_git_tag
 
   #SECRET PROVIDERS
   enable_key_protect     = (local.use_kp_override) ? var.enable_key_protect : var.cc_enable_key_protect
@@ -515,6 +566,7 @@ module "devsecops_cc_toolchain" {
   kp_name                = (var.cc_kp_name == "") ? var.kp_name : var.cc_kp_name
   kp_location            = (var.cc_sm_location == "") ? replace(replace(var.kp_location, "ibm:yp:", ""), "ibm:ys1:", "") : replace(replace(var.cc_kp_location, "ibm:yp:", ""), "ibm:ys1:", "")
   kp_resource_group      = (var.cc_kp_resource_group != "") ? var.cc_kp_resource_group : (var.kp_resource_group != "") ? var.kp_resource_group : var.toolchain_resource_group
+  sm_instance_crn        = (var.cc_sm_instance_crn != "") ? var.cc_sm_instance_crn : var.sm_instance_crn
 
   #SECRET NAMES AND SECRET GROUPS
   pipeline_ibmcloud_api_key_secret_name  = var.cc_pipeline_ibmcloud_api_key_secret_name
@@ -549,6 +601,30 @@ module "devsecops_cc_toolchain" {
 
   scc_scc_api_key_secret_name  = var.scc_scc_api_key_secret_name
   scc_scc_api_key_secret_group = var.scc_scc_api_key_secret_group
+
+  gosec_private_repository_ssh_key_secret_name  = (var.cc_gosec_repo_ssh_key_secret_name == "") ? var.gosec_repo_ssh_key_secret_name : var.cc_gosec_repo_ssh_key_secret_name
+  gosec_private_repository_ssh_key_secret_group = (var.cc_gosec_repo_ssh_key_secret_group == "") ? var.gosec_repo_ssh_key_secret_group : var.cc_gosec_repo_ssh_key_secret_group
+
+  pipeline_doi_api_key_secret_name  = (var.cc_pipeline_doi_api_key_secret_name == "") ? var.pipeline_doi_api_key_secret_name : var.cc_pipeline_doi_api_key_secret_name
+  pipeline_doi_api_key_secret_group = (var.cc_pipeline_doi_api_key_secret_group == "") ? var.pipeline_doi_api_key_secret_group : var.cc_pipeline_doi_api_key_secret_group
+
+  # CRN SECRETS
+  app_repo_git_token_secret_crn                 = (var.cc_app_repo_git_token_secret_crn == "") ? var.repo_git_token_secret_crn : var.cc_app_repo_git_token_secret_crn
+  issues_repo_git_token_secret_crn              = (var.cc_issues_repo_git_token_secret_crn == "") ? var.repo_git_token_secret_crn : var.cc_issues_repo_git_token_secret_crn
+  evidence_repo_git_token_secret_crn            = (var.cc_evidence_repo_git_token_secret_crn == "") ? var.repo_git_token_secret_crn : var.cc_evidence_repo_git_token_secret_crn
+  inventory_repo_git_token_secret_crn           = (var.cc_inventory_repo_git_token_secret_crn == "") ? var.repo_git_token_secret_crn : var.cc_inventory_repo_git_token_secret_crn
+  compliance_pipeline_repo_git_token_secret_crn = (var.cc_compliance_pipeline_repo_git_token_secret_crn == "") ? var.repo_git_token_secret_crn : var.cc_compliance_pipeline_repo_git_token_secret_crn
+  pipeline_config_repo_git_token_secret_crn     = (var.cc_pipeline_config_repo_git_token_secret_crn == "") ? var.repo_git_token_secret_crn : var.cc_pipeline_config_repo_git_token_secret_crn
+  cos_api_key_secret_crn                        = (var.cc_cos_api_key_secret_crn == "") ? var.cos_api_key_secret_crn : var.cc_cos_api_key_secret_crn
+  pipeline_ibmcloud_api_key_secret_crn          = (var.cc_pipeline_ibmcloud_api_key_secret_crn == "") ? var.pipeline_ibmcloud_api_key_secret_crn : var.cc_pipeline_ibmcloud_api_key_secret_crn
+  pipeline_dockerconfigjson_secret_crn          = var.cc_pipeline_dockerconfigjson_secret_crn
+  slack_webhook_secret_crn                      = (var.cc_slack_webhook_secret_crn == "") ? var.slack_webhook_secret_crn : var.cc_slack_webhook_secret_crn
+  artifactory_token_secret_crn                  = var.cc_artifactory_token_secret_crn
+  pipeline_git_token_secret_crn                 = var.cc_pipeline_git_token_secret_crn
+  scc_scc_api_key_secret_crn                    = var.scc_scc_api_key_secret_crn
+  sonarqube_secret_crn                          = (var.cc_sonarqube_secret_crn == "") ? var.sonarqube_secret_crn : var.cc_sonarqube_secret_crn
+  pipeline_doi_api_key_secret_crn               = (var.cc_pipeline_doi_api_key_secret_crn == "") ? var.pipeline_doi_api_key_secret_crn : var.cc_pipeline_doi_api_key_secret_crn
+  gosec_private_repository_ssh_key_secret_crn   = (var.cc_gosec_private_repository_ssh_key_secret_crn == "") ? var.gosec_private_repository_ssh_key_secret_crn : var.cc_gosec_private_repository_ssh_key_secret_crn
 
   #AUTH TYPE FOR REPOS
   pipeline_config_repo_auth_type     = (var.cc_pipeline_config_repo_auth_type == "") ? local.repo_auth_type : var.cc_pipeline_config_repo_auth_type
@@ -647,6 +723,10 @@ module "devsecops_cc_toolchain" {
   sm_integration_name    = var.sm_integration_name
   kp_integration_name    = var.kp_integration_name
   slack_integration_name = var.slack_integration_name
+
+  #GOSEC
+  gosec_private_repository_host = (var.cc_gosec_private_repository_host == "") ? var.gosec_private_repository_host : var.cc_gosec_private_repository_host
+  opt_in_gosec                  = (var.cc_opt_in_gosec == "") ? var.opt_in_gosec : var.cc_opt_in_gosec
 
   #SONARQUBE
   sonarqube_integration_name    = var.cc_sonarqube_integration_name

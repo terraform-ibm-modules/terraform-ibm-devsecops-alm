@@ -13,7 +13,7 @@ variable "ibmcloud_api" {
 
 variable "toolchain_region" {
   type        = string
-  description = "The region identifier that will be used, by default, for all resource creation and service instance lookup. This can be overridden on a per resource/service basis. See `ci_toolchain_region`,`cd_toolchain_region`,`cc_toolchain_region`, `ci_cluster_region`, `cd_cluster_region`, `ci_registry_region`."
+  description = "The region identifier that will be used, by default, for all resource creation and service instance lookup. This can be overridden on a per resource/service basis. See `ci_toolchain_region`,`cd_toolchain_region`,`cc_toolchain_region`, `ci_registry_region`."
   default     = "us-south"
 }
 
@@ -213,8 +213,14 @@ variable "enable_secrets_manager" {
 
 variable "toolchain_resource_group" {
   type        = string
-  description = "The resource group that will be used, by default, for all resource creation and service instance lookups. This can be overridden on a per resource/service basis. See `ci_toolchain_resource_group`,`cd_toolchain_resource_group`,`cc_toolchain_resource_group`, `ci_cluster_resource_group`."
+  description = "The resource group that will be used, by default, for all resource creation and service instance lookups. This can be overridden on a per resource/service basis. See `ci_toolchain_resource_group`,`cd_toolchain_resource_group`,`cc_toolchain_resource_group`."
   default     = "Default"
+}
+
+variable "gosec_repo_ssh_key_secret_group" {
+  type        = string
+  description = "Secret group prefix for the gosec private repository ssh key secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
+  default     = ""
 }
 
 variable "cos_endpoint" {
@@ -251,6 +257,106 @@ variable "slack_webhook_secret_name" {
   type        = string
   description = "Name of the webhook secret for Slack in the secret provider. This applies to the CI, CD, and CC toolchains. To set separately, see `ci_slack_webhook_secret_name`, `cd_slack_webhook_secret_name`, and `cc_slack_webhook_secret_name`"
   default     = "slack-webhook"
+}
+
+variable "gosec_repo_ssh_key_secret_name" {
+  type        = string
+  default     = "git-ssh-key"
+  description = "Name of the SSH key token for the private repository in the secret provider."
+}
+
+variable "sm_instance_crn" {
+  type        = string
+  description = "The CRN of the Secrets Manager instance. Will apply to CI, CD and CC toolchains unless set individually."
+  default     = ""
+}
+
+variable "repo_git_token_secret_crn" {
+  type        = string
+  sensitive   = true
+  description = "The CRN for the repositories Git Token."
+  default     = ""
+  validation {
+    condition     = startswith(var.repo_git_token_secret_crn, "crn:") || var.repo_git_token_secret_crn == ""
+    error_message = "Must be a CRN or left empty."
+  }
+}
+
+variable "pipeline_ibmcloud_api_key_secret_crn" {
+  type        = string
+  sensitive   = true
+  description = "The CRN for the IBMCloud apikey."
+  default     = ""
+  validation {
+    condition     = startswith(var.pipeline_ibmcloud_api_key_secret_crn, "crn:") || var.pipeline_ibmcloud_api_key_secret_crn == ""
+    error_message = "Must be a CRN or left empty."
+  }
+}
+
+variable "pipeline_doi_api_key_secret_crn" {
+  type        = string
+  sensitive   = true
+  description = "The CRN for the pipeline DOI apikey."
+  default     = ""
+  validation {
+    condition     = startswith(var.pipeline_doi_api_key_secret_crn, "crn:") || var.pipeline_doi_api_key_secret_crn == ""
+    error_message = "Must be a CRN or left empty."
+  }
+}
+
+variable "sonarqube_secret_crn" {
+  type        = string
+  sensitive   = true
+  description = "The CRN for the SonarQube secret."
+  default     = ""
+  validation {
+    condition     = startswith(var.sonarqube_secret_crn, "crn:") || var.sonarqube_secret_crn == ""
+    error_message = "Must be a CRN or left empty."
+  }
+}
+
+variable "gosec_private_repository_ssh_key_secret_crn" {
+  type        = string
+  sensitive   = true
+  description = "The CRN for the GoSec repository secret."
+  default     = ""
+  validation {
+    condition     = startswith(var.gosec_private_repository_ssh_key_secret_crn, "crn:") || var.gosec_private_repository_ssh_key_secret_crn == ""
+    error_message = "Must be a CRN or left empty."
+  }
+}
+
+variable "cos_api_key_secret_crn" {
+  type        = string
+  sensitive   = true
+  description = "The CRN for the Cloud Object Storage apikey."
+  default     = ""
+  validation {
+    condition     = startswith(var.cos_api_key_secret_crn, "crn:") || var.cos_api_key_secret_crn == ""
+    error_message = "Must be a CRN or left empty."
+  }
+}
+
+variable "scc_scc_api_key_secret_crn" {
+  type        = string
+  sensitive   = true
+  description = "The CRN for the SCC apikey."
+  default     = ""
+  validation {
+    condition     = startswith(var.scc_scc_api_key_secret_crn, "crn:") || var.scc_scc_api_key_secret_crn == ""
+    error_message = "Must be a CRN or left empty."
+  }
+}
+
+variable "slack_webhook_secret_crn" {
+  type        = string
+  sensitive   = true
+  description = "The CRN for the Slack webhook secret."
+  default     = ""
+  validation {
+    condition     = startswith(var.slack_webhook_secret_crn, "crn:") || var.slack_webhook_secret_crn == ""
+    error_message = "Must be a CRN or left empty."
+  }
 }
 
 variable "authorization_policy_creation" {
@@ -301,10 +407,10 @@ variable "compliance_base_image" {
   default     = ""
 }
 
-variable "cluster_name" {
+variable "pipeline_git_tag" {
   type        = string
-  description = "Name of the Kubernetes cluster where the application is deployed. This sets the same cluster for both CI and CD toolchains. See `ci_cluster_name` and `cd_cluster_name` to set different clusters. By default , the cluster namespace for CI will be set to `dev` and CD to `prod`. These can be changed using `ci_cluster_namespace` and `cd_cluster_namespace`."
-  default     = "mycluster-free"
+  description = "The GIT tag within the pipeline definitions repository for the Compliance Pipelines."
+  default     = ""
 }
 
 variable "repositories_prefix" {
@@ -393,10 +499,33 @@ variable "scc_scc_api_key_secret_group" {
 
 variable "scc_use_profile_attachment" {
   type        = string
-  description = "Set to `enabled` to enable use profile with attachment, so that the scripts in the pipeline can interact with the Security and Compliance Center service. When enabled, other parameters become relevant; `scc_scc_scc_api_key_secret_name`, `scc_instance_crn`, `scc_profile_name`, `scc_profile_version`, `scc_attachment_id`. Can individually be `enabled` and `disabled` in the CD and CC toolchains using `cd_scc_use_profile_attachment` and `cc_scc_use_profile_attachment`."
+  description = "Set to `enabled` to enable use profile with attachment, so that the scripts in the pipeline can interact with the Security and Compliance Center service. When enabled, other parameters become relevant; `scc_scc_api_key_secret_name`, `scc_instance_crn`, `scc_profile_name`, `scc_profile_version`, `scc_attachment_id`. Can individually be `enabled` and `disabled` in the CD and CC toolchains using `cd_scc_use_profile_attachment` and `cc_scc_use_profile_attachment`."
   default     = "disabled"
 }
 
+variable "pipeline_doi_api_key_secret_name" {
+  type        = string
+  description = "Name of the Cloud API key secret in the secret provider to access the toolchain containing the Devops Insights instance. This will apply to the CI, CD and CC toolchains."
+  default     = ""
+}
+
+variable "pipeline_doi_api_key_secret_group" {
+  type        = string
+  description = "Secret group prefix for the pipeline DOI api key. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`. Applies to the CI, CD and CC toolchains."
+  default     = ""
+}
+
+variable "opt_in_gosec" {
+  type        = string
+  description = "Enables gosec scans"
+  default     = ""
+}
+
+variable "gosec_private_repository_host" {
+  type        = string
+  description = "Your private repository base URL."
+  default     = ""
+}
 
 variable "deployment_target" {
   type        = string
@@ -444,42 +573,6 @@ variable "ci_app_name" {
   default     = "hello-compliance-app"
 }
 
-variable "ci_cluster_name" {
-  type        = string
-  description = "Name of the Kubernetes cluster where the application is deployed. (can be the same cluster used for prod)"
-  default     = ""
-}
-
-variable "ci_cluster_namespace" {
-  type        = string
-  description = "Name of the Kubernetes cluster namespace where the application is deployed."
-  default     = "dev"
-}
-
-variable "ci_dev_region" {
-  type        = string
-  description = "(Deprecated. Use `ci_cluster_region`) Region of the Kubernetes cluster where the application is deployed. Use the short form of the regions. For example `us-south`"
-  default     = ""
-}
-
-variable "ci_cluster_region" {
-  type        = string
-  description = "Region of the Kubernetes cluster where the application is deployed. Use the short form of the regions. For example `us-south`."
-  default     = ""
-}
-
-variable "ci_dev_resource_group" {
-  type        = string
-  description = "(Deprecated. Use `ci_cluster_resource_group`) The cluster resource group."
-  default     = ""
-}
-
-variable "ci_cluster_resource_group" {
-  type        = string
-  description = "The cluster resource group."
-  default     = ""
-}
-
 variable "registry_namespace" {
   type        = string
   description = "A unique namespace within the IBM Cloud Container Registry region where the application image is stored."
@@ -519,6 +612,18 @@ variable "ci_compliance_pipeline_branch" {
 variable "ci_compliance_pipeline_pr_branch" {
   type        = string
   description = "The PR Pipeline Compliance Pipeline branch."
+  default     = ""
+}
+
+variable "ci_pipeline_git_tag" {
+  type        = string
+  description = "The GIT tag within the pipeline definitions repository for the Compliance CI Pipeline."
+  default     = ""
+}
+
+variable "pr_pipeline_git_tag" {
+  type        = string
+  description = "The GIT tag within the pipeline definitions repository for the Compliance PR Pipeline."
   default     = ""
 }
 
@@ -573,6 +678,18 @@ variable "ci_opt_in_dynamic_scan" {
 variable "ci_peer_review_compliance" {
   type        = string
   description = "Set to `0` to disable. Set to `1` to enable peer review evidence collection."
+  default     = ""
+}
+
+variable "ci_opt_in_gosec" {
+  type        = string
+  description = "Enables gosec scans"
+  default     = ""
+}
+
+variable "ci_gosec_private_repository_host" {
+  type        = string
+  description = "Your private repository base URL."
   default     = ""
 }
 
@@ -1029,6 +1146,18 @@ variable "ci_pipeline_config_repo_secret_group" {
   default     = ""
 }
 
+variable "ci_gosec_repo_ssh_key_secret_group" {
+  type        = string
+  description = "Secret group prefix for the gosec private repository ssh key secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
+  default     = ""
+}
+
+variable "ci_pipeline_doi_api_key_secret_group" {
+  type        = string
+  description = "Secret group prefix for the pipeline DOI api key. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
+  default     = ""
+}
+
 ######## PIPELINE CONFIG REPO ####################
 
 variable "ci_pipeline_config_repo_existing_url" {
@@ -1208,7 +1337,213 @@ variable "ci_pipeline_git_token_secret_name" {
   default     = "pipeline-git-token"
 }
 
+variable "ci_gosec_repo_ssh_key_secret_name" {
+  type        = string
+  default     = "git-ssh-key"
+  description = "Name of the SSH key token for the private repository in the secret provider."
+}
+
+variable "ci_pipeline_doi_api_key_secret_name" {
+  type        = string
+  description = "Name of the Cloud API key secret in the secret provider to access the toolchain containing the Devops Insights instance."
+  default     = ""
+}
+
 ######## End Secret Names #######################
+
+######## CRN Secrets ############################
+variable "ci_sm_instance_crn" {
+  type        = string
+  description = "The CRN of the Secrets Manager instance for the CI toolchain."
+  default     = ""
+}
+
+variable "ci_app_repo_git_token_secret_crn" {
+  type        = string
+  sensitive   = true
+  description = "The CRN for the app repository Git Token."
+  default     = ""
+  validation {
+    condition     = startswith(var.ci_app_repo_git_token_secret_crn, "crn:") || var.ci_app_repo_git_token_secret_crn == ""
+    error_message = "Must be a CRN or left empty."
+  }
+}
+
+variable "ci_issues_repo_git_token_secret_crn" {
+  type        = string
+  sensitive   = true
+  description = "The CRN for the Issues repository Git Token."
+  default     = ""
+  validation {
+    condition     = startswith(var.ci_issues_repo_git_token_secret_crn, "crn:") || var.ci_issues_repo_git_token_secret_crn == ""
+    error_message = "Must be a CRN or left empty."
+  }
+}
+
+variable "ci_evidence_repo_git_token_secret_crn" {
+  type        = string
+  sensitive   = true
+  description = "The CRN for the Evidence repository Git Token."
+  default     = ""
+  validation {
+    condition     = startswith(var.ci_evidence_repo_git_token_secret_crn, "crn:") || var.ci_evidence_repo_git_token_secret_crn == ""
+    error_message = "Must be a CRN or left empty."
+  }
+}
+
+variable "ci_inventory_repo_git_token_secret_crn" {
+  type        = string
+  sensitive   = true
+  description = "The CRN for the Inventory repository Git Token."
+  default     = ""
+  validation {
+    condition     = startswith(var.ci_inventory_repo_git_token_secret_crn, "crn:") || var.ci_inventory_repo_git_token_secret_crn == ""
+    error_message = "Must be a CRN or left empty."
+  }
+}
+
+variable "ci_compliance_pipeline_repo_git_token_secret_crn" {
+  type        = string
+  sensitive   = true
+  description = "The CRN for the Compliance Pipeline repository Git Token."
+  default     = ""
+  validation {
+    condition     = startswith(var.ci_compliance_pipeline_repo_git_token_secret_crn, "crn:") || var.ci_compliance_pipeline_repo_git_token_secret_crn == ""
+    error_message = "Must be a CRN or left empty."
+  }
+}
+
+variable "ci_pipeline_config_repo_git_token_secret_crn" {
+  type        = string
+  sensitive   = true
+  description = "The CRN for the Pipeline Config repository Git Token."
+  default     = ""
+  validation {
+    condition     = startswith(var.ci_pipeline_config_repo_git_token_secret_crn, "crn:") || var.ci_pipeline_config_repo_git_token_secret_crn == ""
+    error_message = "Must be a CRN or left empty."
+  }
+}
+
+variable "ci_cos_api_key_secret_crn" {
+  type        = string
+  sensitive   = true
+  description = "The CRN for the Cloud Object Storage apikey."
+  default     = ""
+  validation {
+    condition     = startswith(var.ci_cos_api_key_secret_crn, "crn:") || var.ci_cos_api_key_secret_crn == ""
+    error_message = "Must be a CRN or left empty."
+  }
+}
+
+variable "ci_pipeline_ibmcloud_api_key_secret_crn" {
+  type        = string
+  sensitive   = true
+  description = "The CRN for the IBMCloud apikey."
+  default     = ""
+  validation {
+    condition     = startswith(var.ci_pipeline_ibmcloud_api_key_secret_crn, "crn:") || var.ci_pipeline_ibmcloud_api_key_secret_crn == ""
+    error_message = "Must be a CRN or left empty."
+  }
+}
+
+variable "ci_signing_key_secret_crn" {
+  type        = string
+  sensitive   = true
+  description = "The CRN for Signing Key secret."
+  default     = ""
+  validation {
+    condition     = startswith(var.ci_signing_key_secret_crn, "crn:") || var.ci_signing_key_secret_crn == ""
+    error_message = "Must be a CRN or left empty."
+  }
+}
+
+variable "ci_pipeline_dockerconfigjson_secret_crn" {
+  type        = string
+  sensitive   = true
+  description = "The CRN for Dockerconfig json secret."
+  default     = ""
+  validation {
+    condition     = startswith(var.ci_pipeline_dockerconfigjson_secret_crn, "crn:") || var.ci_pipeline_dockerconfigjson_secret_crn == ""
+    error_message = "Must be a CRN or left empty."
+  }
+}
+
+variable "ci_slack_webhook_secret_crn" {
+  type        = string
+  sensitive   = true
+  description = "The CRN for the Slack webhook secret."
+  default     = ""
+  validation {
+    condition     = startswith(var.ci_slack_webhook_secret_crn, "crn:") || var.ci_slack_webhook_secret_crn == ""
+    error_message = "Must be a CRN or left empty."
+  }
+}
+
+variable "ci_privateworker_credentials_secret_crn" {
+  type        = string
+  sensitive   = true
+  description = "The CRN for the Private Worker secret secret."
+  default     = ""
+  validation {
+    condition     = startswith(var.ci_privateworker_credentials_secret_crn, "crn:") || var.ci_privateworker_credentials_secret_crn == ""
+    error_message = "Must be a CRN or left empty."
+  }
+}
+
+variable "ci_artifactory_token_secret_crn" {
+  type        = string
+  sensitive   = true
+  description = "The CRN for the Artifactory secret."
+  default     = ""
+  validation {
+    condition     = startswith(var.ci_artifactory_token_secret_crn, "crn:") || var.ci_artifactory_token_secret_crn == ""
+    error_message = "Must be a CRN or left empty."
+  }
+}
+
+variable "ci_pipeline_git_token_secret_crn" {
+  type        = string
+  sensitive   = true
+  description = "The CRN for the Git Token pipeline property."
+  default     = ""
+  validation {
+    condition     = startswith(var.ci_pipeline_git_token_secret_crn, "crn:") || var.ci_pipeline_git_token_secret_crn == ""
+    error_message = "Must be a CRN or left empty."
+  }
+}
+
+variable "ci_pipeline_doi_api_key_secret_crn" {
+  type        = string
+  sensitive   = true
+  description = "The CRN for the pipeline DOI apikey."
+  default     = ""
+  validation {
+    condition     = startswith(var.ci_pipeline_doi_api_key_secret_crn, "crn:") || var.ci_pipeline_doi_api_key_secret_crn == ""
+    error_message = "Must be a CRN or left empty."
+  }
+}
+
+variable "ci_sonarqube_secret_crn" {
+  type        = string
+  sensitive   = true
+  description = "The CRN for the SonarQube secret."
+  default     = ""
+  validation {
+    condition     = startswith(var.ci_sonarqube_secret_crn, "crn:") || var.ci_sonarqube_secret_crn == ""
+    error_message = "Must be a CRN or left empty."
+  }
+}
+
+variable "ci_gosec_private_repository_ssh_key_secret_crn" {
+  type        = string
+  sensitive   = true
+  description = "The CRN for the GoSec repository secret."
+  default     = ""
+  validation {
+    condition     = startswith(var.ci_gosec_private_repository_ssh_key_secret_crn, "crn:") || var.ci_gosec_private_repository_ssh_key_secret_crn == ""
+    error_message = "Must be a CRN or left empty."
+  }
+}
 
 variable "ci_opt_in_sonar" {
   type        = string
@@ -1392,24 +1727,6 @@ variable "cd_toolchain_description" {
   default     = "Toolchain created with terraform template for DevSecOps CD Best Practices."
 }
 
-variable "cd_cluster_name" {
-  type        = string
-  description = "Name of the Kubernetes cluster where the application is deployed."
-  default     = ""
-}
-
-variable "cd_cluster_namespace" {
-  type        = string
-  description = "Name of the Kubernetes cluster namespace where the application is deployed."
-  default     = "prod"
-}
-
-variable "cd_cluster_region" {
-  type        = string
-  description = "Region of the Kubernetes cluster where the application is deployed. Use the short form of the regions. For example `us-south`."
-  default     = ""
-}
-
 variable "cd_region" {
   type        = string
   description = "IBM Cloud region used to prefix the `prod_latest` inventory repo branch."
@@ -1488,6 +1805,12 @@ variable "cd_authorization_policy_creation" {
 variable "cd_compliance_pipeline_branch" {
   type        = string
   description = "The CD Pipeline Compliance Pipeline branch."
+  default     = ""
+}
+
+variable "cd_pipeline_git_tag" {
+  type        = string
+  description = "The GIT tag within the pipeline definitions repository for the Compliance CD Pipeline."
   default     = ""
 }
 
@@ -1608,6 +1931,18 @@ variable "cd_pipeline_ibmcloud_api_key_secret_group" {
 variable "cd_pipeline_git_token_secret_group" {
   type        = string
   description = "Secret group prefix for the pipeline Git token secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
+  default     = ""
+}
+
+variable "cd_pipeline_doi_api_key_secret_group" {
+  type        = string
+  description = "Secret group prefix for the pipeline DOI api key. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
+  default     = ""
+}
+
+variable "cd_code_signing_cert_secret_group" {
+  type        = string
+  description = "Secret group prefix for the pipeline Public signing key cert secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
   default     = ""
 }
 
@@ -1758,6 +2093,12 @@ variable "cd_pipeline_ibmcloud_api_key_secret_name" {
   default     = "ibmcloud-api-key"
 }
 
+variable "cd_code_signing_cert_secret_name" {
+  type        = string
+  description = "Name of the Cloud API key secret in the secret provider."
+  default     = "code-signing-cert"
+}
+
 variable "cd_cos_api_key_secret_name" {
   type        = string
   description = "Name of the COS API key secret in the secret provider."
@@ -1806,19 +2147,204 @@ variable "cd_change_management_repo_git_token_secret_name" {
   default     = ""
 }
 
-variable "cd_code_signing_cert" {
-  type        = string
-  description = "The base64 encoded GPG public key."
-  default     = ""
-}
-
 variable "cd_pipeline_git_token_secret_name" {
   type        = string
   description = "Name of the pipeline Git token secret in the secret provider."
   default     = "pipeline-git-token"
 }
 
+variable "cd_pipeline_doi_api_key_secret_name" {
+  type        = string
+  description = "Name of the Cloud API key secret in the secret provider to access the toolchain containing the Devops Insights instance."
+  default     = ""
+}
+
 ######## End Secret Names #######################
+
+variable "cd_code_signing_cert" {
+  type        = string
+  sensitive   = true
+  description = "The base64 encoded GPG public key. This is stored in a pipeline secret property. To use a secrets provider see `cd_enable_signing_validation`."
+  default     = ""
+}
+variable "cd_enable_signing_validation" {
+  type        = bool
+  description = "Set to `true` to enable code signing validation with a public signing key stored in a secrets provider. By default this expects the secret to be called `code-signing-cert`. See `cd_code_signing_cert_secret_name`."
+  default     = false
+}
+
+######## CRN secrets ############################
+variable "cd_sm_instance_crn" {
+  type        = string
+  description = "The CRN of the Secrets Manager instance."
+  default     = ""
+}
+
+variable "cd_code_signing_cert_secret_crn" {
+  type        = string
+  sensitive   = true
+  description = "The CRN for the public signing key cert in the secrets provider."
+  default     = ""
+  validation {
+    condition     = startswith(var.cd_code_signing_cert_secret_crn, "crn:") || var.cd_code_signing_cert_secret_crn == ""
+    error_message = "Must be a CRN or left empty."
+  }
+}
+
+variable "cd_deployment_repo_git_token_secret_crn" {
+  type        = string
+  sensitive   = true
+  description = "The CRN for the Deployment repository Git Token."
+  default     = ""
+  validation {
+    condition     = startswith(var.cd_deployment_repo_git_token_secret_crn, "crn:") || var.cd_deployment_repo_git_token_secret_crn == ""
+    error_message = "Must be a CRN or left empty."
+  }
+}
+
+variable "cd_change_management_repo_git_token_secret_crn" {
+  type        = string
+  sensitive   = true
+  description = "The CRN for the Change Management repository Git Token."
+  default     = ""
+  validation {
+    condition     = startswith(var.cd_change_management_repo_git_token_secret_crn, "crn:") || var.cd_change_management_repo_git_token_secret_crn == ""
+    error_message = "Must be a CRN or left empty."
+  }
+}
+
+variable "cd_issues_repo_git_token_secret_crn" {
+  type        = string
+  sensitive   = true
+  description = "The CRN for the Issues repository Git Token."
+  default     = ""
+  validation {
+    condition     = startswith(var.cd_issues_repo_git_token_secret_crn, "crn:") || var.cd_issues_repo_git_token_secret_crn == ""
+    error_message = "Must be a CRN or left empty."
+  }
+}
+
+variable "cd_evidence_repo_git_token_secret_crn" {
+  type        = string
+  sensitive   = true
+  description = "The CRN for the Evidence repository Git Token."
+  default     = ""
+  validation {
+    condition     = startswith(var.cd_evidence_repo_git_token_secret_crn, "crn:") || var.cd_evidence_repo_git_token_secret_crn == ""
+    error_message = "Must be a CRN or left empty."
+  }
+}
+
+variable "cd_inventory_repo_git_token_secret_crn" {
+  type        = string
+  sensitive   = true
+  description = "The CRN for the Inventory repository Git Token."
+  default     = ""
+  validation {
+    condition     = startswith(var.cd_inventory_repo_git_token_secret_crn, "crn:") || var.cd_inventory_repo_git_token_secret_crn == ""
+    error_message = "Must be a CRN or left empty."
+  }
+}
+
+variable "cd_compliance_pipeline_repo_git_token_secret_crn" {
+  type        = string
+  sensitive   = true
+  description = "The CRN for the Compliance Pipeline repository Git Token."
+  default     = ""
+  validation {
+    condition     = startswith(var.cd_compliance_pipeline_repo_git_token_secret_crn, "crn:") || var.cd_compliance_pipeline_repo_git_token_secret_crn == ""
+    error_message = "Must be a CRN or left empty."
+  }
+}
+
+variable "cd_pipeline_config_repo_git_token_secret_crn" {
+  type        = string
+  sensitive   = true
+  description = "The CRN for the Config repository Git Token."
+  default     = ""
+  validation {
+    condition     = startswith(var.cd_pipeline_config_repo_git_token_secret_crn, "crn:") || var.cd_pipeline_config_repo_git_token_secret_crn == ""
+    error_message = "Must be a CRN or left empty."
+  }
+}
+
+variable "cd_cos_api_key_secret_crn" {
+  type        = string
+  sensitive   = true
+  description = "The CRN for the Cloud Object Storage apikey."
+  default     = ""
+  validation {
+    condition     = startswith(var.cd_cos_api_key_secret_crn, "crn:") || var.cd_cos_api_key_secret_crn == ""
+    error_message = "Must be a CRN or left empty."
+  }
+}
+
+variable "cd_pipeline_ibmcloud_api_key_secret_crn" {
+  type        = string
+  sensitive   = true
+  description = "The CRN for the pipeline apikey."
+  default     = ""
+  validation {
+    condition     = startswith(var.cd_pipeline_ibmcloud_api_key_secret_crn, "crn:") || var.cd_pipeline_ibmcloud_api_key_secret_crn == ""
+    error_message = "Must be a CRN or left empty."
+  }
+}
+
+variable "cd_slack_webhook_secret_crn" {
+  type        = string
+  sensitive   = true
+  description = "The CRN for the Slack webhook secret."
+  default     = ""
+  validation {
+    condition     = startswith(var.cd_slack_webhook_secret_crn, "crn:") || var.cd_slack_webhook_secret_crn == ""
+    error_message = "Must be a CRN or left empty."
+  }
+}
+
+variable "cd_privateworker_credentials_secret_crn" {
+  type        = string
+  sensitive   = true
+  description = "The CRN for the Private Worker apikey."
+  default     = ""
+  validation {
+    condition     = startswith(var.cd_privateworker_credentials_secret_crn, "crn:") || var.cd_privateworker_credentials_secret_crn == ""
+    error_message = "Must be a CRN or left empty."
+  }
+}
+
+variable "cd_artifactory_token_secret_crn" {
+  type        = string
+  sensitive   = true
+  description = "The CRN for the Artifactory secret."
+  default     = ""
+  validation {
+    condition     = startswith(var.cd_artifactory_token_secret_crn, "crn:") || var.cd_artifactory_token_secret_crn == ""
+    error_message = "Must be a CRN or left empty."
+  }
+}
+
+variable "cd_pipeline_git_token_secret_crn" {
+  type        = string
+  sensitive   = true
+  description = "The CRN for the Git Token secret in the pipeline properties."
+  default     = ""
+  validation {
+    condition     = startswith(var.cd_pipeline_git_token_secret_crn, "crn:") || var.cd_pipeline_git_token_secret_crn == ""
+    error_message = "Must be a CRN or left empty."
+  }
+}
+
+variable "cd_pipeline_doi_api_key_secret_crn" {
+  type        = string
+  sensitive   = true
+  description = "The CRN for the DOI apikey."
+  default     = ""
+  validation {
+    condition     = startswith(var.cd_pipeline_doi_api_key_secret_crn, "crn:") || var.cd_pipeline_doi_api_key_secret_crn == ""
+    error_message = "Must be a CRN or left empty."
+  }
+}
+
 ####### Trigger properties ###################
 variable "cd_trigger_git_name" {
   type        = string
@@ -1943,12 +2469,6 @@ variable "cd_change_request_id" {
   type        = string
   description = "The ID of an open change request. If this parameter is set to 'notAvailable' by default, a change request is automatically created by the continuous deployment pipeline."
   default     = "notAvailable"
-}
-
-variable "cd_satellite_cluster_group" {
-  type        = string
-  description = "The Satellite cluster group"
-  default     = ""
 }
 
 variable "cd_source_environment" {
@@ -2269,6 +2789,12 @@ variable "cc_enable_secrets_manager" {
   default     = false
 }
 
+variable "cc_gosec_repo_ssh_key_secret_group" {
+  type        = string
+  description = "Secret group prefix for the gosec private repository ssh key secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
+  default     = ""
+}
+
 variable "cc_sm_secret_group" {
   type        = string
   description = "Group in Secrets Manager for organizing/grouping secrets."
@@ -2332,6 +2858,12 @@ variable "cc_compliance_pipeline_repo_secret_group" {
 variable "cc_pipeline_config_repo_secret_group" {
   type        = string
   description = "Secret group prefix for the Pipeline Config repo secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
+  default     = ""
+}
+
+variable "cc_pipeline_doi_api_key_secret_group" {
+  type        = string
+  description = "Secret group prefix for the pipeline DOI api key. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
   default     = ""
 }
 
@@ -2554,6 +3086,191 @@ variable "cc_pipeline_dockerconfigjson_secret_name" {
   default     = "pipeline_dockerconfigjson_secret_name"
 }
 
+variable "cc_gosec_repo_ssh_key_secret_name" {
+  type        = string
+  default     = "git-ssh-key"
+  description = "Name of the SSH key token for the private repository in the secret provider."
+}
+
+variable "cc_pipeline_doi_api_key_secret_name" {
+  type        = string
+  description = "Name of the Cloud API key secret in the secret provider to access the toolchain containing the Devops Insights instance."
+  default     = ""
+}
+
+######## End Secret Names #######################
+######## CRN secrets ############################
+variable "cc_sm_instance_crn" {
+  type        = string
+  description = "The CRN of the Secrets Manager instance."
+  default     = ""
+}
+
+variable "cc_app_repo_git_token_secret_crn" {
+  type        = string
+  sensitive   = true
+  description = "The CRN for the app repository Git Token."
+  default     = ""
+  validation {
+    condition     = startswith(var.cc_app_repo_git_token_secret_crn, "crn:") || var.cc_app_repo_git_token_secret_crn == ""
+    error_message = "Must be a CRN or left empty."
+  }
+}
+
+variable "cc_issues_repo_git_token_secret_crn" {
+  type        = string
+  sensitive   = true
+  description = "The CRN for the Issues repository Git Token."
+  default     = ""
+  validation {
+    condition     = startswith(var.cc_issues_repo_git_token_secret_crn, "crn:") || var.cc_issues_repo_git_token_secret_crn == ""
+    error_message = "Must be a CRN or left empty."
+  }
+}
+
+variable "cc_evidence_repo_git_token_secret_crn" {
+  type        = string
+  sensitive   = true
+  description = "The CRN for the Evidence repository Git Token."
+  default     = ""
+  validation {
+    condition     = startswith(var.cc_evidence_repo_git_token_secret_crn, "crn:") || var.cc_evidence_repo_git_token_secret_crn == ""
+    error_message = "Must be a CRN or left empty."
+  }
+}
+
+variable "cc_inventory_repo_git_token_secret_crn" {
+  type        = string
+  sensitive   = true
+  description = "The CRN for the Inventory repository Git Token."
+  default     = ""
+  validation {
+    condition     = startswith(var.cc_inventory_repo_git_token_secret_crn, "crn:") || var.cc_inventory_repo_git_token_secret_crn == ""
+    error_message = "Must be a CRN or left empty."
+  }
+}
+
+variable "cc_compliance_pipeline_repo_git_token_secret_crn" {
+  type        = string
+  sensitive   = true
+  description = "The CRN for the Compliance Pipeline repository Git Token."
+  default     = ""
+  validation {
+    condition     = startswith(var.cc_compliance_pipeline_repo_git_token_secret_crn, "crn:") || var.cc_compliance_pipeline_repo_git_token_secret_crn == ""
+    error_message = "Must be a CRN or left empty."
+  }
+}
+
+variable "cc_pipeline_config_repo_git_token_secret_crn" {
+  type        = string
+  sensitive   = true
+  description = "The CRN for the Pipeline Config repository Git Token."
+  default     = ""
+  validation {
+    condition     = startswith(var.cc_pipeline_config_repo_git_token_secret_crn, "crn:") || var.cc_pipeline_config_repo_git_token_secret_crn == ""
+    error_message = "Must be a CRN or left empty."
+  }
+}
+
+variable "cc_cos_api_key_secret_crn" {
+  type        = string
+  sensitive   = true
+  description = "The CRN for the Cloud Object Storage apikey."
+  default     = ""
+  validation {
+    condition     = startswith(var.cc_cos_api_key_secret_crn, "crn:") || var.cc_cos_api_key_secret_crn == ""
+    error_message = "Must be a CRN or left empty."
+  }
+}
+
+variable "cc_pipeline_ibmcloud_api_key_secret_crn" {
+  type        = string
+  sensitive   = true
+  description = "The CRN for the IBMCloud apikey."
+  default     = ""
+  validation {
+    condition     = startswith(var.cc_pipeline_ibmcloud_api_key_secret_crn, "crn:") || var.cc_pipeline_ibmcloud_api_key_secret_crn == ""
+    error_message = "Must be a CRN or left empty."
+  }
+}
+
+variable "cc_pipeline_dockerconfigjson_secret_crn" {
+  type        = string
+  sensitive   = true
+  description = "The CRN for the Dockerconfig json secret."
+  default     = ""
+  validation {
+    condition     = startswith(var.cc_pipeline_dockerconfigjson_secret_crn, "crn:") || var.cc_pipeline_dockerconfigjson_secret_crn == ""
+    error_message = "Must be a CRN or left empty."
+  }
+}
+
+variable "cc_slack_webhook_secret_crn" {
+  type        = string
+  sensitive   = true
+  description = "The CRN for Slack webhook secret."
+  default     = ""
+  validation {
+    condition     = startswith(var.cc_slack_webhook_secret_crn, "crn:") || var.cc_slack_webhook_secret_crn == ""
+    error_message = "Must be a CRN or left empty."
+  }
+}
+
+variable "cc_artifactory_token_secret_crn" {
+  type        = string
+  sensitive   = true
+  description = "The CRN for the Artifactory secret."
+  default     = ""
+  validation {
+    condition     = startswith(var.cc_artifactory_token_secret_crn, "crn:") || var.cc_artifactory_token_secret_crn == ""
+    error_message = "Must be a CRN or left empty."
+  }
+}
+
+variable "cc_pipeline_git_token_secret_crn" {
+  type        = string
+  sensitive   = true
+  description = "The CRN for pipeline Git token property."
+  default     = ""
+  validation {
+    condition     = startswith(var.cc_pipeline_git_token_secret_crn, "crn:") || var.cc_pipeline_git_token_secret_crn == ""
+    error_message = "Must be a CRN or left empty."
+  }
+}
+
+variable "cc_sonarqube_secret_crn" {
+  type        = string
+  sensitive   = true
+  description = "The CRN for the SonarQube secret."
+  default     = ""
+  validation {
+    condition     = startswith(var.cc_sonarqube_secret_crn, "crn:") || var.cc_sonarqube_secret_crn == ""
+    error_message = "Must be a CRN or left empty."
+  }
+}
+
+variable "cc_pipeline_doi_api_key_secret_crn" {
+  type        = string
+  sensitive   = true
+  description = "The CRN for the pipeline DOI apikey."
+  default     = ""
+  validation {
+    condition     = startswith(var.cc_pipeline_doi_api_key_secret_crn, "crn:") || var.cc_pipeline_doi_api_key_secret_crn == ""
+    error_message = "Must be a CRN or left empty."
+  }
+}
+
+variable "cc_gosec_private_repository_ssh_key_secret_crn" {
+  type        = string
+  sensitive   = true
+  description = "The CRN for the Deployment repository Git Token."
+  default     = ""
+  validation {
+    condition     = startswith(var.cc_gosec_private_repository_ssh_key_secret_crn, "crn:") || var.cc_gosec_private_repository_ssh_key_secret_crn == ""
+    error_message = "Must be a CRN or left empty."
+  }
+}
+
 ######## End Secret Names #######################
 
 #########Trigger Properties ##########
@@ -2622,7 +3339,7 @@ variable "cc_scc_enable_scc" {
 
 variable "cc_scc_use_profile_attachment" {
   type        = string
-  description = "Set to `enabled` to enable use profile with attachment, so that the scripts in the pipeline can interact with the Security and Compliance Center service. When enabled, other parameters become relevant; `scc_scc_scc_api_key_secret_name`, `scc_instance_crn`, `scc_profile_name`, `scc_profile_version`, `scc_attachment_id`."
+  description = "Set to `enabled` to enable use profile with attachment, so that the scripts in the pipeline can interact with the Security and Compliance Center service. When enabled, other parameters become relevant; `scc_scc_api_key_secret_name`, `scc_instance_crn`, `scc_profile_name`, `scc_profile_version`, `scc_attachment_id`."
   default     = ""
 }
 
@@ -2770,6 +3487,12 @@ variable "cc_compliance_pipeline_branch" {
   default     = ""
 }
 
+variable "cc_pipeline_git_tag" {
+  type        = string
+  description = "The GIT tag within the pipeline definitions repository for the Compliance CC Pipeline."
+  default     = ""
+}
+
 variable "cc_pipeline_debug" {
   type        = string
   description = "'0' by default. Set to '1' to enable debug logging."
@@ -2791,6 +3514,18 @@ variable "cc_opt_in_dynamic_ui_scan" {
 variable "cc_opt_in_dynamic_scan" {
   type        = string
   description = "To enable the OWASP Zap scan. '1' enable or '0' disable."
+  default     = ""
+}
+
+variable "cc_opt_in_gosec" {
+  type        = string
+  description = "Enables gosec scans"
+  default     = ""
+}
+
+variable "cc_gosec_private_repository_host" {
+  type        = string
+  description = "Your private repository base URL."
   default     = ""
 }
 
