@@ -9,7 +9,7 @@ import (
 )
 
 // Use existing resource group
-const resourceGroup = "geretain-test-resources"
+// const resourceGroup = "geretain-test-resources"
 const defaultExampleTerraformDir = "examples/default"
 const appExampleDir = "examples/devsecops-ci-toolchain-bring-your-own-app"
 const kpExampleDir = "examples/devsecops-ci-toolchain-with-key-protect"

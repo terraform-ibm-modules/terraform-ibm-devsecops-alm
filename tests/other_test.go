@@ -8,8 +8,6 @@ import (
 	"github.com/terraform-ibm-modules/ibmcloud-terratest-wrapper/testhelper"
 )
 
-const nonDefaultExampleTerraformDir = "examples/devsecops-ci-toolchain-bring-your-own-app"
-
 func TestRunNonDefaultExample(t *testing.T) {
 	t.Parallel()
 
