@@ -2095,7 +2095,7 @@ variable "cd_pipeline_ibmcloud_api_key_secret_name" {
 
 variable "cd_code_signing_cert_secret_name" {
   type        = string
-  description = "Name of the Cloud API key secret in the secret provider."
+  description = "Name of the code signing certificate public key secret in the secret provider."
   default     = "code-signing-cert"
 }
 
