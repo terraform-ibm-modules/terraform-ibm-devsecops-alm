@@ -63,9 +63,9 @@ statement instead the previous block.
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_devsecops_cc_toolchain"></a> [devsecops\_cc\_toolchain](#module\_devsecops\_cc\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cc-toolchain | v1.1.1 |
-| <a name="module_devsecops_cd_toolchain"></a> [devsecops\_cd\_toolchain](#module\_devsecops\_cd\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain | v1.1.4 |
-| <a name="module_devsecops_ci_toolchain"></a> [devsecops\_ci\_toolchain](#module\_devsecops\_ci\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-ci-toolchain | v1.1.2 |
+| <a name="module_devsecops_cc_toolchain"></a> [devsecops\_cc\_toolchain](#module\_devsecops\_cc\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cc-toolchain | signing_update |
+| <a name="module_devsecops_cd_toolchain"></a> [devsecops\_cd\_toolchain](#module\_devsecops\_cd\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain | signing_update |
+| <a name="module_devsecops_ci_toolchain"></a> [devsecops\_ci\_toolchain](#module\_devsecops\_ci\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-ci-toolchain | signing_update |
 
 ### Resources
 
@@ -217,10 +217,9 @@ statement instead the previous block.
 | <a name="input_cd_cluster_name"></a> [cd\_cluster\_name](#input\_cd\_cluster\_name) | Name of the Kubernetes cluster where the application is deployed. | `string` | `""` | no |
 | <a name="input_cd_cluster_namespace"></a> [cd\_cluster\_namespace](#input\_cd\_cluster\_namespace) | Name of the Kubernetes cluster namespace where the application is deployed. | `string` | `"prod"` | no |
 | <a name="input_cd_cluster_region"></a> [cd\_cluster\_region](#input\_cd\_cluster\_region) | Region of the Kubernetes cluster where the application is deployed. Use the short form of the regions. For example `us-south`. | `string` | `""` | no |
-| <a name="input_cd_code_signing_cert"></a> [cd\_code\_signing\_cert](#input\_cd\_code\_signing\_cert) | The base64 encoded GPG public key. This is stored in a pipeline secret property. To use a secrets provider see `cd_enable_signing_validation`. | `string` | `""` | no |
 | <a name="input_cd_code_signing_cert_secret_crn"></a> [cd\_code\_signing\_cert\_secret\_crn](#input\_cd\_code\_signing\_cert\_secret\_crn) | The CRN for the public signing key cert in the secrets provider. | `string` | `""` | no |
 | <a name="input_cd_code_signing_cert_secret_group"></a> [cd\_code\_signing\_cert\_secret\_group](#input\_cd\_code\_signing\_cert\_secret\_group) | Secret group prefix for the pipeline Public signing key cert secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`. | `string` | `""` | no |
-| <a name="input_cd_code_signing_cert_secret_name"></a> [cd\_code\_signing\_cert\_secret\_name](#input\_cd\_code\_signing\_cert\_secret\_name) | Name of the Cloud API key secret in the secret provider. | `string` | `"code-signing-cert"` | no |
+| <a name="input_cd_code_signing_cert_secret_name"></a> [cd\_code\_signing\_cert\_secret\_name](#input\_cd\_code\_signing\_cert\_secret\_name) | This is the name of the secret in the secrets provider for storing the code signing certificate. | `string` | `"signing-certificate"` | no |
 | <a name="input_cd_compliance_base_image"></a> [cd\_compliance\_base\_image](#input\_cd\_compliance\_base\_image) | Pipeline baseimage to run most of the built-in pipeline code. | `string` | `""` | no |
 | <a name="input_cd_compliance_pipeline_branch"></a> [cd\_compliance\_pipeline\_branch](#input\_cd\_compliance\_pipeline\_branch) | The CD Pipeline Compliance Pipeline branch. | `string` | `""` | no |
 | <a name="input_cd_compliance_pipeline_group"></a> [cd\_compliance\_pipeline\_group](#input\_cd\_compliance\_pipeline\_group) | Specify user or group for compliance pipline repo. | `string` | `""` | no |
@@ -252,7 +251,6 @@ statement instead the previous block.
 | <a name="input_cd_emergency_label"></a> [cd\_emergency\_label](#input\_cd\_emergency\_label) | Identifies the pull request as an emergency. | `string` | `"EMERGENCY"` | no |
 | <a name="input_cd_enable_key_protect"></a> [cd\_enable\_key\_protect](#input\_cd\_enable\_key\_protect) | Use the Key Protect integration. | `bool` | `false` | no |
 | <a name="input_cd_enable_secrets_manager"></a> [cd\_enable\_secrets\_manager](#input\_cd\_enable\_secrets\_manager) | Use the Secrets Manager integration. | `bool` | `false` | no |
-| <a name="input_cd_enable_signing_validation"></a> [cd\_enable\_signing\_validation](#input\_cd\_enable\_signing\_validation) | Set to `true` to enable code signing validation with a public signing key stored in a secrets provider. By default this expects the secret to be called `code-signing-cert`. See `cd_code_signing_cert_secret_name`. | `bool` | `false` | no |
 | <a name="input_cd_enable_slack"></a> [cd\_enable\_slack](#input\_cd\_enable\_slack) | Default: false. Set to true to create the integration. | `bool` | `false` | no |
 | <a name="input_cd_event_notifications_crn"></a> [cd\_event\_notifications\_crn](#input\_cd\_event\_notifications\_crn) | Set the Event Notifications CRN to create an Events Notification integration. | `string` | `""` | no |
 | <a name="input_cd_evidence_group"></a> [cd\_evidence\_group](#input\_cd\_evidence\_group) | Specify Git user or group for evidence repository. | `string` | `""` | no |
@@ -445,6 +443,7 @@ statement instead the previous block.
 | <a name="input_ci_pipeline_ibmcloud_api_key_secret_crn"></a> [ci\_pipeline\_ibmcloud\_api\_key\_secret\_crn](#input\_ci\_pipeline\_ibmcloud\_api\_key\_secret\_crn) | The CRN for the IBMCloud apikey. | `string` | `""` | no |
 | <a name="input_ci_pipeline_ibmcloud_api_key_secret_group"></a> [ci\_pipeline\_ibmcloud\_api\_key\_secret\_group](#input\_ci\_pipeline\_ibmcloud\_api\_key\_secret\_group) | Secret group prefix for the pipeline ibmcloud API key secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`. | `string` | `""` | no |
 | <a name="input_ci_pipeline_ibmcloud_api_key_secret_name"></a> [ci\_pipeline\_ibmcloud\_api\_key\_secret\_name](#input\_ci\_pipeline\_ibmcloud\_api\_key\_secret\_name) | Name of the Cloud API key secret in the secret provider. | `string` | `"ibmcloud-api-key"` | no |
+| <a name="input_ci_print_code_signing_certificate"></a> [ci\_print\_code\_signing\_certificate](#input\_ci\_print\_code\_signing\_certificate) | Set to `1` to enable printing of the public signing certificate in the logs. | `string` | `"1"` | no |
 | <a name="input_ci_privateworker_credentials_secret_crn"></a> [ci\_privateworker\_credentials\_secret\_crn](#input\_ci\_privateworker\_credentials\_secret\_crn) | The CRN for the Private Worker secret secret. | `string` | `""` | no |
 | <a name="input_ci_registry_namespace"></a> [ci\_registry\_namespace](#input\_ci\_registry\_namespace) | A unique namespace within the IBM Cloud Container Registry region where the application image is stored. (deprecated. Use `registry_namespace`) | `string` | `""` | no |
 | <a name="input_ci_registry_region"></a> [ci\_registry\_region](#input\_ci\_registry\_region) | The IBM Cloud Region where the IBM Cloud Container Registry namespace is to be created. Use the short form of the regions. For example `us-south`. | `string` | `""` | no |
