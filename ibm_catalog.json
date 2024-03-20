@@ -3835,7 +3835,7 @@
 						{
 							"key": "ci_code_engine_build_strategy",
 							"type": "string",
-							"default_value": "",
+							"default_value": "dockerfile",
 							"description": "The build strategy for the Code Engine entity. Default strategy is 'dockerfile'. Set as 'buildpacks' for 'buildpacks' build.",
 							"required": false
 						},
