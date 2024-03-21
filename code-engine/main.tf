@@ -51,7 +51,7 @@ locals {
 
 module "devsecops_ci_toolchain" {
   count                    = var.create_ci_toolchain ? 1 : 0
-  source                   = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-ci-toolchain?ref=v1.1.2"
+  source                   = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-ci-toolchain?ref=v1.2.0"
   ibmcloud_api_key         = var.ibmcloud_api_key
   toolchain_name           = (var.ci_toolchain_name == "") ? format("${var.toolchain_name}%s", "-CI-Toolchain") : var.ci_toolchain_name
   toolchain_region         = (var.ci_toolchain_region == "") ? var.toolchain_region : replace(replace(var.ci_toolchain_region, "ibm:yp:", ""), "ibm:ys1:", "")
@@ -211,6 +211,7 @@ module "devsecops_ci_toolchain" {
   sonarqube_config                   = var.ci_sonarqube_config
   enable_pipeline_dockerconfigjson   = var.ci_enable_pipeline_dockerconfigjson
   peer_review_compliance             = (var.ci_peer_review_compliance == "") ? var.peer_review_compliance : var.ci_peer_review_compliance
+  print_code_signing_certificate     = var.ci_print_code_signing_certificate
 
   #CODE ENGINE
 
@@ -305,7 +306,7 @@ module "devsecops_ci_toolchain" {
 
 module "devsecops_cd_toolchain" {
   count            = var.create_cd_toolchain ? 1 : 0
-  source           = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain?ref=v1.1.4"
+  source           = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain?ref=v1.2.0"
   ibmcloud_api_key = var.ibmcloud_api_key
 
   toolchain_name           = (var.cd_toolchain_name == "") ? format("${var.toolchain_name}%s", "-CD-Toolchain") : var.cd_toolchain_name
@@ -371,7 +372,6 @@ module "devsecops_cd_toolchain" {
 
   code_signing_cert_secret_name  = var.cd_code_signing_cert_secret_name
   code_signing_cert_secret_group = var.cd_code_signing_cert_secret_group
-  enable_signing_validation      = var.cd_enable_signing_validation
 
   # CRN SECRETS
   deployment_repo_git_token_secret_crn          = (var.cd_deployment_repo_git_token_secret_crn == "") ? var.repo_git_token_secret_crn : var.cd_deployment_repo_git_token_secret_crn
@@ -477,7 +477,6 @@ module "devsecops_cd_toolchain" {
   scc_profile_name              = var.scc_profile_name
   scc_profile_version           = var.scc_profile_version
   scc_use_profile_attachment    = (var.cd_scc_use_profile_attachment == "") ? var.scc_use_profile_attachment : var.cd_scc_use_profile_attachment
-  code_signing_cert             = var.cd_code_signing_cert
 
   #SLACK INTEGRATION
   enable_slack           = (local.use_slack_enable_override) ? local.enable_slack : var.cd_enable_slack
@@ -544,7 +543,7 @@ module "devsecops_cd_toolchain" {
 
 module "devsecops_cc_toolchain" {
   count                         = var.create_cc_toolchain ? 1 : 0
-  source                        = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cc-toolchain?ref=v1.1.1"
+  source                        = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cc-toolchain?ref=v1.2.0"
   ibmcloud_api_key              = var.ibmcloud_api_key
   toolchain_name                = (var.cc_toolchain_name == "") ? format("${var.toolchain_name}%s", "-CC-Toolchain") : var.cc_toolchain_name
   toolchain_description         = var.cc_toolchain_description

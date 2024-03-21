@@ -657,6 +657,12 @@ variable "pr_pipeline_git_tag" {
   default     = ""
 }
 
+variable "ci_print_code_signing_certificate" {
+  type        = string
+  description = "Set to `1` to enable printing of the public signing certificate in the logs."
+  default     = "1"
+}
+
 variable "ci_repositories_prefix" {
   type        = string
   description = "Prefix name for the cloned compliance repos."
@@ -1989,8 +1995,8 @@ variable "cd_pipeline_ibmcloud_api_key_secret_name" {
 
 variable "cd_code_signing_cert_secret_name" {
   type        = string
-  description = "Name of the Cloud API key secret in the secret provider."
-  default     = "code-signing-cert"
+  description = "This is the name of the secret in the secrets provider for storing the code signing certificate."
+  default     = "signing-certificate"
 }
 
 variable "cd_cos_api_key_secret_name" {
@@ -2054,20 +2060,6 @@ variable "cd_pipeline_doi_api_key_secret_name" {
 }
 
 ######## End Secret Names #######################
-
-
-variable "cd_code_signing_cert" {
-  type        = string
-  sensitive   = true
-  description = "The base64 encoded GPG public key. This is stored in a pipeline secret property. To use a secrets provider see `cd_enable_signing_validation`."
-  default     = ""
-}
-
-variable "cd_enable_signing_validation" {
-  type        = bool
-  description = "Set to `true` to enable code signing validation with a public signing key stored in a secrets provider. By default this expects the secret to be called `code-signing-cert`. See `cd_code_signing_cert_secret_name`."
-  default     = false
-}
 
 ######## CRN secrets ############################
 variable "cd_sm_instance_crn" {
