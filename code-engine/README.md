@@ -33,15 +33,15 @@ statement instead the previous block.
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0.0, <1.6.0 |
-| <a name="requirement_ibm"></a> [ibm](#requirement\_ibm) | >=1.59.0 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0.0, <1.7.0 |
+| <a name="requirement_ibm"></a> [ibm](#requirement\_ibm) | >=1.60.0 |
 
 ### Modules
 
 | Name | Source | Version |
 |------|--------|---------|
 | <a name="module_devsecops_cc_toolchain"></a> [devsecops\_cc\_toolchain](#module\_devsecops\_cc\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cc-toolchain | v1.2.0 |
-| <a name="module_devsecops_cd_toolchain"></a> [devsecops\_cd\_toolchain](#module\_devsecops\_cd\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain | v1.2.0 |
+| <a name="module_devsecops_cd_toolchain"></a> [devsecops\_cd\_toolchain](#module\_devsecops\_cd\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain | v1.2.1 |
 | <a name="module_devsecops_ci_toolchain"></a> [devsecops\_ci\_toolchain](#module\_devsecops\_ci\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-ci-toolchain | v1.2.0 |
 
 ### Resources
@@ -140,7 +140,7 @@ statement instead the previous block.
 | <a name="input_cc_pipeline_git_token_secret_crn"></a> [cc\_pipeline\_git\_token\_secret\_crn](#input\_cc\_pipeline\_git\_token\_secret\_crn) | The CRN for pipeline Git token property. | `string` | `""` | no |
 | <a name="input_cc_pipeline_ibmcloud_api_key_secret_crn"></a> [cc\_pipeline\_ibmcloud\_api\_key\_secret\_crn](#input\_cc\_pipeline\_ibmcloud\_api\_key\_secret\_crn) | The CRN for the IBMCloud apikey. | `string` | `""` | no |
 | <a name="input_cc_pipeline_ibmcloud_api_key_secret_group"></a> [cc\_pipeline\_ibmcloud\_api\_key\_secret\_group](#input\_cc\_pipeline\_ibmcloud\_api\_key\_secret\_group) | Secret group prefix for the pipeline ibmcloud API key secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`. | `string` | `""` | no |
-| <a name="input_cc_pipeline_ibmcloud_api_key_secret_name"></a> [cc\_pipeline\_ibmcloud\_api\_key\_secret\_name](#input\_cc\_pipeline\_ibmcloud\_api\_key\_secret\_name) | Name of the Cloud API key secret in the secret provider. | `string` | `"ibmcloud-api-key"` | no |
+| <a name="input_cc_pipeline_ibmcloud_api_key_secret_name"></a> [cc\_pipeline\_ibmcloud\_api\_key\_secret\_name](#input\_cc\_pipeline\_ibmcloud\_api\_key\_secret\_name) | Name of the Cloud API key secret in the secret provider. | `string` | `""` | no |
 | <a name="input_cc_repositories_prefix"></a> [cc\_repositories\_prefix](#input\_cc\_repositories\_prefix) | The prefix for the compliance repositories. | `string` | `""` | no |
 | <a name="input_cc_scc_enable_scc"></a> [cc\_scc\_enable\_scc](#input\_cc\_scc\_enable\_scc) | Adds the SCC tool integration to the toolchain. | `bool` | `true` | no |
 | <a name="input_cc_scc_integration_name"></a> [cc\_scc\_integration\_name](#input\_cc\_scc\_integration\_name) | The name of the SCC integration. | `string` | `"Security and Compliance"` | no |
@@ -153,7 +153,7 @@ statement instead the previous block.
 | <a name="input_cc_slack_team_name"></a> [cc\_slack\_team\_name](#input\_cc\_slack\_team\_name) | The Slack team name, which is the word or phrase before .slack.com in the team URL. | `string` | `""` | no |
 | <a name="input_cc_slack_toolchain_bind"></a> [cc\_slack\_toolchain\_bind](#input\_cc\_slack\_toolchain\_bind) | Generate tool added to toolchain notifications. | `bool` | `true` | no |
 | <a name="input_cc_slack_toolchain_unbind"></a> [cc\_slack\_toolchain\_unbind](#input\_cc\_slack\_toolchain\_unbind) | Generate tool removed from toolchain notifications. | `bool` | `true` | no |
-| <a name="input_cc_slack_webhook_secret_crn"></a> [cc\_slack\_webhook\_secret\_crn](#input\_cc\_slack\_webhook\_secret\_crn) | The CRN for Slack Webhook secret. | `string` | `""` | no |
+| <a name="input_cc_slack_webhook_secret_crn"></a> [cc\_slack\_webhook\_secret\_crn](#input\_cc\_slack\_webhook\_secret\_crn) | The CRN for Slack webhook secret. | `string` | `""` | no |
 | <a name="input_cc_slack_webhook_secret_group"></a> [cc\_slack\_webhook\_secret\_group](#input\_cc\_slack\_webhook\_secret\_group) | Secret group prefix for the Slack webhook secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`. | `string` | `""` | no |
 | <a name="input_cc_slack_webhook_secret_name"></a> [cc\_slack\_webhook\_secret\_name](#input\_cc\_slack\_webhook\_secret\_name) | Name of the webhook secret in the secret provider. | `string` | `""` | no |
 | <a name="input_cc_sm_instance_crn"></a> [cc\_sm\_instance\_crn](#input\_cc\_sm\_instance\_crn) | The CRN of the Secrets Manager instance. | `string` | `""` | no |
@@ -182,11 +182,12 @@ statement instead the previous block.
 | <a name="input_cc_trigger_timed_pruner_enable"></a> [cc\_trigger\_timed\_pruner\_enable](#input\_cc\_trigger\_timed\_pruner\_enable) | Set to `true` to enable the timed Pruner trigger. | `bool` | `false` | no |
 | <a name="input_cc_trigger_timed_pruner_name"></a> [cc\_trigger\_timed\_pruner\_name](#input\_cc\_trigger\_timed\_pruner\_name) | The name of the timed Pruner trigger. | `string` | `"Evidence Pruner Timed Trigger"` | no |
 | <a name="input_cd_app_version"></a> [cd\_app\_version](#input\_cd\_app\_version) | The version of the app to deploy. | `string` | `"v1"` | no |
+| <a name="input_cd_artifact_signature_verification"></a> [cd\_artifact\_signature\_verification](#input\_cd\_artifact\_signature\_verification) | Set to `1` to enable artifact signature verification. | `string` | `""` | no |
 | <a name="input_cd_artifactory_token_secret_crn"></a> [cd\_artifactory\_token\_secret\_crn](#input\_cd\_artifactory\_token\_secret\_crn) | The CRN for the Artifactory secret. | `string` | `""` | no |
 | <a name="input_cd_authorization_policy_creation"></a> [cd\_authorization\_policy\_creation](#input\_cd\_authorization\_policy\_creation) | Disable Toolchain service to Secrets Manager Service authorization policy creation. | `string` | `""` | no |
 | <a name="input_cd_change_management_group"></a> [cd\_change\_management\_group](#input\_cd\_change\_management\_group) | Specify group for change management repository | `string` | `""` | no |
 | <a name="input_cd_change_management_repo_auth_type"></a> [cd\_change\_management\_repo\_auth\_type](#input\_cd\_change\_management\_repo\_auth\_type) | Select the method of authentication that is used to access the Git provider. 'oauth' or 'pat'. | `string` | `""` | no |
-| <a name="input_cd_change_management_repo_git_token_secret_crn"></a> [cd\_change\_management\_repo\_git\_token\_secret\_crn](#input\_cd\_change\_management\_repo\_git\_token\_secret\_crn) | The CRN for the Change Managemenrt repository Git Token. | `string` | `""` | no |
+| <a name="input_cd_change_management_repo_git_token_secret_crn"></a> [cd\_change\_management\_repo\_git\_token\_secret\_crn](#input\_cd\_change\_management\_repo\_git\_token\_secret\_crn) | The CRN for the Change Management repository Git Token. | `string` | `""` | no |
 | <a name="input_cd_change_management_repo_git_token_secret_name"></a> [cd\_change\_management\_repo\_git\_token\_secret\_name](#input\_cd\_change\_management\_repo\_git\_token\_secret\_name) | Name of the Git token secret in the secret provider. | `string` | `""` | no |
 | <a name="input_cd_change_management_repo_secret_group"></a> [cd\_change\_management\_repo\_secret\_group](#input\_cd\_change\_management\_repo\_secret\_group) | Secret group prefix for the Change Management repo secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`. | `string` | `""` | no |
 | <a name="input_cd_change_repo_clone_from_url"></a> [cd\_change\_repo\_clone\_from\_url](#input\_cd\_change\_repo\_clone\_from\_url) | Override the default management repo, which is cloned into the app repo. Note, using clone\_if\_not\_exists mode, so if the app repo already exists the repo contents are unchanged. | `string` | `""` | no |
@@ -212,10 +213,9 @@ statement instead the previous block.
 | <a name="input_cd_code_engine_remove_refs"></a> [cd\_code\_engine\_remove\_refs](#input\_cd\_code\_engine\_remove\_refs) | Remove references to unspecified configuration resources (configmap/secret) references (pulled from env-from-configmaps, env-from-secrets along with auto-managed by CD). | `string` | `"false"` | no |
 | <a name="input_cd_code_engine_resource_group"></a> [cd\_code\_engine\_resource\_group](#input\_cd\_code\_engine\_resource\_group) | The resource group of the Code Engine project. | `string` | `""` | no |
 | <a name="input_cd_code_engine_service_bindings"></a> [cd\_code\_engine\_service\_bindings](#input\_cd\_code\_engine\_service\_bindings) | JSON array including service name(s) (as a simple JSON string. | `string` | `""` | no |
-| <a name="input_cd_code_signing_cert"></a> [cd\_code\_signing\_cert](#input\_cd\_code\_signing\_cert) | The base64 encoded GPG public key. This is stored in a pipeline secret property. To use a secrets provider see `cd_enable_signing_validation`. | `string` | `""` | no |
 | <a name="input_cd_code_signing_cert_secret_crn"></a> [cd\_code\_signing\_cert\_secret\_crn](#input\_cd\_code\_signing\_cert\_secret\_crn) | The CRN for the public signing key cert in the secrets provider. | `string` | `""` | no |
 | <a name="input_cd_code_signing_cert_secret_group"></a> [cd\_code\_signing\_cert\_secret\_group](#input\_cd\_code\_signing\_cert\_secret\_group) | Secret group prefix for the pipeline Public signing key cert secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`. | `string` | `""` | no |
-| <a name="input_cd_code_signing_cert_secret_name"></a> [cd\_code\_signing\_cert\_secret\_name](#input\_cd\_code\_signing\_cert\_secret\_name) | Name of the Cloud API key secret in the secret provider. | `string` | `"code-signing-cert"` | no |
+| <a name="input_cd_code_signing_cert_secret_name"></a> [cd\_code\_signing\_cert\_secret\_name](#input\_cd\_code\_signing\_cert\_secret\_name) | This is the name of the secret in the secrets provider for storing the code signing certificate. | `string` | `"signing-certificate"` | no |
 | <a name="input_cd_compliance_base_image"></a> [cd\_compliance\_base\_image](#input\_cd\_compliance\_base\_image) | Pipeline baseimage to run most of the built-in pipeline code. | `string` | `""` | no |
 | <a name="input_cd_compliance_pipeline_branch"></a> [cd\_compliance\_pipeline\_branch](#input\_cd\_compliance\_pipeline\_branch) | The CD Pipeline Compliance Pipeline branch. | `string` | `""` | no |
 | <a name="input_cd_compliance_pipeline_group"></a> [cd\_compliance\_pipeline\_group](#input\_cd\_compliance\_pipeline\_group) | Specify user or group for compliance pipline repo. | `string` | `""` | no |
@@ -248,7 +248,6 @@ statement instead the previous block.
 | <a name="input_cd_emergency_label"></a> [cd\_emergency\_label](#input\_cd\_emergency\_label) | Identifies the pull request as an emergency. | `string` | `"EMERGENCY"` | no |
 | <a name="input_cd_enable_key_protect"></a> [cd\_enable\_key\_protect](#input\_cd\_enable\_key\_protect) | Use the Key Protect integration. | `bool` | `false` | no |
 | <a name="input_cd_enable_secrets_manager"></a> [cd\_enable\_secrets\_manager](#input\_cd\_enable\_secrets\_manager) | Use the Secrets Manager integration. | `bool` | `false` | no |
-| <a name="input_cd_enable_signing_validation"></a> [cd\_enable\_signing\_validation](#input\_cd\_enable\_signing\_validation) | Set to `true` to enable code signing validation with a public signing key stored in a secrets provider. By default this expects the secret to be called `code-signing-cert`. See `cd_code_signing_cert_secret_name`. | `bool` | `false` | no |
 | <a name="input_cd_enable_slack"></a> [cd\_enable\_slack](#input\_cd\_enable\_slack) | Default: false. Set to true to create the integration. | `bool` | `false` | no |
 | <a name="input_cd_event_notifications_crn"></a> [cd\_event\_notifications\_crn](#input\_cd\_event\_notifications\_crn) | Set the Event Notifications CRN to create an Events Notification integration. | `string` | `""` | no |
 | <a name="input_cd_evidence_group"></a> [cd\_evidence\_group](#input\_cd\_evidence\_group) | Specify Git user or group for evidence repository. | `string` | `""` | no |
@@ -291,7 +290,7 @@ statement instead the previous block.
 | <a name="input_cd_pipeline_git_token_secret_name"></a> [cd\_pipeline\_git\_token\_secret\_name](#input\_cd\_pipeline\_git\_token\_secret\_name) | Name of the pipeline Git token secret in the secret provider. | `string` | `"pipeline-git-token"` | no |
 | <a name="input_cd_pipeline_ibmcloud_api_key_secret_crn"></a> [cd\_pipeline\_ibmcloud\_api\_key\_secret\_crn](#input\_cd\_pipeline\_ibmcloud\_api\_key\_secret\_crn) | The CRN for the pipeline apikey. | `string` | `""` | no |
 | <a name="input_cd_pipeline_ibmcloud_api_key_secret_group"></a> [cd\_pipeline\_ibmcloud\_api\_key\_secret\_group](#input\_cd\_pipeline\_ibmcloud\_api\_key\_secret\_group) | Secret group prefix for the pipeline ibmcloud API key secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`. | `string` | `""` | no |
-| <a name="input_cd_pipeline_ibmcloud_api_key_secret_name"></a> [cd\_pipeline\_ibmcloud\_api\_key\_secret\_name](#input\_cd\_pipeline\_ibmcloud\_api\_key\_secret\_name) | Name of the Cloud API key secret in the secret provider. | `string` | `"ibmcloud-api-key"` | no |
+| <a name="input_cd_pipeline_ibmcloud_api_key_secret_name"></a> [cd\_pipeline\_ibmcloud\_api\_key\_secret\_name](#input\_cd\_pipeline\_ibmcloud\_api\_key\_secret\_name) | Name of the Cloud API key secret in the secret provider. | `string` | `""` | no |
 | <a name="input_cd_privateworker_credentials_secret_crn"></a> [cd\_privateworker\_credentials\_secret\_crn](#input\_cd\_privateworker\_credentials\_secret\_crn) | The CRN for the Private Worker apikey. | `string` | `""` | no |
 | <a name="input_cd_region"></a> [cd\_region](#input\_cd\_region) | IBM Cloud region used to prefix the `prod_latest` inventory repo branch. | `string` | `""` | no |
 | <a name="input_cd_repositories_prefix"></a> [cd\_repositories\_prefix](#input\_cd\_repositories\_prefix) | Prefix name for the cloned compliance repos. | `string` | `""` | no |
@@ -324,6 +323,10 @@ statement instead the previous block.
 | <a name="input_cd_toolchain_resource_group"></a> [cd\_toolchain\_resource\_group](#input\_cd\_toolchain\_resource\_group) | Resource group within which toolchain is created. | `string` | `""` | no |
 | <a name="input_cd_trigger_git_enable"></a> [cd\_trigger\_git\_enable](#input\_cd\_trigger\_git\_enable) | Set to `true` to enable the CD pipeline Git trigger. | `bool` | `false` | no |
 | <a name="input_cd_trigger_git_name"></a> [cd\_trigger\_git\_name](#input\_cd\_trigger\_git\_name) | The name of the CD pipeline GIT trigger. | `string` | `"Git CD Trigger"` | no |
+| <a name="input_cd_trigger_git_promotion_validation_branch"></a> [cd\_trigger\_git\_promotion\_validation\_branch](#input\_cd\_trigger\_git\_promotion\_validation\_branch) | Branch for Git promotion validation listener. | `string` | `"prod"` | no |
+| <a name="input_cd_trigger_git_promotion_validation_enable"></a> [cd\_trigger\_git\_promotion\_validation\_enable](#input\_cd\_trigger\_git\_promotion\_validation\_enable) | Enable Git promotion validation for Git promotion listener. | `bool` | `false` | no |
+| <a name="input_cd_trigger_git_promotion_validation_listener"></a> [cd\_trigger\_git\_promotion\_validation\_listener](#input\_cd\_trigger\_git\_promotion\_validation\_listener) | Select a Tekton EventListener to use when Git promotion validation listener trigger is fired. | `string` | `"promotion-validation-listener"` | no |
+| <a name="input_cd_trigger_git_promotion_validation_name"></a> [cd\_trigger\_git\_promotion\_validation\_name](#input\_cd\_trigger\_git\_promotion\_validation\_name) | Name of Git Promotion Validation Trigger | `string` | `"Git Promotion Validation Trigger"` | no |
 | <a name="input_cd_trigger_manual_enable"></a> [cd\_trigger\_manual\_enable](#input\_cd\_trigger\_manual\_enable) | Set to `true` to enable the CD pipeline Manual trigger. | `bool` | `true` | no |
 | <a name="input_cd_trigger_manual_name"></a> [cd\_trigger\_manual\_name](#input\_cd\_trigger\_manual\_name) | The name of the CI pipeline Manual trigger. | `string` | `"Manual CD Trigger"` | no |
 | <a name="input_cd_trigger_manual_promotion_enable"></a> [cd\_trigger\_manual\_promotion\_enable](#input\_cd\_trigger\_manual\_promotion\_enable) | Set to `true` to enable the CD pipeline Manual Promotion trigger. | `bool` | `true` | no |
@@ -458,7 +461,7 @@ statement instead the previous block.
 | <a name="input_ci_pipeline_git_token_secret_name"></a> [ci\_pipeline\_git\_token\_secret\_name](#input\_ci\_pipeline\_git\_token\_secret\_name) | Name of the pipeline Git token secret in the secret provider. | `string` | `"pipeline-git-token"` | no |
 | <a name="input_ci_pipeline_ibmcloud_api_key_secret_crn"></a> [ci\_pipeline\_ibmcloud\_api\_key\_secret\_crn](#input\_ci\_pipeline\_ibmcloud\_api\_key\_secret\_crn) | The CRN for the IBMCloud apikey. | `string` | `""` | no |
 | <a name="input_ci_pipeline_ibmcloud_api_key_secret_group"></a> [ci\_pipeline\_ibmcloud\_api\_key\_secret\_group](#input\_ci\_pipeline\_ibmcloud\_api\_key\_secret\_group) | Secret group prefix for the pipeline ibmcloud API key secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`. | `string` | `""` | no |
-| <a name="input_ci_pipeline_ibmcloud_api_key_secret_name"></a> [ci\_pipeline\_ibmcloud\_api\_key\_secret\_name](#input\_ci\_pipeline\_ibmcloud\_api\_key\_secret\_name) | Name of the Cloud API key secret in the secret provider. | `string` | `"ibmcloud-api-key"` | no |
+| <a name="input_ci_pipeline_ibmcloud_api_key_secret_name"></a> [ci\_pipeline\_ibmcloud\_api\_key\_secret\_name](#input\_ci\_pipeline\_ibmcloud\_api\_key\_secret\_name) | Name of the Cloud API key secret in the secret provider. | `string` | `""` | no |
 | <a name="input_ci_print_code_signing_certificate"></a> [ci\_print\_code\_signing\_certificate](#input\_ci\_print\_code\_signing\_certificate) | Set to `1` to enable printing of the public signing certificate in the logs. | `string` | `"1"` | no |
 | <a name="input_ci_privateworker_credentials_secret_crn"></a> [ci\_privateworker\_credentials\_secret\_crn](#input\_ci\_privateworker\_credentials\_secret\_crn) | The CRN for the Private Worker secret secret. | `string` | `""` | no |
 | <a name="input_ci_registry_namespace"></a> [ci\_registry\_namespace](#input\_ci\_registry\_namespace) | A unique namespace within the IBM Cloud Container Registry region where the application image is stored. (deprecated. Use `registry_namespace`) | `string` | `""` | no |
@@ -475,7 +478,7 @@ statement instead the previous block.
 | <a name="input_ci_slack_team_name"></a> [ci\_slack\_team\_name](#input\_ci\_slack\_team\_name) | The Slack team name, which is the word or phrase before `.slack.com` in the team URL. | `string` | `""` | no |
 | <a name="input_ci_slack_toolchain_bind"></a> [ci\_slack\_toolchain\_bind](#input\_ci\_slack\_toolchain\_bind) | Generate tool added to toolchain notifications. | `bool` | `true` | no |
 | <a name="input_ci_slack_toolchain_unbind"></a> [ci\_slack\_toolchain\_unbind](#input\_ci\_slack\_toolchain\_unbind) | Generate tool removed from toolchain notifications. | `bool` | `true` | no |
-| <a name="input_ci_slack_webhook_secret_crn"></a> [ci\_slack\_webhook\_secret\_crn](#input\_ci\_slack\_webhook\_secret\_crn) | The CRN for the Slack Webhook secret. | `string` | `""` | no |
+| <a name="input_ci_slack_webhook_secret_crn"></a> [ci\_slack\_webhook\_secret\_crn](#input\_ci\_slack\_webhook\_secret\_crn) | The CRN for the Slack webhook secret. | `string` | `""` | no |
 | <a name="input_ci_slack_webhook_secret_group"></a> [ci\_slack\_webhook\_secret\_group](#input\_ci\_slack\_webhook\_secret\_group) | Secret group prefix for the Slack webhook secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`. | `string` | `""` | no |
 | <a name="input_ci_slack_webhook_secret_name"></a> [ci\_slack\_webhook\_secret\_name](#input\_ci\_slack\_webhook\_secret\_name) | Name of the webhook secret in the secret provider. | `string` | `""` | no |
 | <a name="input_ci_sm_instance_crn"></a> [ci\_sm\_instance\_crn](#input\_ci\_sm\_instance\_crn) | The CRN of the Secrets Manager instance for the CI toolchain. | `string` | `""` | no |
@@ -560,6 +563,7 @@ statement instead the previous block.
 | <a name="input_pipeline_doi_api_key_secret_name"></a> [pipeline\_doi\_api\_key\_secret\_name](#input\_pipeline\_doi\_api\_key\_secret\_name) | Name of the Cloud API key secret in the secret provider to access the toolchain containing the Devops Insights instance. This will apply to the CI, CD and CC toolchains. | `string` | `""` | no |
 | <a name="input_pipeline_git_tag"></a> [pipeline\_git\_tag](#input\_pipeline\_git\_tag) | The GIT tag within the pipeline definitions repository for the Compliance Pipelines. | `string` | `""` | no |
 | <a name="input_pipeline_ibmcloud_api_key_secret_crn"></a> [pipeline\_ibmcloud\_api\_key\_secret\_crn](#input\_pipeline\_ibmcloud\_api\_key\_secret\_crn) | The CRN for the IBMCloud apikey. | `string` | `""` | no |
+| <a name="input_pipeline_ibmcloud_api_key_secret_name"></a> [pipeline\_ibmcloud\_api\_key\_secret\_name](#input\_pipeline\_ibmcloud\_api\_key\_secret\_name) | Name of the Cloud API key secret in the secret provider. Applies to the CI, CD and CC toolchains. For specific versions see `ci_pipeline_ibmcloud_api_key_secret_name`, `cd_pipeline_ibmcloud_api_key_secret_name` and `cc_pipeline_ibmcloud_api_key_secret_name`. | `string` | `"ibmcloud-api-key"` | no |
 | <a name="input_pr_pipeline_git_tag"></a> [pr\_pipeline\_git\_tag](#input\_pr\_pipeline\_git\_tag) | The GIT tag within the pipeline definitions repository for the Compliance PR Pipeline. | `string` | `""` | no |
 | <a name="input_registry_namespace"></a> [registry\_namespace](#input\_registry\_namespace) | A unique namespace within the IBM Cloud Container Registry region where the application image is stored. | `string` | `""` | no |
 | <a name="input_repo_git_token_secret_crn"></a> [repo\_git\_token\_secret\_crn](#input\_repo\_git\_token\_secret\_crn) | The CRN for the repositories Git Token. | `string` | `""` | no |
@@ -579,7 +583,7 @@ statement instead the previous block.
 | <a name="input_slack_integration_name"></a> [slack\_integration\_name](#input\_slack\_integration\_name) | The name of the Slack integration. | `string` | `"slack-compliance"` | no |
 | <a name="input_slack_notifications"></a> [slack\_notifications](#input\_slack\_notifications) | This is enabled automatically when a Slack integration is created. The switch overrides the Slack notifications. Set `1` for on and `0` for off. This applies to the CI, CD, and CC toolchains. To set separately, see `ci_slack_notifications`, `cd_slack_notifications`, and `cc_slack_notifications`. | `string` | `""` | no |
 | <a name="input_slack_team_name"></a> [slack\_team\_name](#input\_slack\_team\_name) | The Slack team name, which is the word or phrase before `.slack.com` in the team URL. This applies to the CI, CD, and CC toolchains. To set separately, see `ci_slack_team_name`, `cd_slack_team_name`, and `cc_slack_team_name`. | `string` | `""` | no |
-| <a name="input_slack_webhook_secret_crn"></a> [slack\_webhook\_secret\_crn](#input\_slack\_webhook\_secret\_crn) | The CRN for the Slack Webhook secret. | `string` | `""` | no |
+| <a name="input_slack_webhook_secret_crn"></a> [slack\_webhook\_secret\_crn](#input\_slack\_webhook\_secret\_crn) | The CRN for the Slack webhook secret. | `string` | `""` | no |
 | <a name="input_slack_webhook_secret_name"></a> [slack\_webhook\_secret\_name](#input\_slack\_webhook\_secret\_name) | Name of the webhook secret for Slack in the secret provider. This applies to the CI, CD, and CC toolchains. To set separately, see `ci_slack_webhook_secret_name`, `cd_slack_webhook_secret_name`, and `cc_slack_webhook_secret_name` | `string` | `"slack-webhook"` | no |
 | <a name="input_sm_instance_crn"></a> [sm\_instance\_crn](#input\_sm\_instance\_crn) | The CRN of the Secrets Manager instance. Will apply to CI, CD and CC toolchains unless set individually. | `string` | `""` | no |
 | <a name="input_sm_integration_name"></a> [sm\_integration\_name](#input\_sm\_integration\_name) | The name of the Secrets Manager integration. | `string` | `"sm-compliance-secrets"` | no |
