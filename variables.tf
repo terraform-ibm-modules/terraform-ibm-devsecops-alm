@@ -1717,7 +1717,7 @@ variable "cd_compliance_pipeline_branch" {
 variable "cd_trigger_git_promotion_validation_listener" {
   type        = string
   description = "Select a Tekton EventListener to use when Git promotion validation listener trigger is fired."
-  default     = "promotion-validation-listener"
+  default     = "promotion-validation-listener-gitlab"
 }
 
 variable "cd_trigger_git_promotion_validation_enable" {
@@ -2357,12 +2357,6 @@ variable "cd_scc_use_profile_attachment" {
 }
 
 ######## End SCC ################################
-
-variable "cd_artifact_signature_verification" {
-  type        = string
-  description = "Set to `0` to disable artifact signature verification."
-  default     = ""
-}
 
 variable "cd_slack_notifications" {
   type        = string
