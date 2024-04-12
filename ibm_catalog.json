@@ -1777,13 +1777,6 @@
 							"required": false
 						},
 						{
-							"key": "cd_artifact_signature_verification",
-							"type": "string",
-							"default_value": "",
-							"description": "Set to `0` to disable artifact signature verification.",
-							"required": false
-						},
-						{
 							"key": "cd_authorization_policy_creation",
 							"type": "string",
 							"default_value": "",
@@ -2633,7 +2626,7 @@
 						{
 							"key": "cd_trigger_git_promotion_validation_listener",
 							"type": "string",
-							"default_value": "promotion-validation-listener",
+							"default_value": "promotion-validation-listener-gitlab",
 							"description": "Select a Tekton EventListener to use when Git promotion validation listener trigger is fired.",
 							"required": false
 						},
@@ -5721,13 +5714,6 @@
 							"required": false
 						},
 						{
-							"key": "cd_artifact_signature_verification",
-							"type": "string",
-							"default_value": "",
-							"description": "Set to `0` to disable artifact signature verification.",
-							"required": false
-						},
-						{
 							"key": "cd_authorization_policy_creation",
 							"type": "string",
 							"default_value": "",
@@ -6556,7 +6542,7 @@
 						{
 							"key": "cd_trigger_git_promotion_validation_listener",
 							"type": "string",
-							"default_value": "promotion-validation-listener",
+							"default_value": "promotion-validation-listener-gitlab",
 							"description": "Select a Tekton EventListener to use when Git promotion validation listener trigger is fired.",
 							"required": false
 						},
