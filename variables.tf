@@ -2360,7 +2360,7 @@ variable "cd_scc_use_profile_attachment" {
 
 variable "cd_artifact_signature_verification" {
   type        = string
-  description = "Set to `1` to enable artifact signature verification."
+  description = "Set to `0` to disable artifact signature verification."
   default     = ""
 }
 

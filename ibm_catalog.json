@@ -1779,8 +1779,8 @@
 						{
 							"key": "cd_artifact_signature_verification",
 							"type": "string",
-							"default_value": "1",
-							"description": "Set to `1` to enable artifact signature verification.",
+							"default_value": "",
+							"description": "Set to `0` to disable artifact signature verification.",
 							"required": false
 						},
 						{
@@ -5723,8 +5723,8 @@
 						{
 							"key": "cd_artifact_signature_verification",
 							"type": "string",
-							"default_value": "1",
-							"description": "Set to `1` to enable artifact signature verification.",
+							"default_value": "",
+							"description": "Set to `0` to disable artifact signature verification.",
 							"required": false
 						},
 						{

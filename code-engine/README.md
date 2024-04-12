@@ -182,7 +182,7 @@ statement instead the previous block.
 | <a name="input_cc_trigger_timed_pruner_enable"></a> [cc\_trigger\_timed\_pruner\_enable](#input\_cc\_trigger\_timed\_pruner\_enable) | Set to `true` to enable the timed Pruner trigger. | `bool` | `false` | no |
 | <a name="input_cc_trigger_timed_pruner_name"></a> [cc\_trigger\_timed\_pruner\_name](#input\_cc\_trigger\_timed\_pruner\_name) | The name of the timed Pruner trigger. | `string` | `"Evidence Pruner Timed Trigger"` | no |
 | <a name="input_cd_app_version"></a> [cd\_app\_version](#input\_cd\_app\_version) | The version of the app to deploy. | `string` | `"v1"` | no |
-| <a name="input_cd_artifact_signature_verification"></a> [cd\_artifact\_signature\_verification](#input\_cd\_artifact\_signature\_verification) | Set to `1` to enable artifact signature verification. | `string` | `""` | no |
+| <a name="input_cd_artifact_signature_verification"></a> [cd\_artifact\_signature\_verification](#input\_cd\_artifact\_signature\_verification) | Set to `0` to disable artifact signature verification. | `string` | `""` | no |
 | <a name="input_cd_artifactory_token_secret_crn"></a> [cd\_artifactory\_token\_secret\_crn](#input\_cd\_artifactory\_token\_secret\_crn) | The CRN for the Artifactory secret. | `string` | `""` | no |
 | <a name="input_cd_authorization_policy_creation"></a> [cd\_authorization\_policy\_creation](#input\_cd\_authorization\_policy\_creation) | Disable Toolchain service to Secrets Manager Service authorization policy creation. | `string` | `""` | no |
 | <a name="input_cd_change_management_group"></a> [cd\_change\_management\_group](#input\_cd\_change\_management\_group) | Specify group for change management repository | `string` | `""` | no |
