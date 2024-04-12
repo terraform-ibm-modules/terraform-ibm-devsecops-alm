@@ -454,30 +454,29 @@ module "devsecops_cd_toolchain" {
   scc_integration_name = var.cd_scc_integration_name
 
   #OTHER INTEGRATIONS
-  artifact_signature_verification = var.cd_artifact_signature_verification
-  slack_notifications             = local.cd_slack_notification_state
-  repositories_prefix             = (var.cd_repositories_prefix == "") ? var.repositories_prefix : var.cd_repositories_prefix
-  authorization_policy_creation   = (var.cd_authorization_policy_creation == "") ? var.authorization_policy_creation : var.cd_authorization_policy_creation
-  doi_environment                 = var.cd_doi_environment
-  link_to_doi_toolchain           = var.cd_link_to_doi_toolchain
-  doi_toolchain_id                = try(module.devsecops_ci_toolchain[0].toolchain_id, var.cd_doi_toolchain_id)
-  target_environment_detail       = var.cd_target_environment_detail
-  customer_impact                 = var.cd_customer_impact
-  target_environment_purpose      = var.cd_target_environment_purpose
-  change_request_id               = var.cd_change_request_id
-  source_environment              = var.cd_source_environment
-  target_environment              = var.cd_target_environment
-  merge_cra_sbom                  = var.cd_merge_cra_sbom
-  emergency_label                 = var.cd_emergency_label
-  app_version                     = var.cd_app_version
-  pipeline_debug                  = var.cd_pipeline_debug
-  region                          = (var.cd_region == "") ? var.toolchain_region : var.cd_region
-  peer_review_compliance          = (var.cd_peer_review_compliance == "") ? var.peer_review_compliance : var.cd_peer_review_compliance
-  scc_attachment_id               = var.scc_attachment_id
-  scc_instance_crn                = var.scc_instance_crn
-  scc_profile_name                = var.scc_profile_name
-  scc_profile_version             = var.scc_profile_version
-  scc_use_profile_attachment      = (var.cd_scc_use_profile_attachment == "") ? var.scc_use_profile_attachment : var.cd_scc_use_profile_attachment
+  slack_notifications           = local.cd_slack_notification_state
+  repositories_prefix           = (var.cd_repositories_prefix == "") ? var.repositories_prefix : var.cd_repositories_prefix
+  authorization_policy_creation = (var.cd_authorization_policy_creation == "") ? var.authorization_policy_creation : var.cd_authorization_policy_creation
+  doi_environment               = var.cd_doi_environment
+  link_to_doi_toolchain         = var.cd_link_to_doi_toolchain
+  doi_toolchain_id              = try(module.devsecops_ci_toolchain[0].toolchain_id, var.cd_doi_toolchain_id)
+  target_environment_detail     = var.cd_target_environment_detail
+  customer_impact               = var.cd_customer_impact
+  target_environment_purpose    = var.cd_target_environment_purpose
+  change_request_id             = var.cd_change_request_id
+  source_environment            = var.cd_source_environment
+  target_environment            = var.cd_target_environment
+  merge_cra_sbom                = var.cd_merge_cra_sbom
+  emergency_label               = var.cd_emergency_label
+  app_version                   = var.cd_app_version
+  pipeline_debug                = var.cd_pipeline_debug
+  region                        = (var.cd_region == "") ? var.toolchain_region : var.cd_region
+  peer_review_compliance        = (var.cd_peer_review_compliance == "") ? var.peer_review_compliance : var.cd_peer_review_compliance
+  scc_attachment_id             = var.scc_attachment_id
+  scc_instance_crn              = var.scc_instance_crn
+  scc_profile_name              = var.scc_profile_name
+  scc_profile_version           = var.scc_profile_version
+  scc_use_profile_attachment    = (var.cd_scc_use_profile_attachment == "") ? var.scc_use_profile_attachment : var.cd_scc_use_profile_attachment
 
   #SLACK INTEGRATION
   enable_slack           = (local.use_slack_enable_override) ? local.enable_slack : var.cd_enable_slack
