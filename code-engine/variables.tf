@@ -282,6 +282,12 @@ variable "repo_git_token_secret_crn" {
   }
 }
 
+variable "pipeline_ibmcloud_api_key_secret_name" {
+  type        = string
+  description = "Name of the Cloud API key secret in the secret provider. Applies to the CI, CD and CC toolchains. For specific versions see `ci_pipeline_ibmcloud_api_key_secret_name`, `cd_pipeline_ibmcloud_api_key_secret_name` and `cc_pipeline_ibmcloud_api_key_secret_name`."
+  default     = "ibmcloud-api-key"
+}
+
 variable "pipeline_ibmcloud_api_key_secret_crn" {
   type        = string
   sensitive   = true
@@ -1274,7 +1280,7 @@ variable "ci_compliance_pipeline_repo_auth_type" {
 variable "ci_pipeline_ibmcloud_api_key_secret_name" {
   type        = string
   description = "Name of the Cloud API key secret in the secret provider."
-  default     = "ibmcloud-api-key"
+  default     = ""
 }
 
 variable "ci_cos_api_key_secret_name" {
@@ -2096,7 +2102,7 @@ variable "cd_change_management_repo_auth_type" {
 variable "cd_pipeline_ibmcloud_api_key_secret_name" {
   type        = string
   description = "Name of the Cloud API key secret in the secret provider."
-  default     = "ibmcloud-api-key"
+  default     = ""
 }
 
 variable "cd_code_signing_cert_secret_name" {
@@ -2351,6 +2357,30 @@ variable "cd_trigger_git_enable" {
   default     = false
 }
 
+variable "cd_trigger_git_promotion_validation_listener" {
+  type        = string
+  description = "Select a Tekton EventListener to use when Git promotion validation listener trigger is fired."
+  default     = "promotion-validation-listener"
+}
+
+variable "cd_trigger_git_promotion_validation_enable" {
+  type        = bool
+  description = "Enable Git promotion validation for Git promotion listener."
+  default     = false
+}
+
+variable "cd_trigger_git_promotion_validation_branch" {
+  type        = string
+  description = "Branch for Git promotion validation listener."
+  default     = "prod"
+}
+
+variable "cd_trigger_git_promotion_validation_name" {
+  type        = string
+  description = "Name of Git Promotion Validation Trigger"
+  default     = "Git Promotion Validation Trigger"
+}
+
 variable "cd_trigger_timed_name" {
   type        = string
   description = "The name of the CD pipeline Timed trigger."
@@ -2433,6 +2463,12 @@ variable "cd_scc_use_profile_attachment" {
 }
 
 ######## End SCC ################################
+
+variable "cd_artifact_signature_verification" {
+  type        = string
+  description = "Set to `0` to disable artifact signature verification."
+  default     = ""
+}
 
 variable "cd_slack_notifications" {
   type        = string
@@ -3029,7 +3065,7 @@ variable "cc_compliance_pipeline_repo_auth_type" {
 variable "cc_pipeline_ibmcloud_api_key_secret_name" {
   type        = string
   description = "Name of the Cloud API key secret in the secret provider."
-  default     = "ibmcloud-api-key"
+  default     = ""
 }
 
 variable "cc_cos_api_key_secret_name" {
