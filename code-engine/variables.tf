@@ -806,7 +806,7 @@ variable "ci_code_engine_project" {
 
 variable "ci_code_engine_project_prefix" {
   type        = string
-  description = "A string that will be prefixed to `ci_code_engine_project`. This take precedence over values set in `code_engine_project_prefix`."
+  description = "A string that will be prefixed to `ci_code_engine_project`. This takes precedence over values set in `code_engine_project_prefix`."
   default     = ""
 }
 
@@ -2650,7 +2650,7 @@ variable "cd_code_engine_project" {
 
 variable "cd_code_engine_project_prefix" {
   type        = string
-  description = "A string that will be prefixed to `cd_code_engine_project`. This take precedence over values set in `code_engine_project_prefix`."
+  description = "A string that will be prefixed to `cd_code_engine_project`. This takes precedence over values set in `code_engine_project_prefix`."
   default     = ""
 }
 
