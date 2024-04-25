@@ -546,6 +546,12 @@ variable "code_engine_project" {
   default     = ""
 }
 
+variable "code_engine_project_prefix" {
+  type        = string
+  description = "A string that will be prefixed to`ci_code_engine_project` and `cd_code_engine_project`."
+  default     = ""
+}
+
 ##### END OF COMMON VARIABLES ############
 ##### START OF CI VARIABLES ##############
 
@@ -582,6 +588,12 @@ variable "ci_app_name" {
 variable "registry_namespace" {
   type        = string
   description = "A unique namespace within the IBM Cloud Container Registry region where the application image is stored."
+  default     = ""
+}
+
+variable "registry_namespace_suffix" {
+  type        = string
+  description = "A string that can be appended to the `registry_namespace` value to help ensure uniqueness."
   default     = ""
 }
 
@@ -790,6 +802,12 @@ variable "ci_code_engine_project" {
   type        = string
   description = "The name of the Code Engine project to use for the CI pipeline build. The project is created if it does not already exist."
   default     = "Sample_CI_Project"
+}
+
+variable "ci_code_engine_project_prefix" {
+  type        = string
+  description = "A string that will be prefixed to `ci_code_engine_project`. This take precedence over values set in `code_engine_project_prefix`."
+  default     = ""
 }
 
 variable "ci_code_engine_region" {
@@ -2628,6 +2646,12 @@ variable "cd_code_engine_project" {
   type        = string
   description = "The name of the Code Engine project to use for the CD pipeline promoted code. The project is created if it does not already exist."
   default     = "Sample_CD_Project"
+}
+
+variable "cd_code_engine_project_prefix" {
+  type        = string
+  description = "A string that will be prefixed to `cd_code_engine_project`. This take precedence over values set in `code_engine_project_prefix`."
+  default     = ""
 }
 
 variable "cd_code_engine_region" {

@@ -47,6 +47,12 @@ locals {
   inventory_repo_existing_url = (var.inventory_repo_existing_url != "") ? var.inventory_repo_existing_url : var.inventory_repo_url
   evidence_repo_existing_url  = (var.evidence_repo_existing_url != "") ? var.evidence_repo_existing_url : var.evidence_repo_url
   issues_repo_existing_url    = (var.issues_repo_existing_url != "") ? var.issues_repo_existing_url : var.issues_repo_url
+
+  ci_code_engine_project_prefix = (var.ci_code_engine_project_prefix == "") ? var.code_engine_project_prefix : var.ci_code_engine_project_prefix
+  cd_code_engine_project_prefix = (var.cd_code_engine_project_prefix == "") ? var.code_engine_project_prefix : var.cd_code_engine_project_prefix
+  ci_code_engine_project        = (var.ci_code_engine_project == "") ? var.code_engine_project : var.ci_code_engine_project
+  cd_code_engine_project        = (var.cd_code_engine_project == "") ? var.code_engine_project : var.cd_code_engine_project
+  registry_namespace            = format("%s%s", var.registry_namespace, var.registry_namespace_suffix)
 }
 
 module "devsecops_ci_toolchain" {
@@ -57,7 +63,7 @@ module "devsecops_ci_toolchain" {
   toolchain_region         = (var.ci_toolchain_region == "") ? var.toolchain_region : replace(replace(var.ci_toolchain_region, "ibm:yp:", ""), "ibm:ys1:", "")
   toolchain_resource_group = (var.ci_toolchain_resource_group == "") ? var.toolchain_resource_group : var.ci_toolchain_resource_group
   toolchain_description    = var.ci_toolchain_description
-  registry_namespace       = (var.registry_namespace != "") ? var.registry_namespace : var.ci_registry_namespace
+  registry_namespace       = (local.registry_namespace != "") ? local.registry_namespace : var.ci_registry_namespace
   ibmcloud_api             = var.ibmcloud_api
   compliance_base_image    = (var.ci_compliance_base_image == "") ? var.compliance_base_image : var.ci_compliance_base_image
   ci_pipeline_branch       = (var.ci_compliance_pipeline_branch == "") ? var.compliance_pipeline_branch : var.ci_compliance_pipeline_branch
@@ -217,7 +223,7 @@ module "devsecops_ci_toolchain" {
 
   #CODE ENGINE
   deployment_target                   = (var.ci_deployment_target == "") ? var.deployment_target : var.ci_deployment_target
-  code_engine_project                 = (var.ci_code_engine_project == "") ? var.code_engine_project : var.ci_code_engine_project
+  code_engine_project                 = format("%s%s", local.ci_code_engine_project_prefix, local.ci_code_engine_project)
   code_engine_region                  = (var.ci_code_engine_region == "") ? var.toolchain_region : var.ci_code_engine_region
   code_engine_resource_group          = (var.ci_code_engine_resource_group == "") ? var.toolchain_resource_group : var.ci_code_engine_resource_group
   code_engine_build_strategy          = var.ci_code_engine_build_strategy
@@ -522,7 +528,7 @@ module "devsecops_cd_toolchain" {
 
   #CODE ENGINE
   deployment_target                  = (var.cd_deployment_target == "") ? var.deployment_target : var.cd_deployment_target
-  code_engine_project                = (var.cd_code_engine_project == "") ? var.code_engine_project : var.cd_code_engine_project
+  code_engine_project                = format("%s%s", local.cd_code_engine_project_prefix, local.cd_code_engine_project)
   code_engine_region                 = (var.cd_code_engine_region == "") ? var.toolchain_region : var.cd_code_engine_region
   code_engine_resource_group         = (var.cd_code_engine_resource_group == "") ? var.toolchain_resource_group : var.cd_code_engine_resource_group
   code_engine_binding_resource_group = var.cd_code_engine_binding_resource_group
