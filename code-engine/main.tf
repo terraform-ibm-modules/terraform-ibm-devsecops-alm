@@ -55,7 +55,14 @@ locals {
 
   ci_code_engine_project_name = (local.ci_code_engine_project_prefix == "") ? local.ci_code_engine_project : format("%s-%s", local.ci_code_engine_project_prefix, local.ci_code_engine_project)
   cd_code_engine_project_name = (local.cd_code_engine_project_prefix == "") ? local.cd_code_engine_project : format("%s-%s", local.cd_code_engine_project_prefix, local.cd_code_engine_project)
-  registry_namespace          = format("%s%s", var.registry_namespace, var.registry_namespace_suffix)
+  registry_namespace          = (var.ci_registry_namespace == "") ? var.registry_namespace : var.ci_registry_namespace
+}
+
+resource "random_string" "resource_suffix" {
+  count   = var.add_container_name_suffix ? 1 : 0
+  length  = 4
+  special = false
+  upper   = false
 }
 
 module "devsecops_ci_toolchain" {
@@ -66,7 +73,7 @@ module "devsecops_ci_toolchain" {
   toolchain_region         = (var.ci_toolchain_region == "") ? var.toolchain_region : replace(replace(var.ci_toolchain_region, "ibm:yp:", ""), "ibm:ys1:", "")
   toolchain_resource_group = (var.ci_toolchain_resource_group == "") ? var.toolchain_resource_group : var.ci_toolchain_resource_group
   toolchain_description    = var.ci_toolchain_description
-  registry_namespace       = (local.registry_namespace != "") ? local.registry_namespace : var.ci_registry_namespace
+  registry_namespace       = (var.add_container_name_suffix == false) ? local.registry_namespace : format("%s-%s", local.registry_namespace, random_string.resource_suffix[0].result)
   ibmcloud_api             = var.ibmcloud_api
   compliance_base_image    = (var.ci_compliance_base_image == "") ? var.compliance_base_image : var.ci_compliance_base_image
   ci_pipeline_branch       = (var.ci_compliance_pipeline_branch == "") ? var.compliance_pipeline_branch : var.ci_compliance_pipeline_branch

@@ -4280,11 +4280,11 @@
 							"required": false
 						},
 						{
-							"key": "registry_namespace_suffix",
-							"type": "string",
-							"default_value": "",
-							"description": "A string that can be appended to the `registry_namespace` value to help ensure uniqueness.",
-							"required": true
+							"key": "add_container_name_suffix",
+							"type": "boolean",
+							"default_value": false,
+							"description": "Set to `true` to add a 4 character random suffix to `registry_namespace`.",
+							"required": false
 						},
 						{
 							"key": "pipeline_doi_api_key_secret_crn",

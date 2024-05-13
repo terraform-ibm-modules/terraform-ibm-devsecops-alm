@@ -539,6 +539,12 @@ variable "deployment_target" {
   default     = "code-engine"
 }
 
+variable "add_container_name_suffix" {
+  type        = bool
+  description = "Set to `true` to add a 4 character random suffix to `registry_namespace`."
+  default     = false
+}
+
 ######## Code Engine Vars #####################
 variable "code_engine_project" {
   type        = string
@@ -588,12 +594,6 @@ variable "ci_app_name" {
 variable "registry_namespace" {
   type        = string
   description = "A unique namespace within the IBM Cloud Container Registry region where the application image is stored."
-  default     = ""
-}
-
-variable "registry_namespace_suffix" {
-  type        = string
-  description = "A string that can be appended to the `registry_namespace` value to help ensure uniqueness."
   default     = ""
 }
 
