@@ -4798,7 +4798,7 @@
 						{
 							"key": "ci_deployment_target",
 							"type": "string",
-							"default_value": "cluster",
+							"default_value": "",
 							"description": "The deployment target, Kubernetes, Code-Engine or ZOS.",
 							"required": false
 						},
