@@ -80,7 +80,8 @@ module "devsecops_ci_toolchain" {
   pr_pipeline_branch       = (var.ci_compliance_pipeline_pr_branch == "") ? var.compliance_pipeline_branch : var.ci_compliance_pipeline_pr_branch
   ci_pipeline_git_tag      = (var.ci_pipeline_git_tag == "") ? var.pipeline_git_tag : var.ci_pipeline_git_tag
   pr_pipeline_git_tag      = (var.pr_pipeline_git_tag == "") ? var.pipeline_git_tag : var.pr_pipeline_git_tag
-
+  dev_region               = (var.ci_toolchain_region == "") ? var.toolchain_region : replace(replace(var.ci_toolchain_region, "ibm:yp:", ""), "ibm:ys1:", "")
+  dev_resource_group       = (var.ci_toolchain_resource_group == "") ? var.toolchain_resource_group : var.ci_toolchain_resource_group
   #SECRET PROVIDERS
   enable_key_protect     = (local.use_kp_override) ? var.enable_key_protect : var.ci_enable_key_protect
   enable_secrets_manager = (local.use_sm_override) ? var.enable_secrets_manager : var.ci_enable_secrets_manager
