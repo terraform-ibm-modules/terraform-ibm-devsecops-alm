@@ -3973,14 +3973,14 @@
 						{
 							"key": "zos_dbb_hlq",
 							"type": "string",
-							"default_value": "",
+							"default_value": "IBMUSER.PIPELINE",
 							"description": "The ZOS DBB HLQ.",
 							"required": false
 						},
 						{
 							"key": "zos_dbb_user",
 							"type": "string",
-							"default_value": "",
+							"default_value": "ADMIN",
 							"description": "The ZOS DBB user.",
 							"required": false
 						},
