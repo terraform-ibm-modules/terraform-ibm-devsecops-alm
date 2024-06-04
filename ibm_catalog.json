@@ -3992,6 +3992,13 @@
 							"required": false
 						},
 						{
+							"key": "zos_secret_key_group",
+							"type": "string",
+							"default_value": "",
+							"description": "The name of the secret group containing the secret for `zos_dbb_secret_name`. Only applies to using Secrets Manager.",
+							"required": false
+						},
+						{
 							"key": "zos_secret_info",
 							"type": "string",
 							"default_value": "",
@@ -4001,8 +4008,15 @@
 						{
 							"key": "zos_secret_key_name",
 							"type": "string",
-							"default_value": "",
+							"default_value": "ssh-auth",
 							"description": "API key used to create the toolchains.",
+							"required": false
+						},
+						{
+							"key": "zos_secret_key_group",
+							"type": "string",
+							"default_value": "",
+							"description": "The name of the secret group containing the secret for `zos_secret_key_name`. Only applies to using Secrets Manager.",
 							"required": false
 						},
 						{
@@ -4523,6 +4537,13 @@
 							"required": false
 						},
 						{
+							"key": "ci_zos_secret_key_group",
+							"type": "string",
+							"default_value": "",
+							"description": "The name of the secret group containing the secret for `zos_dbb_secret_name`. Only applies to using Secrets Manager.",
+							"required": false
+						},
+						{
 							"key": "ci_zos_secret_info",
 							"type": "string",
 							"default_value": "",
@@ -4534,6 +4555,13 @@
 							"type": "string",
 							"default_value": "",
 							"description": "API key used to create the toolchains.",
+							"required": false
+						},
+						{
+							"key": "ci_zos_secret_key_group",
+							"type": "string",
+							"default_value": "",
+							"description": "The name of the secret group containing the secret for `zos_secret_key_name`. Only applies to using Secrets Manager.",
 							"required": false
 						},
 						{
@@ -5860,6 +5888,13 @@
 							"required": false
 						},
 						{
+							"key": "cd_zos_secret_key_group",
+							"type": "string",
+							"default_value": "",
+							"description": "The name of the secret group containing the secret for `zos_dbb_secret_name`. Only applies to using Secrets Manager.",
+							"required": false
+						},
+						{
 							"key": "cd_zos_secret_info",
 							"type": "string",
 							"default_value": "",
@@ -5871,6 +5906,13 @@
 							"type": "string",
 							"default_value": "",
 							"description": "API key used to create the toolchains.",
+							"required": false
+						},
+						{
+							"key": "cd_zos_secret_key_group",
+							"type": "string",
+							"default_value": "",
+							"description": "The name of the secret group containing the secret for `zos_secret_key_name`. Only applies to using Secrets Manager.",
 							"required": false
 						},
 						{
@@ -6707,6 +6749,13 @@
 							"required": false
 						},
 						{
+							"key": "cc_zos_secret_key_group",
+							"type": "string",
+							"default_value": "",
+							"description": "The name of the secret group containing the secret for `zos_dbb_secret_name`. Only applies to using Secrets Manager.",
+							"required": false
+						},
+						{
 							"key": "cc_zos_secret_info",
 							"type": "string",
 							"default_value": "",
@@ -6718,6 +6767,13 @@
 							"type": "string",
 							"default_value": "",
 							"description": "API key used to create the toolchains.",
+							"required": false
+						},
+						{
+							"key": "cc_zos_secret_key_group",
+							"type": "string",
+							"default_value": "",
+							"description": "The name of the secret group containing the secret for `zos_secret_key_name`. Only applies to using Secrets Manager.",
 							"required": false
 						},
 						{

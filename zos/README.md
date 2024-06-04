@@ -209,8 +209,9 @@ statement instead the previous block.
 | <a name="input_cc_zos_dbb_url"></a> [cc\_zos\_dbb\_url](#input\_cc\_zos\_dbb\_url) | The ZOS DBB URL. | `string` | `""` | no |
 | <a name="input_cc_zos_dbb_user"></a> [cc\_zos\_dbb\_user](#input\_cc\_zos\_dbb\_user) | The ZOS DBB user. | `string` | `""` | no |
 | <a name="input_cc_zos_host_name"></a> [cc\_zos\_host\_name](#input\_cc\_zos\_host\_name) | The ZOS host name. | `string` | `""` | no |
-| <a name="input_cc_zos_secret_group"></a> [cc\_zos\_secret\_group](#input\_cc\_zos\_secret\_group) | The name of the secret group for the CC pipeline containing the secret for `zos_secret_key_name`. Only applies to using Secrets Manager. | `string` | `""` | no |
+| <a name="input_cc_zos_secret_dbb_group"></a> [cc\_zos\_secret\_dbb\_group](#input\_cc\_zos\_secret\_dbb\_group) | The name of the secret group in the CI pipeline containing the secret for `zos_secret_dbb_name`. Only applies to using Secrets Manager. | `string` | `""` | no |
 | <a name="input_cc_zos_secret_info"></a> [cc\_zos\_secret\_info](#input\_cc\_zos\_secret\_info) | API key used to create the toolchains. | `string` | `""` | no |
+| <a name="input_cc_zos_secret_key_group"></a> [cc\_zos\_secret\_key\_group](#input\_cc\_zos\_secret\_key\_group) | The name of the secret group for the CC pipeline containing the secret for `zos_secret_key_name`. Only applies to using Secrets Manager. | `string` | `""` | no |
 | <a name="input_cc_zos_secret_key_name"></a> [cc\_zos\_secret\_key\_name](#input\_cc\_zos\_secret\_key\_name) | The name of the secret key in the secrets provider. | `string` | `""` | no |
 | <a name="input_cc_zos_ssh_port"></a> [cc\_zos\_ssh\_port](#input\_cc\_zos\_ssh\_port) | The ZOS SSH port. | `string` | `""` | no |
 | <a name="input_cc_zos_user"></a> [cc\_zos\_user](#input\_cc\_zos\_user) | The ZOS user. | `string` | `""` | no |
@@ -361,8 +362,9 @@ statement instead the previous block.
 | <a name="input_cd_zos_dbb_user"></a> [cd\_zos\_dbb\_user](#input\_cd\_zos\_dbb\_user) | The ZOS DBB user. | `string` | `""` | no |
 | <a name="input_cd_zos_host_name"></a> [cd\_zos\_host\_name](#input\_cd\_zos\_host\_name) | The ZOS host name. | `string` | `""` | no |
 | <a name="input_cd_zos_hostip"></a> [cd\_zos\_hostip](#input\_cd\_zos\_hostip) | The ZOS IP. | `string` | `""` | no |
-| <a name="input_cd_zos_secret_group"></a> [cd\_zos\_secret\_group](#input\_cd\_zos\_secret\_group) | The name of the secret group in the CD pipeline containing the secret for `zos_secret_key_name`. Only applies to using Secrets Manager. | `string` | `""` | no |
+| <a name="input_cd_zos_secret_dbb_group"></a> [cd\_zos\_secret\_dbb\_group](#input\_cd\_zos\_secret\_dbb\_group) | The name of the secret group in the CI pipeline containing the secret for `zos_secret_dbb_name`. Only applies to using Secrets Manager. | `string` | `""` | no |
 | <a name="input_cd_zos_secret_info"></a> [cd\_zos\_secret\_info](#input\_cd\_zos\_secret\_info) | API key used to create the toolchains. | `string` | `""` | no |
+| <a name="input_cd_zos_secret_key_group"></a> [cd\_zos\_secret\_key\_group](#input\_cd\_zos\_secret\_key\_group) | The name of the secret group in the CD pipeline containing the secret for `zos_secret_key_name`. Only applies to using Secrets Manager. | `string` | `""` | no |
 | <a name="input_cd_zos_secret_key_name"></a> [cd\_zos\_secret\_key\_name](#input\_cd\_zos\_secret\_key\_name) | The name of the secret key in the secrets provider. | `string` | `""` | no |
 | <a name="input_cd_zos_ssh_port"></a> [cd\_zos\_ssh\_port](#input\_cd\_zos\_ssh\_port) | The ZOS SSH port. | `string` | `""` | no |
 | <a name="input_cd_zos_user"></a> [cd\_zos\_user](#input\_cd\_zos\_user) | The ZOS user. | `string` | `""` | no |
@@ -528,8 +530,9 @@ statement instead the previous block.
 | <a name="input_ci_zos_dbb_user"></a> [ci\_zos\_dbb\_user](#input\_ci\_zos\_dbb\_user) | The ZOS DBB user. | `string` | `""` | no |
 | <a name="input_ci_zos_host_name"></a> [ci\_zos\_host\_name](#input\_ci\_zos\_host\_name) | The ZOS host name. | `string` | `""` | no |
 | <a name="input_ci_zos_hostip"></a> [ci\_zos\_hostip](#input\_ci\_zos\_hostip) | The ZOS IP. | `string` | `""` | no |
-| <a name="input_ci_zos_secret_group"></a> [ci\_zos\_secret\_group](#input\_ci\_zos\_secret\_group) | The name of the secret group in the CI pipeline containing the secret for `zos_secret_key_name`. Only applies to using Secrets Manager. | `string` | `""` | no |
+| <a name="input_ci_zos_secret_dbb_group"></a> [ci\_zos\_secret\_dbb\_group](#input\_ci\_zos\_secret\_dbb\_group) | The name of the secret group in the CI pipeline containing the secret for `zos_secret_dbb_name`. Only applies to using Secrets Manager. | `string` | `""` | no |
 | <a name="input_ci_zos_secret_info"></a> [ci\_zos\_secret\_info](#input\_ci\_zos\_secret\_info) | API key used to create the toolchains. | `string` | `""` | no |
+| <a name="input_ci_zos_secret_key_group"></a> [ci\_zos\_secret\_key\_group](#input\_ci\_zos\_secret\_key\_group) | The name of the secret group in the CI pipeline containing the secret for `zos_secret_key_name`. Only applies to using Secrets Manager. | `string` | `""` | no |
 | <a name="input_ci_zos_secret_key_name"></a> [ci\_zos\_secret\_key\_name](#input\_ci\_zos\_secret\_key\_name) | The name of the secret key in the secrets provider. | `string` | `""` | no |
 | <a name="input_ci_zos_ssh_port"></a> [ci\_zos\_ssh\_port](#input\_ci\_zos\_ssh\_port) | The ZOS SSH port. | `string` | `""` | no |
 | <a name="input_ci_zos_user"></a> [ci\_zos\_user](#input\_ci\_zos\_user) | The ZOS user. | `string` | `""` | no |
@@ -627,8 +630,9 @@ statement instead the previous block.
 | <a name="input_zos_dbb_user"></a> [zos\_dbb\_user](#input\_zos\_dbb\_user) | The ZOS DBB user. | `string` | `"ADMIN"` | no |
 | <a name="input_zos_host_name"></a> [zos\_host\_name](#input\_zos\_host\_name) | The ZOS host name. | `string` | `""` | no |
 | <a name="input_zos_hostip"></a> [zos\_hostip](#input\_zos\_hostip) | The ZOS IP. | `string` | `""` | no |
-| <a name="input_zos_secret_group"></a> [zos\_secret\_group](#input\_zos\_secret\_group) | The name of the secret group containing the secret for `zos_secret_key_name`. Only applies to using Secrets Manager. | `string` | `""` | no |
+| <a name="input_zos_secret_dbb_group"></a> [zos\_secret\_dbb\_group](#input\_zos\_secret\_dbb\_group) | The name of the secret group in the CI pipeline containing the secret for `zos_secret_dbb_name`. Only applies to using Secrets Manager. | `string` | `""` | no |
 | <a name="input_zos_secret_info"></a> [zos\_secret\_info](#input\_zos\_secret\_info) | API key used to create the toolchains. | `string` | `""` | no |
+| <a name="input_zos_secret_key_group"></a> [zos\_secret\_key\_group](#input\_zos\_secret\_key\_group) | The name of the secret group containing the secret for `zos_secret_key_name`. Only applies to using Secrets Manager. | `string` | `""` | no |
 | <a name="input_zos_secret_key_name"></a> [zos\_secret\_key\_name](#input\_zos\_secret\_key\_name) | The name of the secret key in the secrets provider. | `string` | `"ssh-auth"` | no |
 | <a name="input_zos_ssh_port"></a> [zos\_ssh\_port](#input\_zos\_ssh\_port) | The ZOS SSH port. | `string` | `""` | no |
 | <a name="input_zos_user"></a> [zos\_user](#input\_zos\_user) | The ZOS user. | `string` | `""` | no |

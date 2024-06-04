@@ -53,9 +53,9 @@ locals {
   cd_secret_group = (var.cd_sm_secret_group == "") ? var.sm_secret_group : var.cd_sm_secret_group
   cc_secret_group = (var.cc_sm_secret_group == "") ? var.sm_secret_group : var.cc_sm_secret_group
 
-  zos_ci_secret_group = (var.ci_zos_secret_group == "") ? var.zos_secret_group : var.ci_zos_secret_group
-  zos_cd_secret_group = (var.cd_zos_secret_group == "") ? var.zos_secret_group : var.cd_zos_secret_group
-  zos_cc_secret_group = (var.cc_zos_secret_group == "") ? var.zos_secret_group : var.cc_zos_secret_group
+  zos_ci_secret_group = (var.ci_zos_secret_key_group == "") ? var.zos_secret_key_group : var.ci_zos_secret_key_group
+  zos_cd_secret_group = (var.cd_zos_secret_key_group == "") ? var.zos_secret_key_group : var.cd_zos_secret_key_group
+  zos_cc_secret_group = (var.cc_zos_secret_key_group == "") ? var.zos_secret_key_group : var.cc_zos_secret_key_group
 
   resolved_ci_secret_group = (local.zos_ci_secret_group == "") ? local.ci_secret_group : local.zos_ci_secret_group
   resolved_cd_secret_group = (local.zos_cd_secret_group == "") ? local.cd_secret_group : local.zos_cd_secret_group
@@ -64,10 +64,6 @@ locals {
   resolved_ci_zos_secret_key_name = (var.ci_zos_secret_key_name == "") ? var.zos_secret_key_name : var.ci_zos_secret_key_name
   resolved_cd_zos_secret_key_name = (var.cd_zos_secret_key_name == "") ? var.zos_secret_key_name : var.cd_zos_secret_key_name
   resolved_cc_zos_secret_key_name = (var.cc_zos_secret_key_name == "") ? var.zos_secret_key_name : var.cc_zos_secret_key_name
-
-  #zos_ci_secret_key_name_ref = (local.resolved_ci_secret_group == "") ? local.resolved_ci_secret_group : local.resolved_ci_zos_secret_key_name
-  #zos_cd_secret_key_name_ref = (local.resolved_cd_secret_group == "") ? local.resolved_cd_secret_group : local.resolved_cd_zos_secret_key_name
-  #zos_cc_secret_key_name_ref = (local.resolved_cc_secret_group == "") ? local.resolved_cc_secret_group : local.resolved_cc_zos_secret_key_name
 
   zos_ci_secret_key_name_ref = (
     ((var.enable_secrets_manager == true) || (var.ci_enable_secrets_manager == true)) ? format("{vault::%s.%s.%s}", var.sm_integration_name, local.resolved_ci_secret_group, local.resolved_ci_zos_secret_key_name) :
@@ -84,6 +80,33 @@ locals {
     ((var.enable_secrets_manager == true) || (var.ci_enable_secrets_manager == true)) ? format("{vault::%s.%s.%s}", var.sm_integration_name, local.resolved_cc_secret_group, local.resolved_cc_zos_secret_key_name) :
     format("{vault::%s.%s}", var.kp_integration_name, local.resolved_cc_zos_secret_key_name)
 
+  )
+
+  zos_ci_secret_dbb_group = (var.ci_zos_secret_dbb_group == "") ? var.zos_secret_dbb_group : var.ci_zos_secret_dbb_group
+  zos_cd_secret_dbb_group = (var.cd_zos_secret_dbb_group == "") ? var.zos_secret_dbb_group : var.cd_zos_secret_dbb_group
+  zos_cc_secret_dbb_group = (var.cc_zos_secret_dbb_group == "") ? var.zos_secret_dbb_group : var.cc_zos_secret_dbb_group
+
+  resolved_ci_secret_dbb_group = (local.zos_ci_secret_dbb_group == "") ? local.ci_secret_group : local.zos_ci_secret_dbb_group
+  resolved_cd_secret_dbb_group = (local.zos_cd_secret_dbb_group == "") ? local.cd_secret_group : local.zos_cd_secret_dbb_group
+  resolved_cc_secret_dbb_group = (local.zos_cc_secret_dbb_group == "") ? local.cc_secret_group : local.zos_cc_secret_dbb_group
+
+  resolved_ci_zos_dbb_secret_name = (var.ci_zos_dbb_secret_name == "") ? var.zos_dbb_secret_name : var.ci_zos_dbb_secret_name
+  resolved_cd_zos_dbb_secret_name = (var.cd_zos_dbb_secret_name == "") ? var.zos_dbb_secret_name : var.cd_zos_dbb_secret_name
+  resolved_cc_zos_dbb_secret_name = (var.cc_zos_dbb_secret_name == "") ? var.zos_dbb_secret_name : var.cc_zos_dbb_secret_name
+
+  zos_ci_dbb_secret_name_ref = (
+    ((var.enable_secrets_manager == true) || (var.ci_enable_secrets_manager == true)) ? format("{vault::%s.%s.%s}", var.sm_integration_name, local.resolved_ci_secret_dbb_group, local.resolved_ci_zos_dbb_secret_name) :
+    format("{vault::%s.%s}", var.kp_integration_name, local.resolved_ci_zos_dbb_secret_name)
+  )
+
+  zos_cd_dbb_secret_name_ref = (
+    ((var.enable_secrets_manager == true) || (var.ci_enable_secrets_manager == true)) ? format("{vault::%s.%s.%s}", var.sm_integration_name, local.resolved_cd_secret_dbb_group, local.resolved_cd_zos_dbb_secret_name) :
+    format("{vault::%s.%s}", var.kp_integration_name, local.resolved_cd_zos_dbb_secret_name)
+  )
+
+  zos_cc_dbb_secret_name_ref = (
+    ((var.enable_secrets_manager == true) || (var.ci_enable_secrets_manager == true)) ? format("{vault::%s.%s.%s}", var.sm_integration_name, local.resolved_cc_secret_dbb_group, local.resolved_cc_zos_dbb_secret_name) :
+    format("{vault::%s.%s}", var.kp_integration_name, local.resolved_cc_zos_dbb_secret_name)
   )
 }
 
@@ -265,7 +288,7 @@ module "devsecops_ci_toolchain" {
   zos_dbb_url           = (var.ci_zos_dbb_url == "") ? var.zos_dbb_url : var.ci_zos_dbb_url
   zos_dbb_hlq           = (var.ci_zos_dbb_hlq == "") ? var.zos_dbb_hlq : var.ci_zos_dbb_hlq
   zos_dbb_user          = (var.ci_zos_dbb_user == "") ? var.zos_dbb_user : var.ci_zos_dbb_user
-  zos_dbb_secret_name   = (var.ci_zos_dbb_secret_name == "") ? var.zos_dbb_secret_name : var.ci_zos_dbb_secret_name
+  zos_dbb_secret_name   = (local.resolved_ci_zos_dbb_secret_name != "") ? local.zos_ci_dbb_secret_name_ref : ""
   zos_secret_info       = (var.ci_zos_secret_info == "") ? var.zos_secret_info : var.ci_zos_secret_info
   zos_secret_key_name   = local.zos_ci_secret_key_name_ref
 
@@ -523,7 +546,7 @@ module "devsecops_cd_toolchain" {
   zos_dbb_url           = (var.cd_zos_dbb_url == "") ? var.zos_dbb_url : var.cd_zos_dbb_url
   zos_dbb_hlq           = (var.cd_zos_dbb_hlq == "") ? var.zos_dbb_hlq : var.cd_zos_dbb_hlq
   zos_dbb_user          = (var.cd_zos_dbb_user == "") ? var.zos_dbb_user : var.cd_zos_dbb_user
-  zos_dbb_secret_name   = (var.cd_zos_dbb_secret_name == "") ? var.zos_dbb_secret_name : var.cd_zos_dbb_secret_name
+  zos_dbb_secret_name   = (local.resolved_cd_zos_dbb_secret_name != "") ? local.zos_cd_dbb_secret_name_ref : ""
   zos_secret_info       = (var.cd_zos_secret_info == "") ? var.zos_secret_info : var.cd_zos_secret_info
   zos_secret_key_name   = local.zos_cd_secret_key_name_ref
 
@@ -740,7 +763,7 @@ module "devsecops_cc_toolchain" {
   zos_dbb_url         = (var.cc_zos_dbb_url == "") ? var.zos_dbb_url : var.cc_zos_dbb_url
   zos_dbb_hlq         = (var.cc_zos_dbb_hlq == "") ? var.zos_dbb_hlq : var.cc_zos_dbb_hlq
   zos_dbb_user        = (var.cc_zos_dbb_user == "") ? var.zos_dbb_user : var.cc_zos_dbb_user
-  zos_dbb_secret_name = (var.cc_zos_dbb_secret_name == "") ? var.zos_dbb_secret_name : var.cc_zos_dbb_secret_name
+  zos_dbb_secret_name = (local.resolved_cc_zos_dbb_secret_name != "") ? local.zos_cc_dbb_secret_name_ref : ""
   zos_secret_info     = (var.cc_zos_secret_info == "") ? var.zos_secret_info : var.cc_zos_secret_info
   zos_secret_key_name = local.zos_cc_secret_key_name_ref
 

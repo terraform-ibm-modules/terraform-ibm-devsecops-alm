@@ -3438,6 +3438,12 @@ variable "zos_dbb_secret_name" {
   default     = ""
 }
 
+variable "zos_secret_dbb_group" {
+  type        = string
+  description = "The name of the secret group in the CI pipeline containing the secret for `zos_secret_dbb_name`. Only applies to using Secrets Manager."
+  default     = ""
+}
+
 variable "zos_secret_info" {
   type        = string
   description = "API key used to create the toolchains."
@@ -3451,7 +3457,7 @@ variable "zos_secret_key_name" {
   default     = "ssh-auth"
 }
 
-variable "zos_secret_group" {
+variable "zos_secret_key_group" {
   type        = string
   description = "The name of the secret group containing the secret for `zos_secret_key_name`. Only applies to using Secrets Manager."
   default     = ""
@@ -3524,6 +3530,12 @@ variable "ci_zos_dbb_secret_name" {
   default     = ""
 }
 
+variable "ci_zos_secret_dbb_group" {
+  type        = string
+  description = "The name of the secret group in the CI pipeline containing the secret for `zos_secret_dbb_name`. Only applies to using Secrets Manager."
+  default     = ""
+}
+
 variable "ci_zos_secret_info" {
   type        = string
   description = "API key used to create the toolchains."
@@ -3537,7 +3549,7 @@ variable "ci_zos_secret_key_name" {
   default     = ""
 }
 
-variable "ci_zos_secret_group" {
+variable "ci_zos_secret_key_group" {
   type        = string
   description = "The name of the secret group in the CI pipeline containing the secret for `zos_secret_key_name`. Only applies to using Secrets Manager."
   default     = ""
@@ -3610,6 +3622,12 @@ variable "cd_zos_dbb_secret_name" {
   default     = ""
 }
 
+variable "cd_zos_secret_dbb_group" {
+  type        = string
+  description = "The name of the secret group in the CI pipeline containing the secret for `zos_secret_dbb_name`. Only applies to using Secrets Manager."
+  default     = ""
+}
+
 variable "cd_zos_secret_info" {
   type        = string
   description = "API key used to create the toolchains."
@@ -3623,7 +3641,7 @@ variable "cd_zos_secret_key_name" {
   default     = ""
 }
 
-variable "cd_zos_secret_group" {
+variable "cd_zos_secret_key_group" {
   type        = string
   description = "The name of the secret group in the CD pipeline containing the secret for `zos_secret_key_name`. Only applies to using Secrets Manager."
   default     = ""
@@ -3672,6 +3690,12 @@ variable "cc_zos_dbb_secret_name" {
   default     = ""
 }
 
+variable "cc_zos_secret_dbb_group" {
+  type        = string
+  description = "The name of the secret group in the CI pipeline containing the secret for `zos_secret_dbb_name`. Only applies to using Secrets Manager."
+  default     = ""
+}
+
 variable "cc_zos_secret_info" {
   type        = string
   description = "API key used to create the toolchains."
@@ -3685,7 +3709,7 @@ variable "cc_zos_secret_key_name" {
   default     = ""
 }
 
-variable "cc_zos_secret_group" {
+variable "cc_zos_secret_key_group" {
   type        = string
   description = "The name of the secret group for the CC pipeline containing the secret for `zos_secret_key_name`. Only applies to using Secrets Manager."
   default     = ""
