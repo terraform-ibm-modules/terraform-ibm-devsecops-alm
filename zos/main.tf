@@ -57,9 +57,9 @@ locals {
   zos_cd_secret_group = (var.cd_zos_secret_group == "") ? var.zos_secret_group : var.cd_zos_secret_group
   zos_cc_secret_group = (var.cc_zos_secret_group == "") ? var.zos_secret_group : var.cc_zos_secret_group
 
-  resolved_ci_secret_group = (local.zos_ci_secret_group == "") ? local.ci_secret_group : local.ci_sm_secret_group
-  resolved_cd_secret_group = (local.zos_cd_secret_group == "") ? local.cd_secret_group : local.cd_sm_secret_group
-  resolved_cc_secret_group = (local.zos_cc_secret_group == "") ? local.cc_secret_group : local.cc_sm_secret_group
+  resolved_ci_secret_group = (local.zos_ci_secret_group == "") ? local.ci_secret_group : local.zos_ci_secret_group
+  resolved_cd_secret_group = (local.zos_cd_secret_group == "") ? local.cd_secret_group : local.zos_cd_secret_group
+  resolved_cc_secret_group = (local.zos_cc_secret_group == "") ? local.cc_secret_group : local.zos_cc_secret_group
 
   resolved_ci_zos_secret_key_name = (var.ci_zos_secret_key_name == "") ? var.zos_secret_key_name : var.ci_zos_secret_key_name
   resolved_cd_zos_secret_key_name = (var.cd_zos_secret_key_name == "") ? var.zos_secret_key_name : var.cd_zos_secret_key_name
@@ -70,24 +70,26 @@ locals {
   #zos_cc_secret_key_name_ref = (local.resolved_cc_secret_group == "") ? local.resolved_cc_secret_group : local.resolved_cc_zos_secret_key_name
 
   zos_ci_secret_key_name_ref = (
-    (local.use_kp_override) ? format("{vault::%s.%s}", var.kp_integration_name, local.resolved_ci_zos_secret_key_name) :
-    format("{vault::%s.%s.%s}", var.sm_integration_name, local.resolved_ci_secret_group, local.resolved_ci_zos_secret_key_name)
+    ((var.enable_secrets_manager == true) || (var.ci_enable_secrets_manager == true)) ? format("{vault::%s.%s.%s}", var.sm_integration_name, local.resolved_ci_secret_group, local.resolved_ci_zos_secret_key_name) :
+    format("{vault::%s.%s}", var.kp_integration_name, local.resolved_ci_zos_secret_key_name)
   )
 
   zos_cd_secret_key_name_ref = (
-    (local.use_kp_override) ? format("{vault::%s.%s}", var.kp_integration_name, local.resolved_cd_zos_secret_key_name) :
-    format("{vault::%s.%s.%s}", var.sm_integration_name, local.resolved_cd_secret_group, local.resolved_cd_zos_secret_key_name)
+    ((var.enable_secrets_manager == true) || (var.ci_enable_secrets_manager == true)) ? format("{vault::%s.%s.%s}", var.sm_integration_name, local.resolved_cd_secret_group, local.resolved_cd_zos_secret_key_name) :
+    format("{vault::%s.%s}", var.kp_integration_name, local.resolved_cd_zos_secret_key_name)
+
   )
 
   zos_cc_secret_key_name_ref = (
-    (local.use_kp_override) ? format("{vault::%s.%s}", var.kp_integration_name, local.resolved_cc_zos_secret_key_name) :
-    format("{vault::%s.%s.%s}", var.sm_integration_name, local.resolved_cc_secret_group, local.resolved_cc_zos_secret_key_name)
+    ((var.enable_secrets_manager == true) || (var.ci_enable_secrets_manager == true)) ? format("{vault::%s.%s.%s}", var.sm_integration_name, local.resolved_cc_secret_group, local.resolved_cc_zos_secret_key_name) :
+    format("{vault::%s.%s}", var.kp_integration_name, local.resolved_cc_zos_secret_key_name)
+
   )
 }
 
 module "devsecops_ci_toolchain" {
   count                    = var.create_ci_toolchain ? 1 : 0
-  source                   = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-ci-toolchain?ref=v1.3.0-zosbeta.1"
+  source                   = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-ci-toolchain?ref=v1.3.0-zosbeta.2"
   ibmcloud_api_key         = var.ibmcloud_api_key
   toolchain_name           = (var.ci_toolchain_name == "") ? format("${var.toolchain_name}%s", "-CI-Toolchain") : var.ci_toolchain_name
   toolchain_region         = (var.ci_toolchain_region == "") ? var.toolchain_region : replace(replace(var.ci_toolchain_region, "ibm:yp:", ""), "ibm:ys1:", "")
@@ -334,7 +336,7 @@ module "devsecops_ci_toolchain" {
 
 module "devsecops_cd_toolchain" {
   count            = var.create_cd_toolchain ? 1 : 0
-  source           = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain?ref=v1.3.0-zosbeta.1"
+  source           = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain?ref=v1.3.0-zosbeta.2"
   ibmcloud_api_key = var.ibmcloud_api_key
 
   toolchain_name           = (var.cd_toolchain_name == "") ? format("${var.toolchain_name}%s", "-CD-Toolchain") : var.cd_toolchain_name
@@ -572,7 +574,7 @@ module "devsecops_cd_toolchain" {
 
 module "devsecops_cc_toolchain" {
   count                         = var.create_cc_toolchain ? 1 : 0
-  source                        = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cc-toolchain?ref=v1.3.0-zosbeta.1"
+  source                        = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cc-toolchain?ref=v1.3.0-zosbeta.2"
   ibmcloud_api_key              = var.ibmcloud_api_key
   toolchain_name                = (var.cc_toolchain_name == "") ? format("${var.toolchain_name}%s", "-CC-Toolchain") : var.cc_toolchain_name
   toolchain_description         = var.cc_toolchain_description

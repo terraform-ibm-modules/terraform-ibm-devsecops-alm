@@ -63,9 +63,9 @@ statement instead the previous block.
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_devsecops_cc_toolchain"></a> [devsecops\_cc\_toolchain](#module\_devsecops\_cc\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cc-toolchain | v1.3.0-zosbeta.1 |
-| <a name="module_devsecops_cd_toolchain"></a> [devsecops\_cd\_toolchain](#module\_devsecops\_cd\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain | v1.3.0-zosbeta.1 |
-| <a name="module_devsecops_ci_toolchain"></a> [devsecops\_ci\_toolchain](#module\_devsecops\_ci\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-ci-toolchain | v1.3.0-zosbeta.1 |
+| <a name="module_devsecops_cc_toolchain"></a> [devsecops\_cc\_toolchain](#module\_devsecops\_cc\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cc-toolchain | v1.3.0-zosbeta.2 |
+| <a name="module_devsecops_cd_toolchain"></a> [devsecops\_cd\_toolchain](#module\_devsecops\_cd\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain | v1.3.0-zosbeta.2 |
+| <a name="module_devsecops_ci_toolchain"></a> [devsecops\_ci\_toolchain](#module\_devsecops\_ci\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-ci-toolchain | v1.3.0-zosbeta.2 |
 
 ### Resources
 
@@ -624,18 +624,35 @@ statement instead the previous block.
 | <a name="input_zos_dbb_hlq"></a> [zos\_dbb\_hlq](#input\_zos\_dbb\_hlq) | The ZOS DBB HLQ. | `string` | `"IBMUSER.PIPELINE"` | no |
 | <a name="input_zos_dbb_secret_name"></a> [zos\_dbb\_secret\_name](#input\_zos\_dbb\_secret\_name) | API key used to create the toolchains. | `string` | `""` | no |
 | <a name="input_zos_dbb_url"></a> [zos\_dbb\_url](#input\_zos\_dbb\_url) | The ZOS DBB URL. | `string` | `""` | no |
-| <a name="input_zos_dbb_user"></a> [zos\_dbb\_user](#input\_zos\_dbb\_user) | The ZOS DBB user. | `string` | `""` | no |
+| <a name="input_zos_dbb_user"></a> [zos\_dbb\_user](#input\_zos\_dbb\_user) | The ZOS DBB user. | `string` | `"ADMIN"` | no |
 | <a name="input_zos_host_name"></a> [zos\_host\_name](#input\_zos\_host\_name) | The ZOS host name. | `string` | `""` | no |
 | <a name="input_zos_hostip"></a> [zos\_hostip](#input\_zos\_hostip) | The ZOS IP. | `string` | `""` | no |
 | <a name="input_zos_secret_group"></a> [zos\_secret\_group](#input\_zos\_secret\_group) | The name of the secret group containing the secret for `zos_secret_key_name`. Only applies to using Secrets Manager. | `string` | `""` | no |
 | <a name="input_zos_secret_info"></a> [zos\_secret\_info](#input\_zos\_secret\_info) | API key used to create the toolchains. | `string` | `""` | no |
 | <a name="input_zos_secret_key_name"></a> [zos\_secret\_key\_name](#input\_zos\_secret\_key\_name) | The name of the secret key in the secrets provider. | `string` | `"ssh-auth"` | no |
 | <a name="input_zos_ssh_port"></a> [zos\_ssh\_port](#input\_zos\_ssh\_port) | The ZOS SSH port. | `string` | `""` | no |
-| <a name="input_zos_user"></a> [zos\_user](#input\_zos\_user) | The ZOS user. | `string` | `"ADMIN"` | no |
+| <a name="input_zos_user"></a> [zos\_user](#input\_zos\_user) | The ZOS user. | `string` | `""` | no |
 
 ### Outputs
 
-No outputs.
+| Name | Description |
+|------|-------------|
+| <a name="output_app_repo_url"></a> [app\_repo\_url](#output\_app\_repo\_url) | The App Repo URL |
+| <a name="output_cc_pipeline_id"></a> [cc\_pipeline\_id](#output\_cc\_pipeline\_id) | The CC pipeline Id |
+| <a name="output_cd_pipeline_id"></a> [cd\_pipeline\_id](#output\_cd\_pipeline\_id) | The CD pipeline Id |
+| <a name="output_ci_pipeline_id"></a> [ci\_pipeline\_id](#output\_ci\_pipeline\_id) | The CI pipeline Id |
+| <a name="output_compliance_cc_toolchain_id"></a> [compliance\_cc\_toolchain\_id](#output\_compliance\_cc\_toolchain\_id) | The ID of the Compliance CC Toolchain |
+| <a name="output_compliance_cc_toolchain_url"></a> [compliance\_cc\_toolchain\_url](#output\_compliance\_cc\_toolchain\_url) | The Compliance CC Toolchain URL |
+| <a name="output_compliance_cd_toolchain_id"></a> [compliance\_cd\_toolchain\_id](#output\_compliance\_cd\_toolchain\_id) | The ID of the Compliance CD Toolchain |
+| <a name="output_compliance_cd_toolchain_url"></a> [compliance\_cd\_toolchain\_url](#output\_compliance\_cd\_toolchain\_url) | The Compliance CD Toolchain URL |
+| <a name="output_compliance_ci_toolchain_id"></a> [compliance\_ci\_toolchain\_id](#output\_compliance\_ci\_toolchain\_id) | The ID of the Compliance CI Toolchain |
+| <a name="output_compliance_ci_toolchain_url"></a> [compliance\_ci\_toolchain\_url](#output\_compliance\_ci\_toolchain\_url) | The Compliance CI Toolchain URL |
+| <a name="output_evidence_repo_url"></a> [evidence\_repo\_url](#output\_evidence\_repo\_url) | The Evidence Repo URL |
+| <a name="output_inventory_repo_url"></a> [inventory\_repo\_url](#output\_inventory\_repo\_url) | The Inventory Repo URL |
+| <a name="output_issues_repo_url"></a> [issues\_repo\_url](#output\_issues\_repo\_url) | The Issues Repo URL |
+| <a name="output_key_protect_instance_id"></a> [key\_protect\_instance\_id](#output\_key\_protect\_instance\_id) | The Key Protect Instance ID |
+| <a name="output_pr_pipeline_id"></a> [pr\_pipeline\_id](#output\_pr\_pipeline\_id) | The PR pipeline Id |
+| <a name="output_secrets_manager_instance_id"></a> [secrets\_manager\_instance\_id](#output\_secrets\_manager\_instance\_id) | The Secrets Manage Instance ID |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 <!-- BEGIN CONTRIBUTING HOOK -->
 

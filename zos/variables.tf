@@ -3392,7 +3392,7 @@ variable "zos_ssh_port" {
 variable "zos_user" {
   type        = string
   description = "The ZOS user."
-  default     = "ADMIN"
+  default     = ""
 }
 
 variable "zos_bastion_host_name" {
@@ -3428,7 +3428,7 @@ variable "zos_dbb_hlq" {
 variable "zos_dbb_user" {
   type        = string
   description = "The ZOS DBB user."
-  default     = ""
+  default     = "ADMIN"
 }
 
 variable "zos_dbb_secret_name" {
