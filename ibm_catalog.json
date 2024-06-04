@@ -4574,7 +4574,7 @@
 						{
 							"key": "ci_app_name",
 							"type": "string",
-							"default_value": "hello-compliance-app",
+							"default_value": "zopeneditor-sample-compliance-app",
 							"description": "Name of the application image and inventory entry.",
 							"required": false
 						},
