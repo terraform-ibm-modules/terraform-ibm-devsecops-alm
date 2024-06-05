@@ -683,10 +683,10 @@ variable "ci_repositories_prefix" {
   default     = ""
   validation {
     condition = (
-      ((can(regex("^[0-9A-Za-z\\-\\_]+$", var.repositories_prefix))) && ((endswith(var.repositories_prefix, "-") == false) && (endswith(var.repositories_prefix, "_") == false))
-        && (strcontains(var.repositories_prefix, "--") == false) && (strcontains(var.repositories_prefix, "__") == false) && (strcontains(var.repositories_prefix, "_-") == false)
-      && (strcontains(var.repositories_prefix, "-_") == false))
-      || (length(var.repositories_prefix) == 0)
+      ((can(regex("^[0-9A-Za-z\\-\\_]+$", var.ci_repositories_prefix))) && ((endswith(var.ci_repositories_prefix, "-") == false) && (endswith(var.ci_repositories_prefix, "_") == false))
+        && (strcontains(var.ci_repositories_prefix, "--") == false) && (strcontains(var.ci_repositories_prefix, "__") == false) && (strcontains(var.ci_repositories_prefix, "_-") == false)
+      && (strcontains(var.ci_repositories_prefix, "-_") == false))
+      || (length(var.ci_repositories_prefix) == 0)
     )
     error_message = "For the repositories_prefix value only a-z, A-Z and 0-9 and the special characters `-_` are allowed. In addition the string must not end with a special character or have two consecutive special characters."
   }
@@ -1767,10 +1767,10 @@ variable "cd_repositories_prefix" {
   default     = ""
   validation {
     condition = (
-      ((can(regex("^[0-9A-Za-z\\-\\_]+$", var.repositories_prefix))) && ((endswith(var.repositories_prefix, "-") == false) && (endswith(var.repositories_prefix, "_") == false))
-        && (strcontains(var.repositories_prefix, "--") == false) && (strcontains(var.repositories_prefix, "__") == false) && (strcontains(var.repositories_prefix, "_-") == false)
-      && (strcontains(var.repositories_prefix, "-_") == false))
-      || (length(var.repositories_prefix) == 0)
+      ((can(regex("^[0-9A-Za-z\\-\\_]+$", var.cd_repositories_prefix))) && ((endswith(var.cd_repositories_prefix, "-") == false) && (endswith(var.cd_repositories_prefix, "_") == false))
+        && (strcontains(var.cd_repositories_prefix, "--") == false) && (strcontains(var.cd_repositories_prefix, "__") == false) && (strcontains(var.cd_repositories_prefix, "_-") == false)
+      && (strcontains(var.cd_repositories_prefix, "-_") == false))
+      || (length(var.cd_repositories_prefix) == 0)
     )
     error_message = "For the repositories_prefix value only a-z, A-Z and 0-9 and the special characters `-_` are allowed. In addition the string must not end with a special character or have two consecutive special characters."
   }
@@ -3274,10 +3274,10 @@ variable "cc_repositories_prefix" {
   default     = ""
   validation {
     condition = (
-      ((can(regex("^[0-9A-Za-z\\-\\_]+$", var.repositories_prefix))) && ((endswith(var.repositories_prefix, "-") == false) && (endswith(var.repositories_prefix, "_") == false))
-        && (strcontains(var.repositories_prefix, "--") == false) && (strcontains(var.repositories_prefix, "__") == false) && (strcontains(var.repositories_prefix, "_-") == false)
-      && (strcontains(var.repositories_prefix, "-_") == false))
-      || (length(var.repositories_prefix) == 0)
+      ((can(regex("^[0-9A-Za-z\\-\\_]+$", var.cc_repositories_prefix))) && ((endswith(var.cc_repositories_prefix, "-") == false) && (endswith(var.cc_repositories_prefix, "_") == false))
+        && (strcontains(var.cc_repositories_prefix, "--") == false) && (strcontains(var.cc_repositories_prefix, "__") == false) && (strcontains(var.cc_repositories_prefix, "_-") == false)
+      && (strcontains(var.cc_repositories_prefix, "-_") == false))
+      || (length(var.cc_repositories_prefix) == 0)
     )
     error_message = "For the repositories_prefix value only a-z, A-Z and 0-9 and the special characters `-_` are allowed. In addition the string must not end with a special character or have two consecutive special characters."
   }
