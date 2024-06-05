@@ -63,9 +63,9 @@ statement instead the previous block.
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_devsecops_cc_toolchain"></a> [devsecops\_cc\_toolchain](#module\_devsecops\_cc\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cc-toolchain | v1.3.0-zosbeta.2 |
-| <a name="module_devsecops_cd_toolchain"></a> [devsecops\_cd\_toolchain](#module\_devsecops\_cd\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain | v1.3.0-zosbeta.2 |
-| <a name="module_devsecops_ci_toolchain"></a> [devsecops\_ci\_toolchain](#module\_devsecops\_ci\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-ci-toolchain | v1.3.0-zosbeta.2 |
+| <a name="module_devsecops_cc_toolchain"></a> [devsecops\_cc\_toolchain](#module\_devsecops\_cc\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cc-toolchain | v1.3.0-zosbeta.3 |
+| <a name="module_devsecops_cd_toolchain"></a> [devsecops\_cd\_toolchain](#module\_devsecops\_cd\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain | v1.3.0-zosbeta.3 |
+| <a name="module_devsecops_ci_toolchain"></a> [devsecops\_ci\_toolchain](#module\_devsecops\_ci\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-ci-toolchain | v1.3.0-zosbeta.3 |
 
 ### Resources
 
@@ -205,16 +205,12 @@ statement instead the previous block.
 | <a name="input_cc_trigger_timed_pruner_enable"></a> [cc\_trigger\_timed\_pruner\_enable](#input\_cc\_trigger\_timed\_pruner\_enable) | Set to `true` to enable the timed Pruner trigger. | `bool` | `false` | no |
 | <a name="input_cc_trigger_timed_pruner_name"></a> [cc\_trigger\_timed\_pruner\_name](#input\_cc\_trigger\_timed\_pruner\_name) | The name of the timed Pruner trigger. | `string` | `"Evidence Pruner Timed Trigger"` | no |
 | <a name="input_cc_zos_dbb_hlq"></a> [cc\_zos\_dbb\_hlq](#input\_cc\_zos\_dbb\_hlq) | The ZOS DBB HLQ. | `string` | `""` | no |
-| <a name="input_cc_zos_dbb_secret_name"></a> [cc\_zos\_dbb\_secret\_name](#input\_cc\_zos\_dbb\_secret\_name) | API key used to create the toolchains. | `string` | `""` | no |
-| <a name="input_cc_zos_dbb_url"></a> [cc\_zos\_dbb\_url](#input\_cc\_zos\_dbb\_url) | The ZOS DBB URL. | `string` | `""` | no |
 | <a name="input_cc_zos_dbb_user"></a> [cc\_zos\_dbb\_user](#input\_cc\_zos\_dbb\_user) | The ZOS DBB user. | `string` | `""` | no |
-| <a name="input_cc_zos_host_name"></a> [cc\_zos\_host\_name](#input\_cc\_zos\_host\_name) | The ZOS host name. | `string` | `""` | no |
-| <a name="input_cc_zos_secret_dbb_group"></a> [cc\_zos\_secret\_dbb\_group](#input\_cc\_zos\_secret\_dbb\_group) | The name of the secret group in the CI pipeline containing the secret for `zos_secret_dbb_name`. Only applies to using Secrets Manager. | `string` | `""` | no |
-| <a name="input_cc_zos_secret_info"></a> [cc\_zos\_secret\_info](#input\_cc\_zos\_secret\_info) | API key used to create the toolchains. | `string` | `""` | no |
+| <a name="input_cc_zos_host_name"></a> [cc\_zos\_host\_name](#input\_cc\_zos\_host\_name) | z/OS hotname or IP address. | `string` | `""` | no |
 | <a name="input_cc_zos_secret_key_group"></a> [cc\_zos\_secret\_key\_group](#input\_cc\_zos\_secret\_key\_group) | The name of the secret group for the CC pipeline containing the secret for `zos_secret_key_name`. Only applies to using Secrets Manager. | `string` | `""` | no |
-| <a name="input_cc_zos_secret_key_name"></a> [cc\_zos\_secret\_key\_name](#input\_cc\_zos\_secret\_key\_name) | The name of the secret key in the secrets provider. | `string` | `""` | no |
-| <a name="input_cc_zos_ssh_port"></a> [cc\_zos\_ssh\_port](#input\_cc\_zos\_ssh\_port) | The ZOS SSH port. | `string` | `""` | no |
-| <a name="input_cc_zos_user"></a> [cc\_zos\_user](#input\_cc\_zos\_user) | The ZOS user. | `string` | `""` | no |
+| <a name="input_cc_zos_secret_key_name"></a> [cc\_zos\_secret\_key\_name](#input\_cc\_zos\_secret\_key\_name) | z/OS SSH key name. | `string` | `""` | no |
+| <a name="input_cc_zos_ssh_port"></a> [cc\_zos\_ssh\_port](#input\_cc\_zos\_ssh\_port) | z/OS SSH port. | `string` | `""` | no |
+| <a name="input_cc_zos_user"></a> [cc\_zos\_user](#input\_cc\_zos\_user) | z/OS userid. | `string` | `""` | no |
 | <a name="input_cd_app_version"></a> [cd\_app\_version](#input\_cd\_app\_version) | The version of the app to deploy. | `string` | `"v1"` | no |
 | <a name="input_cd_artifactory_token_secret_crn"></a> [cd\_artifactory\_token\_secret\_crn](#input\_cd\_artifactory\_token\_secret\_crn) | The CRN for the Artifactory secret. | `string` | `""` | no |
 | <a name="input_cd_authorization_policy_creation"></a> [cd\_authorization\_policy\_creation](#input\_cd\_authorization\_policy\_creation) | Disable Toolchain service to Secrets Manager Service authorization policy creation. | `string` | `""` | no |
@@ -353,21 +349,13 @@ statement instead the previous block.
 | <a name="input_cd_trigger_timed_name"></a> [cd\_trigger\_timed\_name](#input\_cd\_trigger\_timed\_name) | The name of the CD pipeline Timed trigger. | `string` | `"Git CD Timed Trigger"` | no |
 | <a name="input_cd_trigger_timed_pruner_enable"></a> [cd\_trigger\_timed\_pruner\_enable](#input\_cd\_trigger\_timed\_pruner\_enable) | Set to `true` to enable the timed Pruner trigger. | `bool` | `false` | no |
 | <a name="input_cd_trigger_timed_pruner_name"></a> [cd\_trigger\_timed\_pruner\_name](#input\_cd\_trigger\_timed\_pruner\_name) | The name of the timed Pruner trigger. | `string` | `"Evidence Pruner Timed Trigger"` | no |
-| <a name="input_cd_zos_bastion_host_name"></a> [cd\_zos\_bastion\_host\_name](#input\_cd\_zos\_bastion\_host\_name) | The Bastion host name. | `string` | `""` | no |
-| <a name="input_cd_zos_bastion_ssh_port"></a> [cd\_zos\_bastion\_ssh\_port](#input\_cd\_zos\_bastion\_ssh\_port) | The Bastion SSH port. | `string` | `""` | no |
-| <a name="input_cd_zos_bastion_user"></a> [cd\_zos\_bastion\_user](#input\_cd\_zos\_bastion\_user) | The Bastion user. | `string` | `""` | no |
 | <a name="input_cd_zos_dbb_hlq"></a> [cd\_zos\_dbb\_hlq](#input\_cd\_zos\_dbb\_hlq) | The ZOS DBB HLQ. | `string` | `""` | no |
-| <a name="input_cd_zos_dbb_secret_name"></a> [cd\_zos\_dbb\_secret\_name](#input\_cd\_zos\_dbb\_secret\_name) | API key used to create the toolchains. | `string` | `""` | no |
-| <a name="input_cd_zos_dbb_url"></a> [cd\_zos\_dbb\_url](#input\_cd\_zos\_dbb\_url) | The ZOS DBB URL. | `string` | `""` | no |
 | <a name="input_cd_zos_dbb_user"></a> [cd\_zos\_dbb\_user](#input\_cd\_zos\_dbb\_user) | The ZOS DBB user. | `string` | `""` | no |
-| <a name="input_cd_zos_host_name"></a> [cd\_zos\_host\_name](#input\_cd\_zos\_host\_name) | The ZOS host name. | `string` | `""` | no |
-| <a name="input_cd_zos_hostip"></a> [cd\_zos\_hostip](#input\_cd\_zos\_hostip) | The ZOS IP. | `string` | `""` | no |
-| <a name="input_cd_zos_secret_dbb_group"></a> [cd\_zos\_secret\_dbb\_group](#input\_cd\_zos\_secret\_dbb\_group) | The name of the secret group in the CI pipeline containing the secret for `zos_secret_dbb_name`. Only applies to using Secrets Manager. | `string` | `""` | no |
-| <a name="input_cd_zos_secret_info"></a> [cd\_zos\_secret\_info](#input\_cd\_zos\_secret\_info) | API key used to create the toolchains. | `string` | `""` | no |
+| <a name="input_cd_zos_host_name"></a> [cd\_zos\_host\_name](#input\_cd\_zos\_host\_name) | z/OS hotname or IP address. | `string` | `""` | no |
 | <a name="input_cd_zos_secret_key_group"></a> [cd\_zos\_secret\_key\_group](#input\_cd\_zos\_secret\_key\_group) | The name of the secret group in the CD pipeline containing the secret for `zos_secret_key_name`. Only applies to using Secrets Manager. | `string` | `""` | no |
-| <a name="input_cd_zos_secret_key_name"></a> [cd\_zos\_secret\_key\_name](#input\_cd\_zos\_secret\_key\_name) | The name of the secret key in the secrets provider. | `string` | `""` | no |
-| <a name="input_cd_zos_ssh_port"></a> [cd\_zos\_ssh\_port](#input\_cd\_zos\_ssh\_port) | The ZOS SSH port. | `string` | `""` | no |
-| <a name="input_cd_zos_user"></a> [cd\_zos\_user](#input\_cd\_zos\_user) | The ZOS user. | `string` | `""` | no |
+| <a name="input_cd_zos_secret_key_name"></a> [cd\_zos\_secret\_key\_name](#input\_cd\_zos\_secret\_key\_name) | z/OS SSH key name. | `string` | `""` | no |
+| <a name="input_cd_zos_ssh_port"></a> [cd\_zos\_ssh\_port](#input\_cd\_zos\_ssh\_port) | z/OS SSH port. | `string` | `""` | no |
+| <a name="input_cd_zos_user"></a> [cd\_zos\_user](#input\_cd\_zos\_user) | z/OS userid. | `string` | `""` | no |
 | <a name="input_ci_app_group"></a> [ci\_app\_group](#input\_ci\_app\_group) | Specify Git user or group for your application. | `string` | `""` | no |
 | <a name="input_ci_app_name"></a> [ci\_app\_name](#input\_ci\_app\_name) | Name of the application image and inventory entry. | `string` | `"zopeneditor-sample-compliance-app"` | no |
 | <a name="input_ci_app_repo_auth_type"></a> [ci\_app\_repo\_auth\_type](#input\_ci\_app\_repo\_auth\_type) | Select the method of authentication that is used to access the Git provider. 'oauth' or 'pat'. | `string` | `""` | no |
@@ -521,21 +509,13 @@ statement instead the previous block.
 | <a name="input_ci_trigger_timed_name"></a> [ci\_trigger\_timed\_name](#input\_ci\_trigger\_timed\_name) | The name of the CI pipeline Timed trigger. | `string` | `"Git CI Timed Trigger"` | no |
 | <a name="input_ci_trigger_timed_pruner_enable"></a> [ci\_trigger\_timed\_pruner\_enable](#input\_ci\_trigger\_timed\_pruner\_enable) | Set to `true` to enable the timed Pruner trigger. | `bool` | `false` | no |
 | <a name="input_ci_trigger_timed_pruner_name"></a> [ci\_trigger\_timed\_pruner\_name](#input\_ci\_trigger\_timed\_pruner\_name) | The name of the timed Pruner trigger. | `string` | `"Evidence Pruner Timed Trigger"` | no |
-| <a name="input_ci_zos_bastion_host_name"></a> [ci\_zos\_bastion\_host\_name](#input\_ci\_zos\_bastion\_host\_name) | The Bastion host name. | `string` | `""` | no |
-| <a name="input_ci_zos_bastion_ssh_port"></a> [ci\_zos\_bastion\_ssh\_port](#input\_ci\_zos\_bastion\_ssh\_port) | The Bastion SSH port. | `string` | `""` | no |
-| <a name="input_ci_zos_bastion_user"></a> [ci\_zos\_bastion\_user](#input\_ci\_zos\_bastion\_user) | The Bastion user. | `string` | `""` | no |
 | <a name="input_ci_zos_dbb_hlq"></a> [ci\_zos\_dbb\_hlq](#input\_ci\_zos\_dbb\_hlq) | The ZOS DBB HLQ. | `string` | `""` | no |
-| <a name="input_ci_zos_dbb_secret_name"></a> [ci\_zos\_dbb\_secret\_name](#input\_ci\_zos\_dbb\_secret\_name) | API key used to create the toolchains. | `string` | `""` | no |
-| <a name="input_ci_zos_dbb_url"></a> [ci\_zos\_dbb\_url](#input\_ci\_zos\_dbb\_url) | The ZOS DBB URL. | `string` | `""` | no |
 | <a name="input_ci_zos_dbb_user"></a> [ci\_zos\_dbb\_user](#input\_ci\_zos\_dbb\_user) | The ZOS DBB user. | `string` | `""` | no |
-| <a name="input_ci_zos_host_name"></a> [ci\_zos\_host\_name](#input\_ci\_zos\_host\_name) | The ZOS host name. | `string` | `""` | no |
-| <a name="input_ci_zos_hostip"></a> [ci\_zos\_hostip](#input\_ci\_zos\_hostip) | The ZOS IP. | `string` | `""` | no |
-| <a name="input_ci_zos_secret_dbb_group"></a> [ci\_zos\_secret\_dbb\_group](#input\_ci\_zos\_secret\_dbb\_group) | The name of the secret group in the CI pipeline containing the secret for `zos_secret_dbb_name`. Only applies to using Secrets Manager. | `string` | `""` | no |
-| <a name="input_ci_zos_secret_info"></a> [ci\_zos\_secret\_info](#input\_ci\_zos\_secret\_info) | API key used to create the toolchains. | `string` | `""` | no |
+| <a name="input_ci_zos_host_name"></a> [ci\_zos\_host\_name](#input\_ci\_zos\_host\_name) | z/OS hotname or IP address. | `string` | `""` | no |
 | <a name="input_ci_zos_secret_key_group"></a> [ci\_zos\_secret\_key\_group](#input\_ci\_zos\_secret\_key\_group) | The name of the secret group in the CI pipeline containing the secret for `zos_secret_key_name`. Only applies to using Secrets Manager. | `string` | `""` | no |
-| <a name="input_ci_zos_secret_key_name"></a> [ci\_zos\_secret\_key\_name](#input\_ci\_zos\_secret\_key\_name) | The name of the secret key in the secrets provider. | `string` | `""` | no |
-| <a name="input_ci_zos_ssh_port"></a> [ci\_zos\_ssh\_port](#input\_ci\_zos\_ssh\_port) | The ZOS SSH port. | `string` | `""` | no |
-| <a name="input_ci_zos_user"></a> [ci\_zos\_user](#input\_ci\_zos\_user) | The ZOS user. | `string` | `""` | no |
+| <a name="input_ci_zos_secret_key_name"></a> [ci\_zos\_secret\_key\_name](#input\_ci\_zos\_secret\_key\_name) | z/OS SSH key name. | `string` | `""` | no |
+| <a name="input_ci_zos_ssh_port"></a> [ci\_zos\_ssh\_port](#input\_ci\_zos\_ssh\_port) | z/OS SSH port. | `string` | `""` | no |
+| <a name="input_ci_zos_user"></a> [ci\_zos\_user](#input\_ci\_zos\_user) | z/OS userid. | `string` | `""` | no |
 | <a name="input_cluster_name"></a> [cluster\_name](#input\_cluster\_name) | Name of the Kubernetes cluster where the application is deployed. This sets the same cluster for both CI and CD toolchains. See `ci_cluster_name` and `cd_cluster_name` to set different clusters. By default , the cluster namespace for CI will be set to `dev` and CD to `prod`. These can be changed using `ci_cluster_namespace` and `cd_cluster_namespace`. | `string` | `"mycluster-free"` | no |
 | <a name="input_compliance_base_image"></a> [compliance\_base\_image](#input\_compliance\_base\_image) | Pipeline baseimage to run most of the built-in pipeline code. | `string` | `""` | no |
 | <a name="input_compliance_pipeline_branch"></a> [compliance\_pipeline\_branch](#input\_compliance\_pipeline\_branch) | The Compliance Pipeline branch. | `string` | `"open-v10"` | no |
@@ -621,21 +601,13 @@ statement instead the previous block.
 | <a name="input_toolchain_name"></a> [toolchain\_name](#input\_toolchain\_name) | Common element of the toolchain name. The toolchain names will be appended with `CI Toolchain` or `CD Toolchain` or `CC Toolchain` followed by a timestamp. Can explicitly be set using `ci_toolchain_name`, `cd_toolchain_name`, and `cc_toolchain_name`. | `string` | `"DevSecOps"` | no |
 | <a name="input_toolchain_region"></a> [toolchain\_region](#input\_toolchain\_region) | The region identifier that will be used, by default, for all resource creation and service instance lookup. This can be overridden on a per resource/service basis. See `ci_toolchain_region`,`cd_toolchain_region`,`cc_toolchain_region`, `ci_cluster_region`, `cd_cluster_region`, `ci_registry_region`. | `string` | `"us-south"` | no |
 | <a name="input_toolchain_resource_group"></a> [toolchain\_resource\_group](#input\_toolchain\_resource\_group) | The resource group that will be used, by default, for all resource creation and service instance lookups. This can be overridden on a per resource/service basis. See `ci_toolchain_resource_group`,`cd_toolchain_resource_group`,`cc_toolchain_resource_group`, `ci_cluster_resource_group`. | `string` | `"Default"` | no |
-| <a name="input_zos_bastion_host_name"></a> [zos\_bastion\_host\_name](#input\_zos\_bastion\_host\_name) | The Bastion host name. | `string` | `""` | no |
-| <a name="input_zos_bastion_ssh_port"></a> [zos\_bastion\_ssh\_port](#input\_zos\_bastion\_ssh\_port) | The Bastion SSH port. | `string` | `""` | no |
-| <a name="input_zos_bastion_user"></a> [zos\_bastion\_user](#input\_zos\_bastion\_user) | The Bastion user. | `string` | `""` | no |
-| <a name="input_zos_dbb_hlq"></a> [zos\_dbb\_hlq](#input\_zos\_dbb\_hlq) | The ZOS DBB HLQ. | `string` | `"IBMUSER.PIPELINE"` | no |
-| <a name="input_zos_dbb_secret_name"></a> [zos\_dbb\_secret\_name](#input\_zos\_dbb\_secret\_name) | API key used to create the toolchains. | `string` | `""` | no |
-| <a name="input_zos_dbb_url"></a> [zos\_dbb\_url](#input\_zos\_dbb\_url) | The ZOS DBB URL. | `string` | `""` | no |
-| <a name="input_zos_dbb_user"></a> [zos\_dbb\_user](#input\_zos\_dbb\_user) | The ZOS DBB user. | `string` | `"ADMIN"` | no |
-| <a name="input_zos_host_name"></a> [zos\_host\_name](#input\_zos\_host\_name) | The ZOS host name. | `string` | `""` | no |
-| <a name="input_zos_hostip"></a> [zos\_hostip](#input\_zos\_hostip) | The ZOS IP. | `string` | `""` | no |
-| <a name="input_zos_secret_dbb_group"></a> [zos\_secret\_dbb\_group](#input\_zos\_secret\_dbb\_group) | The name of the secret group in the CI pipeline containing the secret for `zos_secret_dbb_name`. Only applies to using Secrets Manager. | `string` | `""` | no |
-| <a name="input_zos_secret_info"></a> [zos\_secret\_info](#input\_zos\_secret\_info) | API key used to create the toolchains. | `string` | `""` | no |
+| <a name="input_zos_dbb_hlq"></a> [zos\_dbb\_hlq](#input\_zos\_dbb\_hlq) | z/OS Dependency Based Build (DBB) engine High-Level Qualifier. | `string` | `"IBMUSER.PIPELINE"` | no |
+| <a name="input_zos_dbb_user"></a> [zos\_dbb\_user](#input\_zos\_dbb\_user) | z/OS Dependency Based Build (DBB) engine userid. | `string` | `"ADMIN"` | no |
+| <a name="input_zos_host_name"></a> [zos\_host\_name](#input\_zos\_host\_name) | z/OS hotname or IP address. | `string` | `""` | no |
 | <a name="input_zos_secret_key_group"></a> [zos\_secret\_key\_group](#input\_zos\_secret\_key\_group) | The name of the secret group containing the secret for `zos_secret_key_name`. Only applies to using Secrets Manager. | `string` | `""` | no |
-| <a name="input_zos_secret_key_name"></a> [zos\_secret\_key\_name](#input\_zos\_secret\_key\_name) | The name of the secret key in the secrets provider. | `string` | `"ssh-auth"` | no |
-| <a name="input_zos_ssh_port"></a> [zos\_ssh\_port](#input\_zos\_ssh\_port) | The ZOS SSH port. | `string` | `""` | no |
-| <a name="input_zos_user"></a> [zos\_user](#input\_zos\_user) | The ZOS user. | `string` | `""` | no |
+| <a name="input_zos_secret_key_name"></a> [zos\_secret\_key\_name](#input\_zos\_secret\_key\_name) | z/OS SSH key name. | `string` | `"ssh-auth"` | no |
+| <a name="input_zos_ssh_port"></a> [zos\_ssh\_port](#input\_zos\_ssh\_port) | Tz/OS SSH port. | `string` | `"22"` | no |
+| <a name="input_zos_user"></a> [zos\_user](#input\_zos\_user) | z/OS userid. | `string` | `"ibmuser"` | no |
 
 ### Outputs
 

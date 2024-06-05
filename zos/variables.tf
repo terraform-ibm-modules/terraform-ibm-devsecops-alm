@@ -3371,89 +3371,39 @@ variable "deployment_target" {
   default     = "zos"
 }
 
-variable "zos_hostip" {
-  type        = string
-  description = "The ZOS IP."
-  default     = ""
-}
-
 variable "zos_host_name" {
   type        = string
-  description = "The ZOS host name."
+  description = "z/OS hotname or IP address."
   default     = ""
 }
 
 variable "zos_ssh_port" {
   type        = string
-  description = "The ZOS SSH port."
-  default     = ""
+  description = "Tz/OS SSH port."
+  default     = "22"
 }
 
 variable "zos_user" {
   type        = string
-  description = "The ZOS user."
-  default     = ""
-}
-
-variable "zos_bastion_host_name" {
-  type        = string
-  description = "The Bastion host name."
-  default     = ""
-}
-
-variable "zos_bastion_ssh_port" {
-  type        = string
-  description = "The Bastion SSH port."
-  default     = ""
-}
-
-variable "zos_bastion_user" {
-  type        = string
-  description = "The Bastion user."
-  default     = ""
-}
-
-variable "zos_dbb_url" {
-  type        = string
-  description = "The ZOS DBB URL."
-  default     = ""
+  description = "z/OS userid."
+  default     = "ibmuser"
 }
 
 variable "zos_dbb_hlq" {
   type        = string
-  description = "The ZOS DBB HLQ."
+  description = "z/OS Dependency Based Build (DBB) engine High-Level Qualifier."
   default     = "IBMUSER.PIPELINE"
 }
 
 variable "zos_dbb_user" {
   type        = string
-  description = "The ZOS DBB user."
+  description = "z/OS Dependency Based Build (DBB) engine userid."
   default     = "ADMIN"
-}
-
-variable "zos_dbb_secret_name" {
-  type        = string
-  description = "API key used to create the toolchains."
-  sensitive   = true
-  default     = ""
-}
-
-variable "zos_secret_dbb_group" {
-  type        = string
-  description = "The name of the secret group in the CI pipeline containing the secret for `zos_secret_dbb_name`. Only applies to using Secrets Manager."
-  default     = ""
-}
-
-variable "zos_secret_info" {
-  type        = string
-  description = "API key used to create the toolchains."
-  sensitive   = true
-  default     = ""
 }
 
 variable "zos_secret_key_name" {
   type        = string
-  description = "The name of the secret key in the secrets provider."
+  description = "z/OS SSH key name."
   default     = "ssh-auth"
 }
 
@@ -3463,51 +3413,21 @@ variable "zos_secret_key_group" {
   default     = ""
 }
 
-variable "ci_zos_hostip" {
-  type        = string
-  description = "The ZOS IP."
-  default     = ""
-}
-
 variable "ci_zos_host_name" {
   type        = string
-  description = "The ZOS host name."
+  description = "z/OS hotname or IP address."
   default     = ""
 }
 
 variable "ci_zos_ssh_port" {
   type        = string
-  description = "The ZOS SSH port."
+  description = "z/OS SSH port."
   default     = ""
 }
 
 variable "ci_zos_user" {
   type        = string
-  description = "The ZOS user."
-  default     = ""
-}
-
-variable "ci_zos_bastion_host_name" {
-  type        = string
-  description = "The Bastion host name."
-  default     = ""
-}
-
-variable "ci_zos_bastion_ssh_port" {
-  type        = string
-  description = "The Bastion SSH port."
-  default     = ""
-}
-
-variable "ci_zos_bastion_user" {
-  type        = string
-  description = "The Bastion user."
-  default     = ""
-}
-
-variable "ci_zos_dbb_url" {
-  type        = string
-  description = "The ZOS DBB URL."
+  description = "z/OS userid."
   default     = ""
 }
 
@@ -3523,29 +3443,9 @@ variable "ci_zos_dbb_user" {
   default     = ""
 }
 
-variable "ci_zos_dbb_secret_name" {
-  type        = string
-  description = "API key used to create the toolchains."
-  sensitive   = true
-  default     = ""
-}
-
-variable "ci_zos_secret_dbb_group" {
-  type        = string
-  description = "The name of the secret group in the CI pipeline containing the secret for `zos_secret_dbb_name`. Only applies to using Secrets Manager."
-  default     = ""
-}
-
-variable "ci_zos_secret_info" {
-  type        = string
-  description = "API key used to create the toolchains."
-  sensitive   = true
-  default     = ""
-}
-
 variable "ci_zos_secret_key_name" {
   type        = string
-  description = "The name of the secret key in the secrets provider."
+  description = "z/OS SSH key name."
   default     = ""
 }
 
@@ -3555,51 +3455,21 @@ variable "ci_zos_secret_key_group" {
   default     = ""
 }
 
-variable "cd_zos_hostip" {
-  type        = string
-  description = "The ZOS IP."
-  default     = ""
-}
-
 variable "cd_zos_host_name" {
   type        = string
-  description = "The ZOS host name."
+  description = "z/OS hotname or IP address."
   default     = ""
 }
 
 variable "cd_zos_ssh_port" {
   type        = string
-  description = "The ZOS SSH port."
+  description = "z/OS SSH port."
   default     = ""
 }
 
 variable "cd_zos_user" {
   type        = string
-  description = "The ZOS user."
-  default     = ""
-}
-
-variable "cd_zos_bastion_host_name" {
-  type        = string
-  description = "The Bastion host name."
-  default     = ""
-}
-
-variable "cd_zos_bastion_ssh_port" {
-  type        = string
-  description = "The Bastion SSH port."
-  default     = ""
-}
-
-variable "cd_zos_bastion_user" {
-  type        = string
-  description = "The Bastion user."
-  default     = ""
-}
-
-variable "cd_zos_dbb_url" {
-  type        = string
-  description = "The ZOS DBB URL."
+  description = "z/OS userid."
   default     = ""
 }
 
@@ -3615,29 +3485,9 @@ variable "cd_zos_dbb_user" {
   default     = ""
 }
 
-variable "cd_zos_dbb_secret_name" {
-  type        = string
-  description = "API key used to create the toolchains."
-  sensitive   = true
-  default     = ""
-}
-
-variable "cd_zos_secret_dbb_group" {
-  type        = string
-  description = "The name of the secret group in the CI pipeline containing the secret for `zos_secret_dbb_name`. Only applies to using Secrets Manager."
-  default     = ""
-}
-
-variable "cd_zos_secret_info" {
-  type        = string
-  description = "API key used to create the toolchains."
-  sensitive   = true
-  default     = ""
-}
-
 variable "cd_zos_secret_key_name" {
   type        = string
-  description = "The name of the secret key in the secrets provider."
+  description = "z/OS SSH key name."
   default     = ""
 }
 
@@ -3649,25 +3499,19 @@ variable "cd_zos_secret_key_group" {
 
 variable "cc_zos_host_name" {
   type        = string
-  description = "The ZOS host name."
+  description = "z/OS hotname or IP address."
   default     = ""
 }
 
 variable "cc_zos_ssh_port" {
   type        = string
-  description = "The ZOS SSH port."
+  description = "z/OS SSH port."
   default     = ""
 }
 
 variable "cc_zos_user" {
   type        = string
-  description = "The ZOS user."
-  default     = ""
-}
-
-variable "cc_zos_dbb_url" {
-  type        = string
-  description = "The ZOS DBB URL."
+  description = "z/OS userid."
   default     = ""
 }
 
@@ -3683,29 +3527,9 @@ variable "cc_zos_dbb_user" {
   default     = ""
 }
 
-variable "cc_zos_dbb_secret_name" {
-  type        = string
-  description = "API key used to create the toolchains."
-  sensitive   = true
-  default     = ""
-}
-
-variable "cc_zos_secret_dbb_group" {
-  type        = string
-  description = "The name of the secret group in the CI pipeline containing the secret for `zos_secret_dbb_name`. Only applies to using Secrets Manager."
-  default     = ""
-}
-
-variable "cc_zos_secret_info" {
-  type        = string
-  description = "API key used to create the toolchains."
-  sensitive   = true
-  default     = ""
-}
-
 variable "cc_zos_secret_key_name" {
   type        = string
-  description = "The name of the secret key in the secrets provider."
+  description = "z/OS SSH key name."
   default     = ""
 }
 

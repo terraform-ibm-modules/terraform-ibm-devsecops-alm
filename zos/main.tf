@@ -81,38 +81,11 @@ locals {
     format("{vault::%s.%s}", var.kp_integration_name, local.resolved_cc_zos_secret_key_name)
 
   )
-
-  zos_ci_secret_dbb_group = (var.ci_zos_secret_dbb_group == "") ? var.zos_secret_dbb_group : var.ci_zos_secret_dbb_group
-  zos_cd_secret_dbb_group = (var.cd_zos_secret_dbb_group == "") ? var.zos_secret_dbb_group : var.cd_zos_secret_dbb_group
-  zos_cc_secret_dbb_group = (var.cc_zos_secret_dbb_group == "") ? var.zos_secret_dbb_group : var.cc_zos_secret_dbb_group
-
-  resolved_ci_secret_dbb_group = (local.zos_ci_secret_dbb_group == "") ? local.ci_secret_group : local.zos_ci_secret_dbb_group
-  resolved_cd_secret_dbb_group = (local.zos_cd_secret_dbb_group == "") ? local.cd_secret_group : local.zos_cd_secret_dbb_group
-  resolved_cc_secret_dbb_group = (local.zos_cc_secret_dbb_group == "") ? local.cc_secret_group : local.zos_cc_secret_dbb_group
-
-  resolved_ci_zos_dbb_secret_name = (var.ci_zos_dbb_secret_name == "") ? var.zos_dbb_secret_name : var.ci_zos_dbb_secret_name
-  resolved_cd_zos_dbb_secret_name = (var.cd_zos_dbb_secret_name == "") ? var.zos_dbb_secret_name : var.cd_zos_dbb_secret_name
-  resolved_cc_zos_dbb_secret_name = (var.cc_zos_dbb_secret_name == "") ? var.zos_dbb_secret_name : var.cc_zos_dbb_secret_name
-
-  zos_ci_dbb_secret_name_ref = (
-    ((var.enable_secrets_manager == true) || (var.ci_enable_secrets_manager == true)) ? format("{vault::%s.%s.%s}", var.sm_integration_name, local.resolved_ci_secret_dbb_group, local.resolved_ci_zos_dbb_secret_name) :
-    format("{vault::%s.%s}", var.kp_integration_name, local.resolved_ci_zos_dbb_secret_name)
-  )
-
-  zos_cd_dbb_secret_name_ref = (
-    ((var.enable_secrets_manager == true) || (var.ci_enable_secrets_manager == true)) ? format("{vault::%s.%s.%s}", var.sm_integration_name, local.resolved_cd_secret_dbb_group, local.resolved_cd_zos_dbb_secret_name) :
-    format("{vault::%s.%s}", var.kp_integration_name, local.resolved_cd_zos_dbb_secret_name)
-  )
-
-  zos_cc_dbb_secret_name_ref = (
-    ((var.enable_secrets_manager == true) || (var.ci_enable_secrets_manager == true)) ? format("{vault::%s.%s.%s}", var.sm_integration_name, local.resolved_cc_secret_dbb_group, local.resolved_cc_zos_dbb_secret_name) :
-    format("{vault::%s.%s}", var.kp_integration_name, local.resolved_cc_zos_dbb_secret_name)
-  )
 }
 
 module "devsecops_ci_toolchain" {
   count                    = var.create_ci_toolchain ? 1 : 0
-  source                   = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-ci-toolchain?ref=v1.3.0-zosbeta.2"
+  source                   = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-ci-toolchain?ref=v1.3.0-zosbeta.3"
   ibmcloud_api_key         = var.ibmcloud_api_key
   toolchain_name           = (var.ci_toolchain_name == "") ? format("${var.toolchain_name}%s", "-CI-Toolchain") : var.ci_toolchain_name
   toolchain_region         = (var.ci_toolchain_region == "") ? var.toolchain_region : replace(replace(var.ci_toolchain_region, "ibm:yp:", ""), "ibm:ys1:", "")
@@ -278,19 +251,12 @@ module "devsecops_ci_toolchain" {
   peer_review_compliance             = (var.ci_peer_review_compliance == "") ? var.peer_review_compliance : var.ci_peer_review_compliance
   print_code_signing_certificate     = var.ci_print_code_signing_certificate
 
-  zos_hostip            = (var.ci_zos_hostip == "") ? var.zos_hostip : var.ci_zos_hostip
-  zos_host_name         = (var.ci_zos_host_name == "") ? var.zos_host_name : var.ci_zos_host_name
-  zos_ssh_port          = (var.ci_zos_ssh_port == "") ? var.zos_ssh_port : var.ci_zos_ssh_port
-  zos_user              = (var.ci_zos_user == "") ? var.zos_user : var.ci_zos_user
-  zos_bastion_host_name = (var.ci_zos_bastion_host_name == "") ? var.zos_bastion_host_name : var.ci_zos_bastion_host_name
-  zos_bastion_ssh_port  = (var.ci_zos_bastion_ssh_port == "") ? var.zos_bastion_ssh_port : var.ci_zos_bastion_ssh_port
-  zos_bastion_user      = (var.ci_zos_bastion_user == "") ? var.zos_bastion_user : var.ci_zos_bastion_user
-  zos_dbb_url           = (var.ci_zos_dbb_url == "") ? var.zos_dbb_url : var.ci_zos_dbb_url
-  zos_dbb_hlq           = (var.ci_zos_dbb_hlq == "") ? var.zos_dbb_hlq : var.ci_zos_dbb_hlq
-  zos_dbb_user          = (var.ci_zos_dbb_user == "") ? var.zos_dbb_user : var.ci_zos_dbb_user
-  zos_dbb_secret_name   = (local.resolved_ci_zos_dbb_secret_name != "") ? local.zos_ci_dbb_secret_name_ref : ""
-  zos_secret_info       = (var.ci_zos_secret_info == "") ? var.zos_secret_info : var.ci_zos_secret_info
-  zos_secret_key_name   = local.zos_ci_secret_key_name_ref
+  zos_host_name       = (var.ci_zos_host_name == "") ? var.zos_host_name : var.ci_zos_host_name
+  zos_ssh_port        = (var.ci_zos_ssh_port == "") ? var.zos_ssh_port : var.ci_zos_ssh_port
+  zos_user            = (var.ci_zos_user == "") ? var.zos_user : var.ci_zos_user
+  zos_dbb_hlq         = (var.ci_zos_dbb_hlq == "") ? var.zos_dbb_hlq : var.ci_zos_dbb_hlq
+  zos_dbb_user        = (var.ci_zos_dbb_user == "") ? var.zos_dbb_user : var.ci_zos_dbb_user
+  zos_secret_key_name = local.zos_ci_secret_key_name_ref
 
   #CODE ENGINE
   code_engine_project         = var.ci_code_engine_project
@@ -359,7 +325,7 @@ module "devsecops_ci_toolchain" {
 
 module "devsecops_cd_toolchain" {
   count            = var.create_cd_toolchain ? 1 : 0
-  source           = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain?ref=v1.3.0-zosbeta.2"
+  source           = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain?ref=v1.3.0-zosbeta.3"
   ibmcloud_api_key = var.ibmcloud_api_key
 
   toolchain_name           = (var.cd_toolchain_name == "") ? format("${var.toolchain_name}%s", "-CD-Toolchain") : var.cd_toolchain_name
@@ -536,19 +502,12 @@ module "devsecops_cd_toolchain" {
   scc_profile_version           = var.scc_profile_version
   scc_use_profile_attachment    = (var.cd_scc_use_profile_attachment == "") ? var.scc_use_profile_attachment : var.cd_scc_use_profile_attachment
 
-  zos_hostip            = (var.cd_zos_hostip == "") ? var.zos_hostip : var.cd_zos_hostip
-  zos_host_name         = (var.cd_zos_host_name == "") ? var.zos_host_name : var.cd_zos_host_name
-  zos_ssh_port          = (var.cd_zos_ssh_port == "") ? var.zos_ssh_port : var.cd_zos_ssh_port
-  zos_user              = (var.cd_zos_user == "") ? var.zos_user : var.cd_zos_user
-  zos_bastion_host_name = (var.cd_zos_bastion_host_name == "") ? var.zos_bastion_host_name : var.cd_zos_bastion_host_name
-  zos_bastion_ssh_port  = (var.cd_zos_bastion_ssh_port == "") ? var.zos_bastion_ssh_port : var.cd_zos_bastion_ssh_port
-  zos_bastion_user      = (var.cd_zos_bastion_user == "") ? var.zos_bastion_user : var.cd_zos_bastion_user
-  zos_dbb_url           = (var.cd_zos_dbb_url == "") ? var.zos_dbb_url : var.cd_zos_dbb_url
-  zos_dbb_hlq           = (var.cd_zos_dbb_hlq == "") ? var.zos_dbb_hlq : var.cd_zos_dbb_hlq
-  zos_dbb_user          = (var.cd_zos_dbb_user == "") ? var.zos_dbb_user : var.cd_zos_dbb_user
-  zos_dbb_secret_name   = (local.resolved_cd_zos_dbb_secret_name != "") ? local.zos_cd_dbb_secret_name_ref : ""
-  zos_secret_info       = (var.cd_zos_secret_info == "") ? var.zos_secret_info : var.cd_zos_secret_info
-  zos_secret_key_name   = local.zos_cd_secret_key_name_ref
+  zos_host_name       = (var.cd_zos_host_name == "") ? var.zos_host_name : var.cd_zos_host_name
+  zos_ssh_port        = (var.cd_zos_ssh_port == "") ? var.zos_ssh_port : var.cd_zos_ssh_port
+  zos_user            = (var.cd_zos_user == "") ? var.zos_user : var.cd_zos_user
+  zos_dbb_hlq         = (var.cd_zos_dbb_hlq == "") ? var.zos_dbb_hlq : var.cd_zos_dbb_hlq
+  zos_dbb_user        = (var.cd_zos_dbb_user == "") ? var.zos_dbb_user : var.cd_zos_dbb_user
+  zos_secret_key_name = local.zos_cd_secret_key_name_ref
 
   #SLACK INTEGRATION
   enable_slack           = (local.use_slack_enable_override) ? local.enable_slack : var.cd_enable_slack
@@ -597,7 +556,7 @@ module "devsecops_cd_toolchain" {
 
 module "devsecops_cc_toolchain" {
   count                         = var.create_cc_toolchain ? 1 : 0
-  source                        = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cc-toolchain?ref=v1.3.0-zosbeta.2"
+  source                        = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cc-toolchain?ref=v1.3.0-zosbeta.3"
   ibmcloud_api_key              = var.ibmcloud_api_key
   toolchain_name                = (var.cc_toolchain_name == "") ? format("${var.toolchain_name}%s", "-CC-Toolchain") : var.cc_toolchain_name
   toolchain_description         = var.cc_toolchain_description
@@ -760,11 +719,8 @@ module "devsecops_cc_toolchain" {
   zos_host_name       = (var.cc_zos_host_name == "") ? var.zos_host_name : var.cc_zos_host_name
   zos_ssh_port        = (var.cc_zos_ssh_port == "") ? var.zos_ssh_port : var.cc_zos_ssh_port
   zos_user            = (var.cc_zos_user == "") ? var.zos_user : var.cc_zos_user
-  zos_dbb_url         = (var.cc_zos_dbb_url == "") ? var.zos_dbb_url : var.cc_zos_dbb_url
   zos_dbb_hlq         = (var.cc_zos_dbb_hlq == "") ? var.zos_dbb_hlq : var.cc_zos_dbb_hlq
   zos_dbb_user        = (var.cc_zos_dbb_user == "") ? var.zos_dbb_user : var.cc_zos_dbb_user
-  zos_dbb_secret_name = (local.resolved_cc_zos_dbb_secret_name != "") ? local.zos_cc_dbb_secret_name_ref : ""
-  zos_secret_info     = (var.cc_zos_secret_info == "") ? var.zos_secret_info : var.cc_zos_secret_info
   zos_secret_key_name = local.zos_cc_secret_key_name_ref
 
   #SLACK INTEGRATION

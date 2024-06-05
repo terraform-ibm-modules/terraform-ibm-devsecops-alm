@@ -3784,7 +3784,22 @@
 							"type": "string",
 							"default_value": "us-south",
 							"description": "The region identifier that will be used, by default, for all resource creation and service instance lookup. This can be overridden on a per resource/service basis. See `ci_toolchain_region`,`cd_toolchain_region`,`cc_toolchain_region`, `ci_cluster_region`, `cd_cluster_region`, `ci_registry_region`.",
-							"required": true
+							"display_name": "Region",
+							"required": true,
+							"custom_config": {
+								"type": "region",
+								"grouping": "deployment",
+								"original_grouping": "deployment",
+								"config_constraints": {
+									"filterString": "id:au-syd,br-sao,ca-tor,eu-de,eu-es,eu-gb,jp-osa,jp-tok,us-east,us-south",
+									"showKinds": [
+										"region",
+										"zone",
+										"dc",
+										"location"
+									]
+								}
+							}
 						},
 						{
 							"key": "toolchain_resource_group",
@@ -3915,101 +3930,45 @@
 							"required": false
 						},
 						{
-							"key": "zos_hostip",
-							"type": "string",
-							"default_value": "",
-							"description": "The ZOS IP.",
-							"required": false
-						},
-						{
 							"key": "zos_host_name",
 							"type": "string",
 							"default_value": "",
-							"description": "The ZOS host name.",
-							"required": false
+							"description": "z/OS hotname or IP address.",
+							"required": true
 						},
 						{
 							"key": "zos_ssh_port",
 							"type": "string",
-							"default_value": "",
-							"description": "The ZOS SSH port.",
+							"default_value": "22",
+							"description": "z/OS SSH port.",
 							"required": false
 						},
 						{
 							"key": "zos_user",
 							"type": "string",
-							"default_value": "",
-							"description": "The ZOS user.",
-							"required": false
-						},
-						{
-							"key": "zos_bastion_host_name",
-							"type": "string",
-							"default_value": "",
-							"description": "The Bastion host name.",
-							"required": false
-						},
-						{
-							"key": "zos_bastion_ssh_port",
-							"type": "string",
-							"default_value": "",
-							"description": "The Bastion SSH port.",
-							"required": false
-						},
-						{
-							"key": "zos_bastion_user",
-							"type": "string",
-							"default_value": "",
-							"description": "The Bastion user.",
-							"required": false
-						},
-						{
-							"key": "zos_dbb_url",
-							"type": "string",
-							"default_value": "",
-							"description": "The ZOS DBB URL.",
+							"default_value": "ibmuser",
+							"description": "z/OS userid.",
 							"required": false
 						},
 						{
 							"key": "zos_dbb_hlq",
 							"type": "string",
 							"default_value": "IBMUSER.PIPELINE",
-							"description": "The ZOS DBB HLQ.",
+							"description": "z/OS Dependency Based Build (DBB) engine High-Level Qualifier.",
 							"required": false
 						},
 						{
 							"key": "zos_dbb_user",
 							"type": "string",
 							"default_value": "ADMIN",
-							"description": "The ZOS DBB user.",
-							"required": false
-						},
-						{
-							"key": "zos_dbb_secret_name",
-							"type": "string",
-							"default_value": "",
-							"description": "API key used to create the toolchains.",
-							"required": false
-						},
-						{
-							"key": "zos_secret_key_group",
-							"type": "string",
-							"default_value": "",
-							"description": "The name of the secret group containing the secret for `zos_dbb_secret_name`. Only applies to using Secrets Manager.",
-							"required": false
-						},
-						{
-							"key": "zos_secret_info",
-							"type": "string",
-							"default_value": "",
-							"description": "API key used to create the toolchains.",
+							"description": "z/OS Dependency Based Build (DBB) engine userid.",
 							"required": false
 						},
 						{
 							"key": "zos_secret_key_name",
 							"type": "string",
 							"default_value": "ssh-auth",
-							"description": "API key used to create the toolchains.",
+							"description": "z/OS SSH key name.",
 							"required": false
 						},
 						{
@@ -4460,101 +4419,45 @@
 							"required": false
 						},
 						{
-							"key": "ci_zos_hostip",
-							"type": "string",
-							"default_value": "",
-							"description": "The ZOS IP.",
-							"required": false
-						},
-						{
 							"key": "ci_zos_host_name",
 							"type": "string",
 							"default_value": "",
-							"description": "The ZOS host name.",
+							"description": "z/OS hotname or IP address.",
 							"required": false
 						},
 						{
 							"key": "ci_zos_ssh_port",
 							"type": "string",
 							"default_value": "",
-							"description": "The ZOS SSH port.",
+							"description": "z/OS SSH port.",
 							"required": false
 						},
 						{
 							"key": "ci_zos_user",
 							"type": "string",
 							"default_value": "",
-							"description": "The ZOS user.",
-							"required": false
-						},
-						{
-							"key": "ci_zos_bastion_host_name",
-							"type": "string",
-							"default_value": "",
-							"description": "The Bastion host name.",
-							"required": false
-						},
-						{
-							"key": "ci_zos_bastion_ssh_port",
-							"type": "string",
-							"default_value": "",
-							"description": "The Bastion SSH port.",
-							"required": false
-						},
-						{
-							"key": "ci_zos_bastion_user",
-							"type": "string",
-							"default_value": "",
-							"description": "The Bastion user.",
-							"required": false
-						},
-						{
-							"key": "ci_zos_dbb_url",
-							"type": "string",
-							"default_value": "",
-							"description": "The ZOS DBB URL.",
+							"description": "z/OS userid.",
 							"required": false
 						},
 						{
 							"key": "ci_zos_dbb_hlq",
 							"type": "string",
 							"default_value": "",
-							"description": "The ZOS DBB HLQ.",
+							"description": "z/OS Dependency Based Build (DBB) engine High-Level Qualifier.",
 							"required": false
 						},
 						{
 							"key": "ci_zos_dbb_user",
 							"type": "string",
 							"default_value": "",
-							"description": "The ZOS DBB user.",
-							"required": false
-						},
-						{
-							"key": "ci_zos_dbb_secret_name",
-							"type": "string",
-							"default_value": "",
-							"description": "API key used to create the toolchains.",
-							"required": false
-						},
-						{
-							"key": "ci_zos_secret_key_group",
-							"type": "string",
-							"default_value": "",
-							"description": "The name of the secret group containing the secret for `zos_dbb_secret_name`. Only applies to using Secrets Manager.",
-							"required": false
-						},
-						{
-							"key": "ci_zos_secret_info",
-							"type": "string",
-							"default_value": "",
-							"description": "API key used to create the toolchains.",
+							"description": "z/OS Dependency Based Build (DBB) engine userid.",
 							"required": false
 						},
 						{
 							"key": "ci_zos_secret_key_name",
 							"type": "string",
 							"default_value": "",
-							"description": "API key used to create the toolchains.",
+							"description": "z/OS SSH key name.",
 							"required": false
 						},
 						{
@@ -5811,80 +5714,38 @@
 							"required": false
 						},
 						{
-							"key": "cd_zos_hostip",
-							"type": "string",
-							"default_value": "",
-							"description": "The ZOS IP.",
-							"required": false
-						},
-						{
 							"key": "cd_zos_host_name",
 							"type": "string",
 							"default_value": "",
-							"description": "The ZOS host name.",
+							"description": "z/OS hotname or IP address.",
 							"required": false
 						},
 						{
 							"key": "cd_zos_ssh_port",
 							"type": "string",
 							"default_value": "",
-							"description": "The ZOS SSH port.",
+							"description": "z/OS SSH port.",
 							"required": false
 						},
 						{
 							"key": "cd_zos_user",
 							"type": "string",
 							"default_value": "",
-							"description": "The ZOS user.",
-							"required": false
-						},
-						{
-							"key": "cd_zos_bastion_host_name",
-							"type": "string",
-							"default_value": "",
-							"description": "The Bastion host name.",
-							"required": false
-						},
-						{
-							"key": "cd_zos_bastion_ssh_port",
-							"type": "string",
-							"default_value": "",
-							"description": "The Bastion SSH port.",
-							"required": false
-						},
-						{
-							"key": "cd_zos_bastion_user",
-							"type": "string",
-							"default_value": "",
-							"description": "The Bastion user.",
-							"required": false
-						},
-						{
-							"key": "cd_zos_dbb_url",
-							"type": "string",
-							"default_value": "",
-							"description": "The ZOS DBB URL.",
+							"description": "z/OS userid.",
 							"required": false
 						},
 						{
 							"key": "cd_zos_dbb_hlq",
 							"type": "string",
 							"default_value": "",
-							"description": "The ZOS DBB HLQ.",
+							"description": "z/OS Dependency Based Build (DBB) engine High-Level Qualifier.",
 							"required": false
 						},
 						{
 							"key": "cd_zos_dbb_user",
 							"type": "string",
 							"default_value": "",
-							"description": "The ZOS DBB user.",
-							"required": false
-						},
-						{
-							"key": "cd_zos_dbb_secret_name",
-							"type": "string",
-							"default_value": "",
-							"description": "API key used to create the toolchains.",
+							"description": "z/OS Dependency Based Build (DBB) engine userid.",
 							"required": false
 						},
 						{
@@ -5895,17 +5756,10 @@
 							"required": false
 						},
 						{
-							"key": "cd_zos_secret_info",
-							"type": "string",
-							"default_value": "",
-							"description": "API key used to create the toolchains.",
-							"required": false
-						},
-						{
 							"key": "cd_zos_secret_key_name",
 							"type": "string",
 							"default_value": "",
-							"description": "API key used to create the toolchains.",
+							"description": "z/OS SSH key name.",
 							"required": false
 						},
 						{
@@ -6703,70 +6557,42 @@
 							"key": "cc_zos_host_name",
 							"type": "string",
 							"default_value": "",
-							"description": "The ZOS host name.",
+							"description": "z/OS hotname or IP address.",
 							"required": false
 						},
 						{
 							"key": "cc_zos_ssh_port",
 							"type": "string",
 							"default_value": "",
-							"description": "The ZOS SSH port.",
+							"description": "z/OS SSH port.",
 							"required": false
 						},
 						{
 							"key": "cc_zos_user",
 							"type": "string",
 							"default_value": "",
-							"description": "The ZOS user.",
-							"required": false
-						},
-						{
-							"key": "cc_zos_dbb_url",
-							"type": "string",
-							"default_value": "",
-							"description": "The ZOS DBB URL.",
+							"description": "z/OS userid.",
 							"required": false
 						},
 						{
 							"key": "cc_zos_dbb_hlq",
 							"type": "string",
 							"default_value": "",
-							"description": "The ZOS DBB HLQ.",
+							"description": "z/OS Dependency Based Build (DBB) engine High-Level Qualifier.",
 							"required": false
 						},
 						{
 							"key": "cc_zos_dbb_user",
 							"type": "string",
 							"default_value": "",
-							"description": "The ZOS DBB user.",
-							"required": false
-						},
-						{
-							"key": "cc_zos_dbb_secret_name",
-							"type": "string",
-							"default_value": "",
-							"description": "API key used to create the toolchains.",
-							"required": false
-						},
-						{
-							"key": "cc_zos_secret_key_group",
-							"type": "string",
-							"default_value": "",
-							"description": "The name of the secret group containing the secret for `zos_dbb_secret_name`. Only applies to using Secrets Manager.",
-							"required": false
-						},
-						{
-							"key": "cc_zos_secret_info",
-							"type": "string",
-							"default_value": "",
-							"description": "API key used to create the toolchains.",
+							"description": "z/OS Dependency Based Build (DBB) engine userid.",
 							"required": false
 						},
 						{
 							"key": "cc_zos_secret_key_name",
 							"type": "string",
 							"default_value": "",
-							"description": "API key used to create the toolchains.",
+							"description": "z/OS SSH key name.",
 							"required": false
 						},
 						{
