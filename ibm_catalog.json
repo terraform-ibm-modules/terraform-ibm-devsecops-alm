@@ -3836,7 +3836,22 @@
 							"type": "string",
 							"default_value": "us-south",
 							"description": "The region location of the Secrets Manager instance. This applies to the CI, CD and CC Secret Manager integrations. See `ci_sm_location`, `cd_sm_location`, and `cc_sm_location` to set separately.",
-							"required": true
+							"display_name": "Region",
+							"required": true,
+							"custom_config": {
+								"type": "region",
+								"grouping": "deployment",
+								"original_grouping": "deployment",
+								"config_constraints": {
+									"filterString": "id:au-syd,br-sao,ca-tor,eu-de,eu-es,eu-gb,jp-osa,jp-tok,us-east,us-south",
+									"showKinds": [
+										"region",
+										"zone",
+										"dc",
+										"location"
+									]
+								}
+							}
 						},
 						{
 							"key": "sm_name",
