@@ -255,7 +255,7 @@
 							"key": "repositories_prefix",
 							"type": "string",
 							"default_value": "compliance",
-							"description": "Prefix name for the cloned compliance repos.",
+							"description": "Prefix name for the cloned compliance repos. For the repositories_prefix value only a-z, A-Z and 0-9 and the special characters `-_` are allowed. In addition the string must not end with a special character or have two consecutive special characters.",
 							"required": false
 						},
 						{
@@ -1486,7 +1486,7 @@
 							"key": "ci_repositories_prefix",
 							"type": "string",
 							"default_value": "",
-							"description": "Prefix name for the cloned compliance repos.",
+							"description": "Prefix name for the cloned compliance repos. For the repositories_prefix value only a-z, A-Z and 0-9 and the special characters `-_` are allowed. In addition the string must not end with a special character or have two consecutive special characters.",
 							"required": false
 						},
 						{
@@ -2424,7 +2424,7 @@
 							"key": "cd_repositories_prefix",
 							"type": "string",
 							"default_value": "",
-							"description": "Prefix name for the cloned compliance repos.",
+							"description": "Prefix name for the cloned compliance repos. For the repositories_prefix value only a-z, A-Z and 0-9 and the special characters `-_` are allowed. In addition the string must not end with a special character or have two consecutive special characters.",
 							"required": false
 						},
 						{
@@ -3341,7 +3341,7 @@
 							"key": "cc_repositories_prefix",
 							"type": "string",
 							"default_value": "",
-							"description": "The prefix for the compliance repositories.",
+							"description": "Prefix name for the cloned compliance repos. For the repositories_prefix value only a-z, A-Z and 0-9 and the special characters `-_` are allowed. In addition the string must not end with a special character or have two consecutive special characters.",
 							"required": false
 						},
 						{
@@ -4332,7 +4332,7 @@
 							"key": "repositories_prefix",
 							"type": "string",
 							"default_value": "compliance",
-							"description": "Prefix name for the cloned compliance repos.",
+							"description": "Prefix name for the cloned compliance repos. For the repositories_prefix value only a-z, A-Z and 0-9 and the special characters `-_` are allowed. In addition the string must not end with a special character or have two consecutive special characters.",
 							"required": false
 						},
 						{
@@ -5458,7 +5458,7 @@
 							"key": "ci_repositories_prefix",
 							"type": "string",
 							"default_value": "",
-							"description": "Prefix name for the cloned compliance repos.",
+							"description": "Prefix name for the cloned compliance repos. For the repositories_prefix value only a-z, A-Z and 0-9 and the special characters `-_` are allowed. In addition the string must not end with a special character or have two consecutive special characters.",
 							"required": false
 						},
 						{
@@ -6382,7 +6382,7 @@
 							"key": "cd_repositories_prefix",
 							"type": "string",
 							"default_value": "",
-							"description": "Prefix name for the cloned compliance repos.",
+							"description": "Prefix name for the cloned compliance repos. For the repositories_prefix value only a-z, A-Z and 0-9 and the special characters `-_` are allowed. In addition the string must not end with a special character or have two consecutive special characters.",
 							"required": false
 						},
 						{
@@ -7292,7 +7292,7 @@
 							"key": "cc_repositories_prefix",
 							"type": "string",
 							"default_value": "",
-							"description": "The prefix for the compliance repositories.",
+							"description": "Prefix name for the cloned compliance repos. For the repositories_prefix value only a-z, A-Z and 0-9 and the special characters `-_` are allowed. In addition the string must not end with a special character or have two consecutive special characters.",
 							"required": false
 						},
 						{
