@@ -566,6 +566,12 @@ variable "code_engine_project_prefix" {
   default     = ""
 }
 
+variable "autostart" {
+  type        = bool
+  description = "Set to `true` to auto run the CI pipeline in the CI toolchain after creation."
+  default     = false
+}
+
 ##### END OF COMMON VARIABLES ############
 ##### START OF CI VARIABLES ##############
 

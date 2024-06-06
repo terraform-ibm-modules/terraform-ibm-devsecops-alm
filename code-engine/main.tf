@@ -792,6 +792,82 @@ resource "ibm_cd_tekton_pipeline_property" "cc_pipeline_opt_in_cra_auto_remediat
   pipeline_id = module.devsecops_cc_toolchain[0].cc_pipeline_id
 }
 
+############### Auto Start Webhook ######################
+
+# Random string for webhook token
+resource "random_string" "webhook_secret" {
+  length  = 48
+  special = false
+  upper   = false
+}
+
+# Create webhook for CI pipeline
+resource "ibm_cd_tekton_pipeline_trigger" "ci_pipeline_webhook" {
+  count          = (var.autostart) ? 1 : 0
+  depends_on     = [random_string.webhook_secret]
+  type           = "generic"
+  pipeline_id    = module.devsecops_ci_toolchain[0].ci_pipeline_id
+  name           = "ci-auto-start-webhook-trigger"
+  event_listener = "ci-listener-gitlab"
+  secret {
+    type     = "token_matches"
+    source   = "payload"
+    key_name = "webhook-token"
+    value    = random_string.webhook_secret.result
+  }
+}
+
+# Ensure webhook trigger runs against correct git branch
+resource "ibm_cd_tekton_pipeline_trigger_property" "ci_pipeline_webhook_branch_property" {
+  count       = (var.autostart) ? 1 : 0
+  depends_on  = [ibm_cd_tekton_pipeline_trigger.ci_pipeline_webhook]
+  name        = "branch"
+  pipeline_id = module.devsecops_ci_toolchain[0].ci_pipeline_id
+  trigger_id  = ibm_cd_tekton_pipeline_trigger.ci_pipeline_webhook[0].trigger_id
+  type        = "text"
+  value       = module.devsecops_ci_toolchain[0].app_repo_branch
+}
+
+# Trigger property app name
+resource "ibm_cd_tekton_pipeline_trigger_property" "ci_pipeline_webhook_name_property" {
+  count       = (var.autostart) ? 1 : 0
+  depends_on  = [ibm_cd_tekton_pipeline_trigger.ci_pipeline_webhook]
+  name        = "app-name"
+  pipeline_id = module.devsecops_ci_toolchain[0].ci_pipeline_id
+  trigger_id  = ibm_cd_tekton_pipeline_trigger.ci_pipeline_webhook[0].trigger_id
+  type        = "text"
+  value       = var.ci_app_name
+}
+
+# Trigger property repository url
+resource "ibm_cd_tekton_pipeline_trigger_property" "ci_pipeline_webhook_repo_url_property" {
+  count       = (var.autostart) ? 1 : 0
+  depends_on  = [ibm_cd_tekton_pipeline_trigger.ci_pipeline_webhook]
+  name        = "repository"
+  pipeline_id = module.devsecops_ci_toolchain[0].ci_pipeline_id
+  trigger_id  = ibm_cd_tekton_pipeline_trigger.ci_pipeline_webhook[0].trigger_id
+  type        = "text"
+  value       = module.devsecops_ci_toolchain[0].app_repo_url
+}
+
+# Trigger webhook to start CI pipeline run
+resource "null_resource" "ci_pipeline_run" {
+  count = (var.autostart) ? 1 : 0
+  depends_on = [
+    ibm_cd_tekton_pipeline_trigger.ci_pipeline_webhook,
+    ibm_cd_tekton_pipeline_trigger_property.ci_pipeline_webhook_branch_property
+  ]
+  triggers = {
+    always_run = timestamp()
+  }
+
+  provisioner "local-exec" {
+    command     = "${path.root}/scripts/ci_start.sh \"${ibm_cd_tekton_pipeline_trigger.ci_pipeline_webhook[0].webhook_url}\" \"${random_string.webhook_secret.result}\""
+    interpreter = ["/bin/bash", "-c"]
+    quiet       = true
+  }
+}
+
 #############################################################
 ## Example resources to extend the ci_toolchain created above
 #############################################################

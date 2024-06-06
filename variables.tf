@@ -547,6 +547,12 @@ variable "gosec_private_repository_host" {
   default     = ""
 }
 
+variable "autostart" {
+  type        = bool
+  description = "Set to `true` to auto run the CI pipeline in the CI toolchain after creation."
+  default     = false
+}
+
 
 ##### END OF COMMON VARIABLES ############
 ##### START OF CI VARIABLES ##############
