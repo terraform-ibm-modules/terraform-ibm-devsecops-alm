@@ -3679,7 +3679,7 @@
 					],
 					"install_type": "fullstack"
 				},
-				{	"label": "Deploy with ZOS",
+				{	"label": "Deploy to z/OS",
 					"name": "zos",
 					"working_directory": "zos",
 					"compliance": {
