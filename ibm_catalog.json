@@ -3927,6 +3927,20 @@
 							"required": false
 						},
 						{
+							"key": "code_engine_project_prefix",
+							"type": "string",
+							"default_value": "",
+							"description": "A string that will be prefixed to`ci_code_engine_project` and `cd_code_engine_project`.",
+							"required": false
+						},
+						{
+							"key": "code_engine_project",
+							"type": "string",
+							"default_value": "",
+							"description": "The name of the Code Engine project to use. Created if it does not exist. Applies to both the CI and CD toolchains. To set individually use `ci_code_engine_project` and `cd_code_engine_project`.",
+							"required": false
+						},
+						{
 							"key": "ci_code_engine_deployment_type",
 							"type": "string",
 							"default_value": "application",
@@ -4095,6 +4109,13 @@
 							"required": false
 						},
 						{
+							"key": "ci_code_engine_project_prefix",
+							"type": "string",
+							"default_value": "",
+							"description": "A string that will be prefixed to `ci_code_engine_project`. This takes precedence over values set in `code_engine_project_prefix`.",
+							"required": false
+						},
+						{
 							"key": "ci_code_engine_registry_domain",
 							"type": "string",
 							"default_value": "",
@@ -4232,6 +4253,13 @@
 							"type": "string",
 							"default_value": "7200",
 							"description": "The maximum execution time in seconds for runs of the job.",
+							"required": false
+						},
+						{
+							"key": "cd_code_engine_project_prefix",
+							"type": "string",
+							"default_value": "",
+							"description": "A string that will be prefixed to `cd_code_engine_project`. This takes precedence over values set in `code_engine_project_prefix`.",
 							"required": false
 						},
 						{
@@ -4401,34 +4429,6 @@
 							"default_value": "compliance",
 							"description": "Prefix name for the cloned compliance repos. For the repositories_prefix value only a-z, A-Z and 0-9 and the special characters `-_` are allowed. In addition the string must not end with a special character or have two consecutive special characters.",
 							"required": false
-						},
-						{
-							"key": "code_engine_project_prefix",
-							"type": "string",
-							"default_value": "",
-							"description": "A string that will be prefixed to`ci_code_engine_project` and `cd_code_engine_project`.",
-							"required": true
-						},
-						{
-							"key": "code_engine_project",
-							"type": "string",
-							"default_value": "",
-							"description": "The name of the Code Engine project to use. Created if it does not exist. Applies to both the CI and CD toolchains. To set individually use `ci_code_engine_project` and `cd_code_engine_project`.",
-							"required": true
-						},
-						{
-							"key": "ci_code_engine_project_prefix",
-							"type": "string",
-							"default_value": "",
-							"description": "A string that will be prefixed to `ci_code_engine_project`. This takes precedence over values set in `code_engine_project_prefix`.",
-							"required": true
-						},
-						{
-							"key": "cd_code_engine_project_prefix",
-							"type": "string",
-							"default_value": "",
-							"description": "A string that will be prefixed to `cd_code_engine_project`. This takes precedence over values set in `code_engine_project_prefix`.",
-							"required": true
 						},
 						{
 							"key": "compliance_pipeline_branch",
