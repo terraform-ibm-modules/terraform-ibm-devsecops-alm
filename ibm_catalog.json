@@ -3825,13 +3825,6 @@
 							"required": true
 						},
 						{
-							"key": "cluster_name",
-							"type": "string",
-							"default_value": "mycluster-free",
-							"description": "Name of the Kubernetes cluster where the application is deployed. This sets the same cluster for both CI and CD toolchains. See `ci_cluster_name` and `cd_cluster_name` to set different clusters. By default , the cluster namespace for CI will be set to `dev` and CD to `prod`. These can be changed using `ci_cluster_namespace` and `cd_cluster_namespace`.",
-							"required": false
-						},
-						{
 							"key": "sm_location",
 							"type": "string",
 							"default_value": "us-south",
@@ -3873,6 +3866,55 @@
 							"default_value": "Default",
 							"description": "Group in Secrets Manager for organizing/grouping secrets. This applies to the CI, CD and CC Secret Manager integrations. See `ci_sm_secret_group`, `cd_sm_secret_group`, and `cc_sm_secret_group` to set separately.",
 							"required": true
+						},
+						{
+							"key": "zos_host_name",
+							"type": "string",
+							"default_value": "",
+							"description": "z/OS hotname or IP address.",
+							"required": true
+						},
+						{
+							"key": "zos_ssh_port",
+							"type": "string",
+							"default_value": "22",
+							"description": "z/OS SSH port.",
+							"required": false
+						},
+						{
+							"key": "zos_user",
+							"type": "string",
+							"default_value": "ibmuser",
+							"description": "z/OS userid.",
+							"required": false
+						},
+						{
+							"key": "zos_dbb_hlq",
+							"type": "string",
+							"default_value": "IBMUSER.PIPELINE",
+							"description": "z/OS Dependency Based Build (DBB) engine High-Level Qualifier.",
+							"required": false
+						},
+						{
+							"key": "zos_dbb_user",
+							"type": "string",
+							"default_value": "ADMIN",
+							"description": "z/OS Dependency Based Build (DBB) engine userid.",
+							"required": false
+						},
+						{
+							"key": "zos_secret_key_name",
+							"type": "string",
+							"default_value": "ssh-auth",
+							"description": "z/OS SSH key name.",
+							"required": false
+						},
+						{
+							"key": "zos_secret_key_group",
+							"type": "string",
+							"default_value": "",
+							"description": "The name of the secret group containing the secret for `zos_secret_key_name`. Only applies to using Secrets Manager.",
+							"required": false
 						},
 						{
 							"key": "sm_instance_crn",
@@ -3945,55 +3987,6 @@
 							"required": false
 						},
 						{
-							"key": "zos_host_name",
-							"type": "string",
-							"default_value": "",
-							"description": "z/OS hotname or IP address.",
-							"required": true
-						},
-						{
-							"key": "zos_ssh_port",
-							"type": "string",
-							"default_value": "22",
-							"description": "z/OS SSH port.",
-							"required": false
-						},
-						{
-							"key": "zos_user",
-							"type": "string",
-							"default_value": "ibmuser",
-							"description": "z/OS userid.",
-							"required": false
-						},
-						{
-							"key": "zos_dbb_hlq",
-							"type": "string",
-							"default_value": "IBMUSER.PIPELINE",
-							"description": "z/OS Dependency Based Build (DBB) engine High-Level Qualifier.",
-							"required": false
-						},
-						{
-							"key": "zos_dbb_user",
-							"type": "string",
-							"default_value": "ADMIN",
-							"description": "z/OS Dependency Based Build (DBB) engine userid.",
-							"required": false
-						},
-						{
-							"key": "zos_secret_key_name",
-							"type": "string",
-							"default_value": "ssh-auth",
-							"description": "z/OS SSH key name.",
-							"required": false
-						},
-						{
-							"key": "zos_secret_key_group",
-							"type": "string",
-							"default_value": "",
-							"description": "The name of the secret group containing the secret for `zos_secret_key_name`. Only applies to using Secrets Manager.",
-							"required": false
-						},
-						{
 							"key": "repo_git_token_secret_crn",
 							"type": "string",
 							"default_value": "",
@@ -4033,6 +4026,13 @@
 							"type": "string",
 							"default_value": "",
 							"description": "The CRN for the Cloud Object Storage apikey. Applies to the CI, CD and CC toolchains. Can be set independently using the toolchain specific version of the variable.",
+							"required": false
+						},
+						{
+							"key": "cluster_name",
+							"type": "string",
+							"default_value": "mycluster-free",
+							"description": "Name of the Kubernetes cluster where the application is deployed. This sets the same cluster for both CI and CD toolchains. See `ci_cluster_name` and `cd_cluster_name` to set different clusters. By default , the cluster namespace for CI will be set to `dev` and CD to `prod`. These can be changed using `ci_cluster_namespace` and `cd_cluster_namespace`.",
 							"required": false
 						},
 						{
