@@ -128,7 +128,22 @@
 							"type": "string",
 							"default_value": "us-south",
 							"description": "The region identifier that will be used, by default, for all resource creation and service instance lookup. This can be overridden on a per resource/service basis. See `ci_toolchain_region`,`cd_toolchain_region`,`cc_toolchain_region`, `ci_cluster_region`, `cd_cluster_region`, `ci_registry_region`.",
-							"required": true
+							"display_name": "Region",
+							"required": true,
+							"custom_config": {
+								"type": "region",
+								"grouping": "deployment",
+								"original_grouping": "deployment",
+								"config_constraints": {
+									"filterString": "id:au-syd,br-sao,ca-tor,eu-de,eu-es,eu-gb,jp-osa,jp-tok,us-east,us-south",
+									"showKinds": [
+										"region",
+										"zone",
+										"dc",
+										"location"
+									]
+								}
+							}
 						},
 						{
 							"key": "toolchain_resource_group",
@@ -165,7 +180,22 @@
 							"type": "string",
 							"default_value": "us-south",
 							"description": "The region location of the Secrets Manager instance. This applies to the CI, CD and CC Secret Manager integrations. See `ci_sm_location`, `cd_sm_location`, and `cc_sm_location` to set separately.",
-							"required": true
+							"display_name": "Region",
+							"required": true,
+							"custom_config": {
+								"type": "region",
+								"grouping": "deployment",
+								"original_grouping": "deployment",
+								"config_constraints": {
+									"filterString": "id:au-syd,br-sao,ca-tor,eu-de,eu-es,eu-gb,jp-osa,jp-tok,us-east,us-south",
+									"showKinds": [
+										"region",
+										"zone",
+										"dc",
+										"location"
+									]
+								}
+							}
 						},
 						{
 							"key": "sm_name",
@@ -452,6 +482,13 @@
 							"type": "boolean",
 							"default_value": true,
 							"description": "Enable the Secrets Manager integrations.",
+							"required": false
+						},
+						{
+							"key": "autostart",
+							"type": "boolean",
+							"default_value": false,
+							"description": "Set to `true` to auto run the CI pipeline in the CI toolchain after creation.",
 							"required": false
 						},
 						{
@@ -3784,8 +3821,23 @@
 							"key": "toolchain_region",
 							"type": "string",
 							"default_value": "us-south",
-							"description": "The region identifier that will be used, by default, for all resource creation and service instance lookup. This can be overridden on a per resource/service basis. See `ci_toolchain_region`,`cd_toolchain_region`,`cc_toolchain_region`, `ci_registry_region`.",
-							"required": true
+							"description": "The region identifier that will be used, by default, for all resource creation and service instance lookup. This can be overridden on a per resource/service basis. See `ci_toolchain_region`,`cd_toolchain_region`,`cc_toolchain_region`, `ci_cluster_region`, `cd_cluster_region`, `ci_registry_region`.",
+							"display_name": "Region",
+							"required": true,
+							"custom_config": {
+								"type": "region",
+								"grouping": "deployment",
+								"original_grouping": "deployment",
+								"config_constraints": {
+									"filterString": "id:au-syd,br-sao,ca-tor,eu-de,eu-es,eu-gb,jp-osa,jp-tok,us-east,us-south",
+									"showKinds": [
+										"region",
+										"zone",
+										"dc",
+										"location"
+									]
+								}
+							}
 						},
 						{
 							"key": "toolchain_resource_group",
@@ -3829,7 +3881,22 @@
 							"type": "string",
 							"default_value": "us-south",
 							"description": "The region location of the Secrets Manager instance. This applies to the CI, CD and CC Secret Manager integrations. See `ci_sm_location`, `cd_sm_location`, and `cc_sm_location` to set separately.",
-							"required": true
+							"display_name": "Region",
+							"required": true,
+							"custom_config": {
+								"type": "region",
+								"grouping": "deployment",
+								"original_grouping": "deployment",
+								"config_constraints": {
+									"filterString": "id:au-syd,br-sao,ca-tor,eu-de,eu-es,eu-gb,jp-osa,jp-tok,us-east,us-south",
+									"showKinds": [
+										"region",
+										"zone",
+										"dc",
+										"location"
+									]
+								}
+							}
 						},
 						{
 							"key": "sm_name",
@@ -3857,6 +3924,20 @@
 							"type": "string",
 							"default_value": "",
 							"description": "The CRN of the Secrets Manager instance. Will apply to CI, CD and CC toolchains unless set individually.",
+							"required": false
+						},
+						{
+							"key": "code_engine_project_prefix",
+							"type": "string",
+							"default_value": "",
+							"description": "A string that will be prefixed to`ci_code_engine_project` and `cd_code_engine_project`.",
+							"required": false
+						},
+						{
+							"key": "code_engine_project",
+							"type": "string",
+							"default_value": "",
+							"description": "The name of the Code Engine project to use. Created if it does not exist. Applies to both the CI and CD toolchains. To set individually use `ci_code_engine_project` and `cd_code_engine_project`.",
 							"required": false
 						},
 						{
@@ -4028,6 +4109,13 @@
 							"required": false
 						},
 						{
+							"key": "ci_code_engine_project_prefix",
+							"type": "string",
+							"default_value": "",
+							"description": "A string that will be prefixed to `ci_code_engine_project`. This takes precedence over values set in `code_engine_project_prefix`.",
+							"required": false
+						},
+						{
 							"key": "ci_code_engine_registry_domain",
 							"type": "string",
 							"default_value": "",
@@ -4165,6 +4253,13 @@
 							"type": "string",
 							"default_value": "7200",
 							"description": "The maximum execution time in seconds for runs of the job.",
+							"required": false
+						},
+						{
+							"key": "cd_code_engine_project_prefix",
+							"type": "string",
+							"default_value": "",
+							"description": "A string that will be prefixed to `cd_code_engine_project`. This takes precedence over values set in `code_engine_project_prefix`.",
 							"required": false
 						},
 						{
@@ -4336,34 +4431,6 @@
 							"required": false
 						},
 						{
-							"key": "code_engine_project_prefix",
-							"type": "string",
-							"default_value": "",
-							"description": "A string that will be prefixed to`ci_code_engine_project` and `cd_code_engine_project`.",
-							"required": true
-						},
-						{
-							"key": "code_engine_project",
-							"type": "string",
-							"default_value": "",
-							"description": "The name of the Code Engine project to use. Created if it does not exist. Applies to both the CI and CD toolchains. To set individually use `ci_code_engine_project` and `cd_code_engine_project`.",
-							"required": true
-						},
-						{
-							"key": "ci_code_engine_project_prefix",
-							"type": "string",
-							"default_value": "",
-							"description": "A string that will be prefixed to `ci_code_engine_project`. This takes precedence over values set in `code_engine_project_prefix`.",
-							"required": true
-						},
-						{
-							"key": "cd_code_engine_project_prefix",
-							"type": "string",
-							"default_value": "",
-							"description": "A string that will be prefixed to `cd_code_engine_project`. This takes precedence over values set in `code_engine_project_prefix`.",
-							"required": true
-						},
-						{
 							"key": "compliance_pipeline_branch",
 							"type": "string",
 							"default_value": "open-v10",
@@ -4501,6 +4568,13 @@
 							"type": "boolean",
 							"default_value": true,
 							"description": "Enable the Secrets Manager integrations.",
+							"required": false
+						},
+						{
+							"key": "autostart",
+							"type": "boolean",
+							"default_value": false,
+							"description": "Set to `true` to auto run the CI pipeline in the CI toolchain after creation.",
 							"required": false
 						},
 						{

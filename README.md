@@ -58,6 +58,8 @@ statement instead the previous block.
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0.0, <1.7.0 |
 | <a name="requirement_ibm"></a> [ibm](#requirement\_ibm) | >=1.60.0 |
+| <a name="requirement_null"></a> [null](#requirement\_null) | >= 3.2.2 |
+| <a name="requirement_random"></a> [random](#requirement\_random) | >= 3.6.2 |
 
 ### Modules
 
@@ -74,12 +76,19 @@ statement instead the previous block.
 | [ibm_cd_tekton_pipeline_property.cc_pipeline_opt_in_cra_auto_remediation](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/resources/cd_tekton_pipeline_property) | resource |
 | [ibm_cd_tekton_pipeline_property.cc_pipeline_opt_in_cra_auto_remediation_enabled_repos](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/resources/cd_tekton_pipeline_property) | resource |
 | [ibm_cd_tekton_pipeline_property.cc_pipeline_opt_in_cra_auto_remediation_force](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/resources/cd_tekton_pipeline_property) | resource |
+| [ibm_cd_tekton_pipeline_trigger.ci_pipeline_webhook](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/resources/cd_tekton_pipeline_trigger) | resource |
+| [ibm_cd_tekton_pipeline_trigger_property.ci_pipeline_webhook_branch_property](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/resources/cd_tekton_pipeline_trigger_property) | resource |
+| [ibm_cd_tekton_pipeline_trigger_property.ci_pipeline_webhook_name_property](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/resources/cd_tekton_pipeline_trigger_property) | resource |
+| [ibm_cd_tekton_pipeline_trigger_property.ci_pipeline_webhook_repo_url_property](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/resources/cd_tekton_pipeline_trigger_property) | resource |
+| [null_resource.ci_pipeline_run](https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource) | resource |
+| [random_string.webhook_secret](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/string) | resource |
 
 ### Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_authorization_policy_creation"></a> [authorization\_policy\_creation](#input\_authorization\_policy\_creation) | Disable Toolchain Service to Secrets Manager Service authorization policy creation. To disable set the value to `disabled`. This applies to the CI, CD, and CC toolchains. To set separately, see `ci_authorization_policy_creation`, `cd_authorization_policy_creation`, and `cc_authorization_policy_creation`. | `string` | `""` | no |
+| <a name="input_autostart"></a> [autostart](#input\_autostart) | Set to `true` to auto run the CI pipeline in the CI toolchain after creation. | `bool` | `false` | no |
 | <a name="input_cc_app_group"></a> [cc\_app\_group](#input\_cc\_app\_group) | Specify user or group for app repo. | `string` | `""` | no |
 | <a name="input_cc_app_repo_auth_type"></a> [cc\_app\_repo\_auth\_type](#input\_cc\_app\_repo\_auth\_type) | Select the method of authentication that is used to access the Git provider. 'oauth' or 'pat'. | `string` | `""` | no |
 | <a name="input_cc_app_repo_branch"></a> [cc\_app\_repo\_branch](#input\_cc\_app\_repo\_branch) | The default branch of the app repo. | `string` | `"master"` | no |
