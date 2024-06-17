@@ -3646,6 +3646,27 @@
 							"default_value": "ibm:yp:",
 							"description": "By default `ibm:yp:`. This will be set as the prefix to regions automatically where required. For example `ibm:yp:us-south`.",
 							"required": false
+						},
+						{
+							"key": "create_cd_instance",
+							"type": "boolean",
+							"default_value": false,
+							"description": "Set to `true` to create Continuous Delivery Service. ",
+							"required": false
+						},
+						{
+							"key": "cd_instance_name",
+							"type": "string",
+							"default_value": "cd-devsecops",
+							"description": "The name of the CD instance.",
+							"required": false
+						},
+						{
+							"key": "cd_service_plan",
+							"type": "string",
+							"default_value": "professional",
+							"description": "The Continuous Delivery service plan. Can be `lite` or `professional`.",
+							"required": false
 						}
 					],
 					"outputs": [
@@ -4337,6 +4358,27 @@
 							"type": "string",
 							"default_value": "",
 							"description": "Set the Cloud Object Storage endpoint for accessing your COS bucket. This setting sets the same endpoint for COS in the CI, CD, and CC toolchains. See `ci_cos_endpoint`, `cd_cos_endpoint`, and `cc_cos_endpoint` to set the endpoints separately.",
+							"required": false
+						},
+						{
+							"key": "create_cd_instance",
+							"type": "boolean",
+							"default_value": false,
+							"description": "Set to `true` to create Continuous Delivery Service. ",
+							"required": false
+						},
+						{
+							"key": "cd_instance_name",
+							"type": "string",
+							"default_value": "cd-devsecops",
+							"description": "The name of the CD instance.",
+							"required": false
+						},
+						{
+							"key": "cd_service_plan",
+							"type": "string",
+							"default_value": "professional",
+							"description": "The Continuous Delivery service plan. Can be `lite` or `professional`.",
 							"required": false
 						},
 						{
