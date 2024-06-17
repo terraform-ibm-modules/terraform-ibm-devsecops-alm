@@ -65,8 +65,22 @@ resource "random_string" "resource_suffix" {
   upper   = false
 }
 
+data "ibm_resource_group" "resource_group" {
+  name = var.toolchain_resource_group
+}
+
+resource "ibm_resource_instance" "cd_instance" {
+  count             = (var.create_cd_instance) ? 1 : 0
+  name              = var.cd_instance_name
+  service           = "continuous-delivery"
+  plan              = var.cd_service_plan
+  location          = var.toolchain_region
+  resource_group_id = data.ibm_resource_group.resource_group.id
+}
+
 module "devsecops_ci_toolchain" {
   count                    = var.create_ci_toolchain ? 1 : 0
+  depends_on               = [ibm_resource_instance.cd_instance]
   source                   = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-ci-toolchain?ref=v1.3.0"
   ibmcloud_api_key         = var.ibmcloud_api_key
   toolchain_name           = (var.ci_toolchain_name == "") ? format("${var.toolchain_name}%s", "-CI-Toolchain") : var.ci_toolchain_name
@@ -323,6 +337,7 @@ module "devsecops_ci_toolchain" {
 
 module "devsecops_cd_toolchain" {
   count            = var.create_cd_toolchain ? 1 : 0
+  depends_on       = [ibm_resource_instance.cd_instance]
   source           = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain?ref=v1.3.0"
   ibmcloud_api_key = var.ibmcloud_api_key
 
@@ -564,6 +579,7 @@ module "devsecops_cd_toolchain" {
 
 module "devsecops_cc_toolchain" {
   count                         = var.create_cc_toolchain ? 1 : 0
+  depends_on                    = [ibm_resource_instance.cd_instance]
   source                        = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cc-toolchain?ref=v1.3.0"
   ibmcloud_api_key              = var.ibmcloud_api_key
   toolchain_name                = (var.cc_toolchain_name == "") ? format("${var.toolchain_name}%s", "-CC-Toolchain") : var.cc_toolchain_name

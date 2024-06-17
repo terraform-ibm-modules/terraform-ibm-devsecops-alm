@@ -3670,3 +3670,22 @@ variable "cc_event_notifications_crn" {
 }
 
 ##### END OF CC VARIABLES ################
+
+###### CD  Instance ######################
+variable "create_cd_instance" {
+  type        = bool
+  description = "Set to `true` to create Continuous Delivery Service."
+  default     = false
+}
+
+variable "cd_instance_name" {
+  type        = string
+  description = "The name of the CD instance."
+  default     = "cd-devsecops"
+}
+
+variable "cd_service_plan" {
+  type        = string
+  description = "The Continuous Delivery service plan. Can be `lite` or `professional`."
+  default     = "professional"
+}

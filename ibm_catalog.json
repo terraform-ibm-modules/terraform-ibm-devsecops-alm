@@ -3646,6 +3646,27 @@
 							"default_value": "ibm:yp:",
 							"description": "By default `ibm:yp:`. This will be set as the prefix to regions automatically where required. For example `ibm:yp:us-south`.",
 							"required": false
+						},
+						{
+							"key": "create_cd_instance",
+							"type": "boolean",
+							"default_value": false,
+							"description": "Set to `true` to create Continuous Delivery Service. ",
+							"required": false
+						},
+						{
+							"key": "cd_instance_name",
+							"type": "string",
+							"default_value": "cd-devsecops",
+							"description": "The name of the CD instance.",
+							"required": false
+						},
+						{
+							"key": "cd_service_plan",
+							"type": "string",
+							"default_value": "professional",
+							"description": "The Continuous Delivery service plan. Can be `lite` or `professional`.",
+							"required": false
 						}
 					],
 					"outputs": [
@@ -7640,6 +7661,27 @@
 							"type": "string",
 							"default_value": "code-engine",
 							"description": "The deployment target, 'cluster' or 'code-engine'. Applies to both the CI and CD toolchains. To set individually use  `ci_deployment_target` and `cd_deployment_target`.",
+							"required": false
+						},
+						{
+							"key": "create_cd_instance",
+							"type": "boolean",
+							"default_value": false,
+							"description": "Set to `true` to create Continuous Delivery Service. ",
+							"required": false
+						},
+						{
+							"key": "cd_instance_name",
+							"type": "string",
+							"default_value": "cd-devsecops",
+							"description": "The name of the CD instance.",
+							"required": false
+						},
+						{
+							"key": "cd_service_plan",
+							"type": "string",
+							"default_value": "professional",
+							"description": "The Continuous Delivery service plan. Can be `lite` or `professional`.",
 							"required": false
 						}
 					],
