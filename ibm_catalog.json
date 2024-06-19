@@ -230,28 +230,52 @@
 							"type": "string",
 							"default_value": "",
 							"description": "Stringified JSON containing the properties for the CI toolchain pipelines.",
-							"required": false
+							"display_name": "JSON",
+							"required": false,
+							"custom_config": {
+								"type": "json_editor",
+								"grouping": "deployment",
+								"original_grouping": "deployment"
+							}
 						},
 						{
 							"key": "ci_repository_properties",
 							"type": "string",
 							"default_value": "",
 							"description": "Stringified JSON containing the repositories and triggers that get created in the CI toolchain pipelines.",
-							"required": false
+							"display_name": "JSON",
+							"required": false,
+							"custom_config": {
+								"type": "json_editor",
+								"grouping": "deployment",
+								"original_grouping": "deployment"
+							}
 						},
 						{
 							"key": "cd_pipeline_properties",
 							"type": "string",
 							"default_value": "",
 							"description": "Stringified JSON containing the properties for the CI toolchain pipelines.",
-							"required": false
+							"display_name": "JSON",
+							"required": false,
+							"custom_config": {
+								"type": "json_editor",
+								"grouping": "deployment",
+								"original_grouping": "deployment"
+							}
 						},
 						{
 							"key": "cc_pipeline_properties",
 							"type": "string",
 							"default_value": "",
 							"description": "Stringified JSON containing the properties for the CI toolchain pipelines.",
-							"required": false
+							"display_name": "JSON",
+							"required": false,
+							"custom_config": {
+								"type": "json_editor",
+								"grouping": "deployment",
+								"original_grouping": "deployment"
+							}
 						},
 						{
 							"key": "authorization_policy_creation",
@@ -4085,28 +4109,52 @@
 							"type": "string",
 							"default_value": "",
 							"description": "Stringified JSON containing the properties for the CI toolchain pipelines.",
-							"required": false
+							"display_name": "JSON",
+							"required": false,
+							"custom_config": {
+								"type": "json_editor",
+								"grouping": "deployment",
+								"original_grouping": "deployment"
+							}
 						},
 						{
 							"key": "ci_repository_properties",
 							"type": "string",
 							"default_value": "",
 							"description": "Stringified JSON containing the repositories and triggers that get created in the CI toolchain pipelines.",
-							"required": false
+							"display_name": "JSON",
+							"required": false,
+							"custom_config": {
+								"type": "json_editor",
+								"grouping": "deployment",
+								"original_grouping": "deployment"
+							}
 						},
 						{
 							"key": "cd_pipeline_properties",
 							"type": "string",
 							"default_value": "",
 							"description": "Stringified JSON containing the properties for the CI toolchain pipelines.",
-							"required": false
+							"display_name": "JSON",
+							"required": false,
+							"custom_config": {
+								"type": "json_editor",
+								"grouping": "deployment",
+								"original_grouping": "deployment"
+							}
 						},
 						{
 							"key": "cc_pipeline_properties",
 							"type": "string",
 							"default_value": "",
 							"description": "Stringified JSON containing the properties for the CI toolchain pipelines.",
-							"required": false
+							"display_name": "JSON",
+							"required": false,
+							"custom_config": {
+								"type": "json_editor",
+								"grouping": "deployment",
+								"original_grouping": "deployment"
+							}
 						},
 						{
 							"key": "code_engine_project_prefix",
