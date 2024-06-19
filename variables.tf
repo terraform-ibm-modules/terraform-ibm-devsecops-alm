@@ -623,6 +623,84 @@ variable "ci_cluster_resource_group" {
   default     = ""
 }
 
+variable "pr_cra_bom_generate" {
+  type        = string
+  description = "Set this flag to `1` to generate cra bom in PR pipeline"
+  default     = "1"
+  validation {
+    condition     = contains(["0", "1"], var.pr_cra_bom_generate)
+    error_message = "Must be either \"0\" or \"1\" ."
+  }
+}
+
+variable "pr_cra_vulnerability_scan" {
+  type        = string
+  description = "Set this flag to `1` and `pr-cra-bom-generate` to `1` for cra vulnerability scan in PR pipeline. If this value is set to `1` and `pr-cra-bom-generate` is set to `0`, the scan will be marked as `failure`"
+  default     = "1"
+  validation {
+    condition     = contains(["0", "1"], var.pr_cra_vulnerability_scan)
+    error_message = "Must be either \"0\" or \"1\" ."
+  }
+
+}
+
+variable "pr_cra_deploy_analysis" {
+  type        = string
+  description = "Set this flag to `1` for cra deployment analysis to be done in PR pipeline."
+  default     = "1"
+  validation {
+    condition     = contains(["0", "1"], var.pr_cra_deploy_analysis)
+    error_message = "Must be either \"0\" or \"1\" ."
+  }
+}
+
+variable "ci_cra_bom_generate" {
+  type        = string
+  description = "Set this flag to `1` to generate cra bom in CI pipeline."
+  default     = "1"
+  validation {
+    condition     = contains(["0", "1"], var.ci_cra_bom_generate)
+    error_message = "Must be either \"0\" or \"1\" ."
+  }
+}
+
+variable "ci_cra_vulnerability_scan" {
+  type        = string
+  description = "Set this flag to `1` and `ci-cra-bom-generate` to `1` for cra vulnerability scan in CI pipeline. If this value is set to 1 and `ci-cra-bom-generate` is set to `0`, the scan will be marked as `failure`"
+  default     = "1"
+  validation {
+    condition     = contains(["0", "1"], var.ci_cra_vulnerability_scan)
+    error_message = "Must be either \"0\" or \"1\" ."
+  }
+
+}
+
+variable "ci_cra_deploy_analysis" {
+  type        = string
+  description = "Set this flag to `1` for cra deployment analysis to be done in CI pipeline."
+  default     = "1"
+  validation {
+    condition     = contains(["0", "1"], var.ci_cra_deploy_analysis)
+    error_message = "Must be either \"0\" or \"1\" ."
+  }
+}
+
+variable "ci_enable_pipeline_notifications" {
+  type        = bool
+  description = "When enabled, pipeline run events will be sent to the Event Notifications and Slack integrations in the enclosing toolchain."
+  default     = false
+}
+
+variable "ci_event_notifications" {
+  type        = string
+  description = "To enable event notification, set event_notifications to 1 "
+  default     = "0"
+  validation {
+    condition     = contains(["0", "1"], var.ci_event_notifications)
+    error_message = "Must be either \"0\" or \"1\" ."
+  }
+}
+
 variable "registry_namespace" {
   type        = string
   description = "A unique namespace within the IBM Cloud Container Registry region where the application image is stored."
@@ -674,6 +752,18 @@ variable "ci_pipeline_git_tag" {
 variable "pr_pipeline_git_tag" {
   type        = string
   description = "The GIT tag within the pipeline definitions repository for the Compliance PR Pipeline."
+  default     = ""
+}
+
+variable "ci_pipeline_properties" {
+  type        = string
+  description = "Stringified JSON containing the properties for the CI toolchain pipelines."
+  default     = ""
+}
+
+variable "ci_pipeline_properties_filepath" {
+  type        = string
+  description = "The path to the file containing the property JSON. If this is not set, it will by default read the `properties.json` file at the root of the module."
   default     = ""
 }
 
@@ -755,6 +845,18 @@ variable "ci_opt_in_gosec" {
 variable "ci_gosec_private_repository_host" {
   type        = string
   description = "Your private repository base URL."
+  default     = ""
+}
+
+variable "ci_repository_properties" {
+  type        = string
+  description = "Stringified JSON containing the repositories and triggers that get created in the CI toolchain pipelines."
+  default     = ""
+}
+
+variable "ci_repository_properties_filepath" {
+  type        = string
+  description = "The path to the file containing the repository and triggers JSON. If this is not set, it will by default read the `repositories.json` file at the root of the module."
   default     = ""
 }
 
@@ -1656,6 +1758,22 @@ variable "cd_cluster_region" {
   default     = ""
 }
 
+variable "cd_enable_pipeline_notifications" {
+  type        = bool
+  description = "When enabled, pipeline run events will be sent to the Event Notifications and Slack integrations in the enclosing toolchain."
+  default     = false
+}
+
+variable "cd_event_notifications" {
+  type        = string
+  description = "To enable event notification, set event_notifications to 1 "
+  default     = "0"
+  validation {
+    condition     = contains(["0", "1"], var.cd_event_notifications)
+    error_message = "Must be either \"0\" or \"1\" ."
+  }
+}
+
 variable "cd_region" {
   type        = string
   description = "IBM Cloud region used to prefix the `prod_latest` inventory repo branch."
@@ -1764,6 +1882,18 @@ variable "cd_trigger_git_promotion_validation_name" {
 variable "cd_pipeline_git_tag" {
   type        = string
   description = "The GIT tag within the pipeline definitions repository for the Compliance CD Pipeline."
+  default     = ""
+}
+
+variable "cd_pipeline_properties" {
+  type        = string
+  description = "Stringified JSON containing the properties for the CD toolchain pipelines."
+  default     = ""
+}
+
+variable "cd_pipeline_properties_filepath" {
+  type        = string
+  description = "The path to the file containing the property JSON. If this is not set, it will by default read the `properties.json` file at the root of the module."
   default     = ""
 }
 
@@ -2295,6 +2425,18 @@ variable "cd_pipeline_doi_api_key_secret_crn" {
   }
 }
 
+variable "cd_repository_properties" {
+  type        = string
+  description = "Stringified JSON containing the repositories and triggers that get created in the CI toolchain pipelines."
+  default     = ""
+}
+
+variable "cd_repository_properties_filepath" {
+  type        = string
+  description = "The path to the file containing the repository and triggers JSON. If this is not set, it will by default read the `repositories.json` file at the root of the module."
+  default     = ""
+}
+
 ####### Trigger properties ###################
 variable "cd_trigger_git_name" {
   type        = string
@@ -2469,6 +2611,16 @@ variable "cd_peer_review_compliance" {
   default     = ""
 }
 
+variable "cd_pre_prod_evidence_collection" {
+  type        = string
+  description = "Set this flag to collect the pre-prod evidences and the change requests in the production deployment (target-environment-purpose set to production). Default value is 0."
+  default     = "0"
+  validation {
+    condition     = contains(["0", "1"], var.cd_pre_prod_evidence_collection)
+    error_message = "Must be either \"0\" or \"1\" ."
+  }
+}
+
 #SLACK
 variable "cd_slack_webhook_secret_name" {
   type        = string
@@ -2588,6 +2740,22 @@ variable "create_cc_toolchain" {
   description = "Boolean flag which determines if the DevSecOps CC toolchain is created."
   type        = bool
   default     = true
+}
+
+variable "cc_enable_pipeline_notifications" {
+  type        = bool
+  description = "When enabled, pipeline run events will be sent to the Event Notifications and Slack integrations in the enclosing toolchain."
+  default     = false
+}
+
+variable "cc_event_notifications" {
+  type        = string
+  description = "To enable event notification, set event_notifications to 1 "
+  default     = "0"
+  validation {
+    condition     = contains(["0", "1"], var.cc_event_notifications)
+    error_message = "Must be either \"0\" or \"1\" ."
+  }
 }
 
 variable "cc_enable_key_protect" {
@@ -3084,6 +3252,18 @@ variable "cc_gosec_private_repository_ssh_key_secret_crn" {
   }
 }
 
+variable "cc_repository_properties" {
+  type        = string
+  description = "Stringified JSON containing the repositories and triggers that get created in the CI toolchain pipelines."
+  default     = ""
+}
+
+variable "cc_repository_properties_filepath" {
+  type        = string
+  description = "The path to the file containing the repository and triggers JSON. If this is not set, it will by default read the `repositories.json` file at the root of the module."
+  default     = ""
+}
+
 #########Trigger Properties ##########
 variable "cc_trigger_timed_name" {
   type        = string
@@ -3307,9 +3487,52 @@ variable "cc_compliance_pipeline_branch" {
   default     = ""
 }
 
+variable "cc_cra_bom_generate" {
+  type        = string
+  description = "Set this flag to `1` to generate cra bom"
+  default     = "1"
+  validation {
+    condition     = contains(["0", "1"], var.cc_cra_bom_generate)
+    error_message = "Must be either \"0\" or \"1\" ."
+  }
+}
+
+variable "cc_cra_vulnerability_scan" {
+  type        = string
+  description = "Set this flag to `1` and `cra-bom-generate` to `1` for cra vulnerability scan.  If this value is set to 1 and `cra-bom-generate` is set to 0, the scan will be marked as `failure`"
+  default     = "1"
+  validation {
+    condition     = contains(["0", "1"], var.cc_cra_vulnerability_scan)
+    error_message = "Must be either \"0\" or \"1\" ."
+  }
+
+}
+
+variable "cc_cra_deploy_analysis" {
+  type        = string
+  description = "Set this flag to `1` for cra deployment analysis to be done."
+  default     = "1"
+  validation {
+    condition     = contains(["0", "1"], var.cc_cra_deploy_analysis)
+    error_message = "Must be either \"0\" or \"1\" ."
+  }
+}
+
 variable "cc_pipeline_git_tag" {
   type        = string
   description = "The GIT tag within the pipeline definitions repository for the Compliance CC Pipeline."
+  default     = ""
+}
+
+variable "cc_pipeline_properties" {
+  type        = string
+  description = "Stringified JSON containing the properties for the CC toolchain pipelines."
+  default     = ""
+}
+
+variable "cc_pipeline_properties_filepath" {
+  type        = string
+  description = "The path to the file containing the property JSON. If this is not set, it will by default read the `properties.json` file at the root of the module."
   default     = ""
 }
 
