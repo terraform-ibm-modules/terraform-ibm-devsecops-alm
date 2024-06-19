@@ -226,6 +226,58 @@
 							"required": false
 						},
 						{
+							"key": "ci_pipeline_properties",
+							"type": "string",
+							"default_value": "",
+							"description": "Stringified JSON containing the properties for the CI toolchain pipelines.",
+							"display_name": "JSON",
+							"required": false,
+							"custom_config": {
+								"type": "json_editor",
+								"grouping": "deployment",
+								"original_grouping": "deployment"
+							}
+						},
+						{
+							"key": "ci_repository_properties",
+							"type": "string",
+							"default_value": "",
+							"description": "Stringified JSON containing the repositories and triggers that get created in the CI toolchain pipelines.",
+							"display_name": "JSON",
+							"required": false,
+							"custom_config": {
+								"type": "json_editor",
+								"grouping": "deployment",
+								"original_grouping": "deployment"
+							}
+						},
+						{
+							"key": "cd_pipeline_properties",
+							"type": "string",
+							"default_value": "",
+							"description": "Stringified JSON containing the properties for the CI toolchain pipelines.",
+							"display_name": "JSON",
+							"required": false,
+							"custom_config": {
+								"type": "json_editor",
+								"grouping": "deployment",
+								"original_grouping": "deployment"
+							}
+						},
+						{
+							"key": "cc_pipeline_properties",
+							"type": "string",
+							"default_value": "",
+							"description": "Stringified JSON containing the properties for the CI toolchain pipelines.",
+							"display_name": "JSON",
+							"required": false,
+							"custom_config": {
+								"type": "json_editor",
+								"grouping": "deployment",
+								"original_grouping": "deployment"
+							}
+						},
+						{
 							"key": "authorization_policy_creation",
 							"type": "string",
 							"default_value": "",
@@ -988,6 +1040,48 @@
 							"required": false
 						},
 						{
+							"key": "ci_cra_bom_generate",
+							"type": "string",
+							"default_value": "1",
+							"description": "Set this flag to `1` to generate cra bom in CI pipeline.",
+							"required": false
+						},
+						{
+							"key": "ci_cra_vulnerability_scan",
+							"type": "string",
+							"default_value": "1",
+							"description": "Set this flag to `1` and `ci-cra-bom-generate` to `1` for cra vulnerability scan in CI pipeline. If this value is set to 1 and `ci-cra-bom-generate` is set to `0`, the scan will be marked as `failure`",
+							"required": false
+						},
+						{
+							"key": "ci_cra_deploy_analysis",
+							"type": "string",
+							"default_value": "1",
+							"description": "Set this flag to `1` for cra deployment analysis to be done in CI pipeline.",
+							"required": false
+						},
+						{
+							"key": "pr_cra_bom_generate",
+							"type": "string",
+							"default_value": "1",
+							"description": "Set this flag to `1` to generate cra bom in CI pipeline.",
+							"required": false
+						},
+						{
+							"key": "pr_cra_vulnerability_scan",
+							"type": "string",
+							"default_value": "1",
+							"description": "Set this flag to `1` and `ci-cra-bom-generate` to `1` for cra vulnerability scan in CI pipeline. If this value is set to 1 and `ci-cra-bom-generate` is set to `0`, the scan will be marked as `failure`",
+							"required": false
+						},
+						{
+							"key": "pr_cra_deploy_analysis",
+							"type": "string",
+							"default_value": "1",
+							"description": "Set this flag to `1` for cra deployment analysis to be done in CI pipeline.",
+							"required": false
+						},
+						{
 							"key": "ci_custom_image_tag",
 							"type": "string",
 							"default_value": "",
@@ -1041,6 +1135,20 @@
 							"type": "boolean",
 							"default_value": false,
 							"description": "Set to enable Key Protect Integration. ",
+							"required": false
+						},
+						{
+							"key": "ci_enable_pipeline_notifications",
+							"type": "boolean",
+							"default_value": false,
+							"description": "When enabled, pipeline run events will be sent to the Event Notifications and Slack integrations in the enclosing toolchain.",
+							"required": false
+						},
+						{
+							"key": "ci_event_notifications",
+							"type": "string",
+							"default_value": "0",
+							"description": "To enable event notification, set event_notifications to 1.",
 							"required": false
 						},
 						{
@@ -2094,6 +2202,20 @@
 							"required": false
 						},
 						{
+							"key": "cd_enable_pipeline_notifications",
+							"type": "boolean",
+							"default_value": false,
+							"description": "When enabled, pipeline run events will be sent to the Event Notifications and Slack integrations in the enclosing toolchain.",
+							"required": false
+						},
+						{
+							"key": "cd_event_notifications",
+							"type": "string",
+							"default_value": "0",
+							"description": "To enable event notification, set event_notifications to 1.",
+							"required": false
+						},
+						{
 							"key": "cd_enable_secrets_manager",
 							"type": "boolean",
 							"default_value": false,
@@ -2899,6 +3021,27 @@
 							"required": false
 						},
 						{
+							"key": "cc_cra_bom_generate",
+							"type": "string",
+							"default_value": "1",
+							"description": "Set this flag to `1` to generate cra bom in CI pipeline.",
+							"required": false
+						},
+						{
+							"key": "cc_cra_vulnerability_scan",
+							"type": "string",
+							"default_value": "1",
+							"description": "Set this flag to `1` and `ci-cra-bom-generate` to `1` for cra vulnerability scan in CI pipeline. If this value is set to 1 and `ci-cra-bom-generate` is set to `0`, the scan will be marked as `failure`",
+							"required": false
+						},
+						{
+							"key": "cc_cra_deploy_analysis",
+							"type": "string",
+							"default_value": "1",
+							"description": "Set this flag to `1` for cra deployment analysis to be done in CI pipeline.",
+							"required": false
+						},
+						{
 							"key": "cc_doi_environment",
 							"type": "string",
 							"default_value": "",
@@ -2917,6 +3060,20 @@
 							"type": "boolean",
 							"default_value": false,
 							"description": "Enable the Key Protect integration.",
+							"required": false
+						},
+						{
+							"key": "cc_enable_pipeline_notifications",
+							"type": "boolean",
+							"default_value": false,
+							"description": "When enabled, pipeline run events will be sent to the Event Notifications and Slack integrations in the enclosing toolchain.",
+							"required": false
+						},
+						{
+							"key": "cc_event_notifications",
+							"type": "string",
+							"default_value": "0",
+							"description": "To enable event notification, set event_notifications to 1.",
 							"required": false
 						},
 						{
@@ -3946,6 +4103,58 @@
 							"default_value": "",
 							"description": "The CRN of the Secrets Manager instance. Will apply to CI, CD and CC toolchains unless set individually.",
 							"required": false
+						},
+						{
+							"key": "ci_pipeline_properties",
+							"type": "string",
+							"default_value": "",
+							"description": "Stringified JSON containing the properties for the CI toolchain pipelines.",
+							"display_name": "JSON",
+							"required": false,
+							"custom_config": {
+								"type": "json_editor",
+								"grouping": "deployment",
+								"original_grouping": "deployment"
+							}
+						},
+						{
+							"key": "ci_repository_properties",
+							"type": "string",
+							"default_value": "",
+							"description": "Stringified JSON containing the repositories and triggers that get created in the CI toolchain pipelines.",
+							"display_name": "JSON",
+							"required": false,
+							"custom_config": {
+								"type": "json_editor",
+								"grouping": "deployment",
+								"original_grouping": "deployment"
+							}
+						},
+						{
+							"key": "cd_pipeline_properties",
+							"type": "string",
+							"default_value": "",
+							"description": "Stringified JSON containing the properties for the CI toolchain pipelines.",
+							"display_name": "JSON",
+							"required": false,
+							"custom_config": {
+								"type": "json_editor",
+								"grouping": "deployment",
+								"original_grouping": "deployment"
+							}
+						},
+						{
+							"key": "cc_pipeline_properties",
+							"type": "string",
+							"default_value": "",
+							"description": "Stringified JSON containing the properties for the CI toolchain pipelines.",
+							"display_name": "JSON",
+							"required": false,
+							"custom_config": {
+								"type": "json_editor",
+								"grouping": "deployment",
+								"original_grouping": "deployment"
+							}
 						},
 						{
 							"key": "code_engine_project_prefix",
@@ -5053,6 +5262,48 @@
 							"required": false
 						},
 						{
+							"key": "ci_cra_bom_generate",
+							"type": "string",
+							"default_value": "1",
+							"description": "Set this flag to `1` to generate cra bom in CI pipeline.",
+							"required": false
+						},
+						{
+							"key": "ci_cra_vulnerability_scan",
+							"type": "string",
+							"default_value": "1",
+							"description": "Set this flag to `1` and `ci-cra-bom-generate` to `1` for cra vulnerability scan in CI pipeline. If this value is set to 1 and `ci-cra-bom-generate` is set to `0`, the scan will be marked as `failure`",
+							"required": false
+						},
+						{
+							"key": "ci_cra_deploy_analysis",
+							"type": "string",
+							"default_value": "1",
+							"description": "Set this flag to `1` for cra deployment analysis to be done in CI pipeline.",
+							"required": false
+						},
+						{
+							"key": "pr_cra_bom_generate",
+							"type": "string",
+							"default_value": "1",
+							"description": "Set this flag to `1` to generate cra bom in CI pipeline.",
+							"required": false
+						},
+						{
+							"key": "pr_cra_vulnerability_scan",
+							"type": "string",
+							"default_value": "1",
+							"description": "Set this flag to `1` and `ci-cra-bom-generate` to `1` for cra vulnerability scan in CI pipeline. If this value is set to 1 and `ci-cra-bom-generate` is set to `0`, the scan will be marked as `failure`",
+							"required": false
+						},
+						{
+							"key": "pr_cra_deploy_analysis",
+							"type": "string",
+							"default_value": "1",
+							"description": "Set this flag to `1` for cra deployment analysis to be done in CI pipeline.",
+							"required": false
+						},
+						{
 							"key": "ci_custom_image_tag",
 							"type": "string",
 							"default_value": "",
@@ -5092,6 +5343,20 @@
 							"type": "boolean",
 							"default_value": false,
 							"description": "Set to enable Key Protect Integration. ",
+							"required": false
+						},
+						{
+							"key": "ci_enable_pipeline_notifications",
+							"type": "boolean",
+							"default_value": false,
+							"description": "When enabled, pipeline run events will be sent to the Event Notifications and Slack integrations in the enclosing toolchain.",
+							"required": false
+						},
+						{
+							"key": "ci_event_notifications",
+							"type": "string",
+							"default_value": "0",
+							"description": "To enable event notification, set event_notifications to 1.",
 							"required": false
 						},
 						{
@@ -6131,6 +6396,20 @@
 							"required": false
 						},
 						{
+							"key": "cd_enable_pipeline_notifications",
+							"type": "boolean",
+							"default_value": false,
+							"description": "When enabled, pipeline run events will be sent to the Event Notifications and Slack integrations in the enclosing toolchain.",
+							"required": false
+						},
+						{
+							"key": "cd_event_notifications",
+							"type": "string",
+							"default_value": "0",
+							"description": "To enable event notification, set event_notifications to 1.",
+							"required": false
+						},
+						{
 							"key": "cd_enable_secrets_manager",
 							"type": "boolean",
 							"default_value": false,
@@ -6929,6 +7208,27 @@
 							"required": false
 						},
 						{
+							"key": "cc_cra_bom_generate",
+							"type": "string",
+							"default_value": "1",
+							"description": "Set this flag to `1` to generate cra bom in CI pipeline.",
+							"required": false
+						},
+						{
+							"key": "cc_cra_vulnerability_scan",
+							"type": "string",
+							"default_value": "1",
+							"description": "Set this flag to `1` and `ci-cra-bom-generate` to `1` for cra vulnerability scan in CI pipeline. If this value is set to 1 and `ci-cra-bom-generate` is set to `0`, the scan will be marked as `failure`",
+							"required": false
+						},
+						{
+							"key": "cc_cra_deploy_analysis",
+							"type": "string",
+							"default_value": "1",
+							"description": "Set this flag to `1` for cra deployment analysis to be done in CI pipeline.",
+							"required": false
+						},
+						{
 							"key": "cc_doi_environment",
 							"type": "string",
 							"default_value": "",
@@ -6947,6 +7247,20 @@
 							"type": "boolean",
 							"default_value": false,
 							"description": "Enable the Key Protect integration.",
+							"required": false
+						},
+						{
+							"key": "cc_enable_pipeline_notifications",
+							"type": "boolean",
+							"default_value": false,
+							"description": "When enabled, pipeline run events will be sent to the Event Notifications and Slack integrations in the enclosing toolchain.",
+							"required": false
+						},
+						{
+							"key": "cc_event_notifications",
+							"type": "string",
+							"default_value": "0",
+							"description": "To enable event notification, set event_notifications to 1.",
 							"required": false
 						},
 						{

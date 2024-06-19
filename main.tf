@@ -55,7 +55,7 @@ resource "ibm_resource_instance" "cd_instance" {
 module "devsecops_ci_toolchain" {
   count                    = var.create_ci_toolchain ? 1 : 0
   depends_on               = [ibm_resource_instance.cd_instance]
-  source                   = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-ci-toolchain?ref=v1.3.0"
+  source                   = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-ci-toolchain?ref=v1.4.0"
   ibmcloud_api_key         = var.ibmcloud_api_key
   toolchain_name           = (var.ci_toolchain_name == "") ? format("${var.toolchain_name}%s", "-CI-Toolchain") : var.ci_toolchain_name
   toolchain_region         = (var.ci_toolchain_region == "") ? var.toolchain_region : replace(replace(var.ci_toolchain_region, "ibm:yp:", ""), "ibm:ys1:", "")
@@ -220,6 +220,18 @@ module "devsecops_ci_toolchain" {
   enable_pipeline_dockerconfigjson   = var.ci_enable_pipeline_dockerconfigjson
   peer_review_compliance             = (var.ci_peer_review_compliance == "") ? var.peer_review_compliance : var.ci_peer_review_compliance
   print_code_signing_certificate     = var.ci_print_code_signing_certificate
+  pr_cra_bom_generate                = var.pr_cra_bom_generate
+  pr_cra_vulnerability_scan          = var.pr_cra_vulnerability_scan
+  pr_cra_deploy_analysis             = var.pr_cra_deploy_analysis
+  ci_cra_bom_generate                = var.ci_cra_bom_generate
+  ci_cra_vulnerability_scan          = var.ci_cra_vulnerability_scan
+  ci_cra_deploy_analysis             = var.ci_cra_deploy_analysis
+  enable_pipeline_notifications      = var.ci_enable_pipeline_notifications
+  event_notifications                = var.ci_event_notifications
+  pipeline_properties                = var.ci_pipeline_properties
+  pipeline_properties_filepath       = var.ci_pipeline_properties_filepath
+  repository_properties              = var.ci_repository_properties
+  repository_properties_filepath     = var.ci_repository_properties_filepath
 
   #CODE ENGINE
   code_engine_project         = var.ci_code_engine_project
@@ -289,7 +301,7 @@ module "devsecops_ci_toolchain" {
 module "devsecops_cd_toolchain" {
   count            = var.create_cd_toolchain ? 1 : 0
   depends_on       = [ibm_resource_instance.cd_instance]
-  source           = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain?ref=v1.3.0"
+  source           = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain?ref=v1.4.0"
   ibmcloud_api_key = var.ibmcloud_api_key
 
   toolchain_name           = (var.cd_toolchain_name == "") ? format("${var.toolchain_name}%s", "-CD-Toolchain") : var.cd_toolchain_name
@@ -465,6 +477,14 @@ module "devsecops_cd_toolchain" {
   scc_profile_name              = var.scc_profile_name
   scc_profile_version           = var.scc_profile_version
   scc_use_profile_attachment    = (var.cd_scc_use_profile_attachment == "") ? var.scc_use_profile_attachment : var.cd_scc_use_profile_attachment
+  enable_pipeline_notifications = var.cd_enable_pipeline_notifications
+  event_notifications           = var.cd_event_notifications
+  pipeline_properties           = var.cd_pipeline_properties
+  pipeline_properties_filepath  = var.cd_pipeline_properties_filepath
+  pre_prod_evidence_collection  = var.cd_pre_prod_evidence_collection
+
+  repository_properties          = var.cd_repository_properties
+  repository_properties_filepath = var.cd_repository_properties_filepath
 
   #SLACK INTEGRATION
   enable_slack           = (local.use_slack_enable_override) ? local.enable_slack : var.cd_enable_slack
@@ -512,7 +532,7 @@ module "devsecops_cd_toolchain" {
 module "devsecops_cc_toolchain" {
   count                         = var.create_cc_toolchain ? 1 : 0
   depends_on                    = [ibm_resource_instance.cd_instance]
-  source                        = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cc-toolchain?ref=v1.3.0"
+  source                        = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cc-toolchain?ref=v1.4.0"
   ibmcloud_api_key              = var.ibmcloud_api_key
   toolchain_name                = (var.cc_toolchain_name == "") ? format("${var.toolchain_name}%s", "-CC-Toolchain") : var.cc_toolchain_name
   toolchain_description         = var.cc_toolchain_description
@@ -669,6 +689,16 @@ module "devsecops_cc_toolchain" {
   scc_profile_name                 = var.scc_profile_name
   scc_profile_version              = var.scc_profile_version
   scc_use_profile_attachment       = (var.cc_scc_use_profile_attachment == "") ? var.scc_use_profile_attachment : var.cc_scc_use_profile_attachment
+  enable_pipeline_notifications    = var.cc_enable_pipeline_notifications
+  event_notifications              = var.cc_event_notifications
+  cra_bom_generate                 = var.cc_cra_bom_generate
+  cra_vulnerability_scan           = var.cc_cra_vulnerability_scan
+  cra_deploy_analysis              = var.cc_cra_deploy_analysis
+  pipeline_properties              = var.cc_pipeline_properties
+  pipeline_properties_filepath     = var.cc_pipeline_properties_filepath
+  repository_properties            = var.cc_repository_properties
+  repository_properties_filepath   = var.cc_repository_properties_filepath
+
 
   #SLACK INTEGRATION
   enable_slack           = (local.use_slack_enable_override) ? local.enable_slack : var.cc_enable_slack
