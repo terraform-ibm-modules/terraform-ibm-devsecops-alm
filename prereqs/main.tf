@@ -43,7 +43,7 @@ data "external" "signing_keys" {
 ####### SECRETS MANAGER #####################
 
 data "ibm_resource_instance" "sm_instance" {
-  count             = (var.sm_name != "") ? 1 : 0
+  count             = ((var.sm_name != "") && (var.sm_exists == true)) ? 1 : 0
   name              = var.sm_name
   location          = var.sm_location
   resource_group_id = var.resource_group_id

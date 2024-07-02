@@ -337,14 +337,14 @@
 							"key": "create_signing_key",
 							"type": "boolean",
 							"default_value": false,
-							"description": "Set to `true` to create and add a `signing_key`to the Secrets Provider.",
+							"description": "Experimental. Set to `true` to create and add a `signing_key`to the Secrets Provider.",
 							"required": false
 						},
 						{
 							"key": "create_signing_certificate",
 							"type": "boolean",
 							"default_value": false,
-							"description": "Set to `true` to create and add the `signing-certificate` to the Secrets Provider.",
+							"description": "Experimental. Set to `true` to create and add the `signing-certificate` to the Secrets Provider.",
 							"required": false
 						},
 						{
@@ -4643,14 +4643,14 @@
 							"key": "create_signing_key",
 							"type": "boolean",
 							"default_value": false,
-							"description": "Set to `true` to create and add a `signing_key`to the Secrets Provider.",
+							"description": "Experimental. Set to `true` to create and add a `signing_key`to the Secrets Provider.",
 							"required": false
 						},
 						{
 							"key": "create_signing_certificate",
 							"type": "boolean",
 							"default_value": false,
-							"description": "Set to `true` to create and add the `signing-certificate` to the Secrets Provider.",
+							"description": "Experimental. Set to `true` to create and add the `signing-certificate` to the Secrets Provider.",
 							"required": false
 						},
 						{
@@ -4679,41 +4679,6 @@
 							"type": "string",
 							"default_value": "",
 							"description": "Set the Cloud Object Storage endpoint for accessing your COS bucket. This setting sets the same endpoint for COS in the CI, CD, and CC toolchains. See `ci_cos_endpoint`, `cd_cos_endpoint`, and `cc_cos_endpoint` to set the endpoints separately.",
-							"required": false
-						},
-						{
-							"key": "create_ibmcloud_api_key",
-							"type": "boolean",
-							"default_value": false,
-							"description": "Set to `true` to create and add an `ibmcloud-api-key` to the Secrets Provider.",
-							"required": false
-						},
-						{
-							"key": "create_cos_api_key",
-							"type": "boolean",
-							"default_value": false,
-							"description": "Set to `true` to create and add a `cos-api-key` to the Secrets Provider.",
-							"required": false
-						},
-						{
-							"key": "create_signing_key",
-							"type": "boolean",
-							"default_value": false,
-							"description": "Set to `true` to create and add a `signing_key`to the Secrets Provider.",
-							"required": false
-						},
-						{
-							"key": "create_signing_certificate",
-							"type": "boolean",
-							"default_value": false,
-							"description": "Set to `true` to create and add the `signing-certificate` to the Secrets Provider.",
-							"required": false
-						},
-						{
-							"key": "create_sm_secret_group",
-							"type": "boolean",
-							"default_value": false,
-							"description": "Set to `true` to create a secrets group in Secrets Manager.",
 							"required": false
 						},
 						{

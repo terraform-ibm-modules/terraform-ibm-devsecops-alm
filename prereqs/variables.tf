@@ -24,19 +24,25 @@ variable "create_cos_api_key" {
 
 variable "create_signing_key" {
   type        = bool
-  description = "Set to `true` to create and add a `signing_key`to the Secrets Provider."
+  description = "Experimental. Set to `true` to create and add a `signing_key`to the Secrets Provider."
   default     = false
 }
 
 variable "create_signing_certificate" {
   type        = bool
-  description = "Set to `true` to create and add the `signing-certificate` to the Secrets Provider."
+  description = "Experimental. Set to `true` to create and add the `signing-certificate` to the Secrets Provider."
   default     = false
 }
 
 variable "create_sm_secret_group" {
   type        = bool
   description = "Set to `true` to create a secrets group in Secrets Manager."
+  default     = false
+}
+
+variable "sm_exists" {
+  description = "Only connect to the Secrets Manager instance if it has been enabled for the toolchain."
+  type        = bool
   default     = false
 }
 
