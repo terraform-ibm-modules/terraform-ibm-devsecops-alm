@@ -57,7 +57,7 @@ statement instead the previous block.
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0.0 |
-| <a name="requirement_ibm"></a> [ibm](#requirement\_ibm) | >=1.60.0 |
+| <a name="requirement_ibm"></a> [ibm](#requirement\_ibm) | >=1.65.0 |
 | <a name="requirement_null"></a> [null](#requirement\_null) | >= 3.2.2 |
 | <a name="requirement_random"></a> [random](#requirement\_random) | >= 3.6.2 |
 
@@ -68,6 +68,7 @@ statement instead the previous block.
 | <a name="module_devsecops_cc_toolchain"></a> [devsecops\_cc\_toolchain](#module\_devsecops\_cc\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cc-toolchain | v1.4.0 |
 | <a name="module_devsecops_cd_toolchain"></a> [devsecops\_cd\_toolchain](#module\_devsecops\_cd\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain | v1.4.0 |
 | <a name="module_devsecops_ci_toolchain"></a> [devsecops\_ci\_toolchain](#module\_devsecops\_ci\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-ci-toolchain | v1.4.0 |
+| <a name="module_prereqs"></a> [prereqs](#module\_prereqs) | ./prereqs | n/a |
 
 ### Resources
 
@@ -89,6 +90,7 @@ statement instead the previous block.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_add_container_name_suffix"></a> [add\_container\_name\_suffix](#input\_add\_container\_name\_suffix) | Set to `true` to add a random suffix to the specified ICR name. | `bool` | `false` | no |
 | <a name="input_authorization_policy_creation"></a> [authorization\_policy\_creation](#input\_authorization\_policy\_creation) | Disable Toolchain Service to Secrets Manager Service authorization policy creation. To disable set the value to `disabled`. This applies to the CI, CD, and CC toolchains. To set separately, see `ci_authorization_policy_creation`, `cd_authorization_policy_creation`, and `cc_authorization_policy_creation`. | `string` | `""` | no |
 | <a name="input_autostart"></a> [autostart](#input\_autostart) | Set to `true` to auto run the CI pipeline in the CI toolchain after creation. | `bool` | `false` | no |
 | <a name="input_cc_app_group"></a> [cc\_app\_group](#input\_cc\_app\_group) | Specify user or group for app repo. | `string` | `""` | no |
@@ -485,7 +487,6 @@ statement instead the previous block.
 | <a name="input_ci_pipeline_properties_filepath"></a> [ci\_pipeline\_properties\_filepath](#input\_ci\_pipeline\_properties\_filepath) | The path to the file containing the property JSON. If this is not set, it will by default read the `properties.json` file at the root of the module. | `string` | `""` | no |
 | <a name="input_ci_print_code_signing_certificate"></a> [ci\_print\_code\_signing\_certificate](#input\_ci\_print\_code\_signing\_certificate) | Set to `1` to enable printing of the public signing certificate in the logs. | `string` | `"1"` | no |
 | <a name="input_ci_privateworker_credentials_secret_crn"></a> [ci\_privateworker\_credentials\_secret\_crn](#input\_ci\_privateworker\_credentials\_secret\_crn) | The CRN for the Private Worker secret secret. | `string` | `""` | no |
-| <a name="input_ci_registry_namespace"></a> [ci\_registry\_namespace](#input\_ci\_registry\_namespace) | A unique namespace within the IBM Cloud Container Registry region where the application image is stored. (deprecated. Use `registry_namespace`) | `string` | `""` | no |
 | <a name="input_ci_registry_region"></a> [ci\_registry\_region](#input\_ci\_registry\_region) | The IBM Cloud Region where the IBM Cloud Container Registry namespace is to be created. Use the short form of the regions. For example `us-south`. | `string` | `""` | no |
 | <a name="input_ci_repositories_prefix"></a> [ci\_repositories\_prefix](#input\_ci\_repositories\_prefix) | Prefix name for the cloned compliance repos. For the repositories\_prefix value only a-z, A-Z and 0-9 and the special characters `-_` are allowed. In addition the string must not end with a special character or have two consecutive special characters. | `string` | `""` | no |
 | <a name="input_ci_repository_properties"></a> [ci\_repository\_properties](#input\_ci\_repository\_properties) | Stringified JSON containing the repositories and triggers that get created in the CI toolchain pipelines. | `string` | `""` | no |
@@ -544,6 +545,11 @@ statement instead the previous block.
 | <a name="input_create_cd_instance"></a> [create\_cd\_instance](#input\_create\_cd\_instance) | Set to `true` to create Continuous Delivery Service. | `bool` | `false` | no |
 | <a name="input_create_cd_toolchain"></a> [create\_cd\_toolchain](#input\_create\_cd\_toolchain) | Boolean flag which determines if the DevSecOps CD toolchain is created. | `bool` | `true` | no |
 | <a name="input_create_ci_toolchain"></a> [create\_ci\_toolchain](#input\_create\_ci\_toolchain) | Flag which determines if the DevSecOps CI toolchain is created. If this toolchain is not created then values must be set for the following variables, evidence\_repo\_url, issues\_repo\_url and inventory\_repo\_url. | `bool` | `true` | no |
+| <a name="input_create_cos_api_key"></a> [create\_cos\_api\_key](#input\_create\_cos\_api\_key) | Set to `true` to create and add a `cos-api-key` to the Secrets Provider. | `bool` | `false` | no |
+| <a name="input_create_ibmcloud_api_key"></a> [create\_ibmcloud\_api\_key](#input\_create\_ibmcloud\_api\_key) | Set to `true` to create and add an `ibmcloud-api-key` to the Secrets Provider. | `bool` | `false` | no |
+| <a name="input_create_signing_certificate"></a> [create\_signing\_certificate](#input\_create\_signing\_certificate) | Set to `true` to create and add the `signing-certificate` to the Secrets Provider. | `bool` | `false` | no |
+| <a name="input_create_signing_key"></a> [create\_signing\_key](#input\_create\_signing\_key) | Set to `true` to create and add a `signing_key`to the Secrets Provider. | `bool` | `false` | no |
+| <a name="input_create_sm_secret_group"></a> [create\_sm\_secret\_group](#input\_create\_sm\_secret\_group) | Set to `true` to create a secrets group in Secrets Manager. | `bool` | `false` | no |
 | <a name="input_deployment_repo_url"></a> [deployment\_repo\_url](#input\_deployment\_repo\_url) | This is the repository to clone deployment for DevSecOps toolchain template. | `string` | `""` | no |
 | <a name="input_enable_key_protect"></a> [enable\_key\_protect](#input\_enable\_key\_protect) | Set to enable Key Protect Integrations. | `bool` | `false` | no |
 | <a name="input_enable_secrets_manager"></a> [enable\_secrets\_manager](#input\_enable\_secrets\_manager) | Enable the Secrets Manager integrations. | `bool` | `true` | no |
@@ -619,6 +625,7 @@ statement instead the previous block.
 | <a name="input_sm_secret_group"></a> [sm\_secret\_group](#input\_sm\_secret\_group) | Group in Secrets Manager for organizing/grouping secrets. This applies to the CI, CD and CC Secret Manager integrations. See `ci_sm_secret_group`, `cd_sm_secret_group`, and `cc_sm_secret_group` to set separately. | `string` | `"Default"` | no |
 | <a name="input_sonarqube_secret_crn"></a> [sonarqube\_secret\_crn](#input\_sonarqube\_secret\_crn) | The CRN for the SonarQube secret. | `string` | `""` | no |
 | <a name="input_toolchain_name"></a> [toolchain\_name](#input\_toolchain\_name) | Common element of the toolchain name. The toolchain names will be appended with `CI Toolchain` or `CD Toolchain` or `CC Toolchain` followed by a timestamp. Can explicitly be set using `ci_toolchain_name`, `cd_toolchain_name`, and `cc_toolchain_name`. | `string` | `"DevSecOps"` | no |
+| <a name="input_toolchain_name_prefix"></a> [toolchain\_name\_prefix](#input\_toolchain\_name\_prefix) | A prefix that is added to the toolchain names. | `string` | `""` | no |
 | <a name="input_toolchain_region"></a> [toolchain\_region](#input\_toolchain\_region) | The region identifier that will be used, by default, for all resource creation and service instance lookup. This can be overridden on a per resource/service basis. See `ci_toolchain_region`,`cd_toolchain_region`,`cc_toolchain_region`, `ci_cluster_region`, `cd_cluster_region`, `ci_registry_region`. | `string` | `"us-south"` | no |
 | <a name="input_toolchain_resource_group"></a> [toolchain\_resource\_group](#input\_toolchain\_resource\_group) | The resource group that will be used, by default, for all resource creation and service instance lookups. This can be overridden on a per resource/service basis. See `ci_toolchain_resource_group`,`cd_toolchain_resource_group`,`cc_toolchain_resource_group`, `ci_cluster_resource_group`. | `string` | `"Default"` | no |
 

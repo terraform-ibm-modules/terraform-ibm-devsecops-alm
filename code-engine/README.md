@@ -34,7 +34,7 @@ statement instead the previous block.
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0.0, <1.7.0 |
-| <a name="requirement_ibm"></a> [ibm](#requirement\_ibm) | >=1.60.0 |
+| <a name="requirement_ibm"></a> [ibm](#requirement\_ibm) | >=1.65.0 |
 | <a name="requirement_null"></a> [null](#requirement\_null) | >= 3.2.2 |
 | <a name="requirement_random"></a> [random](#requirement\_random) | >= 3.6.2 |
 
@@ -42,9 +42,10 @@ statement instead the previous block.
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_devsecops_cc_toolchain"></a> [devsecops\_cc\_toolchain](#module\_devsecops\_cc\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cc-toolchain | v1.2.0 |
-| <a name="module_devsecops_cd_toolchain"></a> [devsecops\_cd\_toolchain](#module\_devsecops\_cd\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain | v1.2.1 |
-| <a name="module_devsecops_ci_toolchain"></a> [devsecops\_ci\_toolchain](#module\_devsecops\_ci\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-ci-toolchain | v1.2.0 |
+| <a name="module_devsecops_cc_toolchain"></a> [devsecops\_cc\_toolchain](#module\_devsecops\_cc\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cc-toolchain | v1.4.0 |
+| <a name="module_devsecops_cd_toolchain"></a> [devsecops\_cd\_toolchain](#module\_devsecops\_cd\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain | v1.4.0 |
+| <a name="module_devsecops_ci_toolchain"></a> [devsecops\_ci\_toolchain](#module\_devsecops\_ci\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-ci-toolchain | v1.4.0 |
+| <a name="module_prereqs"></a> [prereqs](#module\_prereqs) | ./prereqs | n/a |
 
 ### Resources
 
@@ -62,6 +63,7 @@ statement instead the previous block.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_add_container_name_suffix"></a> [add\_container\_name\_suffix](#input\_add\_container\_name\_suffix) | Set to `true` to add a random suffix to the specified ICR name. | `bool` | `false` | no |
 | <a name="input_authorization_policy_creation"></a> [authorization\_policy\_creation](#input\_authorization\_policy\_creation) | Disable Toolchain Service to Secrets Manager Service authorization policy creation. To disable set the value to `disabled`. This applies to the CI, CD, and CC toolchains. To set separately, see `ci_authorization_policy_creation`, `cd_authorization_policy_creation`, and `cc_authorization_policy_creation`. | `string` | `""` | no |
 | <a name="input_autostart"></a> [autostart](#input\_autostart) | Set to `true` to auto run the CI pipeline in the CI toolchain after creation. | `bool` | `false` | no |
 | <a name="input_cc_app_group"></a> [cc\_app\_group](#input\_cc\_app\_group) | Specify user or group for app repo. | `string` | `""` | no |
@@ -550,6 +552,11 @@ statement instead the previous block.
 | <a name="input_create_cc_toolchain"></a> [create\_cc\_toolchain](#input\_create\_cc\_toolchain) | Boolean flag which determines if the DevSecOps CC toolchain is created. | `bool` | `true` | no |
 | <a name="input_create_cd_toolchain"></a> [create\_cd\_toolchain](#input\_create\_cd\_toolchain) | Boolean flag which determines if the DevSecOps CD toolchain is created. | `bool` | `true` | no |
 | <a name="input_create_ci_toolchain"></a> [create\_ci\_toolchain](#input\_create\_ci\_toolchain) | Flag which determines if the DevSecOps CI toolchain is created. If this toolchain is not created then values must be set for the following variables, evidence\_repo\_url, issues\_repo\_url and inventory\_repo\_url. | `bool` | `true` | no |
+| <a name="input_create_cos_api_key"></a> [create\_cos\_api\_key](#input\_create\_cos\_api\_key) | Set to `true` to create and add a `cos-api-key` to the Secrets Provider. | `bool` | `false` | no |
+| <a name="input_create_ibmcloud_api_key"></a> [create\_ibmcloud\_api\_key](#input\_create\_ibmcloud\_api\_key) | Set to `true` to create and add an `ibmcloud-api-key` to the Secrets Provider. | `bool` | `false` | no |
+| <a name="input_create_signing_certificate"></a> [create\_signing\_certificate](#input\_create\_signing\_certificate) | Set to `true` to create and add the `signing-certificate` to the Secrets Provider. | `bool` | `false` | no |
+| <a name="input_create_signing_key"></a> [create\_signing\_key](#input\_create\_signing\_key) | Set to `true` to create and add a `signing_key`to the Secrets Provider. | `bool` | `false` | no |
+| <a name="input_create_sm_secret_group"></a> [create\_sm\_secret\_group](#input\_create\_sm\_secret\_group) | Set to `true` to create a secrets group in Secrets Manager. | `bool` | `false` | no |
 | <a name="input_deployment_repo_url"></a> [deployment\_repo\_url](#input\_deployment\_repo\_url) | This is the repository to clone deployment for DevSecOps toolchain template. | `string` | `""` | no |
 | <a name="input_deployment_target"></a> [deployment\_target](#input\_deployment\_target) | The deployment target, 'cluster' or 'code-engine'. Applies to both the CI and CD toolchains. To set individually use  `ci_deployment_target` and `cd_deployment_target`. | `string` | `"code-engine"` | no |
 | <a name="input_enable_key_protect"></a> [enable\_key\_protect](#input\_enable\_key\_protect) | Set to enable Key Protect Integrations. | `bool` | `false` | no |
@@ -627,6 +634,7 @@ statement instead the previous block.
 | <a name="input_sm_secret_group"></a> [sm\_secret\_group](#input\_sm\_secret\_group) | Group in Secrets Manager for organizing/grouping secrets. This applies to the CI, CD and CC Secret Manager integrations. See `ci_sm_secret_group`, `cd_sm_secret_group`, and `cc_sm_secret_group` to set separately. | `string` | `"Default"` | no |
 | <a name="input_sonarqube_secret_crn"></a> [sonarqube\_secret\_crn](#input\_sonarqube\_secret\_crn) | The CRN for the SonarQube secret. | `string` | `""` | no |
 | <a name="input_toolchain_name"></a> [toolchain\_name](#input\_toolchain\_name) | Common element of the toolchain name. The toolchain names will be appended with `CI Toolchain` or `CD Toolchain` or `CC Toolchain` followed by a timestamp. Can explicitly be set using `ci_toolchain_name`, `cd_toolchain_name`, and `cc_toolchain_name`. | `string` | `"DevSecOps"` | no |
+| <a name="input_toolchain_name_prefix"></a> [toolchain\_name\_prefix](#input\_toolchain\_name\_prefix) | A prefix that is added to the toolchain names. | `string` | `""` | no |
 | <a name="input_toolchain_region"></a> [toolchain\_region](#input\_toolchain\_region) | The region identifier that will be used, by default, for all resource creation and service instance lookup. This can be overridden on a per resource/service basis. See `ci_toolchain_region`,`cd_toolchain_region`,`cc_toolchain_region`, `ci_registry_region`. | `string` | `"us-south"` | no |
 | <a name="input_toolchain_resource_group"></a> [toolchain\_resource\_group](#input\_toolchain\_resource\_group) | The resource group that will be used, by default, for all resource creation and service instance lookups. This can be overridden on a per resource/service basis. See `ci_toolchain_resource_group`,`cd_toolchain_resource_group`,`cc_toolchain_resource_group`. | `string` | `"Default"` | no |
 

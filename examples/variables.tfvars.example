@@ -18,14 +18,10 @@ cd_toolchain_resource_group = "Default"
 cc_toolchain_resource_group = "Default"
 
 #Set the Container Registry Namespaces
-ci_registry_namespace          = "my-namespace"
-cd_registry_namespace          = "my-namespace"
-cc_registry_namespace          = "my-namespace"
+registry_namespace          = "my-namespace"
 
 #Set the Container Registry Regions
-ci_registry_region                 = "ibm:yp:us-south"
-cd_registry_region                 = "ibm:yp:us-south"
-cc_registry_region                 = "ibm:yp:us-south"
+registry_region                 = "ibm:yp:us-south"
 
 #Set the Cluster for CI and CD
 ci_cluster_name                    = "mycluster-free"
