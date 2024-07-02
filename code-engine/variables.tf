@@ -395,6 +395,12 @@ variable "repo_secret_group" {
   default     = ""
 }
 
+variable "toolchain_name_prefix" {
+  type        = string
+  description = "A prefix that is added to the toolchain names."
+  default     = ""
+}
+
 variable "toolchain_name" {
   type        = string
   description = "Common element of the toolchain name. The toolchain names will be appended with `CI Toolchain` or `CD Toolchain` or `CC Toolchain` followed by a timestamp. Can explicitly be set using `ci_toolchain_name`, `cd_toolchain_name`, and `cc_toolchain_name`."
@@ -547,12 +553,6 @@ variable "deployment_target" {
   default     = "code-engine"
 }
 
-variable "add_container_name_suffix" {
-  type        = bool
-  description = "Set to `true` to add a 4 character random suffix to `registry_namespace`."
-  default     = false
-}
-
 ######## Code Engine Vars #####################
 variable "code_engine_project" {
   type        = string
@@ -608,12 +608,6 @@ variable "ci_app_name" {
 variable "registry_namespace" {
   type        = string
   description = "A unique namespace within the IBM Cloud Container Registry region where the application image is stored."
-  default     = ""
-}
-
-variable "ci_registry_namespace" {
-  type        = string
-  description = "A unique namespace within the IBM Cloud Container Registry region where the application image is stored. (deprecated. Use `registry_namespace`)"
   default     = ""
 }
 
@@ -3911,4 +3905,42 @@ variable "cd_service_plan" {
   type        = string
   description = "The Continuous Delivery service plan. Can be `lite` or `professional`."
   default     = "professional"
+}
+
+###### PRE REQS #########################
+
+variable "create_sm_secret_group" {
+  type        = bool
+  description = "Set to `true` to create a secrets group in Secrets Manager."
+  default     = false
+}
+
+variable "create_ibmcloud_api_key" {
+  type        = bool
+  description = "Set to `true` to create and add an `ibmcloud-api-key` to the Secrets Provider."
+  default     = false
+}
+
+variable "create_cos_api_key" {
+  type        = bool
+  description = "Set to `true` to create and add a `cos-api-key` to the Secrets Provider."
+  default     = false
+}
+
+variable "create_signing_key" {
+  type        = bool
+  description = "Set to `true` to create and add a `signing_key`to the Secrets Provider."
+  default     = false
+}
+
+variable "create_signing_certificate" {
+  type        = bool
+  description = "Set to `true` to create and add the `signing-certificate` to the Secrets Provider."
+  default     = false
+}
+
+variable "add_container_name_suffix" {
+  type        = bool
+  description = "Set to `true` to add a random suffix to the specified ICR name."
+  default     = false
 }

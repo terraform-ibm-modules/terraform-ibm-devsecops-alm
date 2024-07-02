@@ -285,6 +285,76 @@
 							"required": false
 						},
 						{
+							"key": "add_container_name_suffix",
+							"type": "boolean",
+							"default_value": false,
+							"description": "Set to `true` to add a random suffix to the specified ICR name.",
+							"required": false
+						},
+						{
+							"key": "toolchain_name_prefix",
+							"type": "string",
+							"default_value": "",
+							"description": "A prefix that is added to the toolchain names.",
+							"required": false
+						},
+						{
+							"key": "create_ibmcloud_api_key",
+							"type": "boolean",
+							"default_value": false,
+							"description": "Set to `true` to create and add an `ibmcloud-api-key` to the Secrets Provider.",
+							"required": false
+						},
+						{
+							"key": "create_cos_api_key",
+							"type": "boolean",
+							"default_value": false,
+							"description": "Set to `true` to create and add a `cos-api-key` to the Secrets Provider.",
+							"required": false
+						},
+						{
+							"key": "create_cd_instance",
+							"type": "boolean",
+							"default_value": false,
+							"description": "Set to `true` to create Continuous Delivery Service. ",
+							"required": false
+						},
+						{
+							"key": "cd_instance_name",
+							"type": "string",
+							"default_value": "cd-devsecops",
+							"description": "The name of the CD instance.",
+							"required": false
+						},
+						{
+							"key": "cd_service_plan",
+							"type": "string",
+							"default_value": "professional",
+							"description": "The Continuous Delivery service plan. Can be `lite` or `professional`.",
+							"required": false
+						},
+						{
+							"key": "create_signing_key",
+							"type": "boolean",
+							"default_value": false,
+							"description": "Experimental. Set to `true` to create and add a `signing_key`to the Secrets Provider.",
+							"required": false
+						},
+						{
+							"key": "create_signing_certificate",
+							"type": "boolean",
+							"default_value": false,
+							"description": "Experimental. Set to `true` to create and add the `signing-certificate` to the Secrets Provider.",
+							"required": false
+						},
+						{
+							"key": "create_sm_secret_group",
+							"type": "boolean",
+							"default_value": false,
+							"description": "Set to `true` to create a secrets group in Secrets Manager.",
+							"required": false
+						},
+						{
 							"key": "pipeline_ibmcloud_api_key_secret_name",
 							"type": "string",
 							"default_value": "ibmcloud-api-key",
@@ -1611,13 +1681,6 @@
 							"type": "string",
 							"default_value": "",
 							"description": "The CRN for the GoSec repository secret.",
-							"required": false
-						},
-						{
-							"key": "ci_registry_namespace",
-							"type": "string",
-							"default_value": "",
-							"description": "A unique namespace within the IBM Cloud Container Registry region where the application image is stored. (deprecated. Use `registry_namespace`)",
 							"required": false
 						},
 						{
@@ -3803,27 +3866,6 @@
 							"default_value": "ibm:yp:",
 							"description": "By default `ibm:yp:`. This will be set as the prefix to regions automatically where required. For example `ibm:yp:us-south`.",
 							"required": false
-						},
-						{
-							"key": "create_cd_instance",
-							"type": "boolean",
-							"default_value": false,
-							"description": "Set to `true` to create Continuous Delivery Service. ",
-							"required": false
-						},
-						{
-							"key": "cd_instance_name",
-							"type": "string",
-							"default_value": "cd-devsecops",
-							"description": "The name of the CD instance.",
-							"required": false
-						},
-						{
-							"key": "cd_service_plan",
-							"type": "string",
-							"default_value": "professional",
-							"description": "The Continuous Delivery service plan. Can be `lite` or `professional`.",
-							"required": false
 						}
 					],
 					"outputs": [
@@ -4549,24 +4591,31 @@
 							"required": false
 						},
 						{
-							"key": "cos_api_key_secret_name",
-							"type": "string",
-							"default_value": "cos-api-key",
-							"description": "To enable the use of COS, a secret name to a COS API key secret in the secret provider is required. In addition `cos_endpoint` and `cos_bucket_name` must be set. This setting sets the same API key for the COS settings in the CI, CD, and CC toolchains. See `ci_cos_api_key_secret_name`, `cd_cos_api_key_secret_name`, and `cc_cos_api_key_secret_name` to set separately.",
+							"key": "add_container_name_suffix",
+							"type": "boolean",
+							"default_value": false,
+							"description": "Set to `true` to add a random suffix to the specified ICR name.",
 							"required": false
 						},
 						{
-							"key": "cos_bucket_name",
+							"key": "toolchain_name_prefix",
 							"type": "string",
 							"default_value": "",
-							"description": "Set the name of your COS bucket. This applies the same COS bucket name for the CI, CD, and CC toolchains. See `ci_cos_bucket_name`, `cd_cos_bucket_name`, and `cc_cos_bucket_name` to set separately.",
+							"description": "A prefix that is added to the toolchain names.",
 							"required": false
 						},
 						{
-							"key": "cos_endpoint",
-							"type": "string",
-							"default_value": "",
-							"description": "Set the Cloud Object Storage endpoint for accessing your COS bucket. This setting sets the same endpoint for COS in the CI, CD, and CC toolchains. See `ci_cos_endpoint`, `cd_cos_endpoint`, and `cc_cos_endpoint` to set the endpoints separately.",
+							"key": "create_ibmcloud_api_key",
+							"type": "boolean",
+							"default_value": false,
+							"description": "Set to `true` to create and add an `ibmcloud-api-key` to the Secrets Provider.",
+							"required": false
+						},
+						{
+							"key": "create_cos_api_key",
+							"type": "boolean",
+							"default_value": false,
+							"description": "Set to `true` to create and add a `cos-api-key` to the Secrets Provider.",
 							"required": false
 						},
 						{
@@ -4588,6 +4637,48 @@
 							"type": "string",
 							"default_value": "professional",
 							"description": "The Continuous Delivery service plan. Can be `lite` or `professional`.",
+							"required": false
+						},
+						{
+							"key": "create_signing_key",
+							"type": "boolean",
+							"default_value": false,
+							"description": "Experimental. Set to `true` to create and add a `signing_key`to the Secrets Provider.",
+							"required": false
+						},
+						{
+							"key": "create_signing_certificate",
+							"type": "boolean",
+							"default_value": false,
+							"description": "Experimental. Set to `true` to create and add the `signing-certificate` to the Secrets Provider.",
+							"required": false
+						},
+						{
+							"key": "create_sm_secret_group",
+							"type": "boolean",
+							"default_value": false,
+							"description": "Set to `true` to create a secrets group in Secrets Manager.",
+							"required": false
+						},
+						{
+							"key": "cos_api_key_secret_name",
+							"type": "string",
+							"default_value": "cos-api-key",
+							"description": "To enable the use of COS, a secret name to a COS API key secret in the secret provider is required. In addition `cos_endpoint` and `cos_bucket_name` must be set. This setting sets the same API key for the COS settings in the CI, CD, and CC toolchains. See `ci_cos_api_key_secret_name`, `cd_cos_api_key_secret_name`, and `cc_cos_api_key_secret_name` to set separately.",
+							"required": false
+						},
+						{
+							"key": "cos_bucket_name",
+							"type": "string",
+							"default_value": "",
+							"description": "Set the name of your COS bucket. This applies the same COS bucket name for the CI, CD, and CC toolchains. See `ci_cos_bucket_name`, `cd_cos_bucket_name`, and `cc_cos_bucket_name` to set separately.",
+							"required": false
+						},
+						{
+							"key": "cos_endpoint",
+							"type": "string",
+							"default_value": "",
+							"description": "Set the Cloud Object Storage endpoint for accessing your COS bucket. This setting sets the same endpoint for COS in the CI, CD, and CC toolchains. See `ci_cos_endpoint`, `cd_cos_endpoint`, and `cc_cos_endpoint` to set the endpoints separately.",
 							"required": false
 						},
 						{
@@ -4623,13 +4714,6 @@
 							"type": "string",
 							"default_value": "",
 							"description": "The CRN for the IBMCloud apikey. Applies to the CI, CD and CC toolchains. Can be set independently using the toolchain specific version of the variable.",
-							"required": false
-						},
-						{
-							"key": "add_container_name_suffix",
-							"type": "boolean",
-							"default_value": false,
-							"description": "Set to `true` to add a 4 character random suffix to `registry_namespace`.",
 							"required": false
 						},
 						{
@@ -5819,13 +5903,6 @@
 							"type": "string",
 							"default_value": "",
 							"description": "Name of the Cloud API key secret in the secret provider to access the toolchain containing the Devops Insights instance.",
-							"required": false
-						},
-						{
-							"key": "ci_registry_namespace",
-							"type": "string",
-							"default_value": "",
-							"description": "A unique namespace within the IBM Cloud Container Registry region where the application image is stored. (deprecated. Use `registry_namespace`)",
 							"required": false
 						},
 						{
