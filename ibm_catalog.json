@@ -306,6 +306,13 @@
 							"required": false
 						},
 						{
+							"key": "create_icr_namespace",
+							"type": "boolean",
+							"default_value": false,
+							"description": "Set to `true` to create the namespace.",
+							"required": false
+						},
+						{
 							"key": "create_cos_api_key",
 							"type": "boolean",
 							"default_value": false,
@@ -4609,6 +4616,13 @@
 							"type": "boolean",
 							"default_value": false,
 							"description": "Set to `true` to create and add an `ibmcloud-api-key` to the Secrets Provider.",
+							"required": false
+						},
+						{
+							"key": "create_icr_namespace",
+							"type": "boolean",
+							"default_value": false,
+							"description": "Set to `true` to create the namespace.",
 							"required": false
 						},
 						{

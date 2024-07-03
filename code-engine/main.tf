@@ -76,9 +76,9 @@ resource "ibm_resource_instance" "cd_instance" {
 }
 
 module "prereqs" {
-  source     = "../prereqs"
-  depends_on = [data.ibm_resource_group.resource_group]
-  #region                         = var.toolchain_region
+  source                         = "../prereqs"
+  depends_on                     = [data.ibm_resource_group.resource_group]
+  create_icr_namespace           = var.create_icr_namespace
   create_sm_secret_group         = var.create_sm_secret_group
   create_ibmcloud_api_key        = var.create_ibmcloud_api_key
   create_cos_api_key             = var.create_cos_api_key

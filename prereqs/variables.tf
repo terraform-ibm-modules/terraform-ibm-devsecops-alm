@@ -135,6 +135,12 @@ variable "signing_key_secret_name" {
 }
 
 ##################### ICR ################
+variable "create_icr_namespace" {
+  type        = bool
+  description = "Set to `true` to create the namespace."
+  default     = false
+}
+
 variable "add_container_name_suffix" {
   type        = bool
   description = "Set to `true` to add a random suffix to the specified ICR name."
