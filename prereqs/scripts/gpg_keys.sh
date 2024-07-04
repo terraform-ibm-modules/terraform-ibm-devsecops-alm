@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#dnf install pinentry -y
+dnf install pinentry -y
 
 function parse_input() {
   eval "$(jq -r '@sh "export EMAIL=\(.email) NAME=\(.name)"')"
@@ -42,11 +42,9 @@ function generate_keys() {
 
 
   #Export the signing key
-  #SIGNING_KEY=$(gpg --export-secret-key "${EMAIL}" | base64 -w0)
-  SIGNING_KEY=$(gpg --export-secret-key "${EMAIL}" | base64)
+  SIGNING_KEY=$(gpg --export-secret-key "${EMAIL}" | base64 -w0)
   #Export the public signing certifacate
-  #PUBLIC_CERTIFICATE=$(gpg --armor --export "${EMAIL}" | base64 -w0)
-  PUBLIC_CERTIFICATE=$(gpg --armor --export "${EMAIL}" | base64)
+  PUBLIC_CERTIFICATE=$(gpg --armor --export "${EMAIL}" | base64 -w0)
   #Terraform requires a JSON response from a script
   JSON_STRING_RESULT=$( jq -n --arg signing_key "$SIGNING_KEY" --arg public_key "$PUBLIC_CERTIFICATE" '{signingkey: $signing_key, publickey: $public_key}' )
 

@@ -14,7 +14,7 @@ resource "random_string" "resource_suffix" {
 }
 
 resource "ibm_cr_namespace" "cr_namespace" {
-  count             = (var.registry_namespace != "") ? 1 : 0
+  count             = ((var.registry_namespace != "") && (var.create_icr_namespace == true)) ? 1 : 0
   name              = (var.add_container_name_suffix) ? format("%s-%s", var.registry_namespace, random_string.resource_suffix[0].result) : var.registry_namespace
   resource_group_id = var.resource_group_id
 }
@@ -43,7 +43,7 @@ data "external" "signing_keys" {
 ####### SECRETS MANAGER #####################
 
 data "ibm_resource_instance" "sm_instance" {
-  count             = ((var.sm_name != "") && (var.sm_exists == true)) ? 1 : 0
+  count             = ((var.sm_name != "") && (var.sm_location != "") && (var.sm_exists == true)) ? 1 : 0
   name              = var.sm_name
   location          = var.sm_location
   resource_group_id = var.resource_group_id
@@ -51,7 +51,7 @@ data "ibm_resource_instance" "sm_instance" {
 }
 
 resource "ibm_sm_secret_group" "sm_secret_group" {
-  count         = (var.create_sm_secret_group) ? 1 : 0
+  count         = ((var.create_sm_secret_group == true) && (var.sm_exists == true)) ? 1 : 0
   depends_on    = [data.ibm_resource_instance.sm_instance]
   instance_id   = (local.sm_instance_id != "") ? local.sm_instance_id : var.sm_instance_id
   region        = var.sm_location
@@ -60,7 +60,7 @@ resource "ibm_sm_secret_group" "sm_secret_group" {
 }
 
 resource "ibm_sm_arbitrary_secret" "secret_ibmcloud_api_key" {
-  count           = (var.create_ibmcloud_api_key) ? 1 : 0
+  count           = ((var.create_ibmcloud_api_key == true) && (var.sm_exists == true)) ? 1 : 0
   depends_on      = [ibm_sm_secret_group.sm_secret_group]
   region          = var.sm_location
   instance_id     = (local.sm_instance_id != "") ? local.sm_instance_id : var.sm_instance_id
@@ -74,7 +74,7 @@ resource "ibm_sm_arbitrary_secret" "secret_ibmcloud_api_key" {
 }
 
 resource "ibm_sm_arbitrary_secret" "secret_cos_api_key" {
-  count           = (var.create_cos_api_key) ? 1 : 0
+  count           = ((var.create_cos_api_key == true) && (var.sm_exists == true)) ? 1 : 0
   depends_on      = [ibm_sm_secret_group.sm_secret_group]
   region          = var.sm_location
   instance_id     = (local.sm_instance_id != "") ? local.sm_instance_id : var.sm_instance_id
@@ -88,7 +88,7 @@ resource "ibm_sm_arbitrary_secret" "secret_cos_api_key" {
 }
 
 resource "ibm_sm_arbitrary_secret" "secret_signing_key" {
-  count           = (var.create_signing_key) ? 1 : 0
+  count           = ((var.create_signing_key == true) && (var.sm_exists == true)) ? 1 : 0
   depends_on      = [ibm_sm_secret_group.sm_secret_group, data.external.signing_keys]
   region          = var.sm_location
   instance_id     = (local.sm_instance_id != "") ? local.sm_instance_id : var.sm_instance_id
@@ -102,7 +102,7 @@ resource "ibm_sm_arbitrary_secret" "secret_signing_key" {
 }
 
 resource "ibm_sm_arbitrary_secret" "secret_signing_certifcate" {
-  count           = (var.create_signing_certificate) ? 1 : 0
+  count           = ((var.create_signing_certificate == true) && (var.sm_exists == true)) ? 1 : 0
   depends_on      = [ibm_sm_secret_group.sm_secret_group, data.external.signing_keys]
   region          = var.sm_location
   instance_id     = (local.sm_instance_id != "") ? local.sm_instance_id : var.sm_instance_id
