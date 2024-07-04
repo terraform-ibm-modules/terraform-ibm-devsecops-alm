@@ -165,14 +165,39 @@ variable "random_string_length" {
   default     = 4
 }
 
+###### CD  Instance ######################
+variable "create_cd_instance" {
+  type        = bool
+  description = "Set to `true` to create Continuous Delivery Service."
+  default     = false
+}
+
+variable "cd_instance_name" {
+  type        = string
+  description = "The name of the CD instance."
+  default     = "cd-devsecops"
+}
+
+variable "cd_service_plan" {
+  type        = string
+  description = "The Continuous Delivery service plan. Can be `lite` or `professional`."
+  default     = "professional"
+}
+
 #variable "ibmcloud_api_key" {
 #  type        = string
 #  description = "API key belonging to the account in which all the resources are created."
 #  sensitive   = true
 #}
 
-#variable "region" {
-#  type        = string
-#  description = "The region used for all resource creation unless a resource specific region is used."
-#  default     = "us-south"
-#}
+variable "region" {
+  type        = string
+  description = "The region used for all resource creation unless a resource specific region is used."
+  default     = "us-south"
+}
+
+variable "prefix" {
+  type        = string
+  description = "A prefix that will be added before the `cd_instance_name` and the `registry_namespace` name."
+  default     = ""
+}

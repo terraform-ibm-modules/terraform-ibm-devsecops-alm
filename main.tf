@@ -47,18 +47,11 @@ data "ibm_resource_group" "resource_group" {
   name = var.toolchain_resource_group
 }
 
-resource "ibm_resource_instance" "cd_instance" {
-  count             = (var.create_cd_instance) ? 1 : 0
-  name              = var.cd_instance_name
-  service           = "continuous-delivery"
-  plan              = var.cd_service_plan
-  location          = var.toolchain_region
-  resource_group_id = data.ibm_resource_group.resource_group.id
-}
-
 module "prereqs" {
   source                         = "./prereqs"
   depends_on                     = [data.ibm_resource_group.resource_group]
+  region                         = var.toolchain_region
+  create_cd_instance             = var.create_cd_instance
   create_icr_namespace           = var.create_icr_namespace
   create_sm_secret_group         = var.create_sm_secret_group
   create_ibmcloud_api_key        = var.create_ibmcloud_api_key
@@ -76,6 +69,8 @@ module "prereqs" {
   signing_key_secret_name        = var.ci_signing_key_secret_name
   signing_certifcate_secret_name = var.cd_code_signing_cert_secret_name
   sm_exists                      = var.enable_secrets_manager
+  cd_instance_name               = var.cd_instance_name
+  cd_service_plan                = var.cd_service_plan
 }
 
 module "devsecops_ci_toolchain" {

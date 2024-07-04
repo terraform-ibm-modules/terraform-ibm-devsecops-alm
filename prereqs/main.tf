@@ -1,7 +1,18 @@
 locals {
-  sm_instance_id  = try(data.ibm_resource_instance.sm_instance[0].guid, "")
-  sm_instance_crn = try(data.ibm_resource_instance.sm_instance[0].id, "")
+  sm_instance_id     = try(data.ibm_resource_instance.sm_instance[0].guid, "")
+  sm_instance_crn    = try(data.ibm_resource_instance.sm_instance[0].id, "")
+  registry_namespace = (var.add_container_name_suffix) ? format("%s-%s", var.registry_namespace, random_string.resource_suffix[0].result) : var.registry_namespace
+}
 
+################### CD SERICE #######################
+
+resource "ibm_resource_instance" "cd_instance" {
+  count             = (var.create_cd_instance) ? 1 : 0
+  name              = (var.prefix == "") ? var.cd_instance_name : format("%s-%s", var.prefix, var.cd_instance_name)
+  service           = "continuous-delivery"
+  plan              = var.cd_service_plan
+  location          = var.region
+  resource_group_id = data.ibm_resource_group.resource_group.id
 }
 
 #################### ICR ###########################
@@ -15,7 +26,7 @@ resource "random_string" "resource_suffix" {
 
 resource "ibm_cr_namespace" "cr_namespace" {
   count             = ((var.registry_namespace != "") && (var.create_icr_namespace == true)) ? 1 : 0
-  name              = (var.add_container_name_suffix) ? format("%s-%s", var.registry_namespace, random_string.resource_suffix[0].result) : var.registry_namespace
+  name              = (var.prefix == "") ? local.registry_namespace : format("%s-%s", var.prefix, local.registry_namespace)
   resource_group_id = var.resource_group_id
 }
 

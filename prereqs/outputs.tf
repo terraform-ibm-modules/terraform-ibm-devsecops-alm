@@ -16,7 +16,7 @@ output "gpg_public_certificate" {
 
 output "registry_namespace" {
   description = "The name of created IBM Cloud Container Registry namespace."
-  value       = (var.add_container_name_suffix) ? format("%s-%s", var.registry_namespace, random_string.resource_suffix[0].result) : var.registry_namespace
+  value       = (var.prefix == "") ? local.registry_namespace : format("%s-%s", var.prefix, local.registry_namespace)
 }
 
 output "sm_instance_crn" {
