@@ -395,7 +395,7 @@ variable "repo_secret_group" {
   default     = ""
 }
 
-variable "toolchain_name_prefix" {
+variable "prefix" {
   type        = string
   description = "A prefix that is added to the toolchain names."
   default     = ""
@@ -557,12 +557,6 @@ variable "deployment_target" {
 variable "code_engine_project" {
   type        = string
   description = "The name of the Code Engine project to use. Created if it does not exist. Applies to both the CI and CD toolchains. To set individually use `ci_code_engine_project` and `cd_code_engine_project`."
-  default     = ""
-}
-
-variable "code_engine_project_prefix" {
-  type        = string
-  description = "A string that will be prefixed to`ci_code_engine_project` and `cd_code_engine_project`."
   default     = ""
 }
 
@@ -921,12 +915,6 @@ variable "ci_code_engine_project" {
   type        = string
   description = "The name of the Code Engine project to use for the CI pipeline build. The project is created if it does not already exist."
   default     = "Sample_CI_Project"
-}
-
-variable "ci_code_engine_project_prefix" {
-  type        = string
-  description = "A string that will be prefixed to `ci_code_engine_project`. This takes precedence over values set in `code_engine_project_prefix`."
-  default     = ""
 }
 
 variable "ci_code_engine_region" {
@@ -2824,12 +2812,6 @@ variable "cd_code_engine_project" {
   type        = string
   description = "The name of the Code Engine project to use for the CD pipeline promoted code. The project is created if it does not already exist."
   default     = "Sample_CD_Project"
-}
-
-variable "cd_code_engine_project_prefix" {
-  type        = string
-  description = "A string that will be prefixed to `cd_code_engine_project`. This takes precedence over values set in `code_engine_project_prefix`."
-  default     = ""
 }
 
 variable "cd_code_engine_region" {

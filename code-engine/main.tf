@@ -48,17 +48,19 @@ locals {
   evidence_repo_existing_url  = (var.evidence_repo_existing_url != "") ? var.evidence_repo_existing_url : var.evidence_repo_url
   issues_repo_existing_url    = (var.issues_repo_existing_url != "") ? var.issues_repo_existing_url : var.issues_repo_url
 
-  ci_code_engine_project_prefix = (var.ci_code_engine_project_prefix == "") ? var.code_engine_project_prefix : var.ci_code_engine_project_prefix
-  cd_code_engine_project_prefix = (var.cd_code_engine_project_prefix == "") ? var.code_engine_project_prefix : var.cd_code_engine_project_prefix
-  ci_code_engine_project        = (var.ci_code_engine_project == "") ? var.code_engine_project : var.ci_code_engine_project
-  cd_code_engine_project        = (var.cd_code_engine_project == "") ? var.code_engine_project : var.cd_code_engine_project
+  ci_code_engine_project = (var.ci_code_engine_project == "") ? var.code_engine_project : var.ci_code_engine_project
+  cd_code_engine_project = (var.cd_code_engine_project == "") ? var.code_engine_project : var.cd_code_engine_project
 
-  ci_code_engine_project_name = (local.ci_code_engine_project_prefix == "") ? local.ci_code_engine_project : format("%s-%s", local.ci_code_engine_project_prefix, local.ci_code_engine_project)
-  cd_code_engine_project_name = (local.cd_code_engine_project_prefix == "") ? local.cd_code_engine_project : format("%s-%s", local.cd_code_engine_project_prefix, local.cd_code_engine_project)
+  ci_code_engine_project_name = (var.prefix == "") ? local.ci_code_engine_project : format("${var.prefix}-%s", local.ci_code_engine_project)
+  cd_code_engine_project_name = (var.prefix == "") ? local.cd_code_engine_project : format("${var.prefix}-%s", local.cd_code_engine_project)
 
   ci_toolchain_name = (var.ci_toolchain_name == "") ? format("${var.toolchain_name}%s", "-CI-Toolchain") : var.ci_toolchain_name
   cd_toolchain_name = (var.cd_toolchain_name == "") ? format("${var.toolchain_name}%s", "-CD-Toolchain") : var.cd_toolchain_name
   cc_toolchain_name = (var.cc_toolchain_name == "") ? format("${var.toolchain_name}%s", "-CC-Toolchain") : var.cc_toolchain_name
+
+  ci_repositories_prefix = (var.ci_repositories_prefix == "") ? var.repositories_prefix : var.ci_repositories_prefix
+  cd_repositories_prefix = (var.cd_repositories_prefix == "") ? var.repositories_prefix : var.cd_repositories_prefix
+  cc_repositories_prefix = (var.cc_repositories_prefix == "") ? var.repositories_prefix : var.cc_repositories_prefix
 
 }
 
@@ -90,6 +92,7 @@ module "prereqs" {
   sm_exists                      = var.enable_secrets_manager
   cd_instance_name               = var.cd_instance_name
   cd_service_plan                = var.cd_service_plan
+  prefix                         = var.prefix
 }
 
 module "devsecops_ci_toolchain" {
@@ -97,7 +100,7 @@ module "devsecops_ci_toolchain" {
   depends_on               = [ibm_resource_instance.cd_instance]
   source                   = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-ci-toolchain?ref=v1.4.0"
   ibmcloud_api_key         = var.ibmcloud_api_key
-  toolchain_name           = (var.toolchain_name_prefix == "") ? local.ci_toolchain_name : format("${var.toolchain_name_prefix}-%s", local.ci_toolchain_name)
+  toolchain_name           = (var.prefix == "") ? local.ci_toolchain_name : format("${var.prefix}-%s", local.ci_toolchain_name)
   toolchain_region         = (var.ci_toolchain_region == "") ? var.toolchain_region : replace(replace(var.ci_toolchain_region, "ibm:yp:", ""), "ibm:ys1:", "")
   toolchain_resource_group = (var.ci_toolchain_resource_group == "") ? var.toolchain_resource_group : var.ci_toolchain_resource_group
   toolchain_description    = var.ci_toolchain_description
@@ -240,7 +243,7 @@ module "devsecops_ci_toolchain" {
   app_name                           = var.ci_app_name
   registry_region                    = (var.ci_registry_region == "") ? format("${var.environment_prefix}%s", var.toolchain_region) : format("${var.environment_prefix}%s", replace(replace(var.ci_registry_region, "ibm:yp:", ""), "ibm:ys1:", ""))
   authorization_policy_creation      = (var.ci_authorization_policy_creation == "") ? var.authorization_policy_creation : var.ci_authorization_policy_creation
-  repositories_prefix                = (var.ci_repositories_prefix == "") ? var.repositories_prefix : var.ci_repositories_prefix
+  repositories_prefix                = (local.ci_repositories_prefix == "") ? var.prefix : local.ci_repositories_prefix
   doi_toolchain_id                   = var.ci_doi_toolchain_id
   pipeline_debug                     = var.ci_pipeline_debug
   opt_in_dynamic_api_scan            = var.ci_opt_in_dynamic_api_scan
@@ -367,7 +370,7 @@ module "devsecops_cd_toolchain" {
   source           = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain?ref=v1.4.0"
   ibmcloud_api_key = var.ibmcloud_api_key
 
-  toolchain_name           = (var.toolchain_name_prefix == "") ? local.cd_toolchain_name : format("${var.toolchain_name_prefix}-%s", local.cd_toolchain_name)
+  toolchain_name           = (var.prefix == "") ? local.cd_toolchain_name : format("${var.prefix}-%s", local.cd_toolchain_name)
   toolchain_description    = var.cd_toolchain_description
   toolchain_region         = (var.cd_toolchain_region == "") ? var.toolchain_region : replace(replace(var.cd_toolchain_region, "ibm:yp:", ""), "ibm:ys1:", "")
   toolchain_resource_group = (var.cd_toolchain_resource_group == "") ? var.toolchain_resource_group : var.cd_toolchain_resource_group
@@ -513,7 +516,7 @@ module "devsecops_cd_toolchain" {
 
   #OTHER INTEGRATIONS
   slack_notifications           = local.cd_slack_notification_state
-  repositories_prefix           = (var.cd_repositories_prefix == "") ? var.repositories_prefix : var.cd_repositories_prefix
+  repositories_prefix           = (local.cd_repositories_prefix == "") ? var.prefix : local.cd_repositories_prefix
   authorization_policy_creation = (var.cd_authorization_policy_creation == "") ? var.authorization_policy_creation : var.cd_authorization_policy_creation
   doi_environment               = var.cd_doi_environment
   link_to_doi_toolchain         = var.cd_link_to_doi_toolchain
@@ -616,7 +619,7 @@ module "devsecops_cc_toolchain" {
   depends_on                    = [ibm_resource_instance.cd_instance]
   source                        = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cc-toolchain?ref=v1.4.0"
   ibmcloud_api_key              = var.ibmcloud_api_key
-  toolchain_name                = (var.toolchain_name_prefix == "") ? local.cc_toolchain_name : format("${var.toolchain_name_prefix}-%s", local.cc_toolchain_name)
+  toolchain_name                = (var.prefix == "") ? local.cc_toolchain_name : format("${var.prefix}-%s", local.cc_toolchain_name)
   toolchain_description         = var.cc_toolchain_description
   toolchain_region              = (var.cc_toolchain_region == "") ? var.toolchain_region : replace(replace(var.cc_toolchain_region, "ibm:yp:", ""), "ibm:ys1:", "")
   toolchain_resource_group      = (var.cc_toolchain_resource_group == "") ? var.toolchain_resource_group : var.cc_toolchain_resource_group
@@ -755,7 +758,7 @@ module "devsecops_cc_toolchain" {
   #OTHER INTEGRATIONS
   slack_notifications              = local.cc_slack_notification_state
   sonarqube_config                 = var.cc_sonarqube_config
-  repositories_prefix              = (var.cc_repositories_prefix == "") ? var.repositories_prefix : var.cc_repositories_prefix
+  repositories_prefix              = (local.cc_repositories_prefix == "") ? var.prefix : local.cc_repositories_prefix
   doi_toolchain_id                 = try(module.devsecops_ci_toolchain[0].toolchain_id, var.cc_doi_toolchain_id)
   pipeline_debug                   = var.cc_pipeline_debug
   opt_in_dynamic_api_scan          = var.cc_opt_in_dynamic_api_scan
