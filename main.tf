@@ -75,7 +75,7 @@ module "prereqs" {
 
 module "devsecops_ci_toolchain" {
   count                    = var.create_ci_toolchain ? 1 : 0
-  depends_on               = [ibm_resource_instance.cd_instance]
+  depends_on               = [module.prereqs]
   source                   = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-ci-toolchain?ref=v1.4.0"
   ibmcloud_api_key         = var.ibmcloud_api_key
   toolchain_name           = (var.toolchain_name_prefix == "") ? local.ci_toolchain_name : format("${var.toolchain_name_prefix}-%s", local.ci_toolchain_name)
@@ -321,7 +321,7 @@ module "devsecops_ci_toolchain" {
 
 module "devsecops_cd_toolchain" {
   count            = var.create_cd_toolchain ? 1 : 0
-  depends_on       = [ibm_resource_instance.cd_instance]
+  depends_on       = [module.prereqs]
   source           = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain?ref=v1.4.0"
   ibmcloud_api_key = var.ibmcloud_api_key
 
@@ -552,7 +552,7 @@ module "devsecops_cd_toolchain" {
 
 module "devsecops_cc_toolchain" {
   count                         = var.create_cc_toolchain ? 1 : 0
-  depends_on                    = [ibm_resource_instance.cd_instance]
+  depends_on                    = [module.prereqs]
   source                        = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cc-toolchain?ref=v1.4.0"
   ibmcloud_api_key              = var.ibmcloud_api_key
   toolchain_name                = (var.toolchain_name_prefix == "") ? local.cc_toolchain_name : format("${var.toolchain_name_prefix}-%s", local.cc_toolchain_name)

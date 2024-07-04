@@ -12,7 +12,7 @@ resource "ibm_resource_instance" "cd_instance" {
   service           = "continuous-delivery"
   plan              = var.cd_service_plan
   location          = var.region
-  resource_group_id = data.ibm_resource_group.resource_group.id
+  resource_group_id = var.resource_group_id
 }
 
 #################### ICR ###########################
