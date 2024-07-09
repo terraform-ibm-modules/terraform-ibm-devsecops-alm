@@ -292,7 +292,7 @@
 							"required": false
 						},
 						{
-							"key":"prefix",
+							"key": "prefix",
 							"type": "string",
 							"default_value": "",
 							"description": "A prefix that is added to the toolchain resources.",
@@ -352,13 +352,6 @@
 							"type": "boolean",
 							"default_value": false,
 							"description": "Experimental. Set to `true` to create and add the `signing-certificate` to the Secrets Provider.",
-							"required": false
-						},
-						{
-							"key": "create_sm_secret_group",
-							"type": "boolean",
-							"default_value": false,
-							"description": "Set to `true` to create a secrets group in Secrets Manager.",
 							"required": false
 						},
 						{
@@ -4644,13 +4637,6 @@
 							"type": "boolean",
 							"default_value": false,
 							"description": "Experimental. Set to `true` to create and add the `signing-certificate` to the Secrets Provider.",
-							"required": false
-						},
-						{
-							"key": "create_sm_secret_group",
-							"type": "boolean",
-							"default_value": false,
-							"description": "Set to `true` to create a secrets group in Secrets Manager.",
 							"required": false
 						},
 						{
