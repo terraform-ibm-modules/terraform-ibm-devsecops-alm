@@ -548,6 +548,7 @@ statement instead the previous block.
 | <a name="input_create_cos_api_key"></a> [create\_cos\_api\_key](#input\_create\_cos\_api\_key) | Set to `true` to create and add a `cos-api-key` to the Secrets Provider. | `bool` | `false` | no |
 | <a name="input_create_ibmcloud_api_key"></a> [create\_ibmcloud\_api\_key](#input\_create\_ibmcloud\_api\_key) | Set to `true` to create and add an `ibmcloud-api-key` to the Secrets Provider. | `bool` | `false` | no |
 | <a name="input_create_icr_namespace"></a> [create\_icr\_namespace](#input\_create\_icr\_namespace) | Set to `true` to create the namespace. | `bool` | `false` | no |
+| <a name="input_create_secret_group"></a> [create\_secret\_group](#input\_create\_secret\_group) | Set to `true` to create the specified Secrets Manager secret group. | `bool` | `false` | no |
 | <a name="input_create_signing_certificate"></a> [create\_signing\_certificate](#input\_create\_signing\_certificate) | Set to `true` to create and add the `signing-certificate` to the Secrets Provider. | `bool` | `false` | no |
 | <a name="input_create_signing_key"></a> [create\_signing\_key](#input\_create\_signing\_key) | Set to `true` to create and add a `signing_key`to the Secrets Provider. | `bool` | `false` | no |
 | <a name="input_deployment_repo_url"></a> [deployment\_repo\_url](#input\_deployment\_repo\_url) | This is the repository to clone deployment for DevSecOps toolchain template. | `string` | `""` | no |

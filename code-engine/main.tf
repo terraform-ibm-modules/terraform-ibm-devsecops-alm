@@ -90,6 +90,7 @@ module "prereqs" {
   sm_secret_group_name           = var.sm_secret_group
   registry_namespace             = var.registry_namespace
   resource_group_id              = data.ibm_resource_group.resource_group.id
+  create_secret_group            = var.create_secret_group
   cos_api_key_secret_name        = var.cos_api_key_secret_name
   iam_api_key_secret_name        = var.pipeline_ibmcloud_api_key_secret_name
   signing_key_secret_name        = var.ci_signing_key_secret_name

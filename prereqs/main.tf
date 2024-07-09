@@ -16,9 +16,6 @@ locals {
   # 3) retrive that object from the list and get the ID from it
   secret_group_list = (var.sm_exists) ? data.ibm_sm_secret_groups.secret_groups[0].secret_groups : []
   secret_group_id   = try(local.secret_group_list[index(local.secret_group_list[*].name, var.sm_secret_group_name)].id, "")
-
-  any_secret_created  = ((var.create_ibmcloud_api_key == true) || (var.create_cos_api_key == true) || (var.create_signing_key == true) || (var.create_signing_certificate == true))
-  create_secret_group = ((local.secret_group_id == "") && (local.any_secret_created == true) && (var.sm_exists == true)) ? true : false
 }
 
 ####### SECRETS MANAGER #####################
@@ -59,7 +56,7 @@ data "external" "signing_keys" {
 }
 
 resource "ibm_sm_secret_group" "sm_secret_group" {
-  count         = ((local.create_secret_group == true) && (var.sm_exists == true)) ? 1 : 0
+  count         = ((var.create_secret_group == true) && (var.sm_exists == true)) ? 1 : 0
   depends_on    = [data.ibm_resource_instance.sm_instance]
   instance_id   = (local.sm_instance_id != "") ? local.sm_instance_id : var.sm_instance_id
   region        = var.sm_location
@@ -68,7 +65,7 @@ resource "ibm_sm_secret_group" "sm_secret_group" {
 }
 
 data "ibm_sm_secret_group" "existing_sm_secret_group" {
-  count           = ((local.create_secret_group == false) && (var.sm_exists == true)) ? 1 : 0
+  count           = ((var.create_secret_group == false) && (var.sm_exists == true)) ? 1 : 0
   instance_id     = (local.sm_instance_id != "") ? local.sm_instance_id : var.sm_instance_id
   region          = var.sm_location
   secret_group_id = local.secret_group_id
@@ -79,7 +76,7 @@ resource "ibm_sm_arbitrary_secret" "secret_ibmcloud_api_key" {
   depends_on      = [ibm_sm_secret_group.sm_secret_group]
   region          = var.sm_location
   instance_id     = (local.sm_instance_id != "") ? local.sm_instance_id : var.sm_instance_id
-  secret_group_id = (local.create_secret_group == false) ? data.ibm_sm_secret_group.existing_sm_secret_group[0].secret_group_id : ibm_sm_secret_group.sm_secret_group[0].secret_group_id
+  secret_group_id = (var.create_secret_group == false) ? data.ibm_sm_secret_group.existing_sm_secret_group[0].secret_group_id : ibm_sm_secret_group.sm_secret_group[0].secret_group_id
   name            = var.iam_api_key_secret_name
   description     = "The IBMCloud apikey for running the pipelines."
   labels          = []
@@ -93,7 +90,7 @@ resource "ibm_sm_arbitrary_secret" "secret_cos_api_key" {
   depends_on      = [ibm_sm_secret_group.sm_secret_group]
   region          = var.sm_location
   instance_id     = (local.sm_instance_id != "") ? local.sm_instance_id : var.sm_instance_id
-  secret_group_id = (local.create_secret_group == false) ? data.ibm_sm_secret_group.existing_sm_secret_group[0].secret_group_id : ibm_sm_secret_group.sm_secret_group[0].secret_group_id
+  secret_group_id = (var.create_secret_group == false) ? data.ibm_sm_secret_group.existing_sm_secret_group[0].secret_group_id : ibm_sm_secret_group.sm_secret_group[0].secret_group_id
   name            = var.cos_api_key_secret_name
   description     = "The COS apikey for accessing the associated COS instance."
   labels          = []
@@ -107,7 +104,7 @@ resource "ibm_sm_arbitrary_secret" "secret_signing_key" {
   depends_on      = [ibm_sm_secret_group.sm_secret_group, data.external.signing_keys]
   region          = var.sm_location
   instance_id     = (local.sm_instance_id != "") ? local.sm_instance_id : var.sm_instance_id
-  secret_group_id = (local.create_secret_group == false) ? data.ibm_sm_secret_group.existing_sm_secret_group[0].secret_group_id : ibm_sm_secret_group.sm_secret_group[0].secret_group_id
+  secret_group_id = (var.create_secret_group == false) ? data.ibm_sm_secret_group.existing_sm_secret_group[0].secret_group_id : ibm_sm_secret_group.sm_secret_group[0].secret_group_id
   name            = var.signing_key_secret_name
   description     = "The gpg signing key for signing images."
   labels          = []
@@ -121,7 +118,7 @@ resource "ibm_sm_arbitrary_secret" "secret_signing_certifcate" {
   depends_on      = [ibm_sm_secret_group.sm_secret_group, data.external.signing_keys]
   region          = var.sm_location
   instance_id     = (local.sm_instance_id != "") ? local.sm_instance_id : var.sm_instance_id
-  secret_group_id = (local.create_secret_group == false) ? data.ibm_sm_secret_group.existing_sm_secret_group[0].secret_group_id : ibm_sm_secret_group.sm_secret_group[0].secret_group_id
+  secret_group_id = (var.create_secret_group == false) ? data.ibm_sm_secret_group.existing_sm_secret_group[0].secret_group_id : ibm_sm_secret_group.sm_secret_group[0].secret_group_id
   name            = var.signing_certifcate_secret_name
   description     = "The public component of the GPG signing key for validating image signatures."
   labels          = []

@@ -10,6 +10,12 @@ variable "gpg_email" {
   default     = "ibmer@ibm.com"
 }
 
+variable "create_secret_group" {
+  type        = bool
+  description = "Set to `true` to create the specified Secrets Manager secret group."
+  default     = false
+}
+
 variable "create_ibmcloud_api_key" {
   type        = bool
   description = "Set to `true` to create and add an `ibmcloud-api-key` to the Secrets Provider."
