@@ -299,6 +299,13 @@
 							"required": false
 						},
 						{
+							"key": "create_secret_group",
+							"type": "boolean",
+							"default_value": false,
+							"description": "Set to `true` to create the specified Secrets Manager secret group.",
+							"required": false
+						},
+						{
 							"key": "create_ibmcloud_api_key",
 							"type": "boolean",
 							"default_value": false,
@@ -4581,6 +4588,13 @@
 							"type": "string",
 							"default_value": "",
 							"description": "A prefix that is added to the toolchain resources.",
+							"required": false
+						},
+						{
+							"key": "create_secret_group",
+							"type": "boolean",
+							"default_value": false,
+							"description": "Set to `true` to create the specified Secrets Manager secret group.",
 							"required": false
 						},
 						{
