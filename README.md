@@ -81,6 +81,7 @@ statement instead the previous block.
 | [ibm_cd_tekton_pipeline_trigger_property.ci_pipeline_webhook_branch_property](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/resources/cd_tekton_pipeline_trigger_property) | resource |
 | [ibm_cd_tekton_pipeline_trigger_property.ci_pipeline_webhook_name_property](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/resources/cd_tekton_pipeline_trigger_property) | resource |
 | [ibm_cd_tekton_pipeline_trigger_property.ci_pipeline_webhook_repo_url_property](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/resources/cd_tekton_pipeline_trigger_property) | resource |
+| [ibm_resource_instance.cd_instance](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/resources/resource_instance) | resource |
 | [null_resource.ci_pipeline_run](https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource) | resource |
 | [random_string.webhook_secret](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/string) | resource |
 | [ibm_resource_group.resource_group](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/data-sources/resource_group) | data source |
@@ -549,7 +550,6 @@ statement instead the previous block.
 | <a name="input_create_icr_namespace"></a> [create\_icr\_namespace](#input\_create\_icr\_namespace) | Set to `true` to create the namespace. | `bool` | `false` | no |
 | <a name="input_create_signing_certificate"></a> [create\_signing\_certificate](#input\_create\_signing\_certificate) | Set to `true` to create and add the `signing-certificate` to the Secrets Provider. | `bool` | `false` | no |
 | <a name="input_create_signing_key"></a> [create\_signing\_key](#input\_create\_signing\_key) | Set to `true` to create and add a `signing_key`to the Secrets Provider. | `bool` | `false` | no |
-| <a name="input_create_sm_secret_group"></a> [create\_sm\_secret\_group](#input\_create\_sm\_secret\_group) | Set to `true` to create a secrets group in Secrets Manager. | `bool` | `false` | no |
 | <a name="input_deployment_repo_url"></a> [deployment\_repo\_url](#input\_deployment\_repo\_url) | This is the repository to clone deployment for DevSecOps toolchain template. | `string` | `""` | no |
 | <a name="input_enable_key_protect"></a> [enable\_key\_protect](#input\_enable\_key\_protect) | Set to enable Key Protect Integrations. | `bool` | `false` | no |
 | <a name="input_enable_secrets_manager"></a> [enable\_secrets\_manager](#input\_enable\_secrets\_manager) | Enable the Secrets Manager integrations. | `bool` | `true` | no |

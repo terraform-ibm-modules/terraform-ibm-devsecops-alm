@@ -3891,12 +3891,6 @@ variable "cd_service_plan" {
 
 ###### PRE REQS #########################
 
-variable "create_sm_secret_group" {
-  type        = bool
-  description = "Set to `true` to create a secrets group in Secrets Manager."
-  default     = false
-}
-
 variable "create_ibmcloud_api_key" {
   type        = bool
   description = "Set to `true` to create and add an `ibmcloud-api-key` to the Secrets Provider."

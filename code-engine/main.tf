@@ -61,20 +61,25 @@ locals {
   ci_repositories_prefix = (var.ci_repositories_prefix == "") ? var.repositories_prefix : var.ci_repositories_prefix
   cd_repositories_prefix = (var.cd_repositories_prefix == "") ? var.repositories_prefix : var.cd_repositories_prefix
   cc_repositories_prefix = (var.cc_repositories_prefix == "") ? var.repositories_prefix : var.cc_repositories_prefix
-
 }
 
 data "ibm_resource_group" "resource_group" {
   name = var.toolchain_resource_group
 }
 
+resource "ibm_resource_instance" "cd_instance" {
+  count             = (var.create_cd_instance) ? 1 : 0
+  name              = (var.prefix == "") ? var.cd_instance_name : format("${var.prefix}-%s", var.cd_instance_name)
+  service           = "continuous-delivery"
+  plan              = var.cd_service_plan
+  location          = var.toolchain_region
+  resource_group_id = data.ibm_resource_group.resource_group.id
+}
+
 module "prereqs" {
   source                         = "../prereqs"
   depends_on                     = [data.ibm_resource_group.resource_group]
-  region                         = var.toolchain_region
-  create_cd_instance             = var.create_cd_instance
   create_icr_namespace           = var.create_icr_namespace
-  create_sm_secret_group         = var.create_sm_secret_group
   create_ibmcloud_api_key        = var.create_ibmcloud_api_key
   create_cos_api_key             = var.create_cos_api_key
   create_signing_key             = var.create_signing_key
@@ -90,8 +95,6 @@ module "prereqs" {
   signing_key_secret_name        = var.ci_signing_key_secret_name
   signing_certifcate_secret_name = var.cd_code_signing_cert_secret_name
   sm_exists                      = var.enable_secrets_manager
-  cd_instance_name               = var.cd_instance_name
-  cd_service_plan                = var.cd_service_plan
   prefix                         = var.prefix
 }
 
@@ -243,7 +246,7 @@ module "devsecops_ci_toolchain" {
   app_name                           = var.ci_app_name
   registry_region                    = (var.ci_registry_region == "") ? format("${var.environment_prefix}%s", var.toolchain_region) : format("${var.environment_prefix}%s", replace(replace(var.ci_registry_region, "ibm:yp:", ""), "ibm:ys1:", ""))
   authorization_policy_creation      = (var.ci_authorization_policy_creation == "") ? var.authorization_policy_creation : var.ci_authorization_policy_creation
-  repositories_prefix                = (local.ci_repositories_prefix == "") ? var.prefix : local.ci_repositories_prefix
+  repositories_prefix                = (local.ci_repositories_prefix == "compliance" && var.prefix != "") ? format("%s-%s", var.prefix, local.ci_repositories_prefix) : local.ci_repositories_prefix
   doi_toolchain_id                   = var.ci_doi_toolchain_id
   pipeline_debug                     = var.ci_pipeline_debug
   opt_in_dynamic_api_scan            = var.ci_opt_in_dynamic_api_scan
@@ -516,7 +519,7 @@ module "devsecops_cd_toolchain" {
 
   #OTHER INTEGRATIONS
   slack_notifications           = local.cd_slack_notification_state
-  repositories_prefix           = (local.cd_repositories_prefix == "") ? var.prefix : local.cd_repositories_prefix
+  repositories_prefix           = (local.cd_repositories_prefix == "compliance" && var.prefix != "") ? format("%s-%s", var.prefix, local.cd_repositories_prefix) : local.cd_repositories_prefix
   authorization_policy_creation = (var.cd_authorization_policy_creation == "") ? var.authorization_policy_creation : var.cd_authorization_policy_creation
   doi_environment               = var.cd_doi_environment
   link_to_doi_toolchain         = var.cd_link_to_doi_toolchain
@@ -758,7 +761,7 @@ module "devsecops_cc_toolchain" {
   #OTHER INTEGRATIONS
   slack_notifications              = local.cc_slack_notification_state
   sonarqube_config                 = var.cc_sonarqube_config
-  repositories_prefix              = (local.cc_repositories_prefix == "") ? var.prefix : local.cc_repositories_prefix
+  repositories_prefix              = (local.cc_repositories_prefix == "compliance" && var.prefix != "") ? format("%s-%s", var.prefix, local.cc_repositories_prefix) : local.cc_repositories_prefix
   doi_toolchain_id                 = try(module.devsecops_ci_toolchain[0].toolchain_id, var.cc_doi_toolchain_id)
   pipeline_debug                   = var.cc_pipeline_debug
   opt_in_dynamic_api_scan          = var.cc_opt_in_dynamic_api_scan

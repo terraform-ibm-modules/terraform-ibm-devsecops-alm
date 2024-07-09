@@ -34,12 +34,6 @@ variable "create_signing_certificate" {
   default     = false
 }
 
-variable "create_sm_secret_group" {
-  type        = bool
-  description = "Set to `true` to create a secrets group in Secrets Manager."
-  default     = false
-}
-
 variable "sm_exists" {
   description = "Only connect to the Secrets Manager instance if it has been enabled for the toolchain."
   type        = bool
@@ -68,12 +62,6 @@ variable "sm_secret_group_name" {
   type        = string
   description = "Group in Secrets Manager for organizing/grouping secrets."
   default     = "devsecops"
-}
-
-variable "sm_existing_secret_group_id" {
-  type        = string
-  description = "The ID for an existing Secrets Manager secret group."
-  default     = ""
 }
 
 variable "sm_endpoint_type" {
@@ -165,36 +153,11 @@ variable "random_string_length" {
   default     = 4
 }
 
-###### CD  Instance ######################
-variable "create_cd_instance" {
-  type        = bool
-  description = "Set to `true` to create Continuous Delivery Service."
-  default     = false
-}
-
-variable "cd_instance_name" {
-  type        = string
-  description = "The name of the CD instance."
-  default     = "cd-devsecops"
-}
-
-variable "cd_service_plan" {
-  type        = string
-  description = "The Continuous Delivery service plan. Can be `lite` or `professional`."
-  default     = "professional"
-}
-
 #variable "ibmcloud_api_key" {
 #  type        = string
 #  description = "API key belonging to the account in which all the resources are created."
 #  sensitive   = true
 #}
-
-variable "region" {
-  type        = string
-  description = "The region used for all resource creation unless a resource specific region is used."
-  default     = "us-south"
-}
 
 variable "prefix" {
   type        = string
