@@ -14,11 +14,11 @@ locals {
   # }
   # 2) Use index to find the index of the object containing the correct name
   # 3) retrive that object from the list and get the ID from it
-  secret_group_list = data.ibm_sm_secret_groups.secret_groups.secret_groups
+  secret_group_list = (var.sm_exists) ? data.ibm_sm_secret_groups.secret_groups[0].secret_groups : []
   secret_group_id   = try(local.secret_group_list[index(local.secret_group_list[*].name, var.sm_secret_group_name)].id, "")
 
   any_secret_created  = ((var.create_ibmcloud_api_key == true) || (var.create_cos_api_key == true) || (var.create_signing_key == true) || (var.create_signing_certificate == true))
-  create_secret_group = ((local.secret_group_id == "") && (local.any_secret_created == true)) ? true : false
+  create_secret_group = ((local.secret_group_id == "") && (local.any_secret_created == true) && (var.sm_exists == true)) ? true : false
 }
 
 ####### SECRETS MANAGER #####################
@@ -32,6 +32,7 @@ data "ibm_resource_instance" "sm_instance" {
 }
 
 data "ibm_sm_secret_groups" "secret_groups" {
+  count       = (var.sm_exists) ? 1 : 0
   instance_id = (local.sm_instance_id != "") ? local.sm_instance_id : var.sm_instance_id
   region      = var.sm_location
 }
