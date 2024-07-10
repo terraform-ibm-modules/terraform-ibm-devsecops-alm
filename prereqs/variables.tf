@@ -10,6 +10,12 @@ variable "gpg_email" {
   default     = "ibmer@ibm.com"
 }
 
+variable "create_secret_group" {
+  type        = bool
+  description = "Set to `true` to create the specified Secrets Manager secret group."
+  default     = false
+}
+
 variable "create_ibmcloud_api_key" {
   type        = bool
   description = "Set to `true` to create and add an `ibmcloud-api-key` to the Secrets Provider."
@@ -31,12 +37,6 @@ variable "create_signing_key" {
 variable "create_signing_certificate" {
   type        = bool
   description = "Experimental. Set to `true` to create and add the `signing-certificate` to the Secrets Provider."
-  default     = false
-}
-
-variable "create_sm_secret_group" {
-  type        = bool
-  description = "Set to `true` to create a secrets group in Secrets Manager."
   default     = false
 }
 
@@ -68,12 +68,6 @@ variable "sm_secret_group_name" {
   type        = string
   description = "Group in Secrets Manager for organizing/grouping secrets."
   default     = "devsecops"
-}
-
-variable "sm_existing_secret_group_id" {
-  type        = string
-  description = "The ID for an existing Secrets Manager secret group."
-  default     = ""
 }
 
 variable "sm_endpoint_type" {
@@ -171,8 +165,8 @@ variable "random_string_length" {
 #  sensitive   = true
 #}
 
-#variable "region" {
-#  type        = string
-#  description = "The region used for all resource creation unless a resource specific region is used."
-#  default     = "us-south"
-#}
+variable "prefix" {
+  type        = string
+  description = "A prefix that will be added before the `cd_instance_name` and the `registry_namespace` name."
+  default     = ""
+}

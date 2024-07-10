@@ -292,10 +292,17 @@
 							"required": false
 						},
 						{
-							"key": "toolchain_name_prefix",
+							"key": "prefix",
 							"type": "string",
 							"default_value": "",
-							"description": "A prefix that is added to the toolchain names.",
+							"description": "A prefix that is added to the toolchain resources.",
+							"required": false
+						},
+						{
+							"key": "create_secret_group",
+							"type": "boolean",
+							"default_value": false,
+							"description": "Set to `true` to create the specified Secrets Manager secret group.",
 							"required": false
 						},
 						{
@@ -352,13 +359,6 @@
 							"type": "boolean",
 							"default_value": false,
 							"description": "Experimental. Set to `true` to create and add the `signing-certificate` to the Secrets Provider.",
-							"required": false
-						},
-						{
-							"key": "create_sm_secret_group",
-							"type": "boolean",
-							"default_value": false,
-							"description": "Set to `true` to create a secrets group in Secrets Manager.",
 							"required": false
 						},
 						{
@@ -4206,13 +4206,6 @@
 							}
 						},
 						{
-							"key": "code_engine_project_prefix",
-							"type": "string",
-							"default_value": "",
-							"description": "A string that will be prefixed to`ci_code_engine_project` and `cd_code_engine_project`.",
-							"required": false
-						},
-						{
 							"key": "code_engine_project",
 							"type": "string",
 							"default_value": "",
@@ -4388,13 +4381,6 @@
 							"required": false
 						},
 						{
-							"key": "ci_code_engine_project_prefix",
-							"type": "string",
-							"default_value": "",
-							"description": "A string that will be prefixed to `ci_code_engine_project`. This takes precedence over values set in `code_engine_project_prefix`.",
-							"required": false
-						},
-						{
 							"key": "ci_code_engine_registry_domain",
 							"type": "string",
 							"default_value": "",
@@ -4535,13 +4521,6 @@
 							"required": false
 						},
 						{
-							"key": "cd_code_engine_project_prefix",
-							"type": "string",
-							"default_value": "",
-							"description": "A string that will be prefixed to `cd_code_engine_project`. This takes precedence over values set in `code_engine_project_prefix`.",
-							"required": false
-						},
-						{
 							"key": "cd_code_engine_job_retrylimit",
 							"type": "string",
 							"default_value": "3",
@@ -4605,10 +4584,17 @@
 							"required": false
 						},
 						{
-							"key": "toolchain_name_prefix",
+							"key": "prefix",
 							"type": "string",
 							"default_value": "",
-							"description": "A prefix that is added to the toolchain names.",
+							"description": "A prefix that is added to the toolchain resources.",
+							"required": false
+						},
+						{
+							"key": "create_secret_group",
+							"type": "boolean",
+							"default_value": false,
+							"description": "Set to `true` to create the specified Secrets Manager secret group.",
 							"required": false
 						},
 						{
@@ -4665,13 +4651,6 @@
 							"type": "boolean",
 							"default_value": false,
 							"description": "Experimental. Set to `true` to create and add the `signing-certificate` to the Secrets Provider.",
-							"required": false
-						},
-						{
-							"key": "create_sm_secret_group",
-							"type": "boolean",
-							"default_value": false,
-							"description": "Set to `true` to create a secrets group in Secrets Manager.",
 							"required": false
 						},
 						{

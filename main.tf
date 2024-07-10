@@ -40,6 +40,10 @@ locals {
   ci_toolchain_name = (var.ci_toolchain_name == "") ? format("${var.toolchain_name}%s", "-CI-Toolchain") : var.ci_toolchain_name
   cd_toolchain_name = (var.cd_toolchain_name == "") ? format("${var.toolchain_name}%s", "-CD-Toolchain") : var.cd_toolchain_name
   cc_toolchain_name = (var.cc_toolchain_name == "") ? format("${var.toolchain_name}%s", "-CC-Toolchain") : var.cc_toolchain_name
+
+  ci_repositories_prefix = (var.ci_repositories_prefix == "") ? var.repositories_prefix : var.ci_repositories_prefix
+  cd_repositories_prefix = (var.cd_repositories_prefix == "") ? var.repositories_prefix : var.cd_repositories_prefix
+  cc_repositories_prefix = (var.cc_repositories_prefix == "") ? var.repositories_prefix : var.cc_repositories_prefix
 }
 
 
@@ -49,7 +53,7 @@ data "ibm_resource_group" "resource_group" {
 
 resource "ibm_resource_instance" "cd_instance" {
   count             = (var.create_cd_instance) ? 1 : 0
-  name              = var.cd_instance_name
+  name              = (var.prefix == "") ? var.cd_instance_name : format("${var.prefix}-%s", var.cd_instance_name)
   service           = "continuous-delivery"
   plan              = var.cd_service_plan
   location          = var.toolchain_region
@@ -60,7 +64,6 @@ module "prereqs" {
   source                         = "./prereqs"
   depends_on                     = [data.ibm_resource_group.resource_group]
   create_icr_namespace           = var.create_icr_namespace
-  create_sm_secret_group         = var.create_sm_secret_group
   create_ibmcloud_api_key        = var.create_ibmcloud_api_key
   create_cos_api_key             = var.create_cos_api_key
   create_signing_key             = var.create_signing_key
@@ -71,11 +74,13 @@ module "prereqs" {
   sm_secret_group_name           = var.sm_secret_group
   registry_namespace             = var.registry_namespace
   resource_group_id              = data.ibm_resource_group.resource_group.id
+  create_secret_group            = var.create_secret_group
   cos_api_key_secret_name        = var.cos_api_key_secret_name
   iam_api_key_secret_name        = var.pipeline_ibmcloud_api_key_secret_name
   signing_key_secret_name        = var.ci_signing_key_secret_name
   signing_certifcate_secret_name = var.cd_code_signing_cert_secret_name
   sm_exists                      = var.enable_secrets_manager
+  prefix                         = var.prefix
 }
 
 module "devsecops_ci_toolchain" {
@@ -83,7 +88,7 @@ module "devsecops_ci_toolchain" {
   depends_on               = [ibm_resource_instance.cd_instance]
   source                   = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-ci-toolchain?ref=v1.4.0"
   ibmcloud_api_key         = var.ibmcloud_api_key
-  toolchain_name           = (var.toolchain_name_prefix == "") ? local.ci_toolchain_name : format("${var.toolchain_name_prefix}-%s", local.ci_toolchain_name)
+  toolchain_name           = (var.prefix == "") ? local.ci_toolchain_name : format("${var.prefix}-%s", local.ci_toolchain_name)
   toolchain_region         = (var.ci_toolchain_region == "") ? var.toolchain_region : replace(replace(var.ci_toolchain_region, "ibm:yp:", ""), "ibm:ys1:", "")
   toolchain_resource_group = (var.ci_toolchain_resource_group == "") ? var.toolchain_resource_group : var.ci_toolchain_resource_group
   toolchain_description    = var.ci_toolchain_description
@@ -229,7 +234,7 @@ module "devsecops_ci_toolchain" {
   cluster_namespace                  = var.ci_cluster_namespace
   registry_region                    = (var.ci_registry_region == "") ? format("${var.environment_prefix}%s", var.toolchain_region) : format("${var.environment_prefix}%s", replace(replace(var.ci_registry_region, "ibm:yp:", ""), "ibm:ys1:", ""))
   authorization_policy_creation      = (var.ci_authorization_policy_creation == "") ? var.authorization_policy_creation : var.ci_authorization_policy_creation
-  repositories_prefix                = (var.ci_repositories_prefix == "") ? var.repositories_prefix : var.ci_repositories_prefix
+  repositories_prefix                = (local.ci_repositories_prefix == "compliance" && var.prefix != "") ? format("%s-%s", var.prefix, local.ci_repositories_prefix) : local.ci_repositories_prefix
   doi_toolchain_id                   = var.ci_doi_toolchain_id
   pipeline_debug                     = var.ci_pipeline_debug
   opt_in_dynamic_api_scan            = var.ci_opt_in_dynamic_api_scan
@@ -330,7 +335,7 @@ module "devsecops_cd_toolchain" {
   source           = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain?ref=v1.4.0"
   ibmcloud_api_key = var.ibmcloud_api_key
 
-  toolchain_name           = (var.toolchain_name_prefix == "") ? local.cd_toolchain_name : format("${var.toolchain_name_prefix}-%s", local.cd_toolchain_name)
+  toolchain_name           = (var.prefix == "") ? local.cd_toolchain_name : format("${var.prefix}-%s", local.cd_toolchain_name)
   toolchain_description    = var.cd_toolchain_description
   toolchain_region         = (var.cd_toolchain_region == "") ? var.toolchain_region : replace(replace(var.cd_toolchain_region, "ibm:yp:", ""), "ibm:ys1:", "")
   toolchain_resource_group = (var.cd_toolchain_resource_group == "") ? var.toolchain_resource_group : var.cd_toolchain_resource_group
@@ -480,7 +485,7 @@ module "devsecops_cd_toolchain" {
   cluster_name                  = (var.cd_cluster_name == "") ? var.cluster_name : var.cd_cluster_name
   cluster_namespace             = var.cd_cluster_namespace
   cluster_region                = (var.cd_cluster_region == "") ? format("${var.environment_prefix}%s", var.toolchain_region) : format("${var.environment_prefix}%s", replace(replace(var.cd_cluster_region, "ibm:yp:", ""), "ibm:ys1:", ""))
-  repositories_prefix           = (var.cd_repositories_prefix == "") ? var.repositories_prefix : var.cd_repositories_prefix
+  repositories_prefix           = (local.cd_repositories_prefix == "compliance" && var.prefix != "") ? format("%s-%s", var.prefix, local.cd_repositories_prefix) : local.cd_repositories_prefix
   authorization_policy_creation = (var.cd_authorization_policy_creation == "") ? var.authorization_policy_creation : var.cd_authorization_policy_creation
   doi_environment               = var.cd_doi_environment
   link_to_doi_toolchain         = var.cd_link_to_doi_toolchain
@@ -560,7 +565,7 @@ module "devsecops_cc_toolchain" {
   depends_on                    = [ibm_resource_instance.cd_instance]
   source                        = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cc-toolchain?ref=v1.4.0"
   ibmcloud_api_key              = var.ibmcloud_api_key
-  toolchain_name                = (var.toolchain_name_prefix == "") ? local.cc_toolchain_name : format("${var.toolchain_name_prefix}-%s", local.cc_toolchain_name)
+  toolchain_name                = (var.prefix == "") ? local.cc_toolchain_name : format("${var.prefix}-%s", local.cc_toolchain_name)
   toolchain_description         = var.cc_toolchain_description
   toolchain_region              = (var.cc_toolchain_region == "") ? var.toolchain_region : replace(replace(var.cc_toolchain_region, "ibm:yp:", ""), "ibm:ys1:", "")
   toolchain_resource_group      = (var.cc_toolchain_resource_group == "") ? var.toolchain_resource_group : var.cc_toolchain_resource_group
@@ -700,7 +705,7 @@ module "devsecops_cc_toolchain" {
   #OTHER INTEGRATIONS
   slack_notifications              = local.cc_slack_notification_state
   sonarqube_config                 = var.cc_sonarqube_config
-  repositories_prefix              = (var.cc_repositories_prefix == "") ? var.repositories_prefix : var.cc_repositories_prefix
+  repositories_prefix              = (local.cc_repositories_prefix == "compliance" && var.prefix != "") ? format("%s-%s", var.prefix, local.cc_repositories_prefix) : local.cc_repositories_prefix
   doi_toolchain_id                 = try(module.devsecops_ci_toolchain[0].toolchain_id, var.cc_doi_toolchain_id)
   pipeline_debug                   = var.cc_pipeline_debug
   opt_in_dynamic_api_scan          = var.cc_opt_in_dynamic_api_scan

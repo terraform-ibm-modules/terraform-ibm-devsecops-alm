@@ -395,9 +395,9 @@ variable "repo_secret_group" {
   default     = ""
 }
 
-variable "toolchain_name_prefix" {
+variable "prefix" {
   type        = string
-  description = "A prefix that is added to the toolchain names."
+  description = "A prefix that is added to the toolchain resources."
   default     = ""
 }
 
@@ -3645,10 +3645,9 @@ variable "cd_service_plan" {
 }
 
 ###### PRE REQS #########################
-
-variable "create_sm_secret_group" {
+variable "create_secret_group" {
   type        = bool
-  description = "Set to `true` to create a secrets group in Secrets Manager."
+  description = "Set to `true` to create the specified Secrets Manager secret group."
   default     = false
 }
 
