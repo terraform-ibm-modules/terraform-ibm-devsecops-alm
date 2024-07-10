@@ -65,7 +65,7 @@ resource "ibm_sm_secret_group" "sm_secret_group" {
 }
 
 data "ibm_sm_secret_group" "existing_sm_secret_group" {
-  count           = ((var.create_secret_group == false) && (var.sm_exists == true)) ? 1 : 0
+  count           = ((var.create_secret_group == false) && (var.sm_exists == true) && (local.secret_group_id != "")) ? 1 : 0
   instance_id     = (local.sm_instance_id != "") ? local.sm_instance_id : var.sm_instance_id
   region          = var.sm_location
   secret_group_id = local.secret_group_id
