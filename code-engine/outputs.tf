@@ -57,6 +57,11 @@ output "compliance_cd_toolchain_url" {
   value       = try(module.devsecops_cd_toolchain[0].toolchain_url, "")
 }
 
+output "change_management_repo_url" {
+  description = "The Change Management Repo URL."
+  value       = try(module.devsecops_cd_toolchain[0].change_management_repo_url, "")
+}
+
 output "compliance_cc_toolchain_url" {
   description = "The Compliance CC Toolchain URL"
   value       = try(module.devsecops_cc_toolchain[0].toolchain_url, "")
