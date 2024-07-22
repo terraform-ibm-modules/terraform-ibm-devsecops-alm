@@ -637,6 +637,7 @@ statement instead the previous block.
 | <a name="output_app_repo_url"></a> [app\_repo\_url](#output\_app\_repo\_url) | The App Repo URL |
 | <a name="output_cc_pipeline_id"></a> [cc\_pipeline\_id](#output\_cc\_pipeline\_id) | The CC pipeline Id |
 | <a name="output_cd_pipeline_id"></a> [cd\_pipeline\_id](#output\_cd\_pipeline\_id) | The CD pipeline Id |
+| <a name="output_change_management_repo_url"></a> [change\_management\_repo\_url](#output\_change\_management\_repo\_url) | The Change Management Repo URL. |
 | <a name="output_ci_pipeline_id"></a> [ci\_pipeline\_id](#output\_ci\_pipeline\_id) | The CI pipeline Id |
 | <a name="output_compliance_cc_toolchain_id"></a> [compliance\_cc\_toolchain\_id](#output\_compliance\_cc\_toolchain\_id) | The ID of the Compliance CC Toolchain |
 | <a name="output_compliance_cc_toolchain_url"></a> [compliance\_cc\_toolchain\_url](#output\_compliance\_cc\_toolchain\_url) | The Compliance CC Toolchain URL |
