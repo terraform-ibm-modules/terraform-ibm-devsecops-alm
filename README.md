@@ -65,9 +65,9 @@ statement instead the previous block.
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_devsecops_cc_toolchain"></a> [devsecops\_cc\_toolchain](#module\_devsecops\_cc\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cc-toolchain | v1.4.0 |
-| <a name="module_devsecops_cd_toolchain"></a> [devsecops\_cd\_toolchain](#module\_devsecops\_cd\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain | v1.4.0 |
-| <a name="module_devsecops_ci_toolchain"></a> [devsecops\_ci\_toolchain](#module\_devsecops\_ci\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-ci-toolchain | v1.4.0 |
+| <a name="module_devsecops_cc_toolchain"></a> [devsecops\_cc\_toolchain](#module\_devsecops\_cc\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cc-toolchain | v1.5.0 |
+| <a name="module_devsecops_cd_toolchain"></a> [devsecops\_cd\_toolchain](#module\_devsecops\_cd\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain | v1.5.0 |
+| <a name="module_devsecops_ci_toolchain"></a> [devsecops\_ci\_toolchain](#module\_devsecops\_ci\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-ci-toolchain | v1.5.0 |
 | <a name="module_prereqs"></a> [prereqs](#module\_prereqs) | ./prereqs | n/a |
 
 ### Resources
@@ -637,6 +637,7 @@ statement instead the previous block.
 | <a name="output_app_repo_url"></a> [app\_repo\_url](#output\_app\_repo\_url) | The App Repo URL |
 | <a name="output_cc_pipeline_id"></a> [cc\_pipeline\_id](#output\_cc\_pipeline\_id) | The CC pipeline Id |
 | <a name="output_cd_pipeline_id"></a> [cd\_pipeline\_id](#output\_cd\_pipeline\_id) | The CD pipeline Id |
+| <a name="output_change_management_repo_url"></a> [change\_management\_repo\_url](#output\_change\_management\_repo\_url) | The Change Management Repo URL. |
 | <a name="output_ci_pipeline_id"></a> [ci\_pipeline\_id](#output\_ci\_pipeline\_id) | The CI pipeline Id |
 | <a name="output_compliance_cc_toolchain_id"></a> [compliance\_cc\_toolchain\_id](#output\_compliance\_cc\_toolchain\_id) | The ID of the Compliance CC Toolchain |
 | <a name="output_compliance_cc_toolchain_url"></a> [compliance\_cc\_toolchain\_url](#output\_compliance\_cc\_toolchain\_url) | The Compliance CC Toolchain URL |
