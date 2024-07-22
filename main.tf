@@ -44,6 +44,9 @@ locals {
   ci_repositories_prefix = (var.ci_repositories_prefix == "") ? var.repositories_prefix : var.ci_repositories_prefix
   cd_repositories_prefix = (var.cd_repositories_prefix == "") ? var.repositories_prefix : var.cd_repositories_prefix
   cc_repositories_prefix = (var.cc_repositories_prefix == "") ? var.repositories_prefix : var.cc_repositories_prefix
+
+  enable_prereqs = ((var.create_icr_namespace == true) || (var.create_signing_certificate == true) || (var.create_secret_group == true) ||
+  (var.create_ibmcloud_api_key == true) || (var.create_cos_api_key == true) || (var.create_signing_key == true)) ? true : false
 }
 
 
@@ -61,6 +64,7 @@ resource "ibm_resource_instance" "cd_instance" {
 }
 
 module "prereqs" {
+  count                          = (local.enable_prereqs) ? 1 : 0
   source                         = "./prereqs"
   depends_on                     = [data.ibm_resource_group.resource_group]
   create_icr_namespace           = var.create_icr_namespace
@@ -92,7 +96,7 @@ module "devsecops_ci_toolchain" {
   toolchain_region         = (var.ci_toolchain_region == "") ? var.toolchain_region : replace(replace(var.ci_toolchain_region, "ibm:yp:", ""), "ibm:ys1:", "")
   toolchain_resource_group = (var.ci_toolchain_resource_group == "") ? var.toolchain_resource_group : var.ci_toolchain_resource_group
   toolchain_description    = var.ci_toolchain_description
-  registry_namespace       = module.prereqs.registry_namespace
+  registry_namespace       = (local.enable_prereqs) ? module.prereqs[0].registry_namespace : var.registry_namespace
   ibmcloud_api             = var.ibmcloud_api
   compliance_base_image    = (var.ci_compliance_base_image == "") ? var.compliance_base_image : var.ci_compliance_base_image
   ci_pipeline_branch       = (var.ci_compliance_pipeline_branch == "") ? var.compliance_pipeline_branch : var.ci_compliance_pipeline_branch
