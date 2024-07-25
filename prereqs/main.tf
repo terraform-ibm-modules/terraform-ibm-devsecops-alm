@@ -1,7 +1,6 @@
 locals {
-  sm_instance_id     = try(data.ibm_resource_instance.sm_instance[0].guid, "")
-  sm_instance_crn    = try(data.ibm_resource_instance.sm_instance[0].id, "")
-  registry_namespace = (var.add_container_name_suffix) ? format("%s-%s", var.registry_namespace, random_string.resource_suffix[0].result) : var.registry_namespace
+  sm_instance_id  = try(data.ibm_resource_instance.sm_instance[0].guid, "")
+  sm_instance_crn = try(data.ibm_resource_instance.sm_instance[0].id, "")
 
   # Look up the ID of a SM secret group based on secret group name
   # 1) get the list of secret groups where each element is an Object with secret group Details
@@ -20,11 +19,15 @@ locals {
 
 ####### SECRETS MANAGER #####################
 
+data "ibm_resource_group" "resource_group" {
+  name = var.sm_resource_group
+}
+
 data "ibm_resource_instance" "sm_instance" {
   count             = ((var.sm_name != "") && (var.sm_location != "") && (var.sm_exists == true)) ? 1 : 0
   name              = var.sm_name
   location          = var.sm_location
-  resource_group_id = var.resource_group_id
+  resource_group_id = data.ibm_resource_group.resource_group.id
   service           = "secrets-manager"
 }
 
@@ -125,19 +128,4 @@ resource "ibm_sm_arbitrary_secret" "secret_signing_certifcate" {
   payload         = (var.signing_certificate_secret == "") ? data.external.signing_keys[0].result.publickey : var.signing_certificate_secret
   expiration_date = null
   endpoint_type   = var.sm_endpoint_type
-}
-
-#################### ICR ###########################
-
-resource "random_string" "resource_suffix" {
-  count   = (var.add_container_name_suffix) ? 1 : 0
-  length  = var.random_string_length
-  special = false
-  upper   = false
-}
-
-resource "ibm_cr_namespace" "cr_namespace" {
-  count             = ((var.registry_namespace != "") && (var.create_icr_namespace == true)) ? 1 : 0
-  name              = (var.prefix == "") ? local.registry_namespace : format("%s-%s", var.prefix, local.registry_namespace)
-  resource_group_id = var.resource_group_id
 }

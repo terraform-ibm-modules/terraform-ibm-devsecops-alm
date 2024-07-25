@@ -45,8 +45,11 @@ locals {
   cd_repositories_prefix = (var.cd_repositories_prefix == "") ? var.repositories_prefix : var.cd_repositories_prefix
   cc_repositories_prefix = (var.cc_repositories_prefix == "") ? var.repositories_prefix : var.cc_repositories_prefix
 
-  enable_prereqs = ((var.create_icr_namespace == true) || (var.create_signing_certificate == true) || (var.create_secret_group == true) ||
+  enable_prereqs = ((var.create_signing_certificate == true) || (var.create_secret_group == true) ||
   (var.create_ibmcloud_api_key == true) || (var.create_cos_api_key == true) || (var.create_signing_key == true)) ? true : false
+
+  registry_namespace_suffix = (var.add_container_name_suffix) ? format("%s-%s", var.registry_namespace, random_string.resource_suffix[0].result) : var.registry_namespace
+  registry_namespace        = (var.prefix == "") ? local.registry_namespace_suffix : format("%s-%s", var.prefix, local.registry_namespace_suffix)
 }
 
 
@@ -63,28 +66,39 @@ resource "ibm_resource_instance" "cd_instance" {
   resource_group_id = data.ibm_resource_group.resource_group.id
 }
 
+#################### ICR ###########################
+
+resource "random_string" "resource_suffix" {
+  count   = (var.add_container_name_suffix) ? 1 : 0
+  length  = 4
+  special = false
+  upper   = false
+}
+
+resource "ibm_cr_namespace" "cr_namespace" {
+  count             = ((var.registry_namespace != "") && (var.create_icr_namespace == true)) ? 1 : 0
+  name              = local.registry_namespace
+  resource_group_id = data.ibm_resource_group.resource_group.id
+}
+
+################ Experimental #####################
 module "prereqs" {
   count                          = (local.enable_prereqs) ? 1 : 0
   source                         = "./prereqs"
-  depends_on                     = [data.ibm_resource_group.resource_group]
-  create_icr_namespace           = var.create_icr_namespace
   create_ibmcloud_api_key        = var.create_ibmcloud_api_key
   create_cos_api_key             = var.create_cos_api_key
   create_signing_key             = var.create_signing_key
   create_signing_certificate     = var.create_signing_certificate
-  add_container_name_suffix      = var.add_container_name_suffix
   sm_name                        = var.sm_name
   sm_location                    = var.sm_location
   sm_secret_group_name           = var.sm_secret_group
-  registry_namespace             = var.registry_namespace
-  resource_group_id              = data.ibm_resource_group.resource_group.id
+  sm_resource_group              = var.sm_resource_group
   create_secret_group            = var.create_secret_group
   cos_api_key_secret_name        = var.cos_api_key_secret_name
   iam_api_key_secret_name        = var.pipeline_ibmcloud_api_key_secret_name
   signing_key_secret_name        = var.ci_signing_key_secret_name
   signing_certifcate_secret_name = var.cd_code_signing_cert_secret_name
   sm_exists                      = var.enable_secrets_manager
-  prefix                         = var.prefix
 }
 
 module "devsecops_ci_toolchain" {
@@ -96,7 +110,7 @@ module "devsecops_ci_toolchain" {
   toolchain_region         = (var.ci_toolchain_region == "") ? var.toolchain_region : replace(replace(var.ci_toolchain_region, "ibm:yp:", ""), "ibm:ys1:", "")
   toolchain_resource_group = (var.ci_toolchain_resource_group == "") ? var.toolchain_resource_group : var.ci_toolchain_resource_group
   toolchain_description    = var.ci_toolchain_description
-  registry_namespace       = (local.enable_prereqs) ? module.prereqs[0].registry_namespace : var.registry_namespace
+  registry_namespace       = local.registry_namespace
   ibmcloud_api             = var.ibmcloud_api
   compliance_base_image    = (var.ci_compliance_base_image == "") ? var.compliance_base_image : var.ci_compliance_base_image
   ci_pipeline_branch       = (var.ci_compliance_pipeline_branch == "") ? var.compliance_pipeline_branch : var.ci_compliance_pipeline_branch
