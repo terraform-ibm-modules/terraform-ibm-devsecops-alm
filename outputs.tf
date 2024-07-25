@@ -86,4 +86,10 @@ output "pr_pipeline_id" {
   description = "The PR pipeline Id"
   value       = try(module.devsecops_ci_toolchain[0].pr_pipeline_id, "")
 }
+
+output "icr_namespace_name" {
+  description = "The name of the targets ICR namespace."
+  value       = (var.prefix == "") ? local.registry_namespace_suffix : local.registry_namespace
+}
+
 #############################################################################

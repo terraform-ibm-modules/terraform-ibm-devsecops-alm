@@ -3677,7 +3677,7 @@ variable "create_signing_certificate" {
 
 variable "create_icr_namespace" {
   type        = bool
-  description = "Set to `true` to create the namespace."
+  description = "Set to `true` to have Terraform create the registry namespace. Setting to `false` will have the CI pipeline create the namespace if it does not already exist. Note: If a Terraform destroy is used, the ICR namespace along with all images will be removed."
   default     = false
 }
 

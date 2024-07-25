@@ -129,44 +129,8 @@ variable "signing_key_secret_name" {
 }
 
 ##################### ICR ################
-variable "create_icr_namespace" {
-  type        = bool
-  description = "Set to `true` to create the namespace."
-  default     = false
-}
-
-variable "add_container_name_suffix" {
-  type        = bool
-  description = "Set to `true` to add a random suffix to the specified ICR name."
-  default     = false
-}
-
-variable "registry_namespace" {
+variable "sm_resource_group" {
   type        = string
-  description = "The name of the secret as it appears in Secret Manager."
-  default     = ""
-}
-
-variable "resource_group_id" {
-  type        = string
-  description = "The ID of the resource group containing the ICR"
-  default     = ""
-}
-
-variable "random_string_length" {
-  type        = number
-  description = "The length of the random suffix added to the resource name."
-  default     = 4
-}
-
-#variable "ibmcloud_api_key" {
-#  type        = string
-#  description = "API key belonging to the account in which all the resources are created."
-#  sensitive   = true
-#}
-
-variable "prefix" {
-  type        = string
-  description = "A prefix that will be added before the `cd_instance_name` and the `registry_namespace` name."
+  description = "The name of the resource group containing the Secrets Manager instance."
   default     = ""
 }
