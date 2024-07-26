@@ -226,6 +226,13 @@
 							"required": false
 						},
 						{
+							"key": "sm_endpoint_type",
+							"type": "string",
+							"default_value": "private",
+							"description": "The types of service endpoints to target for Secrets Manager.",
+							"required": false
+						},
+						{
 							"key": "ci_pipeline_properties",
 							"type": "string",
 							"default_value": "",
@@ -4152,6 +4159,13 @@
 							"type": "string",
 							"default_value": "",
 							"description": "The CRN of the Secrets Manager instance. Will apply to CI, CD and CC toolchains unless set individually.",
+							"required": false
+						},
+						{
+							"key": "sm_endpoint_type",
+							"type": "string",
+							"default_value": "private",
+							"description": "The types of service endpoints to target for Secrets Manager.",
 							"required": false
 						},
 						{

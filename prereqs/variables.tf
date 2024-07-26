@@ -72,7 +72,7 @@ variable "sm_secret_group_name" {
 
 variable "sm_endpoint_type" {
   type        = string
-  description = "The types of service endpoints to target for the secret group`."
+  description = "The types of service endpoints to target for Secrets Manager."
   default     = "public"
 }
 

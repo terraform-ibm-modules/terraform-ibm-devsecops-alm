@@ -181,6 +181,12 @@ variable "sm_secret_group" {
   default     = "Default"
 }
 
+variable "sm_endpoint_type" {
+  type        = string
+  description = "The types of service endpoints to target for Secrets Manager."
+  default     = "private"
+}
+
 variable "kp_resource_group" {
   type        = string
   description = "The resource group containing the Key Protect instance. This applies to the CI, CD and CC Key Protect integrations. See `ci_kp_resource_group`, `cd_kp_resource_group`, and `cc_kp_resource_group` to set separately."

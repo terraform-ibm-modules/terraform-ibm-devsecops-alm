@@ -32,9 +32,10 @@ data "ibm_resource_instance" "sm_instance" {
 }
 
 data "ibm_sm_secret_groups" "secret_groups" {
-  count       = (var.sm_exists) ? 1 : 0
-  instance_id = (local.sm_instance_id != "") ? local.sm_instance_id : var.sm_instance_id
-  region      = var.sm_location
+  count         = (var.sm_exists) ? 1 : 0
+  instance_id   = (local.sm_instance_id != "") ? local.sm_instance_id : var.sm_instance_id
+  region        = var.sm_location
+  endpoint_type = var.sm_endpoint_type
 }
 
 #################### SECRETS #######################
@@ -72,6 +73,7 @@ data "ibm_sm_secret_group" "existing_sm_secret_group" {
   instance_id     = (local.sm_instance_id != "") ? local.sm_instance_id : var.sm_instance_id
   region          = var.sm_location
   secret_group_id = local.secret_group_id
+  endpoint_type   = var.sm_endpoint_type
 }
 
 resource "ibm_sm_arbitrary_secret" "secret_ibmcloud_api_key" {
