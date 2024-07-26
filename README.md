@@ -81,8 +81,10 @@ statement instead the previous block.
 | [ibm_cd_tekton_pipeline_trigger_property.ci_pipeline_webhook_branch_property](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/resources/cd_tekton_pipeline_trigger_property) | resource |
 | [ibm_cd_tekton_pipeline_trigger_property.ci_pipeline_webhook_name_property](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/resources/cd_tekton_pipeline_trigger_property) | resource |
 | [ibm_cd_tekton_pipeline_trigger_property.ci_pipeline_webhook_repo_url_property](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/resources/cd_tekton_pipeline_trigger_property) | resource |
+| [ibm_cr_namespace.cr_namespace](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/resources/cr_namespace) | resource |
 | [ibm_resource_instance.cd_instance](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/resources/resource_instance) | resource |
 | [null_resource.ci_pipeline_run](https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource) | resource |
+| [random_string.resource_suffix](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/string) | resource |
 | [random_string.webhook_secret](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/string) | resource |
 | [ibm_resource_group.resource_group](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/data-sources/resource_group) | data source |
 
@@ -547,7 +549,7 @@ statement instead the previous block.
 | <a name="input_create_ci_toolchain"></a> [create\_ci\_toolchain](#input\_create\_ci\_toolchain) | Flag which determines if the DevSecOps CI toolchain is created. If this toolchain is not created then values must be set for the following variables, evidence\_repo\_url, issues\_repo\_url and inventory\_repo\_url. | `bool` | `true` | no |
 | <a name="input_create_cos_api_key"></a> [create\_cos\_api\_key](#input\_create\_cos\_api\_key) | Set to `true` to create and add a `cos-api-key` to the Secrets Provider. | `bool` | `false` | no |
 | <a name="input_create_ibmcloud_api_key"></a> [create\_ibmcloud\_api\_key](#input\_create\_ibmcloud\_api\_key) | Set to `true` to create and add an `ibmcloud-api-key` to the Secrets Provider. | `bool` | `false` | no |
-| <a name="input_create_icr_namespace"></a> [create\_icr\_namespace](#input\_create\_icr\_namespace) | Set to `true` to create the namespace. | `bool` | `false` | no |
+| <a name="input_create_icr_namespace"></a> [create\_icr\_namespace](#input\_create\_icr\_namespace) | Set to `true` to have Terraform create the registry namespace. Setting to `false` will have the CI pipeline create the namespace if it does not already exist. Note: If a Terraform destroy is used, the ICR namespace along with all images will be removed. | `bool` | `false` | no |
 | <a name="input_create_secret_group"></a> [create\_secret\_group](#input\_create\_secret\_group) | Set to `true` to create the specified Secrets Manager secret group. | `bool` | `false` | no |
 | <a name="input_create_signing_certificate"></a> [create\_signing\_certificate](#input\_create\_signing\_certificate) | Set to `true` to create and add the `signing-certificate` to the Secrets Provider. | `bool` | `false` | no |
 | <a name="input_create_signing_key"></a> [create\_signing\_key](#input\_create\_signing\_key) | Set to `true` to create and add a `signing_key`to the Secrets Provider. | `bool` | `false` | no |
@@ -646,6 +648,7 @@ statement instead the previous block.
 | <a name="output_compliance_ci_toolchain_id"></a> [compliance\_ci\_toolchain\_id](#output\_compliance\_ci\_toolchain\_id) | The ID of the Compliance CI Toolchain |
 | <a name="output_compliance_ci_toolchain_url"></a> [compliance\_ci\_toolchain\_url](#output\_compliance\_ci\_toolchain\_url) | The Compliance CI Toolchain URL |
 | <a name="output_evidence_repo_url"></a> [evidence\_repo\_url](#output\_evidence\_repo\_url) | The Evidence Repo URL |
+| <a name="output_icr_namespace_name"></a> [icr\_namespace\_name](#output\_icr\_namespace\_name) | The name of the targets ICR namespace. |
 | <a name="output_inventory_repo_url"></a> [inventory\_repo\_url](#output\_inventory\_repo\_url) | The Inventory Repo URL |
 | <a name="output_issues_repo_url"></a> [issues\_repo\_url](#output\_issues\_repo\_url) | The Issues Repo URL |
 | <a name="output_key_protect_instance_id"></a> [key\_protect\_instance\_id](#output\_key\_protect\_instance\_id) | The Key Protect Instance ID |

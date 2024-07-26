@@ -14,11 +14,6 @@ output "gpg_public_certificate" {
   sensitive   = true
 }
 
-output "registry_namespace" {
-  description = "The name of created IBM Cloud Container Registry namespace."
-  value       = (var.prefix == "") ? local.registry_namespace : format("%s-%s", var.prefix, local.registry_namespace)
-}
-
 output "sm_instance_crn" {
   description = "The instance ID of the specified Secrets Manager."
   value       = local.sm_instance_crn
