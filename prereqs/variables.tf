@@ -76,6 +76,12 @@ variable "sm_endpoint_type" {
   default     = "public"
 }
 
+variable "expiration_period" {
+  type        = string
+  description = "The number of days until the secret expires."
+  default     = ""
+}
+
 variable "cos_api_key_secret" {
   type        = string
   description = "apikey"

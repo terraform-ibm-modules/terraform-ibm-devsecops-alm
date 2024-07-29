@@ -187,6 +187,12 @@ variable "sm_endpoint_type" {
   default     = "private"
 }
 
+variable "expiration_period" {
+  type        = string
+  description = "The number of days until the secret expires."
+  default     = ""
+}
+
 variable "kp_resource_group" {
   type        = string
   description = "The resource group containing the Key Protect instance. This applies to the CI, CD and CC Key Protect integrations. See `ci_kp_resource_group`, `cd_kp_resource_group`, and `cc_kp_resource_group` to set separately."
