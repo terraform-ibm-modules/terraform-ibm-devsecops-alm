@@ -76,7 +76,7 @@ variable "sm_endpoint_type" {
   default     = "public"
 }
 
-variable "expiration_period" {
+variable "sm_secret_expiration_period" {
   type        = string
   description = "The number of days until the secret expires. Leave empty to not set an expiration."
   default     = ""

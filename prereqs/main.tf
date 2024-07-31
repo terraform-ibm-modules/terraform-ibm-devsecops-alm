@@ -16,13 +16,13 @@ locals {
   secret_group_list = (var.sm_exists) ? data.ibm_sm_secret_groups.secret_groups[0].secret_groups : []
   secret_group_id   = try(local.secret_group_list[index(local.secret_group_list[*].name, var.sm_secret_group_name)].id, "")
 
-  expiration_period_hours = (var.expiration_period != "") ? var.expiration_period * 24 : null
+  sm_secret_expiration_period_hours = ((var.sm_secret_expiration_period != "") && (var.sm_secret_expiration_period != "0")) ? var.sm_secret_expiration_period * 24 : null
 
-  expiration_date = (local.expiration_period_hours != null) ? timeadd(time_static.timestamp[0].rfc3339, local.expiration_period_hours) : null
+  expiration_date = (local.sm_secret_expiration_period_hours != null) ? timeadd(time_static.timestamp[0].rfc3339, "${local.sm_secret_expiration_period_hours}h") : null
 }
 
 resource "time_static" "timestamp" {
-  count = (local.expiration_period_hours != null) ? 1 : 0
+  count = (local.sm_secret_expiration_period_hours != null) ? 1 : 0
 }
 
 ####### SECRETS MANAGER #####################
