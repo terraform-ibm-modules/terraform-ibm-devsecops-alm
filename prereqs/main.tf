@@ -15,6 +15,14 @@ locals {
   # 3) retrive that object from the list and get the ID from it
   secret_group_list = (var.sm_exists) ? data.ibm_sm_secret_groups.secret_groups[0].secret_groups : []
   secret_group_id   = try(local.secret_group_list[index(local.secret_group_list[*].name, var.sm_secret_group_name)].id, "")
+
+  sm_secret_expiration_period_hours = ((var.sm_secret_expiration_period != "") && (var.sm_secret_expiration_period != "0")) ? var.sm_secret_expiration_period * 24 : null
+
+  expiration_date = (local.sm_secret_expiration_period_hours != null) ? timeadd(time_static.timestamp[0].rfc3339, "${local.sm_secret_expiration_period_hours}h") : null
+}
+
+resource "time_static" "timestamp" {
+  count = (local.sm_secret_expiration_period_hours != null) ? 1 : 0
 }
 
 ####### SECRETS MANAGER #####################
@@ -32,9 +40,10 @@ data "ibm_resource_instance" "sm_instance" {
 }
 
 data "ibm_sm_secret_groups" "secret_groups" {
-  count       = (var.sm_exists) ? 1 : 0
-  instance_id = (local.sm_instance_id != "") ? local.sm_instance_id : var.sm_instance_id
-  region      = var.sm_location
+  count         = (var.sm_exists) ? 1 : 0
+  instance_id   = (local.sm_instance_id != "") ? local.sm_instance_id : var.sm_instance_id
+  region        = var.sm_location
+  endpoint_type = var.sm_endpoint_type
 }
 
 #################### SECRETS #######################
@@ -72,6 +81,7 @@ data "ibm_sm_secret_group" "existing_sm_secret_group" {
   instance_id     = (local.sm_instance_id != "") ? local.sm_instance_id : var.sm_instance_id
   region          = var.sm_location
   secret_group_id = local.secret_group_id
+  endpoint_type   = var.sm_endpoint_type
 }
 
 resource "ibm_sm_arbitrary_secret" "secret_ibmcloud_api_key" {
@@ -84,7 +94,7 @@ resource "ibm_sm_arbitrary_secret" "secret_ibmcloud_api_key" {
   description     = "The IBMCloud apikey for running the pipelines."
   labels          = []
   payload         = (var.iam_api_key_secret == "") ? ibm_iam_api_key.iam_api_key[0].apikey : var.iam_api_key_secret
-  expiration_date = null
+  expiration_date = local.expiration_date
   endpoint_type   = var.sm_endpoint_type
 }
 
@@ -98,7 +108,7 @@ resource "ibm_sm_arbitrary_secret" "secret_cos_api_key" {
   description     = "The COS apikey for accessing the associated COS instance."
   labels          = []
   payload         = (var.cos_api_key_secret == "") ? ibm_iam_api_key.cos_iam_api_key[0].apikey : var.cos_api_key_secret
-  expiration_date = null
+  expiration_date = local.expiration_date
   endpoint_type   = var.sm_endpoint_type
 }
 
@@ -112,7 +122,7 @@ resource "ibm_sm_arbitrary_secret" "secret_signing_key" {
   description     = "The gpg signing key for signing images."
   labels          = []
   payload         = (var.signing_key_secret == "") ? data.external.signing_keys[0].result.signingkey : var.signing_key_secret
-  expiration_date = null
+  expiration_date = local.expiration_date
   endpoint_type   = var.sm_endpoint_type
 }
 
@@ -126,6 +136,6 @@ resource "ibm_sm_arbitrary_secret" "secret_signing_certifcate" {
   description     = "The public component of the GPG signing key for validating image signatures."
   labels          = []
   payload         = (var.signing_certificate_secret == "") ? data.external.signing_keys[0].result.publickey : var.signing_certificate_secret
-  expiration_date = null
+  expiration_date = local.expiration_date
   endpoint_type   = var.sm_endpoint_type
 }

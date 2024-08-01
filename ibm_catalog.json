@@ -226,6 +226,13 @@
 							"required": false
 						},
 						{
+							"key": "sm_endpoint_type",
+							"type": "string",
+							"default_value": "private",
+							"description": "The types of service endpoints to target for Secrets Manager.",
+							"required": false
+						},
+						{
 							"key": "ci_pipeline_properties",
 							"type": "string",
 							"default_value": "",
@@ -324,6 +331,13 @@
 							"type": "boolean",
 							"default_value": false,
 							"description": "Set to `true` to create and add a `cos-api-key` to the Secrets Provider.",
+							"required": false
+						},
+						{
+							"key": "sm_secret_expiration_period",
+							"type": "string",
+							"default_value": "",
+							"description": "The number of days until the secret expires. Leave empty to not set an expiration.",
 							"required": false
 						},
 						{
@@ -4155,6 +4169,13 @@
 							"required": false
 						},
 						{
+							"key": "sm_endpoint_type",
+							"type": "string",
+							"default_value": "private",
+							"description": "The types of service endpoints to target for Secrets Manager.",
+							"required": false
+						},
+						{
 							"key": "ci_pipeline_properties",
 							"type": "string",
 							"default_value": "",
@@ -4617,6 +4638,13 @@
 							"type": "boolean",
 							"default_value": false,
 							"description": "Set to `true` to create and add a `cos-api-key` to the Secrets Provider.",
+							"required": false
+						},
+						{
+							"key": "sm_secret_expiration_period",
+							"type": "string",
+							"default_value": "",
+							"description": "The number of days until the secret expires. Leave empty to not set an expiration.",
 							"required": false
 						},
 						{

@@ -72,8 +72,14 @@ variable "sm_secret_group_name" {
 
 variable "sm_endpoint_type" {
   type        = string
-  description = "The types of service endpoints to target for the secret group`."
+  description = "The types of service endpoints to target for Secrets Manager."
   default     = "public"
+}
+
+variable "sm_secret_expiration_period" {
+  type        = string
+  description = "The number of days until the secret expires. Leave empty to not set an expiration."
+  default     = ""
 }
 
 variable "cos_api_key_secret" {

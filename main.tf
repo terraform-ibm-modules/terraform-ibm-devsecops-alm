@@ -98,7 +98,9 @@ module "prereqs" {
   iam_api_key_secret_name        = var.pipeline_ibmcloud_api_key_secret_name
   signing_key_secret_name        = var.ci_signing_key_secret_name
   signing_certifcate_secret_name = var.cd_code_signing_cert_secret_name
+  sm_secret_expiration_period    = var.sm_secret_expiration_period
   sm_exists                      = var.enable_secrets_manager
+  sm_endpoint_type               = var.sm_endpoint_type
 }
 
 module "devsecops_ci_toolchain" {
