@@ -5,12 +5,6 @@
 ##############################################################################
 ##### START OF COMMON VARIABLES ##########
 
-variable "ibmcloud_api" {
-  type        = string
-  description = "IBM Cloud API Endpoint."
-  default     = "https://cloud.ibm.com"
-}
-
 variable "toolchain_region" {
   type        = string
   description = "The region identifier that will be used, by default, for all resource creation and service instance lookup. This can be overridden on a per resource/service basis. See `ci_toolchain_region`,`cd_toolchain_region`,`cc_toolchain_region`, `ci_cluster_region`, `cd_cluster_region`, `ci_registry_region`."
@@ -229,12 +223,6 @@ variable "toolchain_resource_group" {
   default     = "Default"
 }
 
-variable "gosec_repo_ssh_key_secret_group" {
-  type        = string
-  description = "Secret group prefix for the gosec private repository ssh key secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
-  default     = ""
-}
-
 variable "cos_endpoint" {
   type        = string
   description = "Set the Cloud Object Storage endpoint for accessing your COS bucket. This setting sets the same endpoint for COS in the CI, CD, and CC toolchains. See `ci_cos_endpoint`, `cd_cos_endpoint`, and `cc_cos_endpoint` to set the endpoints separately."
@@ -269,12 +257,6 @@ variable "slack_webhook_secret_name" {
   type        = string
   description = "Name of the webhook secret for Slack in the secret provider. This applies to the CI, CD, and CC toolchains. To set separately, see `ci_slack_webhook_secret_name`, `cd_slack_webhook_secret_name`, and `cc_slack_webhook_secret_name`"
   default     = "slack-webhook"
-}
-
-variable "gosec_repo_ssh_key_secret_name" {
-  type        = string
-  default     = "git-ssh-key"
-  description = "Name of the SSH key token for the private repository in the secret provider."
 }
 
 variable "sm_instance_crn" {
@@ -333,17 +315,6 @@ variable "sonarqube_secret_crn" {
   }
 }
 
-variable "gosec_private_repository_ssh_key_secret_crn" {
-  type        = string
-  sensitive   = true
-  description = "The CRN for the GoSec repository secret."
-  default     = ""
-  validation {
-    condition     = startswith(var.gosec_private_repository_ssh_key_secret_crn, "crn:") || var.gosec_private_repository_ssh_key_secret_crn == ""
-    error_message = "Must be a CRN or left empty."
-  }
-}
-
 variable "cos_api_key_secret_crn" {
   type        = string
   sensitive   = true
@@ -383,12 +354,6 @@ variable "authorization_policy_creation" {
   default     = ""
 }
 
-variable "slack_notifications" {
-  type        = string
-  description = "This is enabled automatically when a Slack integration is created. The switch overrides the Slack notifications. Set `1` for on and `0` for off. This applies to the CI, CD, and CC toolchains. To set separately, see `ci_slack_notifications`, `cd_slack_notifications`, and `cc_slack_notifications`."
-  default     = ""
-}
-
 variable "repo_group" {
   type        = string
   description = "Specify Git user or group for your application. This must be set if the repository authentication type is `pat` (personal access token)."
@@ -425,12 +390,6 @@ variable "environment_prefix" {
   default     = "ibm:yp:"
 }
 
-variable "compliance_base_image" {
-  type        = string
-  description = "Pipeline baseimage to run most of the built-in pipeline code."
-  default     = ""
-}
-
 variable "pipeline_git_tag" {
   type        = string
   description = "The GIT tag within the pipeline definitions repository for the Compliance Pipelines."
@@ -461,12 +420,6 @@ variable "compliance_pipeline_branch" {
   type        = string
   description = "The Compliance Pipeline branch."
   default     = "open-v10"
-}
-
-variable "peer_review_compliance" {
-  type        = string
-  description = "Set to `0` to disable. Set to `1` to enable peer review evidence collection. This parameter will apply to the CI, CD and CC pipelines. Can be set individually with `ci_peer_review_compliance`, `cd_peer_review_compliance`, `cc_peer_review_compliance`."
-  default     = "1"
 }
 
 variable "event_notifications_tool_name" {
@@ -553,18 +506,6 @@ variable "pipeline_doi_api_key_secret_group" {
   default     = ""
 }
 
-variable "opt_in_gosec" {
-  type        = string
-  description = "Enables gosec scans"
-  default     = ""
-}
-
-variable "gosec_private_repository_host" {
-  type        = string
-  description = "Your private repository base URL."
-  default     = ""
-}
-
 variable "autostart" {
   type        = bool
   description = "Set to `true` to auto run the CI pipeline in the CI toolchain after creation."
@@ -641,82 +582,10 @@ variable "ci_cluster_resource_group" {
   default     = ""
 }
 
-variable "pr_cra_bom_generate" {
-  type        = string
-  description = "Set this flag to `1` to generate cra bom in PR pipeline"
-  default     = "1"
-  validation {
-    condition     = contains(["0", "1"], var.pr_cra_bom_generate)
-    error_message = "Must be either \"0\" or \"1\" ."
-  }
-}
-
-variable "pr_cra_vulnerability_scan" {
-  type        = string
-  description = "Set this flag to `1` and `pr-cra-bom-generate` to `1` for cra vulnerability scan in PR pipeline. If this value is set to `1` and `pr-cra-bom-generate` is set to `0`, the scan will be marked as `failure`"
-  default     = "1"
-  validation {
-    condition     = contains(["0", "1"], var.pr_cra_vulnerability_scan)
-    error_message = "Must be either \"0\" or \"1\" ."
-  }
-
-}
-
-variable "pr_cra_deploy_analysis" {
-  type        = string
-  description = "Set this flag to `1` for cra deployment analysis to be done in PR pipeline."
-  default     = "1"
-  validation {
-    condition     = contains(["0", "1"], var.pr_cra_deploy_analysis)
-    error_message = "Must be either \"0\" or \"1\" ."
-  }
-}
-
-variable "ci_cra_bom_generate" {
-  type        = string
-  description = "Set this flag to `1` to generate cra bom in CI pipeline."
-  default     = "1"
-  validation {
-    condition     = contains(["0", "1"], var.ci_cra_bom_generate)
-    error_message = "Must be either \"0\" or \"1\" ."
-  }
-}
-
-variable "ci_cra_vulnerability_scan" {
-  type        = string
-  description = "Set this flag to `1` and `ci-cra-bom-generate` to `1` for cra vulnerability scan in CI pipeline. If this value is set to 1 and `ci-cra-bom-generate` is set to `0`, the scan will be marked as `failure`"
-  default     = "1"
-  validation {
-    condition     = contains(["0", "1"], var.ci_cra_vulnerability_scan)
-    error_message = "Must be either \"0\" or \"1\" ."
-  }
-
-}
-
-variable "ci_cra_deploy_analysis" {
-  type        = string
-  description = "Set this flag to `1` for cra deployment analysis to be done in CI pipeline."
-  default     = "1"
-  validation {
-    condition     = contains(["0", "1"], var.ci_cra_deploy_analysis)
-    error_message = "Must be either \"0\" or \"1\" ."
-  }
-}
-
 variable "ci_enable_pipeline_notifications" {
   type        = bool
   description = "When enabled, pipeline run events will be sent to the Event Notifications and Slack integrations in the enclosing toolchain."
   default     = false
-}
-
-variable "ci_event_notifications" {
-  type        = string
-  description = "To enable event notification, set event_notifications to 1 "
-  default     = "0"
-  validation {
-    condition     = contains(["0", "1"], var.ci_event_notifications)
-    error_message = "Must be either \"0\" or \"1\" ."
-  }
 }
 
 variable "registry_namespace" {
@@ -728,12 +597,6 @@ variable "registry_namespace" {
 variable "ci_registry_region" {
   type        = string
   description = "The IBM Cloud Region where the IBM Cloud Container Registry namespace is to be created. Use the short form of the regions. For example `us-south`."
-  default     = ""
-}
-
-variable "ci_compliance_base_image" {
-  type        = string
-  description = "Pipeline baseimage to run most of the built-in pipeline code."
   default     = ""
 }
 
@@ -779,12 +642,6 @@ variable "ci_pipeline_properties_filepath" {
   default     = ""
 }
 
-variable "ci_print_code_signing_certificate" {
-  type        = string
-  description = "Set to `1` to enable printing of the public signing certificate in the logs."
-  default     = "1"
-}
-
 variable "ci_repositories_prefix" {
   type        = string
   description = "Prefix name for the cloned compliance repos. For the repositories_prefix value only a-z, A-Z and 0-9 and the special characters `-_` are allowed. In addition the string must not end with a special character or have two consecutive special characters."
@@ -815,48 +672,6 @@ variable "ci_link_to_doi_toolchain" {
 variable "ci_doi_toolchain_id" {
   type        = string
   description = "DevOps Insights toolchain ID to link to."
-  default     = ""
-}
-
-variable "ci_pipeline_debug" {
-  type        = string
-  description = "'0' by default. Set to '1' to enable debug logging."
-  default     = "0"
-}
-
-variable "ci_opt_in_dynamic_api_scan" {
-  type        = string
-  description = "To enable the OWASP Zap API scan. '1' enable or '0' disable."
-  default     = "1"
-}
-
-variable "ci_opt_in_dynamic_ui_scan" {
-  type        = string
-  description = "To enable the OWASP Zap UI scan. '1' enable or '0' disable."
-  default     = "1"
-}
-
-variable "ci_opt_in_dynamic_scan" {
-  type        = string
-  description = "To enable the OWASP Zap scan. '1' enable or '0' disable."
-  default     = "1"
-}
-
-variable "ci_peer_review_compliance" {
-  type        = string
-  description = "Set to `0` to disable. Set to `1` to enable peer review evidence collection."
-  default     = ""
-}
-
-variable "ci_opt_in_gosec" {
-  type        = string
-  description = "Enables gosec scans"
-  default     = ""
-}
-
-variable "ci_gosec_private_repository_host" {
-  type        = string
-  description = "Your private repository base URL."
   default     = ""
 }
 
@@ -944,14 +759,6 @@ variable "ci_trigger_timed_pruner_enable" {
   default     = false
 }
 
-######## Deployment Strategy ##################
-
-variable "ci_deployment_target" {
-  type        = string
-  description = "The deployment target, cluster or code-engine."
-  default     = "cluster"
-}
-
 ######## Code Engine Vars #####################
 
 variable "ci_code_engine_project" {
@@ -970,24 +777,6 @@ variable "ci_code_engine_resource_group" {
   type        = string
   description = "The resource group of the Code Engine project."
   default     = "Default"
-}
-
-variable "ci_code_engine_entity_type" {
-  type        = string
-  description = "Deprecated: See Code Engine variant and `ci_code_engine_deployment_type`. Type of Code Engine entity to create/update as part of deployment. Default type is 'application'. Set as 'job' for 'job' type."
-  default     = ""
-}
-
-variable "ci_code_engine_build_strategy" {
-  type        = string
-  description = "The build strategy for the Code Engine entity. Default strategy is 'dockerfile'. Set as 'buildpacks' for 'buildpacks' build."
-  default     = ""
-}
-
-variable "ci_code_engine_source" {
-  type        = string
-  description = "The path to the location of code to build in the repository."
-  default     = ""
 }
 
 ######### END Code Engine ######################
@@ -1104,12 +893,6 @@ variable "ci_pipeline_ibmcloud_api_key_secret_group" {
   default     = ""
 }
 
-variable "ci_signing_key_secret_group" {
-  type        = string
-  description = "Secret group prefix for the signing key secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
-  default     = ""
-}
-
 variable "ci_cos_api_key_secret_group" {
   type        = string
   description = "Secret group prefix for the COS API key secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
@@ -1119,18 +902,6 @@ variable "ci_cos_api_key_secret_group" {
 variable "ci_slack_webhook_secret_group" {
   type        = string
   description = "Secret group prefix for the Slack webhook secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
-  default     = ""
-}
-
-variable "ci_pipeline_dockerconfigjson_secret_group" {
-  type        = string
-  description = "Secret group prefix for the pipeline DockerConfigJson secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
-  default     = ""
-}
-
-variable "ci_pipeline_git_token_secret_group" {
-  type        = string
-  description = "Secret group prefix for the pipeline Git token secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
   default     = ""
 }
 
@@ -1170,12 +941,6 @@ variable "ci_pipeline_config_repo_secret_group" {
   default     = ""
 }
 
-variable "ci_gosec_repo_ssh_key_secret_group" {
-  type        = string
-  description = "Secret group prefix for the gosec private repository ssh key secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
-  default     = ""
-}
-
 variable "ci_pipeline_doi_api_key_secret_group" {
   type        = string
   description = "Secret group prefix for the pipeline DOI api key. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
@@ -1200,12 +965,6 @@ variable "ci_pipeline_config_repo_branch" {
   type        = string
   description = "Specify the branch containing the custom pipeline-config.yaml file."
   default     = ""
-}
-
-variable "ci_pipeline_config_path" {
-  type        = string
-  description = "The name and path of the pipeline-config.yaml file within the pipeline-config repo."
-  default     = ".pipeline-config.yaml"
 }
 
 ######## Repo Groups #############################
@@ -1343,34 +1102,16 @@ variable "ci_app_repo_git_token_secret_name" {
   default     = ""
 }
 
-variable "ci_signing_key_secret_name" {
-  type        = string
-  description = "Name of the signing key secret in the secret provider."
-  default     = "signing_key"
-}
-
-variable "ci_pipeline_dockerconfigjson_secret_name" {
-  type        = string
-  description = "Name of the pipeline docker config JSON secret in the secret provider."
-  default     = "pipeline_dockerconfigjson_secret_name"
-}
-
-variable "ci_pipeline_git_token_secret_name" {
-  type        = string
-  description = "Name of the pipeline Git token secret in the secret provider."
-  default     = "pipeline-git-token"
-}
-
-variable "ci_gosec_repo_ssh_key_secret_name" {
-  type        = string
-  default     = "git-ssh-key"
-  description = "Name of the SSH key token for the private repository in the secret provider."
-}
-
 variable "ci_pipeline_doi_api_key_secret_name" {
   type        = string
   description = "Name of the Cloud API key secret in the secret provider to access the toolchain containing the Devops Insights instance."
   default     = ""
+}
+
+variable "ci_signing_key_secret_name" {
+  type        = string
+  description = "Name of the signing key secret in the secret provider."
+  default     = "signing_key"
 }
 
 ######## End Secret Names #######################
@@ -1470,28 +1211,6 @@ variable "ci_pipeline_ibmcloud_api_key_secret_crn" {
   }
 }
 
-variable "ci_signing_key_secret_crn" {
-  type        = string
-  sensitive   = true
-  description = "The CRN for Signing Key secret."
-  default     = ""
-  validation {
-    condition     = startswith(var.ci_signing_key_secret_crn, "crn:") || var.ci_signing_key_secret_crn == ""
-    error_message = "Must be a CRN or left empty."
-  }
-}
-
-variable "ci_pipeline_dockerconfigjson_secret_crn" {
-  type        = string
-  sensitive   = true
-  description = "The CRN for Dockerconfig json secret."
-  default     = ""
-  validation {
-    condition     = startswith(var.ci_pipeline_dockerconfigjson_secret_crn, "crn:") || var.ci_pipeline_dockerconfigjson_secret_crn == ""
-    error_message = "Must be a CRN or left empty."
-  }
-}
-
 variable "ci_slack_webhook_secret_crn" {
   type        = string
   sensitive   = true
@@ -1525,17 +1244,6 @@ variable "ci_artifactory_token_secret_crn" {
   }
 }
 
-variable "ci_pipeline_git_token_secret_crn" {
-  type        = string
-  sensitive   = true
-  description = "The CRN for the Git Token pipeline property."
-  default     = ""
-  validation {
-    condition     = startswith(var.ci_pipeline_git_token_secret_crn, "crn:") || var.ci_pipeline_git_token_secret_crn == ""
-    error_message = "Must be a CRN or left empty."
-  }
-}
-
 variable "ci_pipeline_doi_api_key_secret_crn" {
   type        = string
   sensitive   = true
@@ -1558,29 +1266,7 @@ variable "ci_sonarqube_secret_crn" {
   }
 }
 
-variable "ci_gosec_private_repository_ssh_key_secret_crn" {
-  type        = string
-  sensitive   = true
-  description = "The CRN for the GoSec repository secret."
-  default     = ""
-  validation {
-    condition     = startswith(var.ci_gosec_private_repository_ssh_key_secret_crn, "crn:") || var.ci_gosec_private_repository_ssh_key_secret_crn == ""
-    error_message = "Must be a CRN or left empty."
-  }
-}
-
 ########## CI pipeline env properties ###########################
-variable "ci_opt_in_sonar" {
-  type        = string
-  description = "Opt in for Sonarqube"
-  default     = "1"
-}
-
-variable "ci_doi_environment" {
-  type        = string
-  description = "The DevOps Insights target environment."
-  default     = ""
-}
 
 variable "ci_doi_toolchain_id_pipeline_property" {
   type        = string
@@ -1588,36 +1274,7 @@ variable "ci_doi_toolchain_id_pipeline_property" {
   default     = ""
 }
 
-variable "ci_cra_generate_cyclonedx_format" {
-  type        = string
-  description = "If set to 1, CRA also generates the BOM in cyclonedx format (defaults to 1)."
-  default     = "1"
-}
-
-variable "ci_custom_image_tag" {
-  type        = string
-  description = "The custom tag for the image in a comma-separated list."
-  default     = ""
-}
-
-variable "ci_app_version" {
-  type        = string
-  description = "The version of the app to deploy."
-  default     = "v1"
-}
-
-variable "ci_slack_notifications" {
-  type        = string
-  description = "The switch that turns the Slack notification on (`1`) or off (`0`)."
-  default     = ""
-}
-
 ######SonarQube ############################
-variable "ci_sonarqube_config" {
-  type        = string
-  description = "Runs a SonarQube scan in an isolated Docker-in-Docker container (default configuration) or in an existing Kubernetes cluster (custom configuration). Options: default or custom. Default is default."
-  default     = "default"
-}
 
 variable "ci_sonarqube_integration_name" {
   type        = string
@@ -1647,12 +1304,6 @@ variable "ci_sonarqube_server_url" {
   type        = string
   description = "The URL to the SonarQube server."
   default     = ""
-}
-
-variable "ci_enable_pipeline_dockerconfigjson" {
-  type        = bool
-  description = "Enable to add the pipeline-dockerconfigjson property to the pipeline properties."
-  default     = false
 }
 
 ######## SLACK INTEGRATION ###################
@@ -1774,16 +1425,6 @@ variable "cd_enable_pipeline_notifications" {
   type        = bool
   description = "When enabled, pipeline run events will be sent to the Event Notifications and Slack integrations in the enclosing toolchain."
   default     = false
-}
-
-variable "cd_event_notifications" {
-  type        = string
-  description = "To enable event notification, set event_notifications to 1 "
-  default     = "0"
-  validation {
-    condition     = contains(["0", "1"], var.cd_event_notifications)
-    error_message = "Must be either \"0\" or \"1\" ."
-  }
 }
 
 variable "cd_region" {
@@ -1924,21 +1565,9 @@ variable "cd_repositories_prefix" {
   }
 }
 
-variable "cd_compliance_base_image" {
-  type        = string
-  description = "Pipeline baseimage to run most of the built-in pipeline code."
-  default     = ""
-}
-
 variable "cd_doi_toolchain_id" {
   type        = string
   description = "DevOps Insights toolchain ID to link to."
-  default     = ""
-}
-
-variable "cd_doi_environment" {
-  type        = string
-  description = "DevOps Insights environment for DevSecOps CD deployment."
   default     = ""
 }
 
@@ -2032,12 +1661,6 @@ variable "cd_pipeline_ibmcloud_api_key_secret_group" {
   default     = ""
 }
 
-variable "cd_pipeline_git_token_secret_group" {
-  type        = string
-  description = "Secret group prefix for the pipeline Git token secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
-  default     = ""
-}
-
 variable "cd_pipeline_doi_api_key_secret_group" {
   type        = string
   description = "Secret group prefix for the pipeline DOI api key. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
@@ -2102,12 +1725,6 @@ variable "cd_pipeline_config_repo_branch" {
   type        = string
   description = "Specify the branch containing the custom pipeline-config.yaml file."
   default     = ""
-}
-
-variable "cd_pipeline_config_path" {
-  type        = string
-  description = "The name and path of the pipeline-config.yaml file within the pipeline-config repo."
-  default     = ".pipeline-config.yaml"
 }
 
 ######## Repo Groups #############################
@@ -2249,12 +1866,6 @@ variable "cd_change_management_repo_git_token_secret_name" {
   type        = string
   description = "Name of the Git token secret in the secret provider."
   default     = ""
-}
-
-variable "cd_pipeline_git_token_secret_name" {
-  type        = string
-  description = "Name of the pipeline Git token secret in the secret provider."
-  default     = "pipeline-git-token"
 }
 
 variable "cd_pipeline_doi_api_key_secret_name" {
@@ -2415,17 +2026,6 @@ variable "cd_artifactory_token_secret_crn" {
   }
 }
 
-variable "cd_pipeline_git_token_secret_crn" {
-  type        = string
-  sensitive   = true
-  description = "The CRN for the Git Token secret in the pipeline properties."
-  default     = ""
-  validation {
-    condition     = startswith(var.cd_pipeline_git_token_secret_crn, "crn:") || var.cd_pipeline_git_token_secret_crn == ""
-    error_message = "Must be a CRN or left empty."
-  }
-}
-
 variable "cd_pipeline_doi_api_key_secret_crn" {
   type        = string
   sensitive   = true
@@ -2544,95 +2144,6 @@ variable "cd_scc_use_profile_attachment" {
 
 ######## End SCC ################################
 
-variable "cd_slack_notifications" {
-  type        = string
-  description = "The switch that turns the Slack notification on (`1`) or off (`0`)."
-  default     = ""
-}
-
-
-variable "cd_target_environment_detail" {
-  description = "Details of the environment being updated."
-  type        = string
-  default     = "Production target environment"
-}
-
-variable "cd_customer_impact" {
-  description = "Custom impact of the change request."
-  type        = string
-  default     = "no_impact"
-}
-
-variable "cd_target_environment_purpose" {
-  description = "Purpose of the environment being updated."
-  type        = string
-  default     = "production"
-}
-
-variable "cd_change_request_id" {
-  type        = string
-  description = "The ID of an open change request. If this parameter is set to 'notAvailable' by default, a change request is automatically created by the continuous deployment pipeline."
-  default     = "notAvailable"
-}
-
-variable "cd_satellite_cluster_group" {
-  type        = string
-  description = "The Satellite cluster group"
-  default     = ""
-}
-
-variable "cd_source_environment" {
-  type        = string
-  description = "The source environment that the app is promoted from."
-  default     = "master"
-}
-
-variable "cd_target_environment" {
-  type        = string
-  description = "The target environment that the app is deployed to."
-  default     = "prod"
-}
-
-variable "cd_merge_cra_sbom" {
-  type        = string
-  description = "Merge the SBOM"
-  default     = "1"
-}
-
-variable "cd_emergency_label" {
-  type        = string
-  description = "Identifies the pull request as an emergency."
-  default     = "EMERGENCY"
-}
-
-variable "cd_app_version" {
-  type        = string
-  description = "The version of the app to deploy."
-  default     = "v1"
-}
-
-variable "cd_pipeline_debug" {
-  type        = string
-  description = "'0' by default. Set to '1' to enable debug logging."
-  default     = "0"
-}
-
-variable "cd_peer_review_compliance" {
-  type        = string
-  description = "Set to `0` to disable. Set to `1` to enable peer review evidence collection."
-  default     = ""
-}
-
-variable "cd_pre_prod_evidence_collection" {
-  type        = string
-  description = "Set this flag to collect the pre-prod evidences and the change requests in the production deployment (target-environment-purpose set to production). Default value is 0."
-  default     = "0"
-  validation {
-    condition     = contains(["0", "1"], var.cd_pre_prod_evidence_collection)
-    error_message = "Must be either \"0\" or \"1\" ."
-  }
-}
-
 #SLACK
 variable "cd_slack_webhook_secret_name" {
   type        = string
@@ -2736,12 +2247,6 @@ variable "cc_toolchain_description" {
   default     = "Toolchain created with terraform template for DevSecOps CC Best Practices."
 }
 
-variable "cc_doi_environment" {
-  type        = string
-  description = "DevOps Insights environment for DevSecOps CD deployment."
-  default     = ""
-}
-
 variable "cc_link_to_doi_toolchain" {
   description = "Enable a link to a DevOps Insights instance in another toolchain, true or false."
   type        = bool
@@ -2758,16 +2263,6 @@ variable "cc_enable_pipeline_notifications" {
   type        = bool
   description = "When enabled, pipeline run events will be sent to the Event Notifications and Slack integrations in the enclosing toolchain."
   default     = false
-}
-
-variable "cc_event_notifications" {
-  type        = string
-  description = "To enable event notification, set event_notifications to 1 "
-  default     = "0"
-  validation {
-    condition     = contains(["0", "1"], var.cc_event_notifications)
-    error_message = "Must be either \"0\" or \"1\" ."
-  }
 }
 
 variable "cc_enable_key_protect" {
@@ -2806,12 +2301,6 @@ variable "cc_slack_webhook_secret_group" {
   default     = ""
 }
 
-variable "cc_pipeline_dockerconfigjson_secret_group" {
-  type        = string
-  description = "Secret group prefix for the pipeline DockerConfigJson secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
-  default     = ""
-}
-
 variable "cc_app_repo_secret_group" {
   type        = string
   description = "Secret group prefix for the App repo secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
@@ -2845,12 +2334,6 @@ variable "cc_compliance_pipeline_repo_secret_group" {
 variable "cc_pipeline_config_repo_secret_group" {
   type        = string
   description = "Secret group prefix for the Pipeline Config repo secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
-  default     = ""
-}
-
-variable "cc_gosec_repo_ssh_key_secret_group" {
-  type        = string
-  description = "Secret group prefix for the gosec private repository ssh key secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
   default     = ""
 }
 
@@ -2912,12 +2395,6 @@ variable "cc_pipeline_config_repo_branch" {
   type        = string
   description = "Specify the branch containing the custom pipeline-config.yaml file."
   default     = ""
-}
-
-variable "cc_pipeline_config_path" {
-  type        = string
-  description = "The name and path of the pipeline-config.yaml file within the pipeline-config repo."
-  default     = ".pipeline-config.yaml"
 }
 
 variable "cc_app_repo_url" {
@@ -3073,18 +2550,6 @@ variable "cc_app_repo_git_token_secret_name" {
   default     = ""
 }
 
-variable "cc_pipeline_dockerconfigjson_secret_name" {
-  type        = string
-  description = "Name of the pipeline docker config JSON secret in the secret provider."
-  default     = "pipeline_dockerconfigjson_secret_name"
-}
-
-variable "cc_gosec_repo_ssh_key_secret_name" {
-  type        = string
-  default     = "git-ssh-key"
-  description = "Name of the SSH key token for the private repository in the secret provider."
-}
-
 variable "cc_pipeline_doi_api_key_secret_name" {
   type        = string
   description = "Name of the Cloud API key secret in the secret provider to access the toolchain containing the Devops Insights instance."
@@ -3187,17 +2652,6 @@ variable "cc_pipeline_ibmcloud_api_key_secret_crn" {
   }
 }
 
-variable "cc_pipeline_dockerconfigjson_secret_crn" {
-  type        = string
-  sensitive   = true
-  description = "The CRN for the Dockerconfig json secret."
-  default     = ""
-  validation {
-    condition     = startswith(var.cc_pipeline_dockerconfigjson_secret_crn, "crn:") || var.cc_pipeline_dockerconfigjson_secret_crn == ""
-    error_message = "Must be a CRN or left empty."
-  }
-}
-
 variable "cc_slack_webhook_secret_crn" {
   type        = string
   sensitive   = true
@@ -3220,17 +2674,6 @@ variable "cc_artifactory_token_secret_crn" {
   }
 }
 
-variable "cc_pipeline_git_token_secret_crn" {
-  type        = string
-  sensitive   = true
-  description = "The CRN for pipeline Git token property."
-  default     = ""
-  validation {
-    condition     = startswith(var.cc_pipeline_git_token_secret_crn, "crn:") || var.cc_pipeline_git_token_secret_crn == ""
-    error_message = "Must be a CRN or left empty."
-  }
-}
-
 variable "cc_sonarqube_secret_crn" {
   type        = string
   sensitive   = true
@@ -3249,17 +2692,6 @@ variable "cc_pipeline_doi_api_key_secret_crn" {
   default     = ""
   validation {
     condition     = startswith(var.cc_pipeline_doi_api_key_secret_crn, "crn:") || var.cc_pipeline_doi_api_key_secret_crn == ""
-    error_message = "Must be a CRN or left empty."
-  }
-}
-
-variable "cc_gosec_private_repository_ssh_key_secret_crn" {
-  type        = string
-  sensitive   = true
-  description = "The CRN for the Deployment repository Git Token."
-  default     = ""
-  validation {
-    condition     = startswith(var.cc_gosec_private_repository_ssh_key_secret_crn, "crn:") || var.cc_gosec_private_repository_ssh_key_secret_crn == ""
     error_message = "Must be a CRN or left empty."
   }
 }
@@ -3348,12 +2780,6 @@ variable "cc_scc_use_profile_attachment" {
 
 ######## End SCC ################################
 
-variable "cc_slack_notifications" {
-  type        = string
-  description = "The switch that turns the Slack notification on (`1`) or off (`0`)."
-  default     = ""
-}
-
 ######SonarQube ############################
 variable "cc_sonarqube_integration_name" {
   type        = string
@@ -3383,12 +2809,6 @@ variable "cc_sonarqube_server_url" {
   type        = string
   description = "The URL to the SonarQube server."
   default     = ""
-}
-
-variable "cc_sonarqube_config" {
-  type        = string
-  description = "Runs a SonarQube scan in an isolated Docker-in-Docker container (default configuration) or in an existing Kubernetes cluster (custom configuration). Options: default or custom. Default is default."
-  default     = "default"
 }
 
 ######### SLACK ###############################
@@ -3481,12 +2901,6 @@ variable "cc_repositories_prefix" {
   }
 }
 
-variable "cc_compliance_base_image" {
-  type        = string
-  description = "Pipeline baseimage to run most of the built-in pipeline code."
-  default     = ""
-}
-
 variable "cc_authorization_policy_creation" {
   type        = string
   description = "Disable Toolchain service to Secrets Manager Service authorization policy creation."
@@ -3497,37 +2911,6 @@ variable "cc_compliance_pipeline_branch" {
   type        = string
   description = "The CC Pipeline Compliance Pipeline branch."
   default     = ""
-}
-
-variable "cc_cra_bom_generate" {
-  type        = string
-  description = "Set this flag to `1` to generate cra bom"
-  default     = "1"
-  validation {
-    condition     = contains(["0", "1"], var.cc_cra_bom_generate)
-    error_message = "Must be either \"0\" or \"1\" ."
-  }
-}
-
-variable "cc_cra_vulnerability_scan" {
-  type        = string
-  description = "Set this flag to `1` and `cra-bom-generate` to `1` for cra vulnerability scan.  If this value is set to 1 and `cra-bom-generate` is set to 0, the scan will be marked as `failure`"
-  default     = "1"
-  validation {
-    condition     = contains(["0", "1"], var.cc_cra_vulnerability_scan)
-    error_message = "Must be either \"0\" or \"1\" ."
-  }
-
-}
-
-variable "cc_cra_deploy_analysis" {
-  type        = string
-  description = "Set this flag to `1` for cra deployment analysis to be done."
-  default     = "1"
-  validation {
-    condition     = contains(["0", "1"], var.cc_cra_deploy_analysis)
-    error_message = "Must be either \"0\" or \"1\" ."
-  }
 }
 
 variable "cc_pipeline_git_tag" {
@@ -3545,66 +2928,6 @@ variable "cc_pipeline_properties" {
 variable "cc_pipeline_properties_filepath" {
   type        = string
   description = "The path to the file containing the property JSON. If this is not set, it will by default read the `properties.json` file at the root of the module."
-  default     = ""
-}
-
-variable "cc_pipeline_debug" {
-  type        = string
-  description = "'0' by default. Set to '1' to enable debug logging."
-  default     = "0"
-}
-
-variable "cc_opt_in_dynamic_api_scan" {
-  type        = string
-  description = "To enable the OWASP Zap API scan. '1' enable or '0' disable."
-  default     = ""
-}
-
-variable "cc_opt_in_dynamic_ui_scan" {
-  type        = string
-  description = "To enable the OWASP Zap UI scan. '1' enable or '0' disable."
-  default     = ""
-}
-
-variable "cc_opt_in_dynamic_scan" {
-  type        = string
-  description = "To enable the OWASP Zap scan. '1' enable or '0' disable."
-  default     = ""
-}
-
-variable "cc_opt_in_gosec" {
-  type        = string
-  description = "Enables gosec scans"
-  default     = ""
-}
-
-variable "cc_gosec_private_repository_host" {
-  type        = string
-  description = "Your private repository base URL."
-  default     = ""
-}
-
-variable "cc_opt_in_auto_close" {
-  type        = string
-  description = "Enables auto-closing of issues coming from vulnerabilities, once the vulnerability is no longer detected by the CC pipeline run."
-  default     = "1"
-}
-
-variable "cc_environment_tag" {
-  type        = string
-  description = "Tag name that represents the target environment in the inventory. Example: prod_latest."
-  default     = ""
-}
-
-variable "cc_enable_pipeline_dockerconfigjson" {
-  type        = bool
-  description = "Enable to add the pipeline-dockerconfigjson property to the pipeline properties."
-  default     = false
-}
-
-variable "cc_peer_review_compliance" {
-  type        = string
-  description = "Set to `0` to disable. Set to `1` to enable peer review evidence collection."
   default     = ""
 }
 
