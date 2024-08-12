@@ -34,7 +34,7 @@ statement instead the previous block.
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0.0, <1.7.0 |
-| <a name="requirement_ibm"></a> [ibm](#requirement\_ibm) | >=1.65.0 |
+| <a name="requirement_ibm"></a> [ibm](#requirement\_ibm) | =1.67.1 |
 | <a name="requirement_null"></a> [null](#requirement\_null) | >= 3.2.2 |
 | <a name="requirement_random"></a> [random](#requirement\_random) | >= 3.6.2 |
 

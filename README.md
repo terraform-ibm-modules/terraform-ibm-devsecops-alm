@@ -57,7 +57,7 @@ statement instead the previous block.
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0.0 |
-| <a name="requirement_ibm"></a> [ibm](#requirement\_ibm) | >=1.65.0 |
+| <a name="requirement_ibm"></a> [ibm](#requirement\_ibm) | =1.67.1 |
 | <a name="requirement_null"></a> [null](#requirement\_null) | >= 3.2.2 |
 | <a name="requirement_random"></a> [random](#requirement\_random) | >= 3.6.2 |
 
@@ -74,19 +74,19 @@ statement instead the previous block.
 
 | Name | Type |
 |------|------|
-| [ibm_cd_tekton_pipeline_property.cc_pipeline_opt_in_cra_auto_remediation](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/resources/cd_tekton_pipeline_property) | resource |
-| [ibm_cd_tekton_pipeline_property.cc_pipeline_opt_in_cra_auto_remediation_enabled_repos](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/resources/cd_tekton_pipeline_property) | resource |
-| [ibm_cd_tekton_pipeline_property.cc_pipeline_opt_in_cra_auto_remediation_force](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/resources/cd_tekton_pipeline_property) | resource |
-| [ibm_cd_tekton_pipeline_trigger.ci_pipeline_webhook](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/resources/cd_tekton_pipeline_trigger) | resource |
-| [ibm_cd_tekton_pipeline_trigger_property.ci_pipeline_webhook_branch_property](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/resources/cd_tekton_pipeline_trigger_property) | resource |
-| [ibm_cd_tekton_pipeline_trigger_property.ci_pipeline_webhook_name_property](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/resources/cd_tekton_pipeline_trigger_property) | resource |
-| [ibm_cd_tekton_pipeline_trigger_property.ci_pipeline_webhook_repo_url_property](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/resources/cd_tekton_pipeline_trigger_property) | resource |
-| [ibm_cr_namespace.cr_namespace](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/resources/cr_namespace) | resource |
-| [ibm_resource_instance.cd_instance](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/resources/resource_instance) | resource |
+| [ibm_cd_tekton_pipeline_property.cc_pipeline_opt_in_cra_auto_remediation](https://registry.terraform.io/providers/IBM-Cloud/ibm/1.67.1/docs/resources/cd_tekton_pipeline_property) | resource |
+| [ibm_cd_tekton_pipeline_property.cc_pipeline_opt_in_cra_auto_remediation_enabled_repos](https://registry.terraform.io/providers/IBM-Cloud/ibm/1.67.1/docs/resources/cd_tekton_pipeline_property) | resource |
+| [ibm_cd_tekton_pipeline_property.cc_pipeline_opt_in_cra_auto_remediation_force](https://registry.terraform.io/providers/IBM-Cloud/ibm/1.67.1/docs/resources/cd_tekton_pipeline_property) | resource |
+| [ibm_cd_tekton_pipeline_trigger.ci_pipeline_webhook](https://registry.terraform.io/providers/IBM-Cloud/ibm/1.67.1/docs/resources/cd_tekton_pipeline_trigger) | resource |
+| [ibm_cd_tekton_pipeline_trigger_property.ci_pipeline_webhook_branch_property](https://registry.terraform.io/providers/IBM-Cloud/ibm/1.67.1/docs/resources/cd_tekton_pipeline_trigger_property) | resource |
+| [ibm_cd_tekton_pipeline_trigger_property.ci_pipeline_webhook_name_property](https://registry.terraform.io/providers/IBM-Cloud/ibm/1.67.1/docs/resources/cd_tekton_pipeline_trigger_property) | resource |
+| [ibm_cd_tekton_pipeline_trigger_property.ci_pipeline_webhook_repo_url_property](https://registry.terraform.io/providers/IBM-Cloud/ibm/1.67.1/docs/resources/cd_tekton_pipeline_trigger_property) | resource |
+| [ibm_cr_namespace.cr_namespace](https://registry.terraform.io/providers/IBM-Cloud/ibm/1.67.1/docs/resources/cr_namespace) | resource |
+| [ibm_resource_instance.cd_instance](https://registry.terraform.io/providers/IBM-Cloud/ibm/1.67.1/docs/resources/resource_instance) | resource |
 | [null_resource.ci_pipeline_run](https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource) | resource |
 | [random_string.resource_suffix](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/string) | resource |
 | [random_string.webhook_secret](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/string) | resource |
-| [ibm_resource_group.resource_group](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/data-sources/resource_group) | data source |
+| [ibm_resource_group.resource_group](https://registry.terraform.io/providers/IBM-Cloud/ibm/1.67.1/docs/data-sources/resource_group) | data source |
 
 ### Inputs
 
