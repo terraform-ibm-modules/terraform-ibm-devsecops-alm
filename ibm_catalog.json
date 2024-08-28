@@ -4606,6 +4606,13 @@
 							"required": false
 						},
 						{
+							"key": "add_code_engine_prefix",
+							"type": "boolean",
+							"default_value": true,
+							"description": "Set to `true` to use `prefix` to add a prefix to the code engine project names.",
+							"required": false
+						},
+						{
 							"key": "prefix",
 							"type": "string",
 							"default_value": "",

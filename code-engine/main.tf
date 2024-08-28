@@ -51,8 +51,8 @@ locals {
   ci_code_engine_project = (var.ci_code_engine_project == "") ? var.code_engine_project : var.ci_code_engine_project
   cd_code_engine_project = (var.cd_code_engine_project == "") ? var.code_engine_project : var.cd_code_engine_project
 
-  ci_code_engine_project_name = (var.prefix == "") ? local.ci_code_engine_project : format("${var.prefix}-%s", local.ci_code_engine_project)
-  cd_code_engine_project_name = (var.prefix == "") ? local.cd_code_engine_project : format("${var.prefix}-%s", local.cd_code_engine_project)
+  ci_code_engine_project_name = ((var.prefix != "") && (var.add_code_engine_prefix)) ? format("${var.prefix}-%s", local.ci_code_engine_project) : local.ci_code_engine_project
+  cd_code_engine_project_name = ((var.prefix != "") && (var.add_code_engine_prefix)) ? format("${var.prefix}-%s", local.cd_code_engine_project) : local.cd_code_engine_project
 
   ci_toolchain_name = (var.ci_toolchain_name == "") ? format("${var.toolchain_name}%s", "-CI-Toolchain") : var.ci_toolchain_name
   cd_toolchain_name = (var.cd_toolchain_name == "") ? format("${var.toolchain_name}%s", "-CD-Toolchain") : var.cd_toolchain_name
