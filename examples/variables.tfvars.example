@@ -29,8 +29,8 @@ ci_cluster_namespace               = "prod"
 cd_cluster_name                    = "mycluster-free"
 cd_cluster_namespace               = "prod"
 
-ci_dev_region                      = "ibm:yp:us-south"
-ci_dev_resource_group              = "Default"
+ci_cluster_region                      = "ibm:yp:us-south"
+ci_cluster_resource_group              = "Default"
 
 #Set the region where the toolchain will be created. Using 'toolchain_region' will set the same value for each of the toolchains.
 #The regions can be explicitly set for each toolchain using the variables prefixed with 'ci', 'cd' and 'cc'

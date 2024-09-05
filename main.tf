@@ -9,37 +9,19 @@ locals {
   use_slack_enable_override = (var.ci_enable_slack == false) && (var.cd_enable_slack == false) && (var.cc_enable_slack == false) ? true : false
 
   enable_slack = try(var.enable_slack, false)
-  ci_slack_notification_state = (
-    (var.ci_slack_notifications != "") ? var.ci_slack_notifications :
-    (var.slack_notifications != "") ? var.slack_notifications :
-    (local.use_slack_enable_override) && (local.enable_slack) ? "1" :
-    (var.ci_enable_slack) ? "1" : "0"
-  )
-
-  cd_slack_notification_state = (
-    (var.cd_slack_notifications != "") ? var.cd_slack_notifications :
-    (var.slack_notifications != "") ? var.slack_notifications :
-    (local.use_slack_enable_override) && (local.enable_slack) ? "1" :
-    (var.cd_enable_slack) ? "1" : "0"
-  )
-
-  cc_slack_notification_state = (
-    (var.cc_slack_notifications != "") ? var.cc_slack_notifications :
-    (var.slack_notifications != "") ? var.slack_notifications :
-    (local.use_slack_enable_override) && (local.enable_slack) ? "1" :
-    (var.cc_enable_slack) ? "1" : "0"
-  )
 
   repo_auth_type               = ((var.repo_git_token_secret_name == "") && (var.repo_git_token_secret_crn == "")) ? "oauth" : "pat"
-  calculated_ci_cluster_region = (var.ci_dev_region != "") ? var.ci_dev_region : (var.ci_cluster_region != "") ? var.ci_cluster_region : var.toolchain_region
-
-  inventory_repo_existing_url = (var.inventory_repo_existing_url != "") ? var.inventory_repo_existing_url : var.inventory_repo_url
-  evidence_repo_existing_url  = (var.evidence_repo_existing_url != "") ? var.evidence_repo_existing_url : var.evidence_repo_url
-  issues_repo_existing_url    = (var.issues_repo_existing_url != "") ? var.issues_repo_existing_url : var.issues_repo_url
+  calculated_ci_cluster_region = (var.ci_cluster_region != "") ? var.ci_cluster_region : var.toolchain_region
 
   ci_toolchain_name = (var.ci_toolchain_name == "") ? format("${var.toolchain_name}%s", "-CI-Toolchain") : var.ci_toolchain_name
   cd_toolchain_name = (var.cd_toolchain_name == "") ? format("${var.toolchain_name}%s", "-CD-Toolchain") : var.cd_toolchain_name
   cc_toolchain_name = (var.cc_toolchain_name == "") ? format("${var.toolchain_name}%s", "-CC-Toolchain") : var.cc_toolchain_name
+
+  ci_code_engine_project = (var.ci_code_engine_project == "") ? var.code_engine_project : var.ci_code_engine_project
+  cd_code_engine_project = (var.cd_code_engine_project == "") ? var.code_engine_project : var.cd_code_engine_project
+
+  ci_code_engine_project_name = ((var.prefix != "") && (var.add_code_engine_prefix)) ? format("${var.prefix}-%s", local.ci_code_engine_project) : local.ci_code_engine_project
+  cd_code_engine_project_name = ((var.prefix != "") && (var.add_code_engine_prefix)) ? format("${var.prefix}-%s", local.cd_code_engine_project) : local.cd_code_engine_project
 
   ci_repositories_prefix = (var.ci_repositories_prefix == "") ? var.repositories_prefix : var.ci_repositories_prefix
   cd_repositories_prefix = (var.cd_repositories_prefix == "") ? var.repositories_prefix : var.cd_repositories_prefix
@@ -106,15 +88,13 @@ module "prereqs" {
 module "devsecops_ci_toolchain" {
   count                    = var.create_ci_toolchain ? 1 : 0
   depends_on               = [ibm_resource_instance.cd_instance]
-  source                   = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-ci-toolchain?ref=v1.5.0"
+  source                   = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-ci-toolchain?ref=v2.0.0-beta.1"
   ibmcloud_api_key         = var.ibmcloud_api_key
   toolchain_name           = (var.prefix == "") ? local.ci_toolchain_name : format("${var.prefix}-%s", local.ci_toolchain_name)
   toolchain_region         = (var.ci_toolchain_region == "") ? var.toolchain_region : replace(replace(var.ci_toolchain_region, "ibm:yp:", ""), "ibm:ys1:", "")
   toolchain_resource_group = (var.ci_toolchain_resource_group == "") ? var.toolchain_resource_group : var.ci_toolchain_resource_group
   toolchain_description    = var.ci_toolchain_description
-  registry_namespace       = local.registry_namespace
-  ibmcloud_api             = var.ibmcloud_api
-  compliance_base_image    = (var.ci_compliance_base_image == "") ? var.compliance_base_image : var.ci_compliance_base_image
+  registry_namespace       = (local.enable_prereqs) ? module.prereqs[0].registry_namespace : var.registry_namespace
   ci_pipeline_branch       = (var.ci_compliance_pipeline_branch == "") ? var.compliance_pipeline_branch : var.ci_compliance_pipeline_branch
   pr_pipeline_branch       = (var.ci_compliance_pipeline_pr_branch == "") ? var.compliance_pipeline_branch : var.ci_compliance_pipeline_pr_branch
   ci_pipeline_git_tag      = (var.ci_pipeline_git_tag == "") ? var.pipeline_git_tag : var.ci_pipeline_git_tag
@@ -142,15 +122,6 @@ module "devsecops_ci_toolchain" {
   slack_webhook_secret_name  = (var.ci_slack_webhook_secret_name == "") ? var.slack_webhook_secret_name : var.ci_slack_webhook_secret_name
   slack_webhook_secret_group = var.ci_slack_webhook_secret_group
 
-  signing_key_secret_name  = var.ci_signing_key_secret_name
-  signing_key_secret_group = var.ci_signing_key_secret_group
-
-  pipeline_dockerconfigjson_secret_name  = var.ci_pipeline_dockerconfigjson_secret_name
-  pipeline_dockerconfigjson_secret_group = var.ci_pipeline_dockerconfigjson_secret_group
-
-  pipeline_git_token_secret_name  = var.ci_pipeline_git_token_secret_name
-  pipeline_git_token_secret_group = var.ci_pipeline_git_token_secret_group
-
   issues_repo_git_token_secret_name = (var.ci_issues_repo_git_token_secret_name == "") ? var.repo_git_token_secret_name : var.ci_issues_repo_git_token_secret_name
   issues_repo_secret_group          = (var.ci_issues_repo_secret_group == "") ? var.repo_secret_group : var.ci_issues_repo_secret_group
 
@@ -169,9 +140,6 @@ module "devsecops_ci_toolchain" {
   app_repo_git_token_secret_name = (var.ci_app_repo_git_token_secret_name == "") ? var.repo_git_token_secret_name : var.ci_app_repo_git_token_secret_name
   app_repo_secret_group          = (var.ci_app_repo_secret_group == "") ? var.repo_secret_group : var.ci_app_repo_secret_group
 
-  gosec_private_repository_ssh_key_secret_name  = (var.ci_gosec_repo_ssh_key_secret_name == "") ? var.gosec_repo_ssh_key_secret_name : var.ci_gosec_repo_ssh_key_secret_name
-  gosec_private_repository_ssh_key_secret_group = (var.ci_gosec_repo_ssh_key_secret_group == "") ? var.gosec_repo_ssh_key_secret_group : var.ci_gosec_repo_ssh_key_secret_group
-
   pipeline_doi_api_key_secret_name  = (var.ci_pipeline_doi_api_key_secret_name == "") ? var.pipeline_doi_api_key_secret_name : var.ci_pipeline_doi_api_key_secret_name
   pipeline_doi_api_key_secret_group = (var.ci_pipeline_doi_api_key_secret_group == "") ? var.pipeline_doi_api_key_secret_group : var.ci_pipeline_doi_api_key_secret_group
 
@@ -184,15 +152,11 @@ module "devsecops_ci_toolchain" {
   pipeline_config_repo_git_token_secret_crn     = (var.ci_pipeline_config_repo_git_token_secret_crn == "") ? var.repo_git_token_secret_crn : var.ci_pipeline_config_repo_git_token_secret_crn
   cos_api_key_secret_crn                        = (var.ci_cos_api_key_secret_crn == "") ? var.cos_api_key_secret_crn : var.ci_cos_api_key_secret_crn
   pipeline_ibmcloud_api_key_secret_crn          = (var.ci_pipeline_ibmcloud_api_key_secret_crn == "") ? var.pipeline_ibmcloud_api_key_secret_crn : var.ci_pipeline_ibmcloud_api_key_secret_crn
-  signing_key_secret_crn                        = var.ci_signing_key_secret_crn
-  pipeline_dockerconfigjson_secret_crn          = var.ci_pipeline_dockerconfigjson_secret_crn
   slack_webhook_secret_crn                      = (var.ci_slack_webhook_secret_crn == "") ? var.slack_webhook_secret_crn : var.ci_slack_webhook_secret_crn
   privateworker_credentials_secret_crn          = var.ci_privateworker_credentials_secret_crn
   artifactory_token_secret_crn                  = var.ci_artifactory_token_secret_crn
-  pipeline_git_token_secret_crn                 = var.ci_pipeline_git_token_secret_crn
   pipeline_doi_api_key_secret_crn               = var.ci_pipeline_doi_api_key_secret_crn
   sonarqube_secret_crn                          = (var.ci_sonarqube_secret_crn == "") ? var.sonarqube_secret_crn : var.ci_sonarqube_secret_crn
-  gosec_private_repository_ssh_key_secret_crn   = (var.ci_gosec_private_repository_ssh_key_secret_crn == "") ? var.gosec_private_repository_ssh_key_secret_crn : var.ci_gosec_private_repository_ssh_key_secret_crn
 
   #AUTH TYPE FOR REPOS
   pipeline_config_repo_auth_type     = (var.ci_pipeline_config_repo_auth_type == "") ? local.repo_auth_type : var.ci_pipeline_config_repo_auth_type
@@ -212,9 +176,8 @@ module "devsecops_ci_toolchain" {
 
   #APP REPO
   app_repo_clone_from_url        = var.ci_app_repo_clone_from_url
-  app_repo_clone_from_branch     = var.ci_app_repo_clone_from_branch
+  app_repo_branch                = var.ci_app_repo_branch
   app_repo_existing_url          = var.ci_app_repo_existing_url
-  app_repo_existing_branch       = var.ci_app_repo_existing_branch
   app_repo_existing_git_provider = var.ci_app_repo_existing_git_provider
   app_repo_existing_git_id       = var.ci_app_repo_existing_git_id
   app_repo_clone_to_git_provider = var.ci_app_repo_clone_to_git_provider
@@ -224,7 +187,6 @@ module "devsecops_ci_toolchain" {
   pipeline_config_repo_existing_url   = var.ci_pipeline_config_repo_existing_url
   pipeline_config_repo_clone_from_url = var.ci_pipeline_config_repo_clone_from_url
   pipeline_config_repo_branch         = var.ci_pipeline_config_repo_branch
-  pipeline_config_path                = var.ci_pipeline_config_path
 
   #EVIDENCE REPO
   evidence_repo_name              = var.evidence_repo_name
@@ -247,52 +209,29 @@ module "devsecops_ci_toolchain" {
   inventory_repo_git_id            = var.inventory_repo_existing_git_id
   inventory_repo_integration_owner = var.inventory_repo_integration_owner
 
-  app_name                           = var.ci_app_name
-  dev_region                         = format("${var.environment_prefix}%s", replace(replace(local.calculated_ci_cluster_region, "ibm:yp:", ""), "ibm:ys1:", ""))
-  dev_resource_group                 = (var.ci_cluster_resource_group != "") ? var.ci_cluster_resource_group : (var.ci_dev_resource_group != "") ? var.ci_dev_resource_group : var.toolchain_resource_group
-  cluster_name                       = (var.ci_cluster_name == "") ? var.cluster_name : var.ci_cluster_name
-  cluster_namespace                  = var.ci_cluster_namespace
+  app_name = var.ci_app_name
+
   registry_region                    = (var.ci_registry_region == "") ? format("${var.environment_prefix}%s", var.toolchain_region) : format("${var.environment_prefix}%s", replace(replace(var.ci_registry_region, "ibm:yp:", ""), "ibm:ys1:", ""))
   authorization_policy_creation      = (var.ci_authorization_policy_creation == "") ? var.authorization_policy_creation : var.ci_authorization_policy_creation
   repositories_prefix                = (local.ci_repositories_prefix == "compliance" && var.prefix != "") ? format("%s-%s", var.prefix, local.ci_repositories_prefix) : local.ci_repositories_prefix
   doi_toolchain_id                   = var.ci_doi_toolchain_id
-  pipeline_debug                     = var.ci_pipeline_debug
-  opt_in_dynamic_api_scan            = var.ci_opt_in_dynamic_api_scan
-  opt_in_dynamic_ui_scan             = var.ci_opt_in_dynamic_ui_scan
-  opt_in_dynamic_scan                = var.ci_opt_in_dynamic_scan
-  opt_in_sonar                       = var.ci_opt_in_sonar
-  doi_environment                    = var.ci_doi_environment
   doi_toolchain_id_pipeline_property = var.ci_doi_toolchain_id_pipeline_property
-  cra_generate_cyclonedx_format      = var.ci_cra_generate_cyclonedx_format
-  custom_image_tag                   = var.ci_custom_image_tag
-  app_version                        = var.ci_app_version
-  slack_notifications                = local.ci_slack_notification_state
-  sonarqube_config                   = var.ci_sonarqube_config
-  enable_pipeline_dockerconfigjson   = var.ci_enable_pipeline_dockerconfigjson
-  peer_review_compliance             = (var.ci_peer_review_compliance == "") ? var.peer_review_compliance : var.ci_peer_review_compliance
-  print_code_signing_certificate     = var.ci_print_code_signing_certificate
-  pr_cra_bom_generate                = var.pr_cra_bom_generate
-  pr_cra_vulnerability_scan          = var.pr_cra_vulnerability_scan
-  pr_cra_deploy_analysis             = var.pr_cra_deploy_analysis
-  ci_cra_bom_generate                = var.ci_cra_bom_generate
-  ci_cra_vulnerability_scan          = var.ci_cra_vulnerability_scan
-  ci_cra_deploy_analysis             = var.ci_cra_deploy_analysis
   enable_pipeline_notifications      = var.ci_enable_pipeline_notifications
-  event_notifications                = var.ci_event_notifications
   pipeline_properties                = var.ci_pipeline_properties
   pipeline_properties_filepath       = var.ci_pipeline_properties_filepath
   repository_properties              = var.ci_repository_properties
   repository_properties_filepath     = var.ci_repository_properties_filepath
 
   #CODE ENGINE
-  code_engine_project         = var.ci_code_engine_project
-  code_engine_region          = var.ci_code_engine_region
-  code_engine_resource_group  = var.ci_code_engine_resource_group
-  code_engine_build_strategy  = var.ci_code_engine_build_strategy
-  code_engine_source          = var.ci_code_engine_source
-  code_engine_deployment_type = var.ci_code_engine_entity_type
+  code_engine_project        = local.ci_code_engine_project_name
+  code_engine_region         = (var.ci_code_engine_region == "") ? var.toolchain_region : var.ci_code_engine_region
+  code_engine_resource_group = (var.ci_code_engine_resource_group == "") ? var.toolchain_resource_group : var.ci_code_engine_resource_group
 
-  deployment_target = var.ci_deployment_target
+  #CLUSTER
+  dev_region         = format("${var.environment_prefix}%s", replace(replace(local.calculated_ci_cluster_region, "ibm:yp:", ""), "ibm:ys1:", ""))
+  dev_resource_group = (var.ci_cluster_resource_group != "") ? var.ci_cluster_resource_group : var.toolchain_resource_group
+  cluster_name       = (var.ci_cluster_name == "") ? var.cluster_name : var.ci_cluster_name
+  cluster_namespace  = var.ci_cluster_namespace
 
   #OTHER INTEGRATIONS
 
@@ -305,10 +244,6 @@ module "devsecops_ci_toolchain" {
   slack_pipeline_success = var.ci_slack_pipeline_success
   slack_toolchain_bind   = var.ci_slack_toolchain_bind
   slack_toolchain_unbind = var.ci_slack_toolchain_unbind
-
-  #GOSEC
-  gosec_private_repository_host = (var.ci_gosec_private_repository_host == "") ? var.gosec_private_repository_host : var.ci_gosec_private_repository_host
-  opt_in_gosec                  = (var.ci_opt_in_gosec == "") ? var.opt_in_gosec : var.ci_opt_in_gosec
 
   #SONARQUBE
   sonarqube_integration_name    = var.ci_sonarqube_integration_name
@@ -352,15 +287,13 @@ module "devsecops_ci_toolchain" {
 module "devsecops_cd_toolchain" {
   count            = var.create_cd_toolchain ? 1 : 0
   depends_on       = [ibm_resource_instance.cd_instance]
-  source           = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain?ref=v1.5.0"
+  source           = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain?ref=v2.0.0-beta.2"
   ibmcloud_api_key = var.ibmcloud_api_key
 
   toolchain_name           = (var.prefix == "") ? local.cd_toolchain_name : format("${var.prefix}-%s", local.cd_toolchain_name)
   toolchain_description    = var.cd_toolchain_description
   toolchain_region         = (var.cd_toolchain_region == "") ? var.toolchain_region : replace(replace(var.cd_toolchain_region, "ibm:yp:", ""), "ibm:ys1:", "")
   toolchain_resource_group = (var.cd_toolchain_resource_group == "") ? var.toolchain_resource_group : var.cd_toolchain_resource_group
-  ibmcloud_api             = var.ibmcloud_api
-  compliance_base_image    = (var.cd_compliance_base_image == "") ? var.compliance_base_image : var.cd_compliance_base_image
   pipeline_branch          = (var.cd_compliance_pipeline_branch == "") ? var.compliance_pipeline_branch : var.cd_compliance_pipeline_branch
   pipeline_git_tag         = (var.cd_pipeline_git_tag == "") ? var.pipeline_git_tag : var.cd_pipeline_git_tag
 
@@ -410,14 +343,8 @@ module "devsecops_cd_toolchain" {
   scc_scc_api_key_secret_name  = var.scc_scc_api_key_secret_name
   scc_scc_api_key_secret_group = var.scc_scc_api_key_secret_group
 
-  pipeline_git_token_secret_name  = var.cd_pipeline_git_token_secret_name
-  pipeline_git_token_secret_group = var.cd_pipeline_git_token_secret_group
-
   pipeline_doi_api_key_secret_name  = (var.cd_pipeline_doi_api_key_secret_name == "") ? var.pipeline_doi_api_key_secret_name : var.cd_pipeline_doi_api_key_secret_name
   pipeline_doi_api_key_secret_group = (var.cd_pipeline_doi_api_key_secret_group == "") ? var.pipeline_doi_api_key_secret_group : var.cd_pipeline_doi_api_key_secret_group
-
-  code_signing_cert_secret_name  = var.cd_code_signing_cert_secret_name
-  code_signing_cert_secret_group = var.cd_code_signing_cert_secret_group
 
   # CRN SECRETS
   deployment_repo_git_token_secret_crn          = (var.cd_deployment_repo_git_token_secret_crn == "") ? var.repo_git_token_secret_crn : var.cd_deployment_repo_git_token_secret_crn
@@ -432,9 +359,7 @@ module "devsecops_cd_toolchain" {
   slack_webhook_secret_crn                      = (var.cd_slack_webhook_secret_crn == "") ? var.slack_webhook_secret_crn : var.cd_slack_webhook_secret_crn
   privateworker_credentials_secret_crn          = var.cd_privateworker_credentials_secret_crn
   artifactory_token_secret_crn                  = var.cd_artifactory_token_secret_crn
-  code_signing_cert_secret_crn                  = var.cd_code_signing_cert_secret_crn
   scc_scc_api_key_secret_crn                    = var.scc_scc_api_key_secret_crn
-  pipeline_git_token_secret_crn                 = var.cd_pipeline_git_token_secret_crn
   pipeline_doi_api_key_secret_crn               = (var.cd_pipeline_doi_api_key_secret_crn == "") ? var.pipeline_doi_api_key_secret_crn : var.cd_pipeline_doi_api_key_secret_crn
 
   #AUTH TYPE FOR REPOS
@@ -459,25 +384,24 @@ module "devsecops_cd_toolchain" {
   pipeline_config_repo_existing_url   = var.cd_pipeline_config_repo_existing_url
   pipeline_config_repo_clone_from_url = var.cd_pipeline_config_repo_clone_from_url
   pipeline_config_repo_branch         = var.cd_pipeline_config_repo_branch
-  pipeline_config_path                = var.cd_pipeline_config_path
 
   #EVIDENCE REPO
   evidence_repo_name              = var.evidence_repo_name
-  evidence_repo_url               = try(module.devsecops_ci_toolchain[0].evidence_repo_url, local.evidence_repo_existing_url)
+  evidence_repo_url               = try(module.devsecops_ci_toolchain[0].evidence_repo_url, var.evidence_repo_existing_url)
   evidence_repo_git_provider      = var.evidence_repo_existing_git_provider
   evidence_repo_git_id            = var.evidence_repo_existing_git_id
   evidence_repo_integration_owner = var.evidence_repo_integration_owner
 
   #ISSUES REPO
   issues_repo_name              = var.issues_repo_name
-  issues_repo_url               = try(module.devsecops_ci_toolchain[0].issues_repo_url, local.issues_repo_existing_url)
+  issues_repo_url               = try(module.devsecops_ci_toolchain[0].issues_repo_url, var.issues_repo_existing_url)
   issues_repo_git_provider      = var.issues_repo_existing_git_provider
   issues_repo_git_id            = var.issues_repo_existing_git_id
   issues_repo_integration_owner = var.issues_repo_integration_owner
 
   #INVENTORY REPO
   inventory_repo_name              = var.inventory_repo_name
-  inventory_repo_url               = try(module.devsecops_ci_toolchain[0].inventory_repo_url, local.inventory_repo_existing_url)
+  inventory_repo_url               = try(module.devsecops_ci_toolchain[0].inventory_repo_url, var.inventory_repo_existing_url)
   inventory_repo_git_provider      = var.inventory_repo_existing_git_provider
   inventory_repo_git_id            = var.inventory_repo_existing_git_id
   inventory_repo_integration_owner = var.inventory_repo_integration_owner
@@ -500,39 +424,31 @@ module "devsecops_cd_toolchain" {
   scc_enable_scc       = var.cd_scc_enable_scc
   scc_integration_name = var.cd_scc_integration_name
 
+  #CODE ENGINE
+  code_engine_project        = local.cd_code_engine_project_name
+  code_engine_region         = (var.cd_code_engine_region == "") ? var.toolchain_region : var.cd_code_engine_region
+  code_engine_resource_group = (var.cd_code_engine_resource_group == "") ? var.toolchain_resource_group : var.cd_code_engine_resource_group
+
+  #CLUSTER
+  cluster_name      = (var.cd_cluster_name == "") ? var.cluster_name : var.cd_cluster_name
+  cluster_namespace = var.cd_cluster_namespace
+  cluster_region    = (var.cd_cluster_region == "") ? format("${var.environment_prefix}%s", var.toolchain_region) : format("${var.environment_prefix}%s", replace(replace(var.cd_cluster_region, "ibm:yp:", ""), "ibm:ys1:", ""))
+
   #OTHER INTEGRATIONS
-  slack_notifications           = local.cd_slack_notification_state
-  cluster_name                  = (var.cd_cluster_name == "") ? var.cluster_name : var.cd_cluster_name
-  cluster_namespace             = var.cd_cluster_namespace
-  cluster_region                = (var.cd_cluster_region == "") ? format("${var.environment_prefix}%s", var.toolchain_region) : format("${var.environment_prefix}%s", replace(replace(var.cd_cluster_region, "ibm:yp:", ""), "ibm:ys1:", ""))
+
   repositories_prefix           = (local.cd_repositories_prefix == "compliance" && var.prefix != "") ? format("%s-%s", var.prefix, local.cd_repositories_prefix) : local.cd_repositories_prefix
   authorization_policy_creation = (var.cd_authorization_policy_creation == "") ? var.authorization_policy_creation : var.cd_authorization_policy_creation
-  doi_environment               = var.cd_doi_environment
   link_to_doi_toolchain         = var.cd_link_to_doi_toolchain
   doi_toolchain_id              = try(module.devsecops_ci_toolchain[0].toolchain_id, var.cd_doi_toolchain_id)
-  target_environment_detail     = var.cd_target_environment_detail
-  customer_impact               = var.cd_customer_impact
-  target_environment_purpose    = var.cd_target_environment_purpose
-  change_request_id             = var.cd_change_request_id
-  satellite_cluster_group       = var.cd_satellite_cluster_group
-  source_environment            = var.cd_source_environment
-  target_environment            = var.cd_target_environment
-  merge_cra_sbom                = var.cd_merge_cra_sbom
-  emergency_label               = var.cd_emergency_label
-  app_version                   = var.cd_app_version
-  pipeline_debug                = var.cd_pipeline_debug
   region                        = (var.cd_region == "") ? var.toolchain_region : var.cd_region
-  peer_review_compliance        = (var.cd_peer_review_compliance == "") ? var.peer_review_compliance : var.cd_peer_review_compliance
   scc_attachment_id             = var.scc_attachment_id
   scc_instance_crn              = var.scc_instance_crn
   scc_profile_name              = var.scc_profile_name
   scc_profile_version           = var.scc_profile_version
   scc_use_profile_attachment    = (var.cd_scc_use_profile_attachment == "") ? var.scc_use_profile_attachment : var.cd_scc_use_profile_attachment
   enable_pipeline_notifications = var.cd_enable_pipeline_notifications
-  event_notifications           = var.cd_event_notifications
   pipeline_properties           = var.cd_pipeline_properties
   pipeline_properties_filepath  = var.cd_pipeline_properties_filepath
-  pre_prod_evidence_collection  = var.cd_pre_prod_evidence_collection
 
   repository_properties          = var.cd_repository_properties
   repository_properties_filepath = var.cd_repository_properties_filepath
@@ -582,15 +498,13 @@ module "devsecops_cd_toolchain" {
 
 module "devsecops_cc_toolchain" {
   count                         = var.create_cc_toolchain ? 1 : 0
-  depends_on                    = [ibm_resource_instance.cd_instance]
-  source                        = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cc-toolchain?ref=v1.5.0"
+  depends_on                    = [module.devsecops_ci_toolchain]
+  source                        = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cc-toolchain?ref=v2.0.0-beta.1"
   ibmcloud_api_key              = var.ibmcloud_api_key
   toolchain_name                = (var.prefix == "") ? local.cc_toolchain_name : format("${var.prefix}-%s", local.cc_toolchain_name)
   toolchain_description         = var.cc_toolchain_description
   toolchain_region              = (var.cc_toolchain_region == "") ? var.toolchain_region : replace(replace(var.cc_toolchain_region, "ibm:yp:", ""), "ibm:ys1:", "")
   toolchain_resource_group      = (var.cc_toolchain_resource_group == "") ? var.toolchain_resource_group : var.cc_toolchain_resource_group
-  ibmcloud_api                  = var.ibmcloud_api
-  compliance_base_image         = (var.cc_compliance_base_image == "") ? var.compliance_base_image : var.cc_compliance_base_image
   authorization_policy_creation = (var.cc_authorization_policy_creation == "") ? var.authorization_policy_creation : var.cc_authorization_policy_creation
   pipeline_branch               = (var.cc_compliance_pipeline_branch == "") ? var.compliance_pipeline_branch : var.cc_compliance_pipeline_branch
   pipeline_git_tag              = (var.cc_pipeline_git_tag == "") ? var.pipeline_git_tag : var.cc_pipeline_git_tag
@@ -635,15 +549,8 @@ module "devsecops_cc_toolchain" {
   slack_webhook_secret_name  = (var.cc_slack_webhook_secret_name == "") ? var.slack_webhook_secret_name : var.cc_slack_webhook_secret_name
   slack_webhook_secret_group = var.cc_slack_webhook_secret_group
 
-  pipeline_dockerconfigjson_secret_name  = var.cc_pipeline_dockerconfigjson_secret_name
-  pipeline_dockerconfigjson_secret_group = var.cc_pipeline_dockerconfigjson_secret_group
-
   scc_scc_api_key_secret_name  = var.scc_scc_api_key_secret_name
   scc_scc_api_key_secret_group = var.scc_scc_api_key_secret_group
-
-
-  gosec_private_repository_ssh_key_secret_name  = (var.cc_gosec_repo_ssh_key_secret_name == "") ? var.gosec_repo_ssh_key_secret_name : var.cc_gosec_repo_ssh_key_secret_name
-  gosec_private_repository_ssh_key_secret_group = (var.cc_gosec_repo_ssh_key_secret_group == "") ? var.gosec_repo_ssh_key_secret_group : var.cc_gosec_repo_ssh_key_secret_group
 
   pipeline_doi_api_key_secret_name  = (var.cc_pipeline_doi_api_key_secret_name == "") ? var.pipeline_doi_api_key_secret_name : var.cc_pipeline_doi_api_key_secret_name
   pipeline_doi_api_key_secret_group = (var.cc_pipeline_doi_api_key_secret_group == "") ? var.pipeline_doi_api_key_secret_group : var.cc_pipeline_doi_api_key_secret_group
@@ -657,14 +564,11 @@ module "devsecops_cc_toolchain" {
   pipeline_config_repo_git_token_secret_crn     = (var.cc_pipeline_config_repo_git_token_secret_crn == "") ? var.repo_git_token_secret_crn : var.cc_pipeline_config_repo_git_token_secret_crn
   cos_api_key_secret_crn                        = (var.cc_cos_api_key_secret_crn == "") ? var.cos_api_key_secret_crn : var.cc_cos_api_key_secret_crn
   pipeline_ibmcloud_api_key_secret_crn          = (var.cc_pipeline_ibmcloud_api_key_secret_crn == "") ? var.pipeline_ibmcloud_api_key_secret_crn : var.cc_pipeline_ibmcloud_api_key_secret_crn
-  pipeline_dockerconfigjson_secret_crn          = var.cc_pipeline_dockerconfigjson_secret_crn
   slack_webhook_secret_crn                      = (var.cc_slack_webhook_secret_crn == "") ? var.slack_webhook_secret_crn : var.cc_slack_webhook_secret_crn
   artifactory_token_secret_crn                  = var.cc_artifactory_token_secret_crn
-  pipeline_git_token_secret_crn                 = var.cc_pipeline_git_token_secret_crn
   scc_scc_api_key_secret_crn                    = var.scc_scc_api_key_secret_crn
   sonarqube_secret_crn                          = (var.cc_sonarqube_secret_crn == "") ? var.sonarqube_secret_crn : var.cc_sonarqube_secret_crn
   pipeline_doi_api_key_secret_crn               = (var.cc_pipeline_doi_api_key_secret_crn == "") ? var.pipeline_doi_api_key_secret_crn : var.cc_pipeline_doi_api_key_secret_crn
-  gosec_private_repository_ssh_key_secret_crn   = (var.cc_gosec_private_repository_ssh_key_secret_crn == "") ? var.gosec_private_repository_ssh_key_secret_crn : var.cc_gosec_private_repository_ssh_key_secret_crn
 
   #AUTH TYPE FOR REPOS
   pipeline_config_repo_auth_type     = (var.cc_pipeline_config_repo_auth_type == "") ? local.repo_auth_type : var.cc_pipeline_config_repo_auth_type
@@ -682,14 +586,12 @@ module "devsecops_cc_toolchain" {
   compliance_pipeline_group = (var.cc_compliance_pipeline_group == "") ? var.repo_group : var.cc_compliance_pipeline_group
   app_group                 = (var.cc_app_group == "") ? var.repo_group : var.cc_app_group
 
-  doi_environment       = var.cc_doi_environment
   link_to_doi_toolchain = var.cc_link_to_doi_toolchain
 
   #PIPELINE CONFIG REPO
   pipeline_config_repo_existing_url   = var.cc_pipeline_config_repo_existing_url
   pipeline_config_repo_clone_from_url = var.cc_pipeline_config_repo_clone_from_url
   pipeline_config_repo_branch         = var.cc_pipeline_config_repo_branch
-  pipeline_config_path                = var.cc_pipeline_config_path
 
   #APP REPO
   app_repo_url          = try(module.devsecops_ci_toolchain[0].app_repo_url, var.cc_app_repo_url)
@@ -699,21 +601,21 @@ module "devsecops_cc_toolchain" {
 
   #EVIDENCE REPO
   evidence_repo_name              = var.evidence_repo_name
-  evidence_repo_url               = try(module.devsecops_ci_toolchain[0].evidence_repo_url, local.evidence_repo_existing_url)
+  evidence_repo_url               = try(module.devsecops_ci_toolchain[0].evidence_repo_url, var.evidence_repo_existing_url)
   evidence_repo_git_provider      = var.evidence_repo_existing_git_provider
   evidence_repo_git_id            = var.evidence_repo_existing_git_id
   evidence_repo_integration_owner = var.evidence_repo_integration_owner
 
   #ISSUES REPO
   issues_repo_name              = var.issues_repo_name
-  issues_repo_url               = try(module.devsecops_ci_toolchain[0].issues_repo_url, local.issues_repo_existing_url)
+  issues_repo_url               = try(module.devsecops_ci_toolchain[0].issues_repo_url, var.issues_repo_existing_url)
   issues_repo_git_provider      = var.issues_repo_existing_git_provider
   issues_repo_git_id            = var.issues_repo_existing_git_id
   issues_repo_integration_owner = var.issues_repo_integration_owner
 
   #INVENTORY REPO
   inventory_repo_name              = var.inventory_repo_name
-  inventory_repo_url               = try(module.devsecops_ci_toolchain[0].inventory_repo_url, local.inventory_repo_existing_url)
+  inventory_repo_url               = try(module.devsecops_ci_toolchain[0].inventory_repo_url, var.inventory_repo_existing_url)
   inventory_repo_git_provider      = var.inventory_repo_existing_git_provider
   inventory_repo_git_id            = var.inventory_repo_existing_git_id
   inventory_repo_integration_owner = var.inventory_repo_integration_owner
@@ -723,32 +625,19 @@ module "devsecops_cc_toolchain" {
   scc_integration_name = var.cc_scc_integration_name
 
   #OTHER INTEGRATIONS
-  slack_notifications              = local.cc_slack_notification_state
-  sonarqube_config                 = var.cc_sonarqube_config
-  repositories_prefix              = (local.cc_repositories_prefix == "compliance" && var.prefix != "") ? format("%s-%s", var.prefix, local.cc_repositories_prefix) : local.cc_repositories_prefix
-  doi_toolchain_id                 = try(module.devsecops_ci_toolchain[0].toolchain_id, var.cc_doi_toolchain_id)
-  pipeline_debug                   = var.cc_pipeline_debug
-  opt_in_dynamic_api_scan          = var.cc_opt_in_dynamic_api_scan
-  opt_in_dynamic_ui_scan           = var.cc_opt_in_dynamic_ui_scan
-  opt_in_dynamic_scan              = var.cc_opt_in_dynamic_scan
-  opt_in_auto_close                = var.cc_opt_in_auto_close
-  environment_tag                  = (var.cc_environment_tag == "") ? format("%s_prod_latest", var.toolchain_region) : var.cc_environment_tag
-  enable_pipeline_dockerconfigjson = var.cc_enable_pipeline_dockerconfigjson
-  peer_review_compliance           = (var.cc_peer_review_compliance == "") ? var.peer_review_compliance : var.cc_peer_review_compliance
-  scc_attachment_id                = var.scc_attachment_id
-  scc_instance_crn                 = var.scc_instance_crn
-  scc_profile_name                 = var.scc_profile_name
-  scc_profile_version              = var.scc_profile_version
-  scc_use_profile_attachment       = (var.cc_scc_use_profile_attachment == "") ? var.scc_use_profile_attachment : var.cc_scc_use_profile_attachment
-  enable_pipeline_notifications    = var.cc_enable_pipeline_notifications
-  event_notifications              = var.cc_event_notifications
-  cra_bom_generate                 = var.cc_cra_bom_generate
-  cra_vulnerability_scan           = var.cc_cra_vulnerability_scan
-  cra_deploy_analysis              = var.cc_cra_deploy_analysis
-  pipeline_properties              = var.cc_pipeline_properties
-  pipeline_properties_filepath     = var.cc_pipeline_properties_filepath
-  repository_properties            = var.cc_repository_properties
-  repository_properties_filepath   = var.cc_repository_properties_filepath
+  repositories_prefix = (local.cc_repositories_prefix == "compliance" && var.prefix != "") ? format("%s-%s", var.prefix, local.cc_repositories_prefix) : local.cc_repositories_prefix
+  doi_toolchain_id    = try(module.devsecops_ci_toolchain[0].toolchain_id, var.cc_doi_toolchain_id)
+  #environment_tag                  = (var.cc_environment_tag == "") ? format("%s_prod_latest", var.toolchain_region) : var.cc_environment_tag
+  scc_attachment_id              = var.scc_attachment_id
+  scc_instance_crn               = var.scc_instance_crn
+  scc_profile_name               = var.scc_profile_name
+  scc_profile_version            = var.scc_profile_version
+  scc_use_profile_attachment     = (var.cc_scc_use_profile_attachment == "") ? var.scc_use_profile_attachment : var.cc_scc_use_profile_attachment
+  enable_pipeline_notifications  = var.cc_enable_pipeline_notifications
+  pipeline_properties            = var.cc_pipeline_properties
+  pipeline_properties_filepath   = var.cc_pipeline_properties_filepath
+  repository_properties          = var.cc_repository_properties
+  repository_properties_filepath = var.cc_repository_properties_filepath
 
 
   #SLACK INTEGRATION
@@ -774,10 +663,6 @@ module "devsecops_cc_toolchain" {
   kp_integration_name    = var.kp_integration_name
   slack_integration_name = var.slack_integration_name
 
-  #GOSEC
-  gosec_private_repository_host = (var.cc_gosec_private_repository_host == "") ? var.gosec_private_repository_host : var.cc_gosec_private_repository_host
-  opt_in_gosec                  = (var.cc_opt_in_gosec == "") ? var.opt_in_gosec : var.cc_opt_in_gosec
-
   #SONARQUBE
   sonarqube_integration_name    = var.cc_sonarqube_integration_name
   sonarqube_user                = var.cc_sonarqube_user
@@ -795,31 +680,6 @@ module "devsecops_cc_toolchain" {
   trigger_manual_pruner_enable = var.cc_trigger_manual_pruner_enable
   trigger_timed_pruner_name    = var.cc_trigger_timed_pruner_name
   trigger_timed_pruner_enable  = var.cc_trigger_timed_pruner_enable
-}
-
-#############Auto Remediation Support ######################
-resource "ibm_cd_tekton_pipeline_property" "cc_pipeline_opt_in_cra_auto_remediation" {
-  depends_on  = [module.devsecops_cc_toolchain]
-  name        = "opt-in-cra-auto-remediation"
-  type        = "text"
-  value       = var.cc_opt_in_cra_auto_remediation
-  pipeline_id = module.devsecops_cc_toolchain[0].cc_pipeline_id
-}
-
-resource "ibm_cd_tekton_pipeline_property" "cc_pipeline_opt_in_cra_auto_remediation_force" {
-  depends_on  = [module.devsecops_cc_toolchain]
-  name        = "opt-in-cra-auto-remediation-force"
-  type        = "text"
-  value       = var.cc_opt_in_cra_auto_remediation_force
-  pipeline_id = module.devsecops_cc_toolchain[0].cc_pipeline_id
-}
-
-resource "ibm_cd_tekton_pipeline_property" "cc_pipeline_opt_in_cra_auto_remediation_enabled_repos" {
-  depends_on  = [module.devsecops_cc_toolchain]
-  name        = "opt-in-cra-auto-remediation-enabled-repos"
-  type        = "text"
-  value       = var.cc_opt_in_cra_auto_remediation_enabled_repos
-  pipeline_id = module.devsecops_cc_toolchain[0].cc_pipeline_id
 }
 
 ############### Auto Start Webhook ######################

@@ -30,7 +30,7 @@ variable "autostart" {
 variable "cluster_name" {
   type        = string
   description = "Name of the Kubernetes cluster where the application is deployed. This sets the same cluster name for both CI and CD toolchains. See `ci_cluster_name` and `cd_cluster_name` to set different cluster names. By default , the cluster namespace for CI will be set to `dev` and CD to `prod`. These can be changed using `ci_cluster_namespace` and `cd_cluster_namespace`."
-  default     = "mycluster-free"
+  default     = "mycluster-free2"
 }
 
 variable "code_engine_project" {
@@ -1004,7 +1004,7 @@ variable "cc_pipeline_ibmcloud_api_key_secret_name" {
 variable "cc_pipeline_properties_filepath" {
   type        = string
   description = "The path to the file containing the property JSON. If this is not set, it will by default read the `properties.json` file at the root of the module."
-  default     = ""
+  default     = "./cc-properties.json"
 }
 
 variable "cc_pipeline_properties" {
@@ -1814,7 +1814,7 @@ variable "cd_pipeline_ibmcloud_api_key_secret_name" {
 variable "cd_pipeline_properties_filepath" {
   type        = string
   description = "The path to the file containing the property JSON. If this is not set, it will by default read the `properties.json` file at the root of the module."
-  default     = ""
+  default     = "./cd-properties.json"
 }
 
 variable "cd_pipeline_properties" {
@@ -2619,7 +2619,7 @@ variable "ci_pipeline_ibmcloud_api_key_secret_name" {
 variable "ci_pipeline_properties_filepath" {
   type        = string
   description = "The path to the file containing the properties JSON. If this is not set, it will by default read the `properties.json` file at the root of the CI module."
-  default     = ""
+  default     = "./ci-properties.json"
 }
 
 variable "ci_pipeline_properties" {

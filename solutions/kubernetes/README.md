@@ -58,32 +58,16 @@ statement instead the previous block.
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0.0 |
 | <a name="requirement_ibm"></a> [ibm](#requirement\_ibm) | =1.67.1 |
-| <a name="requirement_null"></a> [null](#requirement\_null) | = 3.2.2 |
-| <a name="requirement_random"></a> [random](#requirement\_random) | = 3.6.2 |
 
 ### Modules
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_devsecops_cc_toolchain"></a> [devsecops\_cc\_toolchain](#module\_devsecops\_cc\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cc-toolchain | v2.0.0-beta.1 |
-| <a name="module_devsecops_cd_toolchain"></a> [devsecops\_cd\_toolchain](#module\_devsecops\_cd\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain | v2.0.0-beta.2 |
-| <a name="module_devsecops_ci_toolchain"></a> [devsecops\_ci\_toolchain](#module\_devsecops\_ci\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-ci-toolchain | v2.0.0-beta.1 |
-| <a name="module_prereqs"></a> [prereqs](#module\_prereqs) | ./prereqs | n/a |
+| <a name="module_devsecops_da"></a> [devsecops\_da](#module\_devsecops\_da) | ../../ | n/a |
 
 ### Resources
 
-| Name | Type |
-|------|------|
-| [ibm_cd_tekton_pipeline_trigger.ci_pipeline_webhook](https://registry.terraform.io/providers/IBM-Cloud/ibm/1.67.1/docs/resources/cd_tekton_pipeline_trigger) | resource |
-| [ibm_cd_tekton_pipeline_trigger_property.ci_pipeline_webhook_branch_property](https://registry.terraform.io/providers/IBM-Cloud/ibm/1.67.1/docs/resources/cd_tekton_pipeline_trigger_property) | resource |
-| [ibm_cd_tekton_pipeline_trigger_property.ci_pipeline_webhook_name_property](https://registry.terraform.io/providers/IBM-Cloud/ibm/1.67.1/docs/resources/cd_tekton_pipeline_trigger_property) | resource |
-| [ibm_cd_tekton_pipeline_trigger_property.ci_pipeline_webhook_repo_url_property](https://registry.terraform.io/providers/IBM-Cloud/ibm/1.67.1/docs/resources/cd_tekton_pipeline_trigger_property) | resource |
-| [ibm_cr_namespace.cr_namespace](https://registry.terraform.io/providers/IBM-Cloud/ibm/1.67.1/docs/resources/cr_namespace) | resource |
-| [ibm_resource_instance.cd_instance](https://registry.terraform.io/providers/IBM-Cloud/ibm/1.67.1/docs/resources/resource_instance) | resource |
-| [null_resource.ci_pipeline_run](https://registry.terraform.io/providers/hashicorp/null/3.2.2/docs/resources/resource) | resource |
-| [random_string.resource_suffix](https://registry.terraform.io/providers/hashicorp/random/3.6.2/docs/resources/string) | resource |
-| [random_string.webhook_secret](https://registry.terraform.io/providers/hashicorp/random/3.6.2/docs/resources/string) | resource |
-| [ibm_resource_group.resource_group](https://registry.terraform.io/providers/IBM-Cloud/ibm/1.67.1/docs/data-sources/resource_group) | data source |
+No resources.
 
 ### Inputs
 
@@ -156,7 +140,7 @@ statement instead the previous block.
 | <a name="input_cc_pipeline_ibmcloud_api_key_secret_group"></a> [cc\_pipeline\_ibmcloud\_api\_key\_secret\_group](#input\_cc\_pipeline\_ibmcloud\_api\_key\_secret\_group) | Secret group for the pipeline ibmcloud API key secret. Defaults to the value set in `sm_secret_group` if not set. Only used with `Secrets Manager`. | `string` | `""` | no |
 | <a name="input_cc_pipeline_ibmcloud_api_key_secret_name"></a> [cc\_pipeline\_ibmcloud\_api\_key\_secret\_name](#input\_cc\_pipeline\_ibmcloud\_api\_key\_secret\_name) | Name of the Cloud API key secret in the secret provider for running the pipelines. | `string` | `""` | no |
 | <a name="input_cc_pipeline_properties"></a> [cc\_pipeline\_properties](#input\_cc\_pipeline\_properties) | Stringified JSON containing the properties for the CC toolchain pipelines. | `string` | `""` | no |
-| <a name="input_cc_pipeline_properties_filepath"></a> [cc\_pipeline\_properties\_filepath](#input\_cc\_pipeline\_properties\_filepath) | The path to the file containing the property JSON. If this is not set, it will by default read the `properties.json` file at the root of the module. | `string` | `""` | no |
+| <a name="input_cc_pipeline_properties_filepath"></a> [cc\_pipeline\_properties\_filepath](#input\_cc\_pipeline\_properties\_filepath) | The path to the file containing the property JSON. If this is not set, it will by default read the `properties.json` file at the root of the module. | `string` | `"./cc-properties.json"` | no |
 | <a name="input_cc_repositories_prefix"></a> [cc\_repositories\_prefix](#input\_cc\_repositories\_prefix) | The prefix for the compliance repositories. For the repositories\_prefix value only a-z, A-Z and 0-9 and the special characters `-_` are allowed. In addition the string must not end with a special character or have two consecutive special characters. | `string` | `""` | no |
 | <a name="input_cc_repository_properties"></a> [cc\_repository\_properties](#input\_cc\_repository\_properties) | Stringified JSON containing the repositories and triggers that get created in the CI toolchain pipelines. | `string` | `""` | no |
 | <a name="input_cc_repository_properties_filepath"></a> [cc\_repository\_properties\_filepath](#input\_cc\_repository\_properties\_filepath) | The path to the file containing the repository and triggers JSON. If this is not set, it will by default read the `repositories.json` file at the root of the module. | `string` | `""` | no |
@@ -278,7 +262,7 @@ statement instead the previous block.
 | <a name="input_cd_pipeline_ibmcloud_api_key_secret_group"></a> [cd\_pipeline\_ibmcloud\_api\_key\_secret\_group](#input\_cd\_pipeline\_ibmcloud\_api\_key\_secret\_group) | Secret group for the pipeline ibmcloud API key secret. Defaults to the value set in `sm_secret_group` if not set. Only used with `Secrets Manager`. | `string` | `""` | no |
 | <a name="input_cd_pipeline_ibmcloud_api_key_secret_name"></a> [cd\_pipeline\_ibmcloud\_api\_key\_secret\_name](#input\_cd\_pipeline\_ibmcloud\_api\_key\_secret\_name) | Name of the Cloud API key secret in the secret provider for running the pipelines. | `string` | `""` | no |
 | <a name="input_cd_pipeline_properties"></a> [cd\_pipeline\_properties](#input\_cd\_pipeline\_properties) | Stringified JSON containing the properties for the CD toolchain pipelines. | `string` | `""` | no |
-| <a name="input_cd_pipeline_properties_filepath"></a> [cd\_pipeline\_properties\_filepath](#input\_cd\_pipeline\_properties\_filepath) | The path to the file containing the property JSON. If this is not set, it will by default read the `properties.json` file at the root of the module. | `string` | `""` | no |
+| <a name="input_cd_pipeline_properties_filepath"></a> [cd\_pipeline\_properties\_filepath](#input\_cd\_pipeline\_properties\_filepath) | The path to the file containing the property JSON. If this is not set, it will by default read the `properties.json` file at the root of the module. | `string` | `"./cd-properties.json"` | no |
 | <a name="input_cd_privateworker_credentials_secret_crn"></a> [cd\_privateworker\_credentials\_secret\_crn](#input\_cd\_privateworker\_credentials\_secret\_crn) | The CRN of the private worker service apikey that runs the pipeline tasks. | `string` | `""` | no |
 | <a name="input_cd_region"></a> [cd\_region](#input\_cd\_region) | IBM Cloud region used to prefix the `prod_latest` inventory repository branch. | `string` | `""` | no |
 | <a name="input_cd_repositories_prefix"></a> [cd\_repositories\_prefix](#input\_cd\_repositories\_prefix) | Prefix name for the cloned compliance repos. For the repositories\_prefix value only a-z, A-Z and 0-9 and the special characters `-_` are allowed. In addition the string must not end with a special character or have two consecutive special characters. | `string` | `""` | no |
@@ -400,7 +384,7 @@ statement instead the previous block.
 | <a name="input_ci_pipeline_ibmcloud_api_key_secret_group"></a> [ci\_pipeline\_ibmcloud\_api\_key\_secret\_group](#input\_ci\_pipeline\_ibmcloud\_api\_key\_secret\_group) | Secret group for the pipeline ibmcloud API key secret. Defaults to the value set in `sm_secret_group` if not set. Only used with `Secrets Manager`. | `string` | `""` | no |
 | <a name="input_ci_pipeline_ibmcloud_api_key_secret_name"></a> [ci\_pipeline\_ibmcloud\_api\_key\_secret\_name](#input\_ci\_pipeline\_ibmcloud\_api\_key\_secret\_name) | Name of the Cloud API key secret in the secret provider for running the pipelines. | `string` | `""` | no |
 | <a name="input_ci_pipeline_properties"></a> [ci\_pipeline\_properties](#input\_ci\_pipeline\_properties) | Stringified JSON containing the properties for the CI toolchain pipelines. | `string` | `""` | no |
-| <a name="input_ci_pipeline_properties_filepath"></a> [ci\_pipeline\_properties\_filepath](#input\_ci\_pipeline\_properties\_filepath) | The path to the file containing the properties JSON. If this is not set, it will by default read the `properties.json` file at the root of the CI module. | `string` | `""` | no |
+| <a name="input_ci_pipeline_properties_filepath"></a> [ci\_pipeline\_properties\_filepath](#input\_ci\_pipeline\_properties\_filepath) | The path to the file containing the properties JSON. If this is not set, it will by default read the `properties.json` file at the root of the CI module. | `string` | `"./ci-properties.json"` | no |
 | <a name="input_ci_privateworker_credentials_secret_crn"></a> [ci\_privateworker\_credentials\_secret\_crn](#input\_ci\_privateworker\_credentials\_secret\_crn) | The CRN of the private worker service apikey that runs the pipeline tasks. | `string` | `""` | no |
 | <a name="input_ci_registry_region"></a> [ci\_registry\_region](#input\_ci\_registry\_region) | The IBM Cloud Region where the IBM Cloud Container Registry namespace is to be created. Use the short form of the regions. For example `us-south`. | `string` | `""` | no |
 | <a name="input_ci_repositories_prefix"></a> [ci\_repositories\_prefix](#input\_ci\_repositories\_prefix) | Prefix name for the cloned compliance repos. For the repositories\_prefix value only a-z, A-Z and 0-9 and the special characters `-_` are allowed. In addition the string must not end with a special character or have two consecutive special characters. | `string` | `""` | no |
@@ -445,7 +429,7 @@ statement instead the previous block.
 | <a name="input_ci_trigger_timed_name"></a> [ci\_trigger\_timed\_name](#input\_ci\_trigger\_timed\_name) | The name of the CI pipeline Timed trigger. | `string` | `"Git CI Timed Trigger"` | no |
 | <a name="input_ci_trigger_timed_pruner_enable"></a> [ci\_trigger\_timed\_pruner\_enable](#input\_ci\_trigger\_timed\_pruner\_enable) | Set to `true` to enable the timed Pruner trigger. | `bool` | `false` | no |
 | <a name="input_ci_trigger_timed_pruner_name"></a> [ci\_trigger\_timed\_pruner\_name](#input\_ci\_trigger\_timed\_pruner\_name) | The name of the timed Pruner trigger. | `string` | `"Evidence Pruner Timed Trigger"` | no |
-| <a name="input_cluster_name"></a> [cluster\_name](#input\_cluster\_name) | Name of the Kubernetes cluster where the application is deployed. This sets the same cluster name for both CI and CD toolchains. See `ci_cluster_name` and `cd_cluster_name` to set different cluster names. By default , the cluster namespace for CI will be set to `dev` and CD to `prod`. These can be changed using `ci_cluster_namespace` and `cd_cluster_namespace`. | `string` | `"mycluster-free"` | no |
+| <a name="input_cluster_name"></a> [cluster\_name](#input\_cluster\_name) | Name of the Kubernetes cluster where the application is deployed. This sets the same cluster name for both CI and CD toolchains. See `ci_cluster_name` and `cd_cluster_name` to set different cluster names. By default , the cluster namespace for CI will be set to `dev` and CD to `prod`. These can be changed using `ci_cluster_namespace` and `cd_cluster_namespace`. | `string` | `"mycluster-free2"` | no |
 | <a name="input_code_engine_project"></a> [code\_engine\_project](#input\_code\_engine\_project) | The name of the Code Engine project to use. Created if it does not exist. Applies to both the CI and CD toolchains. To set individually use `ci_code_engine_project` and `cd_code_engine_project`. | `string` | `""` | no |
 | <a name="input_compliance_pipeline_branch"></a> [compliance\_pipeline\_branch](#input\_compliance\_pipeline\_branch) | The Compliance Pipeline definitions branch. See `ci_compliance_pipeline_branch`, `cd_compliance_pipeline_branch` and `cc_compliance_pipeline_branch` to set independently. | `string` | `"open-v10"` | no |
 | <a name="input_cos_api_key_secret_crn"></a> [cos\_api\_key\_secret\_crn](#input\_cos\_api\_key\_secret\_crn) | The CRN of the Cloud Object Storage apikey. Applies to the CI, CD and CC toolchains. Can beset independently using `ci_cos_api_key_secret_crn`,`cd_cos_api_key_secret_crn`,`cc_cos_api_key_secret_crn`. | `string` | `""` | no |

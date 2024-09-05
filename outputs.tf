@@ -29,17 +29,17 @@ output "key_protect_instance_id" {
 
 output "evidence_repo_url" {
   description = "The Evidence Repo URL"
-  value       = try(module.devsecops_ci_toolchain[0].evidence_repo_url, var.evidence_repo_url)
+  value       = try(module.devsecops_ci_toolchain[0].evidence_repo_url, var.evidence_repo_existing_url)
 }
 
 output "issues_repo_url" {
   description = "The Issues Repo URL"
-  value       = try(module.devsecops_ci_toolchain[0].issues_repo_url, var.issues_repo_url)
+  value       = try(module.devsecops_ci_toolchain[0].issues_repo_url, var.issues_repo_existing_url)
 }
 
 output "inventory_repo_url" {
   description = "The Inventory Repo URL"
-  value       = try(module.devsecops_ci_toolchain[0].inventory_repo_url, var.inventory_repo_url)
+  value       = try(module.devsecops_ci_toolchain[0].inventory_repo_url, var.inventory_repo_existing_url)
 }
 
 output "app_repo_url" {
