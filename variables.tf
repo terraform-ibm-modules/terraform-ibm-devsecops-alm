@@ -15,6 +15,17 @@ variable "add_container_name_suffix" {
   default     = false
 }
 
+variable "app_repo_git_token_secret_crn" {
+  type        = string
+  sensitive   = true
+  description = "The CRN of the Git token used for accessing the sample application repository."
+  default     = ""
+  validation {
+    condition     = startswith(var.app_repo_git_token_secret_crn, "crn:") || var.app_repo_git_token_secret_crn == ""
+    error_message = "Must be a CRN or left empty."
+  }
+}
+
 variable "authorization_policy_creation" {
   type        = string
   description = "Disable Toolchain Service to Secrets Manager/Key Protect/Notifications Service authorization policy creation. To disable set the value to `disabled`. This applies to the CI, CD, and CC toolchains. To set independently, see `ci_authorization_policy_creation`, `cd_authorization_policy_creation`, and `cc_authorization_policy_creation`."
@@ -45,6 +56,35 @@ variable "compliance_pipeline_branch" {
   default     = "open-v10"
 }
 
+variable "compliance_pipeline_repo_auth_type" {
+  type        = string
+  description = "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`."
+  default     = ""
+}
+
+variable "compliance_pipeline_repo_git_token_secret_crn" {
+  type        = string
+  sensitive   = true
+  description = "The CRN of the Git token used for accessing the sample application repository."
+  default     = ""
+  validation {
+    condition     = startswith(var.compliance_pipeline_repo_git_token_secret_crn, "crn:") || var.compliance_pipeline_repo_git_token_secret_crn == ""
+    error_message = "Must be a CRN or left empty."
+  }
+}
+
+variable "compliance_pipeline_repo_git_token_secret_name" {
+  type        = string
+  description = "Name of the Git token secret in the secret provider used for accessing the compliance pipelines repository."
+  default     = ""
+}
+
+variable "compliance_pipeline_repo_secret_group" {
+  type        = string
+  description = "Secret group for the Compliance Pipeline repository secret. Defaults to the value set in `sm_secret_group` if not set. Only used with `Secrets Manager`."
+  default     = ""
+}
+
 variable "cos_api_key_secret_crn" {
   type        = string
   sensitive   = true
@@ -54,6 +94,12 @@ variable "cos_api_key_secret_crn" {
     condition     = startswith(var.cos_api_key_secret_crn, "crn:") || var.cos_api_key_secret_crn == ""
     error_message = "Must be a CRN or left empty."
   }
+}
+
+variable "cos_api_key_secret_group" {
+  type        = string
+  description = "Secret group for the COS api key secret. Defaults to the value set in `sm_secret_group` if not set. Only used with `Secrets Manager`."
+  default     = ""
 }
 
 variable "cos_api_key_secret_name" {
@@ -170,6 +216,12 @@ variable "event_notifications_tool_name" {
   default     = "Event Notifications"
 }
 
+variable "evidence_repo_auth_type" {
+  type        = string
+  description = "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`."
+  default     = ""
+}
+
 variable "evidence_repo_existing_git_id" {
   type        = string
   description = "Set this value to `github` for github.com, or to the GUID of a custom GitHub Enterprise server."
@@ -192,6 +244,23 @@ variable "evidence_repo_existing_url" {
   default     = ""
 }
 
+variable "evidence_repo_git_token_secret_crn" {
+  type        = string
+  sensitive   = true
+  description = "The CRN of the Git token used for accessing the Evidence repository."
+  default     = ""
+  validation {
+    condition     = startswith(var.evidence_repo_git_token_secret_crn, "crn:") || var.evidence_repo_git_token_secret_crn == ""
+    error_message = "Must be a CRN or left empty."
+  }
+}
+
+variable "evidence_repo_git_token_secret_name" {
+  type        = string
+  description = "Name of the Git token secret in the secret provider used for accessing the evidence repository."
+  default     = ""
+}
+
 variable "evidence_repo_integration_owner" {
   type        = string
   description = "The name of the repository integration owner."
@@ -204,10 +273,22 @@ variable "evidence_repo_name" {
   default     = ""
 }
 
+variable "evidence_repo_secret_group" {
+  type        = string
+  description = "Secret group for the Evidence repository secret. Defaults to the value set in `sm_secret_group` if not set. Only used with `Secrets Manager`."
+  default     = ""
+}
+
 variable "ibmcloud_api_key" {
   type        = string
   description = "The API key used to create the toolchains. (See deployment guide.)"
   sensitive   = true
+}
+
+variable "inventory_repo_auth_type" {
+  type        = string
+  description = "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`."
+  default     = ""
 }
 
 variable "inventory_repo_existing_git_id" {
@@ -232,6 +313,23 @@ variable "inventory_repo_existing_url" {
   default     = ""
 }
 
+variable "inventory_repo_git_token_secret_crn" {
+  type        = string
+  sensitive   = true
+  description = "The CRN of the Git token used for acessing the Inventory repository."
+  default     = ""
+  validation {
+    condition     = startswith(var.inventory_repo_git_token_secret_crn, "crn:") || var.inventory_repo_git_token_secret_crn == ""
+    error_message = "Must be a CRN or left empty."
+  }
+}
+
+variable "inventory_repo_git_token_secret_name" {
+  type        = string
+  description = "Name of the Git token secret in the secret provider used for accessing the inventory repository."
+  default     = ""
+}
+
 variable "inventory_repo_integration_owner" {
   type        = string
   description = "The name of the repository integration owner."
@@ -241,6 +339,18 @@ variable "inventory_repo_integration_owner" {
 variable "inventory_repo_name" {
   type        = string
   description = "Set to use a custom name for the Inventory repository."
+  default     = ""
+}
+
+variable "inventory_repo_secret_group" {
+  type        = string
+  description = "Secret group for the Inventory repository secret. Defaults to the value set in `sm_secret_group` if not set. Only used with `Secrets Manager`."
+  default     = ""
+}
+
+variable "issues_repo_auth_type" {
+  type        = string
+  description = "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`."
   default     = ""
 }
 
@@ -266,6 +376,23 @@ variable "issues_repo_existing_url" {
   default     = ""
 }
 
+variable "issues_repo_git_token_secret_crn" {
+  type        = string
+  sensitive   = true
+  description = "The CRN of the Git token used for accessing the Issues repository."
+  default     = ""
+  validation {
+    condition     = startswith(var.issues_repo_git_token_secret_crn, "crn:") || var.issues_repo_git_token_secret_crn == ""
+    error_message = "Must be a CRN or left empty."
+  }
+}
+
+variable "issues_repo_git_token_secret_name" {
+  type        = string
+  description = "Name of the Git token secret in the secret provider used for accessing the issues repository."
+  default     = ""
+}
+
 variable "issues_repo_integration_owner" {
   type        = string
   description = "The name of the repository integration owner."
@@ -275,6 +402,12 @@ variable "issues_repo_integration_owner" {
 variable "issues_repo_name" {
   type        = string
   description = "Set to use a custom name for the Issues repository."
+  default     = ""
+}
+
+variable "issues_repo_secret_group" {
+  type        = string
+  description = "Secret group for the Issues repository secret. Defaults to the value set in `sm_secret_group` if not set. Only used with `Secrets Manager`."
   default     = ""
 }
 
@@ -300,6 +433,35 @@ variable "kp_resource_group" {
   type        = string
   description = "The resource group containing the Key Protect instance. This applies to the CI, CD and CC Key Protect integrations. See `ci_kp_resource_group`, `cd_kp_resource_group`, and `cc_kp_resource_group` to set these values independently."
   default     = "Default"
+}
+
+variable "pipeline_config_repo_auth_type" {
+  type        = string
+  description = "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`."
+  default     = ""
+}
+
+variable "pipeline_config_repo_git_token_secret_crn" {
+  type        = string
+  sensitive   = true
+  description = "The CRN of the Git token for accessing the pipeline config repository."
+  default     = ""
+  validation {
+    condition     = startswith(var.pipeline_config_repo_git_token_secret_crn, "crn:") || var.pipeline_config_repo_git_token_secret_crn == ""
+    error_message = "Must be a CRN or left empty."
+  }
+}
+
+variable "pipeline_config_repo_git_token_secret_name" {
+  type        = string
+  description = "Name of the Git token secret in the secret provider used for accessing the pipeline config repository."
+  default     = ""
+}
+
+variable "pipeline_config_repo_secret_group" {
+  type        = string
+  description = "Secret group for the Pipeline Config repository secret. Defaults to the value set in `sm_secret_group` if not set. Only used with `Secrets Manager`."
+  default     = ""
 }
 
 variable "pipeline_doi_api_key_secret_crn" {
@@ -491,6 +653,12 @@ variable "slack_webhook_secret_crn" {
   }
 }
 
+variable "slack_webhook_secret_group" {
+  type        = string
+  description = "Secret group for the Slack webhook secret. Defaults to the value set in `sm_secret_group` if not set. Only used with `Secrets Manager`."
+  default     = ""
+}
+
 variable "slack_webhook_secret_name" {
   type        = string
   description = "Name of the webhook secret in the secret provider used for accessing the configured Slack channel. This applies to the CI, CD, and CC toolchains. To set independently, see `ci_slack_webhook_secret_name`, `cd_slack_webhook_secret_name`, and `cc_slack_webhook_secret_name`."
@@ -545,15 +713,51 @@ variable "sm_secret_group" {
   default     = "Default"
 }
 
+variable "sonarqube_integration_name" {
+  type        = string
+  description = "The name of the SonarQube integration."
+  default     = "SonarQube"
+}
+
+variable "sonarqube_is_blind_connection" {
+  type        = string
+  description = "When set to `true`, instructs IBM Cloud Continuous Delivery to not validate the configuration of this integration. Set this to `true` if the SonarQube server is not addressable on the public internet."
+  default     = "true"
+}
+
 variable "sonarqube_secret_crn" {
   type        = string
   sensitive   = true
-  description = "The CRN of the secret used to access SonarQube. Applies to the CI and CC toolchains."
+  description = "The CRN of the secret used to access SonarQube."
   default     = ""
   validation {
     condition     = startswith(var.sonarqube_secret_crn, "crn:") || var.sonarqube_secret_crn == ""
     error_message = "Must be a CRN or left empty."
   }
+}
+
+variable "sonarqube_secret_group" {
+  type        = string
+  description = "Secret group for the SonarQube secret. Defaults to the value set in `sm_secret_group` if not set. Only used with `Secrets Manager`."
+  default     = ""
+}
+
+variable "sonarqube_secret_name" {
+  type        = string
+  description = "The name of the SonarQube secret in the secrets provider."
+  default     = "sonarqube-secret"
+}
+
+variable "sonarqube_server_url" {
+  type        = string
+  description = "The URL to the SonarQube server."
+  default     = ""
+}
+
+variable "sonarqube_user" {
+  type        = string
+  description = "The name of the SonarQube user."
+  default     = ""
 }
 
 variable "toolchain_name" {
@@ -587,7 +791,7 @@ variable "cc_app_group" {
 
 variable "cc_app_repo_auth_type" {
   type        = string
-  description = "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `ouath` when unset. `pat` is a git `personal access token`."
+  description = "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`."
   default     = ""
 }
 
@@ -669,7 +873,7 @@ variable "cc_compliance_pipeline_group" {
 
 variable "cc_compliance_pipeline_repo_auth_type" {
   type        = string
-  description = "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `ouath` when unset. `pat` is a git `personal access token`."
+  description = "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`."
   default     = ""
 }
 
@@ -810,7 +1014,7 @@ variable "cc_inventory_group" {
 
 variable "cc_inventory_repo_auth_type" {
   type        = string
-  description = "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `ouath` when unset. `pat` is a git `personal access token`."
+  description = "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`."
   default     = ""
 }
 
@@ -845,7 +1049,7 @@ variable "cc_issues_group" {
 
 variable "cc_issues_repo_auth_type" {
   type        = string
-  description = "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `ouath` when unset. `pat` is a git `personal access token`."
+  description = "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`."
   default     = ""
 }
 
@@ -904,7 +1108,7 @@ variable "cc_pipeline_config_group" {
 
 variable "cc_pipeline_config_repo_auth_type" {
   type        = string
-  description = "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `ouath` when unset. `pat` is a git `personal access token`."
+  description = "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`."
   default     = ""
 }
 
@@ -1156,13 +1360,13 @@ variable "cc_sm_secret_group" {
 variable "cc_sonarqube_integration_name" {
   type        = string
   description = "The name of the SonarQube integration."
-  default     = "SonarQube"
+  default     = ""
 }
 
 variable "cc_sonarqube_is_blind_connection" {
   type        = string
   description = "When set to `true`, instructs IBM Cloud Continuous Delivery to not validate the configuration of this integration. Set this to `true` if the SonarQube server is not addressable on the public internet."
-  default     = true
+  default     = ""
 }
 
 variable "cc_sonarqube_secret_crn" {
@@ -1176,10 +1380,16 @@ variable "cc_sonarqube_secret_crn" {
   }
 }
 
+variable "cc_sonarqube_secret_group" {
+  type        = string
+  description = "Secret group for the SonarQube secret. Defaults to the value set in `sm_secret_group` if not set. Only used with `Secrets Manager`."
+  default     = ""
+}
+
 variable "cc_sonarqube_secret_name" {
   type        = string
   description = "The name of the SonarQube secret in the secrets provider."
-  default     = "sonarqube-secret"
+  default     = ""
 }
 
 variable "cc_sonarqube_server_url" {
@@ -1301,7 +1511,7 @@ variable "cd_change_management_group" {
 
 variable "cd_change_management_repo_auth_type" {
   type        = string
-  description = "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `ouath` when unset. `pat` is a git `personal access token`."
+  description = "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`."
   default     = ""
 }
 
@@ -1390,7 +1600,7 @@ variable "cd_compliance_pipeline_group" {
 
 variable "cd_compliance_pipeline_repo_auth_type" {
   type        = string
-  description = "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `ouath` when unset. `pat` is a git `personal access token`."
+  description = "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`."
   default     = ""
 }
 
@@ -1460,7 +1670,7 @@ variable "cd_deployment_group" {
 
 variable "cd_deployment_repo_auth_type" {
   type        = string
-  description = "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `ouath` when unset. `pat` is a git `personal access token`."
+  description = "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`."
   default     = ""
 }
 
@@ -1579,7 +1789,7 @@ variable "cd_evidence_group" {
 
 variable "cd_evidence_repo_auth_type" {
   type        = string
-  description = "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `ouath` when unset. `pat` is a git `personal access token`."
+  description = "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`."
   default     = ""
 }
 
@@ -1620,7 +1830,7 @@ variable "cd_inventory_group" {
 
 variable "cd_inventory_repo_auth_type" {
   type        = string
-  description = "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `ouath` when unset. `pat` is a git `personal access token`."
+  description = "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`."
   default     = ""
 }
 
@@ -1655,7 +1865,7 @@ variable "cd_issues_group" {
 
 variable "cd_issues_repo_auth_type" {
   type        = string
-  description = "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `ouath` when unset. `pat` is a git `personal access token`."
+  description = "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`."
   default     = ""
 }
 
@@ -1714,7 +1924,7 @@ variable "cd_pipeline_config_group" {
 
 variable "cd_pipeline_config_repo_auth_type" {
   type        = string
-  description = "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `ouath` when unset. `pat` is a git `personal access token`."
+  description = "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`."
   default     = ""
 }
 
@@ -2130,7 +2340,7 @@ variable "ci_app_name" {
 
 variable "ci_app_repo_auth_type" {
   type        = string
-  description = "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `ouath` when unset. `pat` is a git `personal access token`."
+  description = "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`."
   default     = ""
 }
 
@@ -2278,7 +2488,7 @@ variable "ci_compliance_pipeline_pr_branch" {
 
 variable "ci_compliance_pipeline_repo_auth_type" {
   type        = string
-  description = "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `ouath` when unset. `pat` is a git `personal access token`."
+  description = "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`."
   default     = ""
 }
 
@@ -2390,7 +2600,7 @@ variable "ci_evidence_group" {
 
 variable "ci_evidence_repo_auth_type" {
   type        = string
-  description = "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `ouath` when unset. `pat` is a git `personal access token`."
+  description = "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`."
   default     = ""
 }
 
@@ -2425,7 +2635,7 @@ variable "ci_inventory_group" {
 
 variable "ci_inventory_repo_auth_type" {
   type        = string
-  description = "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `ouath` when unset. `pat` is a git `personal access token`."
+  description = "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`."
   default     = ""
 }
 
@@ -2460,7 +2670,7 @@ variable "ci_issues_group" {
 
 variable "ci_issues_repo_auth_type" {
   type        = string
-  description = "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `ouath` when unset. `pat` is a git `personal access token`."
+  description = "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`."
   default     = ""
 }
 
@@ -2519,7 +2729,7 @@ variable "ci_pipeline_config_group" {
 
 variable "ci_pipeline_config_repo_auth_type" {
   type        = string
-  description = "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `ouath` when unset. `pat` is a git `personal access token`."
+  description = "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`."
   default     = ""
 }
 
@@ -2776,13 +2986,13 @@ variable "ci_sm_secret_group" {
 variable "ci_sonarqube_integration_name" {
   type        = string
   description = "The name of the SonarQube integration."
-  default     = "SonarQube"
+  default     = ""
 }
 
 variable "ci_sonarqube_is_blind_connection" {
   type        = string
   description = "When set to `true`, instructs IBM Cloud Continuous Delivery to not validate the configuration of this integration. Set this to `true` if the SonarQube server is not addressable on the public internet."
-  default     = true
+  default     = ""
 }
 
 variable "ci_sonarqube_secret_crn" {
@@ -2796,10 +3006,16 @@ variable "ci_sonarqube_secret_crn" {
   }
 }
 
+variable "ci_sonarqube_secret_group" {
+  type        = string
+  description = "Secret group for the SonarQube secret. Defaults to the value set in `sm_secret_group` if not set. Only used with `Secrets Manager`."
+  default     = ""
+}
+
 variable "ci_sonarqube_secret_name" {
   type        = string
   description = "The name of the SonarQube secret in the secrets provider."
-  default     = "sonarqube-secret"
+  default     = ""
 }
 
 variable "ci_sonarqube_server_url" {

@@ -32,6 +32,74 @@ locals {
 
   registry_namespace_suffix = (var.add_container_name_suffix) ? format("%s-%s", var.registry_namespace, random_string.resource_suffix[0].result) : var.registry_namespace
   registry_namespace        = (var.prefix == "") ? local.registry_namespace_suffix : format("%s-%s", var.prefix, local.registry_namespace_suffix)
+
+  ci_app_repo_git_token_secret_crn = (var.ci_app_repo_git_token_secret_crn == "") ? var.app_repo_git_token_secret_crn : var.ci_app_repo_git_token_secret_crn
+  cc_app_repo_git_token_secret_crn = (var.cc_app_repo_git_token_secret_crn == "") ? var.app_repo_git_token_secret_crn : var.cc_app_repo_git_token_secret_crn
+
+  ci_compliance_pipeline_repo_auth_type             = (var.ci_compliance_pipeline_repo_auth_type == "") ? var.compliance_pipeline_repo_auth_type : var.ci_compliance_pipeline_repo_auth_type
+  cd_compliance_pipeline_repo_auth_type             = (var.cd_compliance_pipeline_repo_auth_type == "") ? var.compliance_pipeline_repo_auth_type : var.cd_compliance_pipeline_repo_auth_type
+  cc_compliance_pipeline_repo_auth_type             = (var.cc_compliance_pipeline_repo_auth_type == "") ? var.compliance_pipeline_repo_auth_type : var.cc_compliance_pipeline_repo_auth_type
+  ci_compliance_pipeline_repo_git_token_secret_crn  = (var.ci_compliance_pipeline_repo_git_token_secret_crn == "") ? var.compliance_pipeline_repo_git_token_secret_crn : var.ci_compliance_pipeline_repo_git_token_secret_crn
+  cd_compliance_pipeline_repo_git_token_secret_crn  = (var.cd_compliance_pipeline_repo_git_token_secret_crn == "") ? var.compliance_pipeline_repo_git_token_secret_crn : var.cd_compliance_pipeline_repo_git_token_secret_crn
+  cc_compliance_pipeline_repo_git_token_secret_crn  = (var.cc_compliance_pipeline_repo_git_token_secret_crn == "") ? var.compliance_pipeline_repo_git_token_secret_crn : var.cc_compliance_pipeline_repo_git_token_secret_crn
+  ci_compliance_pipeline_repo_git_token_secret_name = (var.ci_compliance_pipeline_repo_git_token_secret_name == "") ? var.compliance_pipeline_repo_git_token_secret_name : var.ci_compliance_pipeline_repo_git_token_secret_name
+  cd_compliance_pipeline_repo_git_token_secret_name = (var.cd_compliance_pipeline_repo_git_token_secret_name == "") ? var.compliance_pipeline_repo_git_token_secret_name : var.cd_compliance_pipeline_repo_git_token_secret_name
+  cc_compliance_pipeline_repo_git_token_secret_name = (var.cc_compliance_pipeline_repo_git_token_secret_name == "") ? var.compliance_pipeline_repo_git_token_secret_name : var.cc_compliance_pipeline_repo_git_token_secret_name
+  ci_compliance_pipeline_repo_secret_group          = (var.ci_compliance_pipeline_repo_secret_group == "") ? var.compliance_pipeline_repo_secret_group : var.ci_compliance_pipeline_repo_secret_group
+  cd_compliance_pipeline_repo_secret_group          = (var.cd_compliance_pipeline_repo_secret_group == "") ? var.compliance_pipeline_repo_secret_group : var.cd_compliance_pipeline_repo_secret_group
+  cc_compliance_pipeline_repo_secret_group          = (var.cc_compliance_pipeline_repo_secret_group == "") ? var.compliance_pipeline_repo_secret_group : var.cc_compliance_pipeline_repo_secret_group
+
+  ci_evidence_repo_auth_type             = (var.ci_evidence_repo_auth_type == "") ? var.evidence_repo_auth_type : var.ci_evidence_repo_auth_type
+  cd_evidence_repo_auth_type             = (var.cd_evidence_repo_auth_type == "") ? var.evidence_repo_auth_type : var.cd_evidence_repo_auth_type
+  cc_evidence_repo_auth_type             = (var.cc_evidence_repo_auth_type == "") ? var.evidence_repo_auth_type : var.cc_evidence_repo_auth_type
+  ci_evidence_repo_git_token_secret_crn  = (var.ci_evidence_repo_git_token_secret_crn == "") ? var.evidence_repo_git_token_secret_crn : var.ci_evidence_repo_git_token_secret_crn
+  cd_evidence_repo_git_token_secret_crn  = (var.cd_evidence_repo_git_token_secret_crn == "") ? var.evidence_repo_git_token_secret_crn : var.cd_evidence_repo_git_token_secret_crn
+  cc_evidence_repo_git_token_secret_crn  = (var.cc_evidence_repo_git_token_secret_crn == "") ? var.evidence_repo_git_token_secret_crn : var.cc_evidence_repo_git_token_secret_crn
+  ci_evidence_repo_git_token_secret_name = (var.ci_evidence_repo_git_token_secret_name == "") ? var.evidence_repo_git_token_secret_name : var.ci_evidence_repo_git_token_secret_name
+  cd_evidence_repo_git_token_secret_name = (var.cd_evidence_repo_git_token_secret_name == "") ? var.evidence_repo_git_token_secret_name : var.cd_evidence_repo_git_token_secret_name
+  cc_evidence_repo_git_token_secret_name = (var.cc_evidence_repo_git_token_secret_name == "") ? var.evidence_repo_git_token_secret_name : var.cc_evidence_repo_git_token_secret_name
+  ci_evidence_repo_secret_group          = (var.ci_evidence_repo_secret_group == "") ? var.evidence_repo_secret_group : var.ci_evidence_repo_secret_group
+  cd_evidence_repo_secret_group          = (var.cd_evidence_repo_secret_group == "") ? var.evidence_repo_secret_group : var.cd_evidence_repo_secret_group
+  cc_evidence_repo_secret_group          = (var.cc_evidence_repo_secret_group == "") ? var.evidence_repo_secret_group : var.cc_evidence_repo_secret_group
+
+  ci_issues_repo_auth_type             = (var.ci_issues_repo_auth_type == "") ? var.issues_repo_auth_type : var.ci_issues_repo_auth_type
+  cd_issues_repo_auth_type             = (var.cd_issues_repo_auth_type == "") ? var.issues_repo_auth_type : var.cd_issues_repo_auth_type
+  cc_issues_repo_auth_type             = (var.cc_issues_repo_auth_type == "") ? var.issues_repo_auth_type : var.cc_issues_repo_auth_type
+  ci_issues_repo_git_token_secret_crn  = (var.ci_issues_repo_git_token_secret_crn == "") ? var.issues_repo_git_token_secret_crn : var.ci_issues_repo_git_token_secret_crn
+  cd_issues_repo_git_token_secret_crn  = (var.cd_issues_repo_git_token_secret_crn == "") ? var.issues_repo_git_token_secret_crn : var.cd_issues_repo_git_token_secret_crn
+  cc_issues_repo_git_token_secret_crn  = (var.cc_issues_repo_git_token_secret_crn == "") ? var.issues_repo_git_token_secret_crn : var.cc_issues_repo_git_token_secret_crn
+  ci_issues_repo_git_token_secret_name = (var.ci_issues_repo_git_token_secret_name == "") ? var.issues_repo_git_token_secret_name : var.ci_issues_repo_git_token_secret_name
+  cd_issues_repo_git_token_secret_name = (var.cd_issues_repo_git_token_secret_name == "") ? var.issues_repo_git_token_secret_name : var.cd_issues_repo_git_token_secret_name
+  cc_issues_repo_git_token_secret_name = (var.cc_issues_repo_git_token_secret_name == "") ? var.issues_repo_git_token_secret_name : var.cc_issues_repo_git_token_secret_name
+  ci_issues_repo_secret_group          = (var.ci_issues_repo_secret_group == "") ? var.issues_repo_secret_group : var.ci_issues_repo_secret_group
+  cd_issues_repo_secret_group          = (var.cd_issues_repo_secret_group == "") ? var.issues_repo_secret_group : var.cd_issues_repo_secret_group
+  cc_issues_repo_secret_group          = (var.cc_issues_repo_secret_group == "") ? var.issues_repo_secret_group : var.cc_issues_repo_secret_group
+
+  ci_inventory_repo_auth_type             = (var.ci_inventory_repo_auth_type == "") ? var.inventory_repo_auth_type : var.ci_inventory_repo_auth_type
+  cd_inventory_repo_auth_type             = (var.cd_inventory_repo_auth_type == "") ? var.inventory_repo_auth_type : var.cd_inventory_repo_auth_type
+  cc_inventory_repo_auth_type             = (var.cc_inventory_repo_auth_type == "") ? var.inventory_repo_auth_type : var.cc_inventory_repo_auth_type
+  ci_inventory_repo_git_token_secret_crn  = (var.ci_inventory_repo_git_token_secret_crn == "") ? var.inventory_repo_git_token_secret_crn : var.ci_inventory_repo_git_token_secret_crn
+  cd_inventory_repo_git_token_secret_crn  = (var.cd_inventory_repo_git_token_secret_crn == "") ? var.inventory_repo_git_token_secret_crn : var.cd_inventory_repo_git_token_secret_crn
+  cc_inventory_repo_git_token_secret_crn  = (var.cc_inventory_repo_git_token_secret_crn == "") ? var.inventory_repo_git_token_secret_crn : var.cc_inventory_repo_git_token_secret_crn
+  ci_inventory_repo_git_token_secret_name = (var.ci_inventory_repo_git_token_secret_name == "") ? var.inventory_repo_git_token_secret_name : var.ci_inventory_repo_git_token_secret_name
+  cd_inventory_repo_git_token_secret_name = (var.cd_inventory_repo_git_token_secret_name == "") ? var.inventory_repo_git_token_secret_name : var.cd_inventory_repo_git_token_secret_name
+  cc_inventory_repo_git_token_secret_name = (var.cc_inventory_repo_git_token_secret_name == "") ? var.inventory_repo_git_token_secret_name : var.cc_inventory_repo_git_token_secret_name
+  ci_inventory_repo_secret_group          = (var.ci_inventory_repo_secret_group == "") ? var.inventory_repo_secret_group : var.ci_inventory_repo_secret_group
+  cd_inventory_repo_secret_group          = (var.cd_inventory_repo_secret_group == "") ? var.inventory_repo_secret_group : var.cd_inventory_repo_secret_group
+  cc_inventory_repo_secret_group          = (var.cc_inventory_repo_secret_group == "") ? var.inventory_repo_secret_group : var.cc_inventory_repo_secret_group
+
+  ci_pipeline_config_repo_auth_type             = (var.ci_pipeline_config_repo_auth_type == "") ? var.pipeline_config_repo_auth_type : var.ci_pipeline_config_repo_auth_type
+  cd_pipeline_config_repo_auth_type             = (var.cd_pipeline_config_repo_auth_type == "") ? var.pipeline_config_repo_auth_type : var.cd_pipeline_config_repo_auth_type
+  cc_pipeline_config_repo_auth_type             = (var.cc_pipeline_config_repo_auth_type == "") ? var.pipeline_config_repo_auth_type : var.cc_pipeline_config_repo_auth_type
+  ci_pipeline_config_repo_git_token_secret_crn  = (var.ci_pipeline_config_repo_git_token_secret_crn == "") ? var.pipeline_config_repo_git_token_secret_crn : var.ci_pipeline_config_repo_git_token_secret_crn
+  cd_pipeline_config_repo_git_token_secret_crn  = (var.cd_pipeline_config_repo_git_token_secret_crn == "") ? var.pipeline_config_repo_git_token_secret_crn : var.cd_pipeline_config_repo_git_token_secret_crn
+  cc_pipeline_config_repo_git_token_secret_crn  = (var.cc_pipeline_config_repo_git_token_secret_crn == "") ? var.pipeline_config_repo_git_token_secret_crn : var.cc_pipeline_config_repo_git_token_secret_crn
+  ci_pipeline_config_repo_git_token_secret_name = (var.ci_pipeline_config_repo_git_token_secret_name == "") ? var.pipeline_config_repo_git_token_secret_name : var.ci_pipeline_config_repo_git_token_secret_name
+  cd_pipeline_config_repo_git_token_secret_name = (var.cd_pipeline_config_repo_git_token_secret_name == "") ? var.pipeline_config_repo_git_token_secret_name : var.cd_pipeline_config_repo_git_token_secret_name
+  cc_pipeline_config_repo_git_token_secret_name = (var.cc_pipeline_config_repo_git_token_secret_name == "") ? var.pipeline_config_repo_git_token_secret_name : var.cc_pipeline_config_repo_git_token_secret_name
+  ci_pipeline_config_repo_secret_group          = (var.ci_pipeline_config_repo_secret_group == "") ? var.pipeline_config_repo_secret_group : var.ci_pipeline_config_repo_secret_group
+  cd_pipeline_config_repo_secret_group          = (var.cd_pipeline_config_repo_secret_group == "") ? var.pipeline_config_repo_secret_group : var.cd_pipeline_config_repo_secret_group
+  cc_pipeline_config_repo_secret_group          = (var.cc_pipeline_config_repo_secret_group == "") ? var.pipeline_config_repo_secret_group : var.cc_pipeline_config_repo_secret_group
 }
 
 
@@ -117,25 +185,25 @@ module "devsecops_ci_toolchain" {
   pipeline_ibmcloud_api_key_secret_group = var.ci_pipeline_ibmcloud_api_key_secret_group
 
   cos_api_key_secret_name  = (var.ci_cos_api_key_secret_name == "") ? var.cos_api_key_secret_name : var.ci_cos_api_key_secret_name
-  cos_api_key_secret_group = var.ci_cos_api_key_secret_group
+  cos_api_key_secret_group = (var.ci_cos_api_key_secret_group == "") ? var.cos_api_key_secret_group : var.ci_cos_api_key_secret_group
 
   slack_webhook_secret_name  = (var.ci_slack_webhook_secret_name == "") ? var.slack_webhook_secret_name : var.ci_slack_webhook_secret_name
-  slack_webhook_secret_group = var.ci_slack_webhook_secret_group
+  slack_webhook_secret_group = (var.ci_slack_webhook_secret_group == "") ? var.slack_webhook_secret_group : var.ci_slack_webhook_secret_group
 
-  issues_repo_git_token_secret_name = (var.ci_issues_repo_git_token_secret_name == "") ? var.repo_git_token_secret_name : var.ci_issues_repo_git_token_secret_name
-  issues_repo_secret_group          = (var.ci_issues_repo_secret_group == "") ? var.repo_secret_group : var.ci_issues_repo_secret_group
+  issues_repo_git_token_secret_name = (local.ci_issues_repo_git_token_secret_name == "") ? var.repo_git_token_secret_name : local.ci_issues_repo_git_token_secret_name
+  issues_repo_secret_group          = (local.ci_issues_repo_secret_group == "") ? var.repo_secret_group : local.ci_issues_repo_secret_group
 
-  evidence_repo_git_token_secret_name = (var.ci_evidence_repo_git_token_secret_name == "") ? var.repo_git_token_secret_name : var.ci_evidence_repo_git_token_secret_name
-  evidence_repo_secret_group          = (var.ci_evidence_repo_secret_group == "") ? var.repo_secret_group : var.ci_evidence_repo_secret_group
+  evidence_repo_git_token_secret_name = (local.ci_evidence_repo_git_token_secret_name == "") ? var.repo_git_token_secret_name : local.ci_evidence_repo_git_token_secret_name
+  evidence_repo_secret_group          = (local.ci_evidence_repo_secret_group == "") ? var.repo_secret_group : local.ci_evidence_repo_secret_group
 
-  inventory_repo_git_token_secret_name = (var.ci_inventory_repo_git_token_secret_name == "") ? var.repo_git_token_secret_name : var.ci_inventory_repo_git_token_secret_name
-  inventory_repo_secret_group          = (var.ci_inventory_repo_secret_group == "") ? var.repo_secret_group : var.ci_inventory_repo_secret_group
+  inventory_repo_git_token_secret_name = (local.ci_inventory_repo_git_token_secret_name == "") ? var.repo_git_token_secret_name : local.ci_inventory_repo_git_token_secret_name
+  inventory_repo_secret_group          = (local.ci_inventory_repo_secret_group == "") ? var.repo_secret_group : local.ci_inventory_repo_secret_group
 
-  compliance_pipeline_repo_git_token_secret_name = (var.ci_compliance_pipeline_repo_git_token_secret_name == "") ? var.repo_git_token_secret_name : var.ci_compliance_pipeline_repo_git_token_secret_name
-  compliance_pipeline_repo_secret_group          = (var.ci_compliance_pipeline_repo_secret_group == "") ? var.repo_secret_group : var.ci_compliance_pipeline_repo_secret_group
+  compliance_pipeline_repo_git_token_secret_name = (local.ci_compliance_pipeline_repo_git_token_secret_name == "") ? var.repo_git_token_secret_name : local.ci_compliance_pipeline_repo_git_token_secret_name
+  compliance_pipeline_repo_secret_group          = (local.ci_compliance_pipeline_repo_secret_group == "") ? var.repo_secret_group : local.ci_compliance_pipeline_repo_secret_group
 
-  pipeline_config_repo_git_token_secret_name = (var.ci_pipeline_config_repo_git_token_secret_name == "") ? var.repo_git_token_secret_name : var.ci_pipeline_config_repo_git_token_secret_name
-  pipeline_config_repo_secret_group          = (var.ci_pipeline_config_repo_secret_group == "") ? var.repo_secret_group : var.ci_pipeline_config_repo_secret_group
+  pipeline_config_repo_git_token_secret_name = (local.ci_pipeline_config_repo_git_token_secret_name == "") ? var.repo_git_token_secret_name : local.ci_pipeline_config_repo_git_token_secret_name
+  pipeline_config_repo_secret_group          = (local.ci_pipeline_config_repo_secret_group == "") ? var.repo_secret_group : local.ci_pipeline_config_repo_secret_group
 
   app_repo_git_token_secret_name = (var.ci_app_repo_git_token_secret_name == "") ? var.repo_git_token_secret_name : var.ci_app_repo_git_token_secret_name
   app_repo_secret_group          = (var.ci_app_repo_secret_group == "") ? var.repo_secret_group : var.ci_app_repo_secret_group
@@ -144,12 +212,12 @@ module "devsecops_ci_toolchain" {
   pipeline_doi_api_key_secret_group = (var.ci_pipeline_doi_api_key_secret_group == "") ? var.pipeline_doi_api_key_secret_group : var.ci_pipeline_doi_api_key_secret_group
 
   # CRN SECRETS
-  app_repo_git_token_secret_crn                 = (var.ci_app_repo_git_token_secret_crn == "") ? var.repo_git_token_secret_crn : var.ci_app_repo_git_token_secret_crn
-  issues_repo_git_token_secret_crn              = (var.ci_issues_repo_git_token_secret_crn == "") ? var.repo_git_token_secret_crn : var.ci_issues_repo_git_token_secret_crn
-  evidence_repo_git_token_secret_crn            = (var.ci_evidence_repo_git_token_secret_crn == "") ? var.repo_git_token_secret_crn : var.ci_evidence_repo_git_token_secret_crn
-  inventory_repo_git_token_secret_crn           = (var.ci_inventory_repo_git_token_secret_crn == "") ? var.repo_git_token_secret_crn : var.ci_inventory_repo_git_token_secret_crn
-  compliance_pipeline_repo_git_token_secret_crn = (var.ci_compliance_pipeline_repo_git_token_secret_crn == "") ? var.repo_git_token_secret_crn : var.ci_pipeline_config_repo_git_token_secret_crn
-  pipeline_config_repo_git_token_secret_crn     = (var.ci_pipeline_config_repo_git_token_secret_crn == "") ? var.repo_git_token_secret_crn : var.ci_pipeline_config_repo_git_token_secret_crn
+  app_repo_git_token_secret_crn                 = (local.ci_app_repo_git_token_secret_crn == "") ? var.repo_git_token_secret_crn : local.ci_app_repo_git_token_secret_crn
+  issues_repo_git_token_secret_crn              = (local.ci_issues_repo_git_token_secret_crn == "") ? var.repo_git_token_secret_crn : local.ci_issues_repo_git_token_secret_crn
+  evidence_repo_git_token_secret_crn            = (local.ci_evidence_repo_git_token_secret_crn == "") ? var.repo_git_token_secret_crn : local.ci_evidence_repo_git_token_secret_crn
+  inventory_repo_git_token_secret_crn           = (local.ci_inventory_repo_git_token_secret_crn == "") ? var.repo_git_token_secret_crn : local.ci_inventory_repo_git_token_secret_crn
+  compliance_pipeline_repo_git_token_secret_crn = (local.ci_compliance_pipeline_repo_git_token_secret_crn == "") ? var.repo_git_token_secret_crn : local.ci_pipeline_config_repo_git_token_secret_crn
+  pipeline_config_repo_git_token_secret_crn     = (local.ci_pipeline_config_repo_git_token_secret_crn == "") ? var.repo_git_token_secret_crn : local.ci_pipeline_config_repo_git_token_secret_crn
   cos_api_key_secret_crn                        = (var.ci_cos_api_key_secret_crn == "") ? var.cos_api_key_secret_crn : var.ci_cos_api_key_secret_crn
   pipeline_ibmcloud_api_key_secret_crn          = (var.ci_pipeline_ibmcloud_api_key_secret_crn == "") ? var.pipeline_ibmcloud_api_key_secret_crn : var.ci_pipeline_ibmcloud_api_key_secret_crn
   slack_webhook_secret_crn                      = (var.ci_slack_webhook_secret_crn == "") ? var.slack_webhook_secret_crn : var.ci_slack_webhook_secret_crn
@@ -159,12 +227,12 @@ module "devsecops_ci_toolchain" {
   sonarqube_secret_crn                          = (var.ci_sonarqube_secret_crn == "") ? var.sonarqube_secret_crn : var.ci_sonarqube_secret_crn
 
   #AUTH TYPE FOR REPOS
-  pipeline_config_repo_auth_type     = (var.ci_pipeline_config_repo_auth_type == "") ? local.repo_auth_type : var.ci_pipeline_config_repo_auth_type
-  inventory_repo_auth_type           = (var.ci_inventory_repo_auth_type == "") ? local.repo_auth_type : var.ci_inventory_repo_auth_type
-  issues_repo_auth_type              = (var.ci_issues_repo_auth_type == "") ? local.repo_auth_type : var.ci_issues_repo_auth_type
-  evidence_repo_auth_type            = (var.ci_evidence_repo_auth_type == "") ? local.repo_auth_type : var.ci_evidence_repo_auth_type
+  pipeline_config_repo_auth_type     = (local.ci_pipeline_config_repo_auth_type == "") ? local.repo_auth_type : local.ci_pipeline_config_repo_auth_type
+  inventory_repo_auth_type           = (local.ci_inventory_repo_auth_type == "") ? local.repo_auth_type : local.ci_inventory_repo_auth_type
+  issues_repo_auth_type              = (local.ci_issues_repo_auth_type == "") ? local.repo_auth_type : local.ci_issues_repo_auth_type
+  evidence_repo_auth_type            = (local.ci_evidence_repo_auth_type == "") ? local.repo_auth_type : local.ci_evidence_repo_auth_type
   app_repo_auth_type                 = (var.ci_app_repo_auth_type == "") ? local.repo_auth_type : var.ci_app_repo_auth_type
-  compliance_pipeline_repo_auth_type = (var.ci_compliance_pipeline_repo_auth_type == "") ? local.repo_auth_type : var.ci_compliance_pipeline_repo_auth_type
+  compliance_pipeline_repo_auth_type = (local.ci_compliance_pipeline_repo_auth_type == "") ? local.repo_auth_type : local.ci_compliance_pipeline_repo_auth_type
 
   #GROUPS/USERS FOR REPOS
   app_group                 = (var.ci_app_group == "") ? var.repo_group : var.ci_app_group
@@ -246,11 +314,12 @@ module "devsecops_ci_toolchain" {
   slack_toolchain_unbind = var.ci_slack_toolchain_unbind
 
   #SONARQUBE
-  sonarqube_integration_name    = var.ci_sonarqube_integration_name
-  sonarqube_user                = var.ci_sonarqube_user
-  sonarqube_secret_name         = var.ci_sonarqube_secret_name
-  sonarqube_is_blind_connection = var.ci_sonarqube_is_blind_connection
-  sonarqube_server_url          = var.ci_sonarqube_server_url
+  sonarqube_integration_name    = (var.ci_sonarqube_integration_name == "") ? var.sonarqube_integration_name : var.ci_sonarqube_integration_name
+  sonarqube_user                = (var.ci_sonarqube_user == "") ? var.sonarqube_user : var.ci_sonarqube_user
+  sonarqube_secret_name         = (var.ci_sonarqube_secret_name == "") ? var.sonarqube_secret_name : var.ci_sonarqube_secret_name
+  sonarqube_secret_group        = (var.ci_sonarqube_secret_group == "") ? var.sonarqube_secret_group : var.ci_sonarqube_secret_group
+  sonarqube_is_blind_connection = (var.ci_sonarqube_is_blind_connection == "") ? var.sonarqube_is_blind_connection : var.ci_sonarqube_is_blind_connection
+  sonarqube_server_url          = (var.ci_sonarqube_server_url == "") ? var.sonarqube_server_url : var.ci_sonarqube_server_url
 
   #COS INTEGRATION
   cos_endpoint    = (var.ci_cos_endpoint == "") ? var.cos_endpoint : var.ci_cos_endpoint
@@ -314,22 +383,22 @@ module "devsecops_cd_toolchain" {
   pipeline_ibmcloud_api_key_secret_group = var.cd_pipeline_ibmcloud_api_key_secret_group
 
   cos_api_key_secret_name  = (var.cd_cos_api_key_secret_name == "") ? var.cos_api_key_secret_name : var.cd_cos_api_key_secret_name
-  cos_api_key_secret_group = var.cd_cos_api_key_secret_group
+  cos_api_key_secret_group = (var.cd_cos_api_key_secret_group == "") ? var.cos_api_key_secret_group : var.cd_cos_api_key_secret_group
 
-  issues_repo_git_token_secret_name = (var.cd_issues_repo_git_token_secret_name == "") ? var.repo_git_token_secret_name : var.cd_issues_repo_git_token_secret_name
-  issues_repo_secret_group          = (var.cd_issues_repo_secret_group == "") ? var.repo_secret_group : var.cd_issues_repo_secret_group
+  issues_repo_git_token_secret_name = (local.cd_issues_repo_git_token_secret_name == "") ? var.repo_git_token_secret_name : local.cd_issues_repo_git_token_secret_name
+  issues_repo_secret_group          = (local.cd_issues_repo_secret_group == "") ? var.repo_secret_group : local.cd_issues_repo_secret_group
 
-  evidence_repo_git_token_secret_name = (var.cd_evidence_repo_git_token_secret_name == "") ? var.repo_git_token_secret_name : var.cd_evidence_repo_git_token_secret_name
-  evidence_repo_secret_group          = (var.cd_evidence_repo_secret_group == "") ? var.repo_secret_group : var.cd_evidence_repo_secret_group
+  evidence_repo_git_token_secret_name = (local.cd_evidence_repo_git_token_secret_name == "") ? var.repo_git_token_secret_name : local.cd_evidence_repo_git_token_secret_name
+  evidence_repo_secret_group          = (local.cd_evidence_repo_secret_group == "") ? var.repo_secret_group : local.cd_evidence_repo_secret_group
 
-  inventory_repo_git_token_secret_name = (var.cd_inventory_repo_git_token_secret_name == "") ? var.repo_git_token_secret_name : var.cd_inventory_repo_git_token_secret_name
-  inventory_repo_secret_group          = (var.cd_inventory_repo_secret_group == "") ? var.repo_secret_group : var.cd_inventory_repo_secret_group
+  inventory_repo_git_token_secret_name = (local.cd_inventory_repo_git_token_secret_name == "") ? var.repo_git_token_secret_name : local.cd_inventory_repo_git_token_secret_name
+  inventory_repo_secret_group          = (local.cd_inventory_repo_secret_group == "") ? var.repo_secret_group : local.cd_inventory_repo_secret_group
 
-  compliance_pipeline_repo_git_token_secret_name = (var.cd_compliance_pipeline_repo_git_token_secret_name == "") ? var.repo_git_token_secret_name : var.cd_compliance_pipeline_repo_git_token_secret_name
-  compliance_pipeline_repo_secret_group          = (var.cd_compliance_pipeline_repo_secret_group == "") ? var.repo_secret_group : var.cd_compliance_pipeline_repo_secret_group
+  compliance_pipeline_repo_git_token_secret_name = (local.cd_compliance_pipeline_repo_git_token_secret_name == "") ? var.repo_git_token_secret_name : local.cd_compliance_pipeline_repo_git_token_secret_name
+  compliance_pipeline_repo_secret_group          = (local.cd_compliance_pipeline_repo_secret_group == "") ? var.repo_secret_group : local.cd_compliance_pipeline_repo_secret_group
 
-  pipeline_config_repo_git_token_secret_name = (var.cd_pipeline_config_repo_git_token_secret_name == "") ? var.repo_git_token_secret_name : var.cd_pipeline_config_repo_git_token_secret_name
-  pipeline_config_repo_secret_group          = (var.cd_pipeline_config_repo_secret_group == "") ? var.repo_secret_group : var.cd_pipeline_config_repo_secret_group
+  pipeline_config_repo_git_token_secret_name = (local.cd_pipeline_config_repo_git_token_secret_name == "") ? var.repo_git_token_secret_name : local.cd_pipeline_config_repo_git_token_secret_name
+  pipeline_config_repo_secret_group          = (local.cd_pipeline_config_repo_secret_group == "") ? var.repo_secret_group : local.cd_pipeline_config_repo_secret_group
 
   deployment_repo_git_token_secret_name = (var.cd_deployment_repo_git_token_secret_name == "") ? var.repo_git_token_secret_name : var.cd_deployment_repo_git_token_secret_name
   deployment_repo_secret_group          = (var.cd_deployment_repo_secret_group == "") ? var.repo_secret_group : var.cd_deployment_repo_secret_group
@@ -337,8 +406,9 @@ module "devsecops_cd_toolchain" {
   change_management_repo_git_token_secret_name = (var.cd_change_management_repo_git_token_secret_name == "") ? var.repo_git_token_secret_name : var.cd_change_management_repo_git_token_secret_name
   change_management_repo_secret_group          = (var.cd_change_management_repo_secret_group == "") ? var.repo_secret_group : var.cd_change_management_repo_secret_group
 
-  slack_webhook_secret_name  = (var.cd_slack_webhook_secret_name == "") ? var.slack_webhook_secret_name : var.cd_slack_webhook_secret_name
-  slack_webhook_secret_group = var.cd_slack_webhook_secret_group
+  slack_webhook_secret_name = (var.cd_slack_webhook_secret_name == "") ? var.slack_webhook_secret_name : var.cd_slack_webhook_secret_name
+
+  slack_webhook_secret_group = (var.cd_slack_webhook_secret_group == "") ? var.slack_webhook_secret_group : var.cd_slack_webhook_secret_group
 
   scc_scc_api_key_secret_name  = var.scc_scc_api_key_secret_name
   scc_scc_api_key_secret_group = var.scc_scc_api_key_secret_group
@@ -349,11 +419,11 @@ module "devsecops_cd_toolchain" {
   # CRN SECRETS
   deployment_repo_git_token_secret_crn          = (var.cd_deployment_repo_git_token_secret_crn == "") ? var.repo_git_token_secret_crn : var.cd_deployment_repo_git_token_secret_crn
   change_management_repo_git_token_secret_crn   = (var.cd_change_management_repo_git_token_secret_crn == "") ? var.repo_git_token_secret_crn : var.cd_change_management_repo_git_token_secret_crn
-  issues_repo_git_token_secret_crn              = (var.cd_issues_repo_git_token_secret_crn == "") ? var.repo_git_token_secret_crn : var.cd_issues_repo_git_token_secret_crn
-  evidence_repo_git_token_secret_crn            = (var.cd_evidence_repo_git_token_secret_crn == "") ? var.repo_git_token_secret_crn : var.cd_evidence_repo_git_token_secret_crn
-  inventory_repo_git_token_secret_crn           = (var.cd_inventory_repo_git_token_secret_crn == "") ? var.repo_git_token_secret_crn : var.cd_inventory_repo_git_token_secret_crn
-  compliance_pipeline_repo_git_token_secret_crn = (var.cd_compliance_pipeline_repo_git_token_secret_crn == "") ? var.repo_git_token_secret_crn : var.cd_compliance_pipeline_repo_git_token_secret_crn
-  pipeline_config_repo_git_token_secret_crn     = (var.cd_pipeline_config_repo_git_token_secret_crn == "") ? var.repo_git_token_secret_crn : var.cd_pipeline_config_repo_git_token_secret_crn
+  issues_repo_git_token_secret_crn              = (local.cd_issues_repo_git_token_secret_crn == "") ? var.repo_git_token_secret_crn : local.cd_issues_repo_git_token_secret_crn
+  evidence_repo_git_token_secret_crn            = (local.cd_evidence_repo_git_token_secret_crn == "") ? var.repo_git_token_secret_crn : local.cd_evidence_repo_git_token_secret_crn
+  inventory_repo_git_token_secret_crn           = (local.cd_inventory_repo_git_token_secret_crn == "") ? var.repo_git_token_secret_crn : local.cd_inventory_repo_git_token_secret_crn
+  compliance_pipeline_repo_git_token_secret_crn = (local.cd_compliance_pipeline_repo_git_token_secret_crn == "") ? var.repo_git_token_secret_crn : local.cd_compliance_pipeline_repo_git_token_secret_crn
+  pipeline_config_repo_git_token_secret_crn     = (local.cd_pipeline_config_repo_git_token_secret_crn == "") ? var.repo_git_token_secret_crn : local.cd_pipeline_config_repo_git_token_secret_crn
   cos_api_key_secret_crn                        = (var.cd_cos_api_key_secret_crn == "") ? var.cos_api_key_secret_crn : var.cd_cos_api_key_secret_crn
   pipeline_ibmcloud_api_key_secret_crn          = (var.cd_pipeline_ibmcloud_api_key_secret_crn == "") ? var.pipeline_ibmcloud_api_key_secret_crn : var.cd_pipeline_ibmcloud_api_key_secret_crn
   slack_webhook_secret_crn                      = (var.cd_slack_webhook_secret_crn == "") ? var.slack_webhook_secret_crn : var.cd_slack_webhook_secret_crn
@@ -363,12 +433,12 @@ module "devsecops_cd_toolchain" {
   pipeline_doi_api_key_secret_crn               = (var.cd_pipeline_doi_api_key_secret_crn == "") ? var.pipeline_doi_api_key_secret_crn : var.cd_pipeline_doi_api_key_secret_crn
 
   #AUTH TYPE FOR REPOS
-  pipeline_config_repo_auth_type     = (var.cd_pipeline_config_repo_auth_type == "") ? local.repo_auth_type : var.cd_pipeline_config_repo_auth_type
-  inventory_repo_auth_type           = (var.cd_inventory_repo_auth_type == "") ? local.repo_auth_type : var.cd_inventory_repo_auth_type
-  issues_repo_auth_type              = (var.cd_issues_repo_auth_type == "") ? local.repo_auth_type : var.cd_issues_repo_auth_type
-  evidence_repo_auth_type            = (var.cd_evidence_repo_auth_type == "") ? local.repo_auth_type : var.cd_evidence_repo_auth_type
+  pipeline_config_repo_auth_type     = (local.cd_pipeline_config_repo_auth_type == "") ? local.repo_auth_type : local.cd_pipeline_config_repo_auth_type
+  inventory_repo_auth_type           = (local.cd_inventory_repo_auth_type == "") ? local.repo_auth_type : local.cd_inventory_repo_auth_type
+  issues_repo_auth_type              = (local.cd_issues_repo_auth_type == "") ? local.repo_auth_type : local.cd_issues_repo_auth_type
+  evidence_repo_auth_type            = (local.cd_evidence_repo_auth_type == "") ? local.repo_auth_type : local.cd_evidence_repo_auth_type
   deployment_repo_auth_type          = (var.cd_deployment_repo_auth_type == "") ? local.repo_auth_type : var.cd_deployment_repo_auth_type
-  compliance_pipeline_repo_auth_type = (var.cd_compliance_pipeline_repo_auth_type == "") ? local.repo_auth_type : var.cd_compliance_pipeline_repo_auth_type
+  compliance_pipeline_repo_auth_type = (local.cd_compliance_pipeline_repo_auth_type == "") ? local.repo_auth_type : local.cd_compliance_pipeline_repo_auth_type
   change_management_repo_auth_type   = (var.cd_change_management_repo_auth_type == "") ? local.repo_auth_type : var.cd_change_management_repo_auth_type
 
   #GROUPS/USERS FOR REPOS
@@ -526,28 +596,28 @@ module "devsecops_cc_toolchain" {
   pipeline_ibmcloud_api_key_secret_group = var.cc_pipeline_ibmcloud_api_key_secret_group
 
   cos_api_key_secret_name  = (var.cc_cos_api_key_secret_name == "") ? var.cos_api_key_secret_name : var.cc_cos_api_key_secret_name
-  cos_api_key_secret_group = var.cc_cos_api_key_secret_group
+  cos_api_key_secret_group = (var.cc_cos_api_key_secret_group == "") ? var.cos_api_key_secret_group : var.cc_cos_api_key_secret_group
 
-  issues_repo_git_token_secret_name = (var.cc_issues_repo_git_token_secret_name == "") ? var.repo_git_token_secret_name : var.cc_issues_repo_git_token_secret_name
-  issues_repo_secret_group          = (var.cc_issues_repo_secret_group == "") ? var.repo_secret_group : var.cc_issues_repo_secret_group
+  issues_repo_git_token_secret_name = (local.cc_issues_repo_git_token_secret_name == "") ? var.repo_git_token_secret_name : local.cc_issues_repo_git_token_secret_name
+  issues_repo_secret_group          = (local.cc_issues_repo_secret_group == "") ? var.repo_secret_group : local.cc_issues_repo_secret_group
 
-  evidence_repo_git_token_secret_name = (var.cc_evidence_repo_git_token_secret_name == "") ? var.repo_git_token_secret_name : var.cc_evidence_repo_git_token_secret_name
-  evidence_repo_secret_group          = (var.cc_evidence_repo_secret_group == "") ? var.repo_secret_group : var.cc_evidence_repo_secret_group
+  evidence_repo_git_token_secret_name = (local.cc_evidence_repo_git_token_secret_name == "") ? var.repo_git_token_secret_name : local.cc_evidence_repo_git_token_secret_name
+  evidence_repo_secret_group          = (local.cc_evidence_repo_secret_group == "") ? var.repo_secret_group : local.cc_evidence_repo_secret_group
 
-  inventory_repo_git_token_secret_name = (var.cc_inventory_repo_git_token_secret_name == "") ? var.repo_git_token_secret_name : var.cc_inventory_repo_git_token_secret_name
-  inventory_repo_secret_group          = (var.cc_inventory_repo_secret_group == "") ? var.repo_secret_group : var.cc_inventory_repo_secret_group
+  inventory_repo_git_token_secret_name = (local.cc_inventory_repo_git_token_secret_name == "") ? var.repo_git_token_secret_name : local.cc_inventory_repo_git_token_secret_name
+  inventory_repo_secret_group          = (local.cc_inventory_repo_secret_group == "") ? var.repo_secret_group : local.cc_inventory_repo_secret_group
 
-  compliance_pipeline_repo_git_token_secret_name = (var.cc_compliance_pipeline_repo_git_token_secret_name == "") ? var.repo_git_token_secret_name : var.cc_compliance_pipeline_repo_git_token_secret_name
-  compliance_pipeline_repo_secret_group          = (var.cc_compliance_pipeline_repo_secret_group == "") ? var.repo_secret_group : var.cc_compliance_pipeline_repo_secret_group
+  compliance_pipeline_repo_git_token_secret_name = (local.cc_compliance_pipeline_repo_git_token_secret_name == "") ? var.repo_git_token_secret_name : local.cc_compliance_pipeline_repo_git_token_secret_name
+  compliance_pipeline_repo_secret_group          = (local.cc_compliance_pipeline_repo_secret_group == "") ? var.repo_secret_group : local.cc_compliance_pipeline_repo_secret_group
 
-  pipeline_config_repo_git_token_secret_name = (var.cc_pipeline_config_repo_git_token_secret_name == "") ? var.repo_git_token_secret_name : var.cc_pipeline_config_repo_git_token_secret_name
-  pipeline_config_repo_secret_group          = (var.cc_pipeline_config_repo_secret_group == "") ? var.repo_secret_group : var.cc_pipeline_config_repo_secret_group
+  pipeline_config_repo_git_token_secret_name = (local.cc_pipeline_config_repo_git_token_secret_name == "") ? var.repo_git_token_secret_name : local.cc_pipeline_config_repo_git_token_secret_name
+  pipeline_config_repo_secret_group          = (local.cc_pipeline_config_repo_secret_group == "") ? var.repo_secret_group : local.cc_pipeline_config_repo_secret_group
 
   app_repo_git_token_secret_name = (var.cc_app_repo_git_token_secret_name == "") ? var.repo_git_token_secret_name : var.cc_app_repo_git_token_secret_name
   app_repo_secret_group          = (var.cc_app_repo_secret_group == "") ? var.repo_secret_group : var.cc_app_repo_secret_group
 
   slack_webhook_secret_name  = (var.cc_slack_webhook_secret_name == "") ? var.slack_webhook_secret_name : var.cc_slack_webhook_secret_name
-  slack_webhook_secret_group = var.cc_slack_webhook_secret_group
+  slack_webhook_secret_group = (var.cc_slack_webhook_secret_group == "") ? var.slack_webhook_secret_group : var.cc_slack_webhook_secret_group
 
   scc_scc_api_key_secret_name  = var.scc_scc_api_key_secret_name
   scc_scc_api_key_secret_group = var.scc_scc_api_key_secret_group
@@ -556,12 +626,12 @@ module "devsecops_cc_toolchain" {
   pipeline_doi_api_key_secret_group = (var.cc_pipeline_doi_api_key_secret_group == "") ? var.pipeline_doi_api_key_secret_group : var.cc_pipeline_doi_api_key_secret_group
 
   # CRN SECRETS
-  app_repo_git_token_secret_crn                 = (var.cc_app_repo_git_token_secret_crn == "") ? var.repo_git_token_secret_crn : var.cc_app_repo_git_token_secret_crn
-  issues_repo_git_token_secret_crn              = (var.cc_issues_repo_git_token_secret_crn == "") ? var.repo_git_token_secret_crn : var.cc_issues_repo_git_token_secret_crn
-  evidence_repo_git_token_secret_crn            = (var.cc_evidence_repo_git_token_secret_crn == "") ? var.repo_git_token_secret_crn : var.cc_evidence_repo_git_token_secret_crn
-  inventory_repo_git_token_secret_crn           = (var.cc_inventory_repo_git_token_secret_crn == "") ? var.repo_git_token_secret_crn : var.cc_inventory_repo_git_token_secret_crn
-  compliance_pipeline_repo_git_token_secret_crn = (var.cc_compliance_pipeline_repo_git_token_secret_crn == "") ? var.repo_git_token_secret_crn : var.cc_compliance_pipeline_repo_git_token_secret_crn
-  pipeline_config_repo_git_token_secret_crn     = (var.cc_pipeline_config_repo_git_token_secret_crn == "") ? var.repo_git_token_secret_crn : var.cc_pipeline_config_repo_git_token_secret_crn
+  app_repo_git_token_secret_crn                 = (local.cc_app_repo_git_token_secret_crn == "") ? var.repo_git_token_secret_crn : local.cc_app_repo_git_token_secret_crn
+  issues_repo_git_token_secret_crn              = (local.cc_issues_repo_git_token_secret_crn == "") ? var.repo_git_token_secret_crn : local.cc_issues_repo_git_token_secret_crn
+  evidence_repo_git_token_secret_crn            = (local.cc_evidence_repo_git_token_secret_crn == "") ? var.repo_git_token_secret_crn : local.cc_evidence_repo_git_token_secret_crn
+  inventory_repo_git_token_secret_crn           = (local.cc_inventory_repo_git_token_secret_crn == "") ? var.repo_git_token_secret_crn : local.cc_inventory_repo_git_token_secret_crn
+  compliance_pipeline_repo_git_token_secret_crn = (local.cc_compliance_pipeline_repo_git_token_secret_crn == "") ? var.repo_git_token_secret_crn : local.cc_compliance_pipeline_repo_git_token_secret_crn
+  pipeline_config_repo_git_token_secret_crn     = (local.cc_pipeline_config_repo_git_token_secret_crn == "") ? var.repo_git_token_secret_crn : local.cc_pipeline_config_repo_git_token_secret_crn
   cos_api_key_secret_crn                        = (var.cc_cos_api_key_secret_crn == "") ? var.cos_api_key_secret_crn : var.cc_cos_api_key_secret_crn
   pipeline_ibmcloud_api_key_secret_crn          = (var.cc_pipeline_ibmcloud_api_key_secret_crn == "") ? var.pipeline_ibmcloud_api_key_secret_crn : var.cc_pipeline_ibmcloud_api_key_secret_crn
   slack_webhook_secret_crn                      = (var.cc_slack_webhook_secret_crn == "") ? var.slack_webhook_secret_crn : var.cc_slack_webhook_secret_crn
@@ -571,12 +641,12 @@ module "devsecops_cc_toolchain" {
   pipeline_doi_api_key_secret_crn               = (var.cc_pipeline_doi_api_key_secret_crn == "") ? var.pipeline_doi_api_key_secret_crn : var.cc_pipeline_doi_api_key_secret_crn
 
   #AUTH TYPE FOR REPOS
-  pipeline_config_repo_auth_type     = (var.cc_pipeline_config_repo_auth_type == "") ? local.repo_auth_type : var.cc_pipeline_config_repo_auth_type
-  inventory_repo_auth_type           = (var.cc_inventory_repo_auth_type == "") ? local.repo_auth_type : var.cc_inventory_repo_auth_type
-  issues_repo_auth_type              = (var.cc_issues_repo_auth_type == "") ? local.repo_auth_type : var.cc_issues_repo_auth_type
-  evidence_repo_auth_type            = (var.cc_evidence_repo_auth_type == "") ? local.repo_auth_type : var.cc_evidence_repo_auth_type
+  pipeline_config_repo_auth_type     = (local.cc_pipeline_config_repo_auth_type == "") ? local.repo_auth_type : local.cc_pipeline_config_repo_auth_type
+  inventory_repo_auth_type           = (local.cc_inventory_repo_auth_type == "") ? local.repo_auth_type : local.cc_inventory_repo_auth_type
+  issues_repo_auth_type              = (local.cc_issues_repo_auth_type == "") ? local.repo_auth_type : local.cc_issues_repo_auth_type
+  evidence_repo_auth_type            = (local.cc_evidence_repo_auth_type == "") ? local.repo_auth_type : local.cc_evidence_repo_auth_type
   app_repo_auth_type                 = (var.cc_app_repo_auth_type == "") ? local.repo_auth_type : var.cc_app_repo_auth_type
-  compliance_pipeline_repo_auth_type = (var.cc_compliance_pipeline_repo_auth_type == "") ? local.repo_auth_type : var.cc_compliance_pipeline_repo_auth_type
+  compliance_pipeline_repo_auth_type = (local.cc_compliance_pipeline_repo_auth_type == "") ? local.repo_auth_type : local.cc_compliance_pipeline_repo_auth_type
 
   #GROUPS/USERS FOR REPOS
   issues_group              = (var.cc_issues_group == "") ? var.repo_group : var.cc_issues_group
@@ -650,6 +720,7 @@ module "devsecops_cc_toolchain" {
   slack_toolchain_bind   = var.cc_slack_toolchain_bind
   slack_toolchain_unbind = var.cc_slack_toolchain_unbind
 
+
   #COS INTEGRATION
   cos_endpoint    = (var.cc_cos_endpoint == "") ? var.cos_endpoint : var.cc_cos_endpoint
   cos_bucket_name = (var.cc_cos_bucket_name == "") ? var.cos_bucket_name : var.cc_cos_bucket_name
@@ -664,11 +735,12 @@ module "devsecops_cc_toolchain" {
   slack_integration_name = var.slack_integration_name
 
   #SONARQUBE
-  sonarqube_integration_name    = var.cc_sonarqube_integration_name
-  sonarqube_user                = var.cc_sonarqube_user
-  sonarqube_secret_name         = var.cc_sonarqube_secret_name
-  sonarqube_is_blind_connection = var.cc_sonarqube_is_blind_connection
-  sonarqube_server_url          = var.cc_sonarqube_server_url
+  sonarqube_integration_name    = (var.cc_sonarqube_integration_name == "") ? var.sonarqube_integration_name : var.cc_sonarqube_integration_name
+  sonarqube_user                = (var.cc_sonarqube_user == "") ? var.sonarqube_user : var.cc_sonarqube_user
+  sonarqube_secret_name         = (var.cc_sonarqube_secret_name == "") ? var.sonarqube_secret_name : var.cc_sonarqube_secret_name
+  sonarqube_secret_group        = (var.cc_sonarqube_secret_group == "") ? var.sonarqube_secret_group : var.cc_sonarqube_secret_group
+  sonarqube_is_blind_connection = (var.cc_sonarqube_is_blind_connection == "") ? var.sonarqube_is_blind_connection : var.cc_sonarqube_is_blind_connection
+  sonarqube_server_url          = (var.cc_sonarqube_server_url == "") ? var.sonarqube_server_url : var.cc_sonarqube_server_url
 
   #TRIGGER PROPERTIES
   trigger_timed_name           = var.cc_trigger_timed_name
