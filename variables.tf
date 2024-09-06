@@ -523,13 +523,13 @@ variable "sm_location" {
 
 variable "sm_name" {
   type        = string
-  description = "The name of the Secret Managers instance. This applies to the CI, CD and CC Secret Manager integrations. See `ci_sm_name`, `cd_sm_name`, and `cc_sm_name` to set these values independently. "
+  description = "The name of an existing Secret Managers instance. This applies to the CI, CD and CC Secret Manager integrations. See `ci_sm_name`, `cd_sm_name`, and `cc_sm_name` to set these values independently. "
   default     = "sm-instance"
 }
 
 variable "sm_resource_group" {
   type        = string
-  description = "The resource group containing the Secrets Manager instance. This applies to the CI, CD and CC Secret Manager integrations. See `ci_sm_resource_group`, `cd_sm_resource_group`, and `cc_sm_resource_group` to set these values independently."
+  description = "The name of the existing resource group containing the Secrets Manager instance for your secrets.. This applies to the CI, CD and CC Secret Manager integrations. See `ci_sm_resource_group`, `cd_sm_resource_group`, and `cc_sm_resource_group` to set these values independently."
   default     = "Default"
 }
 
@@ -1137,13 +1137,13 @@ variable "cc_sm_location" {
 
 variable "cc_sm_name" {
   type        = string
-  description = "Name of the Secrets Manager instance where the secrets are stored."
+  description = "The name of an existing Secrets Manager instance where the secrets are stored."
   default     = ""
 }
 
 variable "cc_sm_resource_group" {
   type        = string
-  description = "The resource group containing the Secrets Manager instance for your secrets."
+  description = "The name of the existing resource group containing the Secrets Manager instance for your secrets."
   default     = ""
 }
 
@@ -1970,13 +1970,13 @@ variable "cd_sm_location" {
 
 variable "cd_sm_name" {
   type        = string
-  description = "Name of the Secrets Manager instance where the secrets are stored."
+  description = "The name of an existing Secrets Manager instance where the secrets are stored."
   default     = ""
 }
 
 variable "cd_sm_resource_group" {
   type        = string
-  description = "The resource group containing the Secrets Manager instance for your secrets."
+  description = "The name of the existing resource group containing the Secrets Manager instance for your secrets."
   default     = ""
 }
 
@@ -2757,13 +2757,13 @@ variable "ci_sm_location" {
 
 variable "ci_sm_name" {
   type        = string
-  description = "Name of the Secrets Manager instance where the secrets are stored."
+  description = "The name of an existing Secrets Manager instance where the secrets are stored."
   default     = ""
 }
 
 variable "ci_sm_resource_group" {
   type        = string
-  description = "The resource group containing the Secrets Manager instance."
+  description = "The name of the existing resource group containing the Secrets Manager instance for your secrets."
   default     = ""
 }
 

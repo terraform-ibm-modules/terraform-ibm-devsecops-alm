@@ -2,120 +2,121 @@
     "products": [
         {
             "label": "DevSecOps Application Lifecycle Management",
-			"name": "deploy-arch-ibm-devsecops-alm",
-			"product_kind": "solution",
-			"tags": [
-				"enterprise_app",
-				"ibm_created"
-			],
-			"keywords": [
-				"DevSecOps Toolchain Compliance"
-			],
-			"short_description": "DevSecOps provides a set of predefined continuous integration, continuous deployment and continuous compliance toolchain templates.",
-			"long_description": "This deployable architecture provides tools to deploy your application using DevSecOps. See the [Deployment guide](https://cloud.ibm.com/docs/devsecops-alm) before beginning. DevSecOps toolchains use Continuous Delivery (Git Repos and Issue Tracking, Tekton pipelines, DevOps insights, and Code Risk Analyzer). DevSecOps also uses Secrets Manager, Key Protect, Cloud Object Storage, Container Registry and Vulnerability Advisor. Out of the box, DevSecOps also uses popular scanning tools such as SonarQube, Gosec, OWASP Zap (dynamic scan), any unit test framework, and GPG signing. DevSecOps can also be used with other tools such as external Git providers and artefact stores. DevSecOps supports hybrid deployments, in particular it uses private pipeline workers. DevSecOps can also be interfaced with other deployment tools such as Satellite Config and ArgoCD.\n",
-			"provider_name": "OTC CD SETUP",
-			"offering_docs_url": "https://cloud.ibm.com/docs/devsecops-alm",
-			"offering_icon_url": "https://globalcatalog.cloud.ibm.com/api/v1/1082e7d2-5e2f-0a11-a3bc-f88a8e1931fc/artifacts/terraform.svg",
-			"features": [
-				{
-					"title": "DevSecOps  ",
-					"description": "A complete end to end GitOps based reference architecture for managing the security posture of your application."
-				}
-			],
+            "name": "deploy-arch-ibm-devsecops-alm",
+            "version": "2.0.0",
+            "product_kind": "solution",
+            "tags": [
+                "enterprise_app",
+                "ibm_created"
+            ],
+            "keywords": [
+                "DevSecOps Toolchain Compliance"
+            ],
+            "short_description": "DevSecOps provides a set of predefined continuous integration, continuous deployment and continuous compliance toolchain templates.",
+            "long_description": "This deployable architecture provides tools to deploy your application using DevSecOps. See the [Deployment guide](https://cloud.ibm.com/docs/devsecops-alm) before beginning. DevSecOps toolchains use Continuous Delivery (Git Repos and Issue Tracking, Tekton pipelines, DevOps insights, and Code Risk Analyzer). DevSecOps also uses Secrets Manager, Key Protect, Cloud Object Storage, Container Registry and Vulnerability Advisor. Out of the box, DevSecOps also uses popular scanning tools such as SonarQube, Gosec, OWASP Zap (dynamic scan), any unit test framework, and GPG signing. DevSecOps can also be used with other tools such as external Git providers and artefact stores. DevSecOps supports hybrid deployments, in particular it uses private pipeline workers. DevSecOps can also be interfaced with other deployment tools such as Satellite Config and ArgoCD.\n",
+            "offering_docs_url": "https://cloud.ibm.com/docs/devsecops-alm",
+            "offering_icon_url": "https://globalcatalog.cloud.ibm.com/api/v1/1082e7d2-5e2f-0a11-a3bc-f88a8e1931fc/artifacts/terraform.svg",
+            "features": [
+                {
+                    "title": "DevSecOps  ",
+                    "description": "A complete end to end GitOps based reference architecture for managing the security posture of your application."
+                }
+            ],
             "flavors": [
                 {
-                "label": "Deploy to Kubernetes",
-                "name": "devsecops",
-                "working_directory": "solutions/kubernetes",
-                "compliance": {
-                    "authority": "scc-v3",
-                    "controls": [
-                        {
-                            "profile": {
-                                "name": "IBM Cloud Framework for Financial Services",
-                                "version": "1.6.0"
-                            },
-                            "names": [
-                                "CM-2",
-                                "CM-2(1)(a)",
-                                "CM-2(1)(b)",
-                                "CM-2(1)(c)",
-                                "CM-2(2)",
-                                "CM-2(3)",
-                                "CM-3(a)",
-                                "CM-3(b)",
-                                "CM-3(c)",
-                                "CM-3(d)",
-                                "CM-3(e)",
-                                "CM-3(f)",
-                                "CM-3(g)",
-                                "CM-3(2)",
-                                "CM-4",
-                                "CM-4(1)",
-                                "CM-5",
-                                "CM-6(a)",
-                                "CM-6(b)",
-                                "CM-6(c)",
-                                "CM-6(d)",
-                                "CM-6(1)",
-                                "CM-7(b)",
-                                "CM-7(1)(a)",
-                                "CM-8(a)",
-                                "CM-8(b)",
-                                "CM-8(1)",
-                                "CM-8(2)",
-                                "CM-9(a)",
-                                "CM-9(b)",
-                                "CM-9(c)",
-                                "CM-9(d)",
-                                "CM-10(1)",
-                                "RA-5(a)",
-                                "RA-5(b)",
-                                "RA-5(c)",
-                                "RA-5(d)",
-                                "RA-5(1)",
-                                "RA-5(2)",
-                                "RA-5(3)",
-                                "SA-3(a)",
-                                "SA-3(d)",
-                                "SA-8",
-                                "SA-10(a)",
-                                "SA-10(b)",
-                                "SA-10(c)",
-                                "SA-10(d)",
-                                "SA-10(e)",
-                                "SA-10(1)",
-                                "SA-15(a)",
-                                "SI-2(a)",
-                                "SI-2(b)",
-                                "SI-2(c)",
-                                "SI-2(d)",
-                                "SI-2(2)",
-                                "SI-7",
-                                "SI-10"
-                            ]
-                        }
-                    ]
-                },
-                "architecture": {
-                    "diagrams": [
-                        {
-                            "diagram": {
-                                "url": "https://raw.githubusercontent.com/terraform-ibm-modules/terraform-ibm-devsecops-alm/main/reference-architectures/diagram-deploy-arch-ibm-devsecops-alm-diagram.svg",
-                                "caption": "DevSecOps Toolchains",
-                                "type": "image/svg+xml",
-                                "thumbnail_url": "https://raw.githubusercontent.com/terraform-ibm-modules/terraform-ibm-devsecops-alm/main/reference-architectures/diagram-deploy-arch-ibm-devsecops-alm-diagram.svg"
-                            },
-                            "description": "The DevSecOps Application Lifecycle Management deployable architecture consists of three Continuous Delivery Toolchains, one each for development (Continuous Integration), production deployment (Continuous Deployment), and ongoing compliance validation for the deployed app (Continuous Compliance). Together they enable secure and compliant application delivery on IBM Cloud."
-                        }
-                    ],
-                    "features": [
-                        {
-                            "title": "Application",
-                            "description": "Deploy a sample application to Kubernetes using DevSecOps best practices."
-                        }
-                    ]
-                },
+                    "label": "Deploy to Kubernetes",
+                    "name": "devsecops",
+                    "working_directory": "solutions/kubernetes",
+                    "compliance": {
+                        "authority": "scc-v3",
+                        "controls": [
+                            {
+                                "profile": {
+                                    "id": "",
+                                    "name": "IBM Cloud Framework for Financial Services",
+                                    "version": "1.6.0"
+                                },
+                                "names": [
+                                    "RA-5(c)",
+                                    "RA-5(2)",
+                                    "SI-2(a)",
+                                    "CM-2(1)(a)",
+                                    "CM-7(b)",
+                                    "SA-10(c)",
+                                    "CM-6(1)",
+                                    "SI-2(b)",
+                                    "CM-6(c)",
+                                    "SI-7",
+                                    "SA-10(b)",
+                                    "CM-2(3)",
+                                    "CM-3(b)",
+                                    "RA-5(1)",
+                                    "SA-15(a)",
+                                    "SI-2(c)",
+                                    "CM-6(d)",
+                                    "CM-9(a)",
+                                    "CM-9(b)",
+                                    "SI-2(d)",
+                                    "CM-8(2)",
+                                    "RA-5(b)",
+                                    "SA-3(a)",
+                                    "CM-5",
+                                    "CM-9(c)",
+                                    "CM-2(1)(c)",
+                                    "CM-3(e)",
+                                    "CM-3(2)",
+                                    "CM-8(1)",
+                                    "RA-5(a)",
+                                    "SA-3(d)",
+                                    "CM-3(f)",
+                                    "CM-4",
+                                    "CM-6(b)",
+                                    "SA-10(1)",
+                                    "SI-2(2)",
+                                    "CM-3(d)",
+                                    "CM-8(a)",
+                                    "RA-5(d)",
+                                    "SA-8",
+                                    "SA-10(d)",
+                                    "CM-4(1)",
+                                    "CM-7(1)(a)",
+                                    "CM-9(d)",
+                                    "CM-8(b)",
+                                    "SA-10(e)",
+                                    "CM-3(g)",
+                                    "RA-5(3)",
+                                    "CM-2",
+                                    "CM-2(2)",
+                                    "CM-3(a)",
+                                    "CM-3(c)",
+                                    "CM-10(1)",
+                                    "SA-10(a)",
+                                    "CM-6(a)",
+                                    "SI-10",
+                                    "CM-2(1)(b)"
+                                ]
+                            }
+                        ]
+                    },
+                    "architecture": {
+                        "features": [
+                            {
+                                "title": "Application",
+                                "description": "Deploy a sample application to Kubernetes using DevSecOps best practices."
+                            }
+                        ],
+                        "diagrams": [
+                            {
+                                "diagram": {
+                                    "url": "https://raw.githubusercontent.com/terraform-ibm-modules/terraform-ibm-devsecops-alm/main/reference-architectures/diagram-deploy-arch-ibm-devsecops-alm-diagram.svg",
+                                    "caption": "DevSecOps Toolchains",
+                                    "type": "image/svg+xml",
+                                    "thumbnail_url": "https://raw.githubusercontent.com/terraform-ibm-modules/terraform-ibm-devsecops-alm/main/reference-architectures/diagram-deploy-arch-ibm-devsecops-alm-diagram.svg"
+                                },
+                                "description": "The DevSecOps Application Lifecycle Management deployable architecture consists of three Continuous Delivery Toolchains, one each for development (Continuous Integration), production deployment (Continuous Deployment), and ongoing compliance validation for the deployed app (Continuous Compliance). Together they enable secure and compliant application delivery on IBM Cloud."
+                            }
+                        ]
+                    },
                     "configuration": [
                         {
                             "key": "add_code_engine_prefix",
@@ -639,45 +640,10 @@
                             "required": false
                         },
                         {
-                            "key": "cc_slack_pipeline_fail",
-                            "type": "boolean",
-                            "default_value": true,
-                            "description": "Set to `true` to generate pipeline failed notifications.",
-                            "required": false
-                        },
-                        {
-                            "key": "cc_slack_pipeline_start",
-                            "type": "boolean",
-                            "default_value": true,
-                            "description": "Set to `true` to generate pipeline start notifications.",
-                            "required": false
-                        },
-                        {
-                            "key": "cc_slack_pipeline_success",
-                            "type": "boolean",
-                            "default_value": true,
-                            "description": "Set to `true` to generate pipeline succeeded notifications.",
-                            "required": false
-                        },
-                        {
                             "key": "cc_slack_team_name",
                             "type": "string",
                             "default_value": "",
                             "description": "The Slack team name, which is the word or phrase before .slack.com in the team URL.",
-                            "required": false
-                        },
-                        {
-                            "key": "cc_slack_toolchain_bind",
-                            "type": "boolean",
-                            "default_value": true,
-                            "description": "Generate tool added to toolchain notifications.",
-                            "required": false
-                        },
-                        {
-                            "key": "cc_slack_toolchain_unbind",
-                            "type": "boolean",
-                            "default_value": true,
-                            "description": "Set to `true` to generate tool removed from toolchain notifications.",
                             "required": false
                         },
                         {
@@ -718,14 +684,14 @@
                             "key": "cc_sm_name",
                             "type": "string",
                             "default_value": "",
-                            "description": "Name of the Secrets Manager instance where the secrets are stored.",
+                            "description": "The name of an existing Secrets Manager instance where the secrets are stored.",
                             "required": false
                         },
                         {
                             "key": "cc_sm_resource_group",
                             "type": "string",
                             "default_value": "",
-                            "description": "The resource group containing the Secrets Manager instance for your secrets.",
+                            "description": "The name of the existing resource group containing the Secrets Manager instance for your secrets.",
                             "required": false
                         },
                         {
@@ -1506,45 +1472,10 @@
                             "required": false
                         },
                         {
-                            "key": "cd_slack_pipeline_fail",
-                            "type": "boolean",
-                            "default_value": true,
-                            "description": "Set to `true` to generate pipeline failed notifications.",
-                            "required": false
-                        },
-                        {
-                            "key": "cd_slack_pipeline_start",
-                            "type": "boolean",
-                            "default_value": true,
-                            "description": "Set to `true` to generate pipeline start notifications.",
-                            "required": false
-                        },
-                        {
-                            "key": "cd_slack_pipeline_success",
-                            "type": "boolean",
-                            "default_value": true,
-                            "description": "Set to `true` to generate pipeline succeeded notifications.",
-                            "required": false
-                        },
-                        {
                             "key": "cd_slack_team_name",
                             "type": "string",
                             "default_value": "",
                             "description": "The Slack team name, which is the word or phrase before .slack.com in the team URL.",
-                            "required": false
-                        },
-                        {
-                            "key": "cd_slack_toolchain_bind",
-                            "type": "boolean",
-                            "default_value": true,
-                            "description": "Set to `true` to Generate tool added to toolchain notifications.",
-                            "required": false
-                        },
-                        {
-                            "key": "cd_slack_toolchain_unbind",
-                            "type": "boolean",
-                            "default_value": true,
-                            "description": "Set to `true` to generate tool removed from toolchain notifications.",
                             "required": false
                         },
                         {
@@ -1585,14 +1516,14 @@
                             "key": "cd_sm_name",
                             "type": "string",
                             "default_value": "",
-                            "description": "Name of the Secrets Manager instance where the secrets are stored.",
+                            "description": "The name of an existing Secrets Manager instance where the secrets are stored.",
                             "required": false
                         },
                         {
                             "key": "cd_sm_resource_group",
                             "type": "string",
                             "default_value": "",
-                            "description": "The resource group containing the Secrets Manager instance for your secrets.",
+                            "description": "The name of the existing resource group containing the Secrets Manager instance for your secrets.",
                             "required": false
                         },
                         {
@@ -2333,45 +2264,10 @@
                             "required": false
                         },
                         {
-                            "key": "ci_slack_pipeline_fail",
-                            "type": "boolean",
-                            "default_value": true,
-                            "description": "Set to `true` to generate pipeline failed notifications.",
-                            "required": false
-                        },
-                        {
-                            "key": "ci_slack_pipeline_start",
-                            "type": "boolean",
-                            "default_value": true,
-                            "description": "Set to `true` to generate pipeline start notifications.",
-                            "required": false
-                        },
-                        {
-                            "key": "ci_slack_pipeline_success",
-                            "type": "boolean",
-                            "default_value": true,
-                            "description": "Set to `true` to generate pipeline succeeded notifications.",
-                            "required": false
-                        },
-                        {
                             "key": "ci_slack_team_name",
                             "type": "string",
                             "default_value": "",
                             "description": "The Slack team name, which is the word or phrase before `.slack.com` in the team URL.",
-                            "required": false
-                        },
-                        {
-                            "key": "ci_slack_toolchain_bind",
-                            "type": "boolean",
-                            "default_value": true,
-                            "description": "Set to `true` to Generate tool added to toolchain notifications.",
-                            "required": false
-                        },
-                        {
-                            "key": "ci_slack_toolchain_unbind",
-                            "type": "boolean",
-                            "default_value": true,
-                            "description": "Set to `true` to generate tool removed from toolchain notifications.",
                             "required": false
                         },
                         {
@@ -2412,14 +2308,14 @@
                             "key": "ci_sm_name",
                             "type": "string",
                             "default_value": "",
-                            "description": "Name of the Secrets Manager instance where the secrets are stored.",
+                            "description": "The name of an existing Secrets Manager instance where the secrets are stored.",
                             "required": false
                         },
                         {
                             "key": "ci_sm_resource_group",
                             "type": "string",
                             "default_value": "",
-                            "description": "The resource group containing the Secrets Manager instance.",
+                            "description": "The name of the existing resource group containing the Secrets Manager instance for your secrets.",
                             "required": false
                         },
                         {
@@ -3113,14 +3009,14 @@
                             "key": "sm_name",
                             "type": "string",
                             "default_value": "sm-instance",
-                            "description": "The name of the Secret Managers instance. This applies to the CI, CD and CC Secret Manager integrations. See `ci_sm_name`, `cd_sm_name`, and `cc_sm_name` to set these values independently. ",
+                            "description": "The name of an Secret Managers instance. This applies to the CI, CD and CC Secret Manager integrations. See `ci_sm_name`, `cd_sm_name`, and `cc_sm_name` to set these values independently. ",
                             "required": true
                         },
                         {
                             "key": "sm_resource_group",
                             "type": "string",
                             "default_value": "Default",
-                            "description": "The resource group containing the Secrets Manager instance. This applies to the CI, CD and CC Secret Manager integrations. See `ci_sm_resource_group`, `cd_sm_resource_group`, and `cc_sm_resource_group` to set these values independently.",
+                            "description": "The name of the existing resource group containing the Secrets Manager instance for your secrets. This applies to the CI, CD and CC Secret Manager integrations. See `ci_sm_resource_group`, `cd_sm_resource_group`, and `cc_sm_resource_group` to set these values independently.",
                             "required": true
                         },
                         {
@@ -3176,76 +3072,76 @@
                     ],
                     "outputs": [
                         {
-                            "key": "compliance_cd_toolchain_id",
-                            "description": "The ID of the Compliance CD Toolchain"
-                        },
-                        {
-                            "key": "secrets_manager_instance_id",
-                            "description": "The Secrets Manage Instance ID"
-                        },
-                        {
-                            "key": "cc_pipeline_id",
-                            "description": "The CC pipeline Id"
-                        },
-                        {
-                            "key": "inventory_repo_url",
-                            "description": "The Inventory Repo URL"
-                        },
-                        {
-                            "key": "icr_namespace_name",
-                            "description": "The name of the targets ICR namespace."
-                        },
-                        {
-                            "key": "app_repo_url",
-                            "description": "The App Repo URL"
-                        },
-                        {
-                            "key": "pr_pipeline_id",
-                            "description": "The PR pipeline Id"
-                        },
-                        {
-                            "key": "compliance_ci_toolchain_url",
-                            "description": "The Compliance CI Toolchain URL"
-                        },
-                        {
-                            "key": "ci_pipeline_id",
-                            "description": "The CI pipeline Id"
-                        },
-                        {
-                            "key": "cd_pipeline_id",
-                            "description": "The CD pipeline Id"
-                        },
-                        {
-                            "key": "compliance_ci_toolchain_id",
-                            "description": "The ID of the Compliance CI Toolchain"
-                        },
-                        {
-                            "key": "change_management_repo_url",
-                            "description": "The Change Management Repo URL."
-                        },
-                        {
-                            "key": "key_protect_instance_id",
-                            "description": "The Key Protect Instance ID"
-                        },
-                        {
                             "key": "evidence_repo_url",
                             "description": "The Evidence Repo URL"
-                        },
-                        {
-                            "key": "compliance_cc_toolchain_url",
-                            "description": "The Compliance CC Toolchain URL"
                         },
                         {
                             "key": "issues_repo_url",
                             "description": "The Issues Repo URL"
                         },
                         {
-                            "key": "compliance_cc_toolchain_id",
-                            "description": "The ID of the Compliance CC Toolchain"
+                            "key": "change_management_repo_url",
+                            "description": "The Change Management Repo URL."
+                        },
+                        {
+                            "key": "secrets_manager_instance_id",
+                            "description": "The Secrets Manage Instance ID"
+                        },
+                        {
+                            "key": "app_repo_url",
+                            "description": "The App Repo URL"
                         },
                         {
                             "key": "compliance_cd_toolchain_url",
                             "description": "The Compliance CD Toolchain URL"
+                        },
+                        {
+                            "key": "inventory_repo_url",
+                            "description": "The Inventory Repo URL"
+                        },
+                        {
+                            "key": "compliance_cd_toolchain_id",
+                            "description": "The ID of the Compliance CD Toolchain"
+                        },
+                        {
+                            "key": "cc_pipeline_id",
+                            "description": "The CC pipeline Id"
+                        },
+                        {
+                            "key": "compliance_ci_toolchain_id",
+                            "description": "The ID of the Compliance CI Toolchain"
+                        },
+                        {
+                            "key": "compliance_ci_toolchain_url",
+                            "description": "The Compliance CI Toolchain URL"
+                        },
+                        {
+                            "key": "compliance_cc_toolchain_id",
+                            "description": "The ID of the Compliance CC Toolchain"
+                        },
+                        {
+                            "key": "cd_pipeline_id",
+                            "description": "The CD pipeline Id"
+                        },
+                        {
+                            "key": "pr_pipeline_id",
+                            "description": "The PR pipeline Id"
+                        },
+                        {
+                            "key": "compliance_cc_toolchain_url",
+                            "description": "The Compliance CC Toolchain URL"
+                        },
+                        {
+                            "key": "ci_pipeline_id",
+                            "description": "The CI pipeline Id"
+                        },
+                        {
+                            "key": "icr_namespace_name",
+                            "description": "The name of the targets ICR namespace."
+                        },
+                        {
+                            "key": "key_protect_instance_id",
+                            "description": "The Key Protect Instance ID"
                         }
                     ],
                     "install_type": "fullstack"
