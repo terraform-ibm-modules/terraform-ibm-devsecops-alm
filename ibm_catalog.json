@@ -3,7 +3,7 @@
         {
             "label": "DevSecOps Application Lifecycle Management",
             "name": "deploy-arch-ibm-devsecops-alm",
-            "version": "2.0.3",
+            "version": "2.0.4",
             "product_kind": "solution",
             "tags": [
                 "enterprise_app",
@@ -38,62 +38,63 @@
                                 },
                                 "names": [
                                     "RA-5(c)",
-                                    "CM-2(1)(c)",
-                                    "CM-9(d)",
-                                    "CM-2(1)(a)",
-                                    "CM-6(1)",
                                     "CM-6(c)",
-                                    "RA-5(3)",
-                                    "CM-3(c)",
-                                    "CM-7(b)",
-                                    "CM-10(1)",
-                                    "SI-2(b)",
-                                    "CM-6(d)",
-                                    "SI-2(d)",
+                                    "CM-2(1)(a)",
+                                    "SI-2(c)",
+                                    "CM-9(b)",
+                                    "SI-7",
+                                    "SA-10(a)",
                                     "CM-3(2)",
-                                    "SA-3(d)",
-                                    "SA-10(d)",
                                     "RA-5(b)",
-                                    "CM-7(1)(a)",
                                     "CM-3(a)",
-                                    "SI-10",
-                                    "RA-5(2)",
-                                    "RA-5(1)",
+                                    "SA-10(e)",
+                                    "CM-6(1)",
+                                    "SA-3(d)",
+                                    "CM-7(1)(a)",
+                                    "SA-10(1)",
+                                    "RA-5(c)",
+                                    "SA-10(d)",
                                     "SA-8",
                                     "CM-4(1)",
-                                    "CM-2(1)(b)",
                                     "CM-5",
-                                    "CM-3(d)",
                                     "CM-2(2)",
-                                    "SI-7",
+                                    "RA-5(3)",
+                                    "CM-6(d)",
+                                    "SI-10",
+                                    "RA-5(1)",
+                                    "CM-3(f)",
+                                    "CM-8(2)",
+                                    "SA-3(a)",
+                                    "SI-2(d)",
                                     "CM-9(c)",
                                     "CM-3(e)",
-                                    "CM-3(f)",
-                                    "SA-10(1)",
                                     "SI-2(2)",
-                                    "CM-8(a)",
-                                    "CM-8(b)",
-                                    "SA-10(e)",
-                                    "CM-2",
+                                    "CM-2(1)(c)",
                                     "CM-2(3)",
-                                    "SA-15(a)",
-                                    "SI-2(c)",
-                                    "CM-9(a)",
                                     "CM-3(g)",
-                                    "CM-8(2)",
-                                    "SA-10(a)",
-                                    "SA-10(b)",
-                                    "CM-3(b)",
-                                    "CM-9(b)",
-                                    "SA-3(a)",
-                                    "CM-8(1)",
-                                    "CM-6(a)",
-                                    "SI-2(a)",
-                                    "SA-10(c)",
-                                    "CM-6(b)",
                                     "RA-5(a)",
+                                    "CM-8(a)",
+                                    "CM-6(a)",
+                                    "CM-10(1)",
+                                    "RA-5(2)",
+                                    "CM-2(1)(b)",
+                                    "SA-10(c)",
+                                    "CM-2",
+                                    "SA-10(b)",
+                                    "CM-3(c)",
+                                    "SI-2(b)",
                                     "CM-4",
-                                    "RA-5(d)"
+                                    "RA-5(d)",
+                                    "CM-7(b)",
+                                    "CM-8(1)",
+                                    "SI-2(a)",
+                                    "CM-9(a)",
+                                    "CM-3(b)",
+                                    "CM-6(b)",
+                                    "CM-9(d)",
+                                    "CM-3(d)",
+                                    "CM-8(b)",
+                                    "SA-15(a)"
                                 ]
                             }
                         ]
@@ -391,26 +392,6 @@
                             "type": "string",
                             "default_value": "",
                             "description": "The GIT tag selector for the Compliance Pipelines definitions.",
-                            "required": false
-                        },
-                        {
-                            "key": "cc_pipeline_ibmcloud_api_key_secret_crn",
-                            "type": "password",
-                            "description": "The CRN of the IBMCloud apikey used for running the pipelines.",
-                            "required": false
-                        },
-                        {
-                            "key": "cc_pipeline_ibmcloud_api_key_secret_group",
-                            "type": "string",
-                            "default_value": "",
-                            "description": "Secret group for the pipeline ibmcloud API key secret. Defaults to the value set in `sm_secret_group` if not set. Only used with `Secrets Manager`.",
-                            "required": false
-                        },
-                        {
-                            "key": "cc_pipeline_ibmcloud_api_key_secret_name",
-                            "type": "string",
-                            "default_value": "",
-                            "description": "Name of the Cloud API key secret in the secret provider for running the pipelines.",
                             "required": false
                         },
                         {
@@ -916,26 +897,6 @@
                             "type": "string",
                             "default_value": "",
                             "description": "The GIT tag selector for the Compliance Pipelines definitions.",
-                            "required": false
-                        },
-                        {
-                            "key": "cd_pipeline_ibmcloud_api_key_secret_crn",
-                            "type": "password",
-                            "description": "The CRN of the IBMCloud apikey used for running the pipelines.",
-                            "required": false
-                        },
-                        {
-                            "key": "cd_pipeline_ibmcloud_api_key_secret_group",
-                            "type": "string",
-                            "default_value": "",
-                            "description": "Secret group for the pipeline ibmcloud API key secret. Defaults to the value set in `sm_secret_group` if not set. Only used with `Secrets Manager`.",
-                            "required": false
-                        },
-                        {
-                            "key": "cd_pipeline_ibmcloud_api_key_secret_name",
-                            "type": "string",
-                            "default_value": "",
-                            "description": "Name of the Cloud API key secret in the secret provider for running the pipelines.",
                             "required": false
                         },
                         {
@@ -1476,26 +1437,6 @@
                             "type": "string",
                             "default_value": "",
                             "description": "The GIT tag selector for the Compliance Pipelines definitions.",
-                            "required": false
-                        },
-                        {
-                            "key": "ci_pipeline_ibmcloud_api_key_secret_crn",
-                            "type": "password",
-                            "description": "The CRN of the IBMCloud apikey used for running the pipelines.",
-                            "required": false
-                        },
-                        {
-                            "key": "ci_pipeline_ibmcloud_api_key_secret_group",
-                            "type": "string",
-                            "default_value": "",
-                            "description": "Secret group for the pipeline ibmcloud API key secret. Defaults to the value set in `sm_secret_group` if not set. Only used with `Secrets Manager`.",
-                            "required": false
-                        },
-                        {
-                            "key": "ci_pipeline_ibmcloud_api_key_secret_name",
-                            "type": "string",
-                            "default_value": "",
-                            "description": "Name of the Cloud API key secret in the secret provider for running the pipelines.",
                             "required": false
                         },
                         {
@@ -2106,6 +2047,13 @@
                             "required": false
                         },
                         {
+                            "key": "pipeline_ibmcloud_api_key_secret_group",
+                            "type": "string",
+                            "default_value": "",
+                            "description": "Secret group for the pipeline ibmcloud API key secret. Defaults to the value set in `sm_secret_group` if not set. Only used with `Secrets Manager`.",
+                            "required": false
+                        },
+                        {
                             "key": "pipeline_config_repo_git_token_secret_name",
                             "type": "string",
                             "default_value": "",
@@ -2438,76 +2386,76 @@
                     ],
                     "outputs": [
                         {
-                            "key": "key_protect_instance_id",
-                            "description": "The Key Protect Instance ID"
+                            "key": "evidence_repo_url",
+                            "description": "The Evidence Repo URL"
                         },
                         {
                             "key": "change_management_repo_url",
                             "description": "The Change Management Repo URL."
                         },
                         {
+                            "key": "issues_repo_url",
+                            "description": "The Issues Repo URL"
+                        },
+                        {
                             "key": "icr_namespace_name",
                             "description": "The name of the targets ICR namespace."
-                        },
-                        {
-                            "key": "cd_pipeline_id",
-                            "description": "The CD pipeline Id"
-                        },
-                        {
-                            "key": "compliance_cc_toolchain_id",
-                            "description": "The ID of the Compliance CC Toolchain"
-                        },
-                        {
-                            "key": "evidence_repo_url",
-                            "description": "The Evidence Repo URL"
-                        },
-                        {
-                            "key": "secrets_manager_instance_id",
-                            "description": "The Secrets Manage Instance ID"
-                        },
-                        {
-                            "key": "compliance_ci_toolchain_url",
-                            "description": "The Compliance CI Toolchain URL"
-                        },
-                        {
-                            "key": "ci_pipeline_id",
-                            "description": "The CI pipeline Id"
-                        },
-                        {
-                            "key": "app_repo_url",
-                            "description": "The App Repo URL"
-                        },
-                        {
-                            "key": "cc_pipeline_id",
-                            "description": "The CC pipeline Id"
-                        },
-                        {
-                            "key": "compliance_cc_toolchain_url",
-                            "description": "The Compliance CC Toolchain URL"
-                        },
-                        {
-                            "key": "pr_pipeline_id",
-                            "description": "The PR pipeline Id"
-                        },
-                        {
-                            "key": "compliance_ci_toolchain_id",
-                            "description": "The ID of the Compliance CI Toolchain"
-                        },
-                        {
-                            "key": "compliance_cd_toolchain_url",
-                            "description": "The Compliance CD Toolchain URL"
                         },
                         {
                             "key": "inventory_repo_url",
                             "description": "The Inventory Repo URL"
                         },
                         {
+                            "key": "key_protect_instance_id",
+                            "description": "The Key Protect Instance ID"
+                        },
+                        {
+                            "key": "compliance_cc_toolchain_url",
+                            "description": "The Compliance CC Toolchain URL"
+                        },
+                        {
+                            "key": "ci_pipeline_id",
+                            "description": "The CI pipeline Id"
+                        },
+                        {
+                            "key": "compliance_ci_toolchain_url",
+                            "description": "The Compliance CI Toolchain URL"
+                        },
+                        {
                             "key": "compliance_cd_toolchain_id",
                             "description": "The ID of the Compliance CD Toolchain"
                         },
                         {
-                            "key": "issues_repo_url",
-                            "description": "The Issues Repo URL"
+                            "key": "app_repo_url",
+                            "description": "The App Repo URL"
+                        },
+                        {
+                            "key": "secrets_manager_instance_id",
+                            "description": "The Secrets Manage Instance ID"
+                        },
+                        {
+                            "key": "pr_pipeline_id",
+                            "description": "The PR pipeline Id"
+                        },
+                        {
+                            "key": "compliance_cc_toolchain_id",
+                            "description": "The ID of the Compliance CC Toolchain"
+                        },
+                        {
+                            "key": "compliance_ci_toolchain_id",
+                            "description": "The ID of the Compliance CI Toolchain"
+                        },
+                        {
+                            "key": "cd_pipeline_id",
+                            "description": "The CD pipeline Id"
+                        },
+                        {
+                            "key": "cc_pipeline_id",
+                            "description": "The CC pipeline Id"
+                        },
+                        {
+                            "key": "compliance_cd_toolchain_url",
+                            "description": "The Compliance CD Toolchain URL"
                         }
                     ],
                     "install_type": "fullstack"
