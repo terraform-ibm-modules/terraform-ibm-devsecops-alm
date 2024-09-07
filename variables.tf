@@ -452,6 +452,12 @@ variable "pipeline_config_repo_git_token_secret_crn" {
   }
 }
 
+variable "pipeline_ibmcloud_api_key_secret_group" {
+  type        = string
+  description = "Secret group for the pipeline ibmcloud API key secret. Defaults to the value set in `sm_secret_group` if not set. Only used with `Secrets Manager`."
+  default     = ""
+}
+
 variable "pipeline_config_repo_git_token_secret_name" {
   type        = string
   description = "Name of the Git token secret in the secret provider used for accessing the pipeline config repository."

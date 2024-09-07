@@ -182,7 +182,7 @@ module "devsecops_ci_toolchain" {
 
   #SECRET NAMES
   pipeline_ibmcloud_api_key_secret_name  = (var.ci_pipeline_ibmcloud_api_key_secret_name == "") ? var.pipeline_ibmcloud_api_key_secret_name : var.ci_pipeline_ibmcloud_api_key_secret_name
-  pipeline_ibmcloud_api_key_secret_group = var.ci_pipeline_ibmcloud_api_key_secret_group
+  pipeline_ibmcloud_api_key_secret_group = (var.ci_pipeline_ibmcloud_api_key_secret_group == "") ? var.pipeline_ibmcloud_api_key_secret_group : var.ci_pipeline_ibmcloud_api_key_secret_group
 
   cos_api_key_secret_name  = (var.ci_cos_api_key_secret_name == "") ? var.cos_api_key_secret_name : var.ci_cos_api_key_secret_name
   cos_api_key_secret_group = (var.ci_cos_api_key_secret_group == "") ? var.cos_api_key_secret_group : var.ci_cos_api_key_secret_group
@@ -380,7 +380,7 @@ module "devsecops_cd_toolchain" {
 
   #SECRET NAMES AND SECRET GROUPS
   pipeline_ibmcloud_api_key_secret_name  = (var.cd_pipeline_ibmcloud_api_key_secret_name == "") ? var.pipeline_ibmcloud_api_key_secret_name : var.cd_pipeline_ibmcloud_api_key_secret_name
-  pipeline_ibmcloud_api_key_secret_group = var.cd_pipeline_ibmcloud_api_key_secret_group
+  pipeline_ibmcloud_api_key_secret_group = (var.cd_pipeline_ibmcloud_api_key_secret_group == "") ? var.pipeline_ibmcloud_api_key_secret_group : var.cd_pipeline_ibmcloud_api_key_secret_group
 
   cos_api_key_secret_name  = (var.cd_cos_api_key_secret_name == "") ? var.cos_api_key_secret_name : var.cd_cos_api_key_secret_name
   cos_api_key_secret_group = (var.cd_cos_api_key_secret_group == "") ? var.cos_api_key_secret_group : var.cd_cos_api_key_secret_group
@@ -593,7 +593,7 @@ module "devsecops_cc_toolchain" {
 
   #SECRET NAMES AND SECRET GROUPS
   pipeline_ibmcloud_api_key_secret_name  = (var.cc_pipeline_ibmcloud_api_key_secret_name == "") ? var.pipeline_ibmcloud_api_key_secret_name : var.cc_pipeline_ibmcloud_api_key_secret_name
-  pipeline_ibmcloud_api_key_secret_group = var.cc_pipeline_ibmcloud_api_key_secret_group
+  pipeline_ibmcloud_api_key_secret_group = (var.cc_pipeline_ibmcloud_api_key_secret_group == "") ? var.pipeline_ibmcloud_api_key_secret_group : var.cc_pipeline_ibmcloud_api_key_secret_group
 
   cos_api_key_secret_name  = (var.cc_cos_api_key_secret_name == "") ? var.cos_api_key_secret_name : var.cc_cos_api_key_secret_name
   cos_api_key_secret_group = (var.cc_cos_api_key_secret_group == "") ? var.cos_api_key_secret_group : var.cc_cos_api_key_secret_group

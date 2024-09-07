@@ -75,6 +75,7 @@ module "devsecops_da" {
   pipeline_doi_api_key_secret_name                  = var.pipeline_doi_api_key_secret_name
   pipeline_git_tag                                  = var.pipeline_git_tag
   pipeline_ibmcloud_api_key_secret_crn              = var.pipeline_ibmcloud_api_key_secret_crn
+  pipeline_ibmcloud_api_key_secret_group            = var.pipeline_ibmcloud_api_key_secret_group
   pipeline_ibmcloud_api_key_secret_name             = var.pipeline_ibmcloud_api_key_secret_name
   prefix                                            = var.prefix
   registry_namespace                                = var.registry_namespace
