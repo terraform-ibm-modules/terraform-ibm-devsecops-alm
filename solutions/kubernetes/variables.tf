@@ -56,6 +56,12 @@ variable "compliance_pipeline_branch" {
   default     = "open-v10"
 }
 
+variable "compliance_pipeline_group" {
+  type        = string
+  description = "Specify user or group for compliance pipline repository."
+  default     = ""
+}
+
 variable "compliance_pipeline_repo_auth_type" {
   type        = string
   description = "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`."
@@ -222,6 +228,12 @@ variable "event_notifications_tool_name" {
   default     = "Event Notifications"
 }
 
+variable "evidence_group" {
+  type        = string
+  description = "Specify the Git user or group for the evidence repository."
+  default     = ""
+}
+
 variable "evidence_repo_auth_type" {
   type        = string
   description = "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`."
@@ -291,6 +303,12 @@ variable "ibmcloud_api_key" {
   sensitive   = true
 }
 
+variable "inventory_group" {
+  type        = string
+  description = "Specify the Git user or group for the inventory repository."
+  default     = ""
+}
+
 variable "inventory_repo_auth_type" {
   type        = string
   description = "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`."
@@ -351,6 +369,12 @@ variable "inventory_repo_name" {
 variable "inventory_repo_secret_group" {
   type        = string
   description = "Secret group for the Inventory repository secret. Defaults to the value set in `sm_secret_group` if not set. Only used with `Secrets Manager`."
+  default     = ""
+}
+
+variable "issues_group" {
+  type        = string
+  description = "Specify the Git user or group for the issues repository."
   default     = ""
 }
 
@@ -461,6 +485,12 @@ variable "pipeline_config_repo_git_token_secret_crn" {
 variable "pipeline_ibmcloud_api_key_secret_group" {
   type        = string
   description = "Secret group for the pipeline ibmcloud API key secret. Defaults to the value set in `sm_secret_group` if not set. Only used with `Secrets Manager`."
+  default     = ""
+}
+
+variable "pipeline_config_group" {
+  type        = string
+  description = "Specify the Git user or group for the compliance pipeline repository."
   default     = ""
 }
 

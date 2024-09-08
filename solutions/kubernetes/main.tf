@@ -9,6 +9,7 @@ module "devsecops_da" {
   cluster_name                                      = var.cluster_name
   code_engine_project                               = var.code_engine_project
   compliance_pipeline_branch                        = var.compliance_pipeline_branch
+  compliance_pipeline_group                         = var.compliance_pipeline_group
   compliance_pipeline_repo_auth_type                = var.compliance_pipeline_repo_auth_type
   compliance_pipeline_repo_git_token_secret_crn     = var.compliance_pipeline_repo_git_token_secret_crn
   compliance_pipeline_repo_git_token_secret_name    = var.compliance_pipeline_repo_git_token_secret_name
@@ -35,6 +36,7 @@ module "devsecops_da" {
   environment_prefix                                = var.environment_prefix
   event_notifications_crn                           = var.event_notifications_crn
   event_notifications_tool_name                     = var.event_notifications_tool_name
+  evidence_group                                    = var.evidence_group
   evidence_repo_auth_type                           = var.evidence_repo_auth_type
   evidence_repo_existing_git_id                     = var.evidence_repo_existing_git_id
   evidence_repo_existing_git_provider               = var.evidence_repo_existing_git_provider
@@ -45,6 +47,7 @@ module "devsecops_da" {
   evidence_repo_name                                = var.evidence_repo_name
   evidence_repo_secret_group                        = var.evidence_repo_secret_group
   ibmcloud_api_key                                  = var.ibmcloud_api_key
+  inventory_group                                   = var.inventory_group
   inventory_repo_auth_type                          = var.inventory_repo_auth_type
   inventory_repo_existing_git_id                    = var.inventory_repo_existing_git_id
   inventory_repo_existing_git_provider              = var.inventory_repo_existing_git_provider
@@ -54,6 +57,7 @@ module "devsecops_da" {
   inventory_repo_integration_owner                  = var.inventory_repo_integration_owner
   inventory_repo_name                               = var.inventory_repo_name
   inventory_repo_secret_group                       = var.inventory_repo_secret_group
+  issues_group                                      = var.issues_group
   issues_repo_auth_type                             = var.issues_repo_auth_type
   issues_repo_existing_git_id                       = var.issues_repo_existing_git_id
   issues_repo_existing_git_provider                 = var.issues_repo_existing_git_provider
@@ -67,6 +71,7 @@ module "devsecops_da" {
   kp_location                                       = var.kp_location
   kp_name                                           = var.kp_name
   kp_resource_group                                 = var.kp_resource_group
+  pipeline_config_group                             = var.pipeline_config_group
   pipeline_config_repo_auth_type                    = var.pipeline_config_repo_auth_type
   pipeline_config_repo_git_token_secret_crn         = var.pipeline_config_repo_git_token_secret_crn
   pipeline_config_repo_git_token_secret_name        = var.pipeline_config_repo_git_token_secret_name

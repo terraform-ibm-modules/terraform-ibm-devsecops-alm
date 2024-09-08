@@ -61,6 +61,9 @@ locals {
   ci_compliance_pipeline_repo_secret_group          = (var.ci_compliance_pipeline_repo_secret_group == "") ? var.compliance_pipeline_repo_secret_group : var.ci_compliance_pipeline_repo_secret_group
   cd_compliance_pipeline_repo_secret_group          = (var.cd_compliance_pipeline_repo_secret_group == "") ? var.compliance_pipeline_repo_secret_group : var.cd_compliance_pipeline_repo_secret_group
   cc_compliance_pipeline_repo_secret_group          = (var.cc_compliance_pipeline_repo_secret_group == "") ? var.compliance_pipeline_repo_secret_group : var.cc_compliance_pipeline_repo_secret_group
+  ci_compliance_pipeline_group                      = (var.ci_compliance_pipeline_group == "") ? var.compliance_pipeline_group : var.ci_compliance_pipeline_group
+  cd_compliance_pipeline_group                      = (var.cd_compliance_pipeline_group == "") ? var.compliance_pipeline_group : var.cd_compliance_pipeline_group
+  cc_compliance_pipeline_group                      = (var.cc_compliance_pipeline_group == "") ? var.compliance_pipeline_group : var.cc_compliance_pipeline_group
 
   ci_evidence_repo_auth_type             = (var.ci_evidence_repo_auth_type == "") ? var.evidence_repo_auth_type : var.ci_evidence_repo_auth_type
   cd_evidence_repo_auth_type             = (var.cd_evidence_repo_auth_type == "") ? var.evidence_repo_auth_type : var.cd_evidence_repo_auth_type
@@ -74,6 +77,9 @@ locals {
   ci_evidence_repo_secret_group          = (var.ci_evidence_repo_secret_group == "") ? var.evidence_repo_secret_group : var.ci_evidence_repo_secret_group
   cd_evidence_repo_secret_group          = (var.cd_evidence_repo_secret_group == "") ? var.evidence_repo_secret_group : var.cd_evidence_repo_secret_group
   cc_evidence_repo_secret_group          = (var.cc_evidence_repo_secret_group == "") ? var.evidence_repo_secret_group : var.cc_evidence_repo_secret_group
+  ci_evidence_group                      = (var.ci_evidence_group == "") ? var.evidence_group : var.ci_evidence_group
+  cd_evidence_group                      = (var.cd_evidence_group == "") ? var.evidence_group : var.cd_evidence_group
+  cc_evidence_group                      = (var.cc_evidence_group == "") ? var.evidence_group : var.cc_evidence_group
 
   ci_issues_repo_auth_type             = (var.ci_issues_repo_auth_type == "") ? var.issues_repo_auth_type : var.ci_issues_repo_auth_type
   cd_issues_repo_auth_type             = (var.cd_issues_repo_auth_type == "") ? var.issues_repo_auth_type : var.cd_issues_repo_auth_type
@@ -87,6 +93,9 @@ locals {
   ci_issues_repo_secret_group          = (var.ci_issues_repo_secret_group == "") ? var.issues_repo_secret_group : var.ci_issues_repo_secret_group
   cd_issues_repo_secret_group          = (var.cd_issues_repo_secret_group == "") ? var.issues_repo_secret_group : var.cd_issues_repo_secret_group
   cc_issues_repo_secret_group          = (var.cc_issues_repo_secret_group == "") ? var.issues_repo_secret_group : var.cc_issues_repo_secret_group
+  ci_issues_group                      = (var.ci_issues_group == "") ? var.issues_group : var.ci_issues_group
+  cd_issues_group                      = (var.cd_issues_group == "") ? var.issues_group : var.cd_issues_group
+  cc_issues_group                      = (var.cc_issues_group == "") ? var.issues_group : var.cc_issues_group
 
   ci_inventory_repo_auth_type             = (var.ci_inventory_repo_auth_type == "") ? var.inventory_repo_auth_type : var.ci_inventory_repo_auth_type
   cd_inventory_repo_auth_type             = (var.cd_inventory_repo_auth_type == "") ? var.inventory_repo_auth_type : var.cd_inventory_repo_auth_type
@@ -100,6 +109,9 @@ locals {
   ci_inventory_repo_secret_group          = (var.ci_inventory_repo_secret_group == "") ? var.inventory_repo_secret_group : var.ci_inventory_repo_secret_group
   cd_inventory_repo_secret_group          = (var.cd_inventory_repo_secret_group == "") ? var.inventory_repo_secret_group : var.cd_inventory_repo_secret_group
   cc_inventory_repo_secret_group          = (var.cc_inventory_repo_secret_group == "") ? var.inventory_repo_secret_group : var.cc_inventory_repo_secret_group
+  ci_inventory_group                      = (var.ci_inventory_group == "") ? var.inventory_group : var.ci_inventory_group
+  cd_inventory_group                      = (var.cd_inventory_group == "") ? var.inventory_group : var.cd_inventory_group
+  cc_inventory_group                      = (var.cc_inventory_group == "") ? var.inventory_group : var.cc_inventory_group
 
   ci_pipeline_config_repo_auth_type             = (var.ci_pipeline_config_repo_auth_type == "") ? var.pipeline_config_repo_auth_type : var.ci_pipeline_config_repo_auth_type
   cd_pipeline_config_repo_auth_type             = (var.cd_pipeline_config_repo_auth_type == "") ? var.pipeline_config_repo_auth_type : var.cd_pipeline_config_repo_auth_type
@@ -113,6 +125,10 @@ locals {
   ci_pipeline_config_repo_secret_group          = (var.ci_pipeline_config_repo_secret_group == "") ? var.pipeline_config_repo_secret_group : var.ci_pipeline_config_repo_secret_group
   cd_pipeline_config_repo_secret_group          = (var.cd_pipeline_config_repo_secret_group == "") ? var.pipeline_config_repo_secret_group : var.cd_pipeline_config_repo_secret_group
   cc_pipeline_config_repo_secret_group          = (var.cc_pipeline_config_repo_secret_group == "") ? var.pipeline_config_repo_secret_group : var.cc_pipeline_config_repo_secret_group
+  ci_pipeline_config_group                      = (var.ci_pipeline_config_group == "") ? var.pipeline_config_group : var.ci_pipeline_config_group
+  cd_pipeline_config_group                      = (var.cd_pipeline_config_group == "") ? var.pipeline_config_group : var.cd_pipeline_config_group
+  cc_pipeline_config_group                      = (var.cc_pipeline_config_group == "") ? var.pipeline_config_group : var.cc_pipeline_config_group
+
 }
 
 
@@ -249,11 +265,11 @@ module "devsecops_ci_toolchain" {
 
   #GROUPS/USERS FOR REPOS
   app_group                 = (var.ci_app_group == "") ? var.repo_group : var.ci_app_group
-  issues_group              = (var.ci_issues_group == "") ? var.repo_group : var.ci_issues_group
-  inventory_group           = (var.ci_inventory_group == "") ? var.repo_group : var.ci_inventory_group
-  evidence_group            = (var.ci_evidence_group == "") ? var.repo_group : var.ci_evidence_group
-  pipeline_config_group     = (var.ci_pipeline_config_group == "") ? var.repo_group : var.ci_pipeline_config_group
-  compliance_pipeline_group = (var.ci_compliance_pipeline_group == "") ? var.repo_group : var.ci_compliance_pipeline_group
+  issues_group              = (local.ci_issues_group == "") ? var.repo_group : local.ci_issues_group
+  inventory_group           = (local.ci_inventory_group == "") ? var.repo_group : local.ci_inventory_group
+  evidence_group            = (local.ci_evidence_group == "") ? var.repo_group : local.ci_evidence_group
+  pipeline_config_group     = (local.ci_pipeline_config_group == "") ? var.repo_group : local.ci_pipeline_config_group
+  compliance_pipeline_group = (local.ci_compliance_pipeline_group == "") ? var.repo_group : local.ci_compliance_pipeline_group
 
   #APP REPO
   app_repo_clone_from_url        = var.ci_app_repo_clone_from_url
@@ -455,11 +471,11 @@ module "devsecops_cd_toolchain" {
   change_management_repo_auth_type   = (var.cd_change_management_repo_auth_type == "") ? local.repo_auth_type : var.cd_change_management_repo_auth_type
 
   #GROUPS/USERS FOR REPOS
-  issues_group              = (var.cd_issues_group == "") ? var.repo_group : var.cd_issues_group
-  inventory_group           = (var.cd_inventory_group == "") ? var.repo_group : var.cd_inventory_group
-  evidence_group            = (var.cd_evidence_group == "") ? var.repo_group : var.cd_evidence_group
-  pipeline_config_group     = (var.cd_pipeline_config_group == "") ? var.repo_group : var.cd_pipeline_config_group
-  compliance_pipeline_group = (var.cd_compliance_pipeline_group == "") ? var.repo_group : var.cd_compliance_pipeline_group
+  issues_group              = (local.cd_issues_group == "") ? var.repo_group : local.cd_issues_group
+  inventory_group           = (local.cd_inventory_group == "") ? var.repo_group : local.cd_inventory_group
+  evidence_group            = (local.cd_evidence_group == "") ? var.repo_group : local.cd_evidence_group
+  pipeline_config_group     = (local.cd_pipeline_config_group == "") ? var.repo_group : local.cd_pipeline_config_group
+  compliance_pipeline_group = (local.cd_compliance_pipeline_group == "") ? var.repo_group : local.cd_compliance_pipeline_group
   deployment_group          = (var.cd_deployment_group == "") ? var.repo_group : var.cd_deployment_group
   change_management_group   = (var.cd_change_management_group == "") ? var.repo_group : var.cd_change_management_group
 
@@ -662,11 +678,11 @@ module "devsecops_cc_toolchain" {
   compliance_pipeline_repo_auth_type = (local.cc_compliance_pipeline_repo_auth_type == "") ? local.repo_auth_type : local.cc_compliance_pipeline_repo_auth_type
 
   #GROUPS/USERS FOR REPOS
-  issues_group              = (var.cc_issues_group == "") ? var.repo_group : var.cc_issues_group
-  inventory_group           = (var.cc_inventory_group == "") ? var.repo_group : var.cc_inventory_group
-  evidence_group            = (var.cc_evidence_group == "") ? var.repo_group : var.cc_evidence_group
-  pipeline_config_group     = (var.cc_pipeline_config_group == "") ? var.repo_group : var.cc_pipeline_config_group
-  compliance_pipeline_group = (var.cc_compliance_pipeline_group == "") ? var.repo_group : var.cc_compliance_pipeline_group
+  issues_group              = (local.cc_issues_group == "") ? var.repo_group : local.cc_issues_group
+  inventory_group           = (local.cc_inventory_group == "") ? var.repo_group : local.cc_inventory_group
+  evidence_group            = (local.cc_evidence_group == "") ? var.repo_group : local.cc_evidence_group
+  pipeline_config_group     = (local.cc_pipeline_config_group == "") ? var.repo_group : local.cc_pipeline_config_group
+  compliance_pipeline_group = (local.cc_compliance_pipeline_group == "") ? var.repo_group : local.cc_compliance_pipeline_group
   app_group                 = (var.cc_app_group == "") ? var.repo_group : var.cc_app_group
 
   link_to_doi_toolchain = var.cc_link_to_doi_toolchain
