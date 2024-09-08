@@ -2222,8 +2222,8 @@
                     "install_type": "fullstack"
                 },
                 {
-                    "label": "Deploy to Kubernetes",
-                    "name": "devsecops",
+                    "label": "Deploy to Code Engine",
+                    "name": "devsecops_ce",
                     "working_directory": "solutions/code-engine",
                     "compliance": {
                         "authority": "scc-v3",
