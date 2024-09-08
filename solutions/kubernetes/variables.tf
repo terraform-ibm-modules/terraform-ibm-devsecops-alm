@@ -181,21 +181,27 @@ variable "create_signing_key" {
 }
 
 variable "enable_key_protect" {
-  type        = bool
+  type        = string
   description = "Set to `true` to the enable Key Protect integrations."
-  default     = false
+  default     = "false"
+}
+
+variable "enable_pipeline_notifications" {
+  type        = string
+  description = "When enabled, pipeline run events will be sent to the Event Notifications and Slack integrations in the enclosing toolchain."
+  default     = ""
 }
 
 variable "enable_secrets_manager" {
   description = "Set to `true` to enable the Secrets Manager integrations."
-  type        = bool
-  default     = true
+  type        = string
+  default     = "true"
 }
 
 variable "enable_slack" {
-  type        = bool
-  description = "Set to `true` to create the Slack toolchain integration. This requires a valid `slack_channel_name`, `slack_team_name`, and a valid `webhook` (see `slack_webhook_secret_name`). This setting applies for CI, CD, and CC toolchains. To enable Slack independently, see `ci_enable_slack`, `cd_enable_slack`, and `cc_enable_slack`."
-  default     = false
+  type        = string
+  description = "Set to `true` to create the Slack toolchain integration. This requires a valid `slack_channel_name`, `slack_team_name`, and a valid `webhook` (see `slack_webhook_secret_name`). This setting applies for CI, CD, and CC toolchains."
+  default     = "false"
 }
 
 variable "environment_prefix" {
@@ -583,6 +589,12 @@ variable "scc_attachment_id" {
   default     = ""
 }
 
+variable "scc_enable_scc" {
+  type        = string
+  description = "Adds the SCC tool integration to the toolchain."
+  default     = "false"
+}
+
 variable "scc_instance_crn" {
   type        = string
   description = "The Security and Compliance Center service instance CRN (Cloud Resource Name). This parameter is only relevant when the `scc_use_profile_attachment` parameter is enabled."
@@ -949,26 +961,26 @@ variable "cc_doi_toolchain_id" {
 
 variable "cc_enable_key_protect" {
   description = "Set to `true` to the enable Key Protect integrations."
-  type        = bool
-  default     = false
+  type        = string
+  default     = ""
 }
 
 variable "cc_enable_pipeline_notifications" {
-  type        = bool
+  type        = string
   description = "When enabled, pipeline run events will be sent to the Event Notifications and Slack integrations in the enclosing toolchain."
-  default     = false
+  default     = ""
 }
 
 variable "cc_enable_secrets_manager" {
   description = "Set to `true` to enable the Secrets Manager integrations."
-  type        = bool
-  default     = false
+  type        = string
+  default     = ""
 }
 
 variable "cc_enable_slack" {
-  type        = bool
+  type        = string
   description = "Set to `true` to create the Slack toolchain integration."
-  default     = false
+  default     = ""
 }
 
 variable "cc_event_notifications_crn" {
@@ -1251,9 +1263,9 @@ variable "cc_repository_properties" {
 }
 
 variable "cc_scc_enable_scc" {
-  type        = bool
+  type        = string
   description = "Adds the SCC tool integration to the toolchain."
-  default     = true
+  default     = ""
 }
 
 variable "cc_scc_integration_name" {
@@ -1759,26 +1771,26 @@ variable "cd_doi_toolchain_id" {
 
 variable "cd_enable_key_protect" {
   description = "Set to `true` to the enable Key Protect integrations."
-  type        = bool
-  default     = false
+  type        = string
+  default     = ""
 }
 
 variable "cd_enable_pipeline_notifications" {
-  type        = bool
+  type        = string
   description = "When enabled, pipeline run events will be sent to the Event Notifications and Slack integrations in the enclosing toolchain."
-  default     = false
+  default     = ""
 }
 
 variable "cd_enable_secrets_manager" {
   description = "Set to `true` to enable the Secrets Manager integrations."
-  type        = bool
-  default     = false
+  type        = string
+  default     = ""
 }
 
 variable "cd_enable_slack" {
-  type        = bool
+  type        = string
   description = "Set to `true` to create the Slack toolchain integration."
-  default     = false
+  default     = ""
 }
 
 variable "cd_event_notifications_crn" {
@@ -2084,9 +2096,9 @@ variable "cd_repository_properties" {
 }
 
 variable "cd_scc_enable_scc" {
-  type        = bool
+  type        = string
   description = "Adds the SCC tool integration to the toolchain."
-  default     = true
+  default     = ""
 }
 
 variable "cd_scc_integration_name" {
@@ -2569,27 +2581,27 @@ variable "ci_doi_toolchain_id" {
 }
 
 variable "ci_enable_key_protect" {
-  type        = bool
+  type        = string
   description = "Set to `true` to the enable Key Protect integrations."
-  default     = false
+  default     = ""
 }
 
 variable "ci_enable_pipeline_notifications" {
-  type        = bool
+  type        = string
   description = "When enabled, pipeline run events will be sent to the Event Notifications and Slack integrations in the enclosing toolchain."
-  default     = false
+  default     = ""
 }
 
 variable "ci_enable_secrets_manager" {
-  type        = bool
+  type        = string
   description = "Set to `true` to enable the Secrets Manager integrations."
-  default     = false
+  default     = ""
 }
 
 variable "ci_enable_slack" {
-  type        = bool
+  type        = string
   description = "Set to `true` to create the Slack toolchain integration."
-  default     = false
+  default     = ""
 }
 
 variable "ci_event_notifications_crn" {

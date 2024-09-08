@@ -4,11 +4,24 @@
 # this could be addressed manually by ticking a setting in Schematics for each of the inputs
 locals {
   #setting all three toolchain specific parameters to false by default instead of null. If any of these values change then use the toolchain specific values.
-  use_sm_override           = (var.ci_enable_secrets_manager == false) && (var.cd_enable_secrets_manager == false) && (var.cc_enable_secrets_manager == false) ? true : false
-  use_kp_override           = (var.ci_enable_key_protect == false) && (var.cd_enable_key_protect == false) && (var.cc_enable_key_protect == false) ? true : false
-  use_slack_enable_override = (var.ci_enable_slack == false) && (var.cd_enable_slack == false) && (var.cc_enable_slack == false) ? true : false
+  ci_enable_secrets_manager = (var.ci_enable_secrets_manager == "") ? var.enable_secrets_manager : var.ci_enable_secrets_manager
+  cd_enable_secrets_manager = (var.cd_enable_secrets_manager == "") ? var.enable_secrets_manager : var.cd_enable_secrets_manager
+  cc_enable_secrets_manager = (var.cc_enable_secrets_manager == "") ? var.enable_secrets_manager : var.cc_enable_secrets_manager
 
-  enable_slack = try(var.enable_slack, false)
+  ci_enable_key_protect = (var.ci_enable_key_protect == "") ? var.enable_key_protect : var.ci_enable_key_protect
+  cd_enable_key_protect = (var.cd_enable_key_protect == "") ? var.enable_key_protect : var.cd_enable_key_protect
+  cc_enable_key_protect = (var.cc_enable_key_protect == "") ? var.enable_key_protect : var.cc_enable_key_protect
+
+  ci_enable_slack = (var.ci_enable_slack == "") ? var.enable_slack : var.ci_enable_slack
+  cd_enable_slack = (var.cd_enable_slack == "") ? var.enable_slack : var.cd_enable_slack
+  cc_enable_slack = (var.cc_enable_slack == "") ? var.enable_slack : var.cc_enable_slack
+
+  ci_enable_pipeline_notifications = (var.ci_enable_pipeline_notifications == "") ? var.enable_pipeline_notifications : var.ci_enable_pipeline_notifications
+  cd_enable_pipeline_notifications = (var.cd_enable_pipeline_notifications == "") ? var.enable_pipeline_notifications : var.cd_enable_pipeline_notifications
+  cc_enable_pipeline_notifications = (var.cc_enable_pipeline_notifications == "") ? var.enable_pipeline_notifications : var.cc_enable_pipeline_notifications
+
+  cd_scc_enable_scc = (var.cd_scc_enable_scc == "") ? var.scc_enable_scc : var.cd_scc_enable_scc
+  cc_scc_enable_scc = (var.cc_scc_enable_scc == "") ? var.scc_enable_scc : var.cc_scc_enable_scc
 
   repo_auth_type               = ((var.repo_git_token_secret_name == "") && (var.repo_git_token_secret_crn == "")) ? "oauth" : "pat"
   calculated_ci_cluster_region = (var.ci_cluster_region != "") ? var.ci_cluster_region : var.toolchain_region
@@ -169,8 +182,8 @@ module "devsecops_ci_toolchain" {
   pr_pipeline_git_tag      = (var.pr_pipeline_git_tag == "") ? var.pipeline_git_tag : var.pr_pipeline_git_tag
 
   #SECRET PROVIDERS
-  enable_key_protect     = (local.use_kp_override) ? var.enable_key_protect : var.ci_enable_key_protect
-  enable_secrets_manager = (local.use_sm_override) ? var.enable_secrets_manager : var.ci_enable_secrets_manager
+  enable_key_protect     = (local.ci_enable_key_protect == "true") ? true : false
+  enable_secrets_manager = (local.ci_enable_secrets_manager == "true") ? true : false
   sm_name                = (var.ci_sm_name == "") ? var.sm_name : var.ci_sm_name
   sm_location            = (var.ci_sm_location == "") ? replace(replace(var.sm_location, "ibm:yp:", ""), "ibm:ys1:", "") : replace(replace(var.ci_sm_location, "ibm:yp:", ""), "ibm:ys1:", "")
   sm_resource_group      = (var.ci_sm_resource_group != "") ? var.ci_sm_resource_group : (var.sm_resource_group != "") ? var.sm_resource_group : var.toolchain_resource_group
@@ -284,7 +297,7 @@ module "devsecops_ci_toolchain" {
   repositories_prefix                = (local.ci_repositories_prefix == "compliance" && var.prefix != "") ? format("%s-%s", var.prefix, local.ci_repositories_prefix) : local.ci_repositories_prefix
   doi_toolchain_id                   = var.ci_doi_toolchain_id
   doi_toolchain_id_pipeline_property = var.ci_doi_toolchain_id_pipeline_property
-  enable_pipeline_notifications      = var.ci_enable_pipeline_notifications
+  enable_pipeline_notifications      = (local.ci_enable_pipeline_notifications == "true") ? true : false
   pipeline_properties                = var.ci_pipeline_properties
   pipeline_properties_filepath       = var.ci_pipeline_properties_filepath
   repository_properties              = var.ci_repository_properties
@@ -304,7 +317,7 @@ module "devsecops_ci_toolchain" {
   #OTHER INTEGRATIONS
 
   #SLACK INTEGRATION
-  enable_slack           = (local.use_slack_enable_override) ? local.enable_slack : var.ci_enable_slack
+  enable_slack           = (local.ci_enable_slack == "true") ? true : false
   slack_channel_name     = (var.ci_slack_channel_name == "") ? var.slack_channel_name : var.ci_slack_channel_name
   slack_team_name        = (var.ci_slack_team_name == "") ? var.slack_team_name : var.ci_slack_team_name
   slack_pipeline_fail    = var.ci_slack_pipeline_fail
@@ -367,8 +380,8 @@ module "devsecops_cd_toolchain" {
   pipeline_git_tag         = (var.cd_pipeline_git_tag == "") ? var.pipeline_git_tag : var.cd_pipeline_git_tag
 
   #SECRET PROVIDERS
-  enable_key_protect     = (local.use_kp_override) ? var.enable_key_protect : var.cd_enable_key_protect
-  enable_secrets_manager = (local.use_sm_override) ? var.enable_secrets_manager : var.cd_enable_secrets_manager
+  enable_key_protect     = (local.cd_enable_key_protect == "true") ? true : false
+  enable_secrets_manager = (local.cd_enable_secrets_manager == "true") ? true : false
   sm_name                = (var.cd_sm_name == "") ? var.sm_name : var.cd_sm_name
   sm_location            = (var.cd_sm_location == "") ? replace(replace(var.sm_location, "ibm:yp:", ""), "ibm:ys1:", "") : replace(replace(var.cd_sm_location, "ibm:yp:", ""), "ibm:ys1:", "")
   sm_resource_group      = (var.cd_sm_resource_group != "") ? var.cd_sm_resource_group : (var.sm_resource_group != "") ? var.sm_resource_group : var.toolchain_resource_group
@@ -491,7 +504,7 @@ module "devsecops_cd_toolchain" {
   deployment_repo_existing_branch       = var.cd_deployment_repo_existing_branch
 
   #SCC
-  scc_enable_scc       = var.cd_scc_enable_scc
+  scc_enable_scc       = (local.cd_scc_enable_scc == "true") ? true : false
   scc_integration_name = var.cd_scc_integration_name
 
   #CODE ENGINE
@@ -516,7 +529,7 @@ module "devsecops_cd_toolchain" {
   scc_profile_name              = var.scc_profile_name
   scc_profile_version           = var.scc_profile_version
   scc_use_profile_attachment    = (var.cd_scc_use_profile_attachment == "") ? var.scc_use_profile_attachment : var.cd_scc_use_profile_attachment
-  enable_pipeline_notifications = var.cd_enable_pipeline_notifications
+  enable_pipeline_notifications = (local.cd_enable_pipeline_notifications == "true") ? true : false
   pipeline_properties           = var.cd_pipeline_properties
   pipeline_properties_filepath  = var.cd_pipeline_properties_filepath
 
@@ -524,7 +537,7 @@ module "devsecops_cd_toolchain" {
   repository_properties_filepath = var.cd_repository_properties_filepath
 
   #SLACK INTEGRATION
-  enable_slack           = (local.use_slack_enable_override) ? local.enable_slack : var.cd_enable_slack
+  enable_slack           = (local.cd_enable_slack == "true") ? true : false
   slack_channel_name     = (var.cd_slack_channel_name == "") ? var.slack_channel_name : var.cd_slack_channel_name
   slack_team_name        = (var.cd_slack_team_name == "") ? var.slack_team_name : var.cd_slack_team_name
   slack_pipeline_fail    = var.cd_slack_pipeline_fail
@@ -580,8 +593,8 @@ module "devsecops_cc_toolchain" {
   pipeline_git_tag              = (var.cc_pipeline_git_tag == "") ? var.pipeline_git_tag : var.cc_pipeline_git_tag
 
   #SECRET PROVIDERS
-  enable_key_protect     = (local.use_kp_override) ? var.enable_key_protect : var.cc_enable_key_protect
-  enable_secrets_manager = (local.use_sm_override) ? var.enable_secrets_manager : var.cc_enable_secrets_manager
+  enable_key_protect     = (local.cc_enable_key_protect == "true") ? true : false
+  enable_secrets_manager = (local.cc_enable_secrets_manager == "true") ? true : false
   sm_name                = (var.cc_sm_name == "") ? var.sm_name : var.cc_sm_name
   sm_location            = (var.cc_sm_location == "") ? replace(replace(var.sm_location, "ibm:yp:", ""), "ibm:ys1:", "") : replace(replace(var.cc_sm_location, "ibm:yp:", ""), "ibm:ys1:", "")
   sm_resource_group      = (var.cc_sm_resource_group != "") ? var.cc_sm_resource_group : (var.sm_resource_group != "") ? var.sm_resource_group : var.toolchain_resource_group
@@ -691,7 +704,7 @@ module "devsecops_cc_toolchain" {
   inventory_repo_integration_owner = var.inventory_repo_integration_owner
 
   #SCC
-  scc_enable_scc       = var.cc_scc_enable_scc
+  scc_enable_scc       = (local.cc_scc_enable_scc == "true") ? true : false
   scc_integration_name = var.cc_scc_integration_name
 
   #OTHER INTEGRATIONS
@@ -703,7 +716,7 @@ module "devsecops_cc_toolchain" {
   scc_profile_name               = var.scc_profile_name
   scc_profile_version            = var.scc_profile_version
   scc_use_profile_attachment     = (var.cc_scc_use_profile_attachment == "") ? var.scc_use_profile_attachment : var.cc_scc_use_profile_attachment
-  enable_pipeline_notifications  = var.cc_enable_pipeline_notifications
+  enable_pipeline_notifications  = (local.cc_enable_pipeline_notifications == "true") ? true : false
   pipeline_properties            = var.cc_pipeline_properties
   pipeline_properties_filepath   = var.cc_pipeline_properties_filepath
   repository_properties          = var.cc_repository_properties
@@ -711,7 +724,7 @@ module "devsecops_cc_toolchain" {
 
 
   #SLACK INTEGRATION
-  enable_slack           = (local.use_slack_enable_override) ? local.enable_slack : var.cc_enable_slack
+  enable_slack           = (local.cc_enable_slack == "true") ? true : false
   slack_channel_name     = (var.cc_slack_channel_name == "") ? var.slack_channel_name : var.cc_slack_channel_name
   slack_team_name        = (var.cc_slack_team_name == "") ? var.slack_team_name : var.cc_slack_team_name
   slack_pipeline_fail    = var.cc_slack_pipeline_fail
