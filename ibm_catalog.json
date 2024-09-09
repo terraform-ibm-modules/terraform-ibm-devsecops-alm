@@ -2085,7 +2085,7 @@
                 },
                 {
                     "label": "Deploy to Code Engine",
-                    "name": "devsecops",
+                    "name": "devsecops_ce",
                     "index": 2,
                     "working_directory": "solutions/code-engine",
                     "compliance": {
