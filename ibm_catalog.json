@@ -3,7 +3,7 @@
         {
             "label": "DevSecOps Application Lifecycle Management",
             "name": "deploy-arch-ibm-devsecops-alm",
-            "version": "2.1.0",
+            "version": "2.1.2",
             "product_kind": "solution",
             "tags": [
                 "enterprise_app",
@@ -26,8 +26,8 @@
                 {
                     "label": "Deploy to Kubernetes",
                     "name": "devsecops",
-                    "index": 1,
                     "working_directory": "solutions/kubernetes",
+                    "index": 1,
                     "compliance": {
                         "authority": "scc-v3",
                         "controls": [
@@ -38,63 +38,63 @@
                                     "version": "1.6.0"
                                 },
                                 "names": [
-                                    "CM-6(c)",
+                                    "RA-5(d)",
+                                    "SA-3(a)",
+                                    "RA-5(2)",
+                                    "SA-10(c)",
+                                    "CM-2(1)(c)",
+                                    "CM-4",
+                                    "CM-6(b)",
+                                    "SA-10(e)",
+                                    "CM-2(2)",
+                                    "CM-3(e)",
+                                    "SA-10(1)",
+                                    "CM-9(a)",
+                                    "CM-7(1)(a)",
+                                    "CM-7(b)",
+                                    "CM-3(d)",
+                                    "SI-2(d)",
+                                    "CM-6(a)",
+                                    "CM-10(1)",
                                     "CM-2(1)(a)",
+                                    "CM-5",
+                                    "SI-10",
+                                    "CM-8(b)",
+                                    "CM-4(1)",
+                                    "CM-2(3)",
+                                    "CM-8(1)",
+                                    "SA-10(b)",
+                                    "CM-3(2)",
+                                    "SA-8",
+                                    "SI-2(2)",
+                                    "CM-3(f)",
+                                    "CM-9(c)",
+                                    "SI-2(a)",
+                                    "SA-15(a)",
+                                    "CM-3(c)",
+                                    "SI-2(b)",
+                                    "CM-3(b)",
+                                    "CM-3(a)",
+                                    "CM-2",
+                                    "SA-10(a)",
+                                    "RA-5(1)",
+                                    "CM-8(a)",
+                                    "CM-2(1)(b)",
+                                    "CM-9(d)",
                                     "SI-2(c)",
                                     "CM-9(b)",
                                     "SI-7",
-                                    "SA-10(a)",
-                                    "CM-3(2)",
-                                    "RA-5(b)",
-                                    "CM-3(a)",
-                                    "SA-10(e)",
-                                    "CM-6(1)",
-                                    "SA-3(d)",
-                                    "CM-7(1)(a)",
-                                    "SA-10(1)",
-                                    "RA-5(c)",
-                                    "SA-10(d)",
-                                    "SA-8",
-                                    "CM-4(1)",
-                                    "CM-5",
-                                    "CM-2(2)",
-                                    "RA-5(3)",
-                                    "CM-6(d)",
-                                    "SI-10",
-                                    "RA-5(1)",
-                                    "CM-3(f)",
                                     "CM-8(2)",
-                                    "SA-3(a)",
-                                    "SI-2(d)",
-                                    "CM-9(c)",
-                                    "CM-3(e)",
-                                    "SI-2(2)",
-                                    "CM-2(1)(c)",
-                                    "CM-2(3)",
-                                    "CM-3(g)",
                                     "RA-5(a)",
-                                    "CM-8(a)",
-                                    "CM-6(a)",
-                                    "CM-10(1)",
-                                    "RA-5(2)",
-                                    "CM-2(1)(b)",
-                                    "SA-10(c)",
-                                    "CM-2",
-                                    "SA-10(b)",
-                                    "CM-3(c)",
-                                    "SI-2(b)",
-                                    "CM-4",
-                                    "RA-5(d)",
-                                    "CM-7(b)",
-                                    "CM-8(1)",
-                                    "SI-2(a)",
-                                    "CM-9(a)",
-                                    "CM-3(b)",
-                                    "CM-6(b)",
-                                    "CM-9(d)",
-                                    "CM-3(d)",
-                                    "CM-8(b)",
-                                    "SA-15(a)"
+                                    "CM-6(c)",
+                                    "SA-3(d)",
+                                    "RA-5(3)",
+                                    "RA-5(c)",
+                                    "RA-5(b)",
+                                    "CM-3(g)",
+                                    "CM-6(1)",
+                                    "SA-10(d)",
+                                    "CM-6(d)"
                                 ]
                             }
                         ]
@@ -287,16 +287,28 @@
                         {
                             "key": "cc_pipeline_properties",
                             "type": "string",
-                            "default_value": "",
+                            "default_value": "[\n    {\n      \"pipeline_id\": \"cc\",\n      \"properties\": [\n        {\n          \"name\": \"cos-api-key\",\n          \"type\": \"secure\",\n          \"value\": \"\"\n        },\n        {\n          \"name\": \"cos-bucket-name\",\n          \"type\": \"text\",\n          \"value\": \"\"\n        },\n       {\n          \"name\": \"cos-endpoint\",\n          \"type\": \"text\",\n          \"value\": \"\"\n        },\n        {\n          \"name\": \"cra-bom-generate\",\n          \"type\": \"single_select\",\n          \"value\": \"1\",\n          \"enum\": \"[0,1]\"\n        },\n        {\n          \"name\": \"cra-deploy-analysis\",\n          \"type\": \"single_select\",\n          \"value\": \"1\",\n          \"enum\": \"[0,1]\"\n        },\n        {\n          \"name\": \"cra-vulnerability-scan\",\n          \"type\": \"single_select\",\n          \"value\": \"1\",\n          \"enum\": \"[0,1]\"\n        },\n        {\n            \"name\": \"doi-environment\",\n            \"type\": \"text\",\n            \"value\": \"\"\n        },\n        {\n          \"name\": \"doi-ibmcloud-api-key\",\n          \"type\": \"secure\",\n          \"value\": \"ibmcloud-api-key\"\n        },\n        {\n          \"name\": \"doi-toolchain-id\",\n          \"type\": \"text\",\n          \"value\": \"\"\n        },\n        {\n          \"name\": \"environment-tag\",\n          \"type\": \"text\",\n          \"value\": \"prod_latest\"\n        },\n        {\n          \"name\": \"event-notifications\",\n          \"type\": \"text\",\n          \"value\": \"\"\n        },\n        {\n          \"name\": \"git-token\",\n          \"type\": \"secure\",\n          \"value\": \"\"\n        },\n        {\n          \"name\": \"ibmcloud-api-key\",\n          \"type\": \"secure\",\n          \"value\": \"ibmcloud-api-key\"\n        },\n        {\n            \"name\": \"opt-in-auto-close\",\n            \"type\": \"text\",\n            \"value\": \"1\"\n        },\n        {\n            \"name\": \"opt-in-dynamic-api-scan\",\n            \"type\": \"text\",\n            \"value\": \"\"\n        },\n        {\n          \"name\": \"opt-in-dynamic-scan\",\n          \"type\": \"text\",\n          \"value\": \"\"\n        },\n        {\n            \"name\": \"opt-in-dynamic-ui-scan\",\n            \"type\": \"text\",\n            \"value\": \"\"\n        },\n        {\n            \"name\": \"opt-in-gosec\",\n            \"type\": \"text\",\n            \"value\": \"\"\n        },\n        {\n            \"name\": \"opt-in-sonar\",\n            \"type\": \"text\",\n            \"value\": \"true\"\n        },\n        {\n          \"name\": \"peer-review-compliance\",\n          \"type\": \"text\",\n          \"value\": \"1\"\n        },\n        {\n          \"name\": \"pipeline-config\",\n          \"type\": \"text\",\n          \"value\": \".pipeline-config.yaml\"\n        },\n        {\n          \"name\": \"pipeline-config-branch\",\n          \"type\": \"text\",\n          \"value\": \"\"\n        },\n        {\n          \"name\": \"pipeline-debug\",\n          \"type\": \"single_select\",\n          \"value\": \"0\",\n          \"enum\": \"[0,1]\"\n        },\n        {\n          \"name\": \"slack-notifications\",\n          \"type\": \"text\",\n          \"value\": \"0\"\n        },\n        {\n          \"name\": \"sonarqube-config\",\n          \"type\": \"text\",\n          \"value\": \"default\"\n        }\n      ]\n    }\n  ]\n",
                             "description": "Stringified JSON containing the properties for the CC toolchain pipelines.",
-                            "required": false
+                            "display_name": "JSON",
+                            "required": true,
+                            "custom_config": {
+                                "type": "json_editor",
+                                "grouping": "deployment",
+                                "original_grouping": "deployment"
+                            }
                         },
                         {
                             "key": "cc_repository_properties",
                             "type": "string",
                             "default_value": "",
                             "description": "Stringified JSON containing the repositories and triggers that get created in the CI toolchain pipelines.",
-                            "required": false
+                            "display_name": "JSON",
+                            "required": false,
+                            "custom_config": {
+                                "type": "json_editor",
+                                "grouping": "deployment",
+                                "original_grouping": "deployment"
+                            }
                         },
                         {
                             "key": "cc_scc_enable_scc",
@@ -654,9 +666,15 @@
                         {
                             "key": "cd_pipeline_properties",
                             "type": "string",
-                            "default_value": "",
+                            "default_value": "[\n    {\n      \"pipeline_id\": \"cd\",\n      \"properties\": [\n        {\n            \"name\": \"change-request-id\",\n            \"type\": \"text\",\n            \"value\": \"notAvailable\"\n        },\n        {\n            \"name\": \"cluster\",\n            \"type\": \"text\",\n            \"value\": \"mycluster\"\n        },\n        {\n            \"name\": \"cluster-namespace\",\n            \"type\": \"text\",\n            \"value\": \"prod\"\n        },\n        {\n            \"name\": \"cluster_region\",\n            \"type\": \"text\",\n            \"value\": \"us-south\"\n        },\n        {\n            \"name\": \"code-signing-certificate\",\n            \"type\": \"secure\",\n            \"value\": \"\"\n        },\n        {\n            \"name\": \"cos-api-key\",\n            \"type\": \"secure\",\n            \"value\": \"\"\n        },\n        {\n            \"name\": \"cos-bucket-name\",\n            \"type\": \"text\",\n            \"value\": \"\"\n        },\n        {\n            \"name\": \"cos-endpoint\",\n            \"type\": \"text\",\n            \"value\": \"\"\n        },\n        {\n            \"name\": \"doi-environment\",\n            \"type\": \"text\",\n            \"value\": \"\"\n        },\n        {\n            \"name\": \"doi-ibmcloud-api-key\",\n            \"type\": \"secure\",\n            \"value\": \"ibmcloud-api-key\"\n        },\n        {\n            \"name\": \"doi-toolchain-id\",\n            \"type\": \"text\",\n            \"value\": \"\"\n        },\n        {\n          \"name\": \"emergency-label\",\n          \"type\": \"text\",\n          \"value\": \"EMERGENCY\"\n        },\n        {\n            \"name\": \"event-notifications\",\n            \"type\": \"text\",\n            \"value\": \"\"\n        },\n        {\n            \"name\": \"force-redeploy\",\n            \"type\": \"single_select\",\n            \"value\": \"false\",\n            \"enum\": \"[false,true]\"\n        },\n        {\n          \"name\": \"git-token\",\n          \"type\": \"secure\",\n          \"value\": \"\"\n        },\n        {\n            \"name\": \"ibmcloud-api-key\",\n            \"type\": \"secure\",\n            \"value\": \"ibmcloud-api-key\"\n        },\n        {\n            \"name\": \"merge-cra-sbom\",\n            \"type\": \"text\",\n            \"value\": \"1\"\n        },\n        {\n            \"name\": \"peer-review-compliance\",\n            \"type\": \"text\",\n            \"value\": \"1\"\n        },\n        {\n            \"name\": \"pipeline-config\",\n            \"type\": \"text\",\n            \"value\": \".pipeline-config.yaml\"\n          },\n          {\n            \"name\": \"pipeline-config-branch\",\n            \"type\": \"text\",\n            \"value\": \"\"\n          },\n        {\n            \"name\": \"pipeline-debug\",\n            \"type\": \"single_select\",\n            \"value\": \"0\",\n            \"enum\": \"[0,1]\"\n        },\n        {\n            \"name\": \"pre-prod-evidence-collection\",\n            \"type\": \"text\",\n            \"value\": \"1\"\n        },\n        {\n            \"name\": \"region\",\n            \"type\": \"text\",\n            \"value\": \"us-south\"\n        },\n        {\n            \"name\": \"satellite-cluster-group\",\n            \"type\": \"text\",\n            \"value\": \"\"\n        },\n        {\n            \"name\": \"slack-notifications\",\n            \"type\": \"text\",\n            \"value\": \"0\"\n        },\n        {\n            \"name\": \"source-environment\",\n            \"type\": \"text\",\n            \"value\": \"master\"\n        },\n        {\n            \"name\": \"target-environment\",\n            \"type\": \"text\",\n            \"value\": \"prod\"\n        },\n        {\n            \"name\": \"target-environment-detail\",\n            \"type\": \"text\",\n            \"value\": \"Production target environment\"\n        },\n        {\n            \"name\": \"target-environment-purpose\",\n            \"type\": \"text\",\n            \"value\": \"Production target environment\"\n        },\n        {\n            \"name\": \"version\",\n            \"type\": \"text\",\n            \"value\": \"v1\"\n        }\n      ]\n    }\n  ]\n",
                             "description": "Stringified JSON containing the properties for the CD toolchain pipelines.",
-                            "required": false
+                            "display_name": "JSON",
+                            "required": true,
+                            "custom_config": {
+                                "type": "json_editor",
+                                "grouping": "deployment",
+                                "original_grouping": "deployment"
+                            }
                         },
                         {
                             "key": "cd_privateworker_credentials_secret_crn",
@@ -676,7 +694,13 @@
                             "type": "string",
                             "default_value": "",
                             "description": "Stringified JSON containing the repositories and triggers that get created in the CI toolchain pipelines.",
-                            "required": false
+                            "display_name": "JSON",
+                            "required": false,
+                            "custom_config": {
+                                "type": "json_editor",
+                                "grouping": "deployment",
+                                "original_grouping": "deployment"
+                            }
                         },
                         {
                             "key": "cd_scc_enable_scc",
@@ -1015,9 +1039,15 @@
                         {
                             "key": "ci_pipeline_properties",
                             "type": "string",
-                            "default_value": "",
+                            "default_value": "[\n    {\n      \"pipeline_id\": \"ci\",\n      \"properties\": [\n        {\n          \"name\": \"cluster-name\",\n          \"type\": \"text\",\n          \"value\": \"mycluster\"\n        },\n        {\n          \"name\": \"cos-api-key\",\n          \"type\": \"secure\",\n          \"value\": \"\"\n        },\n        {\n          \"name\": \"cos-bucket-name\",\n          \"type\": \"text\",\n          \"value\": \"hello\"\n        },\n        {\n          \"name\": \"cos-endpoint\",\n          \"type\": \"text\",\n          \"value\": \"\"\n        },\n        {\n          \"name\": \"cra-bom-generate\",\n          \"type\": \"single_select\",\n          \"value\": \"1\",\n          \"enum\": \"[0,1]\"\n        },\n        {\n          \"name\": \"cra-deploy-analysis\",\n          \"type\": \"single_select\",\n          \"value\": \"1\",\n          \"enum\": \"[0,1]\"\n        },\n        {\n          \"name\": \"cra-generate-cyclonedx-format\",\n          \"type\": \"text\",\n          \"value\": \"1\"\n        },\n        {\n          \"name\": \"cra-vulnerability-scan\",\n          \"type\": \"single_select\",\n          \"value\": \"1\",\n          \"enum\": \"[0,1]\"\n        },\n        {\n          \"name\": \"custom_image_tag\",\n          \"type\": \"text\",\n          \"value\": \"\"\n        },\n        {\n          \"name\": \"dev-cluster-namespace\",\n          \"type\": \"text\",\n          \"value\": \"dev\"\n        },\n        {\n          \"name\": \"dev-region\",\n          \"type\": \"text\",\n          \"value\": \"us-south\"\n        },\n        {\n          \"name\": \"dev-resource-group\",\n          \"type\": \"text\",\n          \"value\": \"Default\"\n        },\n        {\n          \"name\": \"doi-environment\",\n          \"type\": \"text\",\n          \"value\": \"\"\n        },\n        {\n          \"name\": \"doi-ibmcloud-api-key\",\n          \"type\": \"secure\",\n          \"value\": \"ibmcloud-api-key\"\n        },\n        {\n          \"name\": \"doi-toolchain-id\",\n          \"type\": \"text\",\n          \"value\": \"\"\n        },\n        {\n          \"name\": \"event-notifications\",\n          \"type\": \"text\",\n          \"value\": \"\"\n        },\n        {\n          \"name\": \"git-token\",\n          \"type\": \"secure\",\n          \"value\": \"\"\n        },\n        {\n          \"name\": \"ibmcloud-api-key\",\n          \"type\": \"secure\",\n          \"value\": \"ibmcloud-api-key\"\n        },\n        {\n          \"name\": \"opt-in-dynamic-api-scan\",\n          \"type\": \"text\",\n          \"value\": \"1\"\n        },\n        {\n          \"name\": \"opt-in-dynamic-scan\",\n          \"type\": \"text\",\n          \"value\": \"1\"\n        },\n        {\n          \"name\": \"opt-in-dynamic-ui-scan\",\n          \"type\": \"text\",\n          \"value\": \"1\"\n        },\n        {\n          \"name\": \"opt-in-gosec\",\n          \"type\": \"text\",\n          \"value\": \"\"\n        },\n        {\n          \"name\": \"opt-in-sonar\",\n          \"type\": \"text\",\n          \"value\": \"1\"\n        },\n        {\n          \"name\": \"peer-review-compliance\",\n          \"type\": \"text\",\n          \"value\": \"1\"\n        },\n        {\n          \"name\": \"pipeline-config\",\n          \"type\": \"text\",\n          \"value\": \".pipeline-config.yaml\"\n        },\n        {\n          \"name\": \"pipeline-config-branch\",\n          \"type\": \"text\",\n          \"value\": \"\"\n        },\n        {\n          \"name\": \"pipeline-debug\",\n          \"type\": \"single_select\",\n          \"value\": \"0\",\n          \"enum\": \"[0,1]\"\n        },\n        {\n          \"name\": \"print-code-signing-certificate\",\n          \"type\": \"text\",\n          \"value\": \"1\"\n        },\n        {\n          \"name\": \"registry-namespace\",\n          \"type\": \"text\",\n          \"value\": \"my-registry-namespace\"\n        },\n        {\n          \"name\": \"registry-region\",\n          \"type\": \"text\",\n          \"value\": \"us-south\"\n        },\n        {\n          \"name\": \"signing-key\",\n          \"type\": \"secure\",\n          \"value\": \"signing_key\"\n        },\n        {\n          \"name\": \"slack-notifications\",\n          \"type\": \"text\",\n          \"value\": \"0\"\n        },\n        {\n          \"name\": \"sonarqube-config\",\n          \"type\": \"text\",\n          \"value\": \"default\"\n        },\n        {\n          \"name\": \"version\",\n          \"type\": \"text\",\n          \"value\": \"v1\"\n        }\n      ]\n    },\n    {\n      \"pipeline_id\": \"pr\",\n      \"properties\": [\n        {\n          \"name\": \"git-token\",\n          \"type\": \"secure\",\n          \"value\": \"\"\n        },\n        {\n          \"name\": \"cra-bom-generate\",\n          \"type\": \"single_select\",\n          \"value\": \"1\",\n          \"enum\": \"[0,1]\"\n        },\n        {\n          \"name\": \"cra-deploy-analysis\",\n          \"type\": \"single_select\",\n          \"value\": \"1\",\n          \"enum\": \"[0,1]\"\n        },\n        {\n          \"name\": \"cra-vulnerability-scan\",\n          \"type\": \"single_select\",\n          \"value\": \"1\",\n          \"enum\": \"[0,1]\"\n        },\n        {\n          \"name\": \"ibmcloud-api-key\",\n          \"type\": \"secure\",\n          \"value\": \"ibmcloud-api-key\"\n        },\n        {\n          \"name\": \"pipeline-config\",\n          \"type\": \"text\",\n          \"value\": \".pipeline-config.yaml\"\n        },\n        {\n          \"name\": \"pipeline-config-branch\",\n          \"type\": \"text\",\n          \"value\": \"\"\n        },\n        {\n          \"name\": \"pipeline-debug\",\n          \"type\": \"single_select\",\n          \"value\": \"0\",\n          \"enum\": \"[0,1]\"\n        },\n        {\n          \"name\": \"slack-notifications\",\n          \"type\": \"text\",\n          \"value\": \"1\"\n        }\n      ]\n    }\n]\n",
                             "description": "Stringified JSON containing the properties for the CI toolchain pipelines.",
-                            "required": false
+                            "display_name": "JSON",
+                            "required": true,
+                            "custom_config": {
+                                "type": "json_editor",
+                                "grouping": "deployment",
+                                "original_grouping": "deployment"
+                            }
                         },
                         {
                             "key": "ci_privateworker_credentials_secret_crn",
@@ -1037,7 +1067,13 @@
                             "type": "string",
                             "default_value": "",
                             "description": "Stringified JSON containing the repositories and triggers that get created in the CI toolchain pipelines.",
-                            "required": false
+                            "display_name": "JSON",
+                            "required": false,
+                            "custom_config": {
+                                "type": "json_editor",
+                                "grouping": "deployment",
+                                "original_grouping": "deployment"
+                            }
                         },
                         {
                             "key": "ci_signing_key_secret_name",
@@ -1907,21 +1943,30 @@
                             "type": "string",
                             "default_value": "us-south",
                             "description": "The region hosting the Secrets Manager instance. This applies to the CI, CD and CC Secret Manager integrations. See `ci_sm_location`, `cd_sm_location`, and `cc_sm_location` to set these values independently.",
-                            "required": false
+                            "display_name": "VPC region",
+                            "required": true,
+                            "custom_config": {
+                                "type": "vpc_region",
+                                "grouping": "deployment",
+                                "original_grouping": "deployment",
+                                "config_constraints": {
+                                    "generationType": "2"
+                                }
+                            }
                         },
                         {
                             "key": "sm_name",
                             "type": "string",
-                            "default_value": "sm-instance",
+                            "default_value": "Secrets Manager",
                             "description": "The name of an existing Secret Managers instance. This applies to the CI, CD and CC Secret Manager integrations. See `ci_sm_name`, `cd_sm_name`, and `cc_sm_name` to set these values independently. ",
-                            "required": false
+                            "required": true
                         },
                         {
                             "key": "sm_resource_group",
                             "type": "string",
                             "default_value": "Default",
                             "description": "The name of the existing resource group containing the Secrets Manager instance for your secrets.. This applies to the CI, CD and CC Secret Manager integrations. See `ci_sm_resource_group`, `cd_sm_resource_group`, and `cc_sm_resource_group` to set these values independently.",
-                            "required": false
+                            "required": true
                         },
                         {
                             "key": "sm_secret_expiration_period",
@@ -1935,7 +1980,7 @@
                             "type": "string",
                             "default_value": "Default",
                             "description": "The Secrets Manager secret group containing the secrets for the DevSecOps pipelines. This applies to the CI, CD and CC Secret Manager integrations. See `ci_sm_secret_group`, `cd_sm_secret_group`, and `cc_sm_secret_group` to set these values independently.",
-                            "required": false
+                            "required": true
                         },
                         {
                             "key": "sonarqube_integration_name",
@@ -1990,35 +2035,72 @@
                             "type": "string",
                             "default_value": "DevSecOps",
                             "description": "This variable specifies the root name for the CI, CD and CC toolchain names. A fixed suffix will automatically be appended. Setting `DevSecOps` will generate toolchains with the names `DevSecOps-CI-Toolchain`,  `DevSecOps-CD-Toolchain` and `DevSecOps-CC-Toolchain`. The full name of each toolchain can be set independently using `ci_toolchain_name`, `cd_toolchain_name`, and `cc_toolchain_name`.",
-                            "required": false
+                            "required": true
                         },
                         {
                             "key": "toolchain_region",
                             "type": "string",
                             "default_value": "us-south",
                             "description": "The region identifier that will be used, by default, for all resource creation and service instance lookup. This can be overridden on a per resource/service basis. See `ci_toolchain_region`,`cd_toolchain_region`,`cc_toolchain_region`.",
-                            "required": false
+                            "display_name": "VPC region",
+                            "required": true,
+                            "custom_config": {
+                                "type": "vpc_region",
+                                "grouping": "deployment",
+                                "original_grouping": "deployment",
+                                "config_constraints": {
+                                    "generationType": "2"
+                                }
+                            }
                         },
                         {
                             "key": "toolchain_resource_group",
                             "type": "string",
                             "default_value": "Default",
                             "description": "The resource group that will be used, by default, for all resource creation and service instance lookups. This can be overridden on a per resource/service basis. See `ci_toolchain_resource_group`,`cd_toolchain_resource_group`,`cc_toolchain_resource_group`, `ci_cluster_resource_group`.",
-                            "required": false
+                            "required": true
                         }
                     ],
                     "outputs": [
-                        {
-                            "key": "compliance_ci_toolchain_id",
-                            "description": "The ID of the Compliance CI Toolchain"
-                        },
                         {
                             "key": "pr_pipeline_id",
                             "description": "The PR pipeline Id"
                         },
                         {
+                            "key": "compliance_ci_toolchain_id",
+                            "description": "The ID of the Compliance CI Toolchain"
+                        },
+                        {
+                            "key": "evidence_repo_url",
+                            "description": "The Evidence Repo URL"
+                        },
+                        {
+                            "key": "ci_pipeline_id",
+                            "description": "The CI pipeline Id"
+                        },
+                        {
+                            "key": "cc_pipeline_id",
+                            "description": "The CC pipeline Id"
+                        },
+                        {
+                            "key": "compliance_cc_toolchain_url",
+                            "description": "The Compliance CC Toolchain URL"
+                        },
+                        {
+                            "key": "app_repo_url",
+                            "description": "The App Repo URL"
+                        },
+                        {
+                            "key": "inventory_repo_url",
+                            "description": "The Inventory Repo URL"
+                        },
+                        {
                             "key": "secrets_manager_instance_id",
                             "description": "The Secrets Manage Instance ID"
+                        },
+                        {
+                            "key": "compliance_cc_toolchain_id",
+                            "description": "The ID of the Compliance CC Toolchain"
                         },
                         {
                             "key": "compliance_cd_toolchain_id",
@@ -2029,56 +2111,28 @@
                             "description": "The CD pipeline Id"
                         },
                         {
-                            "key": "compliance_cc_toolchain_url",
-                            "description": "The Compliance CC Toolchain URL"
-                        },
-                        {
-                            "key": "icr_namespace_name",
-                            "description": "The name of the targets ICR namespace."
-                        },
-                        {
-                            "key": "compliance_cc_toolchain_id",
-                            "description": "The ID of the Compliance CC Toolchain"
-                        },
-                        {
                             "key": "compliance_cd_toolchain_url",
                             "description": "The Compliance CD Toolchain URL"
-                        },
-                        {
-                            "key": "inventory_repo_url",
-                            "description": "The Inventory Repo URL"
-                        },
-                        {
-                            "key": "compliance_ci_toolchain_url",
-                            "description": "The Compliance CI Toolchain URL"
                         },
                         {
                             "key": "change_management_repo_url",
                             "description": "The Change Management Repo URL."
                         },
                         {
+                            "key": "icr_namespace_name",
+                            "description": "The name of the targets ICR namespace."
+                        },
+                        {
                             "key": "issues_repo_url",
                             "description": "The Issues Repo URL"
-                        },
-                        {
-                            "key": "ci_pipeline_id",
-                            "description": "The CI pipeline Id"
-                        },
-                        {
-                            "key": "evidence_repo_url",
-                            "description": "The Evidence Repo URL"
                         },
                         {
                             "key": "key_protect_instance_id",
                             "description": "The Key Protect Instance ID"
                         },
                         {
-                            "key": "cc_pipeline_id",
-                            "description": "The CC pipeline Id"
-                        },
-                        {
-                            "key": "app_repo_url",
-                            "description": "The App Repo URL"
+                            "key": "compliance_ci_toolchain_url",
+                            "description": "The Compliance CI Toolchain URL"
                         }
                     ],
                     "install_type": "fullstack"
@@ -2098,63 +2152,63 @@
                                     "version": "1.6.0"
                                 },
                                 "names": [
-                                    "CM-6(c)",
                                     "CM-2(1)(a)",
-                                    "SI-2(c)",
-                                    "CM-9(b)",
-                                    "SI-7",
-                                    "SA-10(a)",
-                                    "CM-3(2)",
-                                    "RA-5(b)",
-                                    "CM-3(a)",
-                                    "SA-10(e)",
-                                    "CM-6(1)",
-                                    "SA-3(d)",
+                                    "CM-6(a)",
+                                    "CM-6(b)",
                                     "CM-7(1)(a)",
-                                    "SA-10(1)",
-                                    "RA-5(c)",
-                                    "SA-10(d)",
-                                    "SA-8",
-                                    "CM-4(1)",
-                                    "CM-5",
-                                    "CM-2(2)",
-                                    "RA-5(3)",
                                     "CM-6(d)",
-                                    "SI-10",
-                                    "RA-5(1)",
-                                    "CM-3(f)",
-                                    "CM-8(2)",
-                                    "SA-3(a)",
-                                    "SI-2(d)",
-                                    "CM-9(c)",
-                                    "CM-3(e)",
-                                    "SI-2(2)",
-                                    "CM-2(1)(c)",
-                                    "CM-2(3)",
                                     "CM-3(g)",
                                     "RA-5(a)",
-                                    "CM-8(a)",
-                                    "CM-6(a)",
-                                    "CM-10(1)",
-                                    "RA-5(2)",
-                                    "CM-2(1)(b)",
+                                    "SI-2(d)",
+                                    "SA-15(a)",
+                                    "CM-3(a)",
                                     "SA-10(c)",
-                                    "CM-2",
-                                    "SA-10(b)",
-                                    "CM-3(c)",
+                                    "CM-5",
+                                    "RA-5(1)",
+                                    "CM-2(1)(b)",
+                                    "CM-7(b)",
+                                    "CM-8(2)",
+                                    "CM-9(b)",
+                                    "RA-5(c)",
+                                    "RA-5(3)",
                                     "SI-2(b)",
+                                    "CM-6(c)",
+                                    "SA-10(a)",
+                                    "RA-5(b)",
+                                    "CM-6(1)",
+                                    "CM-8(b)",
+                                    "SA-10(d)",
+                                    "CM-9(c)",
+                                    "CM-10(1)",
+                                    "CM-3(d)",
+                                    "CM-8(1)",
+                                    "SI-10",
+                                    "SI-2(2)",
+                                    "CM-2(1)(c)",
+                                    "RA-5(2)",
+                                    "CM-2",
+                                    "CM-3(c)",
+                                    "CM-3(b)",
+                                    "CM-9(d)",
+                                    "SI-2(c)",
+                                    "SI-7",
+                                    "SA-10(e)",
+                                    "SA-8",
+                                    "CM-2(2)",
+                                    "CM-8(a)",
+                                    "SA-10(b)",
+                                    "CM-9(a)",
+                                    "CM-3(f)",
                                     "CM-4",
                                     "RA-5(d)",
-                                    "CM-7(b)",
-                                    "CM-8(1)",
                                     "SI-2(a)",
-                                    "CM-9(a)",
-                                    "CM-3(b)",
-                                    "CM-6(b)",
-                                    "CM-9(d)",
-                                    "CM-3(d)",
-                                    "CM-8(b)",
-                                    "SA-15(a)"
+                                    "CM-2(3)",
+                                    "CM-3(2)",
+                                    "SA-10(1)",
+                                    "SA-3(a)",
+                                    "CM-3(e)",
+                                    "SA-3(d)",
+                                    "CM-4(1)"
                                 ]
                             }
                         ]
@@ -2347,16 +2401,28 @@
                         {
                             "key": "cc_pipeline_properties",
                             "type": "string",
-                            "default_value": "",
+                            "default_value": "[\n    {\n      \"pipeline_id\": \"cc\",\n      \"properties\": [\n        {\n          \"name\": \"cos-api-key\",\n          \"type\": \"secure\",\n          \"value\": \"\"\n        },\n        {\n          \"name\": \"cos-bucket-name\",\n          \"type\": \"text\",\n          \"value\": \"\"\n        },\n       {\n          \"name\": \"cos-endpoint\",\n          \"type\": \"text\",\n          \"value\": \"\"\n        },\n        {\n          \"name\": \"cra-bom-generate\",\n          \"type\": \"single_select\",\n          \"value\": \"1\",\n          \"enum\": \"[0,1]\"\n        },\n        {\n          \"name\": \"cra-deploy-analysis\",\n          \"type\": \"single_select\",\n          \"value\": \"1\",\n          \"enum\": \"[0,1]\"\n        },\n        {\n          \"name\": \"cra-vulnerability-scan\",\n          \"type\": \"single_select\",\n          \"value\": \"1\",\n          \"enum\": \"[0,1]\"\n        },\n        {\n            \"name\": \"doi-environment\",\n            \"type\": \"text\",\n            \"value\": \"\"\n        },\n        {\n          \"name\": \"doi-ibmcloud-api-key\",\n          \"type\": \"secure\",\n          \"value\": \"ibmcloud-api-key\"\n        },\n        {\n          \"name\": \"doi-toolchain-id\",\n          \"type\": \"text\",\n          \"value\": \"\"\n        },\n        {\n          \"name\": \"environment-tag\",\n          \"type\": \"text\",\n          \"value\": \"prod_latest\"\n        },\n        {\n          \"name\": \"event-notifications\",\n          \"type\": \"text\",\n          \"value\": \"\"\n        },\n        {\n          \"name\": \"git-token\",\n          \"type\": \"secure\",\n          \"value\": \"\"\n        },\n        {\n          \"name\": \"ibmcloud-api-key\",\n          \"type\": \"secure\",\n          \"value\": \"ibmcloud-api-key\"\n        },\n        {\n            \"name\": \"opt-in-auto-close\",\n            \"type\": \"text\",\n            \"value\": \"1\"\n        },\n        {\n            \"name\": \"opt-in-dynamic-api-scan\",\n            \"type\": \"text\",\n            \"value\": \"\"\n        },\n        {\n          \"name\": \"opt-in-dynamic-scan\",\n          \"type\": \"text\",\n          \"value\": \"\"\n        },\n        {\n            \"name\": \"opt-in-dynamic-ui-scan\",\n            \"type\": \"text\",\n            \"value\": \"\"\n        },\n        {\n            \"name\": \"opt-in-gosec\",\n            \"type\": \"text\",\n            \"value\": \"\"\n        },\n        {\n            \"name\": \"opt-in-sonar\",\n            \"type\": \"text\",\n            \"value\": \"true\"\n        },\n        {\n          \"name\": \"peer-review-compliance\",\n          \"type\": \"text\",\n          \"value\": \"1\"\n        },\n        {\n          \"name\": \"pipeline-config\",\n          \"type\": \"text\",\n          \"value\": \".pipeline-config.yaml\"\n        },\n        {\n          \"name\": \"pipeline-config-branch\",\n          \"type\": \"text\",\n          \"value\": \"\"\n        },\n        {\n          \"name\": \"pipeline-debug\",\n          \"type\": \"single_select\",\n          \"value\": \"0\",\n          \"enum\": \"[0,1]\"\n        },\n        {\n          \"name\": \"slack-notifications\",\n          \"type\": \"text\",\n          \"value\": \"0\"\n        },\n        {\n          \"name\": \"sonarqube-config\",\n          \"type\": \"text\",\n          \"value\": \"default\"\n        }\n      ]\n    }\n  ]\n",
                             "description": "Stringified JSON containing the properties for the CC toolchain pipelines.",
-                            "required": false
+                            "display_name": "JSON",
+                            "required": true,
+                            "custom_config": {
+                                "type": "json_editor",
+                                "grouping": "deployment",
+                                "original_grouping": "deployment"
+                            }
                         },
                         {
                             "key": "cc_repository_properties",
                             "type": "string",
                             "default_value": "",
                             "description": "Stringified JSON containing the repositories and triggers that get created in the CI toolchain pipelines.",
-                            "required": false
+                            "display_name": "JSON",
+                            "required": false,
+                            "custom_config": {
+                                "type": "json_editor",
+                                "grouping": "deployment",
+                                "original_grouping": "deployment"
+                            }
                         },
                         {
                             "key": "cc_scc_enable_scc",
@@ -2529,7 +2595,7 @@
                             "type": "string",
                             "default_value": "Sample_CD_Project",
                             "description": "The name of the Code Engine project to use for the CD pipeline promoted code. The project is created if it does not already exist.",
-                            "required": false
+                            "required": true
                         },
                         {
                             "key": "cd_code_engine_region",
@@ -2714,9 +2780,15 @@
                         {
                             "key": "cd_pipeline_properties",
                             "type": "string",
-                            "default_value": "",
+                            "default_value": "[\n    {\n      \"pipeline_id\": \"cd\",\n      \"properties\": [\n        {\n            \"name\": \"app-concurrency\",\n            \"type\": \"text\",\n            \"value\": \"100\"\n        },\n        {\n            \"name\": \"app-deployment-timeout\",\n            \"type\": \"text\",\n            \"value\": \"300\"\n        },\n        {\n            \"name\": \"app-max-scale\",\n            \"type\": \"text\",\n            \"value\": \"1\"\n        },\n        {\n            \"name\": \"app-min-scale\",\n            \"type\": \"text\",\n            \"value\": \"0\"\n        },\n        {\n            \"name\": \"app-port\",\n            \"type\": \"text\",\n            \"value\": \"8080\"\n        },\n        {\n            \"name\": \"app-visibility\",\n            \"type\": \"text\",\n            \"value\": \"public\"\n        },\n        {\n            \"name\": \"change-request-id\",\n            \"type\": \"text\",\n            \"value\": \"notAvailable\"\n        },\n        {\n            \"name\": \"code-engine-binding-resource-group\",\n            \"type\": \"text\",\n            \"value\": \"\"\n        },\n        {\n            \"name\": \"code-engine-deployment-type\",\n            \"type\": \"text\",\n            \"value\": \"application\"\n        },\n        {\n            \"name\": \"code-engine-project\",\n            \"type\": \"text\",\n            \"value\": \"\"\n        },\n        {\n            \"name\": \"code-engine-region\",\n            \"type\": \"text\",\n            \"value\": \"us-south\"\n        },\n        {\n            \"name\": \"code-engine-resource-group\",\n            \"type\": \"text\",\n            \"value\": \"Default\"\n        },\n        {\n            \"name\": \"code-signing-certificate\",\n            \"type\": \"secure\",\n            \"value\": \"\"\n        },\n        {\n            \"name\": \"cos-api-key\",\n            \"type\": \"secure\",\n            \"value\": \"\"\n        },\n        {\n            \"name\": \"cos-bucket-name\",\n            \"type\": \"text\",\n            \"value\": \"\"\n        },\n        {\n            \"name\": \"cos-endpoint\",\n            \"type\": \"text\",\n            \"value\": \"\"\n        },\n        {\n            \"name\": \"cpu\",\n            \"type\": \"text\",\n            \"value\": \"0.25\"\n        },\n        {\n            \"name\": \"doi-environment\",\n            \"type\": \"text\",\n            \"value\": \"\"\n        },\n        {\n            \"name\": \"doi-ibmcloud-api-key\",\n            \"type\": \"secure\",\n            \"value\": \"ibmcloud-api-key\"\n        },\n        {\n            \"name\": \"doi-toolchain-id\",\n            \"type\": \"text\",\n            \"value\": \"\"\n        },\n        {\n          \"name\": \"emergency-label\",\n          \"type\": \"text\",\n          \"value\": \"EMERGENCY\"\n        },\n        {\n            \"name\": \"env-from-configmaps\",\n            \"type\": \"text\",\n            \"value\": \"\"\n        },\n        {\n            \"name\": \"env-from-secrets\",\n            \"type\": \"text\",\n            \"value\": \"\"\n        },\n        {\n            \"name\": \"ephemeral-storage\",\n            \"type\": \"text\",\n            \"value\": \"0.4G\"\n        },\n        {\n            \"name\": \"event-notifications\",\n            \"type\": \"text\",\n            \"value\": \"\"\n        },\n        {\n            \"name\": \"force-redeploy\",\n            \"type\": \"single_select\",\n            \"value\": \"false\",\n            \"enum\": \"[false,true]\"\n        },\n        {\n          \"name\": \"git-token\",\n          \"type\": \"secure\",\n          \"value\": \"\"\n        },\n        {\n            \"name\": \"ibmcloud-api-key\",\n            \"type\": \"secure\",\n            \"value\": \"ibmcloud-api-key\"\n        },\n        {\n            \"name\": \"job-instances\",\n            \"type\": \"text\",\n            \"value\": \"1\"\n        },\n        {\n            \"name\": \"job-maxexecutiontime\",\n            \"type\": \"text\",\n            \"value\": \"7200\"\n        },\n        {\n            \"name\": \"job-retrylimit\",\n            \"type\": \"text\",\n            \"value\": \"3\"\n        },\n        {\n            \"name\": \"memory\",\n            \"type\": \"text\",\n            \"value\": \"0.5G\"\n        },\n        {\n            \"name\": \"merge-cra-sbom\",\n            \"type\": \"text\",\n            \"value\": \"1\"\n        },\n        {\n            \"name\": \"peer-review-collection\",\n            \"type\": \"text\",\n            \"value\": \"\"\n        },\n        {\n            \"name\": \"peer-review-compliance\",\n            \"type\": \"text\",\n            \"value\": \"1\"\n        },\n        {\n            \"name\": \"pipeline-config\",\n            \"type\": \"text\",\n            \"value\": \".pipeline-config.yaml\"\n          },\n          {\n            \"name\": \"pipeline-config-branch\",\n            \"type\": \"text\",\n            \"value\": \"\"\n          },\n        {\n            \"name\": \"pipeline-debug\",\n            \"type\": \"single_select\",\n            \"value\": \"0\",\n            \"enum\": \"[0,1]\"\n        },\n        {\n            \"name\": \"pre-prod-evidence-collection\",\n            \"type\": \"text\",\n            \"value\": \"0\"\n        },\n        {\n            \"name\": \"region\",\n            \"type\": \"text\",\n            \"value\": \"us-south\"\n        },\n        {\n            \"name\": \"remove-unspecified-references-to-configuration-resources\",\n            \"type\": \"text\",\n            \"value\": \"false\"\n        },\n        {\n            \"name\": \"service-bindings\",\n            \"type\": \"text\",\n            \"value\": \"\"\n        },\n        {\n            \"name\": \"slack-notifications\",\n            \"type\": \"text\",\n            \"value\": \"0\"\n        },\n        {\n            \"name\": \"source-environment\",\n            \"type\": \"text\",\n            \"value\": \"master\"\n        },\n        {\n            \"name\": \"target-environment\",\n            \"type\": \"text\",\n            \"value\": \"prod\"\n        },\n        {\n            \"name\": \"target-environment-detail\",\n            \"type\": \"text\",\n            \"value\": \"Production target environment\"\n        },\n        {\n            \"name\": \"target-environment-purpose\",\n            \"type\": \"text\",\n            \"value\": \"Production target environment\"\n        },\n        {\n            \"name\": \"version\",\n            \"type\": \"text\",\n            \"value\": \"v1\"\n        }\n      ]\n    }\n  ]\n",
                             "description": "Stringified JSON containing the properties for the CD toolchain pipelines.",
-                            "required": false
+                            "display_name": "JSON",
+                            "required": true,
+                            "custom_config": {
+                                "type": "json_editor",
+                                "grouping": "deployment",
+                                "original_grouping": "deployment"
+                            }
                         },
                         {
                             "key": "cd_privateworker_credentials_secret_crn",
@@ -2736,7 +2808,13 @@
                             "type": "string",
                             "default_value": "",
                             "description": "Stringified JSON containing the repositories and triggers that get created in the CI toolchain pipelines.",
-                            "required": false
+                            "display_name": "JSON",
+                            "required": false,
+                            "custom_config": {
+                                "type": "json_editor",
+                                "grouping": "deployment",
+                                "original_grouping": "deployment"
+                            }
                         },
                         {
                             "key": "cd_scc_enable_scc",
@@ -2978,9 +3056,9 @@
                         {
                             "key": "ci_code_engine_project",
                             "type": "string",
-                            "default_value": "DevSecOps_CE",
+                            "default_value": "Sample_CI_Project",
                             "description": "The name of the Code Engine project to use.",
-                            "required": false
+                            "required": true
                         },
                         {
                             "key": "ci_code_engine_region",
@@ -3075,9 +3153,15 @@
                         {
                             "key": "ci_pipeline_properties",
                             "type": "string",
-                            "default_value": "",
+                            "default_value": "[\n  {\n    \"pipeline_id\": \"ci\",\n    \"properties\": [\n      {\n        \"name\": \"app-concurrency\",\n        \"type\": \"text\",\n        \"value\": \"100\"\n      },\n      {\n        \"name\": \"app-deployment-timeout\",\n        \"type\": \"text\",\n        \"value\": \"300\"\n      },\n      {\n        \"name\": \"app-max-scale\",\n        \"type\": \"text\",\n        \"value\": \"1\"\n      },\n      {\n        \"name\": \"app-min-scale\",\n        \"type\": \"text\",\n        \"value\": \"0\"\n      },\n      {\n        \"name\": \"app-port\",\n        \"type\": \"text\",\n        \"value\": \"8080\"\n      },\n      {\n        \"name\": \"app-visibility\",\n        \"type\": \"text\",\n        \"value\": \"public\"\n      },\n      {\n        \"name\": \"code-engine-binding-resource-group\",\n        \"type\": \"text\",\n        \"value\": \"\"\n      },\n      {\n        \"name\": \"code-engine-build-size\",\n        \"type\": \"text\",\n        \"value\": \"large\"\n      },\n      {\n        \"name\": \"code-engine-build-strategy\",\n        \"type\": \"text\",\n        \"value\": \"dockerfile\"\n      },\n      {\n        \"name\": \"code-engine-build-timeout\",\n        \"type\": \"text\",\n        \"value\": \"1200\"\n      },\n      {\n        \"name\": \"code-engine-build-use-native-docker\",\n        \"type\": \"text\",\n        \"value\": \"false\"\n      },\n      {\n        \"name\": \"code-engine-deployment-type\",\n        \"type\": \"text\",\n        \"value\": \"application\"\n      },\n      {\n        \"name\": \"code-engine-project\",\n        \"type\": \"text\",\n        \"value\": \"\"\n      },\n      {\n        \"name\": \"code-engine-region\",\n        \"type\": \"text\",\n        \"value\": \"us-south\"\n      },\n      {\n        \"name\": \"code-engine-resource-group\",\n        \"type\": \"text\",\n        \"value\": \"Default\"\n      },\n      {\n        \"name\": \"code-engine-wait-timeout\",\n        \"type\": \"text\",\n        \"value\": \"1300\"\n      },\n      {\n        \"name\": \"context-dir\",\n        \"type\": \"text\",\n        \"value\": \"dockerfile-strategy\"\n      },\n      {\n        \"name\": \"cos-api-key\",\n        \"type\": \"secure\",\n        \"value\": \"\"\n      },\n      {\n        \"name\": \"cos-bucket-name\",\n        \"type\": \"text\",\n        \"value\": \"\"\n      },\n      {\n        \"name\": \"cos-endpoint\",\n        \"type\": \"text\",\n        \"value\": \"\"\n      },\n      {\n        \"name\": \"cpu\",\n        \"type\": \"text\",\n        \"value\": \"0.25\"\n      },\n      {\n        \"name\": \"cra-bom-generate\",\n        \"type\": \"single_select\",\n        \"value\": \"1\",\n        \"enum\": \"[0,1]\"\n      },\n      {\n        \"name\": \"cra-deploy-analysis\",\n        \"type\": \"single_select\",\n        \"value\": \"1\",\n        \"enum\": \"[0,1]\"\n      },\n      {\n        \"name\": \"cra-generate-cyclonedx-format\",\n        \"type\": \"text\",\n        \"value\": \"1\"\n      },\n      {\n        \"name\": \"cra-vulnerability-scan\",\n        \"type\": \"single_select\",\n        \"value\": \"1\",\n        \"enum\": \"[0,1]\"\n      },\n      {\n        \"name\": \"custom_image_tag\",\n        \"type\": \"text\",\n        \"value\": \"\"\n      },\n      {\n        \"name\": \"dev-resource-group\",\n        \"type\": \"text\",\n        \"value\": \"Default\"\n      },\n      {\n        \"name\": \"doi-environment\",\n        \"type\": \"text\",\n        \"value\": \"\"\n      },\n      {\n        \"name\": \"doi-ibmcloud-api-key\",\n        \"type\": \"secure\",\n        \"value\": \"ibmcloud-api-key\"\n      },\n      {\n        \"name\": \"doi-toolchain-id\",\n        \"type\": \"text\",\n        \"value\": \"\"\n      },\n      {\n        \"name\": \"env-from-configmaps\",\n        \"type\": \"text\",\n        \"value\": \"\"\n      },\n      {\n        \"name\": \"env-from-secrets\",\n        \"type\": \"text\",\n        \"value\": \"\"\n      },\n      {\n        \"name\": \"ephemeral-storage\",\n        \"type\": \"text\",\n        \"value\": \"0.4G\"\n      },\n      {\n        \"name\": \"event-notifications\",\n        \"type\": \"text\",\n        \"value\": \"\"\n      },\n      {\n        \"name\": \"git-token\",\n        \"type\": \"secure\",\n        \"value\": \"\"\n      },\n      {\n        \"name\": \"ibmcloud-api-key\",\n        \"type\": \"secure\",\n        \"value\": \"ibmcloud-api-key\"\n      },\n      {\n        \"name\": \"image-name\",\n        \"type\": \"text\",\n        \"value\": \"code-engine-compliance-app\"\n      },\n      {\n        \"name\": \"job-instances\",\n        \"type\": \"text\",\n        \"value\": \"1\"\n      },\n      {\n        \"name\": \"job-maxexecutiontime\",\n        \"type\": \"text\",\n        \"value\": \"7200\"\n      },\n      {\n        \"name\": \"job-retrylimit\",\n        \"type\": \"text\",\n        \"value\": \"3\"\n      },\n      {\n        \"name\": \"memory\",\n        \"type\": \"text\",\n        \"value\": \"0.5G\"\n      },\n      {\n        \"name\": \"opt-in-dynamic-api-scan\",\n        \"type\": \"text\",\n        \"value\": \"1\"\n      },\n      {\n        \"name\": \"opt-in-dynamic-scan\",\n        \"type\": \"text\",\n        \"value\": \"1\"\n      },\n      {\n        \"name\": \"opt-in-dynamic-ui-scan\",\n        \"type\": \"text\",\n        \"value\": \"1\"\n      },\n      {\n        \"name\": \"opt-in-gosec\",\n        \"type\": \"text\",\n        \"value\": \"\"\n      },\n      {\n        \"name\": \"opt-in-sonar\",\n        \"type\": \"text\",\n        \"value\": \"1\"\n      },\n      {\n        \"name\": \"peer-review-compliance\",\n        \"type\": \"text\",\n        \"value\": \"1\"\n      },\n      {\n        \"name\": \"pipeline-config\",\n        \"type\": \"text\",\n        \"value\": \".pipeline-config.yaml\"\n      },\n      {\n        \"name\": \"pipeline-config-branch\",\n        \"type\": \"text\",\n        \"value\": \"\"\n      },\n      {\n        \"name\": \"pipeline-debug\",\n        \"type\": \"single_select\",\n        \"value\": \"0\",\n        \"enum\": \"[0,1]\"\n      },\n      {\n        \"name\": \"print-code-signing-certificate\",\n        \"type\": \"text\",\n        \"value\": \"1\"\n      },\n      {\n        \"name\": \"registry-domain\",\n        \"type\": \"text\",\n        \"value\": \"\"\n      },\n      {\n        \"name\": \"registry-namespace\",\n        \"type\": \"text\",\n        \"value\": \"my-registry-namespace\"\n      },\n      {\n        \"name\": \"registry-region\",\n        \"type\": \"text\",\n        \"value\": \"us-south\"\n      },\n      {\n        \"name\": \"remove-unspecified-references-to-configuration-resources\",\n        \"type\": \"text\",\n        \"value\": \"false\"\n      },\n      {\n        \"name\": \"service-bindings\",\n        \"type\": \"text\",\n        \"value\": \"\"\n      },\n      {\n        \"name\": \"signing-key\",\n        \"type\": \"secure\",\n        \"value\": \"signing_key\"\n      },\n      {\n        \"name\": \"slack-notifications\",\n        \"type\": \"text\",\n        \"value\": \"0\"\n      },\n      {\n        \"name\": \"sonarqube-config\",\n        \"type\": \"text\",\n        \"value\": \"default\"\n      },\n      {\n        \"name\": \"source\",\n        \"type\": \"text\",\n        \"value\": \"\"\n      },\n      {\n        \"name\": \"version\",\n        \"type\": \"text\",\n        \"value\": \"v1\"\n      }\n    ]\n  },\n  {\n    \"pipeline_id\": \"pr\",\n    \"properties\": [\n      {\n        \"name\": \"cra-bom-generate\",\n        \"type\": \"single_select\",\n        \"value\": \"1\",\n        \"enum\": \"[0,1]\"\n      },\n      {\n        \"name\": \"cra-deploy-analysis\",\n        \"type\": \"single_select\",\n        \"value\": \"1\",\n        \"enum\": \"[0,1]\"\n      },\n      {\n        \"name\": \"cra-vulnerability-scan\",\n        \"type\": \"single_select\",\n        \"value\": \"1\",\n        \"enum\": \"[0,1]\"\n      },\n      {\n        \"name\": \"git-token\",\n        \"type\": \"secure\",\n        \"value\": \"\"\n      },\n      {\n        \"name\": \"ibmcloud-api-key\",\n        \"type\": \"secure\",\n        \"value\": \"ibmcloud-api-key\"\n      },\n      {\n        \"name\": \"pipeline-config\",\n        \"type\": \"text\",\n        \"value\": \".pipeline-config.yaml\"\n      },\n      {\n        \"name\": \"pipeline-config-branch\",\n        \"type\": \"text\",\n        \"value\": \"\"\n      },\n      {\n        \"name\": \"pipeline-debug\",\n        \"type\": \"single_select\",\n        \"value\": \"0\",\n        \"enum\": \"[0,1]\"\n      },\n      {\n        \"name\": \"slack-notifications\",\n        \"type\": \"text\",\n        \"value\": \"1\"\n      }\n    ]\n  }\n]\n",
                             "description": "Stringified JSON containing the properties for the CI toolchain pipelines.",
-                            "required": false
+                            "display_name": "JSON",
+                            "required": true,
+                            "custom_config": {
+                                "type": "json_editor",
+                                "grouping": "deployment",
+                                "original_grouping": "deployment"
+                            }
                         },
                         {
                             "key": "ci_privateworker_credentials_secret_crn",
@@ -3097,7 +3181,13 @@
                             "type": "string",
                             "default_value": "",
                             "description": "Stringified JSON containing the repositories and triggers that get created in the CI toolchain pipelines.",
-                            "required": false
+                            "display_name": "JSON",
+                            "required": false,
+                            "custom_config": {
+                                "type": "json_editor",
+                                "grouping": "deployment",
+                                "original_grouping": "deployment"
+                            }
                         },
                         {
                             "key": "ci_signing_key_secret_name",
@@ -3967,21 +4057,30 @@
                             "type": "string",
                             "default_value": "us-south",
                             "description": "The region hosting the Secrets Manager instance. This applies to the CI, CD and CC Secret Manager integrations. See `ci_sm_location`, `cd_sm_location`, and `cc_sm_location` to set these values independently.",
-                            "required": false
+                            "display_name": "VPC region",
+                            "required": true,
+                            "custom_config": {
+                                "type": "vpc_region",
+                                "grouping": "deployment",
+                                "original_grouping": "deployment",
+                                "config_constraints": {
+                                    "generationType": "2"
+                                }
+                            }
                         },
                         {
                             "key": "sm_name",
                             "type": "string",
-                            "default_value": "sm-instance",
+                            "default_value": "Secrets Manager",
                             "description": "The name of an existing Secret Managers instance. This applies to the CI, CD and CC Secret Manager integrations. See `ci_sm_name`, `cd_sm_name`, and `cc_sm_name` to set these values independently. ",
-                            "required": false
+                            "required": true
                         },
                         {
                             "key": "sm_resource_group",
                             "type": "string",
                             "default_value": "Default",
                             "description": "The name of the existing resource group containing the Secrets Manager instance for your secrets.. This applies to the CI, CD and CC Secret Manager integrations. See `ci_sm_resource_group`, `cd_sm_resource_group`, and `cc_sm_resource_group` to set these values independently.",
-                            "required": false
+                            "required": true
                         },
                         {
                             "key": "sm_secret_expiration_period",
@@ -3995,7 +4094,7 @@
                             "type": "string",
                             "default_value": "Default",
                             "description": "The Secrets Manager secret group containing the secrets for the DevSecOps pipelines. This applies to the CI, CD and CC Secret Manager integrations. See `ci_sm_secret_group`, `cd_sm_secret_group`, and `cc_sm_secret_group` to set these values independently.",
-                            "required": false
+                            "required": true
                         },
                         {
                             "key": "sonarqube_integration_name",
@@ -4050,63 +4149,64 @@
                             "type": "string",
                             "default_value": "DevSecOps",
                             "description": "This variable specifies the root name for the CI, CD and CC toolchain names. A fixed suffix will automatically be appended. Setting `DevSecOps` will generate toolchains with the names `DevSecOps-CI-Toolchain`,  `DevSecOps-CD-Toolchain` and `DevSecOps-CC-Toolchain`. The full name of each toolchain can be set independently using `ci_toolchain_name`, `cd_toolchain_name`, and `cc_toolchain_name`.",
-                            "required": false
+                            "required": true
                         },
                         {
                             "key": "toolchain_region",
                             "type": "string",
                             "default_value": "us-south",
                             "description": "The region identifier that will be used, by default, for all resource creation and service instance lookup. This can be overridden on a per resource/service basis. See `ci_toolchain_region`,`cd_toolchain_region`,`cc_toolchain_region`.",
-                            "required": false
+                            "display_name": "VPC region",
+                            "required": true,
+                            "custom_config": {
+                                "type": "vpc_region",
+                                "grouping": "deployment",
+                                "original_grouping": "deployment",
+                                "config_constraints": {
+                                    "generationType": "2"
+                                }
+                            }
                         },
                         {
                             "key": "toolchain_resource_group",
                             "type": "string",
                             "default_value": "Default",
                             "description": "The resource group that will be used, by default, for all resource creation and service instance lookups. This can be overridden on a per resource/service basis. See `ci_toolchain_resource_group`,`cd_toolchain_resource_group`,`cc_toolchain_resource_group`, `ci_cluster_resource_group`.",
-                            "required": false
+                            "required": true
                         }
                     ],
                     "outputs": [
                         {
-                            "key": "compliance_ci_toolchain_id",
-                            "description": "The ID of the Compliance CI Toolchain"
-                        },
-                        {
-                            "key": "pr_pipeline_id",
-                            "description": "The PR pipeline Id"
+                            "key": "cc_pipeline_id",
+                            "description": "The CC pipeline Id"
                         },
                         {
                             "key": "secrets_manager_instance_id",
                             "description": "The Secrets Manage Instance ID"
                         },
                         {
-                            "key": "compliance_cd_toolchain_id",
-                            "description": "The ID of the Compliance CD Toolchain"
+                            "key": "issues_repo_url",
+                            "description": "The Issues Repo URL"
                         },
                         {
-                            "key": "cd_pipeline_id",
-                            "description": "The CD pipeline Id"
-                        },
-                        {
-                            "key": "compliance_cc_toolchain_url",
-                            "description": "The Compliance CC Toolchain URL"
-                        },
-                        {
-                            "key": "icr_namespace_name",
-                            "description": "The name of the targets ICR namespace."
-                        },
-                        {
-                            "key": "compliance_cc_toolchain_id",
-                            "description": "The ID of the Compliance CC Toolchain"
+                            "key": "pr_pipeline_id",
+                            "description": "The PR pipeline Id"
                         },
                         {
                             "key": "compliance_cd_toolchain_url",
                             "description": "The Compliance CD Toolchain URL"
                         },
                         {
-                            "key": "inventory_repo_url",
-                            "description": "The Inventory Repo URL"
+                            "key": "ci_pipeline_id",
+                            "description": "The CI pipeline Id"
+                        },
+                        {
+                            "key": "icr_namespace_name",
+                            "description": "The name of the targets ICR namespace."
+                        },
+                        {
+                            "key": "compliance_cc_toolchain_url",
+                            "description": "The Compliance CC Toolchain URL"
                         },
                         {
                             "key": "compliance_ci_toolchain_url",
@@ -4117,28 +4217,36 @@
                             "description": "The Change Management Repo URL."
                         },
                         {
-                            "key": "issues_repo_url",
-                            "description": "The Issues Repo URL"
-                        },
-                        {
-                            "key": "ci_pipeline_id",
-                            "description": "The CI pipeline Id"
+                            "key": "cd_pipeline_id",
+                            "description": "The CD pipeline Id"
                         },
                         {
                             "key": "evidence_repo_url",
                             "description": "The Evidence Repo URL"
                         },
                         {
+                            "key": "compliance_cd_toolchain_id",
+                            "description": "The ID of the Compliance CD Toolchain"
+                        },
+                        {
+                            "key": "compliance_cc_toolchain_id",
+                            "description": "The ID of the Compliance CC Toolchain"
+                        },
+                        {
                             "key": "key_protect_instance_id",
                             "description": "The Key Protect Instance ID"
                         },
                         {
-                            "key": "cc_pipeline_id",
-                            "description": "The CC pipeline Id"
-                        },
-                        {
                             "key": "app_repo_url",
                             "description": "The App Repo URL"
+                        },
+                        {
+                            "key": "inventory_repo_url",
+                            "description": "The Inventory Repo URL"
+                        },
+                        {
+                            "key": "compliance_ci_toolchain_id",
+                            "description": "The ID of the Compliance CI Toolchain"
                         }
                     ],
                     "install_type": "fullstack"
