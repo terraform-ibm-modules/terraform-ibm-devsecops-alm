@@ -3,6 +3,7 @@
 ##############################################################################
 ##### START OF COMMON VARIABLES ##########
 
+
 variable "add_code_engine_prefix" {
   type        = bool
   description = "Set to `true` to use `prefix` to add a prefix to the code engine project names."
@@ -13,6 +14,43 @@ variable "add_container_name_suffix" {
   type        = bool
   description = "Set to `true` to add a random suffix to the specified ICR name."
   default     = false
+}
+
+variable "app_group" {
+  type        = string
+  description = "Specify the Git user or group for the application repository."
+  default     = ""
+}
+
+variable "app_repo_auth_type" {
+  type        = string
+  description = "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`."
+  default     = ""
+}
+
+variable "app_repo_branch" {
+  type        = string
+  description = "Used when `app_repo_clone_from_url` is provided, the default branch that is used by the CI build, usually either main or master."
+  default     = "main"
+}
+
+
+variable "app_repo_existing_url" {
+  type        = string
+  description = "Override to bring your own existing application repository URL, which is used directly instead of cloning the default sample."
+  default     = ""
+}
+
+variable "app_repo_git_token_secret_name" {
+  type        = string
+  description = "Name of the Git token secret in the secret provider used for accessing the sample (or bring your own) application repository."
+  default     = ""
+}
+
+variable "app_repo_secret_group" {
+  type        = string
+  description = "Secret group for the App repository secret. Defaults to the value set in `sm_secret_group` if not set. Only used with `Secrets Manager`."
+  default     = ""
 }
 
 variable "app_repo_git_token_secret_crn" {
@@ -480,6 +518,24 @@ variable "pipeline_config_repo_git_token_secret_crn" {
     condition     = startswith(var.pipeline_config_repo_git_token_secret_crn, "crn:") || var.pipeline_config_repo_git_token_secret_crn == ""
     error_message = "Must be a CRN or left empty."
   }
+}
+
+variable "pipeline_config_repo_existing_url" {
+  type        = string
+  description = "Specify and link to an existing repository containing a custom pipeline-config.yaml file."
+  default     = ""
+}
+
+variable "pipeline_config_repo_clone_from_url" {
+  type        = string
+  description = "Specify a repository containing a custom pipeline-config.yaml file."
+  default     = ""
+}
+
+variable "pipeline_config_repo_branch" {
+  type        = string
+  description = "Specify the branch containing the custom pipeline-config.yaml file."
+  default     = ""
 }
 
 variable "pipeline_ibmcloud_api_key_secret_group" {
@@ -2371,7 +2427,7 @@ variable "cd_trigger_timed_pruner_name" {
 }
 
 ########################################################
-##### START OF CC VARIABLES ##############
+##### START OF CI VARIABLES ##############
 ########################################################
 
 variable "ci_app_group" {
@@ -3178,4 +3234,10 @@ variable "ci_trigger_timed_pruner_name" {
   type        = string
   description = "The name of the timed Pruner trigger."
   default     = "Evidence Pruner Timed Trigger"
+}
+
+variable "sample_default_application" {
+  type        = string
+  description = "The name of the sample application repository. The repository source URL is automatically computed based on the toolchain region. The other currently supported name is `code-engine-compliance-app`. Alternatively an integration can be created that can link to or clone from an existing repository. See `app_repo_existing_url` and `app_repo_clone_from_url` to override the sample application default behavior."
+  default     = "hello-compliance-app"
 }

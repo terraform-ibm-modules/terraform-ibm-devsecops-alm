@@ -3,6 +3,18 @@
 # determing whether to use the enable_secrets_manager or the toolchain specific counter parts ci/cd/cc_enable_secrets_manager
 # this could be addressed manually by ticking a setting in Schematics for each of the inputs
 locals {
+
+  git_fr2 = "https://private.eu-fr2.git.cloud.ibm.com"
+  compliance_pipelines_git_server = (
+    (var.toolchain_region == "eu-fr2") ? local.git_fr2
+    : format("https://%s.git.cloud.ibm.com", var.toolchain_region)
+  )
+
+  app_source_repo_url = (
+    (var.ci_app_repo_clone_from_url != "") ? var.ci_app_repo_clone_from_url :
+    format("%s/open-toolchain/%s.git", local.compliance_pipelines_git_server, var.sample_default_application)
+  )
+
   #setting all three toolchain specific parameters to false by default instead of null. If any of these values change then use the toolchain specific values.
   ci_enable_secrets_manager = (var.ci_enable_secrets_manager == "") ? var.enable_secrets_manager : var.ci_enable_secrets_manager
   cd_enable_secrets_manager = (var.cd_enable_secrets_manager == "") ? var.enable_secrets_manager : var.cd_enable_secrets_manager
@@ -129,6 +141,29 @@ locals {
   cd_pipeline_config_group                      = (var.cd_pipeline_config_group == "") ? var.pipeline_config_group : var.cd_pipeline_config_group
   cc_pipeline_config_group                      = (var.cc_pipeline_config_group == "") ? var.pipeline_config_group : var.cc_pipeline_config_group
 
+
+  ci_pipeline_config_repo_existing_url   = (var.ci_pipeline_config_repo_existing_url == "") ? var.pipeline_config_repo_existing_url : var.ci_pipeline_config_repo_existing_url
+  cd_pipeline_config_repo_existing_url   = (var.cd_pipeline_config_repo_existing_url == "") ? var.pipeline_config_repo_existing_url : var.cd_pipeline_config_repo_existing_url
+  cc_pipeline_config_repo_existing_url   = (var.cc_pipeline_config_repo_existing_url == "") ? var.pipeline_config_repo_existing_url : var.cc_pipeline_config_repo_existing_url
+  ci_pipeline_config_repo_clone_from_url = (var.ci_pipeline_config_repo_clone_from_url == "") ? var.pipeline_config_repo_clone_from_url : var.ci_pipeline_config_repo_clone_from_url
+  cd_pipeline_config_repo_clone_from_url = (var.cd_pipeline_config_repo_clone_from_url == "") ? var.pipeline_config_repo_clone_from_url : var.cd_pipeline_config_repo_clone_from_url
+  cc_pipeline_config_repo_clone_from_url = (var.cc_pipeline_config_repo_clone_from_url == "") ? var.pipeline_config_repo_clone_from_url : var.cc_pipeline_config_repo_clone_from_url
+  ci_pipeline_config_repo_branch         = (var.ci_pipeline_config_repo_branch == "") ? var.pipeline_config_repo_branch : var.ci_pipeline_config_repo_branch
+  cd_pipeline_config_repo_branch         = (var.cd_pipeline_config_repo_branch == "") ? var.pipeline_config_repo_branch : var.cd_pipeline_config_repo_branch
+  cc_pipeline_config_repo_branch         = (var.cc_pipeline_config_repo_branch == "") ? var.pipeline_config_repo_branch : var.cc_pipeline_config_repo_branch
+
+
+  ci_app_group                      = (var.ci_app_group == "") ? var.app_group : var.ci_app_group
+  cc_app_group                      = (var.cc_app_group == "") ? var.app_group : var.cc_app_group
+  ci_app_repo_auth_type             = (var.ci_app_repo_auth_type == "") ? var.app_repo_auth_type : var.ci_app_repo_auth_type
+  cc_app_repo_auth_type             = (var.cc_app_repo_auth_type == "") ? var.app_repo_auth_type : var.cc_app_repo_auth_type
+  ci_app_repo_branch                = (var.ci_app_repo_branch == "") ? var.app_repo_branch : var.ci_app_repo_branch
+  cc_app_repo_branch                = (var.cc_app_repo_branch == "") ? var.app_repo_branch : var.cc_app_repo_branch
+  ci_app_repo_existing_url          = (var.ci_app_repo_existing_url == "") ? var.app_repo_existing_url : var.ci_app_repo_existing_url
+  ci_app_repo_git_token_secret_name = (var.ci_app_repo_git_token_secret_name == "") ? var.app_repo_git_token_secret_name : var.ci_app_repo_git_token_secret_name
+  cc_app_repo_git_token_secret_name = (var.cc_app_repo_git_token_secret_name == "") ? var.app_repo_git_token_secret_name : var.cc_app_repo_git_token_secret_name
+  ci_app_repo_secret_group          = (var.ci_app_repo_secret_group == "") ? var.app_repo_secret_group : var.ci_app_repo_secret_group
+  cc_app_repo_secret_group          = (var.cc_app_repo_secret_group == "") ? var.app_repo_secret_group : var.cc_app_repo_secret_group
 }
 
 
@@ -234,8 +269,8 @@ module "devsecops_ci_toolchain" {
   pipeline_config_repo_git_token_secret_name = (local.ci_pipeline_config_repo_git_token_secret_name == "") ? var.repo_git_token_secret_name : local.ci_pipeline_config_repo_git_token_secret_name
   pipeline_config_repo_secret_group          = (local.ci_pipeline_config_repo_secret_group == "") ? var.repo_secret_group : local.ci_pipeline_config_repo_secret_group
 
-  app_repo_git_token_secret_name = (var.ci_app_repo_git_token_secret_name == "") ? var.repo_git_token_secret_name : var.ci_app_repo_git_token_secret_name
-  app_repo_secret_group          = (var.ci_app_repo_secret_group == "") ? var.repo_secret_group : var.ci_app_repo_secret_group
+  app_repo_git_token_secret_name = (local.ci_app_repo_git_token_secret_name == "") ? var.repo_git_token_secret_name : local.ci_app_repo_git_token_secret_name
+  app_repo_secret_group          = (local.ci_app_repo_secret_group == "") ? var.repo_secret_group : local.ci_app_repo_secret_group
 
   pipeline_doi_api_key_secret_name  = (var.ci_pipeline_doi_api_key_secret_name == "") ? var.pipeline_doi_api_key_secret_name : var.ci_pipeline_doi_api_key_secret_name
   pipeline_doi_api_key_secret_group = (var.ci_pipeline_doi_api_key_secret_group == "") ? var.pipeline_doi_api_key_secret_group : var.ci_pipeline_doi_api_key_secret_group
@@ -260,11 +295,11 @@ module "devsecops_ci_toolchain" {
   inventory_repo_auth_type           = (local.ci_inventory_repo_auth_type == "") ? local.repo_auth_type : local.ci_inventory_repo_auth_type
   issues_repo_auth_type              = (local.ci_issues_repo_auth_type == "") ? local.repo_auth_type : local.ci_issues_repo_auth_type
   evidence_repo_auth_type            = (local.ci_evidence_repo_auth_type == "") ? local.repo_auth_type : local.ci_evidence_repo_auth_type
-  app_repo_auth_type                 = (var.ci_app_repo_auth_type == "") ? local.repo_auth_type : var.ci_app_repo_auth_type
+  app_repo_auth_type                 = (local.ci_app_repo_auth_type == "") ? local.repo_auth_type : local.ci_app_repo_auth_type
   compliance_pipeline_repo_auth_type = (local.ci_compliance_pipeline_repo_auth_type == "") ? local.repo_auth_type : local.ci_compliance_pipeline_repo_auth_type
 
   #GROUPS/USERS FOR REPOS
-  app_group                 = (var.ci_app_group == "") ? var.repo_group : var.ci_app_group
+  app_group                 = (local.ci_app_group == "") ? var.repo_group : local.ci_app_group
   issues_group              = (local.ci_issues_group == "") ? var.repo_group : local.ci_issues_group
   inventory_group           = (local.ci_inventory_group == "") ? var.repo_group : local.ci_inventory_group
   evidence_group            = (local.ci_evidence_group == "") ? var.repo_group : local.ci_evidence_group
@@ -272,18 +307,18 @@ module "devsecops_ci_toolchain" {
   compliance_pipeline_group = (local.ci_compliance_pipeline_group == "") ? var.repo_group : local.ci_compliance_pipeline_group
 
   #APP REPO
-  app_repo_clone_from_url        = var.ci_app_repo_clone_from_url
-  app_repo_branch                = var.ci_app_repo_branch
-  app_repo_existing_url          = var.ci_app_repo_existing_url
+  app_repo_clone_from_url        = (var.ci_app_repo_clone_from_url == "") ? local.app_source_repo_url : var.ci_app_repo_clone_from_url
+  app_repo_branch                = local.ci_app_repo_branch
+  app_repo_existing_url          = local.ci_app_repo_existing_url
   app_repo_existing_git_provider = var.ci_app_repo_existing_git_provider
   app_repo_existing_git_id       = var.ci_app_repo_existing_git_id
   app_repo_clone_to_git_provider = var.ci_app_repo_clone_to_git_provider
   app_repo_clone_to_git_id       = var.ci_app_repo_clone_to_git_id
 
   #PIPELINE CONFIG REPO
-  pipeline_config_repo_existing_url   = var.ci_pipeline_config_repo_existing_url
-  pipeline_config_repo_clone_from_url = var.ci_pipeline_config_repo_clone_from_url
-  pipeline_config_repo_branch         = var.ci_pipeline_config_repo_branch
+  pipeline_config_repo_existing_url   = local.ci_pipeline_config_repo_existing_url
+  pipeline_config_repo_clone_from_url = local.ci_pipeline_config_repo_clone_from_url
+  pipeline_config_repo_branch         = local.ci_pipeline_config_repo_branch
 
   #EVIDENCE REPO
   evidence_repo_name              = var.evidence_repo_name
@@ -480,9 +515,9 @@ module "devsecops_cd_toolchain" {
   change_management_group   = (var.cd_change_management_group == "") ? var.repo_group : var.cd_change_management_group
 
   #PIPELINE CONFIG REPO
-  pipeline_config_repo_existing_url   = var.cd_pipeline_config_repo_existing_url
-  pipeline_config_repo_clone_from_url = var.cd_pipeline_config_repo_clone_from_url
-  pipeline_config_repo_branch         = var.cd_pipeline_config_repo_branch
+  pipeline_config_repo_existing_url   = local.cd_pipeline_config_repo_existing_url
+  pipeline_config_repo_clone_from_url = local.cd_pipeline_config_repo_clone_from_url
+  pipeline_config_repo_branch         = local.cd_pipeline_config_repo_branch
 
   #EVIDENCE REPO
   evidence_repo_name              = var.evidence_repo_name
@@ -642,8 +677,8 @@ module "devsecops_cc_toolchain" {
   pipeline_config_repo_git_token_secret_name = (local.cc_pipeline_config_repo_git_token_secret_name == "") ? var.repo_git_token_secret_name : local.cc_pipeline_config_repo_git_token_secret_name
   pipeline_config_repo_secret_group          = (local.cc_pipeline_config_repo_secret_group == "") ? var.repo_secret_group : local.cc_pipeline_config_repo_secret_group
 
-  app_repo_git_token_secret_name = (var.cc_app_repo_git_token_secret_name == "") ? var.repo_git_token_secret_name : var.cc_app_repo_git_token_secret_name
-  app_repo_secret_group          = (var.cc_app_repo_secret_group == "") ? var.repo_secret_group : var.cc_app_repo_secret_group
+  app_repo_git_token_secret_name = (local.cc_app_repo_git_token_secret_name == "") ? var.repo_git_token_secret_name : local.cc_app_repo_git_token_secret_name
+  app_repo_secret_group          = (local.cc_app_repo_secret_group == "") ? var.repo_secret_group : local.cc_app_repo_secret_group
 
   slack_webhook_secret_name  = (var.cc_slack_webhook_secret_name == "") ? var.slack_webhook_secret_name : var.cc_slack_webhook_secret_name
   slack_webhook_secret_group = (var.cc_slack_webhook_secret_group == "") ? var.slack_webhook_secret_group : var.cc_slack_webhook_secret_group
@@ -674,7 +709,7 @@ module "devsecops_cc_toolchain" {
   inventory_repo_auth_type           = (local.cc_inventory_repo_auth_type == "") ? local.repo_auth_type : local.cc_inventory_repo_auth_type
   issues_repo_auth_type              = (local.cc_issues_repo_auth_type == "") ? local.repo_auth_type : local.cc_issues_repo_auth_type
   evidence_repo_auth_type            = (local.cc_evidence_repo_auth_type == "") ? local.repo_auth_type : local.cc_evidence_repo_auth_type
-  app_repo_auth_type                 = (var.cc_app_repo_auth_type == "") ? local.repo_auth_type : var.cc_app_repo_auth_type
+  app_repo_auth_type                 = (local.cc_app_repo_auth_type == "") ? local.repo_auth_type : local.cc_app_repo_auth_type
   compliance_pipeline_repo_auth_type = (local.cc_compliance_pipeline_repo_auth_type == "") ? local.repo_auth_type : local.cc_compliance_pipeline_repo_auth_type
 
   #GROUPS/USERS FOR REPOS
@@ -683,19 +718,19 @@ module "devsecops_cc_toolchain" {
   evidence_group            = (local.cc_evidence_group == "") ? var.repo_group : local.cc_evidence_group
   pipeline_config_group     = (local.cc_pipeline_config_group == "") ? var.repo_group : local.cc_pipeline_config_group
   compliance_pipeline_group = (local.cc_compliance_pipeline_group == "") ? var.repo_group : local.cc_compliance_pipeline_group
-  app_group                 = (var.cc_app_group == "") ? var.repo_group : var.cc_app_group
+  app_group                 = (local.cc_app_group == "") ? var.repo_group : local.cc_app_group
 
   link_to_doi_toolchain = var.cc_link_to_doi_toolchain
 
   #PIPELINE CONFIG REPO
-  pipeline_config_repo_existing_url   = var.cc_pipeline_config_repo_existing_url
-  pipeline_config_repo_clone_from_url = var.cc_pipeline_config_repo_clone_from_url
-  pipeline_config_repo_branch         = var.cc_pipeline_config_repo_branch
+  pipeline_config_repo_existing_url   = local.cc_pipeline_config_repo_existing_url
+  pipeline_config_repo_clone_from_url = local.cc_pipeline_config_repo_clone_from_url
+  pipeline_config_repo_branch         = local.cc_pipeline_config_repo_branch
 
   #APP REPO
   app_repo_url          = try(module.devsecops_ci_toolchain[0].app_repo_url, var.cc_app_repo_url)
   app_repo_git_provider = try(module.devsecops_ci_toolchain[0].app_repo_git_provider, var.cc_app_repo_git_provider)
-  app_repo_branch       = try(module.devsecops_ci_toolchain[0].app_repo_branch, var.cc_app_repo_branch)
+  app_repo_branch       = try(module.devsecops_ci_toolchain[0].app_repo_branch, local.cc_app_repo_branch)
   app_repo_git_id       = try(module.devsecops_ci_toolchain[0].app_repo_git_id, var.cc_app_repo_git_id)
 
   #EVIDENCE REPO

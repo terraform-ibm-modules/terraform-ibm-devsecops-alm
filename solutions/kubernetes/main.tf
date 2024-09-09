@@ -3,7 +3,13 @@ module "devsecops_da" {
 
   add_code_engine_prefix                            = var.add_code_engine_prefix
   add_container_name_suffix                         = var.add_container_name_suffix
+  app_group                                         = var.app_group
+  app_repo_auth_type                                = var.app_repo_auth_type
+  app_repo_branch                                   = var.app_repo_branch
+  app_repo_existing_url                             = var.app_repo_existing_url
   app_repo_git_token_secret_crn                     = var.app_repo_git_token_secret_crn
+  app_repo_git_token_secret_name                    = var.app_repo_git_token_secret_name
+  app_repo_secret_group                             = var.app_repo_secret_group
   authorization_policy_creation                     = var.authorization_policy_creation
   autostart                                         = var.autostart
   cluster_name                                      = var.cluster_name
@@ -73,6 +79,9 @@ module "devsecops_da" {
   kp_resource_group                                 = var.kp_resource_group
   pipeline_config_group                             = var.pipeline_config_group
   pipeline_config_repo_auth_type                    = var.pipeline_config_repo_auth_type
+  pipeline_config_repo_branch                       = var.pipeline_config_repo_branch
+  pipeline_config_repo_clone_from_url               = var.pipeline_config_repo_clone_from_url
+  pipeline_config_repo_existing_url                 = var.pipeline_config_repo_existing_url
   pipeline_config_repo_git_token_secret_crn         = var.pipeline_config_repo_git_token_secret_crn
   pipeline_config_repo_git_token_secret_name        = var.pipeline_config_repo_git_token_secret_name
   pipeline_config_repo_secret_group                 = var.pipeline_config_repo_secret_group
@@ -99,6 +108,7 @@ module "devsecops_da" {
   scc_scc_api_key_secret_group                      = var.scc_scc_api_key_secret_group
   scc_scc_api_key_secret_name                       = var.scc_scc_api_key_secret_name
   scc_use_profile_attachment                        = var.scc_use_profile_attachment
+  sample_default_application                        = var.sample_default_application
   slack_channel_name                                = var.slack_channel_name
   slack_integration_name                            = var.slack_integration_name
   slack_team_name                                   = var.slack_team_name
