@@ -96,6 +96,14 @@
 							}
 						]
 					},
+					"licenses": [
+						{
+							"id": "LICENSE",
+							"name": "LICENSE",
+							"type": "text/plain",
+							"description": "LICENSE"
+						}
+					],
 					"architecture": {
 						"diagrams": [
 							{
@@ -3955,7 +3963,8 @@
 							"description": "The Evidence Repo URL"
 						}
 					],
-					"install_type": "fullstack"
+					"dependency_version_2": true,
+					"install_type": "extension"
 				},
 				{
 					"label": "Deploy to Code Engine",
@@ -4032,6 +4041,14 @@
 							}
 						]
 					},
+					"licenses": [
+						{
+							"id": "LICENSE",
+							"name": "LICENSE",
+							"type": "text/plain",
+							"description": "LICENSE"
+						}
+					],
 					"architecture": {
 						"diagrams": [
 							{
@@ -8171,7 +8188,8 @@
 							"description": "The Evidence Repo URL"
 						}
 					],
-					"install_type": "fullstack"
+					"dependency_version_2": true,
+					"install_type": "extension"
 				}
 			]
 		}
