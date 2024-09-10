@@ -3239,5 +3239,5 @@ variable "ci_trigger_timed_pruner_name" {
 variable "sample_default_application" {
   type        = string
   description = "The name of the sample application repository. The repository source URL is automatically computed based on the toolchain region. The other currently supported name is `code-engine-compliance-app`. Alternatively an integration can be created that can link to or clone from an existing repository. See `app_repo_existing_url` and `app_repo_clone_from_url` to override the sample application default behavior."
-  default     = "hello-compliance-app"
+  default     = "code-engine-compliance-app"
 }
