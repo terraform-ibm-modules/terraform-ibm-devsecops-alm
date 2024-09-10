@@ -31,7 +31,7 @@ variable "app_repo_auth_type" {
 variable "app_repo_branch" {
   type        = string
   description = "Used when `app_repo_clone_from_url` is provided, the default branch that is used by the CI build, usually either main or master."
-  default     = ""
+  default     = "main"
 }
 
 
@@ -1317,7 +1317,7 @@ variable "cc_pipeline_properties_filepath" {
 
 variable "cc_pipeline_properties" {
   type        = string
-  description = "Stringified JSON containing the properties for the CC toolchain pipelines."
+  description = "This JSON represents the pipeline properties belonging to the CC pipeline in the CC toolchain. Each element in the JSON represents a seperate pipeline property. Three attributes are required to create a property. These are the `name` field (how the name appears in the pipeline properties), the `type` (text, secure and enum) and then the `value`. Do not put secrets directly into JSON for the `secure` type, instead the value for a `secret` type should be a CRN to a secret in the configured secrets provider or a secret reference to a secret in the configured secrets provider."
   default     = ""
 }
 
@@ -2133,7 +2133,7 @@ variable "cd_pipeline_properties_filepath" {
 
 variable "cd_pipeline_properties" {
   type        = string
-  description = "Stringified JSON containing the properties for the CD toolchain pipelines."
+  description = "This JSON represents the pipeline properties belonging to the CD pipeline in the CD toolchain. Each element in the JSON represents a seperate pipeline property. Three attributes are required to create a property. These are the `name` field (how the name appears in the pipeline properties), the `type` (text, secure and enum) and then the `value`. Do not put secrets directly into JSON for the `secure` type, instead the value for a `secret` type should be a CRN to a secret in the configured secrets provider or a secret reference to a secret in the configured secrets provider."
   default     = ""
 }
 
@@ -2427,7 +2427,7 @@ variable "cd_trigger_timed_pruner_name" {
 }
 
 ########################################################
-##### START OF CC VARIABLES ##############
+##### START OF CI VARIABLES ##############
 ########################################################
 
 variable "ci_app_group" {
@@ -2938,7 +2938,7 @@ variable "ci_pipeline_properties_filepath" {
 
 variable "ci_pipeline_properties" {
   type        = string
-  description = "Stringified JSON containing the properties for the CI toolchain pipelines."
+  description = "This JSON represents the pipeline properties belonging to the both the CI and PR pipelines in the CI toolchain. Each element in the JSON represents a seperate pipeline property. Three attributes are required to create a property. These are the `name` field (how the name appears in the pipeline properties), the `type` (text, secure and enum) and then the `value`. Do not put secrets directly into JSON for the `secure` type, instead the value for a `secret` type should be a CRN to a secret in the configured secrets provider or a secret reference to a secret in the configured secrets provider."
   default     = ""
 }
 
@@ -3240,4 +3240,10 @@ variable "sample_default_application" {
   type        = string
   description = "The name of the sample application repository. The repository source URL is automatically computed based on the toolchain region. The other currently supported name is `code-engine-compliance-app`. Alternatively an integration can be created that can link to or clone from an existing repository. See `app_repo_existing_url` and `app_repo_clone_from_url` to override the sample application default behavior."
   default     = "hello-compliance-app"
+}
+
+variable "use_app_repo_for_cd_deploy" {
+  type        = bool
+  description = "Set to `true` to use the CI sample application repository as the deployment repository in the CD pipeline. This will be set in the pipeline config integration."
+  default     = false
 }

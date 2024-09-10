@@ -545,14 +545,14 @@ module "devsecops_cd_toolchain" {
   enable_change_management_repo = true
 
   #DEPLOYMENT REPO
-  deployment_repo_existing_git_provider = var.cd_deployment_repo_existing_git_provider
-  deployment_repo_existing_git_id       = var.cd_deployment_repo_existing_git_id
+  deployment_repo_existing_git_provider = (var.use_app_repo_for_cd_deploy) ? try(module.devsecops_ci_toolchain[0].app_repo_git_provider, "") : var.cd_deployment_repo_existing_git_provider
+  deployment_repo_existing_git_id       = (var.use_app_repo_for_cd_deploy) ? try(module.devsecops_ci_toolchain[0].app_repo_git_id, "") : var.cd_deployment_repo_existing_git_id
   deployment_repo_clone_to_git_provider = var.cd_deployment_repo_clone_to_git_provider
   deployment_repo_clone_to_git_id       = var.cd_deployment_repo_clone_to_git_id
   deployment_repo_clone_from_url        = var.cd_deployment_repo_clone_from_url
   deployment_repo_clone_from_branch     = var.cd_deployment_repo_clone_from_branch
-  deployment_repo_existing_url          = var.cd_deployment_repo_existing_url
-  deployment_repo_existing_branch       = var.cd_deployment_repo_existing_branch
+  deployment_repo_existing_url          = (var.use_app_repo_for_cd_deploy) ? try(module.devsecops_ci_toolchain[0].app_repo_url, "") : var.cd_deployment_repo_existing_url
+  deployment_repo_existing_branch       = (var.use_app_repo_for_cd_deploy) ? try(module.devsecops_ci_toolchain[0].app_repo_branch, "") : var.cd_deployment_repo_existing_branch
 
   #SCC
   scc_enable_scc       = (local.cd_scc_enable_scc == "true") ? true : false
