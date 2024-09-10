@@ -3964,7 +3964,7 @@
 						}
 					],
 					"dependency_version_2": true,
-					"install_type": "extension"
+					"install_type": "fullstack"
 				},
 				{
 					"label": "Deploy to Code Engine",
@@ -8189,7 +8189,7 @@
 						}
 					],
 					"dependency_version_2": true,
-					"install_type": "extension"
+					"install_type": "fullstack"
 				}
 			]
 		}
