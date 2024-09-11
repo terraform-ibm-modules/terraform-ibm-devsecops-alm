@@ -289,7 +289,7 @@ module "devsecops_da" {
   cd_evidence_repo_git_token_secret_crn             = var.cd_evidence_repo_git_token_secret_crn
   cd_evidence_repo_git_token_secret_name            = var.cd_evidence_repo_git_token_secret_name
   cd_evidence_repo_secret_group                     = var.cd_evidence_repo_secret_group
-  cd_instance_name                                  = var.cd_instance_name
+  continuous_delivery_service_name                  = var.continuous_delivery_service_name
   cd_inventory_group                                = var.cd_inventory_group
   cd_inventory_repo_auth_type                       = var.cd_inventory_repo_auth_type
   cd_inventory_repo_git_token_secret_crn            = var.cd_inventory_repo_git_token_secret_crn

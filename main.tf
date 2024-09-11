@@ -173,7 +173,7 @@ data "ibm_resource_group" "resource_group" {
 
 resource "ibm_resource_instance" "cd_instance" {
   count             = (var.create_cd_instance) ? 1 : 0
-  name              = (var.prefix == "") ? var.cd_instance_name : format("${var.prefix}-%s", var.cd_instance_name)
+  name              = (var.prefix == "") ? var.continuous_delivery_service_name : format("${var.prefix}-%s", var.continuous_delivery_service_name)
   service           = "continuous-delivery"
   plan              = var.cd_service_plan
   location          = var.toolchain_region

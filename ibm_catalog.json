@@ -729,7 +729,7 @@
                             "required": false
                         },
                         {
-                            "key": "cd_instance_name",
+                            "key": "continuous_delivery_service_name",
                             "type": "string",
                             "default_value": "cd-devsecops",
                             "description": "The name of the CD instance.",
@@ -1345,8 +1345,8 @@
                         {
                             "key": "cos_api_key_secret_name",
                             "type": "string",
-                            "default_value": "cos-api-key",
-                            "description": "Name of the Cloud Object Storage API key secret in the secret provider for accessing the evidence COS bucket. In addition `cos_endpoint` and `cos_bucket_name` must be set. This setting sets the same API key for the COS settings in the CI, CD, and CC toolchains. See `ci_cos_api_key_secret_name`, `cd_cos_api_key_secret_name`, and `cc_cos_api_key_secret_name` to set separately.",
+                            "default_value": "",
+                            "description": "Name of the Cloud Object Storage API key secret in the secret provider for accessing the evidence COS bucket. In addition `cos_endpoint` and `cos_bucket_name` must be set. This setting sets the same API key for the COS settings in the CI, CD, and CC toolchains.",
                             "required": false
                         },
                         {
@@ -2857,7 +2857,7 @@
                             "required": false
                         },
                         {
-                            "key": "cd_instance_name",
+                            "key": "continuous_delivery_service_name",
                             "type": "string",
                             "default_value": "cd-devsecops",
                             "description": "The name of the CD instance.",
@@ -3466,8 +3466,8 @@
                         {
                             "key": "cos_api_key_secret_name",
                             "type": "string",
-                            "default_value": "cos-api-key",
-                            "description": "Name of the Cloud Object Storage API key secret in the secret provider for accessing the evidence COS bucket. In addition `cos_endpoint` and `cos_bucket_name` must be set. This setting sets the same API key for the COS settings in the CI, CD, and CC toolchains. See `ci_cos_api_key_secret_name`, `cd_cos_api_key_secret_name`, and `cc_cos_api_key_secret_name` to set separately.",
+                            "default_value": "",
+                            "description": "Name of the Cloud Object Storage API key secret in the secret provider for accessing the evidence COS bucket. In addition `cos_endpoint` and `cos_bucket_name` must be set. This setting sets the same API key for the COS settings in the CI, CD, and CC toolchains.",
                             "required": false
                         },
                         {
