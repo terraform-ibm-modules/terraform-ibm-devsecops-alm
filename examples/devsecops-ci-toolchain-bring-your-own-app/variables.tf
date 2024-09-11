@@ -93,7 +93,7 @@ variable "ci_app_repo_clone_from_branch" {
 
 variable "ci_app_repo_existing_url" {
   type        = string
-  description = "Override to bring your own existing application repository URL, which is used directly instead of cloning the default sample."
+  description = "Bring your own existing application repository by providing the URL. This will create an integration for your application repository instead of cloning the default sample. Repositories existing in a different org will require the use of Git token. See `app_repo_git_token_secret_name` under optional variables. "
   default     = ""
 }
 

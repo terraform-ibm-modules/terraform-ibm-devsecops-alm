@@ -10,8 +10,10 @@ locals {
     : format("https://%s.git.cloud.ibm.com", var.toolchain_region)
   )
 
+  ci_app_repo_clone_from_url = (var.ci_app_repo_clone_from_url == "") ? var.app_repo_clone_from_url : var.ci_app_repo_clone_from_url
+
   app_source_repo_url = (
-    (var.ci_app_repo_clone_from_url != "") ? var.ci_app_repo_clone_from_url :
+    (local.ci_app_repo_clone_from_url != "") ? local.ci_app_repo_clone_from_url :
     format("%s/open-toolchain/%s.git", local.compliance_pipelines_git_server, var.sample_default_application)
   )
 
@@ -152,21 +154,18 @@ locals {
   cd_pipeline_config_repo_branch         = (var.cd_pipeline_config_repo_branch == "") ? var.pipeline_config_repo_branch : var.cd_pipeline_config_repo_branch
   cc_pipeline_config_repo_branch         = (var.cc_pipeline_config_repo_branch == "") ? var.pipeline_config_repo_branch : var.cc_pipeline_config_repo_branch
 
+  calculated_provider = (
+    (strcontains(var.app_repo_existing_url, "github")) ? "githubconsolidated" :
+    (strcontains(var.app_repo_existing_url, "git.cloud.ibm.com")) ? "hostedgit" : ""
+  )
 
+  calculated_git_id = (
+    (strcontains(var.app_repo_existing_url, "github.ibm.com")) ? "integrated" :
+    (strcontains(var.app_repo_existing_url, "github")) ? "github" :
+    (strcontains(var.app_repo_existing_url, "git.cloud.ibm.com")) ? "" : ""
+  )
 
-  #calculated_provider = (
-  #  (strcontains(var.app_repo_existing_url, "github")) ? "githubconsolidated" :
-  #  (strcontains(var.app_repo_existing_url, "git.cloud.ibm.com")) ? "hostedgit" : ""
-  #)
-
-  #calculated_git_id = (
-  #  (strcontains(var.app_repo_existing_url, "github.ibm.com")) ? "integrated" :
-  #  (strcontains(var.app_repo_existing_url, "github")) ? "github" :
-  #  (strcontains(var.app_repo_existing_url, "git.cloud.ibm.com")) ? "" : ""
-  #)
-
-
-  #app_repo_existing_url = (local.calculated_provider == "") ? "" : var.app_repo_existing_url
+  app_repo_existing_url = (local.calculated_provider == "") ? "" : var.app_repo_existing_url
 
   ci_app_group                      = (var.ci_app_group == "") ? var.app_group : var.ci_app_group
   cc_app_group                      = (var.cc_app_group == "") ? var.app_group : var.cc_app_group
@@ -179,15 +178,20 @@ locals {
   ci_app_repo_secret_group          = (var.ci_app_repo_secret_group == "") ? var.app_repo_secret_group : var.ci_app_repo_secret_group
   cc_app_repo_secret_group          = (var.cc_app_repo_secret_group == "") ? var.app_repo_secret_group : var.cc_app_repo_secret_group
 
+  ci_app_repo_existing_url = (var.ci_app_repo_existing_url == "") ? local.app_repo_existing_url : var.ci_app_repo_existing_url
+  cc_app_repo_existing_url = (var.cc_app_repo_url == "") ? local.app_repo_existing_url : var.cc_app_repo_url
 
-  ci_app_repo_existing_url          = (var.ci_app_repo_existing_url == "") ? var.app_repo_existing_url : var.ci_app_repo_existing_url
-  cc_app_repo_existing_url          = (var.cc_app_repo_url == "") ? var.app_repo_existing_url : var.cc_app_repo_url
-  ci_app_repo_existing_git_id       = (var.ci_app_repo_existing_git_id == "") ? var.app_repo_existing_git_id : var.ci_app_repo_existing_git_id
-  cc_app_repo_existing_git_id       = (var.cc_app_repo_git_id == "") ? var.app_repo_existing_git_id : var.cc_app_repo_git_id
-  ci_app_repo_existing_git_provider = (var.ci_app_repo_existing_git_provider == "") ? var.app_repo_existing_git_provider : var.ci_app_repo_existing_git_provider
-  cc_app_repo_existing_git_provider = (var.cc_app_repo_git_provider == "") ? var.app_repo_existing_git_provider : var.cc_app_repo_git_provider
+  ci_app_repo_existing_git_id_temp = (var.ci_app_repo_existing_git_id == "") ? var.app_repo_existing_git_id : var.ci_app_repo_existing_git_id
+  ci_app_repo_existing_git_id      = (local.ci_app_repo_existing_git_id_temp == "") ? local.calculated_git_id : local.ci_app_repo_existing_git_id_temp
+  cc_app_repo_existing_git_id_temp = (var.cc_app_repo_git_id == "") ? var.app_repo_existing_git_id : var.cc_app_repo_git_id
+  cc_app_repo_existing_git_id      = (local.cc_app_repo_existing_git_id_temp == "") ? local.calculated_git_id : local.cc_app_repo_existing_git_id_temp
 
-  ci_app_repo_clone_from_url        = (var.ci_app_repo_clone_from_url == "") ? var.app_repo_clone_from_url : var.ci_app_repo_clone_from_url
+
+  ci_app_repo_existing_git_provider_temp = (var.ci_app_repo_existing_git_provider == "") ? var.app_repo_existing_git_provider : var.ci_app_repo_existing_git_provider
+  ci_app_repo_existing_git_provider      = (local.ci_app_repo_existing_git_provider_temp == "") ? local.calculated_provider : local.ci_app_repo_existing_git_provider_temp
+  cc_app_repo_existing_git_provider_temp = (var.cc_app_repo_git_provider == "") ? var.app_repo_existing_git_provider : var.cc_app_repo_git_provider
+  cc_app_repo_existing_git_provider      = (local.cc_app_repo_existing_git_provider_temp == "") ? local.calculated_provider : local.cc_app_repo_existing_git_provider_temp
+
   ci_app_repo_clone_to_git_id       = (var.ci_app_repo_clone_to_git_id == "") ? var.app_repo_clone_to_git_id : var.ci_app_repo_clone_to_git_id
   ci_app_repo_clone_to_git_provider = (var.ci_app_repo_clone_to_git_provider == "") ? var.app_repo_clone_to_git_provider : var.ci_app_repo_clone_to_git_provider
 }
@@ -246,7 +250,7 @@ module "prereqs" {
 module "devsecops_ci_toolchain" {
   count                    = var.create_ci_toolchain ? 1 : 0
   depends_on               = [ibm_resource_instance.cd_instance]
-  source                   = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-ci-toolchain?ref=v2.0.0-beta.1"
+  source                   = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-ci-toolchain?ref=v2.0.0-beta.2"
   ibmcloud_api_key         = var.ibmcloud_api_key
   toolchain_name           = (var.prefix == "") ? local.ci_toolchain_name : format("${var.prefix}-%s", local.ci_toolchain_name)
   toolchain_region         = (var.ci_toolchain_region == "") ? var.toolchain_region : replace(replace(var.ci_toolchain_region, "ibm:yp:", ""), "ibm:ys1:", "")
