@@ -6,6 +6,11 @@ module "devsecops_da" {
   app_group                                         = var.app_group
   app_repo_auth_type                                = var.app_repo_auth_type
   app_repo_branch                                   = var.app_repo_branch
+  app_repo_clone_from_url                           = var.app_repo_clone_from_url
+  app_repo_clone_to_git_id                          = var.app_repo_clone_to_git_id
+  app_repo_clone_to_git_provider                    = var.app_repo_clone_to_git_provider
+  app_repo_existing_git_id                          = var.app_repo_existing_git_id
+  app_repo_existing_git_provider                    = var.app_repo_existing_git_provider
   app_repo_existing_url                             = var.app_repo_existing_url
   app_repo_git_token_secret_crn                     = var.app_repo_git_token_secret_crn
   app_repo_git_token_secret_name                    = var.app_repo_git_token_secret_name

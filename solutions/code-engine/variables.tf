@@ -34,6 +34,35 @@ variable "app_repo_branch" {
   default     = "master"
 }
 
+variable "app_repo_clone_from_url" {
+  type        = string
+  description = "Override the default sample app by providing your own sample app URL, which is cloned into the app repository. Note, uses `clone_if_not_exists` mode, so if the app repository already exists the repository contents are unchanged."
+  default     = ""
+}
+
+variable "app_repo_clone_to_git_id" {
+  type        = string
+  description = "Set this value to `github` for github.com, or to the GUID of a custom GitHub Enterprise server."
+  default     = ""
+}
+
+variable "app_repo_clone_to_git_provider" {
+  type        = string
+  description = "By default this gets set as 'hostedgit', else set to 'githubconsolidated' for GitHub repositories."
+  default     = ""
+}
+
+variable "app_repo_existing_git_id" {
+  type        = string
+  description = "Set this value to `github` for github.com, or to the GUID of a custom GitHub Enterprise server."
+  default     = ""
+}
+
+variable "app_repo_existing_git_provider" {
+  type        = string
+  description = "By default this gets set as 'hostedgit', else set to 'githubconsolidated' for GitHub repositories."
+  default     = ""
+}
 
 variable "app_repo_existing_url" {
   type        = string

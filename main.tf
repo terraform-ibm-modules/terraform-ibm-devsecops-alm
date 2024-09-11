@@ -153,17 +153,43 @@ locals {
   cc_pipeline_config_repo_branch         = (var.cc_pipeline_config_repo_branch == "") ? var.pipeline_config_repo_branch : var.cc_pipeline_config_repo_branch
 
 
+
+  #calculated_provider = (
+  #  (strcontains(var.app_repo_existing_url, "github")) ? "githubconsolidated" :
+  #  (strcontains(var.app_repo_existing_url, "git.cloud.ibm.com")) ? "hostedgit" : ""
+  #)
+
+  #calculated_git_id = (
+  #  (strcontains(var.app_repo_existing_url, "github.ibm.com")) ? "integrated" :
+  #  (strcontains(var.app_repo_existing_url, "github")) ? "github" :
+  #  (strcontains(var.app_repo_existing_url, "git.cloud.ibm.com")) ? "" : ""
+  #)
+
+
+  #app_repo_existing_url = (local.calculated_provider == "") ? "" : var.app_repo_existing_url
+
   ci_app_group                      = (var.ci_app_group == "") ? var.app_group : var.ci_app_group
   cc_app_group                      = (var.cc_app_group == "") ? var.app_group : var.cc_app_group
   ci_app_repo_auth_type             = (var.ci_app_repo_auth_type == "") ? var.app_repo_auth_type : var.ci_app_repo_auth_type
   cc_app_repo_auth_type             = (var.cc_app_repo_auth_type == "") ? var.app_repo_auth_type : var.cc_app_repo_auth_type
   ci_app_repo_branch                = (var.ci_app_repo_branch == "") ? var.app_repo_branch : var.ci_app_repo_branch
   cc_app_repo_branch                = (var.cc_app_repo_branch == "") ? var.app_repo_branch : var.cc_app_repo_branch
-  ci_app_repo_existing_url          = (var.ci_app_repo_existing_url == "") ? var.app_repo_existing_url : var.ci_app_repo_existing_url
   ci_app_repo_git_token_secret_name = (var.ci_app_repo_git_token_secret_name == "") ? var.app_repo_git_token_secret_name : var.ci_app_repo_git_token_secret_name
   cc_app_repo_git_token_secret_name = (var.cc_app_repo_git_token_secret_name == "") ? var.app_repo_git_token_secret_name : var.cc_app_repo_git_token_secret_name
   ci_app_repo_secret_group          = (var.ci_app_repo_secret_group == "") ? var.app_repo_secret_group : var.ci_app_repo_secret_group
   cc_app_repo_secret_group          = (var.cc_app_repo_secret_group == "") ? var.app_repo_secret_group : var.cc_app_repo_secret_group
+
+
+  ci_app_repo_existing_url          = (var.ci_app_repo_existing_url == "") ? var.app_repo_existing_url : var.ci_app_repo_existing_url
+  cc_app_repo_existing_url          = (var.cc_app_repo_url == "") ? var.app_repo_existing_url : var.cc_app_repo_url
+  ci_app_repo_existing_git_id       = (var.ci_app_repo_existing_git_id == "") ? var.app_repo_existing_git_id : var.ci_app_repo_existing_git_id
+  cc_app_repo_existing_git_id       = (var.cc_app_repo_git_id == "") ? var.app_repo_existing_git_id : var.cc_app_repo_git_id
+  ci_app_repo_existing_git_provider = (var.ci_app_repo_existing_git_provider == "") ? var.app_repo_existing_git_provider : var.ci_app_repo_existing_git_provider
+  cc_app_repo_existing_git_provider = (var.cc_app_repo_git_provider == "") ? var.app_repo_existing_git_provider : var.cc_app_repo_git_provider
+
+  ci_app_repo_clone_from_url        = (var.ci_app_repo_clone_from_url == "") ? var.app_repo_clone_from_url : var.ci_app_repo_clone_from_url
+  ci_app_repo_clone_to_git_id       = (var.ci_app_repo_clone_to_git_id == "") ? var.app_repo_clone_to_git_id : var.ci_app_repo_clone_to_git_id
+  ci_app_repo_clone_to_git_provider = (var.ci_app_repo_clone_to_git_provider == "") ? var.app_repo_clone_to_git_provider : var.ci_app_repo_clone_to_git_provider
 }
 
 
@@ -307,13 +333,13 @@ module "devsecops_ci_toolchain" {
   compliance_pipeline_group = (local.ci_compliance_pipeline_group == "") ? var.repo_group : local.ci_compliance_pipeline_group
 
   #APP REPO
-  app_repo_clone_from_url        = (var.ci_app_repo_clone_from_url == "") ? local.app_source_repo_url : var.ci_app_repo_clone_from_url
+  app_repo_clone_from_url        = (local.ci_app_repo_clone_from_url == "") ? local.app_source_repo_url : local.ci_app_repo_clone_from_url
   app_repo_branch                = local.ci_app_repo_branch
   app_repo_existing_url          = local.ci_app_repo_existing_url
-  app_repo_existing_git_provider = var.ci_app_repo_existing_git_provider
-  app_repo_existing_git_id       = var.ci_app_repo_existing_git_id
-  app_repo_clone_to_git_provider = var.ci_app_repo_clone_to_git_provider
-  app_repo_clone_to_git_id       = var.ci_app_repo_clone_to_git_id
+  app_repo_existing_git_provider = local.ci_app_repo_existing_git_provider
+  app_repo_existing_git_id       = local.ci_app_repo_existing_git_id
+  app_repo_clone_to_git_provider = local.ci_app_repo_clone_to_git_provider
+  app_repo_clone_to_git_id       = local.ci_app_repo_clone_to_git_id
 
   #PIPELINE CONFIG REPO
   pipeline_config_repo_existing_url   = local.ci_pipeline_config_repo_existing_url
@@ -728,10 +754,10 @@ module "devsecops_cc_toolchain" {
   pipeline_config_repo_branch         = local.cc_pipeline_config_repo_branch
 
   #APP REPO
-  app_repo_url          = try(module.devsecops_ci_toolchain[0].app_repo_url, var.cc_app_repo_url)
-  app_repo_git_provider = try(module.devsecops_ci_toolchain[0].app_repo_git_provider, var.cc_app_repo_git_provider)
+  app_repo_url          = try(module.devsecops_ci_toolchain[0].app_repo_url, local.cc_app_repo_existing_url)
+  app_repo_git_provider = try(module.devsecops_ci_toolchain[0].app_repo_git_provider, local.cc_app_repo_existing_git_provider)
   app_repo_branch       = try(module.devsecops_ci_toolchain[0].app_repo_branch, local.cc_app_repo_branch)
-  app_repo_git_id       = try(module.devsecops_ci_toolchain[0].app_repo_git_id, var.cc_app_repo_git_id)
+  app_repo_git_id       = try(module.devsecops_ci_toolchain[0].app_repo_git_id, local.cc_app_repo_existing_git_id)
 
   #EVIDENCE REPO
   evidence_repo_name              = var.evidence_repo_name

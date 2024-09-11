@@ -280,6 +280,41 @@
                             "required": false
                         },
                         {
+                            "key": "app_repo_clone_from_url",
+                            "type": "string",
+                            "default_value": "",
+                            "description": "Override the default sample app by providing your own sample app URL, which is cloned into the app repository. Note, uses `clone_if_not_exists` mode, so if the app repository already exists the repository contents are unchanged.",
+                            "required": false
+                        },
+                        {
+                            "key": "app_repo_clone_to_git_id",
+                            "type": "string",
+                            "default_value": "",
+                            "description": "Set this value to `github` for github.com, or to the GUID of a custom GitHub Enterprise server.",
+                            "required": false
+                        },
+                        {
+                            "key": "app_repo_clone_to_git_provider",
+                            "type": "string",
+                            "default_value": "",
+                            "description": "By default this gets set as 'hostedgit', else set to 'githubconsolidated' for GitHub repositories.",
+                            "required": false
+                        },
+                        {
+                            "key": "app_repo_existing_git_id",
+                            "type": "string",
+                            "default_value": "",
+                            "description": "Set this value to `github` for github.com, or to the GUID of a custom GitHub Enterprise server.",
+                            "required": false
+                        },
+                        {
+                            "key": "app_repo_existing_git_provider",
+                            "type": "string",
+                            "default_value": "",
+                            "description": "By default this gets set as 'hostedgit', else set to 'githubconsolidated' for GitHub repositories.",
+                            "required": false
+                        },
+                        {
                             "key": "app_repo_existing_url",
                             "type": "string",
                             "default_value": "",
@@ -2011,6 +2046,41 @@
                             "type": "string",
                             "default_value": "main",
                             "description": "Used when `app_repo_clone_from_url` is provided, the default branch that is used by the CI build, usually either main or master.",
+                            "required": false
+                        },
+                        {
+                            "key": "app_repo_clone_from_url",
+                            "type": "string",
+                            "default_value": "",
+                            "description": "Override the default sample app by providing your own sample app URL, which is cloned into the app repository. Note, uses `clone_if_not_exists` mode, so if the app repository already exists the repository contents are unchanged.",
+                            "required": false
+                        },
+                        {
+                            "key": "app_repo_clone_to_git_id",
+                            "type": "string",
+                            "default_value": "",
+                            "description": "Set this value to `github` for github.com, or to the GUID of a custom GitHub Enterprise server.",
+                            "required": false
+                        },
+                        {
+                            "key": "app_repo_clone_to_git_provider",
+                            "type": "string",
+                            "default_value": "",
+                            "description": "By default this gets set as 'hostedgit', else set to 'githubconsolidated' for GitHub repositories.",
+                            "required": false
+                        },
+                        {
+                            "key": "app_repo_existing_git_id",
+                            "type": "string",
+                            "default_value": "",
+                            "description": "Set this value to `github` for github.com, or to the GUID of a custom GitHub Enterprise server.",
+                            "required": false
+                        },
+                        {
+                            "key": "app_repo_existing_git_provider",
+                            "type": "string",
+                            "default_value": "",
+                            "description": "By default this gets set as 'hostedgit', else set to 'githubconsolidated' for GitHub repositories.",
                             "required": false
                         },
                         {
