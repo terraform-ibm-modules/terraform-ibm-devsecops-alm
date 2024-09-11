@@ -3,7 +3,7 @@
         {
             "label": "DevSecOps Application Lifecycle Management",
             "name": "deploy-arch-ibm-devsecops-alm",
-            "version": "2.1.2",
+            "version": "2.1.7",
             "product_kind": "solution",
             "tags": [
                 "enterprise_app",
@@ -38,63 +38,63 @@
                                     "version": "1.6.0"
                                 },
                                 "names": [
-                                    "RA-5(d)",
-                                    "SA-3(a)",
-                                    "RA-5(2)",
-                                    "SA-10(c)",
-                                    "CM-2(1)(c)",
-                                    "CM-4",
-                                    "CM-6(b)",
-                                    "SA-10(e)",
-                                    "CM-2(2)",
-                                    "CM-3(e)",
-                                    "SA-10(1)",
-                                    "CM-9(a)",
-                                    "CM-7(1)(a)",
-                                    "CM-7(b)",
-                                    "CM-3(d)",
-                                    "SI-2(d)",
-                                    "CM-6(a)",
-                                    "CM-10(1)",
+                                    "SI-2(b)",
+                                    "CM-9(d)",
+                                    "RA-5(c)",
+                                    "CM-6(1)",
+                                    "CM-2(3)",
+                                    "SA-10(b)",
+                                    "CM-3(f)",
+                                    "CM-9(b)",
+                                    "SA-3(d)",
+                                    "CM-8(b)",
+                                    "CM-8(a)",
                                     "CM-2(1)(a)",
+                                    "CM-6(d)",
+                                    "SI-2(2)",
+                                    "CM-3(b)",
+                                    "RA-5(a)",
+                                    "SA-10(d)",
+                                    "CM-2(2)",
+                                    "SI-2(d)",
+                                    "CM-6(c)",
+                                    "CM-3(d)",
+                                    "CM-2(1)(b)",
+                                    "SI-7",
+                                    "RA-5(3)",
+                                    "CM-7(1)(a)",
+                                    "CM-9(c)",
+                                    "SA-10(a)",
+                                    "SI-2(c)",
+                                    "RA-5(d)",
+                                    "SI-2(a)",
+                                    "CM-3(a)",
+                                    "CM-8(1)",
+                                    "CM-3(c)",
+                                    "CM-7(b)",
+                                    "RA-5(b)",
+                                    "CM-2(1)(c)",
+                                    "CM-9(a)",
+                                    "CM-3(g)",
+                                    "RA-5(2)",
+                                    "CM-4",
+                                    "CM-3(e)",
+                                    "RA-5(1)",
+                                    "SA-10(c)",
+                                    "CM-6(b)",
                                     "CM-5",
                                     "SI-10",
-                                    "CM-8(b)",
+                                    "CM-8(2)",
+                                    "SA-10(e)",
+                                    "SA-10(1)",
+                                    "SA-15(a)",
+                                    "CM-6(a)",
                                     "CM-4(1)",
-                                    "CM-2(3)",
-                                    "CM-8(1)",
-                                    "SA-10(b)",
                                     "CM-3(2)",
                                     "SA-8",
-                                    "SI-2(2)",
-                                    "CM-3(f)",
-                                    "CM-9(c)",
-                                    "SI-2(a)",
-                                    "SA-15(a)",
-                                    "CM-3(c)",
-                                    "SI-2(b)",
-                                    "CM-3(b)",
-                                    "CM-3(a)",
                                     "CM-2",
-                                    "SA-10(a)",
-                                    "RA-5(1)",
-                                    "CM-8(a)",
-                                    "CM-2(1)(b)",
-                                    "CM-9(d)",
-                                    "SI-2(c)",
-                                    "CM-9(b)",
-                                    "SI-7",
-                                    "CM-8(2)",
-                                    "RA-5(a)",
-                                    "CM-6(c)",
-                                    "SA-3(d)",
-                                    "RA-5(3)",
-                                    "RA-5(c)",
-                                    "RA-5(b)",
-                                    "CM-3(g)",
-                                    "CM-6(1)",
-                                    "SA-10(d)",
-                                    "CM-6(d)"
+                                    "SA-3(a)",
+                                    "CM-10(1)"
                                 ]
                             }
                         ]
@@ -363,37 +363,10 @@
                             "required": false
                         },
                         {
-                            "key": "cc_enable_slack",
-                            "type": "string",
-                            "default_value": "",
-                            "description": "Set to `true` to create the Slack toolchain integration.",
-                            "required": false
-                        },
-                        {
                             "key": "cc_link_to_doi_toolchain",
                             "type": "boolean",
                             "default_value": true,
                             "description": "Enable a link to a DevOps Insights instance in another toolchain, true or false.",
-                            "required": false
-                        },
-                        {
-                            "key": "cc_pipeline_ibmcloud_api_key_secret_crn",
-                            "type": "password",
-                            "description": "The CRN of the IBMCloud apikey used for running the pipelines.",
-                            "required": false
-                        },
-                        {
-                            "key": "cc_pipeline_ibmcloud_api_key_secret_group",
-                            "type": "string",
-                            "default_value": "",
-                            "description": "Secret group for the pipeline ibmcloud API key secret. Defaults to the value set in `sm_secret_group` if not set. Only used with `Secrets Manager`.",
-                            "required": false
-                        },
-                        {
-                            "key": "cc_pipeline_ibmcloud_api_key_secret_name",
-                            "type": "string",
-                            "default_value": "",
-                            "description": "Name of the Cloud API key secret in the secret provider for running the pipelines.",
                             "required": false
                         },
                         {
@@ -410,13 +383,6 @@
                             }
                         },
                         {
-                            "key": "cc_scc_enable_scc",
-                            "type": "string",
-                            "default_value": "",
-                            "description": "Adds the SCC tool integration to the toolchain.",
-                            "required": false
-                        },
-                        {
                             "key": "cc_toolchain_description",
                             "type": "string",
                             "default_value": "Toolchain created with terraform template for DevSecOps CC Best Practices.",
@@ -431,20 +397,6 @@
                             "required": false
                         },
                         {
-                            "key": "cc_toolchain_region",
-                            "type": "string",
-                            "default_value": "",
-                            "description": "The region containing the CI toolchain. Use the short form of the regions. For example `us-south`.",
-                            "required": false
-                        },
-                        {
-                            "key": "cc_toolchain_resource_group",
-                            "type": "string",
-                            "default_value": "",
-                            "description": "Resource group within which the toolchain is created.",
-                            "required": false
-                        },
-                        {
                             "key": "cc_trigger_manual_enable",
                             "type": "boolean",
                             "default_value": true,
@@ -452,24 +404,10 @@
                             "required": false
                         },
                         {
-                            "key": "cc_trigger_manual_name",
-                            "type": "string",
-                            "default_value": "CC Manual Trigger",
-                            "description": "The name of the CC pipeline Manual trigger.",
-                            "required": false
-                        },
-                        {
                             "key": "cc_trigger_manual_pruner_enable",
                             "type": "boolean",
                             "default_value": true,
                             "description": "Set to `true` to enable the manual Pruner trigger.",
-                            "required": false
-                        },
-                        {
-                            "key": "cc_trigger_manual_pruner_name",
-                            "type": "string",
-                            "default_value": "Evidence Pruner Manual Trigger",
-                            "description": "The name of the manual Pruner trigger.",
                             "required": false
                         },
                         {
@@ -487,24 +425,10 @@
                             "required": false
                         },
                         {
-                            "key": "cc_trigger_timed_name",
-                            "type": "string",
-                            "default_value": "CC Timed Trigger",
-                            "description": "The name of the CC pipeline Timed trigger.",
-                            "required": false
-                        },
-                        {
                             "key": "cc_trigger_timed_pruner_enable",
                             "type": "boolean",
                             "default_value": false,
                             "description": "Set to `true` to enable the timed Pruner trigger.",
-                            "required": false
-                        },
-                        {
-                            "key": "cc_trigger_timed_pruner_name",
-                            "type": "string",
-                            "default_value": "Evidence Pruner Timed Trigger",
-                            "description": "The name of the timed Pruner trigger.",
                             "required": false
                         },
                         {
@@ -722,13 +646,6 @@
                             "required": false
                         },
                         {
-                            "key": "cd_enable_slack",
-                            "type": "string",
-                            "default_value": "",
-                            "description": "Set to `true` to create the Slack toolchain integration.",
-                            "required": false
-                        },
-                        {
                             "key": "continuous_delivery_service_name",
                             "type": "string",
                             "default_value": "cd-devsecops",
@@ -740,26 +657,6 @@
                             "type": "boolean",
                             "default_value": true,
                             "description": "Enable a link to a DevOps Insights instance in another toolchain, true or false.",
-                            "required": false
-                        },
-                        {
-                            "key": "cd_pipeline_ibmcloud_api_key_secret_crn",
-                            "type": "password",
-                            "description": "The CRN of the IBMCloud apikey used for running the pipelines.",
-                            "required": false
-                        },
-                        {
-                            "key": "cd_pipeline_ibmcloud_api_key_secret_group",
-                            "type": "string",
-                            "default_value": "",
-                            "description": "Secret group for the pipeline ibmcloud API key secret. Defaults to the value set in `sm_secret_group` if not set. Only used with `Secrets Manager`.",
-                            "required": false
-                        },
-                        {
-                            "key": "cd_pipeline_ibmcloud_api_key_secret_name",
-                            "type": "string",
-                            "default_value": "",
-                            "description": "Name of the Cloud API key secret in the secret provider for running the pipelines.",
                             "required": false
                         },
                         {
@@ -789,13 +686,6 @@
                             }
                         },
                         {
-                            "key": "cd_scc_enable_scc",
-                            "type": "string",
-                            "default_value": "",
-                            "description": "Adds the SCC tool integration to the toolchain.",
-                            "required": false
-                        },
-                        {
                             "key": "cd_service_plan",
                             "type": "string",
                             "default_value": "professional",
@@ -817,31 +707,10 @@
                             "required": false
                         },
                         {
-                            "key": "cd_toolchain_region",
-                            "type": "string",
-                            "default_value": "",
-                            "description": "The region containing the CD toolchain. Use the short form of the regions. For example `us-south`.",
-                            "required": false
-                        },
-                        {
-                            "key": "cd_toolchain_resource_group",
-                            "type": "string",
-                            "default_value": "",
-                            "description": "Resource group within which the toolchain is created.",
-                            "required": false
-                        },
-                        {
                             "key": "cd_trigger_git_enable",
                             "type": "boolean",
                             "default_value": false,
                             "description": "Set to `true` to enable the CD pipeline Git trigger.",
-                            "required": false
-                        },
-                        {
-                            "key": "cd_trigger_git_name",
-                            "type": "string",
-                            "default_value": "Git CD Trigger",
-                            "description": "The name of the CD pipeline GIT trigger.",
                             "required": false
                         },
                         {
@@ -866,24 +735,10 @@
                             "required": false
                         },
                         {
-                            "key": "cd_trigger_git_promotion_validation_name",
-                            "type": "string",
-                            "default_value": "Git Promotion Validation Trigger",
-                            "description": "Name of Git Promotion Validation Trigger",
-                            "required": false
-                        },
-                        {
                             "key": "cd_trigger_manual_enable",
                             "type": "boolean",
                             "default_value": true,
                             "description": "Set to `true` to enable the CD pipeline Manual trigger.",
-                            "required": false
-                        },
-                        {
-                            "key": "cd_trigger_manual_name",
-                            "type": "string",
-                            "default_value": "Manual CD Trigger",
-                            "description": "The name of the CI pipeline Manual trigger.",
                             "required": false
                         },
                         {
@@ -894,24 +749,10 @@
                             "required": false
                         },
                         {
-                            "key": "cd_trigger_manual_promotion_name",
-                            "type": "string",
-                            "default_value": "Manual Promotion Trigger",
-                            "description": "The name of the CD pipeline Manual Promotion trigger.",
-                            "required": false
-                        },
-                        {
                             "key": "cd_trigger_manual_pruner_enable",
                             "type": "boolean",
                             "default_value": true,
                             "description": "Set to `true` to enable the manual Pruner trigger.",
-                            "required": false
-                        },
-                        {
-                            "key": "cd_trigger_manual_pruner_name",
-                            "type": "string",
-                            "default_value": "Evidence Pruner Manual Trigger",
-                            "description": "The name of the manual Pruner trigger.",
                             "required": false
                         },
                         {
@@ -929,24 +770,10 @@
                             "required": false
                         },
                         {
-                            "key": "cd_trigger_timed_name",
-                            "type": "string",
-                            "default_value": "Git CD Timed Trigger",
-                            "description": "The name of the CD pipeline Timed trigger.",
-                            "required": false
-                        },
-                        {
                             "key": "cd_trigger_timed_pruner_enable",
                             "type": "boolean",
                             "default_value": false,
                             "description": "Set to `true` to enable the timed Pruner trigger.",
-                            "required": false
-                        },
-                        {
-                            "key": "cd_trigger_timed_pruner_name",
-                            "type": "string",
-                            "default_value": "Evidence Pruner Timed Trigger",
-                            "description": "The name of the timed Pruner trigger.",
                             "required": false
                         },
                         {
@@ -1089,37 +916,10 @@
                             "required": false
                         },
                         {
-                            "key": "ci_enable_slack",
-                            "type": "string",
-                            "default_value": "",
-                            "description": "Set to `true` to create the Slack toolchain integration.",
-                            "required": false
-                        },
-                        {
                             "key": "ci_link_to_doi_toolchain",
                             "type": "boolean",
                             "default_value": false,
                             "description": "Enable a link to a DevOps Insights instance in another toolchain.",
-                            "required": false
-                        },
-                        {
-                            "key": "ci_pipeline_ibmcloud_api_key_secret_crn",
-                            "type": "password",
-                            "description": "The CRN of the IBMCloud apikey used for running the pipelines.",
-                            "required": false
-                        },
-                        {
-                            "key": "ci_pipeline_ibmcloud_api_key_secret_group",
-                            "type": "string",
-                            "default_value": "",
-                            "description": "Secret group for the pipeline ibmcloud API key secret. Defaults to the value set in `sm_secret_group` if not set. Only used with `Secrets Manager`.",
-                            "required": false
-                        },
-                        {
-                            "key": "ci_pipeline_ibmcloud_api_key_secret_name",
-                            "type": "string",
-                            "default_value": "",
-                            "description": "Name of the Cloud API key secret in the secret provider for running the pipelines.",
                             "required": false
                         },
                         {
@@ -1170,31 +970,10 @@
                             "required": false
                         },
                         {
-                            "key": "ci_toolchain_region",
-                            "type": "string",
-                            "default_value": "",
-                            "description": "The region containing the CI toolchain. Use the short form of the regions. For example `us-south`.",
-                            "required": false
-                        },
-                        {
-                            "key": "ci_toolchain_resource_group",
-                            "type": "string",
-                            "default_value": "",
-                            "description": "The resource group within which the toolchain is created.",
-                            "required": false
-                        },
-                        {
                             "key": "ci_trigger_git_enable",
                             "type": "boolean",
                             "default_value": true,
                             "description": "Set to `true` to enable the CI pipeline Git trigger.",
-                            "required": false
-                        },
-                        {
-                            "key": "ci_trigger_git_name",
-                            "type": "string",
-                            "default_value": "Git CI Trigger",
-                            "description": "The name of the CI pipeline GIT trigger.",
                             "required": false
                         },
                         {
@@ -1205,13 +984,6 @@
                             "required": false
                         },
                         {
-                            "key": "ci_trigger_manual_name",
-                            "type": "string",
-                            "default_value": "Manual Trigger",
-                            "description": "The name of the CI pipeline Manual trigger.",
-                            "required": false
-                        },
-                        {
                             "key": "ci_trigger_manual_pruner_enable",
                             "type": "boolean",
                             "default_value": true,
@@ -1219,24 +991,10 @@
                             "required": false
                         },
                         {
-                            "key": "ci_trigger_manual_pruner_name",
-                            "type": "string",
-                            "default_value": "Evidence Pruner Manual Trigger",
-                            "description": "The name of the manual Pruner trigger.",
-                            "required": false
-                        },
-                        {
                             "key": "ci_trigger_pr_git_enable",
                             "type": "boolean",
                             "default_value": true,
                             "description": "Set to `true` to enable the PR pipeline Git trigger.",
-                            "required": false
-                        },
-                        {
-                            "key": "ci_trigger_pr_git_name",
-                            "type": "string",
-                            "default_value": "Git PR Trigger",
-                            "description": "The name of the PR pipeline GIT trigger.",
                             "required": false
                         },
                         {
@@ -1254,24 +1012,10 @@
                             "required": false
                         },
                         {
-                            "key": "ci_trigger_timed_name",
-                            "type": "string",
-                            "default_value": "Git CI Timed Trigger",
-                            "description": "The name of the CI pipeline Timed trigger.",
-                            "required": false
-                        },
-                        {
                             "key": "ci_trigger_timed_pruner_enable",
                             "type": "boolean",
                             "default_value": false,
                             "description": "Set to `true` to enable the timed Pruner trigger.",
-                            "required": false
-                        },
-                        {
-                            "key": "ci_trigger_timed_pruner_name",
-                            "type": "string",
-                            "default_value": "Evidence Pruner Timed Trigger",
-                            "description": "The name of the timed Pruner trigger.",
                             "required": false
                         },
                         {
@@ -1687,34 +1431,6 @@
                             "type": "string",
                             "default_value": "",
                             "description": "Secret group for the Issues repository secret. Defaults to the value set in `sm_secret_group` if not set. Only used with `Secrets Manager`.",
-                            "required": false
-                        },
-                        {
-                            "key": "kp_integration_name",
-                            "type": "string",
-                            "default_value": "kp-compliance-secrets",
-                            "description": "The name of the Key Protect integration.",
-                            "required": false
-                        },
-                        {
-                            "key": "kp_location",
-                            "type": "string",
-                            "default_value": "us-south",
-                            "description": "The region hosting the Key Protect instance. This applies to the CI, CD and CC Key Protect integrations. See `ci_kp_location`, `cd_kp_location`, and `cc_kp_location` to set these values .",
-                            "required": false
-                        },
-                        {
-                            "key": "kp_name",
-                            "type": "string",
-                            "default_value": "kp-compliance-secrets",
-                            "description": "Name of the Key Protect instance where the secrets are stored. This applies to the CI, CD and CC Key Protect integrations. See `ci_kp_name`, `cd_kp_name`, and `cc_kp_name` to set these values independently.",
-                            "required": false
-                        },
-                        {
-                            "key": "kp_resource_group",
-                            "type": "string",
-                            "default_value": "Default",
-                            "description": "The resource group containing the Key Protect instance. This applies to the CI, CD and CC Key Protect integrations. See `ci_kp_resource_group`, `cd_kp_resource_group`, and `cc_kp_resource_group` to set these values independently.",
                             "required": false
                         },
                         {
@@ -2070,76 +1786,76 @@
                     ],
                     "outputs": [
                         {
-                            "key": "pr_pipeline_id",
-                            "description": "The PR pipeline Id"
-                        },
-                        {
-                            "key": "compliance_ci_toolchain_id",
-                            "description": "The ID of the Compliance CI Toolchain"
-                        },
-                        {
-                            "key": "evidence_repo_url",
-                            "description": "The Evidence Repo URL"
-                        },
-                        {
-                            "key": "ci_pipeline_id",
-                            "description": "The CI pipeline Id"
+                            "key": "compliance_cc_toolchain_id",
+                            "description": "The ID of the Compliance CC Toolchain"
                         },
                         {
                             "key": "cc_pipeline_id",
                             "description": "The CC pipeline Id"
                         },
                         {
-                            "key": "compliance_cc_toolchain_url",
-                            "description": "The Compliance CC Toolchain URL"
-                        },
-                        {
-                            "key": "app_repo_url",
-                            "description": "The App Repo URL"
-                        },
-                        {
-                            "key": "inventory_repo_url",
-                            "description": "The Inventory Repo URL"
-                        },
-                        {
-                            "key": "secrets_manager_instance_id",
-                            "description": "The Secrets Manage Instance ID"
-                        },
-                        {
-                            "key": "compliance_cc_toolchain_id",
-                            "description": "The ID of the Compliance CC Toolchain"
-                        },
-                        {
-                            "key": "compliance_cd_toolchain_id",
-                            "description": "The ID of the Compliance CD Toolchain"
-                        },
-                        {
-                            "key": "cd_pipeline_id",
-                            "description": "The CD pipeline Id"
-                        },
-                        {
-                            "key": "compliance_cd_toolchain_url",
-                            "description": "The Compliance CD Toolchain URL"
-                        },
-                        {
-                            "key": "change_management_repo_url",
-                            "description": "The Change Management Repo URL."
-                        },
-                        {
                             "key": "icr_namespace_name",
                             "description": "The name of the targets ICR namespace."
                         },
                         {
-                            "key": "issues_repo_url",
-                            "description": "The Issues Repo URL"
+                            "key": "ci_pipeline_id",
+                            "description": "The CI pipeline Id"
                         },
                         {
                             "key": "key_protect_instance_id",
                             "description": "The Key Protect Instance ID"
                         },
                         {
+                            "key": "compliance_cd_toolchain_url",
+                            "description": "The Compliance CD Toolchain URL"
+                        },
+                        {
+                            "key": "pr_pipeline_id",
+                            "description": "The PR pipeline Id"
+                        },
+                        {
                             "key": "compliance_ci_toolchain_url",
                             "description": "The Compliance CI Toolchain URL"
+                        },
+                        {
+                            "key": "compliance_ci_toolchain_id",
+                            "description": "The ID of the Compliance CI Toolchain"
+                        },
+                        {
+                            "key": "inventory_repo_url",
+                            "description": "The Inventory Repo URL"
+                        },
+                        {
+                            "key": "change_management_repo_url",
+                            "description": "The Change Management Repo URL."
+                        },
+                        {
+                            "key": "secrets_manager_instance_id",
+                            "description": "The Secrets Manage Instance ID"
+                        },
+                        {
+                            "key": "issues_repo_url",
+                            "description": "The Issues Repo URL"
+                        },
+                        {
+                            "key": "evidence_repo_url",
+                            "description": "The Evidence Repo URL"
+                        },
+                        {
+                            "key": "compliance_cd_toolchain_id",
+                            "description": "The ID of the Compliance CD Toolchain"
+                        },
+                        {
+                            "key": "compliance_cc_toolchain_url",
+                            "description": "The Compliance CC Toolchain URL"
+                        },
+                        {
+                            "key": "cd_pipeline_id",
+                            "description": "The CD pipeline Id"
+                        },
+                        {
+                            "key": "app_repo_url",
+                            "description": "The App Repo URL"
                         }
                     ],
                     "install_type": "fullstack"
@@ -2147,8 +1863,8 @@
                 {
                     "label": "Deploy to Code Engine",
                     "name": "devsecops_ce",
-                    "index": 2,
                     "working_directory": "solutions/code-engine",
+                    "index": 2,
                     "compliance": {
                         "authority": "scc-v3",
                         "controls": [
@@ -2160,62 +1876,62 @@
                                 },
                                 "names": [
                                     "CM-2(1)(a)",
+                                    "CM-3(d)",
+                                    "CM-8(a)",
+                                    "SA-3(a)",
+                                    "SI-10",
+                                    "RA-5(2)",
+                                    "SA-10(1)",
+                                    "RA-5(a)",
+                                    "CM-8(2)",
+                                    "CM-8(b)",
+                                    "CM-9(c)",
+                                    "CM-3(f)",
                                     "CM-6(a)",
+                                    "RA-5(b)",
+                                    "SA-10(d)",
+                                    "SI-2(c)",
+                                    "CM-3(g)",
+                                    "RA-5(1)",
+                                    "CM-9(b)",
+                                    "SI-2(2)",
+                                    "CM-6(1)",
+                                    "CM-2(3)",
                                     "CM-6(b)",
                                     "CM-7(1)(a)",
                                     "CM-6(d)",
-                                    "CM-3(g)",
-                                    "RA-5(a)",
-                                    "SI-2(d)",
+                                    "CM-6(c)",
+                                    "CM-7(b)",
+                                    "CM-10(1)",
+                                    "SI-2(a)",
+                                    "SA-3(d)",
+                                    "SA-10(c)",
+                                    "SA-10(a)",
+                                    "CM-9(a)",
+                                    "CM-4(1)",
+                                    "SI-2(b)",
+                                    "CM-9(d)",
+                                    "CM-8(1)",
+                                    "CM-2",
+                                    "SA-8",
                                     "SA-15(a)",
                                     "CM-3(a)",
-                                    "SA-10(c)",
-                                    "CM-5",
-                                    "RA-5(1)",
                                     "CM-2(1)(b)",
-                                    "CM-7(b)",
-                                    "CM-8(2)",
-                                    "CM-9(b)",
+                                    "SA-10(b)",
+                                    "CM-3(c)",
+                                    "SA-10(e)",
+                                    "CM-2(1)(c)",
+                                    "CM-3(2)",
                                     "RA-5(c)",
                                     "RA-5(3)",
-                                    "SI-2(b)",
-                                    "CM-6(c)",
-                                    "SA-10(a)",
-                                    "RA-5(b)",
-                                    "CM-6(1)",
-                                    "CM-8(b)",
-                                    "SA-10(d)",
-                                    "CM-9(c)",
-                                    "CM-10(1)",
-                                    "CM-3(d)",
-                                    "CM-8(1)",
-                                    "SI-10",
-                                    "SI-2(2)",
-                                    "CM-2(1)(c)",
-                                    "RA-5(2)",
-                                    "CM-2",
-                                    "CM-3(c)",
                                     "CM-3(b)",
-                                    "CM-9(d)",
-                                    "SI-2(c)",
-                                    "SI-7",
-                                    "SA-10(e)",
-                                    "SA-8",
-                                    "CM-2(2)",
-                                    "CM-8(a)",
-                                    "SA-10(b)",
-                                    "CM-9(a)",
-                                    "CM-3(f)",
                                     "CM-4",
                                     "RA-5(d)",
-                                    "SI-2(a)",
-                                    "CM-2(3)",
-                                    "CM-3(2)",
-                                    "SA-10(1)",
-                                    "SA-3(a)",
                                     "CM-3(e)",
-                                    "SA-3(d)",
-                                    "CM-4(1)"
+                                    "SI-2(d)",
+                                    "CM-5",
+                                    "SI-7",
+                                    "CM-2(2)"
                                 ]
                             }
                         ]
@@ -2464,12 +2180,6 @@
                             "required": false
                         },
                         {
-                            "key": "cc_artifactory_token_secret_crn",
-                            "type": "password",
-                            "description": "The CRN for the Artifactory access secret.",
-                            "required": false
-                        },
-                        {
                             "key": "cc_doi_toolchain_id",
                             "type": "string",
                             "default_value": "",
@@ -2498,37 +2208,10 @@
                             "required": false
                         },
                         {
-                            "key": "cc_enable_slack",
-                            "type": "string",
-                            "default_value": "",
-                            "description": "Set to `true` to create the Slack toolchain integration.",
-                            "required": false
-                        },
-                        {
                             "key": "cc_link_to_doi_toolchain",
                             "type": "boolean",
                             "default_value": true,
                             "description": "Enable a link to a DevOps Insights instance in another toolchain, true or false.",
-                            "required": false
-                        },
-                        {
-                            "key": "cc_pipeline_ibmcloud_api_key_secret_crn",
-                            "type": "password",
-                            "description": "The CRN of the IBMCloud apikey used for running the pipelines.",
-                            "required": false
-                        },
-                        {
-                            "key": "cc_pipeline_ibmcloud_api_key_secret_group",
-                            "type": "string",
-                            "default_value": "",
-                            "description": "Secret group for the pipeline ibmcloud API key secret. Defaults to the value set in `sm_secret_group` if not set. Only used with `Secrets Manager`.",
-                            "required": false
-                        },
-                        {
-                            "key": "cc_pipeline_ibmcloud_api_key_secret_name",
-                            "type": "string",
-                            "default_value": "",
-                            "description": "Name of the Cloud API key secret in the secret provider for running the pipelines.",
                             "required": false
                         },
                         {
@@ -2545,13 +2228,6 @@
                             }
                         },
                         {
-                            "key": "cc_scc_enable_scc",
-                            "type": "string",
-                            "default_value": "",
-                            "description": "Adds the SCC tool integration to the toolchain.",
-                            "required": false
-                        },
-                        {
                             "key": "cc_toolchain_description",
                             "type": "string",
                             "default_value": "Toolchain created with terraform template for DevSecOps CC Best Practices.",
@@ -2566,20 +2242,6 @@
                             "required": false
                         },
                         {
-                            "key": "cc_toolchain_region",
-                            "type": "string",
-                            "default_value": "",
-                            "description": "The region containing the CI toolchain. Use the short form of the regions. For example `us-south`.",
-                            "required": false
-                        },
-                        {
-                            "key": "cc_toolchain_resource_group",
-                            "type": "string",
-                            "default_value": "",
-                            "description": "Resource group within which the toolchain is created.",
-                            "required": false
-                        },
-                        {
                             "key": "cc_trigger_manual_enable",
                             "type": "boolean",
                             "default_value": true,
@@ -2587,24 +2249,10 @@
                             "required": false
                         },
                         {
-                            "key": "cc_trigger_manual_name",
-                            "type": "string",
-                            "default_value": "CC Manual Trigger",
-                            "description": "The name of the CC pipeline Manual trigger.",
-                            "required": false
-                        },
-                        {
                             "key": "cc_trigger_manual_pruner_enable",
                             "type": "boolean",
                             "default_value": true,
                             "description": "Set to `true` to enable the manual Pruner trigger.",
-                            "required": false
-                        },
-                        {
-                            "key": "cc_trigger_manual_pruner_name",
-                            "type": "string",
-                            "default_value": "Evidence Pruner Manual Trigger",
-                            "description": "The name of the manual Pruner trigger.",
                             "required": false
                         },
                         {
@@ -2622,30 +2270,10 @@
                             "required": false
                         },
                         {
-                            "key": "cc_trigger_timed_name",
-                            "type": "string",
-                            "default_value": "CC Timed Trigger",
-                            "description": "The name of the CC pipeline Timed trigger.",
-                            "required": false
-                        },
-                        {
                             "key": "cc_trigger_timed_pruner_enable",
                             "type": "boolean",
                             "default_value": false,
                             "description": "Set to `true` to enable the timed Pruner trigger.",
-                            "required": false
-                        },
-                        {
-                            "key": "cc_trigger_timed_pruner_name",
-                            "type": "string",
-                            "default_value": "Evidence Pruner Timed Trigger",
-                            "description": "The name of the timed Pruner trigger.",
-                            "required": false
-                        },
-                        {
-                            "key": "cd_artifactory_token_secret_crn",
-                            "type": "password",
-                            "description": "The CRN for the Artifactory access secret.",
                             "required": false
                         },
                         {
@@ -2850,13 +2478,6 @@
                             "required": false
                         },
                         {
-                            "key": "cd_enable_slack",
-                            "type": "string",
-                            "default_value": "",
-                            "description": "Set to `true` to create the Slack toolchain integration.",
-                            "required": false
-                        },
-                        {
                             "key": "continuous_delivery_service_name",
                             "type": "string",
                             "default_value": "cd-devsecops",
@@ -2868,26 +2489,6 @@
                             "type": "boolean",
                             "default_value": true,
                             "description": "Enable a link to a DevOps Insights instance in another toolchain, true or false.",
-                            "required": false
-                        },
-                        {
-                            "key": "cd_pipeline_ibmcloud_api_key_secret_crn",
-                            "type": "password",
-                            "description": "The CRN of the IBMCloud apikey used for running the pipelines.",
-                            "required": false
-                        },
-                        {
-                            "key": "cd_pipeline_ibmcloud_api_key_secret_group",
-                            "type": "string",
-                            "default_value": "",
-                            "description": "Secret group for the pipeline ibmcloud API key secret. Defaults to the value set in `sm_secret_group` if not set. Only used with `Secrets Manager`.",
-                            "required": false
-                        },
-                        {
-                            "key": "cd_pipeline_ibmcloud_api_key_secret_name",
-                            "type": "string",
-                            "default_value": "",
-                            "description": "Name of the Cloud API key secret in the secret provider for running the pipelines.",
                             "required": false
                         },
                         {
@@ -2917,13 +2518,6 @@
                             }
                         },
                         {
-                            "key": "cd_scc_enable_scc",
-                            "type": "string",
-                            "default_value": "",
-                            "description": "Adds the SCC tool integration to the toolchain.",
-                            "required": false
-                        },
-                        {
                             "key": "cd_service_plan",
                             "type": "string",
                             "default_value": "professional",
@@ -2945,31 +2539,10 @@
                             "required": false
                         },
                         {
-                            "key": "cd_toolchain_region",
-                            "type": "string",
-                            "default_value": "",
-                            "description": "The region containing the CD toolchain. Use the short form of the regions. For example `us-south`.",
-                            "required": false
-                        },
-                        {
-                            "key": "cd_toolchain_resource_group",
-                            "type": "string",
-                            "default_value": "",
-                            "description": "Resource group within which the toolchain is created.",
-                            "required": false
-                        },
-                        {
                             "key": "cd_trigger_git_enable",
                             "type": "boolean",
                             "default_value": false,
                             "description": "Set to `true` to enable the CD pipeline Git trigger.",
-                            "required": false
-                        },
-                        {
-                            "key": "cd_trigger_git_name",
-                            "type": "string",
-                            "default_value": "Git CD Trigger",
-                            "description": "The name of the CD pipeline GIT trigger.",
                             "required": false
                         },
                         {
@@ -2994,24 +2567,10 @@
                             "required": false
                         },
                         {
-                            "key": "cd_trigger_git_promotion_validation_name",
-                            "type": "string",
-                            "default_value": "Git Promotion Validation Trigger",
-                            "description": "Name of Git Promotion Validation Trigger",
-                            "required": false
-                        },
-                        {
                             "key": "cd_trigger_manual_enable",
                             "type": "boolean",
                             "default_value": true,
                             "description": "Set to `true` to enable the CD pipeline Manual trigger.",
-                            "required": false
-                        },
-                        {
-                            "key": "cd_trigger_manual_name",
-                            "type": "string",
-                            "default_value": "Manual CD Trigger",
-                            "description": "The name of the CI pipeline Manual trigger.",
                             "required": false
                         },
                         {
@@ -3022,24 +2581,10 @@
                             "required": false
                         },
                         {
-                            "key": "cd_trigger_manual_promotion_name",
-                            "type": "string",
-                            "default_value": "Manual Promotion Trigger",
-                            "description": "The name of the CD pipeline Manual Promotion trigger.",
-                            "required": false
-                        },
-                        {
                             "key": "cd_trigger_manual_pruner_enable",
                             "type": "boolean",
                             "default_value": true,
                             "description": "Set to `true` to enable the manual Pruner trigger.",
-                            "required": false
-                        },
-                        {
-                            "key": "cd_trigger_manual_pruner_name",
-                            "type": "string",
-                            "default_value": "Evidence Pruner Manual Trigger",
-                            "description": "The name of the manual Pruner trigger.",
                             "required": false
                         },
                         {
@@ -3057,24 +2602,10 @@
                             "required": false
                         },
                         {
-                            "key": "cd_trigger_timed_name",
-                            "type": "string",
-                            "default_value": "Git CD Timed Trigger",
-                            "description": "The name of the CD pipeline Timed trigger.",
-                            "required": false
-                        },
-                        {
                             "key": "cd_trigger_timed_pruner_enable",
                             "type": "boolean",
                             "default_value": false,
                             "description": "Set to `true` to enable the timed Pruner trigger.",
-                            "required": false
-                        },
-                        {
-                            "key": "cd_trigger_timed_pruner_name",
-                            "type": "string",
-                            "default_value": "Evidence Pruner Timed Trigger",
-                            "description": "The name of the timed Pruner trigger.",
                             "required": false
                         },
                         {
@@ -3117,12 +2648,6 @@
                             "type": "string",
                             "default_value": "",
                             "description": "By default this gets set as 'hostedgit', else set to 'githubconsolidated' for GitHub repositories.",
-                            "required": false
-                        },
-                        {
-                            "key": "ci_artifactory_token_secret_crn",
-                            "type": "password",
-                            "description": "The CRN for the Artifactory access secret.",
                             "required": false
                         },
                         {
@@ -3210,37 +2735,10 @@
                             "required": false
                         },
                         {
-                            "key": "ci_enable_slack",
-                            "type": "string",
-                            "default_value": "",
-                            "description": "Set to `true` to create the Slack toolchain integration.",
-                            "required": false
-                        },
-                        {
                             "key": "ci_link_to_doi_toolchain",
                             "type": "boolean",
                             "default_value": false,
                             "description": "Enable a link to a DevOps Insights instance in another toolchain.",
-                            "required": false
-                        },
-                        {
-                            "key": "ci_pipeline_ibmcloud_api_key_secret_crn",
-                            "type": "password",
-                            "description": "The CRN of the IBMCloud apikey used for running the pipelines.",
-                            "required": false
-                        },
-                        {
-                            "key": "ci_pipeline_ibmcloud_api_key_secret_group",
-                            "type": "string",
-                            "default_value": "",
-                            "description": "Secret group for the pipeline ibmcloud API key secret. Defaults to the value set in `sm_secret_group` if not set. Only used with `Secrets Manager`.",
-                            "required": false
-                        },
-                        {
-                            "key": "ci_pipeline_ibmcloud_api_key_secret_name",
-                            "type": "string",
-                            "default_value": "",
-                            "description": "Name of the Cloud API key secret in the secret provider for running the pipelines.",
                             "required": false
                         },
                         {
@@ -3291,31 +2789,10 @@
                             "required": false
                         },
                         {
-                            "key": "ci_toolchain_region",
-                            "type": "string",
-                            "default_value": "",
-                            "description": "The region containing the CI toolchain. Use the short form of the regions. For example `us-south`.",
-                            "required": false
-                        },
-                        {
-                            "key": "ci_toolchain_resource_group",
-                            "type": "string",
-                            "default_value": "",
-                            "description": "The resource group within which the toolchain is created.",
-                            "required": false
-                        },
-                        {
                             "key": "ci_trigger_git_enable",
                             "type": "boolean",
                             "default_value": true,
                             "description": "Set to `true` to enable the CI pipeline Git trigger.",
-                            "required": false
-                        },
-                        {
-                            "key": "ci_trigger_git_name",
-                            "type": "string",
-                            "default_value": "Git CI Trigger",
-                            "description": "The name of the CI pipeline GIT trigger.",
                             "required": false
                         },
                         {
@@ -3326,13 +2803,6 @@
                             "required": false
                         },
                         {
-                            "key": "ci_trigger_manual_name",
-                            "type": "string",
-                            "default_value": "Manual Trigger",
-                            "description": "The name of the CI pipeline Manual trigger.",
-                            "required": false
-                        },
-                        {
                             "key": "ci_trigger_manual_pruner_enable",
                             "type": "boolean",
                             "default_value": true,
@@ -3340,24 +2810,10 @@
                             "required": false
                         },
                         {
-                            "key": "ci_trigger_manual_pruner_name",
-                            "type": "string",
-                            "default_value": "Evidence Pruner Manual Trigger",
-                            "description": "The name of the manual Pruner trigger.",
-                            "required": false
-                        },
-                        {
                             "key": "ci_trigger_pr_git_enable",
                             "type": "boolean",
                             "default_value": true,
                             "description": "Set to `true` to enable the PR pipeline Git trigger.",
-                            "required": false
-                        },
-                        {
-                            "key": "ci_trigger_pr_git_name",
-                            "type": "string",
-                            "default_value": "Git PR Trigger",
-                            "description": "The name of the PR pipeline GIT trigger.",
                             "required": false
                         },
                         {
@@ -3375,24 +2831,10 @@
                             "required": false
                         },
                         {
-                            "key": "ci_trigger_timed_name",
-                            "type": "string",
-                            "default_value": "Git CI Timed Trigger",
-                            "description": "The name of the CI pipeline Timed trigger.",
-                            "required": false
-                        },
-                        {
                             "key": "ci_trigger_timed_pruner_enable",
                             "type": "boolean",
                             "default_value": false,
                             "description": "Set to `true` to enable the timed Pruner trigger.",
-                            "required": false
-                        },
-                        {
-                            "key": "ci_trigger_timed_pruner_name",
-                            "type": "string",
-                            "default_value": "Evidence Pruner Timed Trigger",
-                            "description": "The name of the timed Pruner trigger.",
                             "required": false
                         },
                         {
@@ -3808,34 +3250,6 @@
                             "type": "string",
                             "default_value": "",
                             "description": "Secret group for the Issues repository secret. Defaults to the value set in `sm_secret_group` if not set. Only used with `Secrets Manager`.",
-                            "required": false
-                        },
-                        {
-                            "key": "kp_integration_name",
-                            "type": "string",
-                            "default_value": "kp-compliance-secrets",
-                            "description": "The name of the Key Protect integration.",
-                            "required": false
-                        },
-                        {
-                            "key": "kp_location",
-                            "type": "string",
-                            "default_value": "us-south",
-                            "description": "The region hosting the Key Protect instance. This applies to the CI, CD and CC Key Protect integrations. See `ci_kp_location`, `cd_kp_location`, and `cc_kp_location` to set these values .",
-                            "required": false
-                        },
-                        {
-                            "key": "kp_name",
-                            "type": "string",
-                            "default_value": "kp-compliance-secrets",
-                            "description": "Name of the Key Protect instance where the secrets are stored. This applies to the CI, CD and CC Key Protect integrations. See `ci_kp_name`, `cd_kp_name`, and `cc_kp_name` to set these values independently.",
-                            "required": false
-                        },
-                        {
-                            "key": "kp_resource_group",
-                            "type": "string",
-                            "default_value": "Default",
-                            "description": "The resource group containing the Key Protect instance. This applies to the CI, CD and CC Key Protect integrations. See `ci_kp_resource_group`, `cd_kp_resource_group`, and `cc_kp_resource_group` to set these values independently.",
                             "required": false
                         },
                         {
@@ -4191,12 +3605,20 @@
                     ],
                     "outputs": [
                         {
-                            "key": "cc_pipeline_id",
-                            "description": "The CC pipeline Id"
+                            "key": "ci_pipeline_id",
+                            "description": "The CI pipeline Id"
                         },
                         {
                             "key": "secrets_manager_instance_id",
                             "description": "The Secrets Manage Instance ID"
+                        },
+                        {
+                            "key": "inventory_repo_url",
+                            "description": "The Inventory Repo URL"
+                        },
+                        {
+                            "key": "compliance_ci_toolchain_id",
+                            "description": "The ID of the Compliance CI Toolchain"
                         },
                         {
                             "key": "issues_repo_url",
@@ -4207,40 +3629,24 @@
                             "description": "The PR pipeline Id"
                         },
                         {
-                            "key": "compliance_cd_toolchain_url",
-                            "description": "The Compliance CD Toolchain URL"
+                            "key": "app_repo_url",
+                            "description": "The App Repo URL"
                         },
                         {
-                            "key": "ci_pipeline_id",
-                            "description": "The CI pipeline Id"
-                        },
-                        {
-                            "key": "icr_namespace_name",
-                            "description": "The name of the targets ICR namespace."
-                        },
-                        {
-                            "key": "compliance_cc_toolchain_url",
-                            "description": "The Compliance CC Toolchain URL"
-                        },
-                        {
-                            "key": "compliance_ci_toolchain_url",
-                            "description": "The Compliance CI Toolchain URL"
-                        },
-                        {
-                            "key": "change_management_repo_url",
-                            "description": "The Change Management Repo URL."
+                            "key": "compliance_cd_toolchain_id",
+                            "description": "The ID of the Compliance CD Toolchain"
                         },
                         {
                             "key": "cd_pipeline_id",
                             "description": "The CD pipeline Id"
                         },
                         {
-                            "key": "evidence_repo_url",
-                            "description": "The Evidence Repo URL"
+                            "key": "change_management_repo_url",
+                            "description": "The Change Management Repo URL."
                         },
                         {
-                            "key": "compliance_cd_toolchain_id",
-                            "description": "The ID of the Compliance CD Toolchain"
+                            "key": "compliance_cd_toolchain_url",
+                            "description": "The Compliance CD Toolchain URL"
                         },
                         {
                             "key": "compliance_cc_toolchain_id",
@@ -4251,16 +3657,24 @@
                             "description": "The Key Protect Instance ID"
                         },
                         {
-                            "key": "app_repo_url",
-                            "description": "The App Repo URL"
+                            "key": "compliance_cc_toolchain_url",
+                            "description": "The Compliance CC Toolchain URL"
                         },
                         {
-                            "key": "inventory_repo_url",
-                            "description": "The Inventory Repo URL"
+                            "key": "compliance_ci_toolchain_url",
+                            "description": "The Compliance CI Toolchain URL"
                         },
                         {
-                            "key": "compliance_ci_toolchain_id",
-                            "description": "The ID of the Compliance CI Toolchain"
+                            "key": "cc_pipeline_id",
+                            "description": "The CC pipeline Id"
+                        },
+                        {
+                            "key": "evidence_repo_url",
+                            "description": "The Evidence Repo URL"
+                        },
+                        {
+                            "key": "icr_namespace_name",
+                            "description": "The name of the targets ICR namespace."
                         }
                     ],
                     "install_type": "fullstack"
