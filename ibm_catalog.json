@@ -1976,7 +1976,7 @@
                             "type": "string",
                             "default_value": "__NOTSET__",
                             "description": "Bring your own existing application repository by providing the URL. This will create an integration for your application repository instead of cloning the default sample. Repositories existing in a different org will require the use of Git token. See `app_repo_git_token_secret_name` under optional variables. ",
-                            "required": false
+                            "required": true
                         },
                         {
                             "key": "add_code_engine_prefix",
