@@ -371,8 +371,8 @@ module "devsecops_ci_toolchain" {
   inventory_repo_git_id            = var.inventory_repo_existing_git_id
   inventory_repo_integration_owner = var.inventory_repo_integration_owner
 
-  app_name = var.ci_app_name
-
+  app_name                           = var.ci_app_name
+  signing_key_secret_name            = var.ci_signing_key_secret_name
   registry_region                    = (var.ci_registry_region == "") ? format("${var.environment_prefix}%s", var.toolchain_region) : format("${var.environment_prefix}%s", replace(replace(var.ci_registry_region, "ibm:yp:", ""), "ibm:ys1:", ""))
   authorization_policy_creation      = (var.ci_authorization_policy_creation == "") ? var.authorization_policy_creation : var.ci_authorization_policy_creation
   repositories_prefix                = (local.ci_repositories_prefix == "compliance" && var.prefix != "") ? format("%s-%s", var.prefix, local.ci_repositories_prefix) : local.ci_repositories_prefix
@@ -616,6 +616,8 @@ module "devsecops_cd_toolchain" {
 
   repository_properties          = var.cd_repository_properties
   repository_properties_filepath = var.cd_repository_properties_filepath
+
+  code_signing_cert_secret_name = var.cd_code_signing_cert_secret_name
 
   #SLACK INTEGRATION
   enable_slack           = (local.cd_enable_slack == "true") ? true : false
