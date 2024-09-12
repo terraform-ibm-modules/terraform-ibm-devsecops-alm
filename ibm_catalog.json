@@ -1,8 +1,8 @@
 {
 	"products": [
 		{
-			"label": "DevSecOps Application Lifecycle Management",
-			"name": "deploy-arch-ibm-devsecops-alm",
+			"label": "Testing - DevSecOps Application Lifecycle Management",
+			"name": "testing-deploy-arch-ibm-devsecops-alm",
 			"product_kind": "solution",
 			"tags": [
 				"enterprise_app",
