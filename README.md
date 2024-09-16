@@ -65,9 +65,9 @@ statement instead the previous block.
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_devsecops_cc_toolchain"></a> [devsecops\_cc\_toolchain](#module\_devsecops\_cc\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cc-toolchain | v2.0.0-beta.2 |
-| <a name="module_devsecops_cd_toolchain"></a> [devsecops\_cd\_toolchain](#module\_devsecops\_cd\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain | v2.0.0-beta.2 |
-| <a name="module_devsecops_ci_toolchain"></a> [devsecops\_ci\_toolchain](#module\_devsecops\_ci\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-ci-toolchain | v2.0.0-beta.2 |
+| <a name="module_devsecops_cc_toolchain"></a> [devsecops\_cc\_toolchain](#module\_devsecops\_cc\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cc-toolchain | v2_2 |
+| <a name="module_devsecops_cd_toolchain"></a> [devsecops\_cd\_toolchain](#module\_devsecops\_cd\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain | v2_2 |
+| <a name="module_devsecops_ci_toolchain"></a> [devsecops\_ci\_toolchain](#module\_devsecops\_ci\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-ci-toolchain | v2_2 |
 | <a name="module_prereqs"></a> [prereqs](#module\_prereqs) | ./prereqs | n/a |
 
 ### Resources
@@ -538,7 +538,7 @@ statement instead the previous block.
 | <a name="input_pipeline_git_tag"></a> [pipeline\_git\_tag](#input\_pipeline\_git\_tag) | The GIT tag selector for the Compliance Pipelines definitions. | `string` | `""` | no |
 | <a name="input_pipeline_ibmcloud_api_key_secret_crn"></a> [pipeline\_ibmcloud\_api\_key\_secret\_crn](#input\_pipeline\_ibmcloud\_api\_key\_secret\_crn) | The CRN of the IBMCloud apikey used for running the pipelines. | `string` | `""` | no |
 | <a name="input_pipeline_ibmcloud_api_key_secret_group"></a> [pipeline\_ibmcloud\_api\_key\_secret\_group](#input\_pipeline\_ibmcloud\_api\_key\_secret\_group) | Secret group for the pipeline ibmcloud API key secret. Defaults to the value set in `sm_secret_group` if not set. Only used with `Secrets Manager`. | `string` | `""` | no |
-| <a name="input_pipeline_ibmcloud_api_key_secret_name"></a> [pipeline\_ibmcloud\_api\_key\_secret\_name](#input\_pipeline\_ibmcloud\_api\_key\_secret\_name) | Name of the Cloud API key secret in the secret provider for running the pipelines. Applies to the CI, CD and CC toolchains. For specific versions see `ci_pipeline_ibmcloud_api_key_secret_name`, `cd_pipeline_ibmcloud_api_key_secret_name` and `cc_pipeline_ibmcloud_api_key_secret_name`. | `string` | `"ibmcloud-api-key"` | no |
+| <a name="input_pipeline_ibmcloud_api_key_secret_name"></a> [pipeline\_ibmcloud\_api\_key\_secret\_name](#input\_pipeline\_ibmcloud\_api\_key\_secret\_name) | Name of the Cloud API key secret in the secret provider for running the pipelines. Applies to the CI, CD and CC toolchains. | `string` | `"ibmcloud-api-key"` | no |
 | <a name="input_pr_pipeline_git_tag"></a> [pr\_pipeline\_git\_tag](#input\_pr\_pipeline\_git\_tag) | The GIT tag selector for the Compliance Pipelines definitions. | `string` | `""` | no |
 | <a name="input_prefix"></a> [prefix](#input\_prefix) | A prefix that is added to the toolchain resources. | `string` | `""` | no |
 | <a name="input_registry_namespace"></a> [registry\_namespace](#input\_registry\_namespace) | A unique namespace within the IBM Cloud Container Registry region where the application image is stored. | `string` | `""` | no |

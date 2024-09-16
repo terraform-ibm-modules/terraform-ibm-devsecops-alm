@@ -95,7 +95,7 @@
         {
             "name": "doi-ibmcloud-api-key",
             "type": "secure",
-            "value": "ibmcloud-api-key"
+            "value": ""
         },
         {
             "name": "doi-toolchain-id",
@@ -141,7 +141,7 @@
         {
             "name": "ibmcloud-api-key",
             "type": "secure",
-            "value": "ibmcloud-api-key"
+            "value": ""
         },
         {
             "name": "job-instances",

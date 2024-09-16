@@ -633,7 +633,7 @@ variable "pipeline_ibmcloud_api_key_secret_crn" {
 
 variable "pipeline_ibmcloud_api_key_secret_name" {
   type        = string
-  description = "Name of the Cloud API key secret in the secret provider for running the pipelines. Applies to the CI, CD and CC toolchains. For specific versions see `ci_pipeline_ibmcloud_api_key_secret_name`, `cd_pipeline_ibmcloud_api_key_secret_name` and `cc_pipeline_ibmcloud_api_key_secret_name`."
+  description = "Name of the Cloud API key secret in the secret provider for running the pipelines. Applies to the CI, CD and CC toolchains."
   default     = "ibmcloud-api-key"
 }
 

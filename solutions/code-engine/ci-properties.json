@@ -294,7 +294,7 @@
       {
         "name": "signing-key",
         "type": "secure",
-        "value": "signing_key"
+        "value": ""
       },
       {
         "name": "slack-notifications",
@@ -347,7 +347,7 @@
       {
         "name": "ibmcloud-api-key",
         "type": "secure",
-        "value": "ibmcloud-api-key"
+        "value": ""
       },
       {
         "name": "pipeline-config",
