@@ -283,6 +283,12 @@ variable "environment_prefix" {
   default     = "ibm:yp:"
 }
 
+variable "environment_tag" {
+  type        = string
+  description = "Tag name that represents the target environment in the inventory. Example: prod_latest."
+  default     = "prod_latest"
+}
+
 variable "event_notifications_crn" {
   type        = string
   description = "Set the Event Notifications CRN to create an Events Notification integration. This paramater will apply to the CI, CD and CC toolchains. Can be set independently with `ci_event_notifications_crn`, `cd_event_notifications_crn`, `cc_event_notifications_crn`."

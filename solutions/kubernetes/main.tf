@@ -45,6 +45,7 @@ module "devsecops_da" {
   enable_secrets_manager                            = var.enable_secrets_manager
   enable_slack                                      = var.enable_slack
   environment_prefix                                = var.environment_prefix
+  environment_tag                                   = var.environment_tag
   event_notifications_crn                           = var.event_notifications_crn
   event_notifications_tool_name                     = var.event_notifications_tool_name
   evidence_group                                    = var.evidence_group

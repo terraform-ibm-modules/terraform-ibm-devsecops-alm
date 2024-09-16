@@ -791,9 +791,9 @@ module "devsecops_cc_toolchain" {
   scc_integration_name = var.cc_scc_integration_name
 
   #OTHER INTEGRATIONS
-  repositories_prefix = (local.cc_repositories_prefix == "compliance" && var.prefix != "") ? format("%s-%s", var.prefix, local.cc_repositories_prefix) : local.cc_repositories_prefix
-  doi_toolchain_id    = try(module.devsecops_ci_toolchain[0].toolchain_id, var.cc_doi_toolchain_id)
-  #environment_tag                  = (var.cc_environment_tag == "") ? format("%s_prod_latest", var.toolchain_region) : var.cc_environment_tag
+  repositories_prefix            = (local.cc_repositories_prefix == "compliance" && var.prefix != "") ? format("%s-%s", var.prefix, local.cc_repositories_prefix) : local.cc_repositories_prefix
+  doi_toolchain_id               = try(module.devsecops_ci_toolchain[0].toolchain_id, var.cc_doi_toolchain_id)
+  environment_tag                = (var.environment_tag == "") ? format("%s_prod_latest", var.toolchain_region) : format("%s_%s", var.toolchain_region, var.environment_tag)
   scc_attachment_id              = var.scc_attachment_id
   scc_instance_crn               = var.scc_instance_crn
   scc_profile_name               = var.scc_profile_name

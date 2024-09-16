@@ -1116,6 +1116,13 @@
                             "required": false
                         },
                         {
+                            "key": "environment_tag",
+                            "type": "string",
+                            "default_value": "prod_latest",
+                            "description": "Tag name that represents the target environment in the inventory. Example: prod_latest.",
+                            "required": false
+                        },
+                        {
                             "key": "event_notifications_crn",
                             "type": "string",
                             "default_value": "",
@@ -2853,6 +2860,13 @@
                             "type": "string",
                             "default_value": "ibm:yp:",
                             "description": "By default `ibm:yp:`. This will be set as the prefix to regions automatically where required. For example `ibm:yp:us-south`.",
+                            "required": false
+                        },
+                        {
+                            "key": "environment_tag",
+                            "type": "string",
+                            "default_value": "prod_latest",
+                            "description": "Tag name that represents the target environment in the inventory. Example: prod_latest.",
                             "required": false
                         },
                         {
