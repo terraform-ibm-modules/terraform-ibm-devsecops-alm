@@ -818,7 +818,7 @@ variable "sm_integration_name" {
 
 variable "sm_location" {
   type        = string
-  description = "The region hosting the Secrets Manager instance. This applies to the CI, CD and CC Secret Manager integrations. See `ci_sm_location`, `cd_sm_location`, and `cc_sm_location` to set these values independently."
+  description = "The region hosting the Secrets Manager instance. This applies to the CI, CD and CC Secret Manager integrations."
   default     = "us-south"
 }
 
@@ -901,7 +901,7 @@ variable "toolchain_name" {
 
 variable "toolchain_region" {
   type        = string
-  description = "The region identifier that will be used, by default, for all resource creation and service instance lookup. This can be overridden on a per resource/service basis. See `ci_toolchain_region`,`cd_toolchain_region`,`cc_toolchain_region`."
+  description = "The region identifier that will be used, by default, for all resource creation and service instance lookup."
   default     = "us-south"
 }
 
