@@ -1,5 +1,5 @@
 module "terraform_devsecops_alm" {
-  source                            = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-alm?ref=v1.9.5"
+  source                            = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-alm?ref=v2.0.0-beta.1"
   ibmcloud_api_key                  = var.ibmcloud_api_key
   toolchain_resource_group          = var.toolchain_resource_group
   toolchain_region                  = var.toolchain_region
@@ -14,11 +14,10 @@ module "terraform_devsecops_alm" {
   create_cd_toolchain               = var.create_cd_toolchain
   create_cc_toolchain               = var.create_cc_toolchain
   ci_app_repo_clone_from_url        = var.ci_app_repo_clone_from_url
-  ci_app_repo_clone_from_branch     = var.ci_app_repo_clone_from_branch
   ci_app_repo_existing_url          = var.ci_app_repo_existing_url
-  ci_app_repo_existing_branch       = var.ci_app_repo_existing_branch
   ci_app_repo_existing_git_provider = var.ci_app_repo_existing_git_provider
   ci_app_repo_existing_git_id       = var.ci_app_repo_existing_git_id
+  app_repo_branch                   = var.app_repo_branch
   #disabling authorization_policy_creation as it seems to be unstable for the unit tests
   authorization_policy_creation = "disabled"
 }
