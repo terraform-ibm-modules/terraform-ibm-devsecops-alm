@@ -10,7 +10,7 @@
         {
             "name": "cluster",
             "type": "text",
-            "value": "mycluster"
+            "value": ""
         },
         {
             "name": "cluster-namespace",
@@ -18,9 +18,9 @@
             "value": "prod"
         },
         {
-            "name": "cluster_region",
+            "name": "cluster-region",
             "type": "text",
-            "value": "us-south"
+            "value": ""
         },
         {
             "name": "code-signing-certificate",
@@ -50,7 +50,7 @@
         {
             "name": "doi-ibmcloud-api-key",
             "type": "secure",
-            "value": "ibmcloud-api-key"
+            "value": ""
         },
         {
             "name": "doi-toolchain-id",
@@ -65,7 +65,7 @@
         {
             "name": "event-notifications",
             "type": "text",
-            "value": ""
+            "value": "0"
         },
         {
             "name": "force-redeploy",
@@ -81,7 +81,7 @@
         {
             "name": "ibmcloud-api-key",
             "type": "secure",
-            "value": "ibmcloud-api-key"
+            "value": ""
         },
         {
             "name": "merge-cra-sbom",
@@ -112,7 +112,7 @@
         {
             "name": "pre-prod-evidence-collection",
             "type": "text",
-            "value": "1"
+            "value": "0"
         },
         {
             "name": "region",

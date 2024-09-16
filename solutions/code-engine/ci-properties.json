@@ -136,6 +136,11 @@
         "value": ""
       },
       {
+        "name": "dev-region",
+        "type": "text",
+        "value": ""
+      },
+      {
         "name": "dev-resource-group",
         "type": "text",
         "value": "Default"
@@ -148,7 +153,7 @@
       {
         "name": "doi-ibmcloud-api-key",
         "type": "secure",
-        "value": "ibmcloud-api-key"
+        "value": ""
       },
       {
         "name": "doi-toolchain-id",
@@ -173,7 +178,7 @@
       {
         "name": "event-notifications",
         "type": "text",
-        "value": ""
+        "value": "0"
       },
       {
         "name": "git-token",
@@ -183,7 +188,7 @@
       {
         "name": "ibmcloud-api-key",
         "type": "secure",
-        "value": "ibmcloud-api-key"
+        "value": ""
       },
       {
         "name": "image-name",
