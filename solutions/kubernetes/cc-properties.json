@@ -80,15 +80,16 @@
         "type": "text",
         "value": "true"
       },
-      {
-        "name": "opt-in-cra-auto-remediation-force",
-        "type": "text",
-        "value": "true"
-      },
+
       {
         "name": "opt-in-cra-auto-remediation-enabled-repos",
         "type": "text",
         "value": ""
+      },
+      {
+        "name": "opt-in-cra-auto-remediation-force",
+        "type": "text",
+        "value": "true"
       },
       {
           "name": "opt-in-dynamic-api-scan",

@@ -75,7 +75,7 @@
       {
         "name": "code-engine-resource-group",
         "type": "text",
-        "value": "Default"
+        "value": ""
       },
       {
         "name": "code-engine-wait-timeout",
@@ -143,7 +143,7 @@
       {
         "name": "dev-resource-group",
         "type": "text",
-        "value": "Default"
+        "value": ""
       },
       {
         "name": "doi-environment",

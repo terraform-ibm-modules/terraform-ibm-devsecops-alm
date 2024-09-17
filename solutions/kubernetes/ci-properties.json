@@ -63,7 +63,7 @@
       {
         "name": "dev-resource-group",
         "type": "text",
-        "value": "Default"
+        "value": ""
       },
       {
         "name": "doi-environment",
