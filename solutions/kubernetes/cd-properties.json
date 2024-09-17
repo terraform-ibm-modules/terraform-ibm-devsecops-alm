@@ -147,7 +147,7 @@
         {
             "name": "target-environment-purpose",
             "type": "text",
-            "value": "Production target environment"
+            "value": "production"
         },
         {
             "name": "version",

@@ -58,7 +58,7 @@
       {
         "name": "dev-region",
         "type": "text",
-        "value": "us-south"
+        "value": ""
       },
       {
         "name": "dev-resource-group",
@@ -149,7 +149,7 @@
       {
         "name": "registry-namespace",
         "type": "text",
-        "value": "my-registry-namespace"
+        "value": ""
       },
       {
         "name": "registry-region",

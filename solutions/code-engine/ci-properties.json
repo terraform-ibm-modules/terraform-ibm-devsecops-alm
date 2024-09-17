@@ -70,7 +70,7 @@
       {
         "name": "code-engine-region",
         "type": "text",
-        "value": "us-south"
+        "value": ""
       },
       {
         "name": "code-engine-resource-group",
@@ -274,12 +274,12 @@
       {
         "name": "registry-namespace",
         "type": "text",
-        "value": "my-registry-namespace"
+        "value": ""
       },
       {
         "name": "registry-region",
         "type": "text",
-        "value": "us-south"
+        "value": ""
       },
       {
         "name": "remove-unspecified-references-to-configuration-resources",

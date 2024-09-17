@@ -55,12 +55,12 @@
         {
             "name": "code-engine-region",
             "type": "text",
-            "value": "us-south"
+            "value": ""
         },
         {
             "name": "code-engine-resource-group",
             "type": "text",
-            "value": "Default"
+            "value": ""
         },
         {
             "name": "code-signing-certificate",
@@ -237,7 +237,7 @@
         {
             "name": "target-environment-purpose",
             "type": "text",
-            "value": "Production target environment"
+            "value": "production"
         },
         {
             "name": "version",

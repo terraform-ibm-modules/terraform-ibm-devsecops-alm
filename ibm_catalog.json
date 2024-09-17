@@ -168,6 +168,13 @@
                             "required": true
                         },
                         {
+                            "key": "cluster_name",
+                            "type": "string",
+                            "default_value": "mycluster-free",
+                            "description": "Name of the Kubernetes cluster where the application is deployed. This sets the same cluster name for both CI and CD toolchains. See `ci_cluster_name` and `cd_cluster_name` to set different cluster names. By default , the cluster namespace for CI will be set to `dev` and CD to `prod`. These can be changed using `ci_cluster_namespace` and `cd_cluster_namespace`.",
+                            "required": true
+                        },
+                        {
                             "key": "sm_location",
                             "type": "string",
                             "default_value": "us-south",
@@ -925,13 +932,6 @@
                             "type": "boolean",
                             "default_value": false,
                             "description": "Set to `true` to enable the timed Pruner trigger.",
-                            "required": false
-                        },
-                        {
-                            "key": "cluster_name",
-                            "type": "string",
-                            "default_value": "mycluster-free",
-                            "description": "Name of the Kubernetes cluster where the application is deployed. This sets the same cluster name for both CI and CD toolchains. See `ci_cluster_name` and `cd_cluster_name` to set different cluster names. By default , the cluster namespace for CI will be set to `dev` and CD to `prod`. These can be changed using `ci_cluster_namespace` and `cd_cluster_namespace`.",
                             "required": false
                         },
                         {
