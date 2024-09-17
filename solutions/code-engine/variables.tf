@@ -31,7 +31,7 @@ variable "app_repo_auth_type" {
 variable "app_repo_branch" {
   type        = string
   description = "This is the repository branch used by the default sample application. Alternatively if `app_repo_existing_url` is provided, then the branch must reflect the default branch for that repository. Typically these branches are `main` or `master`."
-  default     = "master"
+  default     = "main"
 }
 
 variable "app_repo_clone_from_url" {
@@ -2070,7 +2070,7 @@ variable "cd_pipeline_config_repo_auth_type" {
 variable "cd_pipeline_config_repo_branch" {
   type        = string
   description = "Specify the branch containing the custom pipeline-config.yaml file."
-  default     = ""
+  default     = "main"
 }
 
 variable "cd_pipeline_config_repo_clone_from_url" {

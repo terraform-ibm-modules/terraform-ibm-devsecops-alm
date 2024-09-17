@@ -348,7 +348,7 @@ module "devsecops_ci_toolchain" {
   #PIPELINE CONFIG REPO
   pipeline_config_repo_existing_url   = local.ci_pipeline_config_repo_existing_url
   pipeline_config_repo_clone_from_url = local.ci_pipeline_config_repo_clone_from_url
-  pipeline_config_repo_branch         = local.ci_pipeline_config_repo_branch
+  pipeline_config_repo_branch         = (local.ci_pipeline_config_repo_branch == "") ? local.ci_app_repo_branch : local.ci_pipeline_config_repo_branch
 
   #EVIDENCE REPO
   evidence_repo_name              = var.evidence_repo_name
@@ -547,7 +547,7 @@ module "devsecops_cd_toolchain" {
   #PIPELINE CONFIG REPO
   pipeline_config_repo_existing_url   = local.cd_pipeline_config_repo_existing_url
   pipeline_config_repo_clone_from_url = local.cd_pipeline_config_repo_clone_from_url
-  pipeline_config_repo_branch         = local.cd_pipeline_config_repo_branch
+  pipeline_config_repo_branch         = (local.cd_pipeline_config_repo_branch == "") ? "master" : local.cd_pipeline_config_repo_branch
 
   #EVIDENCE REPO
   evidence_repo_name              = var.evidence_repo_name
@@ -664,7 +664,6 @@ module "devsecops_cd_toolchain" {
 
 module "devsecops_cc_toolchain" {
   count                         = var.create_cc_toolchain ? 1 : 0
-  depends_on                    = [module.devsecops_ci_toolchain]
   source                        = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cc-toolchain?ref=v2_2"
   ibmcloud_api_key              = var.ibmcloud_api_key
   toolchain_name                = (var.prefix == "") ? local.cc_toolchain_name : format("${var.prefix}-%s", local.cc_toolchain_name)
@@ -757,7 +756,7 @@ module "devsecops_cc_toolchain" {
   #PIPELINE CONFIG REPO
   pipeline_config_repo_existing_url   = local.cc_pipeline_config_repo_existing_url
   pipeline_config_repo_clone_from_url = local.cc_pipeline_config_repo_clone_from_url
-  pipeline_config_repo_branch         = local.cc_pipeline_config_repo_branch
+  pipeline_config_repo_branch         = (local.cc_pipeline_config_repo_branch == "") ? local.cc_app_repo_branch : local.cc_pipeline_config_repo_branch
 
   #APP REPO
   app_repo_url          = try(module.devsecops_ci_toolchain[0].app_repo_url, local.cc_app_repo_existing_url)

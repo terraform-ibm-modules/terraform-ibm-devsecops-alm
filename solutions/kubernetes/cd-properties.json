@@ -117,7 +117,7 @@
         {
             "name": "region",
             "type": "text",
-            "value": "us-south"
+            "value": ""
         },
         {
             "name": "satellite-cluster-group",
