@@ -85,21 +85,9 @@ variable "ci_app_repo_clone_from_url" {
   default     = ""
 }
 
-variable "ci_app_repo_clone_from_branch" {
-  type        = string
-  description = "Used when app_repo_clone_from_url is provided, the default branch that is used by the CI build, usually either main or master."
-  default     = ""
-}
-
 variable "ci_app_repo_existing_url" {
   type        = string
-  description = "Override to bring your own existing application repository URL, which is used directly instead of cloning the default sample."
-  default     = ""
-}
-
-variable "ci_app_repo_existing_branch" {
-  type        = string
-  description = "Used when app_repo_existing_url is provided, the default branch that is used by the CI build, usually either main or master."
+  description = "Bring your own existing application repository by providing the URL. This will create an integration for your application repository instead of cloning the default sample. Repositories existing in a different org will require the use of Git token. See `app_repo_git_token_secret_name` under optional variables. "
   default     = ""
 }
 
@@ -112,5 +100,11 @@ variable "ci_app_repo_existing_git_provider" {
 variable "ci_app_repo_existing_git_id" {
   type        = string
   description = "By default absent, else custom server GUID, or other options for 'git_id' field in the browser UI."
+  default     = ""
+}
+
+variable "app_repo_branch" {
+  type        = string
+  description = "This is the repository branch used by the default sample application. Alternatively if `app_repo_existing_url` is provided, then the branch must reflect the default branch for that repository. Typically these branches are `main` or `master`."
   default     = ""
 }

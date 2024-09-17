@@ -58,32 +58,16 @@ statement instead the previous block.
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0.0 |
 | <a name="requirement_ibm"></a> [ibm](#requirement\_ibm) | =1.67.1 |
-| <a name="requirement_null"></a> [null](#requirement\_null) | = 3.2.2 |
-| <a name="requirement_random"></a> [random](#requirement\_random) | = 3.6.2 |
 
 ### Modules
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_devsecops_cc_toolchain"></a> [devsecops\_cc\_toolchain](#module\_devsecops\_cc\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cc-toolchain | v2.0.0 |
-| <a name="module_devsecops_cd_toolchain"></a> [devsecops\_cd\_toolchain](#module\_devsecops\_cd\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain | v2.0.0 |
-| <a name="module_devsecops_ci_toolchain"></a> [devsecops\_ci\_toolchain](#module\_devsecops\_ci\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-ci-toolchain | v2.0.0 |
-| <a name="module_prereqs"></a> [prereqs](#module\_prereqs) | ./prereqs | n/a |
+| <a name="module_devsecops_da"></a> [devsecops\_da](#module\_devsecops\_da) | ../../ | n/a |
 
 ### Resources
 
-| Name | Type |
-|------|------|
-| [ibm_cd_tekton_pipeline_trigger.ci_pipeline_webhook](https://registry.terraform.io/providers/IBM-Cloud/ibm/1.67.1/docs/resources/cd_tekton_pipeline_trigger) | resource |
-| [ibm_cd_tekton_pipeline_trigger_property.ci_pipeline_webhook_branch_property](https://registry.terraform.io/providers/IBM-Cloud/ibm/1.67.1/docs/resources/cd_tekton_pipeline_trigger_property) | resource |
-| [ibm_cd_tekton_pipeline_trigger_property.ci_pipeline_webhook_name_property](https://registry.terraform.io/providers/IBM-Cloud/ibm/1.67.1/docs/resources/cd_tekton_pipeline_trigger_property) | resource |
-| [ibm_cd_tekton_pipeline_trigger_property.ci_pipeline_webhook_repo_url_property](https://registry.terraform.io/providers/IBM-Cloud/ibm/1.67.1/docs/resources/cd_tekton_pipeline_trigger_property) | resource |
-| [ibm_cr_namespace.cr_namespace](https://registry.terraform.io/providers/IBM-Cloud/ibm/1.67.1/docs/resources/cr_namespace) | resource |
-| [ibm_resource_instance.cd_instance](https://registry.terraform.io/providers/IBM-Cloud/ibm/1.67.1/docs/resources/resource_instance) | resource |
-| [null_resource.ci_pipeline_run](https://registry.terraform.io/providers/hashicorp/null/3.2.2/docs/resources/resource) | resource |
-| [random_string.resource_suffix](https://registry.terraform.io/providers/hashicorp/random/3.6.2/docs/resources/string) | resource |
-| [random_string.webhook_secret](https://registry.terraform.io/providers/hashicorp/random/3.6.2/docs/resources/string) | resource |
-| [ibm_resource_group.resource_group](https://registry.terraform.io/providers/IBM-Cloud/ibm/1.67.1/docs/data-sources/resource_group) | data source |
+No resources.
 
 ### Inputs
 
@@ -276,7 +260,7 @@ statement instead the previous block.
 | <a name="input_cd_link_to_doi_toolchain"></a> [cd\_link\_to\_doi\_toolchain](#input\_cd\_link\_to\_doi\_toolchain) | Enable a link to a DevOps Insights instance in another toolchain, true or false. | `bool` | `true` | no |
 | <a name="input_cd_pipeline_config_group"></a> [cd\_pipeline\_config\_group](#input\_cd\_pipeline\_config\_group) | Specify the Git user or group for the compliance pipeline repository. | `string` | `""` | no |
 | <a name="input_cd_pipeline_config_repo_auth_type"></a> [cd\_pipeline\_config\_repo\_auth\_type](#input\_cd\_pipeline\_config\_repo\_auth\_type) | Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`. | `string` | `""` | no |
-| <a name="input_cd_pipeline_config_repo_branch"></a> [cd\_pipeline\_config\_repo\_branch](#input\_cd\_pipeline\_config\_repo\_branch) | Specify the branch containing the custom pipeline-config.yaml file. | `string` | `""` | no |
+| <a name="input_cd_pipeline_config_repo_branch"></a> [cd\_pipeline\_config\_repo\_branch](#input\_cd\_pipeline\_config\_repo\_branch) | Specify the branch containing the custom pipeline-config.yaml file. | `string` | `"main"` | no |
 | <a name="input_cd_pipeline_config_repo_clone_from_url"></a> [cd\_pipeline\_config\_repo\_clone\_from\_url](#input\_cd\_pipeline\_config\_repo\_clone\_from\_url) | Specify a repository containing a custom pipeline-config.yaml file. | `string` | `""` | no |
 | <a name="input_cd_pipeline_config_repo_existing_url"></a> [cd\_pipeline\_config\_repo\_existing\_url](#input\_cd\_pipeline\_config\_repo\_existing\_url) | Specify a repository containing a custom pipeline-config.yaml file. | `string` | `""` | no |
 | <a name="input_cd_pipeline_config_repo_git_token_secret_crn"></a> [cd\_pipeline\_config\_repo\_git\_token\_secret\_crn](#input\_cd\_pipeline\_config\_repo\_git\_token\_secret\_crn) | The CRN of the Git token for accessing the pipeline config repository. | `string` | `""` | no |
@@ -466,7 +450,7 @@ statement instead the previous block.
 | <a name="input_compliance_pipeline_repo_git_token_secret_crn"></a> [compliance\_pipeline\_repo\_git\_token\_secret\_crn](#input\_compliance\_pipeline\_repo\_git\_token\_secret\_crn) | The CRN of the Git token used for accessing the sample application repository. | `string` | `""` | no |
 | <a name="input_compliance_pipeline_repo_git_token_secret_name"></a> [compliance\_pipeline\_repo\_git\_token\_secret\_name](#input\_compliance\_pipeline\_repo\_git\_token\_secret\_name) | Name of the Git token secret in the secret provider used for accessing the compliance pipelines repository. | `string` | `""` | no |
 | <a name="input_compliance_pipeline_repo_secret_group"></a> [compliance\_pipeline\_repo\_secret\_group](#input\_compliance\_pipeline\_repo\_secret\_group) | Secret group for the Compliance Pipeline repository secret. Defaults to the value set in `sm_secret_group` if not set. Only used with `Secrets Manager`. | `string` | `""` | no |
-| <a name="input_continuous_delivery_service_name"></a> [continuous\_delivery\_service\_name](#input\_continuous\_delivery\_service\_name) | The name of the Continuous Delivery service instance. | `string` | `"cd-devsecops"` | no |
+| <a name="input_continuous_delivery_service_name"></a> [continuous\_delivery\_service\_name](#input\_continuous\_delivery\_service\_name) | The name of the CD instance. | `string` | `"cd-devsecops"` | no |
 | <a name="input_cos_api_key_secret_crn"></a> [cos\_api\_key\_secret\_crn](#input\_cos\_api\_key\_secret\_crn) | The CRN of the Cloud Object Storage apikey. Applies to the CI, CD and CC toolchains. Can beset independently using `ci_cos_api_key_secret_crn`,`cd_cos_api_key_secret_crn`,`cc_cos_api_key_secret_crn`. | `string` | `""` | no |
 | <a name="input_cos_api_key_secret_group"></a> [cos\_api\_key\_secret\_group](#input\_cos\_api\_key\_secret\_group) | Secret group for the COS api key secret. Defaults to the value set in `sm_secret_group` if not set. Only used with `Secrets Manager`. | `string` | `""` | no |
 | <a name="input_cos_api_key_secret_name"></a> [cos\_api\_key\_secret\_name](#input\_cos\_api\_key\_secret\_name) | Name of the Cloud Object Storage API key secret in the secret provider for accessing the evidence COS bucket. In addition `cos_endpoint` and `cos_bucket_name` must be set. This setting sets the same API key for the COS settings in the CI, CD, and CC toolchains. | `string` | `""` | no |
@@ -548,7 +532,7 @@ statement instead the previous block.
 | <a name="input_repo_group"></a> [repo\_group](#input\_repo\_group) | Specify the Git user or group for your application. This must be set if the repository authentication type is `pat` (personal access token). | `string` | `""` | no |
 | <a name="input_repo_secret_group"></a> [repo\_secret\_group](#input\_repo\_secret\_group) | Secret group in Secrets Manager that contains the secret for the repository. This variable will set the same secret group for all the repositories. Can be overriden on a per secret group basis. Only applies when using Secrets Manager. | `string` | `""` | no |
 | <a name="input_repositories_prefix"></a> [repositories\_prefix](#input\_repositories\_prefix) | Prefix name for the cloned compliance repos. For the repositories\_prefix value only a-z, A-Z and 0-9 and the special characters `-_` are allowed. In addition the string must not end with a special character or have two consecutive special characters. | `string` | `"compliance"` | no |
-| <a name="input_sample_default_application"></a> [sample\_default\_application](#input\_sample\_default\_application) | The name of the sample application repository. The repository source URL is automatically computed based on the toolchain region. The other currently supported name is `code-engine-compliance-app`. Alternatively an integration can be created that can link to or clone from an existing repository. See `app_repo_existing_url` and `app_repo_clone_from_url` to override the sample application default behavior. | `string` | `"hello-compliance-app"` | no |
+| <a name="input_sample_default_application"></a> [sample\_default\_application](#input\_sample\_default\_application) | The name of the sample application repository. The repository source URL is automatically computed based on the toolchain region. The other currently supported name is `code-engine-compliance-app`. Alternatively an integration can be created that can link to or clone from an existing repository. See `app_repo_existing_url` and `app_repo_clone_from_url` to override the sample application default behavior. | `string` | `"code-engine-compliance-app"` | no |
 | <a name="input_scc_attachment_id"></a> [scc\_attachment\_id](#input\_scc\_attachment\_id) | An attachment ID. An attachment is configured under a profile to define how a scan will be run. To find the attachment ID, in the browser, in the attachments list, click on the attachment link, and a panel appears with a button to copy the attachment ID. This parameter is only relevant when the `scc_use_profile_attachment` parameter is enabled. | `string` | `""` | no |
 | <a name="input_scc_enable_scc"></a> [scc\_enable\_scc](#input\_scc\_enable\_scc) | Adds the SCC tool integration to the toolchain. | `string` | `"false"` | no |
 | <a name="input_scc_instance_crn"></a> [scc\_instance\_crn](#input\_scc\_instance\_crn) | The Security and Compliance Center service instance CRN (Cloud Resource Name). This parameter is only relevant when the `scc_use_profile_attachment` parameter is enabled. | `string` | `""` | no |
@@ -580,9 +564,9 @@ statement instead the previous block.
 | <a name="input_sonarqube_server_url"></a> [sonarqube\_server\_url](#input\_sonarqube\_server\_url) | The URL to the SonarQube server. | `string` | `""` | no |
 | <a name="input_sonarqube_user"></a> [sonarqube\_user](#input\_sonarqube\_user) | The name of the SonarQube user. | `string` | `""` | no |
 | <a name="input_toolchain_name"></a> [toolchain\_name](#input\_toolchain\_name) | This variable specifies the root name for the CI, CD and CC toolchain names. A fixed suffix will automatically be appended. Setting `DevSecOps` will generate toolchains with the names `DevSecOps-CI-Toolchain`,  `DevSecOps-CD-Toolchain` and `DevSecOps-CC-Toolchain`. The full name of each toolchain can be set independently using `ci_toolchain_name`, `cd_toolchain_name`, and `cc_toolchain_name`. | `string` | `"DevSecOps"` | no |
-| <a name="input_toolchain_region"></a> [toolchain\_region](#input\_toolchain\_region) | The region identifier that will be used, by default, for all resource creation and service instance lookup. | `string` | `"us-south"` | no |
+| <a name="input_toolchain_region"></a> [toolchain\_region](#input\_toolchain\_region) | The region identifier that will be used, by default, for all resource creation and service instance lookup. This can be overridden on a per resource/service basis. | `string` | `"us-south"` | no |
 | <a name="input_toolchain_resource_group"></a> [toolchain\_resource\_group](#input\_toolchain\_resource\_group) | The resource group that will be used, by default, for all resource creation and service instance lookups. This can be overridden on a per resource/service basis. See `ci_toolchain_resource_group`,`cd_toolchain_resource_group`,`cc_toolchain_resource_group`, `ci_cluster_resource_group`. | `string` | `"Default"` | no |
-| <a name="input_use_app_repo_for_cd_deploy"></a> [use\_app\_repo\_for\_cd\_deploy](#input\_use\_app\_repo\_for\_cd\_deploy) | Set to `true` to use the CI sample application repository as the deployment repository in the CD pipeline. This will be set in the pipeline config integration. | `bool` | `false` | no |
+| <a name="input_use_app_repo_for_cd_deploy"></a> [use\_app\_repo\_for\_cd\_deploy](#input\_use\_app\_repo\_for\_cd\_deploy) | Set to `true` to use the CI sample application repository as the deployment repository in the CD pipeline. This will be set in the pipeline config integration. | `bool` | `true` | no |
 
 ### Outputs
 

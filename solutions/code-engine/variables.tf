@@ -907,7 +907,7 @@ variable "toolchain_name" {
 
 variable "toolchain_region" {
   type        = string
-  description = "The region identifier that will be used, by default, for all resource creation and service instance lookup."
+  description = "The region identifier that will be used, by default, for all resource creation and service instance lookup. This can be overridden on a per resource/service basis."
   default     = "us-south"
 }
 
@@ -1957,7 +1957,7 @@ variable "cd_evidence_repo_secret_group" {
 
 variable "continuous_delivery_service_name" {
   type        = string
-  description = "The name of the Continuous Delivery service instance."
+  description = "The name of the CD instance."
   default     = "cd-devsecops"
 }
 
@@ -2070,7 +2070,7 @@ variable "cd_pipeline_config_repo_auth_type" {
 variable "cd_pipeline_config_repo_branch" {
   type        = string
   description = "Specify the branch containing the custom pipeline-config.yaml file."
-  default     = ""
+  default     = "main"
 }
 
 variable "cd_pipeline_config_repo_clone_from_url" {
@@ -3274,11 +3274,11 @@ variable "ci_trigger_timed_pruner_name" {
 variable "sample_default_application" {
   type        = string
   description = "The name of the sample application repository. The repository source URL is automatically computed based on the toolchain region. The other currently supported name is `code-engine-compliance-app`. Alternatively an integration can be created that can link to or clone from an existing repository. See `app_repo_existing_url` and `app_repo_clone_from_url` to override the sample application default behavior."
-  default     = "hello-compliance-app"
+  default     = "code-engine-compliance-app"
 }
 
 variable "use_app_repo_for_cd_deploy" {
   type        = bool
   description = "Set to `true` to use the CI sample application repository as the deployment repository in the CD pipeline. This will be set in the pipeline config integration."
-  default     = false
+  default     = true
 }

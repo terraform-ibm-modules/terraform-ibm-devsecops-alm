@@ -31,7 +31,7 @@ variable "app_repo_auth_type" {
 variable "app_repo_branch" {
   type        = string
   description = "This is the repository branch used by the default sample application. Alternatively if `app_repo_existing_url` is provided, then the branch must reflect the default branch for that repository. Typically these branches are `main` or `master`."
-  default     = "main"
+  default     = "master"
 }
 
 variable "app_repo_clone_from_url" {
@@ -907,7 +907,7 @@ variable "toolchain_name" {
 
 variable "toolchain_region" {
   type        = string
-  description = "The region identifier that will be used, by default, for all resource creation and service instance lookup."
+  description = "The region identifier that will be used, by default, for all resource creation and service instance lookup. This can be overridden on a per resource/service basis."
   default     = "us-south"
 }
 
@@ -1957,7 +1957,7 @@ variable "cd_evidence_repo_secret_group" {
 
 variable "continuous_delivery_service_name" {
   type        = string
-  description = "The name of the Continuous Delivery service instance."
+  description = "The name of the CD instance."
   default     = "cd-devsecops"
 }
 

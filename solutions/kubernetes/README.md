@@ -58,32 +58,16 @@ statement instead the previous block.
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0.0 |
 | <a name="requirement_ibm"></a> [ibm](#requirement\_ibm) | =1.67.1 |
-| <a name="requirement_null"></a> [null](#requirement\_null) | = 3.2.2 |
-| <a name="requirement_random"></a> [random](#requirement\_random) | = 3.6.2 |
 
 ### Modules
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_devsecops_cc_toolchain"></a> [devsecops\_cc\_toolchain](#module\_devsecops\_cc\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cc-toolchain | v2.0.0 |
-| <a name="module_devsecops_cd_toolchain"></a> [devsecops\_cd\_toolchain](#module\_devsecops\_cd\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain | v2.0.0 |
-| <a name="module_devsecops_ci_toolchain"></a> [devsecops\_ci\_toolchain](#module\_devsecops\_ci\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-ci-toolchain | v2.0.0 |
-| <a name="module_prereqs"></a> [prereqs](#module\_prereqs) | ./prereqs | n/a |
+| <a name="module_devsecops_da"></a> [devsecops\_da](#module\_devsecops\_da) | ../../ | n/a |
 
 ### Resources
 
-| Name | Type |
-|------|------|
-| [ibm_cd_tekton_pipeline_trigger.ci_pipeline_webhook](https://registry.terraform.io/providers/IBM-Cloud/ibm/1.67.1/docs/resources/cd_tekton_pipeline_trigger) | resource |
-| [ibm_cd_tekton_pipeline_trigger_property.ci_pipeline_webhook_branch_property](https://registry.terraform.io/providers/IBM-Cloud/ibm/1.67.1/docs/resources/cd_tekton_pipeline_trigger_property) | resource |
-| [ibm_cd_tekton_pipeline_trigger_property.ci_pipeline_webhook_name_property](https://registry.terraform.io/providers/IBM-Cloud/ibm/1.67.1/docs/resources/cd_tekton_pipeline_trigger_property) | resource |
-| [ibm_cd_tekton_pipeline_trigger_property.ci_pipeline_webhook_repo_url_property](https://registry.terraform.io/providers/IBM-Cloud/ibm/1.67.1/docs/resources/cd_tekton_pipeline_trigger_property) | resource |
-| [ibm_cr_namespace.cr_namespace](https://registry.terraform.io/providers/IBM-Cloud/ibm/1.67.1/docs/resources/cr_namespace) | resource |
-| [ibm_resource_instance.cd_instance](https://registry.terraform.io/providers/IBM-Cloud/ibm/1.67.1/docs/resources/resource_instance) | resource |
-| [null_resource.ci_pipeline_run](https://registry.terraform.io/providers/hashicorp/null/3.2.2/docs/resources/resource) | resource |
-| [random_string.resource_suffix](https://registry.terraform.io/providers/hashicorp/random/3.6.2/docs/resources/string) | resource |
-| [random_string.webhook_secret](https://registry.terraform.io/providers/hashicorp/random/3.6.2/docs/resources/string) | resource |
-| [ibm_resource_group.resource_group](https://registry.terraform.io/providers/IBM-Cloud/ibm/1.67.1/docs/data-sources/resource_group) | data source |
+No resources.
 
 ### Inputs
 
@@ -93,7 +77,7 @@ statement instead the previous block.
 | <a name="input_add_container_name_suffix"></a> [add\_container\_name\_suffix](#input\_add\_container\_name\_suffix) | Set to `true` to add a random suffix to the specified ICR name. | `bool` | `false` | no |
 | <a name="input_app_group"></a> [app\_group](#input\_app\_group) | Specify the Git user or group for the application repository. | `string` | `""` | no |
 | <a name="input_app_repo_auth_type"></a> [app\_repo\_auth\_type](#input\_app\_repo\_auth\_type) | Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`. | `string` | `""` | no |
-| <a name="input_app_repo_branch"></a> [app\_repo\_branch](#input\_app\_repo\_branch) | This is the repository branch used by the default sample application. Alternatively if `app_repo_existing_url` is provided, then the branch must reflect the default branch for that repository. Typically these branches are `main` or `master`. | `string` | `"main"` | no |
+| <a name="input_app_repo_branch"></a> [app\_repo\_branch](#input\_app\_repo\_branch) | This is the repository branch used by the default sample application. Alternatively if `app_repo_existing_url` is provided, then the branch must reflect the default branch for that repository. Typically these branches are `main` or `master`. | `string` | `"master"` | no |
 | <a name="input_app_repo_clone_from_url"></a> [app\_repo\_clone\_from\_url](#input\_app\_repo\_clone\_from\_url) | Override the default sample app by providing your own sample app URL, which is cloned into the app repository. Note, uses `clone_if_not_exists` mode, so if the app repository already exists the repository contents are unchanged. | `string` | `""` | no |
 | <a name="input_app_repo_clone_to_git_id"></a> [app\_repo\_clone\_to\_git\_id](#input\_app\_repo\_clone\_to\_git\_id) | Set this value to `github` for github.com, or to the GUID of a custom GitHub Enterprise server. | `string` | `""` | no |
 | <a name="input_app_repo_clone_to_git_provider"></a> [app\_repo\_clone\_to\_git\_provider](#input\_app\_repo\_clone\_to\_git\_provider) | By default this gets set as 'hostedgit', else set to 'githubconsolidated' for GitHub repositories. | `string` | `""` | no |
@@ -466,7 +450,7 @@ statement instead the previous block.
 | <a name="input_compliance_pipeline_repo_git_token_secret_crn"></a> [compliance\_pipeline\_repo\_git\_token\_secret\_crn](#input\_compliance\_pipeline\_repo\_git\_token\_secret\_crn) | The CRN of the Git token used for accessing the sample application repository. | `string` | `""` | no |
 | <a name="input_compliance_pipeline_repo_git_token_secret_name"></a> [compliance\_pipeline\_repo\_git\_token\_secret\_name](#input\_compliance\_pipeline\_repo\_git\_token\_secret\_name) | Name of the Git token secret in the secret provider used for accessing the compliance pipelines repository. | `string` | `""` | no |
 | <a name="input_compliance_pipeline_repo_secret_group"></a> [compliance\_pipeline\_repo\_secret\_group](#input\_compliance\_pipeline\_repo\_secret\_group) | Secret group for the Compliance Pipeline repository secret. Defaults to the value set in `sm_secret_group` if not set. Only used with `Secrets Manager`. | `string` | `""` | no |
-| <a name="input_continuous_delivery_service_name"></a> [continuous\_delivery\_service\_name](#input\_continuous\_delivery\_service\_name) | The name of the Continuous Delivery service instance. | `string` | `"cd-devsecops"` | no |
+| <a name="input_continuous_delivery_service_name"></a> [continuous\_delivery\_service\_name](#input\_continuous\_delivery\_service\_name) | The name of the CD instance. | `string` | `"cd-devsecops"` | no |
 | <a name="input_cos_api_key_secret_crn"></a> [cos\_api\_key\_secret\_crn](#input\_cos\_api\_key\_secret\_crn) | The CRN of the Cloud Object Storage apikey. Applies to the CI, CD and CC toolchains. Can beset independently using `ci_cos_api_key_secret_crn`,`cd_cos_api_key_secret_crn`,`cc_cos_api_key_secret_crn`. | `string` | `""` | no |
 | <a name="input_cos_api_key_secret_group"></a> [cos\_api\_key\_secret\_group](#input\_cos\_api\_key\_secret\_group) | Secret group for the COS api key secret. Defaults to the value set in `sm_secret_group` if not set. Only used with `Secrets Manager`. | `string` | `""` | no |
 | <a name="input_cos_api_key_secret_name"></a> [cos\_api\_key\_secret\_name](#input\_cos\_api\_key\_secret\_name) | Name of the Cloud Object Storage API key secret in the secret provider for accessing the evidence COS bucket. In addition `cos_endpoint` and `cos_bucket_name` must be set. This setting sets the same API key for the COS settings in the CI, CD, and CC toolchains. | `string` | `""` | no |
@@ -580,7 +564,7 @@ statement instead the previous block.
 | <a name="input_sonarqube_server_url"></a> [sonarqube\_server\_url](#input\_sonarqube\_server\_url) | The URL to the SonarQube server. | `string` | `""` | no |
 | <a name="input_sonarqube_user"></a> [sonarqube\_user](#input\_sonarqube\_user) | The name of the SonarQube user. | `string` | `""` | no |
 | <a name="input_toolchain_name"></a> [toolchain\_name](#input\_toolchain\_name) | This variable specifies the root name for the CI, CD and CC toolchain names. A fixed suffix will automatically be appended. Setting `DevSecOps` will generate toolchains with the names `DevSecOps-CI-Toolchain`,  `DevSecOps-CD-Toolchain` and `DevSecOps-CC-Toolchain`. The full name of each toolchain can be set independently using `ci_toolchain_name`, `cd_toolchain_name`, and `cc_toolchain_name`. | `string` | `"DevSecOps"` | no |
-| <a name="input_toolchain_region"></a> [toolchain\_region](#input\_toolchain\_region) | The region identifier that will be used, by default, for all resource creation and service instance lookup. | `string` | `"us-south"` | no |
+| <a name="input_toolchain_region"></a> [toolchain\_region](#input\_toolchain\_region) | The region identifier that will be used, by default, for all resource creation and service instance lookup. This can be overridden on a per resource/service basis. | `string` | `"us-south"` | no |
 | <a name="input_toolchain_resource_group"></a> [toolchain\_resource\_group](#input\_toolchain\_resource\_group) | The resource group that will be used, by default, for all resource creation and service instance lookups. This can be overridden on a per resource/service basis. See `ci_toolchain_resource_group`,`cd_toolchain_resource_group`,`cc_toolchain_resource_group`, `ci_cluster_resource_group`. | `string` | `"Default"` | no |
 | <a name="input_use_app_repo_for_cd_deploy"></a> [use\_app\_repo\_for\_cd\_deploy](#input\_use\_app\_repo\_for\_cd\_deploy) | Set to `true` to use the CI sample application repository as the deployment repository in the CD pipeline. This will be set in the pipeline config integration. | `bool` | `false` | no |
 
