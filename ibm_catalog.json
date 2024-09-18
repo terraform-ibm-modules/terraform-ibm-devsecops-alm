@@ -25,7 +25,7 @@
             "flavors": [
                 {
                     "label": "Deploy to Code Engine",
-                    "name": "devsecops_ce",
+                    "name": "devsecopsce",
                     "index": 2,
                     "working_directory": "solutions/code-engine",
                     "compliance": {
