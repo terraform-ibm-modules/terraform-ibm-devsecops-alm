@@ -31,7 +31,7 @@ variable "app_repo_auth_type" {
 variable "app_repo_branch" {
   type        = string
   description = "This is the repository branch used by the default sample application. Alternatively if `app_repo_existing_url` is provided, then the branch must reflect the default branch for that repository. Typically these branches are `main` or `master`."
-  default     = "main"
+  default     = "master"
 }
 
 variable "app_repo_clone_from_url" {
@@ -713,7 +713,7 @@ variable "scc_attachment_id" {
 variable "scc_enable_scc" {
   type        = string
   description = "Adds the SCC tool integration to the toolchain."
-  default     = "false"
+  default     = "true"
 }
 
 variable "scc_instance_crn" {
