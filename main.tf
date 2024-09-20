@@ -919,7 +919,7 @@ resource "null_resource" "ci_pipeline_run" {
   }
 
   provisioner "local-exec" {
-    command     = "${path.root}/scripts/ci_start.sh \"${ibm_cd_tekton_pipeline_trigger.ci_pipeline_webhook[0].webhook_url}\" \"${random_string.webhook_secret.result}\""
+    command     = "${path.root}/../../scripts/ci_start.sh \"${ibm_cd_tekton_pipeline_trigger.ci_pipeline_webhook[0].webhook_url}\" \"${random_string.webhook_secret.result}\""
     interpreter = ["/bin/bash", "-c"]
     quiet       = true
   }
