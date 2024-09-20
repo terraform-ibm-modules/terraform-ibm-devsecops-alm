@@ -1524,9 +1524,9 @@
                         {
                             "key": "scc_enable_scc",
                             "type": "string",
-                            "default_value": "false",
+                            "default_value": "true",
                             "description": "Adds the SCC tool integration to the toolchain.",
-                            "required": true
+                            "required": false
                         },
                         {
                             "key": "scc_instance_crn",
@@ -3299,9 +3299,9 @@
                         {
                             "key": "scc_enable_scc",
                             "type": "string",
-                            "default_value": "false",
+                            "default_value": "true",
                             "description": "Adds the SCC tool integration to the toolchain.",
-                            "required": true
+                            "required": false
                         },
                         {
                             "key": "scc_instance_crn",
