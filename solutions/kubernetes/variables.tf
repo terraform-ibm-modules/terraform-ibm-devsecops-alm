@@ -713,7 +713,7 @@ variable "scc_attachment_id" {
 variable "scc_enable_scc" {
   type        = string
   description = "Adds the SCC tool integration to the toolchain."
-  default     = "false"
+  default     = "true"
 }
 
 variable "scc_instance_crn" {
