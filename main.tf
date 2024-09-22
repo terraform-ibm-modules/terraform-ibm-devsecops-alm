@@ -250,7 +250,7 @@ module "prereqs" {
 module "devsecops_ci_toolchain" {
   count                    = var.create_ci_toolchain ? 1 : 0
   depends_on               = [ibm_resource_instance.cd_instance]
-  source                   = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-ci-toolchain?ref=v2.0.0"
+  source                   = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-ci-toolchain?ref=gitlab"
   ibmcloud_api_key         = var.ibmcloud_api_key
   toolchain_name           = (var.prefix == "") ? local.ci_toolchain_name : format("${var.prefix}-%s", local.ci_toolchain_name)
   toolchain_region         = (var.ci_toolchain_region == "") ? var.toolchain_region : replace(replace(var.ci_toolchain_region, "ibm:yp:", ""), "ibm:ys1:", "")
@@ -344,32 +344,54 @@ module "devsecops_ci_toolchain" {
   app_repo_existing_git_id       = local.ci_app_repo_existing_git_id
   app_repo_clone_to_git_provider = local.ci_app_repo_clone_to_git_provider
   app_repo_clone_to_git_id       = local.ci_app_repo_clone_to_git_id
+  app_repo_blind_connection      = var.repo_blind_connection
+  app_repo_root_url              = var.repo_root_url
+  app_repo_title                 = var.repo_title
+
+  #COMPLIANCE PIPELINE REPO
+  compliance_pipelines_repo_blind_connection = var.repo_blind_connection
+  compliance_pipelines_repo_root_url         = var.repo_root_url
+  compliance_pipelines_repo_title            = var.repo_title
+  #clone_compliance_pipelines                 = var.clone_compliance_pipelines
+
 
   #PIPELINE CONFIG REPO
-  pipeline_config_repo_existing_url   = local.ci_pipeline_config_repo_existing_url
-  pipeline_config_repo_clone_from_url = local.ci_pipeline_config_repo_clone_from_url
-  pipeline_config_repo_branch         = (local.ci_pipeline_config_repo_branch == "") ? local.ci_app_repo_branch : local.ci_pipeline_config_repo_branch
+  pipeline_config_repo_existing_url     = local.ci_pipeline_config_repo_existing_url
+  pipeline_config_repo_clone_from_url   = local.ci_pipeline_config_repo_clone_from_url
+  pipeline_config_repo_branch           = (local.ci_pipeline_config_repo_branch == "") ? local.ci_app_repo_branch : local.ci_pipeline_config_repo_branch
+  pipeline_config_repo_blind_connection = var.repo_blind_connection
+  pipeline_config_repo_root_url         = var.repo_root_url
+  pipeline_config_repo_title            = var.repo_title
 
   #EVIDENCE REPO
   evidence_repo_name              = var.evidence_repo_name
   evidence_repo_existing_url      = var.evidence_repo_existing_url
-  evidence_repo_git_provider      = var.evidence_repo_existing_git_provider
-  evidence_repo_git_id            = var.evidence_repo_existing_git_id
+  evidence_repo_git_provider      = (var.evidence_repo_existing_git_provider == "") ? var.repo_git_provider : var.evidence_repo_existing_git_provider
+  evidence_repo_git_id            = (var.evidence_repo_existing_git_id == "") ? var.repo_git_id : var.evidence_repo_existing_git_id
   evidence_repo_integration_owner = var.evidence_repo_integration_owner
+  evidence_repo_blind_connection  = var.repo_blind_connection
+  evidence_repo_root_url          = var.repo_root_url
+  evidence_repo_title             = var.repo_title
 
   #ISSUES REPO
   issues_repo_name              = var.issues_repo_name
   issues_repo_existing_url      = var.issues_repo_existing_url
-  issues_repo_git_provider      = var.issues_repo_existing_git_provider
-  issues_repo_git_id            = var.issues_repo_existing_git_id
+  issues_repo_git_provider      = (var.issues_repo_existing_git_provider == "") ? var.repo_git_provider : var.issues_repo_existing_git_provider
+  issues_repo_git_id            = (var.issues_repo_existing_git_id == "") ? var.repo_git_id : var.issues_repo_existing_git_id
   issues_repo_integration_owner = var.issues_repo_integration_owner
+  issues_repo_blind_connection  = var.repo_blind_connection
+  issues_repo_root_url          = var.repo_root_url
+  issues_repo_title             = var.repo_title
 
   #INVENTORY REPO
   inventory_repo_name              = var.inventory_repo_name
   inventory_repo_existing_url      = var.inventory_repo_existing_url
-  inventory_repo_git_provider      = var.inventory_repo_existing_git_provider
-  inventory_repo_git_id            = var.inventory_repo_existing_git_id
+  inventory_repo_git_provider      = (var.inventory_repo_existing_git_provider == "") ? var.repo_git_id : var.inventory_repo_existing_git_provider
+  inventory_repo_git_id            = (var.inventory_repo_existing_git_id == "") ? var.repo_git_id : var.inventory_repo_existing_git_id
   inventory_repo_integration_owner = var.inventory_repo_integration_owner
+  inventory_repo_blind_connection  = var.repo_blind_connection
+  inventory_repo_root_url          = var.repo_root_url
+  inventory_repo_title             = var.repo_title
 
   app_name                           = var.ci_app_name
   signing_key_secret_name            = var.ci_signing_key_secret_name
@@ -450,7 +472,7 @@ module "devsecops_ci_toolchain" {
 module "devsecops_cd_toolchain" {
   count            = var.create_cd_toolchain ? 1 : 0
   depends_on       = [ibm_resource_instance.cd_instance]
-  source           = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain?ref=v2.0.0"
+  source           = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain?ref=gitlab"
   ibmcloud_api_key = var.ibmcloud_api_key
 
   toolchain_name           = (var.prefix == "") ? local.cd_toolchain_name : format("${var.prefix}-%s", local.cd_toolchain_name)
@@ -544,35 +566,57 @@ module "devsecops_cd_toolchain" {
   deployment_group          = (var.cd_deployment_group == "") ? var.repo_group : var.cd_deployment_group
   change_management_group   = (var.cd_change_management_group == "") ? var.repo_group : var.cd_change_management_group
 
+  #COMPLIANCE PIPELINE REPO
+  compliance_pipelines_repo_blind_connection = var.repo_blind_connection
+  compliance_pipelines_repo_root_url         = var.repo_root_url
+  compliance_pipelines_repo_title            = var.repo_title
+  #clone_compliance_pipelines                 = var.clone_compliance_pipelines
+
   #PIPELINE CONFIG REPO
-  pipeline_config_repo_existing_url   = local.cd_pipeline_config_repo_existing_url
-  pipeline_config_repo_clone_from_url = local.cd_pipeline_config_repo_clone_from_url
-  pipeline_config_repo_branch         = (local.cd_pipeline_config_repo_branch == "") ? "master" : local.cd_pipeline_config_repo_branch
+  pipeline_config_repo_existing_url     = local.cd_pipeline_config_repo_existing_url
+  pipeline_config_repo_clone_from_url   = local.cd_pipeline_config_repo_clone_from_url
+  pipeline_config_repo_branch           = (local.cd_pipeline_config_repo_branch == "") ? "master" : local.cd_pipeline_config_repo_branch
+  pipeline_config_repo_blind_connection = var.repo_blind_connection
+  pipeline_config_repo_root_url         = var.repo_root_url
+  pipeline_config_repo_title            = var.repo_title
 
   #EVIDENCE REPO
   evidence_repo_name              = var.evidence_repo_name
   evidence_repo_url               = try(module.devsecops_ci_toolchain[0].evidence_repo_url, var.evidence_repo_existing_url)
-  evidence_repo_git_provider      = var.evidence_repo_existing_git_provider
-  evidence_repo_git_id            = var.evidence_repo_existing_git_id
+  evidence_repo_git_provider      = (var.evidence_repo_existing_git_provider == "") ? var.repo_git_provider : var.evidence_repo_existing_git_provider
+  evidence_repo_git_id            = (var.evidence_repo_existing_git_id == "") ? var.repo_git_id : var.evidence_repo_existing_git_id
   evidence_repo_integration_owner = var.evidence_repo_integration_owner
+  evidence_repo_blind_connection  = var.repo_blind_connection
+  evidence_repo_root_url          = var.repo_root_url
+  evidence_repo_title             = var.repo_title
 
   #ISSUES REPO
   issues_repo_name              = var.issues_repo_name
   issues_repo_url               = try(module.devsecops_ci_toolchain[0].issues_repo_url, var.issues_repo_existing_url)
-  issues_repo_git_provider      = var.issues_repo_existing_git_provider
-  issues_repo_git_id            = var.issues_repo_existing_git_id
+  issues_repo_git_provider      = (var.issues_repo_existing_git_provider == "") ? var.repo_git_provider : var.issues_repo_existing_git_provider
+  issues_repo_git_id            = (var.issues_repo_existing_git_id == "") ? var.repo_git_id : var.issues_repo_existing_git_id
   issues_repo_integration_owner = var.issues_repo_integration_owner
+  issues_repo_blind_connection  = var.repo_blind_connection
+  issues_repo_root_url          = var.repo_root_url
+  issues_repo_title             = var.repo_title
 
   #INVENTORY REPO
   inventory_repo_name              = var.inventory_repo_name
   inventory_repo_url               = try(module.devsecops_ci_toolchain[0].inventory_repo_url, var.inventory_repo_existing_url)
-  inventory_repo_git_provider      = var.inventory_repo_existing_git_provider
-  inventory_repo_git_id            = var.inventory_repo_existing_git_id
+  inventory_repo_git_provider      = (var.inventory_repo_existing_git_provider == "") ? var.repo_git_id : var.inventory_repo_existing_git_provider
+  inventory_repo_git_id            = (var.inventory_repo_existing_git_id == "") ? var.repo_git_id : var.inventory_repo_existing_git_id
   inventory_repo_integration_owner = var.inventory_repo_integration_owner
+  inventory_repo_blind_connection  = var.repo_blind_connection
+  inventory_repo_root_url          = var.repo_root_url
+  inventory_repo_title             = var.repo_title
 
   #CHANGE MANAGEMENT REPO
-  change_repo_clone_from_url    = var.cd_change_repo_clone_from_url
-  enable_change_management_repo = true
+  enable_change_management_repo           = true
+  change_repo_clone_from_url              = var.cd_change_repo_clone_from_url
+  change_management_repo_blind_connection = var.repo_blind_connection
+  change_management_repo_root_url         = var.repo_root_url
+  change_management_repo_title            = var.repo_title
+  change_management_repo_git_provider     = var.cd_change_management_repo_git_provider
 
   #DEPLOYMENT REPO
   deployment_repo_existing_git_provider = (var.use_app_repo_for_cd_deploy) ? try(module.devsecops_ci_toolchain[0].app_repo_git_provider, "") : var.cd_deployment_repo_existing_git_provider
@@ -583,6 +627,11 @@ module "devsecops_cd_toolchain" {
   deployment_repo_clone_from_branch     = var.cd_deployment_repo_clone_from_branch
   deployment_repo_existing_url          = (var.use_app_repo_for_cd_deploy) ? try(module.devsecops_ci_toolchain[0].app_repo_url, "") : var.cd_deployment_repo_existing_url
   deployment_repo_existing_branch       = (var.use_app_repo_for_cd_deploy) ? try(module.devsecops_ci_toolchain[0].app_repo_branch, "") : var.cd_deployment_repo_existing_branch
+  deployment_repo_blind_connection      = var.repo_blind_connection
+  deployment_repo_root_url              = var.repo_root_url
+  deployment_repo_title                 = var.repo_title
+
+
 
   #SCC
   scc_enable_scc       = (local.cd_scc_enable_scc == "true") ? true : false
@@ -664,7 +713,7 @@ module "devsecops_cd_toolchain" {
 
 module "devsecops_cc_toolchain" {
   count                         = var.create_cc_toolchain ? 1 : 0
-  source                        = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cc-toolchain?ref=v2.0.0"
+  source                        = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cc-toolchain?ref=gitlab"
   ibmcloud_api_key              = var.ibmcloud_api_key
   toolchain_name                = (var.prefix == "") ? local.cc_toolchain_name : format("${var.prefix}-%s", local.cc_toolchain_name)
   toolchain_description         = var.cc_toolchain_description
@@ -753,10 +802,19 @@ module "devsecops_cc_toolchain" {
 
   link_to_doi_toolchain = var.cc_link_to_doi_toolchain
 
+  #COMPLIANCE PIPELINE REPO
+  compliance_pipelines_repo_blind_connection = var.repo_blind_connection
+  compliance_pipelines_repo_root_url         = var.repo_root_url
+  compliance_pipelines_repo_title            = var.repo_title
+  #clone_compliance_pipelines                 = var.clone_compliance_pipelines
+
   #PIPELINE CONFIG REPO
-  pipeline_config_repo_existing_url   = local.cc_pipeline_config_repo_existing_url
-  pipeline_config_repo_clone_from_url = local.cc_pipeline_config_repo_clone_from_url
-  pipeline_config_repo_branch         = (local.cc_pipeline_config_repo_branch == "") ? local.cc_app_repo_branch : local.cc_pipeline_config_repo_branch
+  pipeline_config_repo_existing_url     = local.cc_pipeline_config_repo_existing_url
+  pipeline_config_repo_clone_from_url   = local.cc_pipeline_config_repo_clone_from_url
+  pipeline_config_repo_branch           = (local.cc_pipeline_config_repo_branch == "") ? local.cc_app_repo_branch : local.cc_pipeline_config_repo_branch
+  pipeline_config_repo_blind_connection = var.repo_blind_connection
+  pipeline_config_repo_root_url         = var.repo_root_url
+  pipeline_config_repo_title            = var.repo_title
 
   #APP REPO
   app_repo_url          = try(module.devsecops_ci_toolchain[0].app_repo_url, local.cc_app_repo_existing_url)
@@ -767,23 +825,32 @@ module "devsecops_cc_toolchain" {
   #EVIDENCE REPO
   evidence_repo_name              = var.evidence_repo_name
   evidence_repo_url               = try(module.devsecops_ci_toolchain[0].evidence_repo_url, var.evidence_repo_existing_url)
-  evidence_repo_git_provider      = var.evidence_repo_existing_git_provider
-  evidence_repo_git_id            = var.evidence_repo_existing_git_id
+  evidence_repo_git_provider      = (var.evidence_repo_existing_git_provider == "") ? var.repo_git_provider : var.evidence_repo_existing_git_provider
+  evidence_repo_git_id            = (var.evidence_repo_existing_git_id == "") ? var.repo_git_id : var.evidence_repo_existing_git_id
   evidence_repo_integration_owner = var.evidence_repo_integration_owner
+  evidence_repo_blind_connection  = var.repo_blind_connection
+  evidence_repo_root_url          = var.repo_root_url
+  evidence_repo_title             = var.repo_title
 
   #ISSUES REPO
   issues_repo_name              = var.issues_repo_name
   issues_repo_url               = try(module.devsecops_ci_toolchain[0].issues_repo_url, var.issues_repo_existing_url)
-  issues_repo_git_provider      = var.issues_repo_existing_git_provider
-  issues_repo_git_id            = var.issues_repo_existing_git_id
+  issues_repo_git_provider      = (var.issues_repo_existing_git_provider == "") ? var.repo_git_provider : var.issues_repo_existing_git_provider
+  issues_repo_git_id            = (var.issues_repo_existing_git_id == "") ? var.repo_git_id : var.issues_repo_existing_git_id
   issues_repo_integration_owner = var.issues_repo_integration_owner
+  issues_repo_blind_connection  = var.repo_blind_connection
+  issues_repo_root_url          = var.repo_root_url
+  issues_repo_title             = var.repo_title
 
   #INVENTORY REPO
   inventory_repo_name              = var.inventory_repo_name
   inventory_repo_url               = try(module.devsecops_ci_toolchain[0].inventory_repo_url, var.inventory_repo_existing_url)
-  inventory_repo_git_provider      = var.inventory_repo_existing_git_provider
-  inventory_repo_git_id            = var.inventory_repo_existing_git_id
+  inventory_repo_git_provider      = (var.inventory_repo_existing_git_provider == "") ? var.repo_git_id : var.inventory_repo_existing_git_provider
+  inventory_repo_git_id            = (var.inventory_repo_existing_git_id == "") ? var.repo_git_id : var.inventory_repo_existing_git_id
   inventory_repo_integration_owner = var.inventory_repo_integration_owner
+  inventory_repo_blind_connection  = var.repo_blind_connection
+  inventory_repo_root_url          = var.repo_root_url
+  inventory_repo_title             = var.repo_title
 
   #SCC
   scc_enable_scc       = (local.cc_scc_enable_scc == "true") ? true : false

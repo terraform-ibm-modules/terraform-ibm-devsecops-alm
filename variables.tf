@@ -105,6 +105,12 @@ variable "autostart" {
   default     = false
 }
 
+#variable "clone_compliance_pipelines" {
+#  type        = bool
+#  description = "Setting to `true` will clone the compliance pipeline repository instead of linking to it. This is required for the case where the user opts to use a non IBM hosted repositories."
+#  default     = false
+#}
+
 variable "cluster_name" {
   type        = string
   description = "Name of the Kubernetes cluster where the application is deployed. This sets the same cluster name for both CI and CD toolchains. See `ci_cluster_name` and `cd_cluster_name` to set different cluster names. By default , the cluster namespace for CI will be set to `dev` and CD to `prod`. These can be changed using `ci_cluster_namespace` and `cd_cluster_namespace`."
@@ -661,6 +667,24 @@ variable "registry_namespace" {
   default     = ""
 }
 
+variable "repo_blind_connection" {
+  type        = string
+  description = "Setting this value to `true` means the server is not addressable on the public internet. IBM Cloud will not be able to validate the connection details you provide. Certain functionality that requires API access to the git server will be disabled. Delivery pipeline will only work using a private worker that has network access to the git server."
+  default     = ""
+}
+
+variable "repo_git_id" {
+  type        = string
+  description = "The Git ID for the compliance repositories."
+  default     = ""
+}
+
+variable "repo_git_provider" {
+  type        = string
+  description = "The Git provider type."
+  default     = ""
+}
+
 variable "repo_git_token_secret_crn" {
   type        = string
   sensitive   = true
@@ -702,6 +726,18 @@ variable "repositories_prefix" {
     )
     error_message = "For the repositories_prefix value only a-z, A-Z and 0-9 and the special characters `-_` are allowed. In addition the string must not end with a special character or have two consecutive special characters."
   }
+}
+
+variable "repo_root_url" {
+  type        = string
+  description = "(Optional) The Root URL of the server. e.g. https://git.example.com."
+  default     = ""
+}
+
+variable "repo_title" {
+  type        = string
+  description = "(Optional) The title of the server. e.g. My Git Enterprise Server."
+  default     = ""
 }
 
 variable "scc_attachment_id" {
@@ -1652,6 +1688,16 @@ variable "cd_change_management_repo_auth_type" {
   type        = string
   description = "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`."
   default     = ""
+}
+
+variable "cd_change_management_repo_git_provider" {
+  type        = string
+  default     = "hostedgit"
+  description = "By default this gets set as 'hostedgit', else set to 'githubconsolidated' for GitHub repositories."
+  validation {
+    condition     = contains(["hostedgit", "githubconsolidated", "gitlab"], var.cd_change_management_repo_git_provider)
+    error_message = "Must be either \"hostedgit\" or \"gitlab\" or \"githubconsolidated\" for evidence repository."
+  }
 }
 
 variable "cd_change_management_repo_git_token_secret_crn" {
