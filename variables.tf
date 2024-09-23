@@ -105,11 +105,11 @@ variable "autostart" {
   default     = false
 }
 
-#variable "clone_compliance_pipelines" {
-#  type        = bool
-#  description = "Setting to `true` will clone the compliance pipeline repository instead of linking to it. This is required for the case where the user opts to use a non IBM hosted repositories."
-#  default     = false
-#}
+variable "clone_compliance_pipelines" {
+  type        = bool
+  description = "Setting to `true` will clone the compliance pipeline repository instead of linking to it. This is required for the case where the user opts to use a non IBM hosted repositories."
+  default     = false
+}
 
 variable "cluster_name" {
   type        = string
@@ -139,6 +139,16 @@ variable "compliance_pipeline_repo_auth_type" {
   type        = string
   description = "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`."
   default     = ""
+}
+
+variable "compliance_pipeline_repo_git_provider" {
+  type        = string
+  default     = "hostedgit"
+  description = "Git provider for pipeline repo"
+  validation {
+    condition     = contains(["hostedgit", "githubconsolidated", "gitlab"], var.compliance_pipeline_repo_git_provider)
+    error_message = "Must be either \"hostedgit\" or \"gitlab\" or \"githubconsolidated\" for pipeline repo."
+  }
 }
 
 variable "compliance_pipeline_repo_git_token_secret_crn" {

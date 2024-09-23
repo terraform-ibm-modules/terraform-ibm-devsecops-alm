@@ -352,8 +352,8 @@ module "devsecops_ci_toolchain" {
   compliance_pipelines_repo_blind_connection = var.repo_blind_connection
   compliance_pipelines_repo_root_url         = var.repo_root_url
   compliance_pipelines_repo_title            = var.repo_title
-  #clone_compliance_pipelines                 = var.clone_compliance_pipelines
-
+  clone_compliance_pipelines                 = var.clone_compliance_pipelines
+  compliance_pipeline_repo_git_provider      = var.compliance_pipeline_repo_git_provider
 
   #PIPELINE CONFIG REPO
   pipeline_config_repo_existing_url     = local.ci_pipeline_config_repo_existing_url
@@ -570,7 +570,8 @@ module "devsecops_cd_toolchain" {
   compliance_pipelines_repo_blind_connection = var.repo_blind_connection
   compliance_pipelines_repo_root_url         = var.repo_root_url
   compliance_pipelines_repo_title            = var.repo_title
-  #clone_compliance_pipelines                 = var.clone_compliance_pipelines
+  clone_compliance_pipelines                 = var.clone_compliance_pipelines
+  compliance_pipeline_repo_git_provider      = var.compliance_pipeline_repo_git_provider
 
   #PIPELINE CONFIG REPO
   pipeline_config_repo_existing_url     = local.cd_pipeline_config_repo_existing_url
@@ -806,7 +807,8 @@ module "devsecops_cc_toolchain" {
   compliance_pipelines_repo_blind_connection = var.repo_blind_connection
   compliance_pipelines_repo_root_url         = var.repo_root_url
   compliance_pipelines_repo_title            = var.repo_title
-  #clone_compliance_pipelines                 = var.clone_compliance_pipelines
+  clone_compliance_pipelines                 = var.clone_compliance_pipelines
+  compliance_pipeline_repo_git_provider      = var.compliance_pipeline_repo_git_provider
 
   #PIPELINE CONFIG REPO
   pipeline_config_repo_existing_url     = local.cc_pipeline_config_repo_existing_url
