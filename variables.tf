@@ -285,6 +285,12 @@ variable "create_signing_key" {
   default     = false
 }
 
+variable "create_triggers" {
+  type        = string
+  description = "Set to `true` to create the default triggers associated with the compliance repos and sample app."
+  default     = "true"
+}
+
 variable "enable_key_protect" {
   type        = string
   description = "Set to `true` to the enable Key Protect integrations."

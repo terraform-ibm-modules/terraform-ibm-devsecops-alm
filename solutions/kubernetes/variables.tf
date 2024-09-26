@@ -149,10 +149,10 @@ variable "compliance_pipeline_repo_git_id" {
 
 variable "compliance_pipeline_repo_git_provider" {
   type        = string
-  default     = "hostedgit"
+  default     = ""
   description = "Git provider for pipeline repo"
   validation {
-    condition     = contains(["hostedgit", "githubconsolidated", "gitlab"], var.compliance_pipeline_repo_git_provider)
+    condition     = contains(["hostedgit", "githubconsolidated", "gitlab", ""], var.compliance_pipeline_repo_git_provider)
     error_message = "Must be either \"hostedgit\" or \"gitlab\" or \"githubconsolidated\" for pipeline repo."
   }
 }
@@ -281,6 +281,12 @@ variable "create_signing_key" {
   default     = false
 }
 
+variable "create_triggers" {
+  type        = string
+  description = "Set to `true` to create the default triggers associated with the compliance repos and sample app."
+  default     = "true"
+}
+
 variable "enable_key_protect" {
   type        = string
   description = "Set to `true` to the enable Key Protect integrations."
@@ -349,10 +355,10 @@ variable "evidence_repo_existing_git_id" {
 
 variable "evidence_repo_existing_git_provider" {
   type        = string
-  default     = "hostedgit"
+  default     = ""
   description = "By default this gets set as 'hostedgit', else set to 'githubconsolidated' for GitHub repositories."
   validation {
-    condition     = contains(["hostedgit", "githubconsolidated", "gitlab"], var.evidence_repo_existing_git_provider)
+    condition     = contains(["hostedgit", "githubconsolidated", "gitlab", ""], var.evidence_repo_existing_git_provider)
     error_message = "Must be either \"hostedgit\" or \"gitlab\" or \"githubconsolidated\" for evidence repository."
   }
 }
@@ -424,10 +430,10 @@ variable "inventory_repo_existing_git_id" {
 
 variable "inventory_repo_existing_git_provider" {
   type        = string
-  default     = "hostedgit"
+  default     = ""
   description = "By default this gets set as 'hostedgit', else set to 'githubconsolidated' for GitHub repositories."
   validation {
-    condition     = contains(["hostedgit", "githubconsolidated", "gitlab"], var.inventory_repo_existing_git_provider)
+    condition     = contains(["hostedgit", "githubconsolidated", "gitlab", ""], var.inventory_repo_existing_git_provider)
     error_message = "Must be either \"hostedgit\" or \"gitlab\" or \"githubconsolidated\" for Inventory repository."
   }
 }
@@ -493,10 +499,10 @@ variable "issues_repo_existing_git_id" {
 
 variable "issues_repo_existing_git_provider" {
   type        = string
-  default     = "hostedgit"
+  default     = ""
   description = "By default this gets set as 'hostedgit', else set to 'githubconsolidated' for GitHub repositories."
   validation {
-    condition     = contains(["hostedgit", "githubconsolidated", "gitlab"], var.issues_repo_existing_git_provider)
+    condition     = contains(["hostedgit", "githubconsolidated", "gitlab", ""], var.issues_repo_existing_git_provider)
     error_message = "Must be either \"hostedgit\" or \"gitlab\" or \"githubconsolidated\" for issue repository."
   }
 }
@@ -1730,10 +1736,10 @@ variable "cd_change_management_repo_auth_type" {
 
 variable "cd_change_management_repo_git_provider" {
   type        = string
-  default     = "hostedgit"
+  default     = ""
   description = "By default this gets set as 'hostedgit', else set to 'githubconsolidated' for GitHub repositories."
   validation {
-    condition     = contains(["hostedgit", "githubconsolidated", "gitlab"], var.cd_change_management_repo_git_provider)
+    condition     = contains(["hostedgit", "githubconsolidated", "gitlab", ""], var.cd_change_management_repo_git_provider)
     error_message = "Must be either \"hostedgit\" or \"gitlab\" or \"githubconsolidated\" for evidence repository."
   }
 }
@@ -1947,8 +1953,12 @@ variable "cd_deployment_repo_existing_git_id" {
 
 variable "cd_deployment_repo_existing_git_provider" {
   type        = string
-  description = "By default this gets set as 'hostedgit', else set to 'githubconsolidated' for GitHub repositories."
-  default     = "hostedgit"
+  description = "Git provider for the deployment repo. If not set will default `hostedgit`."
+  default     = ""
+  validation {
+    condition     = contains(["hostedgit", "githubconsolidated", "gitlab", ""], var.cd_deployment_repo_existing_git_provider)
+    error_message = "Must be either \"hostedgit\" or \"gitlab\" or \"githubconsolidated\" for evidence repository."
+  }
 }
 
 variable "cd_deployment_repo_existing_url" {
