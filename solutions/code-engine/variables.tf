@@ -105,12 +105,6 @@ variable "autostart" {
   default     = false
 }
 
-variable "clone_compliance_pipelines" {
-  type        = bool
-  description = "Setting to `true` will clone the compliance pipeline repository instead of linking to it. This is required for the case where the user opts to use a non IBM hosted repositories."
-  default     = false
-}
-
 variable "cluster_name" {
   type        = string
   description = "Name of the Kubernetes cluster where the application is deployed. This sets the same cluster name for both CI and CD toolchains. See `ci_cluster_name` and `cd_cluster_name` to set different cluster names. By default , the cluster namespace for CI will be set to `dev` and CD to `prod`. These can be changed using `ci_cluster_namespace` and `cd_cluster_namespace`."
@@ -129,6 +123,12 @@ variable "compliance_pipeline_branch" {
   default     = "open-v10"
 }
 
+variable "compliance_pipeline_existing_repo_url" {
+  type        = string
+  default     = ""
+  description = "The URL of an existing compliance pipelines repository."
+}
+
 variable "compliance_pipeline_group" {
   type        = string
   description = "Specify user or group for compliance pipline repository."
@@ -138,6 +138,12 @@ variable "compliance_pipeline_group" {
 variable "compliance_pipeline_repo_auth_type" {
   type        = string
   description = "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`."
+  default     = ""
+}
+
+variable "compliance_pipeline_repo_git_id" {
+  type        = string
+  description = "Set this value to `github` for github.com, or to the ID of a custom GitHub Enterprise server."
   default     = ""
 }
 
@@ -172,6 +178,12 @@ variable "compliance_pipeline_repo_secret_group" {
   type        = string
   description = "Secret group for the Compliance Pipeline repository secret. Defaults to the value set in `sm_secret_group` if not set. Only used with `Secrets Manager`."
   default     = ""
+}
+
+variable "compliance_pipeline_source_repo_url" {
+  type        = string
+  default     = ""
+  description = "The URL of a compliance pipelines repository to clone."
 }
 
 variable "cos_api_key_secret_crn" {
@@ -599,6 +611,22 @@ variable "pipeline_config_group" {
   type        = string
   description = "Specify the Git user or group for the compliance pipeline repository."
   default     = ""
+}
+
+variable "pipeline_config_repo_git_id" {
+  type        = string
+  description = "Set this value to `github` for github.com, or to the GUID of a custom GitHub Enterprise server."
+  default     = ""
+}
+
+variable "pipeline_config_repo_git_provider" {
+  type        = string
+  default     = ""
+  description = "Git provider for pipeline repo config"
+  validation {
+    condition     = contains(["hostedgit", "githubconsolidated", "gitlab", ""], var.pipeline_config_repo_git_provider)
+    error_message = "Must be either \"hostedgit\" or \"gitlab\" or \"githubconsolidated\" for pipeline config repo."
+  }
 }
 
 variable "pipeline_config_repo_git_token_secret_name" {
@@ -1697,6 +1725,18 @@ variable "cd_change_management_group" {
 variable "cd_change_management_repo_auth_type" {
   type        = string
   description = "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`."
+  default     = ""
+}
+
+variable "change_management_existing_url" {
+  type        = string
+  description = "The URL for an existing Change Management repository."
+  default     = ""
+}
+
+variable "change_management_repo_git_id" {
+  type        = string
+  description = "Set this value to `github` for github.com, or to the ID of a custom GitHub Enterprise server."
   default     = ""
 }
 
