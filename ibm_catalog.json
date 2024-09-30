@@ -712,7 +712,7 @@
                         {
                             "key": "cd_deployment_repo_existing_git_provider",
                             "type": "string",
-                            "default_value": "hostedgit",
+                            "default_value": "",
                             "description": "By default this gets set as 'hostedgit', else set to 'githubconsolidated' for GitHub repositories.",
                             "required": false
                         },
@@ -1279,7 +1279,7 @@
                         {
                             "key": "evidence_repo_existing_git_provider",
                             "type": "string",
-                            "default_value": "hostedgit",
+                            "default_value": "",
                             "description": "By default this gets set as 'hostedgit', else set to 'githubconsolidated' for GitHub repositories.",
                             "required": false
                         },
@@ -1341,7 +1341,7 @@
                         {
                             "key": "inventory_repo_existing_git_provider",
                             "type": "string",
-                            "default_value": "hostedgit",
+                            "default_value": "",
                             "description": "By default this gets set as 'hostedgit', else set to 'githubconsolidated' for GitHub repositories.",
                             "required": false
                         },
@@ -1403,7 +1403,7 @@
                         {
                             "key": "issues_repo_existing_git_provider",
                             "type": "string",
-                            "default_value": "hostedgit",
+                            "default_value": "",
                             "description": "By default this gets set as 'hostedgit', else set to 'githubconsolidated' for GitHub repositories.",
                             "required": false
                         },
@@ -2571,7 +2571,7 @@
                         {
                             "key": "cd_deployment_repo_existing_git_provider",
                             "type": "string",
-                            "default_value": "hostedgit",
+                            "default_value": "",
                             "description": "By default this gets set as 'hostedgit', else set to 'githubconsolidated' for GitHub repositories.",
                             "required": false
                         },
@@ -3138,7 +3138,7 @@
                         {
                             "key": "evidence_repo_existing_git_provider",
                             "type": "string",
-                            "default_value": "hostedgit",
+                            "default_value": "",
                             "description": "By default this gets set as 'hostedgit', else set to 'githubconsolidated' for GitHub repositories.",
                             "required": false
                         },
@@ -3200,7 +3200,7 @@
                         {
                             "key": "inventory_repo_existing_git_provider",
                             "type": "string",
-                            "default_value": "hostedgit",
+                            "default_value": "",
                             "description": "By default this gets set as 'hostedgit', else set to 'githubconsolidated' for GitHub repositories.",
                             "required": false
                         },
@@ -3262,7 +3262,7 @@
                         {
                             "key": "issues_repo_existing_git_provider",
                             "type": "string",
-                            "default_value": "hostedgit",
+                            "default_value": "",
                             "description": "By default this gets set as 'hostedgit', else set to 'githubconsolidated' for GitHub repositories.",
                             "required": false
                         },

@@ -1029,7 +1029,7 @@ variable "cc_app_repo_git_id" {
 variable "cc_app_repo_git_provider" {
   type        = string
   description = "The type of the Git provider."
-  default     = "hostedgit"
+  default     = ""
 }
 
 variable "cc_app_repo_git_token_secret_crn" {
