@@ -91,6 +91,7 @@ statement instead the previous block.
 |------|-------------|------|---------|:--------:|
 | <a name="input_add_code_engine_prefix"></a> [add\_code\_engine\_prefix](#input\_add\_code\_engine\_prefix) | Set to `true` to use `prefix` to add a prefix to the code engine project names. | `bool` | `true` | no |
 | <a name="input_add_container_name_suffix"></a> [add\_container\_name\_suffix](#input\_add\_container\_name\_suffix) | Set to `true` to add a random suffix to the specified ICR name. | `bool` | `false` | no |
+| <a name="input_add_pipeline_definitions"></a> [add\_pipeline\_definitions](#input\_add\_pipeline\_definitions) | Set to `true` to add pipeline definitions. | `string` | `"true"` | no |
 | <a name="input_app_group"></a> [app\_group](#input\_app\_group) | Specify the Git user or group for the application repository. | `string` | `""` | no |
 | <a name="input_app_repo_auth_type"></a> [app\_repo\_auth\_type](#input\_app\_repo\_auth\_type) | Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`. | `string` | `""` | no |
 | <a name="input_app_repo_branch"></a> [app\_repo\_branch](#input\_app\_repo\_branch) | This is the repository branch used by the default sample application. Alternatively if `app_repo_existing_url` is provided, then the branch must reflect the default branch for that repository. Typically these branches are `main` or `master`. | `string` | `"master"` | no |

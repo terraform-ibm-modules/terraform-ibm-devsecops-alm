@@ -4,6 +4,7 @@ module "devsecops_da" {
   add_code_engine_prefix                            = var.add_code_engine_prefix
   add_container_name_suffix                         = var.add_container_name_suffix
   app_group                                         = var.app_group
+  add_pipeline_definitions                          = var.add_pipeline_definitions
   app_repo_auth_type                                = var.app_repo_auth_type
   app_repo_branch                                   = var.app_repo_branch
   app_repo_clone_from_url                           = var.app_repo_clone_from_url

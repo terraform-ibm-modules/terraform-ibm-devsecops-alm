@@ -295,16 +295,17 @@ module "devsecops_ci_toolchain" {
   pr_pipeline_git_tag      = (var.pr_pipeline_git_tag == "") ? var.pipeline_git_tag : var.pr_pipeline_git_tag
 
   #SECRET PROVIDERS
-  enable_key_protect     = (local.ci_enable_key_protect == "true") ? true : false
-  enable_secrets_manager = (local.ci_enable_secrets_manager == "true") ? true : false
-  sm_name                = (var.ci_sm_name == "") ? var.sm_name : var.ci_sm_name
-  sm_location            = (var.ci_sm_location == "") ? replace(replace(var.sm_location, "ibm:yp:", ""), "ibm:ys1:", "") : replace(replace(var.ci_sm_location, "ibm:yp:", ""), "ibm:ys1:", "")
-  sm_resource_group      = (var.ci_sm_resource_group != "") ? var.ci_sm_resource_group : (var.sm_resource_group != "") ? var.sm_resource_group : var.toolchain_resource_group
-  sm_secret_group        = (var.ci_sm_secret_group == "") ? var.sm_secret_group : var.ci_sm_secret_group
-  kp_name                = (var.ci_kp_name == "") ? var.kp_name : var.ci_kp_name
-  kp_location            = (var.ci_kp_location == "") ? replace(replace(var.kp_location, "ibm:yp:", ""), "ibm:ys1:", "") : replace(replace(var.ci_kp_location, "ibm:yp:", ""), "ibm:ys1:", "")
-  kp_resource_group      = (var.ci_kp_resource_group != "") ? var.ci_kp_resource_group : (var.kp_resource_group != "") ? var.kp_resource_group : var.toolchain_resource_group
-  sm_instance_crn        = (var.ci_sm_instance_crn != "") ? var.ci_sm_instance_crn : var.sm_instance_crn
+  enable_key_protect       = (local.ci_enable_key_protect == "true") ? true : false
+  enable_secrets_manager   = (local.ci_enable_secrets_manager == "true") ? true : false
+  sm_name                  = (var.ci_sm_name == "") ? var.sm_name : var.ci_sm_name
+  sm_location              = (var.ci_sm_location == "") ? replace(replace(var.sm_location, "ibm:yp:", ""), "ibm:ys1:", "") : replace(replace(var.ci_sm_location, "ibm:yp:", ""), "ibm:ys1:", "")
+  sm_resource_group        = (var.ci_sm_resource_group != "") ? var.ci_sm_resource_group : (var.sm_resource_group != "") ? var.sm_resource_group : var.toolchain_resource_group
+  sm_secret_group          = (var.ci_sm_secret_group == "") ? var.sm_secret_group : var.ci_sm_secret_group
+  kp_name                  = (var.ci_kp_name == "") ? var.kp_name : var.ci_kp_name
+  kp_location              = (var.ci_kp_location == "") ? replace(replace(var.kp_location, "ibm:yp:", ""), "ibm:ys1:", "") : replace(replace(var.ci_kp_location, "ibm:yp:", ""), "ibm:ys1:", "")
+  kp_resource_group        = (var.ci_kp_resource_group != "") ? var.ci_kp_resource_group : (var.kp_resource_group != "") ? var.kp_resource_group : var.toolchain_resource_group
+  sm_instance_crn          = (var.ci_sm_instance_crn != "") ? var.ci_sm_instance_crn : var.sm_instance_crn
+  add_pipeline_definitions = var.add_pipeline_definitions
 
   #SECRET NAMES
   pipeline_ibmcloud_api_key_secret_name  = (var.ci_pipeline_ibmcloud_api_key_secret_name == "") ? var.pipeline_ibmcloud_api_key_secret_name : var.ci_pipeline_ibmcloud_api_key_secret_name
@@ -520,16 +521,17 @@ module "devsecops_cd_toolchain" {
   pipeline_git_tag         = (var.cd_pipeline_git_tag == "") ? var.pipeline_git_tag : var.cd_pipeline_git_tag
 
   #SECRET PROVIDERS
-  enable_key_protect     = (local.cd_enable_key_protect == "true") ? true : false
-  enable_secrets_manager = (local.cd_enable_secrets_manager == "true") ? true : false
-  sm_name                = (var.cd_sm_name == "") ? var.sm_name : var.cd_sm_name
-  sm_location            = (var.cd_sm_location == "") ? replace(replace(var.sm_location, "ibm:yp:", ""), "ibm:ys1:", "") : replace(replace(var.cd_sm_location, "ibm:yp:", ""), "ibm:ys1:", "")
-  sm_resource_group      = (var.cd_sm_resource_group != "") ? var.cd_sm_resource_group : (var.sm_resource_group != "") ? var.sm_resource_group : var.toolchain_resource_group
-  sm_secret_group        = (var.cd_sm_secret_group == "") ? var.sm_secret_group : var.cd_sm_secret_group
-  kp_name                = (var.cd_kp_name == "") ? var.kp_name : var.cd_kp_name
-  kp_location            = (var.cd_kp_location == "") ? replace(replace(var.kp_location, "ibm:yp:", ""), "ibm:ys1:", "") : replace(replace(var.cd_kp_location, "ibm:yp:", ""), "ibm:ys1:", "")
-  kp_resource_group      = (var.cd_kp_resource_group != "") ? var.cd_kp_resource_group : (var.kp_resource_group != "") ? var.kp_resource_group : var.toolchain_resource_group
-  sm_instance_crn        = (var.cd_sm_instance_crn != "") ? var.cd_sm_instance_crn : var.sm_instance_crn
+  enable_key_protect       = (local.cd_enable_key_protect == "true") ? true : false
+  enable_secrets_manager   = (local.cd_enable_secrets_manager == "true") ? true : false
+  sm_name                  = (var.cd_sm_name == "") ? var.sm_name : var.cd_sm_name
+  sm_location              = (var.cd_sm_location == "") ? replace(replace(var.sm_location, "ibm:yp:", ""), "ibm:ys1:", "") : replace(replace(var.cd_sm_location, "ibm:yp:", ""), "ibm:ys1:", "")
+  sm_resource_group        = (var.cd_sm_resource_group != "") ? var.cd_sm_resource_group : (var.sm_resource_group != "") ? var.sm_resource_group : var.toolchain_resource_group
+  sm_secret_group          = (var.cd_sm_secret_group == "") ? var.sm_secret_group : var.cd_sm_secret_group
+  kp_name                  = (var.cd_kp_name == "") ? var.kp_name : var.cd_kp_name
+  kp_location              = (var.cd_kp_location == "") ? replace(replace(var.kp_location, "ibm:yp:", ""), "ibm:ys1:", "") : replace(replace(var.cd_kp_location, "ibm:yp:", ""), "ibm:ys1:", "")
+  kp_resource_group        = (var.cd_kp_resource_group != "") ? var.cd_kp_resource_group : (var.kp_resource_group != "") ? var.kp_resource_group : var.toolchain_resource_group
+  sm_instance_crn          = (var.cd_sm_instance_crn != "") ? var.cd_sm_instance_crn : var.sm_instance_crn
+  add_pipeline_definitions = var.add_pipeline_definitions
 
   #SECRET NAMES AND SECRET GROUPS
   pipeline_ibmcloud_api_key_secret_name  = (var.cd_pipeline_ibmcloud_api_key_secret_name == "") ? var.pipeline_ibmcloud_api_key_secret_name : var.cd_pipeline_ibmcloud_api_key_secret_name
@@ -767,16 +769,17 @@ module "devsecops_cc_toolchain" {
   pipeline_git_tag              = (var.cc_pipeline_git_tag == "") ? var.pipeline_git_tag : var.cc_pipeline_git_tag
 
   #SECRET PROVIDERS
-  enable_key_protect     = (local.cc_enable_key_protect == "true") ? true : false
-  enable_secrets_manager = (local.cc_enable_secrets_manager == "true") ? true : false
-  sm_name                = (var.cc_sm_name == "") ? var.sm_name : var.cc_sm_name
-  sm_location            = (var.cc_sm_location == "") ? replace(replace(var.sm_location, "ibm:yp:", ""), "ibm:ys1:", "") : replace(replace(var.cc_sm_location, "ibm:yp:", ""), "ibm:ys1:", "")
-  sm_resource_group      = (var.cc_sm_resource_group != "") ? var.cc_sm_resource_group : (var.sm_resource_group != "") ? var.sm_resource_group : var.toolchain_resource_group
-  sm_secret_group        = (var.cc_sm_secret_group == "") ? var.sm_secret_group : var.cc_sm_secret_group
-  kp_name                = (var.cc_kp_name == "") ? var.kp_name : var.cc_kp_name
-  kp_location            = (var.cc_sm_location == "") ? replace(replace(var.kp_location, "ibm:yp:", ""), "ibm:ys1:", "") : replace(replace(var.cc_kp_location, "ibm:yp:", ""), "ibm:ys1:", "")
-  kp_resource_group      = (var.cc_kp_resource_group != "") ? var.cc_kp_resource_group : (var.kp_resource_group != "") ? var.kp_resource_group : var.toolchain_resource_group
-  sm_instance_crn        = (var.cc_sm_instance_crn != "") ? var.cc_sm_instance_crn : var.sm_instance_crn
+  enable_key_protect       = (local.cc_enable_key_protect == "true") ? true : false
+  enable_secrets_manager   = (local.cc_enable_secrets_manager == "true") ? true : false
+  sm_name                  = (var.cc_sm_name == "") ? var.sm_name : var.cc_sm_name
+  sm_location              = (var.cc_sm_location == "") ? replace(replace(var.sm_location, "ibm:yp:", ""), "ibm:ys1:", "") : replace(replace(var.cc_sm_location, "ibm:yp:", ""), "ibm:ys1:", "")
+  sm_resource_group        = (var.cc_sm_resource_group != "") ? var.cc_sm_resource_group : (var.sm_resource_group != "") ? var.sm_resource_group : var.toolchain_resource_group
+  sm_secret_group          = (var.cc_sm_secret_group == "") ? var.sm_secret_group : var.cc_sm_secret_group
+  kp_name                  = (var.cc_kp_name == "") ? var.kp_name : var.cc_kp_name
+  kp_location              = (var.cc_sm_location == "") ? replace(replace(var.kp_location, "ibm:yp:", ""), "ibm:ys1:", "") : replace(replace(var.cc_kp_location, "ibm:yp:", ""), "ibm:ys1:", "")
+  kp_resource_group        = (var.cc_kp_resource_group != "") ? var.cc_kp_resource_group : (var.kp_resource_group != "") ? var.kp_resource_group : var.toolchain_resource_group
+  sm_instance_crn          = (var.cc_sm_instance_crn != "") ? var.cc_sm_instance_crn : var.sm_instance_crn
+  add_pipeline_definitions = var.add_pipeline_definitions
 
   #SECRET NAMES AND SECRET GROUPS
   pipeline_ibmcloud_api_key_secret_name  = (var.cc_pipeline_ibmcloud_api_key_secret_name == "") ? var.pipeline_ibmcloud_api_key_secret_name : var.cc_pipeline_ibmcloud_api_key_secret_name

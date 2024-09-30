@@ -3388,3 +3388,9 @@ variable "use_app_repo_for_cd_deploy" {
   description = "Set to `true` to use the CI sample application repository as the deployment repository in the CD pipeline. This will be set in the pipeline config integration."
   default     = true
 }
+
+variable "add_pipeline_definitions" {
+  type        = string
+  description = "Set to `true` to add pipeline definitions."
+  default     = "true"
+}
