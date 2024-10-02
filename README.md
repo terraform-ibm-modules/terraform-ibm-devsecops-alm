@@ -65,9 +65,9 @@ statement instead the previous block.
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_devsecops_cc_toolchain"></a> [devsecops\_cc\_toolchain](#module\_devsecops\_cc\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cc-toolchain | v2.0.0-gitlabpoc |
-| <a name="module_devsecops_cd_toolchain"></a> [devsecops\_cd\_toolchain](#module\_devsecops\_cd\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain | v2.0.0-gitlabpoc |
-| <a name="module_devsecops_ci_toolchain"></a> [devsecops\_ci\_toolchain](#module\_devsecops\_ci\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-ci-toolchain | v2.0.0-gitlabpoc |
+| <a name="module_devsecops_cc_toolchain"></a> [devsecops\_cc\_toolchain](#module\_devsecops\_cc\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cc-toolchain | v2.0.1-gitlabpoc |
+| <a name="module_devsecops_cd_toolchain"></a> [devsecops\_cd\_toolchain](#module\_devsecops\_cd\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain | v2.0.1-gitlabpoc |
+| <a name="module_devsecops_ci_toolchain"></a> [devsecops\_ci\_toolchain](#module\_devsecops\_ci\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-ci-toolchain | v2.0.1-gitlabpoc |
 | <a name="module_prereqs"></a> [prereqs](#module\_prereqs) | ./prereqs | n/a |
 
 ### Resources
@@ -485,6 +485,7 @@ statement instead the previous block.
 | <a name="input_create_cd_toolchain"></a> [create\_cd\_toolchain](#input\_create\_cd\_toolchain) | Boolean flag which determines if the DevSecOps CD toolchain is created. | `bool` | `true` | no |
 | <a name="input_create_ci_toolchain"></a> [create\_ci\_toolchain](#input\_create\_ci\_toolchain) | Flag which determines if the DevSecOps CI toolchain is created. If this toolchain is not created then values must be set for the following variables, evidence\_repo\_url, issues\_repo\_url and inventory\_repo\_url. | `bool` | `true` | no |
 | <a name="input_create_cos_api_key"></a> [create\_cos\_api\_key](#input\_create\_cos\_api\_key) | Set to `true` to create and add a `cos-api-key` to the Secrets Provider. | `bool` | `false` | no |
+| <a name="input_create_git_triggers"></a> [create\_git\_triggers](#input\_create\_git\_triggers) | Set to `true` to create the default Git triggers associated with the compliance repos and sample app. | `string` | `"true"` | no |
 | <a name="input_create_ibmcloud_api_key"></a> [create\_ibmcloud\_api\_key](#input\_create\_ibmcloud\_api\_key) | Set to `true` to create and add an `ibmcloud-api-key` to the Secrets Provider. | `bool` | `false` | no |
 | <a name="input_create_icr_namespace"></a> [create\_icr\_namespace](#input\_create\_icr\_namespace) | Set to `true` to have Terraform create the registry namespace. Setting to `false` will have the CI pipeline create the namespace if it does not already exist. Note: If a Terraform destroy is used, the ICR namespace along with all images will be removed. | `bool` | `false` | no |
 | <a name="input_create_secret_group"></a> [create\_secret\_group](#input\_create\_secret\_group) | Set to `true` to create the specified Secrets Manager secret group. | `bool` | `false` | no |

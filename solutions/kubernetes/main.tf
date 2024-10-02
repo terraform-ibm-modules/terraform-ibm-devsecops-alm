@@ -48,6 +48,7 @@ module "devsecops_da" {
   create_signing_certificate                        = var.create_signing_certificate
   create_signing_key                                = var.create_signing_key
   create_triggers                                   = var.create_triggers
+  create_git_triggers                               = var.create_git_triggers
   enable_key_protect                                = var.enable_key_protect
   enable_pipeline_notifications                     = var.enable_pipeline_notifications
   enable_secrets_manager                            = var.enable_secrets_manager

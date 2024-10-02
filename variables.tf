@@ -3406,3 +3406,9 @@ variable "add_pipeline_definitions" {
   description = "Set to `true` to add pipeline definitions."
   default     = "true"
 }
+
+variable "create_git_triggers" {
+  type        = string
+  description = "Set to `true` to create the default Git triggers associated with the compliance repos and sample app."
+  default     = "true"
+}
