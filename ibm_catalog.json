@@ -328,6 +328,13 @@
                             "required": false
                         },
                         {
+                            "key": "create_git_triggers",
+                            "type": "string",
+                            "default_value": "true",
+                            "description": "Set to `true` to create the Git triggers used by the DevSecOps pipelines.",
+                            "required": false
+                        },
+                        {
                             "key": "create_triggers",
                             "type": "string",
                             "default_value": "true",
@@ -2184,6 +2191,13 @@
                             "type": "string",
                             "default_value": "false",
                             "description": "Setting this value to `true` means the server is not addressable on the public internet. IBM Cloud will not be able to validate the connection details you provide. Certain functionality that requires API access to the git server will be disabled. Delivery pipeline will only work using a private worker that has network access to the git server.",
+                            "required": false
+                        },
+                        {
+                            "key": "create_git_triggers",
+                            "type": "string",
+                            "default_value": "true",
+                            "description": "Set to `true` to create the Git triggers used by the DevSecOps pipelines.",
                             "required": false
                         },
                         {
