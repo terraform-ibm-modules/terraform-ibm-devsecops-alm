@@ -205,7 +205,6 @@ resource "ibm_sm_iam_credentials_secret" "iam_pipeline_apikey_credentials_secret
   instance_id = data.ibm_resource_instance.sm_instance[0].guid
   region      = var.sm_location
   name        = var.iam_api_key_secret_name
-  #access_groups = ["${data.ibm_iam_access_group.pipeline_access_group.groups[0].id}"]
   description = "Extended description for this secret."
   rotation {
     auto_rotate = true
@@ -223,7 +222,6 @@ resource "ibm_sm_iam_credentials_secret" "iam_cos_apikey_credentials_secret" {
   instance_id = data.ibm_resource_instance.sm_instance[0].guid
   region      = var.sm_location
   name        = var.cos_api_key_secret_name
-  #access_groups = ["${data.ibm_iam_access_group.cos_access_group.groups[0].id}"]
   description = "Extended description for this secret."
   rotation {
     auto_rotate = true

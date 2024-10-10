@@ -144,11 +144,11 @@ variable "sm_resource_group" {
 variable "service_name_pipeline" {
   type        = string
   description = "The name of the Service ID for pipeline and toolchain access."
-  default     = "alm-pipeline-service-id"
+  default     = "toolchain-pipeline-service-id"
 }
 
 variable "service_name_cos" {
   type        = string
   description = "The name of the Service ID for COS access."
-  default     = "alm-cos-service-id"
+  default     = "cos-service-id"
 }
