@@ -35,6 +35,7 @@ module "devsecops_da" {
   create_cd_toolchain                               = var.create_cd_toolchain
   create_ci_toolchain                               = var.create_ci_toolchain
   create_cos_api_key                                = var.create_cos_api_key
+  create_git_token                                  = var.create_git_token
   create_ibmcloud_api_key                           = var.create_ibmcloud_api_key
   create_icr_namespace                              = var.create_icr_namespace
   create_secret_group                               = var.create_secret_group
@@ -102,6 +103,7 @@ module "devsecops_da" {
   registry_namespace                                = var.registry_namespace
   repo_git_token_secret_crn                         = var.repo_git_token_secret_crn
   repo_git_token_secret_name                        = var.repo_git_token_secret_name
+  repo_git_token_secret_value                       = var.repo_git_token_secret_value
   repo_group                                        = var.repo_group
   repo_secret_group                                 = var.repo_secret_group
   repositories_prefix                               = var.repositories_prefix
