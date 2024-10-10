@@ -233,6 +233,8 @@ module "prereqs" {
   create_cos_api_key             = var.create_cos_api_key
   create_signing_key             = var.create_signing_key
   create_signing_certificate     = var.create_signing_certificate
+  service_name_pipeline          = var.service_name_pipeline
+  service_name_cos               = var.service_name_cos
   sm_name                        = var.sm_name
   sm_location                    = var.sm_location
   sm_secret_group_name           = var.sm_secret_group
@@ -242,9 +244,11 @@ module "prereqs" {
   iam_api_key_secret_name        = var.pipeline_ibmcloud_api_key_secret_name
   signing_key_secret_name        = var.ci_signing_key_secret_name
   signing_certifcate_secret_name = var.cd_code_signing_cert_secret_name
+  rotation_period                = var.rotation_period
   sm_secret_expiration_period    = var.sm_secret_expiration_period
   sm_exists                      = var.enable_secrets_manager
   sm_endpoint_type               = var.sm_endpoint_type
+  target_deployment              = var.target_deployment
 }
 
 module "devsecops_ci_toolchain" {

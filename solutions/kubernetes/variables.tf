@@ -830,13 +830,13 @@ variable "sm_location" {
 
 variable "sm_name" {
   type        = string
-  description = "The name of an existing Secret Managers instance. This applies to the CI, CD and CC Secret Manager integrations. See `ci_sm_name`, `cd_sm_name`, and `cc_sm_name` to set these values independently. "
+  description = "The name of an existing Secret Managers instance. This applies to the CI, CD and CC Secret Manager integrations."
   default     = "sm-instance"
 }
 
 variable "sm_resource_group" {
   type        = string
-  description = "The name of the existing resource group containing the Secrets Manager instance for your secrets.. This applies to the CI, CD and CC Secret Manager integrations. See `ci_sm_resource_group`, `cd_sm_resource_group`, and `cc_sm_resource_group` to set these values independently."
+  description = "The name of the existing resource group containing the Secrets Manager instance for your secrets.. This applies to the CI, CD and CC Secret Manager integrations."
   default     = "Default"
 }
 
@@ -848,7 +848,7 @@ variable "sm_secret_expiration_period" {
 
 variable "sm_secret_group" {
   type        = string
-  description = "The Secrets Manager secret group containing the secrets for the DevSecOps pipelines. This applies to the CI, CD and CC Secret Manager integrations. See `ci_sm_secret_group`, `cd_sm_secret_group`, and `cc_sm_secret_group` to set these values independently."
+  description = "The Secrets Manager secret group containing the secrets for the DevSecOps pipelines. This applies to the CI, CD and CC Secret Manager integrations."
   default     = "Default"
 }
 
@@ -899,6 +899,12 @@ variable "sonarqube_user" {
   default     = ""
 }
 
+variable "target_deployment" {
+  type        = string
+  description = "The target deployment ,`kubernetes` or `code-engine` to create the relevant access policy."
+  default     = "kubernetes"
+}
+
 variable "toolchain_name" {
   type        = string
   description = "This variable specifies the root name for the CI, CD and CC toolchain names. A fixed suffix will automatically be appended. Setting `DevSecOps` will generate toolchains with the names `DevSecOps-CI-Toolchain`,  `DevSecOps-CD-Toolchain` and `DevSecOps-CC-Toolchain`. The full name of each toolchain can be set independently using `ci_toolchain_name`, `cd_toolchain_name`, and `cc_toolchain_name`."
@@ -913,7 +919,7 @@ variable "toolchain_region" {
 
 variable "toolchain_resource_group" {
   type        = string
-  description = "The resource group that will be used, by default, for all resource creation and service instance lookups. This can be overridden on a per resource/service basis. See `ci_toolchain_resource_group`,`cd_toolchain_resource_group`,`cc_toolchain_resource_group`, `ci_cluster_resource_group`."
+  description = "The resource group that will be used, by default, for all resource creation and service instance lookups. This can be overridden on a per resource/service basis."
   default     = "Default"
 }
 
