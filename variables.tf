@@ -704,6 +704,12 @@ variable "repositories_prefix" {
   }
 }
 
+variable "rotation_period" {
+  type        = number
+  description = "The number of days until the `ibmcloud-api-key` and the `cos-api-key` are auto rotated."
+  default     = 90
+}
+
 variable "scc_attachment_id" {
   type        = string
   description = "An attachment ID. An attachment is configured under a profile to define how a scan will be run. To find the attachment ID, in the browser, in the attachments list, click on the attachment link, and a panel appears with a button to copy the attachment ID. This parameter is only relevant when the `scc_use_profile_attachment` parameter is enabled."
@@ -830,7 +836,7 @@ variable "sm_location" {
 
 variable "sm_name" {
   type        = string
-  description = "The name of an existing Secret Managers instance. This applies to the CI, CD and CC Secret Manager integrations. See `ci_sm_name`, `cd_sm_name`, and `cc_sm_name` to set these values independently. "
+  description = "The name of an existing Secret Managers instance. This applies to the CI, CD and CC Secret Manager integrations."
   default     = "sm-instance"
 }
 
@@ -899,6 +905,12 @@ variable "sonarqube_user" {
   default     = ""
 }
 
+variable "target_deployment" {
+  type        = string
+  description = "The target deployment ,`kubernetes` or `code-engine` to create the relevant access policy."
+  default     = "kubernetes"
+}
+
 variable "toolchain_name" {
   type        = string
   description = "This variable specifies the root name for the CI, CD and CC toolchain names. A fixed suffix will automatically be appended. Setting `DevSecOps` will generate toolchains with the names `DevSecOps-CI-Toolchain`,  `DevSecOps-CD-Toolchain` and `DevSecOps-CC-Toolchain`. The full name of each toolchain can be set independently using `ci_toolchain_name`, `cd_toolchain_name`, and `cc_toolchain_name`."
@@ -913,7 +925,7 @@ variable "toolchain_region" {
 
 variable "toolchain_resource_group" {
   type        = string
-  description = "The resource group that will be used, by default, for all resource creation and service instance lookups. This can be overridden on a per resource/service basis. See `ci_toolchain_resource_group`,`cd_toolchain_resource_group`,`cc_toolchain_resource_group`, `ci_cluster_resource_group`."
+  description = "The resource group that will be used, by default, for all resource creation and service instance lookups. This can be overridden on a per resource/service basis."
   default     = "Default"
 }
 
@@ -3281,4 +3293,16 @@ variable "use_app_repo_for_cd_deploy" {
   type        = bool
   description = "Set to `true` to use the CI sample application repository as the deployment repository in the CD pipeline. This will be set in the pipeline config integration."
   default     = false
+}
+
+variable "service_name_pipeline" {
+  type        = string
+  description = "The name of the Service ID for pipeline and toolchain access."
+  default     = "toolchain-pipeline-service-id"
+}
+
+variable "service_name_cos" {
+  type        = string
+  description = "The name of the Service ID for COS access."
+  default     = "cos-service-id"
 }

@@ -25,6 +25,92 @@ resource "time_static" "timestamp" {
   count = (local.sm_secret_expiration_period_hours != null) ? 1 : 0
 }
 
+####### SECRET GROUP ########################
+
+resource "ibm_iam_service_id" "pipeline_service_id" {
+  name = var.service_name_pipeline
+}
+
+resource "ibm_iam_service_id" "cos_service_id" {
+  name = var.service_name_cos
+}
+
+data "ibm_iam_service_id" "pipeline_service_id" {
+  depends_on = [ibm_iam_service_id.pipeline_service_id]
+  name       = var.service_name_pipeline
+}
+
+data "ibm_iam_service_id" "cos_service_id" {
+  depends_on = [ibm_iam_service_id.cos_service_id]
+  name       = var.service_name_cos
+}
+
+resource "ibm_iam_service_policy" "cos_policy" {
+  iam_service_id = ibm_iam_service_id.cos_service_id.id
+  roles          = ["Reader", "Object Writer"]
+
+  resources {
+    service           = "cloud-object-storage"
+    resource_group_id = data.ibm_resource_group.resource_group.id
+  }
+}
+
+resource "ibm_iam_service_policy" "pipeline_policy" {
+  iam_service_id = ibm_iam_service_id.pipeline_service_id.id
+  roles          = ["Editor"]
+
+  resources {
+    resource_type = "resource-group"
+    resource      = data.ibm_resource_group.resource_group.id
+  }
+}
+
+resource "ibm_iam_service_policy" "toolchain_policy" {
+  iam_service_id = ibm_iam_service_id.pipeline_service_id.id
+  roles          = ["Viewer", "Operator"]
+  resources {
+    service           = "toolchain"
+    resource_group_id = data.ibm_resource_group.resource_group.id
+  }
+}
+
+resource "ibm_iam_service_policy" "cr_policy" {
+  iam_service_id = ibm_iam_service_id.pipeline_service_id.id
+  roles          = ["Manager"]
+  resources {
+    service = "container-registry"
+  }
+}
+
+resource "ibm_iam_service_policy" "cd_policy" {
+  iam_service_id = ibm_iam_service_id.pipeline_service_id.id
+  roles          = ["Writer"]
+  resources {
+    service           = "continuous-delivery"
+    resource_group_id = data.ibm_resource_group.resource_group.id
+  }
+}
+
+resource "ibm_iam_service_policy" "kube_policy" {
+  count          = (var.target_deployment == "kubernetes") ? 1 : 0
+  iam_service_id = ibm_iam_service_id.pipeline_service_id.id
+  roles          = ["Editor"]
+  resources {
+    service           = "kubernetes"
+    resource_group_id = data.ibm_resource_group.resource_group.id
+  }
+}
+
+resource "ibm_iam_service_policy" "ce_policy" {
+  count          = (var.target_deployment == "code-engine") ? 1 : 0
+  iam_service_id = ibm_iam_service_id.pipeline_service_id.id
+  roles          = ["Editor"]
+  resources {
+    service           = "code-engine"
+    resource_group_id = data.ibm_resource_group.resource_group.id
+  }
+}
+
 ####### SECRETS MANAGER #####################
 
 data "ibm_resource_group" "resource_group" {
@@ -84,34 +170,6 @@ data "ibm_sm_secret_group" "existing_sm_secret_group" {
   endpoint_type   = var.sm_endpoint_type
 }
 
-resource "ibm_sm_arbitrary_secret" "secret_ibmcloud_api_key" {
-  count           = ((var.create_ibmcloud_api_key == true) && (var.sm_exists == true)) ? 1 : 0
-  depends_on      = [ibm_sm_secret_group.sm_secret_group]
-  region          = var.sm_location
-  instance_id     = (local.sm_instance_id != "") ? local.sm_instance_id : var.sm_instance_id
-  secret_group_id = (var.create_secret_group == false) ? data.ibm_sm_secret_group.existing_sm_secret_group[0].secret_group_id : ibm_sm_secret_group.sm_secret_group[0].secret_group_id
-  name            = var.iam_api_key_secret_name
-  description     = "The IBMCloud apikey for running the pipelines."
-  labels          = []
-  payload         = (var.iam_api_key_secret == "") ? ibm_iam_api_key.iam_api_key[0].apikey : var.iam_api_key_secret
-  expiration_date = local.expiration_date
-  endpoint_type   = var.sm_endpoint_type
-}
-
-resource "ibm_sm_arbitrary_secret" "secret_cos_api_key" {
-  count           = ((var.create_cos_api_key == true) && (var.sm_exists == true)) ? 1 : 0
-  depends_on      = [ibm_sm_secret_group.sm_secret_group]
-  region          = var.sm_location
-  instance_id     = (local.sm_instance_id != "") ? local.sm_instance_id : var.sm_instance_id
-  secret_group_id = (var.create_secret_group == false) ? data.ibm_sm_secret_group.existing_sm_secret_group[0].secret_group_id : ibm_sm_secret_group.sm_secret_group[0].secret_group_id
-  name            = var.cos_api_key_secret_name
-  description     = "The COS apikey for accessing the associated COS instance."
-  labels          = []
-  payload         = (var.cos_api_key_secret == "") ? ibm_iam_api_key.cos_iam_api_key[0].apikey : var.cos_api_key_secret
-  expiration_date = local.expiration_date
-  endpoint_type   = var.sm_endpoint_type
-}
-
 resource "ibm_sm_arbitrary_secret" "secret_signing_key" {
   count           = ((var.create_signing_key == true) && (var.sm_exists == true)) ? 1 : 0
   depends_on      = [ibm_sm_secret_group.sm_secret_group, data.external.signing_keys]
@@ -138,4 +196,39 @@ resource "ibm_sm_arbitrary_secret" "secret_signing_certifcate" {
   payload         = (var.signing_certificate_secret == "") ? data.external.signing_keys[0].result.publickey : var.signing_certificate_secret
   expiration_date = local.expiration_date
   endpoint_type   = var.sm_endpoint_type
+}
+
+################## IAM CREDENTIALS###############################
+resource "ibm_sm_iam_credentials_secret" "iam_pipeline_apikey_credentials_secret" {
+  count       = ((var.create_ibmcloud_api_key == true) && (var.sm_exists == true)) ? 1 : 0
+  depends_on  = [ibm_sm_secret_group.sm_secret_group]
+  instance_id = data.ibm_resource_instance.sm_instance[0].guid
+  region      = var.sm_location
+  name        = var.iam_api_key_secret_name
+  description = "Extended description for this secret."
+  rotation {
+    auto_rotate = true
+    interval    = var.rotation_period
+    unit        = "day"
+  }
+  secret_group_id = ibm_sm_secret_group.sm_secret_group[0].secret_group_id
+  service_id      = data.ibm_iam_service_id.pipeline_service_id.service_ids[0].id
+  ttl             = "7776000"
+}
+
+resource "ibm_sm_iam_credentials_secret" "iam_cos_apikey_credentials_secret" {
+  count       = ((var.create_cos_api_key == true) && (var.sm_exists == true)) ? 1 : 0
+  depends_on  = [ibm_sm_secret_group.sm_secret_group]
+  instance_id = data.ibm_resource_instance.sm_instance[0].guid
+  region      = var.sm_location
+  name        = var.cos_api_key_secret_name
+  description = "Extended description for this secret."
+  rotation {
+    auto_rotate = true
+    interval    = var.rotation_period
+    unit        = "day"
+  }
+  secret_group_id = ibm_sm_secret_group.sm_secret_group[0].secret_group_id
+  service_id      = data.ibm_iam_service_id.cos_service_id.service_ids[0].id
+  ttl             = "7776000"
 }

@@ -82,30 +82,22 @@ variable "sm_secret_expiration_period" {
   default     = ""
 }
 
-variable "cos_api_key_secret" {
-  type        = string
-  description = "apikey"
-  sensitive   = true
-  default     = ""
-}
-
 variable "cos_api_key_secret_name" {
   type        = string
   description = "The name of the secret as it appears in Secret Manager."
   default     = "cos-api-key"
 }
 
-variable "iam_api_key_secret" {
-  type        = string
-  description = "apikey"
-  sensitive   = true
-  default     = ""
-}
-
 variable "iam_api_key_secret_name" {
   type        = string
   description = "The name of the secret as it appears in Secret Manager."
   default     = "ibmcloud-api-key"
+}
+
+variable "rotation_period" {
+  type        = number
+  description = "The number of days until the `ibmcloud-api-key` and the `cos-api-key` are auto rotated."
+  default     = 90
 }
 
 variable "signing_certificate_secret" {
@@ -134,9 +126,29 @@ variable "signing_key_secret_name" {
   default     = "signing_key"
 }
 
+variable "target_deployment" {
+  type        = string
+  description = "The target deployment ,`kubernetes` or `code-engine` to create the relevant access policy."
+  default     = "kubernetes"
+}
+
 ##################### ICR ################
 variable "sm_resource_group" {
   type        = string
   description = "The name of the resource group containing the Secrets Manager instance."
   default     = ""
+}
+
+############### ACCESS GROUPS  ################
+
+variable "service_name_pipeline" {
+  type        = string
+  description = "The name of the Service ID for pipeline and toolchain access."
+  default     = "toolchain-pipeline-service-id"
+}
+
+variable "service_name_cos" {
+  type        = string
+  description = "The name of the Service ID for COS access."
+  default     = "cos-service-id"
 }

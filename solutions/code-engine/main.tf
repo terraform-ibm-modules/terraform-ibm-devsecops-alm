@@ -136,6 +136,7 @@ module "devsecops_da" {
   sonarqube_secret_name                             = var.sonarqube_secret_name
   sonarqube_server_url                              = var.sonarqube_server_url
   sonarqube_user                                    = var.sonarqube_user
+  target_deployment                                 = var.target_deployment
   toolchain_name                                    = var.toolchain_name
   toolchain_resource_group                          = var.toolchain_resource_group
   toolchain_region                                  = var.toolchain_region
