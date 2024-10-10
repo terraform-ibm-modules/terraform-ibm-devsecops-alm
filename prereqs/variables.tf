@@ -40,6 +40,25 @@ variable "create_signing_certificate" {
   default     = false
 }
 
+variable "create_git_token" {
+  type        = bool
+  description = "Set to `true` to create and add the specified personal access token secret to the Secrets Provider."
+  default     = false
+}
+
+variable "repo_git_token_secret_name" {
+  type        = string
+  description = "Name of the Git token secret in the secret provider. Specifying a secret name for the Git Token automatically sets the authentication type to `pat`."
+  default     = ""
+}
+
+variable "repo_git_token_secret_value" {
+  type        = string
+  sensitive   = true
+  description = "The personal access token that will be added to the `repo_git_token_secret_name` secret in the secrets provider."
+  default     = ""
+}
+
 variable "sm_exists" {
   description = "Only connect to the Secrets Manager instance if it has been enabled for the toolchain."
   type        = bool

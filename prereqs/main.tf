@@ -198,6 +198,20 @@ resource "ibm_sm_arbitrary_secret" "secret_signing_certifcate" {
   endpoint_type   = var.sm_endpoint_type
 }
 
+resource "ibm_sm_arbitrary_secret" "git_token" {
+  count           = ((var.create_git_token == true) && (var.sm_exists == true)) ? 1 : 0
+  depends_on      = [ibm_sm_secret_group.sm_secret_group]
+  region          = var.sm_location
+  instance_id     = (local.sm_instance_id != "") ? local.sm_instance_id : var.sm_instance_id
+  secret_group_id = (var.create_secret_group == false) ? data.ibm_sm_secret_group.existing_sm_secret_group[0].secret_group_id : ibm_sm_secret_group.sm_secret_group[0].secret_group_id
+  name            = var.repo_git_token_secret_name
+  description     = "A personal access token for accessing your repositories."
+  labels          = []
+  payload         = var.repo_git_token_secret_value
+  expiration_date = local.expiration_date
+  endpoint_type   = var.sm_endpoint_type
+}
+
 ################## IAM CREDENTIALS###############################
 resource "ibm_sm_iam_credentials_secret" "iam_pipeline_apikey_credentials_secret" {
   count       = ((var.create_ibmcloud_api_key == true) && (var.sm_exists == true)) ? 1 : 0
