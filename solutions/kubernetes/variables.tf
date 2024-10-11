@@ -2255,8 +2255,8 @@ variable "cd_scc_use_profile_attachment" {
 
 variable "cd_service_plan" {
   type        = string
-  description = "The Continuous Delivery service plan. Can be `lite` or `professional`."
-  default     = "professional"
+  description = "The Continuous Delivery service plan. Can be `lite` or `standard`."
+  default     = "standard"
 }
 
 variable "cd_slack_channel_name" {

@@ -57,7 +57,7 @@ statement instead the previous block.
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0.0 |
-| <a name="requirement_ibm"></a> [ibm](#requirement\_ibm) | =1.67.1 |
+| <a name="requirement_ibm"></a> [ibm](#requirement\_ibm) | =1.70.0 |
 | <a name="requirement_null"></a> [null](#requirement\_null) | = 3.2.2 |
 | <a name="requirement_random"></a> [random](#requirement\_random) | = 3.6.2 |
 
@@ -74,16 +74,16 @@ statement instead the previous block.
 
 | Name | Type |
 |------|------|
-| [ibm_cd_tekton_pipeline_trigger.ci_pipeline_webhook](https://registry.terraform.io/providers/IBM-Cloud/ibm/1.67.1/docs/resources/cd_tekton_pipeline_trigger) | resource |
-| [ibm_cd_tekton_pipeline_trigger_property.ci_pipeline_webhook_branch_property](https://registry.terraform.io/providers/IBM-Cloud/ibm/1.67.1/docs/resources/cd_tekton_pipeline_trigger_property) | resource |
-| [ibm_cd_tekton_pipeline_trigger_property.ci_pipeline_webhook_name_property](https://registry.terraform.io/providers/IBM-Cloud/ibm/1.67.1/docs/resources/cd_tekton_pipeline_trigger_property) | resource |
-| [ibm_cd_tekton_pipeline_trigger_property.ci_pipeline_webhook_repo_url_property](https://registry.terraform.io/providers/IBM-Cloud/ibm/1.67.1/docs/resources/cd_tekton_pipeline_trigger_property) | resource |
-| [ibm_cr_namespace.cr_namespace](https://registry.terraform.io/providers/IBM-Cloud/ibm/1.67.1/docs/resources/cr_namespace) | resource |
-| [ibm_resource_instance.cd_instance](https://registry.terraform.io/providers/IBM-Cloud/ibm/1.67.1/docs/resources/resource_instance) | resource |
+| [ibm_cd_tekton_pipeline_trigger.ci_pipeline_webhook](https://registry.terraform.io/providers/IBM-Cloud/ibm/1.70.0/docs/resources/cd_tekton_pipeline_trigger) | resource |
+| [ibm_cd_tekton_pipeline_trigger_property.ci_pipeline_webhook_branch_property](https://registry.terraform.io/providers/IBM-Cloud/ibm/1.70.0/docs/resources/cd_tekton_pipeline_trigger_property) | resource |
+| [ibm_cd_tekton_pipeline_trigger_property.ci_pipeline_webhook_name_property](https://registry.terraform.io/providers/IBM-Cloud/ibm/1.70.0/docs/resources/cd_tekton_pipeline_trigger_property) | resource |
+| [ibm_cd_tekton_pipeline_trigger_property.ci_pipeline_webhook_repo_url_property](https://registry.terraform.io/providers/IBM-Cloud/ibm/1.70.0/docs/resources/cd_tekton_pipeline_trigger_property) | resource |
+| [ibm_cr_namespace.cr_namespace](https://registry.terraform.io/providers/IBM-Cloud/ibm/1.70.0/docs/resources/cr_namespace) | resource |
+| [ibm_resource_instance.cd_instance](https://registry.terraform.io/providers/IBM-Cloud/ibm/1.70.0/docs/resources/resource_instance) | resource |
 | [null_resource.ci_pipeline_run](https://registry.terraform.io/providers/hashicorp/null/3.2.2/docs/resources/resource) | resource |
 | [random_string.resource_suffix](https://registry.terraform.io/providers/hashicorp/random/3.6.2/docs/resources/string) | resource |
 | [random_string.webhook_secret](https://registry.terraform.io/providers/hashicorp/random/3.6.2/docs/resources/string) | resource |
-| [ibm_resource_group.resource_group](https://registry.terraform.io/providers/IBM-Cloud/ibm/1.67.1/docs/data-sources/resource_group) | data source |
+| [ibm_resource_group.resource_group](https://registry.terraform.io/providers/IBM-Cloud/ibm/1.70.0/docs/data-sources/resource_group) | data source |
 
 ### Inputs
 
@@ -299,7 +299,7 @@ statement instead the previous block.
 | <a name="input_cd_scc_enable_scc"></a> [cd\_scc\_enable\_scc](#input\_cd\_scc\_enable\_scc) | Adds the SCC tool integration to the toolchain. | `string` | `""` | no |
 | <a name="input_cd_scc_integration_name"></a> [cd\_scc\_integration\_name](#input\_cd\_scc\_integration\_name) | The name of the SCC integration. | `string` | `"Security and Compliance"` | no |
 | <a name="input_cd_scc_use_profile_attachment"></a> [cd\_scc\_use\_profile\_attachment](#input\_cd\_scc\_use\_profile\_attachment) | Set to `enabled` to enable use profile with attachment, so that the scripts in the pipeline can interact with the Security and Compliance Center service. When enabled, other parameters become relevant; `scc_scc_api_key_secret_name`, `scc_instance_crn`, `scc_profile_name`, `scc_profile_version`, `scc_attachment_id`. | `string` | `""` | no |
-| <a name="input_cd_service_plan"></a> [cd\_service\_plan](#input\_cd\_service\_plan) | The Continuous Delivery service plan. Can be `lite` or `professional`. | `string` | `"professional"` | no |
+| <a name="input_cd_service_plan"></a> [cd\_service\_plan](#input\_cd\_service\_plan) | The Continuous Delivery service plan. Can be `lite` or `standard`. | `string` | `"standard"` | no |
 | <a name="input_cd_slack_channel_name"></a> [cd\_slack\_channel\_name](#input\_cd\_slack\_channel\_name) | The name of the Slack channel where notifications are posted. | `string` | `""` | no |
 | <a name="input_cd_slack_pipeline_fail"></a> [cd\_slack\_pipeline\_fail](#input\_cd\_slack\_pipeline\_fail) | Set to `true` to generate pipeline failed notifications. | `bool` | `true` | no |
 | <a name="input_cd_slack_pipeline_start"></a> [cd\_slack\_pipeline\_start](#input\_cd\_slack\_pipeline\_start) | Set to `true` to generate pipeline start notifications. | `bool` | `true` | no |

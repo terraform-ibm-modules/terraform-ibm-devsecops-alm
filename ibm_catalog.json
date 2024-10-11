@@ -681,8 +681,8 @@
                         {
                             "key": "cd_service_plan",
                             "type": "string",
-                            "default_value": "professional",
-                            "description": "The Continuous Delivery service plan. Can be `lite` or `professional`.",
+                            "default_value": "standard",
+                            "description": "The Continuous Delivery service plan. Can be `lite` or `standard`.",
                             "required": false
                         },
                         {
@@ -2477,8 +2477,8 @@
                         {
                             "key": "cd_service_plan",
                             "type": "string",
-                            "default_value": "professional",
-                            "description": "The Continuous Delivery service plan. Can be `lite` or `professional`.",
+                            "default_value": "standard",
+                            "description": "The Continuous Delivery service plan. Can be `lite` or `standard`.",
                             "required": false
                         },
                         {

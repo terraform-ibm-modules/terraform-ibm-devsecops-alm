@@ -57,7 +57,7 @@ statement instead the previous block.
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0.0 |
-| <a name="requirement_ibm"></a> [ibm](#requirement\_ibm) | =1.67.1 |
+| <a name="requirement_ibm"></a> [ibm](#requirement\_ibm) | =1.70.0 |
 
 ### Modules
 
@@ -283,7 +283,7 @@ No resources.
 | <a name="input_cd_scc_enable_scc"></a> [cd\_scc\_enable\_scc](#input\_cd\_scc\_enable\_scc) | Adds the SCC tool integration to the toolchain. | `string` | `""` | no |
 | <a name="input_cd_scc_integration_name"></a> [cd\_scc\_integration\_name](#input\_cd\_scc\_integration\_name) | The name of the SCC integration. | `string` | `"Security and Compliance"` | no |
 | <a name="input_cd_scc_use_profile_attachment"></a> [cd\_scc\_use\_profile\_attachment](#input\_cd\_scc\_use\_profile\_attachment) | Set to `enabled` to enable use profile with attachment, so that the scripts in the pipeline can interact with the Security and Compliance Center service. When enabled, other parameters become relevant; `scc_scc_api_key_secret_name`, `scc_instance_crn`, `scc_profile_name`, `scc_profile_version`, `scc_attachment_id`. | `string` | `""` | no |
-| <a name="input_cd_service_plan"></a> [cd\_service\_plan](#input\_cd\_service\_plan) | The Continuous Delivery service plan. Can be `lite` or `professional`. | `string` | `"professional"` | no |
+| <a name="input_cd_service_plan"></a> [cd\_service\_plan](#input\_cd\_service\_plan) | The Continuous Delivery service plan. Can be `lite` or `standard`. | `string` | `"standard"` | no |
 | <a name="input_cd_slack_channel_name"></a> [cd\_slack\_channel\_name](#input\_cd\_slack\_channel\_name) | The name of the Slack channel where notifications are posted. | `string` | `""` | no |
 | <a name="input_cd_slack_pipeline_fail"></a> [cd\_slack\_pipeline\_fail](#input\_cd\_slack\_pipeline\_fail) | Set to `true` to generate pipeline failed notifications. | `bool` | `true` | no |
 | <a name="input_cd_slack_pipeline_start"></a> [cd\_slack\_pipeline\_start](#input\_cd\_slack\_pipeline\_start) | Set to `true` to generate pipeline start notifications. | `bool` | `true` | no |
