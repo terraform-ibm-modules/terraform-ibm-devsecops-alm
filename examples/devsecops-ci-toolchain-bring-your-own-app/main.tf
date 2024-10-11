@@ -1,5 +1,5 @@
 module "terraform_devsecops_alm" {
-  source                            = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-alm?ref=v2.0.3"
+  source                            = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-alm?ref=v2.2.0"
   ibmcloud_api_key                  = var.ibmcloud_api_key
   toolchain_resource_group          = var.toolchain_resource_group
   toolchain_region                  = var.toolchain_region
