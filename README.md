@@ -57,7 +57,7 @@ statement instead the previous block.
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0.0 |
-| <a name="requirement_ibm"></a> [ibm](#requirement\_ibm) | =1.67.1 |
+| <a name="requirement_ibm"></a> [ibm](#requirement\_ibm) | =1.70.0 |
 | <a name="requirement_null"></a> [null](#requirement\_null) | = 3.2.2 |
 | <a name="requirement_random"></a> [random](#requirement\_random) | = 3.6.2 |
 
@@ -74,16 +74,16 @@ statement instead the previous block.
 
 | Name | Type |
 |------|------|
-| [ibm_cd_tekton_pipeline_trigger.ci_pipeline_webhook](https://registry.terraform.io/providers/IBM-Cloud/ibm/1.67.1/docs/resources/cd_tekton_pipeline_trigger) | resource |
-| [ibm_cd_tekton_pipeline_trigger_property.ci_pipeline_webhook_branch_property](https://registry.terraform.io/providers/IBM-Cloud/ibm/1.67.1/docs/resources/cd_tekton_pipeline_trigger_property) | resource |
-| [ibm_cd_tekton_pipeline_trigger_property.ci_pipeline_webhook_name_property](https://registry.terraform.io/providers/IBM-Cloud/ibm/1.67.1/docs/resources/cd_tekton_pipeline_trigger_property) | resource |
-| [ibm_cd_tekton_pipeline_trigger_property.ci_pipeline_webhook_repo_url_property](https://registry.terraform.io/providers/IBM-Cloud/ibm/1.67.1/docs/resources/cd_tekton_pipeline_trigger_property) | resource |
-| [ibm_cr_namespace.cr_namespace](https://registry.terraform.io/providers/IBM-Cloud/ibm/1.67.1/docs/resources/cr_namespace) | resource |
-| [ibm_resource_instance.cd_instance](https://registry.terraform.io/providers/IBM-Cloud/ibm/1.67.1/docs/resources/resource_instance) | resource |
+| [ibm_cd_tekton_pipeline_trigger.ci_pipeline_webhook](https://registry.terraform.io/providers/IBM-Cloud/ibm/1.70.0/docs/resources/cd_tekton_pipeline_trigger) | resource |
+| [ibm_cd_tekton_pipeline_trigger_property.ci_pipeline_webhook_branch_property](https://registry.terraform.io/providers/IBM-Cloud/ibm/1.70.0/docs/resources/cd_tekton_pipeline_trigger_property) | resource |
+| [ibm_cd_tekton_pipeline_trigger_property.ci_pipeline_webhook_name_property](https://registry.terraform.io/providers/IBM-Cloud/ibm/1.70.0/docs/resources/cd_tekton_pipeline_trigger_property) | resource |
+| [ibm_cd_tekton_pipeline_trigger_property.ci_pipeline_webhook_repo_url_property](https://registry.terraform.io/providers/IBM-Cloud/ibm/1.70.0/docs/resources/cd_tekton_pipeline_trigger_property) | resource |
+| [ibm_cr_namespace.cr_namespace](https://registry.terraform.io/providers/IBM-Cloud/ibm/1.70.0/docs/resources/cr_namespace) | resource |
+| [ibm_resource_instance.cd_instance](https://registry.terraform.io/providers/IBM-Cloud/ibm/1.70.0/docs/resources/resource_instance) | resource |
 | [null_resource.ci_pipeline_run](https://registry.terraform.io/providers/hashicorp/null/3.2.2/docs/resources/resource) | resource |
 | [random_string.resource_suffix](https://registry.terraform.io/providers/hashicorp/random/3.6.2/docs/resources/string) | resource |
 | [random_string.webhook_secret](https://registry.terraform.io/providers/hashicorp/random/3.6.2/docs/resources/string) | resource |
-| [ibm_resource_group.resource_group](https://registry.terraform.io/providers/IBM-Cloud/ibm/1.67.1/docs/data-sources/resource_group) | data source |
+| [ibm_resource_group.resource_group](https://registry.terraform.io/providers/IBM-Cloud/ibm/1.70.0/docs/data-sources/resource_group) | data source |
 
 ### Inputs
 
@@ -589,6 +589,7 @@ statement instead the previous block.
 | <a name="input_toolchain_region"></a> [toolchain\_region](#input\_toolchain\_region) | The region identifier that will be used, by default, for all resource creation and service instance lookup. | `string` | `"us-south"` | no |
 | <a name="input_toolchain_resource_group"></a> [toolchain\_resource\_group](#input\_toolchain\_resource\_group) | The resource group that will be used, by default, for all resource creation and service instance lookups. This can be overridden on a per resource/service basis. | `string` | `"Default"` | no |
 | <a name="input_use_app_repo_for_cd_deploy"></a> [use\_app\_repo\_for\_cd\_deploy](#input\_use\_app\_repo\_for\_cd\_deploy) | Set to `true` to use the CI sample application repository as the deployment repository in the CD pipeline. This will be set in the pipeline config integration. | `bool` | `false` | no |
+| <a name="input_worker_id"></a> [worker\_id](#input\_worker\_id) | The identifier for the pipeline worker. Applies to the CI, CD and CC pipelines. | `string` | `"public"` | no |
 
 ### Outputs
 

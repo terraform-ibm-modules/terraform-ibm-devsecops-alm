@@ -942,6 +942,11 @@ variable "toolchain_resource_group" {
   default     = "Default"
 }
 
+variable "worker_id" {
+  type        = string
+  default     = "public"
+  description = "The identifier for the pipeline worker. Applies to the CI, CD and CC pipelines."
+}
 
 ########################################################
 ##### START OF CC VARIABLES ##############
