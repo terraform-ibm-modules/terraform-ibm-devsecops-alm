@@ -143,6 +143,7 @@ module "devsecops_da" {
   toolchain_resource_group                          = var.toolchain_resource_group
   toolchain_region                                  = var.toolchain_region
   use_app_repo_for_cd_deploy                        = var.use_app_repo_for_cd_deploy
+  worker_id                                         = var.worker_id
   cc_app_group                                      = var.cc_app_group
   cc_app_repo_auth_type                             = var.cc_app_repo_auth_type
   cc_app_repo_branch                                = var.cc_app_repo_branch

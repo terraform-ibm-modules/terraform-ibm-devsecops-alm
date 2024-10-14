@@ -268,6 +268,7 @@ module "devsecops_ci_toolchain" {
   pr_pipeline_branch       = (var.ci_compliance_pipeline_pr_branch == "") ? var.compliance_pipeline_branch : var.ci_compliance_pipeline_pr_branch
   ci_pipeline_git_tag      = (var.ci_pipeline_git_tag == "") ? var.pipeline_git_tag : var.ci_pipeline_git_tag
   pr_pipeline_git_tag      = (var.pr_pipeline_git_tag == "") ? var.pipeline_git_tag : var.pr_pipeline_git_tag
+  worker_id                = var.worker_id
 
   #SECRET PROVIDERS
   enable_key_protect     = (local.ci_enable_key_protect == "true") ? true : false
@@ -466,6 +467,7 @@ module "devsecops_cd_toolchain" {
   toolchain_resource_group = (var.cd_toolchain_resource_group == "") ? var.toolchain_resource_group : var.cd_toolchain_resource_group
   pipeline_branch          = (var.cd_compliance_pipeline_branch == "") ? var.compliance_pipeline_branch : var.cd_compliance_pipeline_branch
   pipeline_git_tag         = (var.cd_pipeline_git_tag == "") ? var.pipeline_git_tag : var.cd_pipeline_git_tag
+  worker_id                = var.worker_id
 
   #SECRET PROVIDERS
   enable_key_protect     = (local.cd_enable_key_protect == "true") ? true : false
@@ -680,6 +682,7 @@ module "devsecops_cc_toolchain" {
   authorization_policy_creation = (var.cc_authorization_policy_creation == "") ? var.authorization_policy_creation : var.cc_authorization_policy_creation
   pipeline_branch               = (var.cc_compliance_pipeline_branch == "") ? var.compliance_pipeline_branch : var.cc_compliance_pipeline_branch
   pipeline_git_tag              = (var.cc_pipeline_git_tag == "") ? var.pipeline_git_tag : var.cc_pipeline_git_tag
+  worker_id                     = var.worker_id
 
   #SECRET PROVIDERS
   enable_key_protect     = (local.cc_enable_key_protect == "true") ? true : false
@@ -860,9 +863,10 @@ module "devsecops_cc_toolchain" {
 
 # Random string for webhook token
 resource "random_string" "webhook_secret" {
-  length  = 48
-  special = false
-  upper   = false
+  depends_on = [module.devsecops_ci_toolchain[0].ci_pipeline_id, module.devsecops_ci_toolchain[0].app_repo_url]
+  length     = 48
+  special    = false
+  upper      = false
 }
 
 # Create webhook for CI pipeline
@@ -919,7 +923,8 @@ resource "null_resource" "ci_pipeline_run" {
   count = (var.autostart) ? 1 : 0
   depends_on = [
     ibm_cd_tekton_pipeline_trigger.ci_pipeline_webhook,
-    ibm_cd_tekton_pipeline_trigger_property.ci_pipeline_webhook_branch_property
+    ibm_cd_tekton_pipeline_trigger_property.ci_pipeline_webhook_branch_property,
+    ibm_cd_tekton_pipeline_trigger_property.ci_pipeline_webhook_repo_url_property
   ]
   triggers = {
     always_run = timestamp()
