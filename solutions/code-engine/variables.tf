@@ -211,6 +211,12 @@ variable "create_cd_toolchain" {
   default     = true
 }
 
+variable "create_code_engine_access_policy" {
+  type        = bool
+  description = "Add a Code Engine access policy to the generated IAM access key. See `create_ibmcloud_api_key`."
+  default     = true
+}
+
 variable "create_ci_toolchain" {
   description = "Flag which determines if the DevSecOps CI toolchain is created. If this toolchain is not created then values must be set for the following variables, evidence_repo_url, issues_repo_url and inventory_repo_url."
   type        = bool
@@ -238,6 +244,12 @@ variable "create_ibmcloud_api_key" {
 variable "create_icr_namespace" {
   type        = bool
   description = "Set to `true` to have Terraform create the registry namespace. Setting to `false` will have the CI pipeline create the namespace if it does not already exist. Note: If a Terraform destroy is used, the ICR namespace along with all images will be removed."
+  default     = false
+}
+
+variable "create_kubernetes_access_policy" {
+  type        = bool
+  description = "Add a Kubernetes access policy to the generated IAM access key. See `create_ibmcloud_api_key`."
   default     = false
 }
 
@@ -910,12 +922,6 @@ variable "sonarqube_user" {
   type        = string
   description = "The name of the SonarQube user."
   default     = ""
-}
-
-variable "target_deployment" {
-  type        = string
-  description = "The target deployment ,`kubernetes` or `code-engine` to create the relevant access policy."
-  default     = "code-engine"
 }
 
 variable "toolchain_name" {

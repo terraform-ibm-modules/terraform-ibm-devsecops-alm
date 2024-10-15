@@ -227,31 +227,33 @@ resource "ibm_cr_namespace" "cr_namespace" {
 
 ################ Experimental #####################
 module "prereqs" {
-  count                          = (local.enable_prereqs) ? 1 : 0
-  source                         = "./prereqs"
-  create_ibmcloud_api_key        = var.create_ibmcloud_api_key
-  create_cos_api_key             = var.create_cos_api_key
-  create_git_token               = var.create_git_token
-  create_signing_key             = var.create_signing_key
-  create_signing_certificate     = var.create_signing_certificate
-  service_name_pipeline          = var.service_name_pipeline
-  service_name_cos               = var.service_name_cos
-  sm_name                        = var.sm_name
-  sm_location                    = var.sm_location
-  sm_secret_group_name           = var.sm_secret_group
-  sm_resource_group              = var.sm_resource_group
-  create_secret_group            = var.create_secret_group
-  cos_api_key_secret_name        = var.cos_api_key_secret_name
-  iam_api_key_secret_name        = var.pipeline_ibmcloud_api_key_secret_name
-  signing_key_secret_name        = var.ci_signing_key_secret_name
-  signing_certifcate_secret_name = var.cd_code_signing_cert_secret_name
-  repo_git_token_secret_name     = var.repo_git_token_secret_name
-  repo_git_token_secret_value    = var.repo_git_token_secret_value
-  rotation_period                = var.rotation_period
-  sm_secret_expiration_period    = var.sm_secret_expiration_period
-  sm_exists                      = var.enable_secrets_manager
-  sm_endpoint_type               = var.sm_endpoint_type
-  target_deployment              = var.target_deployment
+  count                            = (local.enable_prereqs) ? 1 : 0
+  source                           = "./prereqs"
+  ibmcloud_api_key                 = var.ibmcloud_api_key
+  create_ibmcloud_api_key          = var.create_ibmcloud_api_key
+  create_cos_api_key               = var.create_cos_api_key
+  create_git_token                 = var.create_git_token
+  create_signing_key               = var.create_signing_key
+  create_signing_certificate       = var.create_signing_certificate
+  service_name_pipeline            = var.service_name_pipeline
+  service_name_cos                 = var.service_name_cos
+  sm_name                          = var.sm_name
+  sm_location                      = var.sm_location
+  sm_secret_group_name             = var.sm_secret_group
+  sm_resource_group                = var.sm_resource_group
+  create_secret_group              = var.create_secret_group
+  cos_api_key_secret_name          = var.cos_api_key_secret_name
+  iam_api_key_secret_name          = var.pipeline_ibmcloud_api_key_secret_name
+  signing_key_secret_name          = var.ci_signing_key_secret_name
+  signing_certifcate_secret_name   = var.cd_code_signing_cert_secret_name
+  repo_git_token_secret_name       = var.repo_git_token_secret_name
+  repo_git_token_secret_value      = var.repo_git_token_secret_value
+  rotation_period                  = var.rotation_period
+  sm_secret_expiration_period      = var.sm_secret_expiration_period
+  sm_exists                        = var.enable_secrets_manager
+  sm_endpoint_type                 = var.sm_endpoint_type
+  create_code_engine_access_policy = var.create_code_engine_access_policy
+  create_kubernetes_access_policy  = var.create_kubernetes_access_policy
 }
 
 module "devsecops_ci_toolchain" {
