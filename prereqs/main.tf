@@ -136,16 +136,6 @@ data "ibm_sm_secret_groups" "secret_groups" {
 }
 
 #################### SECRETS #######################
-#resource "ibm_iam_api_key" "iam_api_key" {
-#  count = (var.create_ibmcloud_api_key) ? 1 : 0
-#  name  = "ibmcloud-api-key"
-#}
-
-#resource "ibm_iam_api_key" "cos_iam_api_key" {
-#  count = (var.create_cos_api_key) ? 1 : 0
-#  name  = "cos-api-key"
-#}
-
 data "external" "signing_keys" {
   count   = ((var.create_signing_key == true) || (var.create_signing_certificate == true)) ? 1 : 0
   program = ["bash", "${path.module}/scripts/gpg_keys.sh"]
