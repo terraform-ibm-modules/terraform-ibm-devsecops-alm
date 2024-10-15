@@ -209,7 +209,7 @@ resource "ibm_sm_arbitrary_secret" "git_token" {
 
 resource "ibm_sm_iam_credentials_configuration" "iam_credentials_configuration" {
   count       = ((local.create_pipeline_api_key) || (local.create_cos_api_key)) ? 1 : 0
-  instance_id = local.sm_instance_id
+  instance_id = (local.sm_instance_id != "") ? local.sm_instance_id : var.sm_instance_id
   region      = var.sm_location
   name        = "iam_credentials_config"
   api_key     = var.ibmcloud_api_key
