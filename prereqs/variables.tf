@@ -1,3 +1,9 @@
+variable "ibmcloud_api_key" {
+  type        = string
+  description = "The API key used to create the toolchains. (See deployment guide.)"
+  sensitive   = true
+}
+
 variable "gpg_name" {
   type        = string
   description = "The name to be associated with the GPG key."
@@ -145,10 +151,16 @@ variable "signing_key_secret_name" {
   default     = "signing_key"
 }
 
-variable "target_deployment" {
-  type        = string
-  description = "The target deployment ,`kubernetes` or `code-engine` to create the relevant access policy."
-  default     = "kubernetes"
+variable "create_kubernetes_access_policy" {
+  type        = bool
+  description = "Add a Kubernetes access policy to the generated IAM access key."
+  default     = false
+}
+
+variable "create_code_engine_access_policy" {
+  type        = bool
+  description = "Add a Code Engine access policy to the generated IAM access key."
+  default     = false
 }
 
 ##################### ICR ################

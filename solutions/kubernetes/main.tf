@@ -34,10 +34,12 @@ module "devsecops_da" {
   create_cd_instance                                = var.create_cd_instance
   create_cd_toolchain                               = var.create_cd_toolchain
   create_ci_toolchain                               = var.create_ci_toolchain
+  create_code_engine_access_policy                  = var.create_code_engine_access_policy
   create_cos_api_key                                = var.create_cos_api_key
   create_git_token                                  = var.create_git_token
   create_ibmcloud_api_key                           = var.create_ibmcloud_api_key
   create_icr_namespace                              = var.create_icr_namespace
+  create_kubernetes_access_policy                   = var.create_kubernetes_access_policy
   create_secret_group                               = var.create_secret_group
   create_signing_certificate                        = var.create_signing_certificate
   create_signing_key                                = var.create_signing_key
@@ -138,7 +140,6 @@ module "devsecops_da" {
   sonarqube_secret_name                             = var.sonarqube_secret_name
   sonarqube_server_url                              = var.sonarqube_server_url
   sonarqube_user                                    = var.sonarqube_user
-  target_deployment                                 = var.target_deployment
   toolchain_name                                    = var.toolchain_name
   toolchain_resource_group                          = var.toolchain_resource_group
   toolchain_region                                  = var.toolchain_region

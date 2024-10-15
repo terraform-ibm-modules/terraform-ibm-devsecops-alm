@@ -19,6 +19,9 @@ locals {
   sm_secret_expiration_period_hours = ((var.sm_secret_expiration_period != "") && (var.sm_secret_expiration_period != "0")) ? var.sm_secret_expiration_period * 24 : null
 
   expiration_date = (local.sm_secret_expiration_period_hours != null) ? timeadd(time_static.timestamp[0].rfc3339, "${local.sm_secret_expiration_period_hours}h") : null
+
+  create_pipeline_api_key = ((var.create_ibmcloud_api_key == true) && (var.sm_exists == true)) ? true : false
+  create_cos_api_key      = ((var.create_cos_api_key == true) && (var.sm_exists == true)) ? true : false
 }
 
 resource "time_static" "timestamp" {
@@ -92,7 +95,7 @@ resource "ibm_iam_service_policy" "cd_policy" {
 }
 
 resource "ibm_iam_service_policy" "kube_policy" {
-  count          = (var.target_deployment == "kubernetes") ? 1 : 0
+  count          = (var.create_kubernetes_access_policy) ? 1 : 0
   iam_service_id = ibm_iam_service_id.pipeline_service_id.id
   roles          = ["Editor"]
   resources {
@@ -102,7 +105,7 @@ resource "ibm_iam_service_policy" "kube_policy" {
 }
 
 resource "ibm_iam_service_policy" "ce_policy" {
-  count          = (var.target_deployment == "code-engine") ? 1 : 0
+  count          = (var.create_code_engine_access_policy) ? 1 : 0
   iam_service_id = ibm_iam_service_id.pipeline_service_id.id
   roles          = ["Editor"]
   resources {
@@ -133,15 +136,15 @@ data "ibm_sm_secret_groups" "secret_groups" {
 }
 
 #################### SECRETS #######################
-resource "ibm_iam_api_key" "iam_api_key" {
-  count = (var.create_ibmcloud_api_key) ? 1 : 0
-  name  = "ibmcloud-api-key"
-}
+#resource "ibm_iam_api_key" "iam_api_key" {
+#  count = (var.create_ibmcloud_api_key) ? 1 : 0
+#  name  = "ibmcloud-api-key"
+#}
 
-resource "ibm_iam_api_key" "cos_iam_api_key" {
-  count = (var.create_cos_api_key) ? 1 : 0
-  name  = "cos-api-key"
-}
+#resource "ibm_iam_api_key" "cos_iam_api_key" {
+#  count = (var.create_cos_api_key) ? 1 : 0
+#  name  = "cos-api-key"
+#}
 
 data "external" "signing_keys" {
   count   = ((var.create_signing_key == true) || (var.create_signing_certificate == true)) ? 1 : 0
@@ -213,9 +216,18 @@ resource "ibm_sm_arbitrary_secret" "git_token" {
 }
 
 ################## IAM CREDENTIALS###############################
+
+resource "ibm_sm_iam_credentials_configuration" "iam_credentials_configuration" {
+  count       = ((local.create_pipeline_api_key) || (local.create_cos_api_key)) ? 1 : 0
+  instance_id = local.sm_instance_id
+  region      = var.sm_location
+  name        = "iam_credentials_config"
+  api_key     = var.ibmcloud_api_key
+}
+
 resource "ibm_sm_iam_credentials_secret" "iam_pipeline_apikey_credentials_secret" {
-  count       = ((var.create_ibmcloud_api_key == true) && (var.sm_exists == true)) ? 1 : 0
-  depends_on  = [ibm_sm_secret_group.sm_secret_group]
+  count       = (local.create_pipeline_api_key) ? 1 : 0
+  depends_on  = [ibm_sm_secret_group.sm_secret_group, ibm_sm_iam_credentials_configuration.iam_credentials_configuration]
   instance_id = data.ibm_resource_instance.sm_instance[0].guid
   region      = var.sm_location
   name        = var.iam_api_key_secret_name
@@ -231,8 +243,8 @@ resource "ibm_sm_iam_credentials_secret" "iam_pipeline_apikey_credentials_secret
 }
 
 resource "ibm_sm_iam_credentials_secret" "iam_cos_apikey_credentials_secret" {
-  count       = ((var.create_cos_api_key == true) && (var.sm_exists == true)) ? 1 : 0
-  depends_on  = [ibm_sm_secret_group.sm_secret_group]
+  count       = (local.create_cos_api_key) ? 1 : 0
+  depends_on  = [ibm_sm_secret_group.sm_secret_group, ibm_sm_iam_credentials_configuration.iam_credentials_configuration]
   instance_id = data.ibm_resource_instance.sm_instance[0].guid
   region      = var.sm_location
   name        = var.cos_api_key_secret_name
