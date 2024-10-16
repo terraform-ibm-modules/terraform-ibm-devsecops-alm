@@ -22,6 +22,23 @@ locals {
 
   create_pipeline_api_key = ((var.create_ibmcloud_api_key == true) && (var.sm_exists == true)) ? true : false
   create_cos_api_key      = ((var.create_cos_api_key == true) && (var.sm_exists == true)) ? true : false
+
+  active_secret_group_id = (var.create_secret_group == false) ? data.ibm_sm_secret_group.existing_sm_secret_group[0].secret_group_id : ibm_sm_secret_group.sm_secret_group[0].secret_group_id
+
+  create_signing_keys = ((var.create_signing_key == true) && (var.sm_exists == true)) ? true : false
+  #Secrets Metadata results from Secrets Manager
+  raw_metadata = try(data.ibm_sm_secrets.secrets[0].secrets, [])
+
+  #convert results to a Map with the name of the secrets key as the map key. Secrets Manager already ensures that these key names are unique.
+  metadata_map = {
+    for val in local.raw_metadata : val["name"] => val
+  }
+
+  #find signing key
+  signing_key = try(local.metadata_map[var.signing_key_secret_name]["id"], "")
+
+  #find signing certificate
+  signing_certificate = try(local.metadata_map[var.signing_certifcate_secret_name]["id"], "")
 }
 
 resource "time_static" "timestamp" {
@@ -136,15 +153,6 @@ data "ibm_sm_secret_groups" "secret_groups" {
 }
 
 #################### SECRETS #######################
-data "external" "signing_keys" {
-  count   = ((var.create_signing_key == true) || (var.create_signing_certificate == true)) ? 1 : 0
-  program = ["bash", "${path.module}/scripts/gpg_keys.sh"]
-
-  query = {
-    name  = var.gpg_name
-    email = var.gpg_email
-  }
-}
 
 resource "ibm_sm_secret_group" "sm_secret_group" {
   count         = ((var.create_secret_group == true) && (var.sm_exists == true)) ? 1 : 0
@@ -163,40 +171,12 @@ data "ibm_sm_secret_group" "existing_sm_secret_group" {
   endpoint_type   = var.sm_endpoint_type
 }
 
-resource "ibm_sm_arbitrary_secret" "secret_signing_key" {
-  count           = ((var.create_signing_key == true) && (var.sm_exists == true)) ? 1 : 0
-  depends_on      = [ibm_sm_secret_group.sm_secret_group, data.external.signing_keys]
-  region          = var.sm_location
-  instance_id     = (local.sm_instance_id != "") ? local.sm_instance_id : var.sm_instance_id
-  secret_group_id = (var.create_secret_group == false) ? data.ibm_sm_secret_group.existing_sm_secret_group[0].secret_group_id : ibm_sm_secret_group.sm_secret_group[0].secret_group_id
-  name            = var.signing_key_secret_name
-  description     = "The gpg signing key for signing images."
-  labels          = []
-  payload         = (var.signing_key_secret == "") ? data.external.signing_keys[0].result.signingkey : var.signing_key_secret
-  expiration_date = local.expiration_date
-  endpoint_type   = var.sm_endpoint_type
-}
-
-resource "ibm_sm_arbitrary_secret" "secret_signing_certifcate" {
-  count           = ((var.create_signing_certificate == true) && (var.sm_exists == true)) ? 1 : 0
-  depends_on      = [ibm_sm_secret_group.sm_secret_group, data.external.signing_keys]
-  region          = var.sm_location
-  instance_id     = (local.sm_instance_id != "") ? local.sm_instance_id : var.sm_instance_id
-  secret_group_id = (var.create_secret_group == false) ? data.ibm_sm_secret_group.existing_sm_secret_group[0].secret_group_id : ibm_sm_secret_group.sm_secret_group[0].secret_group_id
-  name            = var.signing_certifcate_secret_name
-  description     = "The public component of the GPG signing key for validating image signatures."
-  labels          = []
-  payload         = (var.signing_certificate_secret == "") ? data.external.signing_keys[0].result.publickey : var.signing_certificate_secret
-  expiration_date = local.expiration_date
-  endpoint_type   = var.sm_endpoint_type
-}
-
 resource "ibm_sm_arbitrary_secret" "git_token" {
   count           = ((var.create_git_token == true) && (var.sm_exists == true)) ? 1 : 0
   depends_on      = [ibm_sm_secret_group.sm_secret_group]
   region          = var.sm_location
   instance_id     = (local.sm_instance_id != "") ? local.sm_instance_id : var.sm_instance_id
-  secret_group_id = (var.create_secret_group == false) ? data.ibm_sm_secret_group.existing_sm_secret_group[0].secret_group_id : ibm_sm_secret_group.sm_secret_group[0].secret_group_id
+  secret_group_id = local.active_secret_group_id
   name            = var.repo_git_token_secret_name
   description     = "A personal access token for accessing your repositories."
   labels          = []
@@ -247,4 +227,68 @@ resource "ibm_sm_iam_credentials_secret" "iam_cos_apikey_credentials_secret" {
   secret_group_id = ibm_sm_secret_group.sm_secret_group[0].secret_group_id
   service_id      = data.ibm_iam_service_id.cos_service_id.service_ids[0].id
   ttl             = "7776000"
+}
+
+############ SIGNING SECRETS ################
+data "ibm_sm_secrets" "secrets" {
+  count       = (local.create_signing_keys) ? 1 : 0
+  instance_id = (local.sm_instance_id != "") ? local.sm_instance_id : var.sm_instance_id
+  region      = var.sm_location
+  groups      = local.active_secret_group_id
+}
+
+data "ibm_sm_arbitrary_secret" "arbitrary_signing_key" {
+  count       = (local.signing_key != "") ? 1 : 0
+  instance_id = (local.sm_instance_id != "") ? local.sm_instance_id : var.sm_instance_id
+  region      = var.sm_location
+  secret_id   = local.signing_key
+}
+
+data "ibm_sm_arbitrary_secret" "arbitrary_signing_cert" {
+  count       = (local.signing_certificate != "") ? 1 : 0
+  instance_id = (local.sm_instance_id != "") ? local.sm_instance_id : var.sm_instance_id
+  region      = var.sm_location
+  secret_id   = local.signing_certificate
+}
+
+data "external" "signing_keys" {
+  count   = (local.create_signing_keys) ? 1 : 0
+  program = ["bash", "${path.module}/scripts/gpg_keys.sh"]
+
+  query = {
+    name                = var.gpg_name
+    email               = var.gpg_email
+    signing_cert        = try(data.ibm_sm_arbitrary_secret.arbitrary_signing_cert[0].payload, "")
+    signing_key         = try(data.ibm_sm_arbitrary_secret.arbitrary_signing_key[0].payload, "")
+    rotate_signing_key  = var.rotate_signing_key
+    rotate_signing_cert = var.rotate_signing_cert
+  }
+}
+
+resource "ibm_sm_arbitrary_secret" "secret_signing_key" {
+  count           = (local.create_signing_keys) ? 1 : 0
+  depends_on      = [ibm_sm_secret_group.sm_secret_group, data.external.signing_keys]
+  region          = var.sm_location
+  instance_id     = (local.sm_instance_id != "") ? local.sm_instance_id : var.sm_instance_id
+  secret_group_id = (var.create_secret_group == false) ? data.ibm_sm_secret_group.existing_sm_secret_group[0].secret_group_id : ibm_sm_secret_group.sm_secret_group[0].secret_group_id
+  name            = var.signing_key_secret_name
+  description     = "The gpg signing key for signing images."
+  labels          = []
+  payload         = (var.signing_key_secret == "") ? data.external.signing_keys[0].result.signingkey : var.signing_key_secret
+  expiration_date = local.expiration_date
+  endpoint_type   = var.sm_endpoint_type
+}
+
+resource "ibm_sm_arbitrary_secret" "secret_signing_certifcate" {
+  count           = (local.create_signing_keys) ? 1 : 0
+  depends_on      = [ibm_sm_secret_group.sm_secret_group, data.external.signing_keys]
+  region          = var.sm_location
+  instance_id     = (local.sm_instance_id != "") ? local.sm_instance_id : var.sm_instance_id
+  secret_group_id = local.active_secret_group_id
+  name            = var.signing_certifcate_secret_name
+  description     = "The public component of the GPG signing key for validating image signatures."
+  labels          = []
+  payload         = (var.signing_certificate_secret == "") ? data.external.signing_keys[0].result.publickey : var.signing_certificate_secret
+  expiration_date = local.expiration_date
+  endpoint_type   = var.sm_endpoint_type
 }

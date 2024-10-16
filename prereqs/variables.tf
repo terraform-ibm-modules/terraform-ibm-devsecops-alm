@@ -36,13 +36,7 @@ variable "create_cos_api_key" {
 
 variable "create_signing_key" {
   type        = bool
-  description = "Experimental. Set to `true` to create and add a `signing_key`to the Secrets Provider."
-  default     = false
-}
-
-variable "create_signing_certificate" {
-  type        = bool
-  description = "Experimental. Set to `true` to create and add the `signing-certificate` to the Secrets Provider."
+  description = "Experimental. Set to `true` to create and add a `signing-key` and the `signing-certificate` to the Secrets Provider."
   default     = false
 }
 
@@ -123,6 +117,18 @@ variable "rotation_period" {
   type        = number
   description = "The number of days until the `ibmcloud-api-key` and the `cos-api-key` are auto rotated."
   default     = 90
+}
+
+variable "rotate_signing_cert" {
+  type        = bool
+  description = "Set to `true` to rotate the signing key."
+  default     = false
+}
+
+variable "rotate_signing_key" {
+  type        = bool
+  description = "Set to `true` to rotate the signing the certificate."
+  default     = false
 }
 
 variable "signing_certificate_secret" {
