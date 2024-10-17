@@ -1,5 +1,7 @@
 #!/bin/bash
 
+dnf install pinentry -y
+
 function parse_input() {
   eval "$(jq -r '@sh "export EMAIL=\(.email) NAME=\(.name) APIKEY=\(.apikey) INSTANCE_ID=\(.instance_id) REGION=\(.region) SECRET_GROUP_ID=\(.secret_group_id) SIGNING_KEY_NAME=\(.signing_key_name) SIGNING_CERT_NAME=\(.signing_cert_name) ROTATE_SIGNING_KEY=\(.rotate_signing_key) ROTATE_SIGNING_CERT=\(.rotate_signing_cert)"')"
   if [[ -z "${EMAIL}" ]]; then export EMAIL=none; fi
