@@ -22,6 +22,8 @@ function getIAM_TOKEN() {
   ibmcloud login -apikey "$1" > /dev/null 2>&1
 
   IAM_ACCESS_TOKEN_FULL=$(curl -s -k -X POST \
+  --retry 5 \
+  --retry-connrefused \
   --header "Content-Type: application/x-www-form-urlencoded" \
   --header "Accept: application/json" \
   --data-urlencode "grant_type=urn:ibm:params:oauth:grant-type:apikey" \
@@ -43,7 +45,7 @@ function getSecretMetadata() {
   local base_url=$2
   local secret_group_id=$3
   local response
-  response=$(curl -X GET --location --header "Authorization: Bearer ${iam_token}" --header "Accept: application/json" "${base_url}/api/v2/secrets?groups=${secret_group_id}")
+  response=$(curl -X GET --retry 5 --retry-connrefused --location --header "Authorization: Bearer ${iam_token}" --header "Accept: application/json" "${base_url}/api/v2/secrets?groups=${secret_group_id}")
   echo "${response}"
 }
 
@@ -58,7 +60,7 @@ function getSecret() {
   local payload
   secret_id=$(echo "${secret_metadata}" | jq -r --arg KEY_NAME "${keyname}" '.secrets[] | select(.name==$KEY_NAME) | .id')
 
-  response=$(curl -X GET --location --header "Authorization: Bearer ${iam_token}" --header "Accept: application/json" "${base_url}/api/v2/secrets/${secret_id}")
+  response=$(curl -X GET --retry 5 --retry-connrefused --location --header "Authorization: Bearer ${iam_token}" --header "Accept: application/json" "${base_url}/api/v2/secrets/${secret_id}")
 
   payload=$(echo "${response}" | jq -r '.payload')
   if [[ -z "${payload}" ]]  ||  [[ "${payload}" == "null" ]] || [[ "${payload}" == null ]]; then
