@@ -169,8 +169,6 @@ BASE_URL="https://${INSTANCE_ID}.${REGION}.secrets-manager.appdomain.cloud"
 IAM_ACCESS_TOKEN=$(getIAM_TOKEN "${APIKEY}")
 SECRET_METADATA=$(getSecretMetadata "${IAM_ACCESS_TOKEN}" "${BASE_URL}" "${SECRET_GROUP_ID}")
 SIGNING_KEY_SECRET=$(getSecret "${IAM_ACCESS_TOKEN}" "${BASE_URL}" "${SECRET_METADATA}" "${SIGNING_KEY_NAME}")
-#SIGNING_CERT_SECRET=$(getSecret "${IAM_ACCESS_TOKEN}" "${BASE_URL}" "${SECRET_METADATA}" "${SIGNING_CERT_NAME}")
-
 #simplify the boolean logic
 if [[  "${ROTATE_SIGNING_KEY}" == true ]]  ||  [[ "${ROTATE_SIGNING_KEY}" == "true" ]]; then
   ROTATE_SIGNING_KEY="true"
@@ -190,6 +188,7 @@ else #have an existing cert
     rotate_signing_cert
   else
     #return existing values
+    SIGNING_CERT_SECRET=$(getSecret "${IAM_ACCESS_TOKEN}" "${BASE_URL}" "${SECRET_METADATA}" "${SIGNING_CERT_NAME}")
     JSON_STRING_RESULT=$( jq -n --arg signing_key "$SIGNING_KEY_SECRET" --arg public_key "$SIGNING_CERT_SECRET" '{signingkey: $signing_key, publickey: $public_key}' )
     echo "${JSON_STRING_RESULT}"
   fi

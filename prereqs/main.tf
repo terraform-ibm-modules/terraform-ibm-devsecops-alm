@@ -149,7 +149,7 @@ data "external" "signing_keys" {
     secret_group_id     = (var.create_secret_group == false) ? data.ibm_sm_secret_group.existing_sm_secret_group[0].secret_group_id : ibm_sm_secret_group.sm_secret_group[0].secret_group_id
     signing_key_name    = var.signing_key_secret_name
     signing_cert_name   = var.signing_certifcate_secret_name
-    rotate_signging_key = var.rotate_signing_key
+    rotate_signing_key  = var.rotate_signing_key
     rotate_signing_cert = var.rotate_signing_cert
   }
 }
