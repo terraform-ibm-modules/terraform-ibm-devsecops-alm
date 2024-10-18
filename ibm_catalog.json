@@ -1095,17 +1095,10 @@
                             "required": false
                         },
                         {
-                            "key": "create_signing_certificate",
-                            "type": "boolean",
-                            "default_value": false,
-                            "description": "Set to `true` to create and add the `signing-certificate` to the Secrets Provider.",
-                            "required": false
-                        },
-                        {
                             "key": "create_signing_key",
                             "type": "boolean",
                             "default_value": false,
-                            "description": "Set to `true` to create and add a `signing_key`to the Secrets Provider.",
+                            "description": "Set to `true` to create and add a `signing-key` and the `signing-certificate` to the Secrets Provider.",
                             "required": false
                         },
                         {
@@ -1523,9 +1516,23 @@
                         },
                         {
                             "key": "rotation_period",
-                            "type": "string",
-                            "default_value": "90",
+                            "type": "number",
+                            "default_value": 90,
                             "description": "The number of days until the `ibmcloud-api-key` and the `cos-api-key` are auto rotated.",
+                            "required": false
+                        },
+                        {
+                            "key": "rotate_signing_cert",
+                            "type": "boolean",
+                            "default_value": false,
+                            "description": "Set to `true` to rotate the signing key.",
+                            "required": false
+                        },
+                        {
+                            "key": "rotate_signing_key",
+                            "type": "boolean",
+                            "default_value": false,
+                            "description": "Set to `true` to rotate the signing the certificate.",
                             "required": false
                         },
                         {
@@ -2891,17 +2898,10 @@
                             "required": false
                         },
                         {
-                            "key": "create_signing_certificate",
-                            "type": "boolean",
-                            "default_value": false,
-                            "description": "Set to `true` to create and add the `signing-certificate` to the Secrets Provider.",
-                            "required": false
-                        },
-                        {
                             "key": "create_signing_key",
                             "type": "boolean",
                             "default_value": false,
-                            "description": "Set to `true` to create and add a `signing_key`to the Secrets Provider.",
+                            "description": "Set to `true` to create and add a `signing-key` and the `signing-certificate` to the Secrets Provider.",
                             "required": false
                         },
                         {
@@ -3322,6 +3322,20 @@
                             "type": "string",
                             "default_value": "90",
                             "description": "The number of days until the `ibmcloud-api-key` and the `cos-api-key` are auto rotated.",
+                            "required": false
+                        },
+                        {
+                            "key": "rotate_signing_cert",
+                            "type": "boolean",
+                            "default_value": false,
+                            "description": "Set to `true` to rotate the signing key.",
+                            "required": false
+                        },
+                        {
+                            "key": "rotate_signing_key",
+                            "type": "boolean",
+                            "default_value": false,
+                            "description": "Set to `true` to rotate the signing the certificate.",
                             "required": false
                         },
                         {
