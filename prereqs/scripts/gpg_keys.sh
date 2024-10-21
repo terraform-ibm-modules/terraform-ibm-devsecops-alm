@@ -1,9 +1,9 @@
 #!/bin/bash
 
-dnf install pinentry -y
+#dnf install pinentry -y
 
 function parse_input() {
-  eval "$(jq -r '@sh "export EMAIL=\(.email) NAME=\(.name) APIKEY=\(.apikey) INSTANCE_ID=\(.instance_id) REGION=\(.region) SECRET_GROUP_ID=\(.secret_group_id) SIGNING_KEY_NAME=\(.signing_key_name) SIGNING_CERT_NAME=\(.signing_cert_name) ROTATE_SIGNING_KEY=\(.rotate_signing_key) ROTATE_SIGNING_CERT=\(.rotate_signing_cert)"')"
+  eval "$(jq -r '@sh "export EMAIL=\(.email) NAME=\(.name) APIKEY=\(.apikey) INSTANCE_ID=\(.instance_id) REGION=\(.region) SECRET_GROUP_ID=\(.secret_group_id) SIGNING_KEY_NAME=\(.signing_key_name) SIGNING_CERT_NAME=\(.signing_cert_name) ROTATE_SIGNING_KEY=\(.rotate_signing_key)"')"
   if [[ -z "${EMAIL}" ]]; then export EMAIL=none; fi
   if [[ -z "${NAME}" ]]; then export NAME=none; fi
   if [[ -z "${APIKEY}" ]]; then export APIKEY=none; fi
@@ -13,7 +13,6 @@ function parse_input() {
   if [[ -z "${SIGNING_KEY_NAME}" ]]; then export SIGNING_KEY_NAME=none; fi
   if [[ -z "${SIGNING_CERT_NAME}" ]]; then export SIGNING_CERT_NAME=none; fi
   if [[ -z "${ROTATE_SIGNING_KEY}" ]]; then export ROTATE_SIGNING_KEY=none; fi
-  if [[ -z "${ROTATE_SIGNING_CERT}" ]]; then export ROTATE_SIGNING_CERT=none; fi
 }
 
 #login with the provided APIKEY and get the IAM bearer token
@@ -63,7 +62,7 @@ function getSecret() {
   response=$(curl -X GET --retry 5 --retry-connrefused --location --header "Authorization: Bearer ${iam_token}" --header "Accept: application/json" "${base_url}/api/v2/secrets/${secret_id}")
 
   payload=$(echo "${response}" | jq -r '.payload')
-  if [[ -z "${payload}" ]]  ||  [[ "${payload}" == "null" ]] || [[ "${payload}" == null ]]; then
+  if [[ -z "${payload}" ]]  ||  [[ "${payload}" == "null" ]] || [[ "${payload}" == null ]] || [[ "${payload}" == "undefined" ]] || [[ "${payload}" == undefined ]]; then
     payload=""
   fi
   echo "${payload}"
@@ -94,13 +93,13 @@ function prepareKeyDetails {
 }
 
 function importKey {
-  FILE="gpg_file.txt"
+  FILE="gpg_file.gpg"
   touch "${FILE}"
     {
       echo "${SIGNING_KEY_SECRET}" | base64 -D
     } >> "${FILE}"
 
-    gpg --import "${FILE}"
+    gpg --allow-secret-key-import --import "${FILE}"
     rm -rf "${FILE}"
 }
 
@@ -182,12 +181,8 @@ fi
 if [[  -z "${SIGNING_KEY_SECRET}" ]]  ||  [[ "${SIGNING_KEY_SECRET}" == "" ]]; then
   generate_keys #create keys for signing and cert and return
 else #have an existing cert
-  if [[  "${ROTATE_SIGNING_KEY}" == "true" ]]  &&  [[ "${ROTATE_SIGNING_CERT}" == "true" ]]; then
+  if [[  "${ROTATE_SIGNING_KEY}" == "true" ]]; then
     generate_keys
-  elif [[  "${ROTATE_SIGNING_KEY}" == "true" ]]; then
-    rotate_signing_key
-  elif [[ "${ROTATE_SIGNING_CERT}" == "true" ]]; then
-    rotate_signing_cert
   else
     #return existing values
     SIGNING_CERT_SECRET=$(getSecret "${IAM_ACCESS_TOKEN}" "${BASE_URL}" "${SECRET_METADATA}" "${SIGNING_CERT_NAME}")

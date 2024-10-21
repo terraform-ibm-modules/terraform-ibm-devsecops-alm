@@ -729,15 +729,9 @@ variable "rotation_period" {
   default     = 90
 }
 
-variable "rotate_signing_cert" {
-  type        = bool
-  description = "Set to `true` to rotate the signing key."
-  default     = false
-}
-
 variable "rotate_signing_key" {
   type        = bool
-  description = "Set to `true` to rotate the signing the certificate."
+  description = "Set to `true` to rotate the signing key and signing certificate. It is important to make a back up for the current code signing certificate as pending CD deployments might require image validation against the previous signing key."
   default     = false
 }
 

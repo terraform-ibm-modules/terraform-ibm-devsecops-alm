@@ -109,7 +109,6 @@ module "devsecops_da" {
   repo_secret_group                                 = var.repo_secret_group
   repositories_prefix                               = var.repositories_prefix
   rotation_period                                   = var.rotation_period
-  rotate_signing_cert                               = var.rotate_signing_cert
   rotate_signing_key                                = var.rotate_signing_key
   scc_attachment_id                                 = var.scc_attachment_id
   scc_enable_scc                                    = var.scc_enable_scc

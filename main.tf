@@ -247,7 +247,6 @@ module "prereqs" {
   repo_git_token_secret_name       = var.repo_git_token_secret_name
   repo_git_token_secret_value      = var.repo_git_token_secret_value
   rotation_period                  = var.rotation_period
-  rotate_signing_cert              = var.rotate_signing_cert
   rotate_signing_key               = var.rotate_signing_key
   sm_secret_expiration_period      = var.sm_secret_expiration_period
   sm_exists                        = var.enable_secrets_manager
