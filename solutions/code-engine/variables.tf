@@ -231,7 +231,7 @@ variable "create_cos_api_key" {
 
 variable "create_git_token" {
   type        = bool
-  description = "Set to `true` to create and add the specified personal access token secret to the Secrets Provider."
+  description = "Set to `true` to create and add the specified personal access token secret to the Secrets Provider. Use `repo_git_token_secret_value` for setting the value."
   default     = false
 }
 
