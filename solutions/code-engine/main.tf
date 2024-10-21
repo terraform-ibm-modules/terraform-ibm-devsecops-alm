@@ -41,7 +41,6 @@ module "devsecops_da" {
   create_icr_namespace                              = var.create_icr_namespace
   create_kubernetes_access_policy                   = var.create_kubernetes_access_policy
   create_secret_group                               = var.create_secret_group
-  create_signing_certificate                        = var.create_signing_certificate
   create_signing_key                                = var.create_signing_key
   enable_key_protect                                = var.enable_key_protect
   enable_pipeline_notifications                     = var.enable_pipeline_notifications
@@ -109,6 +108,8 @@ module "devsecops_da" {
   repo_group                                        = var.repo_group
   repo_secret_group                                 = var.repo_secret_group
   repositories_prefix                               = var.repositories_prefix
+  rotation_period                                   = var.rotation_period
+  rotate_signing_key                                = var.rotate_signing_key
   scc_attachment_id                                 = var.scc_attachment_id
   scc_enable_scc                                    = var.scc_enable_scc
   scc_instance_crn                                  = var.scc_instance_crn

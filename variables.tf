@@ -231,7 +231,7 @@ variable "create_cos_api_key" {
 
 variable "create_git_token" {
   type        = bool
-  description = "Set to `true` to create and add the specified personal access token secret to the Secrets Provider."
+  description = "Set to `true` to create and add the specified personal access token secret to the Secrets Provider. Use `repo_git_token_secret_value` for setting the value."
   default     = false
 }
 
@@ -259,15 +259,9 @@ variable "create_secret_group" {
   default     = false
 }
 
-variable "create_signing_certificate" {
-  type        = bool
-  description = "Set to `true` to create and add the `signing-certificate` to the Secrets Provider."
-  default     = false
-}
-
 variable "create_signing_key" {
   type        = bool
-  description = "Set to `true` to create and add a `signing_key`to the Secrets Provider."
+  description = "Set to `true` to create and add a `signing-key` and the `signing-certificate` to the Secrets Provider."
   default     = false
 }
 
@@ -733,6 +727,12 @@ variable "rotation_period" {
   type        = number
   description = "The number of days until the `ibmcloud-api-key` and the `cos-api-key` are auto rotated."
   default     = 90
+}
+
+variable "rotate_signing_key" {
+  type        = bool
+  description = "Set to `true` to rotate the signing key and signing certificate. It is important to make a back up for the current code signing certificate as pending CD deployments might require image validation against the previous signing key."
+  default     = false
 }
 
 variable "scc_attachment_id" {
