@@ -169,6 +169,11 @@ locals {
   cd_pipeline_config_repo_branch         = (var.cd_pipeline_config_repo_branch == "") ? var.pipeline_config_repo_branch : var.cd_pipeline_config_repo_branch
   cc_pipeline_config_repo_branch         = (var.cc_pipeline_config_repo_branch == "") ? var.pipeline_config_repo_branch : var.cc_pipeline_config_repo_branch
 
+  pipeline_config_repo_git_provider = (
+    (var.pipeline_config_repo_git_provider != "") ? var.pipeline_config_repo_git_provider :
+    (var.repo_git_provider != "") ? var.repo_git_provider : "hostedgit"
+  )
+
   change_management_repo_git_provider = (
     (var.cd_change_management_repo_git_provider != "") ? var.cd_change_management_repo_git_provider :
     (var.repo_git_provider != "") ? var.repo_git_provider : "hostedgit"
@@ -401,7 +406,7 @@ module "devsecops_ci_toolchain" {
   #PIPELINE CONFIG REPO
   pipeline_config_repo_existing_url     = local.ci_pipeline_config_repo_existing_url
   pipeline_config_repo_clone_from_url   = local.ci_pipeline_config_repo_clone_from_url
-  pipeline_config_repo_git_provider     = (var.pipeline_config_repo_git_provider == "") ? var.repo_git_provider : var.pipeline_config_repo_git_provider
+  pipeline_config_repo_git_provider     = local.pipeline_config_repo_git_provider
   pipeline_config_repo_git_id           = (var.pipeline_config_repo_git_id == "") ? var.repo_git_id : var.pipeline_config_repo_git_id
   pipeline_config_repo_branch           = (local.ci_pipeline_config_repo_branch == "") ? local.ci_app_repo_branch : local.ci_pipeline_config_repo_branch
   pipeline_config_repo_blind_connection = var.repo_blind_connection
@@ -627,7 +632,7 @@ module "devsecops_cd_toolchain" {
   #PIPELINE CONFIG REPO
   pipeline_config_repo_existing_url     = local.cd_pipeline_config_repo_existing_url
   pipeline_config_repo_clone_from_url   = local.cd_pipeline_config_repo_clone_from_url
-  pipeline_config_repo_git_provider     = (var.pipeline_config_repo_git_provider == "") ? var.repo_git_provider : var.pipeline_config_repo_git_provider
+  pipeline_config_repo_git_provider     = local.pipeline_config_repo_git_provider
   pipeline_config_repo_git_id           = (var.pipeline_config_repo_git_id == "") ? var.repo_git_id : var.pipeline_config_repo_git_id
   pipeline_config_repo_branch           = (local.cd_pipeline_config_repo_branch == "") ? "master" : local.cd_pipeline_config_repo_branch
   pipeline_config_repo_blind_connection = var.repo_blind_connection
@@ -872,7 +877,7 @@ module "devsecops_cc_toolchain" {
   #PIPELINE CONFIG REPO
   pipeline_config_repo_existing_url     = local.cc_pipeline_config_repo_existing_url
   pipeline_config_repo_clone_from_url   = local.cc_pipeline_config_repo_clone_from_url
-  pipeline_config_repo_git_provider     = (var.pipeline_config_repo_git_provider == "") ? var.repo_git_provider : var.pipeline_config_repo_git_provider
+  pipeline_config_repo_git_provider     = local.pipeline_config_repo_git_provider
   pipeline_config_repo_git_id           = (var.pipeline_config_repo_git_id == "") ? var.repo_git_id : var.pipeline_config_repo_git_id
   pipeline_config_repo_branch           = (local.cc_pipeline_config_repo_branch == "") ? local.cc_app_repo_branch : local.cc_pipeline_config_repo_branch
   pipeline_config_repo_blind_connection = var.repo_blind_connection
