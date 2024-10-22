@@ -525,7 +525,7 @@ variable "issues_repo_existing_git_provider" {
 
 variable "issues_repo_existing_url" {
   type        = string
-  description = "Set to use an existing issues repository."
+  description = "By default this gets set as 'hostedgit', else set to 'githubconsolidated' for GitHub repositories."
   default     = ""
 }
 
