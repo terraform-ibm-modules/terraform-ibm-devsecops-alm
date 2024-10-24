@@ -272,6 +272,83 @@
                             }
                         },
                         {
+                            "key": "repo_git_token_secret_name",
+                            "type": "string",
+                            "default_value": "",
+                            "description": "Name of the Git token secret in the secret provider. Specifying a secret name for the Git Token automatically sets the authentication type to `pat`.",
+                            "required": false
+                        },
+                        {
+                            "key": "repo_group",
+                            "type": "string",
+                            "default_value": "",
+                            "description": "Specify the Git user or group for your application. This must be set if the repository authentication type is `pat` (personal access token).",
+                            "required": false
+                        },
+                        {
+                            "key": "repo_git_provider",
+                            "type": "string",
+                            "default_value": "",
+                            "description": "By default this gets set as 'hostedgit', else set to 'githubconsolidated' for GitHub repositories or `gitlab` for GitLab. Applies to all the default DevSecOps repositories, except the `Compliance Pipelines` repository that get created at the time of running the DA.",
+                            "required": false
+                        },
+                        {
+                            "key": "repo_git_id",
+                            "type": "string",
+                            "default_value": "",
+                            "description": "Set this value to `github` for github.com, `gitlabcustom` for GitLab or to the ID of a custom GitHub Enterprise server.",
+                            "required": false
+                        },
+                        {
+                            "key": "repo_git_token_secret_name",
+                            "type": "string",
+                            "default_value": "",
+                            "description": "Name of the Git token secret in the secret provider used for accessing the repositories created by the DA.",
+                            "required": false
+                        },
+                        {
+                            "key": "repo_title",
+                            "type": "string",
+                            "default_value": "",
+                            "description": "(Optional) The title of the server. e.g. My Git Enterprise Server.",
+                            "required": false
+                        },
+                        {
+                            "key": "repo_root_url",
+                            "type": "string",
+                            "default_value": "",
+                            "description": "(Optional) The Root URL of the server. e.g. https://git.example.com.",
+                            "required": false
+                        },
+                        {
+                            "key": "repo_blind_connection",
+                            "type": "string",
+                            "default_value": "false",
+                            "description": "Setting this value to `true` means the server is not addressable on the public internet. IBM Cloud will not be able to validate the connection details you provide. Certain functionality that requires API access to the git server will be disabled. Delivery pipeline will only work using a private worker that has network access to the git server.",
+                            "required": false
+                        },
+                        {
+                            "key": "create_git_triggers",
+                            "type": "string",
+                            "default_value": "true",
+                            "description": "Set to `true` to create the Git triggers used by the DevSecOps pipelines.",
+                            "required": false
+                        },
+                        {
+                            "key": "create_triggers",
+                            "type": "string",
+                            "default_value": "true",
+                            "description": "Set to `true` to create the triggers used by the DevSecOps pipelines.",
+                            "required": false
+                        },
+                        {
+                            "key": "add_pipeline_definitions",
+                            "type": "string",
+                            "default_value": "true",
+                            "description": "Set to `true` to add the compliance pipelines definitions to the DevSecOps pipelines.",
+                            "required": false
+                        },
+                        {
                             "key": "app_repo_branch",
                             "type": "string",
                             "default_value": "main",
@@ -284,6 +361,62 @@
                             "default_value": "__NOTSET__",
                             "description": "Bring your own existing application repository by providing the URL. This will create an integration for your application repository instead of cloning the default sample. Repositories existing in a different org will require the use of Git token. See `app_repo_git_token_secret_name` under optional variables. ",
                             "required": true
+                        },
+                        {
+                            "key": "cd_deployment_repo_existing_url",
+                            "type": "string",
+                            "default_value": "",
+                            "description": "Override to bring your own existing deployment repository URL, which is used directly instead of cloning the default deployment sample.",
+                            "required": false
+                        },
+                        {
+                            "key": "change_management_existing_url",
+                            "type": "string",
+                            "default_value": "",
+                            "description": "Override to bring your own existing change management repository URL, which is used directly instead of cloning the default change management repository.",
+                            "required": false
+                        },
+                        {
+                            "key": "evidence_repo_existing_url",
+                            "type": "string",
+                            "default_value": "",
+                            "description": "Set to use an existing evidence repository.",
+                            "required": false
+                        },
+                        {
+                            "key": "inventory_repo_existing_url",
+                            "type": "string",
+                            "default_value": "",
+                            "description": "Set to use an existing inventory repository.",
+                            "required": false
+                        },
+                        {
+                            "key": "issues_repo_existing_url",
+                            "type": "string",
+                            "default_value": "",
+                            "description": "Set to use an existing issues repository.",
+                            "required": false
+                        },
+                        {
+                            "key": "compliance_pipeline_repo_git_provider",
+                            "type": "string",
+                            "default_value": "",
+                            "description": "By default this gets set as 'hostedgit', else set to 'githubconsolidated' for GitHub repositories or `gitlab` for GitLab.",
+                            "required": false
+                        },
+                        {
+                            "key": "compliance_pipeline_repo_git_id",
+                            "type": "string",
+                            "default_value": "",
+                            "description": "Set this value to `github` for github.com, `gitlabcustom` for GitLab or to the ID of a custom GitHub Enterprise server.",
+                            "required": false
+                        },
+                        {
+                            "key": "compliance_pipeline_existing_repo_url",
+                            "type": "string",
+                            "default_value": "",
+                            "description": "Override to bring your own existing compliance pipelines repository URL, which is used directly instead of cloning the default change compliance pipelines repository.",
+                            "required": false
                         },
                         {
                             "key": "add_code_engine_prefix",
@@ -600,7 +733,7 @@
                         {
                             "key": "cd_deployment_repo_existing_git_provider",
                             "type": "string",
-                            "default_value": "hostedgit",
+                            "default_value": "",
                             "description": "By default this gets set as 'hostedgit', else set to 'githubconsolidated' for GitHub repositories.",
                             "required": false
                         },
@@ -1181,7 +1314,7 @@
                         {
                             "key": "evidence_repo_existing_git_provider",
                             "type": "string",
-                            "default_value": "hostedgit",
+                            "default_value": "",
                             "description": "By default this gets set as 'hostedgit', else set to 'githubconsolidated' for GitHub repositories.",
                             "required": false
                         },
@@ -1250,7 +1383,7 @@
                         {
                             "key": "inventory_repo_existing_git_provider",
                             "type": "string",
-                            "default_value": "hostedgit",
+                            "default_value": "",
                             "description": "By default this gets set as 'hostedgit', else set to 'githubconsolidated' for GitHub repositories.",
                             "required": false
                         },
@@ -1319,7 +1452,7 @@
                         {
                             "key": "issues_repo_existing_git_provider",
                             "type": "string",
-                            "default_value": "hostedgit",
+                            "default_value": "",
                             "description": "By default this gets set as 'hostedgit', else set to 'githubconsolidated' for GitHub repositories.",
                             "required": false
                         },
@@ -1327,7 +1460,7 @@
                             "key": "issues_repo_existing_url",
                             "type": "string",
                             "default_value": "",
-                            "description": "Set to use an existing issues repository.",
+                            "description": "By default this gets set as 'hostedgit', else set to 'githubconsolidated' for GitHub repositories.",
                             "required": false
                         },
                         {
@@ -1484,20 +1617,6 @@
                             "key": "repo_git_token_secret_crn",
                             "type": "password",
                             "description": "The CRN for the repositories Git Token.",
-                            "required": false
-                        },
-                        {
-                            "key": "repo_git_token_secret_name",
-                            "type": "string",
-                            "default_value": "",
-                            "description": "Name of the Git token secret in the secret provider. Specifying a secret name for the Git Token automatically sets the authentication type to `pat`.",
-                            "required": false
-                        },
-                        {
-                            "key": "repo_group",
-                            "type": "string",
-                            "default_value": "",
-                            "description": "Specify the Git user or group for your application. This must be set if the repository authentication type is `pat` (personal access token).",
                             "required": false
                         },
                         {
@@ -2055,6 +2174,83 @@
                             }
                         },
                         {
+                            "key": "repo_git_token_secret_name",
+                            "type": "string",
+                            "default_value": "",
+                            "description": "Name of the Git token secret in the secret provider. Specifying a secret name for the Git Token automatically sets the authentication type to `pat`.",
+                            "required": false
+                        },
+                        {
+                            "key": "repo_group",
+                            "type": "string",
+                            "default_value": "",
+                            "description": "Specify the Git user or group for your application. This must be set if the repository authentication type is `pat` (personal access token).",
+                            "required": false
+                        },
+                        {
+                            "key": "repo_git_provider",
+                            "type": "string",
+                            "default_value": "",
+                            "description": "By default this gets set as 'hostedgit', else set to 'githubconsolidated' for GitHub repositories or `gitlab` for GitLab. Applies to all the default DevSecOps repositories, except the `Compliance Pipelines` repository that get created at the time of running the DA.",
+                            "required": false
+                        },
+                        {
+                            "key": "repo_git_id",
+                            "type": "string",
+                            "default_value": "",
+                            "description": "Set this value to `github` for github.com, `gitlabcustom` for GitLab or to the ID of a custom GitHub Enterprise server.",
+                            "required": false
+                        },
+                        {
+                            "key": "repo_git_token_secret_name",
+                            "type": "string",
+                            "default_value": "",
+                            "description": "Name of the Git token secret in the secret provider used for accessing the repositories created by the DA.",
+                            "required": false
+                        },
+                        {
+                            "key": "repo_title",
+                            "type": "string",
+                            "default_value": "",
+                            "description": "(Optional) The title of the server. e.g. My Git Enterprise Server.",
+                            "required": false
+                        },
+                        {
+                            "key": "repo_root_url",
+                            "type": "string",
+                            "default_value": "",
+                            "description": "(Optional) The Root URL of the server. e.g. https://git.example.com.",
+                            "required": false
+                        },
+                        {
+                            "key": "repo_blind_connection",
+                            "type": "string",
+                            "default_value": "false",
+                            "description": "Setting this value to `true` means the server is not addressable on the public internet. IBM Cloud will not be able to validate the connection details you provide. Certain functionality that requires API access to the git server will be disabled. Delivery pipeline will only work using a private worker that has network access to the git server.",
+                            "required": false
+                        },
+                        {
+                            "key": "create_git_triggers",
+                            "type": "string",
+                            "default_value": "true",
+                            "description": "Set to `true` to create the Git triggers used by the DevSecOps pipelines.",
+                            "required": false
+                        },
+                        {
+                            "key": "create_triggers",
+                            "type": "string",
+                            "default_value": "true",
+                            "description": "Set to `true` to create the triggers used by the DevSecOps pipelines.",
+                            "required": false
+                        },
+                        {
+                            "key": "add_pipeline_definitions",
+                            "type": "string",
+                            "default_value": "true",
+                            "description": "Set to `true` to add the compliance pipelines definitions to the DevSecOps pipelines.",
+                            "required": false
+                        },
+                        {
                             "key": "ci_pipeline_properties",
                             "type": "string",
                             "default_value": "[\n  {\n    \"pipeline_id\": \"ci\",\n    \"properties\": [\n      {\n        \"name\": \"cluster-name\",\n        \"type\": \"text\",\n        \"value\": \"\"\n      },\n      {\n        \"name\": \"cos-api-key\",\n        \"type\": \"secure\",\n        \"value\": \"\"\n      },\n      {\n        \"name\": \"cos-bucket-name\",\n        \"type\": \"text\",\n        \"value\": \"\"\n      },\n      {\n        \"name\": \"cos-endpoint\",\n        \"type\": \"text\",\n        \"value\": \"\"\n      },\n      {\n        \"name\": \"cra-bom-generate\",\n        \"type\": \"single_select\",\n        \"value\": \"1\",\n        \"enum\": \"[0,1]\"\n      },\n      {\n        \"name\": \"cra-deploy-analysis\",\n        \"type\": \"single_select\",\n        \"value\": \"1\",\n        \"enum\": \"[0,1]\"\n      },\n      {\n        \"name\": \"cra-generate-cyclonedx-format\",\n        \"type\": \"text\",\n        \"value\": \"1\"\n      },\n      {\n        \"name\": \"cra-vulnerability-scan\",\n        \"type\": \"single_select\",\n        \"value\": \"1\",\n        \"enum\": \"[0,1]\"\n      },\n      {\n        \"name\": \"custom_image_tag\",\n        \"type\": \"text\",\n        \"value\": \"\"\n      },\n      {\n        \"name\": \"dev-cluster-namespace\",\n        \"type\": \"text\",\n        \"value\": \"dev\"\n      },\n      {\n        \"name\": \"dev-region\",\n        \"type\": \"text\",\n        \"value\": \"\"\n      },\n      {\n        \"name\": \"dev-resource-group\",\n        \"type\": \"text\",\n        \"value\": \"\"\n      },\n      {\n        \"name\": \"doi-environment\",\n        \"type\": \"text\",\n        \"value\": \"\"\n      },\n      {\n        \"name\": \"doi-ibmcloud-api-key\",\n        \"type\": \"secure\",\n        \"value\": \"\"\n      },\n      {\n        \"name\": \"doi-toolchain-id\",\n        \"type\": \"text\",\n        \"value\": \"\"\n      },\n      {\n        \"name\": \"event-notifications\",\n        \"type\": \"text\",\n        \"value\": \"0\"\n      },\n      {\n        \"name\": \"git-token\",\n        \"type\": \"secure\",\n        \"value\": \"\"\n      },\n      {\n        \"name\": \"ibmcloud-api-key\",\n        \"type\": \"secure\",\n        \"value\": \"\"\n      },\n      {\n        \"name\": \"opt-in-dynamic-api-scan\",\n        \"type\": \"text\",\n        \"value\": \"1\"\n      },\n      {\n        \"name\": \"opt-in-dynamic-scan\",\n        \"type\": \"text\",\n        \"value\": \"1\"\n      },\n      {\n        \"name\": \"opt-in-dynamic-ui-scan\",\n        \"type\": \"text\",\n        \"value\": \"1\"\n      },\n      {\n        \"name\": \"opt-in-gosec\",\n        \"type\": \"text\",\n        \"value\": \"\"\n      },\n      {\n        \"name\": \"opt-in-sonar\",\n        \"type\": \"text\",\n        \"value\": \"1\"\n      },\n      {\n        \"name\": \"peer-review-compliance\",\n        \"type\": \"text\",\n        \"value\": \"1\"\n      },\n      {\n        \"name\": \"pipeline-config\",\n        \"type\": \"text\",\n        \"value\": \".pipeline-config.yaml\"\n      },\n      {\n        \"name\": \"pipeline-config-branch\",\n        \"type\": \"text\",\n        \"value\": \"\"\n      },\n      {\n        \"name\": \"pipeline-debug\",\n        \"type\": \"single_select\",\n        \"value\": \"0\",\n        \"enum\": \"[0,1]\"\n      },\n      {\n        \"name\": \"print-code-signing-certificate\",\n        \"type\": \"text\",\n        \"value\": \"1\"\n      },\n      {\n        \"name\": \"registry-namespace\",\n        \"type\": \"text\",\n        \"value\": \"\"\n      },\n      {\n        \"name\": \"registry-region\",\n        \"type\": \"text\",\n        \"value\": \"\"\n      },\n      {\n        \"name\": \"signing-key\",\n        \"type\": \"secure\",\n        \"value\": \"\"\n      },\n      {\n        \"name\": \"slack-notifications\",\n        \"type\": \"text\",\n        \"value\": \"0\"\n      },\n      {\n        \"name\": \"sonarqube-config\",\n        \"type\": \"text\",\n        \"value\": \"default\"\n      },\n      {\n        \"name\": \"version\",\n        \"type\": \"text\",\n        \"value\": \"v1\"\n      }\n    ]\n  },\n  {\n    \"pipeline_id\": \"pr\",\n    \"properties\": [\n      {\n        \"name\": \"git-token\",\n        \"type\": \"secure\",\n        \"value\": \"\"\n      },\n      {\n        \"name\": \"cra-bom-generate\",\n        \"type\": \"single_select\",\n        \"value\": \"1\",\n        \"enum\": \"[0,1]\"\n      },\n      {\n        \"name\": \"cra-deploy-analysis\",\n        \"type\": \"single_select\",\n        \"value\": \"1\",\n        \"enum\": \"[0,1]\"\n      },\n      {\n        \"name\": \"cra-vulnerability-scan\",\n        \"type\": \"single_select\",\n        \"value\": \"1\",\n        \"enum\": \"[0,1]\"\n      },\n      {\n        \"name\": \"ibmcloud-api-key\",\n        \"type\": \"secure\",\n        \"value\": \"\"\n      },\n      {\n        \"name\": \"pipeline-config\",\n        \"type\": \"text\",\n        \"value\": \".pipeline-config.yaml\"\n      },\n      {\n        \"name\": \"pipeline-config-branch\",\n        \"type\": \"text\",\n        \"value\": \"\"\n      },\n      {\n        \"name\": \"pipeline-debug\",\n        \"type\": \"single_select\",\n        \"value\": \"0\",\n        \"enum\": \"[0,1]\"\n      },\n      {\n        \"name\": \"slack-notifications\",\n        \"type\": \"text\",\n        \"value\": \"1\"\n      }\n    ]\n  }\n]\n",
@@ -2080,6 +2276,62 @@
                             "default_value": "__NOTSET__",
                             "description": "Bring your own existing application repository by providing the URL. This will create an integration for your application repository instead of cloning the default sample. Repositories existing in a different org will require the use of Git token. See `app_repo_git_token_secret_name` under optional variables. ",
                             "required": true
+                        },
+                        {
+                            "key": "cd_deployment_repo_existing_url",
+                            "type": "string",
+                            "default_value": "",
+                            "description": "Override to bring your own existing deployment repository URL, which is used directly instead of cloning the default deployment sample.",
+                            "required": false
+                        },
+                        {
+                            "key": "change_management_existing_url",
+                            "type": "string",
+                            "default_value": "",
+                            "description": "Override to bring your own existing change management repository URL, which is used directly instead of cloning the default change management repository.",
+                            "required": false
+                        },
+                        {
+                            "key": "evidence_repo_existing_url",
+                            "type": "string",
+                            "default_value": "",
+                            "description": "Set to use an existing evidence repository.",
+                            "required": false
+                        },
+                        {
+                            "key": "inventory_repo_existing_url",
+                            "type": "string",
+                            "default_value": "",
+                            "description": "Set to use an existing inventory repository.",
+                            "required": false
+                        },
+                        {
+                            "key": "issues_repo_existing_url",
+                            "type": "string",
+                            "default_value": "",
+                            "description": "Set to use an existing issues repository.",
+                            "required": false
+                        },
+                        {
+                            "key": "compliance_pipeline_repo_git_provider",
+                            "type": "string",
+                            "default_value": "",
+                            "description": "By default this gets set as 'hostedgit', else set to 'githubconsolidated' for GitHub repositories or `gitlab` for GitLab.",
+                            "required": false
+                        },
+                        {
+                            "key": "compliance_pipeline_repo_git_id",
+                            "type": "string",
+                            "default_value": "",
+                            "description": "Set this value to `github` for github.com, `gitlabcustom` for GitLab or to the ID of a custom GitHub Enterprise server.",
+                            "required": false
+                        },
+                        {
+                            "key": "compliance_pipeline_existing_repo_url",
+                            "type": "string",
+                            "default_value": "",
+                            "description": "Override to bring your own existing compliance pipelines repository URL, which is used directly instead of cloning the default change compliance pipelines repository.",
+                            "required": false
                         },
                         {
                             "key": "add_container_name_suffix",
@@ -2396,7 +2648,7 @@
                         {
                             "key": "cd_deployment_repo_existing_git_provider",
                             "type": "string",
-                            "default_value": "hostedgit",
+                            "default_value": "",
                             "description": "By default this gets set as 'hostedgit', else set to 'githubconsolidated' for GitHub repositories.",
                             "required": false
                         },
@@ -2977,7 +3229,7 @@
                         {
                             "key": "evidence_repo_existing_git_provider",
                             "type": "string",
-                            "default_value": "hostedgit",
+                            "default_value": "",
                             "description": "By default this gets set as 'hostedgit', else set to 'githubconsolidated' for GitHub repositories.",
                             "required": false
                         },
@@ -3046,7 +3298,7 @@
                         {
                             "key": "inventory_repo_existing_git_provider",
                             "type": "string",
-                            "default_value": "hostedgit",
+                            "default_value": "",
                             "description": "By default this gets set as 'hostedgit', else set to 'githubconsolidated' for GitHub repositories.",
                             "required": false
                         },
@@ -3115,7 +3367,7 @@
                         {
                             "key": "issues_repo_existing_git_provider",
                             "type": "string",
-                            "default_value": "hostedgit",
+                            "default_value": "",
                             "description": "By default this gets set as 'hostedgit', else set to 'githubconsolidated' for GitHub repositories.",
                             "required": false
                         },
@@ -3123,7 +3375,7 @@
                             "key": "issues_repo_existing_url",
                             "type": "string",
                             "default_value": "",
-                            "description": "Set to use an existing issues repository.",
+                            "description": "By default this gets set as 'hostedgit', else set to 'githubconsolidated' for GitHub repositories.",
                             "required": false
                         },
                         {
@@ -3280,20 +3532,6 @@
                             "key": "repo_git_token_secret_crn",
                             "type": "password",
                             "description": "The CRN for the repositories Git Token.",
-                            "required": false
-                        },
-                        {
-                            "key": "repo_git_token_secret_name",
-                            "type": "string",
-                            "default_value": "",
-                            "description": "Name of the Git token secret in the secret provider. Specifying a secret name for the Git Token automatically sets the authentication type to `pat`.",
-                            "required": false
-                        },
-                        {
-                            "key": "repo_group",
-                            "type": "string",
-                            "default_value": "",
-                            "description": "Specify the Git user or group for your application. This must be set if the repository authentication type is `pat` (personal access token).",
                             "required": false
                         },
                         {
