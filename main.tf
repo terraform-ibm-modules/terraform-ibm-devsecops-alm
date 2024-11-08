@@ -78,8 +78,7 @@ locals {
   cd_compliance_pipeline_group                      = (var.cd_compliance_pipeline_group == "") ? var.compliance_pipeline_group : var.cd_compliance_pipeline_group
   cc_compliance_pipeline_group                      = (var.cc_compliance_pipeline_group == "") ? var.compliance_pipeline_group : var.cc_compliance_pipeline_group
   compliance_pipeline_repo_existing_git_provider = (
-    (var.compliance_pipeline_repo_git_provider != "") ? var.compliance_pipeline_repo_git_provider :
-    (var.repo_git_provider != "") ? var.repo_git_provider : "hostedgit"
+    (var.compliance_pipeline_repo_git_provider != "") ? var.compliance_pipeline_repo_git_provider : "hostedgit"
   )
 
   ci_evidence_repo_auth_type             = (var.ci_evidence_repo_auth_type == "") ? var.evidence_repo_auth_type : var.ci_evidence_repo_auth_type
@@ -395,9 +394,9 @@ module "devsecops_ci_toolchain" {
   app_repo_title                 = var.repo_title
 
   #COMPLIANCE PIPELINE REPO
-  compliance_pipelines_repo_blind_connection = var.repo_blind_connection
-  compliance_pipelines_repo_root_url         = var.repo_root_url
-  compliance_pipelines_repo_title            = var.repo_title
+  compliance_pipelines_repo_blind_connection = var.compliance_pipeline_repo_blind_connection
+  compliance_pipelines_repo_root_url         = var.compliance_pipeline_repo_root_url
+  compliance_pipelines_repo_title            = var.compliance_pipeline_repo_title
   compliance_pipeline_repo_git_provider      = local.compliance_pipeline_repo_existing_git_provider
   compliance_pipelines_repo_git_id           = var.compliance_pipeline_repo_git_id
   compliance_pipeline_existing_repo_url      = var.compliance_pipeline_existing_repo_url
@@ -621,9 +620,9 @@ module "devsecops_cd_toolchain" {
   change_management_group   = (var.cd_change_management_group == "") ? var.repo_group : var.cd_change_management_group
 
   #COMPLIANCE PIPELINE REPO
-  compliance_pipelines_repo_blind_connection = var.repo_blind_connection
-  compliance_pipelines_repo_root_url         = var.repo_root_url
-  compliance_pipelines_repo_title            = var.repo_title
+  compliance_pipelines_repo_blind_connection = var.compliance_pipeline_repo_blind_connection
+  compliance_pipelines_repo_root_url         = var.compliance_pipeline_repo_root_url
+  compliance_pipelines_repo_title            = var.compliance_pipeline_repo_title
   compliance_pipeline_repo_git_provider      = local.compliance_pipeline_repo_existing_git_provider
   compliance_pipelines_repo_git_id           = var.compliance_pipeline_repo_git_id
   compliance_pipeline_existing_repo_url      = var.compliance_pipeline_existing_repo_url
@@ -866,9 +865,9 @@ module "devsecops_cc_toolchain" {
   link_to_doi_toolchain = var.cc_link_to_doi_toolchain
 
   #COMPLIANCE PIPELINE REPO
-  compliance_pipelines_repo_blind_connection = var.repo_blind_connection
-  compliance_pipelines_repo_root_url         = var.repo_root_url
-  compliance_pipelines_repo_title            = var.repo_title
+  compliance_pipelines_repo_blind_connection = var.compliance_pipeline_repo_blind_connection
+  compliance_pipelines_repo_root_url         = var.compliance_pipeline_repo_root_url
+  compliance_pipelines_repo_title            = var.compliance_pipeline_repo_title
   compliance_pipeline_repo_git_provider      = local.compliance_pipeline_repo_existing_git_provider
   compliance_pipelines_repo_git_id           = var.compliance_pipeline_repo_git_id
   compliance_pipeline_existing_repo_url      = var.compliance_pipeline_existing_repo_url

@@ -147,6 +147,24 @@ variable "compliance_pipeline_repo_git_id" {
   default     = ""
 }
 
+variable "compliance_pipeline_repo_blind_connection" {
+  type        = string
+  description = "Setting this value to `true` means the server is not addressable on the public internet. IBM Cloud will not be able to validate the connection details you provide. Certain functionality that requires API access to the git server will be disabled. Delivery pipeline will only work using a private worker that has network access to the git server."
+  default     = ""
+}
+
+variable "compliance_pipeline_repo_root_url" {
+  type        = string
+  description = "(Optional) The Root URL of the server. e.g. https://git.example.com."
+  default     = ""
+}
+
+variable "compliance_pipeline_repo_title" {
+  type        = string
+  description = "(Optional) The title of the server. e.g. My Git Enterprise Server."
+  default     = ""
+}
+
 variable "compliance_pipeline_repo_git_provider" {
   type        = string
   default     = ""
