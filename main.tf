@@ -371,7 +371,7 @@ module "devsecops_ci_toolchain" {
   issues_repo_auth_type              = (local.ci_issues_repo_auth_type == "") ? local.repo_auth_type : local.ci_issues_repo_auth_type
   evidence_repo_auth_type            = (local.ci_evidence_repo_auth_type == "") ? local.repo_auth_type : local.ci_evidence_repo_auth_type
   app_repo_auth_type                 = (local.ci_app_repo_auth_type == "") ? local.repo_auth_type : local.ci_app_repo_auth_type
-  compliance_pipeline_repo_auth_type = (local.ci_compliance_pipeline_repo_auth_type == "") ? local.repo_auth_type : local.ci_compliance_pipeline_repo_auth_type
+  compliance_pipeline_repo_auth_type = (var.compliance_pipeline_repo_use_group_settings) ? local.repo_auth_type : local.ci_compliance_pipeline_repo_auth_type
 
   #GROUPS/USERS FOR REPOS
   app_group                 = (local.ci_app_group == "") ? var.repo_group : local.ci_app_group
@@ -379,7 +379,7 @@ module "devsecops_ci_toolchain" {
   inventory_group           = (local.ci_inventory_group == "") ? var.repo_group : local.ci_inventory_group
   evidence_group            = (local.ci_evidence_group == "") ? var.repo_group : local.ci_evidence_group
   pipeline_config_group     = (local.ci_pipeline_config_group == "") ? var.repo_group : local.ci_pipeline_config_group
-  compliance_pipeline_group = (local.ci_compliance_pipeline_group == "") ? var.repo_group : local.ci_compliance_pipeline_group
+  compliance_pipeline_group = (var.compliance_pipeline_repo_use_group_settings) ? var.repo_group : local.ci_compliance_pipeline_group
 
   #APP REPO
   app_repo_clone_from_url        = (local.ci_app_repo_clone_from_url == "") ? local.app_source_repo_url : local.ci_app_repo_clone_from_url
@@ -394,11 +394,11 @@ module "devsecops_ci_toolchain" {
   app_repo_title                 = var.repo_title
 
   #COMPLIANCE PIPELINE REPO
-  compliance_pipelines_repo_blind_connection = var.compliance_pipeline_repo_blind_connection
-  compliance_pipelines_repo_root_url         = var.compliance_pipeline_repo_root_url
-  compliance_pipelines_repo_title            = var.compliance_pipeline_repo_title
-  compliance_pipeline_repo_git_provider      = local.compliance_pipeline_repo_existing_git_provider
-  compliance_pipelines_repo_git_id           = var.compliance_pipeline_repo_git_id
+  compliance_pipelines_repo_blind_connection = (var.compliance_pipeline_repo_use_group_settings) ? var.repo_blind_connection : var.compliance_pipeline_repo_blind_connection
+  compliance_pipelines_repo_root_url         = (var.compliance_pipeline_repo_use_group_settings) ? var.repo_root_url : var.compliance_pipeline_repo_root_url
+  compliance_pipelines_repo_title            = (var.compliance_pipeline_repo_use_group_settings) ? var.repo_title : var.compliance_pipeline_repo_title
+  compliance_pipeline_repo_git_provider      = (var.compliance_pipeline_repo_use_group_settings) ? var.repo_git_provider : local.compliance_pipeline_repo_existing_git_provider
+  compliance_pipelines_repo_git_id           = (var.compliance_pipeline_repo_use_group_settings) ? var.repo_git_id : var.compliance_pipeline_repo_git_id
   compliance_pipeline_existing_repo_url      = var.compliance_pipeline_existing_repo_url
   compliance_pipeline_source_repo_url        = var.compliance_pipeline_source_repo_url
 
@@ -607,7 +607,7 @@ module "devsecops_cd_toolchain" {
   issues_repo_auth_type              = (local.cd_issues_repo_auth_type == "") ? local.repo_auth_type : local.cd_issues_repo_auth_type
   evidence_repo_auth_type            = (local.cd_evidence_repo_auth_type == "") ? local.repo_auth_type : local.cd_evidence_repo_auth_type
   deployment_repo_auth_type          = (var.cd_deployment_repo_auth_type == "") ? local.repo_auth_type : var.cd_deployment_repo_auth_type
-  compliance_pipeline_repo_auth_type = (local.cd_compliance_pipeline_repo_auth_type == "") ? local.repo_auth_type : local.cd_compliance_pipeline_repo_auth_type
+  compliance_pipeline_repo_auth_type = (var.compliance_pipeline_repo_use_group_settings) ? local.repo_auth_type : local.cd_compliance_pipeline_repo_auth_type
   change_management_repo_auth_type   = (var.cd_change_management_repo_auth_type == "") ? local.repo_auth_type : var.cd_change_management_repo_auth_type
 
   #GROUPS/USERS FOR REPOS
@@ -615,16 +615,16 @@ module "devsecops_cd_toolchain" {
   inventory_group           = (local.cd_inventory_group == "") ? var.repo_group : local.cd_inventory_group
   evidence_group            = (local.cd_evidence_group == "") ? var.repo_group : local.cd_evidence_group
   pipeline_config_group     = (local.cd_pipeline_config_group == "") ? var.repo_group : local.cd_pipeline_config_group
-  compliance_pipeline_group = (local.cd_compliance_pipeline_group == "") ? var.repo_group : local.cd_compliance_pipeline_group
+  compliance_pipeline_group = (var.compliance_pipeline_repo_use_group_settings) ? var.repo_group : local.cd_compliance_pipeline_group
   deployment_group          = (var.cd_deployment_group == "") ? var.repo_group : var.cd_deployment_group
   change_management_group   = (var.cd_change_management_group == "") ? var.repo_group : var.cd_change_management_group
 
   #COMPLIANCE PIPELINE REPO
-  compliance_pipelines_repo_blind_connection = var.compliance_pipeline_repo_blind_connection
-  compliance_pipelines_repo_root_url         = var.compliance_pipeline_repo_root_url
-  compliance_pipelines_repo_title            = var.compliance_pipeline_repo_title
-  compliance_pipeline_repo_git_provider      = local.compliance_pipeline_repo_existing_git_provider
-  compliance_pipelines_repo_git_id           = var.compliance_pipeline_repo_git_id
+  compliance_pipelines_repo_blind_connection = (var.compliance_pipeline_repo_use_group_settings) ? var.repo_blind_connection : var.compliance_pipeline_repo_blind_connection
+  compliance_pipelines_repo_root_url         = (var.compliance_pipeline_repo_use_group_settings) ? var.repo_root_url : var.compliance_pipeline_repo_root_url
+  compliance_pipelines_repo_title            = (var.compliance_pipeline_repo_use_group_settings) ? var.repo_title : var.compliance_pipeline_repo_title
+  compliance_pipeline_repo_git_provider      = (var.compliance_pipeline_repo_use_group_settings) ? var.repo_git_provider : local.compliance_pipeline_repo_existing_git_provider
+  compliance_pipelines_repo_git_id           = (var.compliance_pipeline_repo_use_group_settings) ? var.repo_git_id : var.compliance_pipeline_repo_git_id
   compliance_pipeline_existing_repo_url      = var.compliance_pipeline_existing_repo_url
   compliance_pipeline_source_repo_url        = var.compliance_pipeline_source_repo_url
 
@@ -852,24 +852,24 @@ module "devsecops_cc_toolchain" {
   issues_repo_auth_type              = (local.cc_issues_repo_auth_type == "") ? local.repo_auth_type : local.cc_issues_repo_auth_type
   evidence_repo_auth_type            = (local.cc_evidence_repo_auth_type == "") ? local.repo_auth_type : local.cc_evidence_repo_auth_type
   app_repo_auth_type                 = (local.cc_app_repo_auth_type == "") ? local.repo_auth_type : local.cc_app_repo_auth_type
-  compliance_pipeline_repo_auth_type = (local.cc_compliance_pipeline_repo_auth_type == "") ? local.repo_auth_type : local.cc_compliance_pipeline_repo_auth_type
+  compliance_pipeline_repo_auth_type = (var.compliance_pipeline_repo_use_group_settings) ? local.repo_auth_type : local.cc_compliance_pipeline_repo_auth_type
 
   #GROUPS/USERS FOR REPOS
   issues_group              = (local.cc_issues_group == "") ? var.repo_group : local.cc_issues_group
   inventory_group           = (local.cc_inventory_group == "") ? var.repo_group : local.cc_inventory_group
   evidence_group            = (local.cc_evidence_group == "") ? var.repo_group : local.cc_evidence_group
   pipeline_config_group     = (local.cc_pipeline_config_group == "") ? var.repo_group : local.cc_pipeline_config_group
-  compliance_pipeline_group = (local.cc_compliance_pipeline_group == "") ? var.repo_group : local.cc_compliance_pipeline_group
+  compliance_pipeline_group = (var.compliance_pipeline_repo_use_group_settings) ? var.repo_group : local.cc_compliance_pipeline_group
   app_group                 = (local.cc_app_group == "") ? var.repo_group : local.cc_app_group
 
   link_to_doi_toolchain = var.cc_link_to_doi_toolchain
 
   #COMPLIANCE PIPELINE REPO
-  compliance_pipelines_repo_blind_connection = var.compliance_pipeline_repo_blind_connection
-  compliance_pipelines_repo_root_url         = var.compliance_pipeline_repo_root_url
-  compliance_pipelines_repo_title            = var.compliance_pipeline_repo_title
-  compliance_pipeline_repo_git_provider      = local.compliance_pipeline_repo_existing_git_provider
-  compliance_pipelines_repo_git_id           = var.compliance_pipeline_repo_git_id
+  compliance_pipelines_repo_blind_connection = (var.compliance_pipeline_repo_use_group_settings) ? var.repo_blind_connection : var.compliance_pipeline_repo_blind_connection
+  compliance_pipelines_repo_root_url         = (var.compliance_pipeline_repo_use_group_settings) ? var.repo_root_url : var.compliance_pipeline_repo_root_url
+  compliance_pipelines_repo_title            = (var.compliance_pipeline_repo_use_group_settings) ? var.repo_title : var.compliance_pipeline_repo_title
+  compliance_pipeline_repo_git_provider      = (var.compliance_pipeline_repo_use_group_settings) ? var.repo_git_provider : local.compliance_pipeline_repo_existing_git_provider
+  compliance_pipelines_repo_git_id           = (var.compliance_pipeline_repo_use_group_settings) ? var.repo_git_id : var.compliance_pipeline_repo_git_id
   compliance_pipeline_existing_repo_url      = var.compliance_pipeline_existing_repo_url
   compliance_pipeline_source_repo_url        = var.compliance_pipeline_source_repo_url
 

@@ -32,6 +32,7 @@ module "devsecops_da" {
   compliance_pipeline_repo_git_token_secret_crn     = var.compliance_pipeline_repo_git_token_secret_crn
   compliance_pipeline_repo_git_token_secret_name    = var.compliance_pipeline_repo_git_token_secret_name
   compliance_pipeline_repo_root_url                 = var.compliance_pipeline_repo_root_url
+  compliance_pipeline_repo_use_group_settings       = var.compliance_pipeline_repo_use_group_settings
   compliance_pipeline_repo_secret_group             = var.compliance_pipeline_repo_secret_group
   compliance_pipeline_repo_title                    = var.compliance_pipeline_repo_title
   compliance_pipeline_source_repo_url               = var.compliance_pipeline_source_repo_url

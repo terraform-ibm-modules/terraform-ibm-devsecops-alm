@@ -398,6 +398,13 @@
                             "required": false
                         },
                         {
+                            "key": "compliance_pipeline_repo_use_group_settings",
+                            "type": "boolean",
+                            "default_value": false,
+                            "description": "Set to `true` to apply group level repository settings to the compliance pipeline repository. See `repo_git_provider` as an example.",
+                            "required": false
+                        },
+                        {
                             "key": "compliance_pipeline_repo_title",
                             "type": "string",
                             "default_value": "",
@@ -2331,6 +2338,13 @@
                             "type": "string",
                             "default_value": "",
                             "description": "Set to use an existing issues repository.",
+                            "required": false
+                        },
+                        {
+                            "key": "compliance_pipeline_repo_use_group_settings",
+                            "type": "boolean",
+                            "default_value": false,
+                            "description": "Set to `true` to apply group level repository settings to the compliance pipeline repository. See `repo_git_provider` as an example.",
                             "required": false
                         },
                         {
