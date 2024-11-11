@@ -79,6 +79,7 @@ locals {
   cc_compliance_pipeline_group                      = (var.cc_compliance_pipeline_group == "") ? var.compliance_pipeline_group : var.cc_compliance_pipeline_group
   compliance_pipeline_repo_existing_git_provider = (
     (var.compliance_pipeline_repo_git_provider != "") ? var.compliance_pipeline_repo_git_provider :
+    (var.compliance_pipeline_repo_use_group_settings == false) ? "hostedgit" :
     (var.repo_git_provider != "") ? var.repo_git_provider : "hostedgit"
   )
 
