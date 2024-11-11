@@ -233,7 +233,7 @@ resource "ibm_sm_iam_credentials_configuration" "iam_credentials_configuration" 
 
 resource "ibm_sm_iam_credentials_secret" "iam_pipeline_apikey_credentials_secret" {
   count       = (local.create_pipeline_api_key) ? 1 : 0
-  depends_on  = [ibm_sm_secret_group.sm_secret_group, ibm_sm_iam_credentials_configuration.iam_credentials_configuration]
+  depends_on  = [ibm_sm_secret_group.sm_secret_group, data.ibm_sm_secret_group.existing_sm_secret_group, ibm_sm_iam_credentials_configuration.iam_credentials_configuration]
   instance_id = data.ibm_resource_instance.sm_instance[0].guid
   region      = var.sm_location
   name        = var.iam_api_key_secret_name
@@ -243,14 +243,14 @@ resource "ibm_sm_iam_credentials_secret" "iam_pipeline_apikey_credentials_secret
     interval    = var.rotation_period
     unit        = "day"
   }
-  secret_group_id = ibm_sm_secret_group.sm_secret_group[0].secret_group_id
+  secret_group_id = (var.create_secret_group) ? ibm_sm_secret_group.sm_secret_group[0].secret_group_id : data.ibm_sm_secret_group.existing_sm_secret_group[0].secret_group_id
   service_id      = data.ibm_iam_service_id.pipeline_service_id[0].service_ids[0].id
   ttl             = "7776000"
 }
 
 resource "ibm_sm_iam_credentials_secret" "iam_cos_apikey_credentials_secret" {
   count       = (local.create_cos_api_key) ? 1 : 0
-  depends_on  = [ibm_sm_secret_group.sm_secret_group, ibm_sm_iam_credentials_configuration.iam_credentials_configuration]
+  depends_on  = [ibm_sm_secret_group.sm_secret_group, data.ibm_sm_secret_group.existing_sm_secret_group, ibm_sm_iam_credentials_configuration.iam_credentials_configuration]
   instance_id = data.ibm_resource_instance.sm_instance[0].guid
   region      = var.sm_location
   name        = var.cos_api_key_secret_name
@@ -260,7 +260,7 @@ resource "ibm_sm_iam_credentials_secret" "iam_cos_apikey_credentials_secret" {
     interval    = var.rotation_period
     unit        = "day"
   }
-  secret_group_id = ibm_sm_secret_group.sm_secret_group[0].secret_group_id
+  secret_group_id = (var.create_secret_group) ? ibm_sm_secret_group.sm_secret_group[0].secret_group_id : data.ibm_sm_secret_group.existing_sm_secret_group[0].secret_group_id
   service_id      = data.ibm_iam_service_id.cos_service_id[0].service_ids[0].id
   ttl             = "7776000"
 }
