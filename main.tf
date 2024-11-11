@@ -54,7 +54,7 @@ locals {
   cd_repositories_prefix = (var.cd_repositories_prefix == "") ? var.repositories_prefix : var.cd_repositories_prefix
   cc_repositories_prefix = (var.cc_repositories_prefix == "") ? var.repositories_prefix : var.cc_repositories_prefix
 
-  enable_prereqs = ((var.create_secret_group == true) || (var.create_ibmcloud_api_key == true) || (var.create_cos_api_key == true) || (var.create_signing_key == true)) ? true : false
+  enable_prereqs = ((var.create_secret_group == true) || (var.create_ibmcloud_api_key == true) || (var.create_cos_api_key == true) || (var.create_signing_key == true)) || (var.create_git_token == true) ? true : false
 
   registry_namespace_suffix = (var.add_container_name_suffix) ? format("%s-%s", var.registry_namespace, random_string.resource_suffix[0].result) : var.registry_namespace
   registry_namespace        = (var.prefix == "") ? local.registry_namespace_suffix : format("%s-%s", var.prefix, local.registry_namespace_suffix)
@@ -78,7 +78,8 @@ locals {
   cd_compliance_pipeline_group                      = (var.cd_compliance_pipeline_group == "") ? var.compliance_pipeline_group : var.cd_compliance_pipeline_group
   cc_compliance_pipeline_group                      = (var.cc_compliance_pipeline_group == "") ? var.compliance_pipeline_group : var.cc_compliance_pipeline_group
   compliance_pipeline_repo_existing_git_provider = (
-    (var.compliance_pipeline_repo_git_provider != "") ? var.compliance_pipeline_repo_git_provider : "hostedgit"
+    (var.compliance_pipeline_repo_git_provider != "") ? var.compliance_pipeline_repo_git_provider :
+    (var.repo_git_provider != "") ? var.repo_git_provider : "hostedgit"
   )
 
   ci_evidence_repo_auth_type             = (var.ci_evidence_repo_auth_type == "") ? var.evidence_repo_auth_type : var.ci_evidence_repo_auth_type
@@ -397,7 +398,7 @@ module "devsecops_ci_toolchain" {
   compliance_pipelines_repo_blind_connection = (var.compliance_pipeline_repo_use_group_settings) ? var.repo_blind_connection : var.compliance_pipeline_repo_blind_connection
   compliance_pipelines_repo_root_url         = (var.compliance_pipeline_repo_use_group_settings) ? var.repo_root_url : var.compliance_pipeline_repo_root_url
   compliance_pipelines_repo_title            = (var.compliance_pipeline_repo_use_group_settings) ? var.repo_title : var.compliance_pipeline_repo_title
-  compliance_pipeline_repo_git_provider      = (var.compliance_pipeline_repo_use_group_settings) ? var.repo_git_provider : local.compliance_pipeline_repo_existing_git_provider
+  compliance_pipeline_repo_git_provider      = local.compliance_pipeline_repo_existing_git_provider
   compliance_pipelines_repo_git_id           = (var.compliance_pipeline_repo_use_group_settings) ? var.repo_git_id : var.compliance_pipeline_repo_git_id
   compliance_pipeline_existing_repo_url      = var.compliance_pipeline_existing_repo_url
   compliance_pipeline_source_repo_url        = var.compliance_pipeline_source_repo_url
@@ -623,7 +624,7 @@ module "devsecops_cd_toolchain" {
   compliance_pipelines_repo_blind_connection = (var.compliance_pipeline_repo_use_group_settings) ? var.repo_blind_connection : var.compliance_pipeline_repo_blind_connection
   compliance_pipelines_repo_root_url         = (var.compliance_pipeline_repo_use_group_settings) ? var.repo_root_url : var.compliance_pipeline_repo_root_url
   compliance_pipelines_repo_title            = (var.compliance_pipeline_repo_use_group_settings) ? var.repo_title : var.compliance_pipeline_repo_title
-  compliance_pipeline_repo_git_provider      = (var.compliance_pipeline_repo_use_group_settings) ? var.repo_git_provider : local.compliance_pipeline_repo_existing_git_provider
+  compliance_pipeline_repo_git_provider      = local.compliance_pipeline_repo_existing_git_provider
   compliance_pipelines_repo_git_id           = (var.compliance_pipeline_repo_use_group_settings) ? var.repo_git_id : var.compliance_pipeline_repo_git_id
   compliance_pipeline_existing_repo_url      = var.compliance_pipeline_existing_repo_url
   compliance_pipeline_source_repo_url        = var.compliance_pipeline_source_repo_url
@@ -868,7 +869,7 @@ module "devsecops_cc_toolchain" {
   compliance_pipelines_repo_blind_connection = (var.compliance_pipeline_repo_use_group_settings) ? var.repo_blind_connection : var.compliance_pipeline_repo_blind_connection
   compliance_pipelines_repo_root_url         = (var.compliance_pipeline_repo_use_group_settings) ? var.repo_root_url : var.compliance_pipeline_repo_root_url
   compliance_pipelines_repo_title            = (var.compliance_pipeline_repo_use_group_settings) ? var.repo_title : var.compliance_pipeline_repo_title
-  compliance_pipeline_repo_git_provider      = (var.compliance_pipeline_repo_use_group_settings) ? var.repo_git_provider : local.compliance_pipeline_repo_existing_git_provider
+  compliance_pipeline_repo_git_provider      = local.compliance_pipeline_repo_existing_git_provider
   compliance_pipelines_repo_git_id           = (var.compliance_pipeline_repo_use_group_settings) ? var.repo_git_id : var.compliance_pipeline_repo_git_id
   compliance_pipeline_existing_repo_url      = var.compliance_pipeline_existing_repo_url
   compliance_pipeline_source_repo_url        = var.compliance_pipeline_source_repo_url
@@ -991,6 +992,7 @@ module "devsecops_cc_toolchain" {
 
 # Random string for webhook token
 resource "random_string" "webhook_secret" {
+  count      = (var.autostart) ? 1 : 0
   depends_on = [module.devsecops_ci_toolchain[0].ci_pipeline_id, module.devsecops_ci_toolchain[0].app_repo_url]
   length     = 48
   special    = false
@@ -1009,7 +1011,7 @@ resource "ibm_cd_tekton_pipeline_trigger" "ci_pipeline_webhook" {
     type     = "token_matches"
     source   = "payload"
     key_name = "webhook-token"
-    value    = random_string.webhook_secret.result
+    value    = random_string.webhook_secret[0].result
   }
 }
 
@@ -1059,7 +1061,7 @@ resource "null_resource" "ci_pipeline_run" {
   }
 
   provisioner "local-exec" {
-    command     = "${path.root}/../../scripts/ci_start.sh \"${ibm_cd_tekton_pipeline_trigger.ci_pipeline_webhook[0].webhook_url}\" \"${random_string.webhook_secret.result}\""
+    command     = "${path.root}/../../scripts/ci_start.sh \"${ibm_cd_tekton_pipeline_trigger.ci_pipeline_webhook[0].webhook_url}\" \"${random_string.webhook_secret[0].result}\""
     interpreter = ["/bin/bash", "-c"]
     quiet       = true
   }
