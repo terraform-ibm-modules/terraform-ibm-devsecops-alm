@@ -162,7 +162,7 @@ variable "compliance_pipeline_repo_root_url" {
 variable "compliance_pipeline_repo_use_group_settings" {
   type        = bool
   description = "Set to `true` to apply group level repository settings to the compliance pipeline repository. See `repo_git_provider` as an example."
-  default     = false
+  default     = true
 }
 
 variable "compliance_pipeline_repo_title" {
