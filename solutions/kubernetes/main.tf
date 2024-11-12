@@ -26,11 +26,15 @@ module "devsecops_da" {
   compliance_pipeline_existing_repo_url             = var.compliance_pipeline_existing_repo_url
   compliance_pipeline_group                         = var.compliance_pipeline_group
   compliance_pipeline_repo_auth_type                = var.compliance_pipeline_repo_auth_type
+  compliance_pipeline_repo_blind_connection         = var.compliance_pipeline_repo_blind_connection
   compliance_pipeline_repo_git_id                   = var.compliance_pipeline_repo_git_id
   compliance_pipeline_repo_git_provider             = var.compliance_pipeline_repo_git_provider
   compliance_pipeline_repo_git_token_secret_crn     = var.compliance_pipeline_repo_git_token_secret_crn
   compliance_pipeline_repo_git_token_secret_name    = var.compliance_pipeline_repo_git_token_secret_name
+  compliance_pipeline_repo_root_url                 = var.compliance_pipeline_repo_root_url
+  compliance_pipeline_repo_use_group_settings       = var.compliance_pipeline_repo_use_group_settings
   compliance_pipeline_repo_secret_group             = var.compliance_pipeline_repo_secret_group
+  compliance_pipeline_repo_title                    = var.compliance_pipeline_repo_title
   compliance_pipeline_source_repo_url               = var.compliance_pipeline_source_repo_url
   cos_api_key_secret_crn                            = var.cos_api_key_secret_crn
   cos_api_key_secret_group                          = var.cos_api_key_secret_group

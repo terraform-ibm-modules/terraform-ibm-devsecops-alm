@@ -398,6 +398,34 @@
                             "required": false
                         },
                         {
+                            "key": "compliance_pipeline_repo_use_group_settings",
+                            "type": "boolean",
+                            "default_value": true,
+                            "description": "Set to `true` to apply group level repository settings to the compliance pipeline repository. See `repo_git_provider` as an example.",
+                            "required": false
+                        },
+                        {
+                            "key": "compliance_pipeline_repo_title",
+                            "type": "string",
+                            "default_value": "",
+                            "description": "(Optional) The title of the server. e.g. My Git Enterprise Server.",
+                            "required": false
+                        },
+                        {
+                            "key": "compliance_pipeline_repo_root_url",
+                            "type": "string",
+                            "default_value": "",
+                            "description": "(Optional) The Root URL of the server. e.g. https://git.example.com.",
+                            "required": false
+                        },
+                        {
+                            "key": "compliance_pipeline_repo_blind_connection",
+                            "type": "string",
+                            "default_value": "false",
+                            "description": "Setting this value to `true` means the server is not addressable on the public internet. IBM Cloud will not be able to validate the connection details you provide. Certain functionality that requires API access to the git server will be disabled. Delivery pipeline will only work using a private worker that has network access to the git server.",
+                            "required": false
+                        },
+                        {
                             "key": "compliance_pipeline_repo_git_provider",
                             "type": "string",
                             "default_value": "",
@@ -2310,6 +2338,34 @@
                             "type": "string",
                             "default_value": "",
                             "description": "Set to use an existing issues repository.",
+                            "required": false
+                        },
+                        {
+                            "key": "compliance_pipeline_repo_use_group_settings",
+                            "type": "boolean",
+                            "default_value": true,
+                            "description": "Set to `true` to apply group level repository settings to the compliance pipeline repository. See `repo_git_provider` as an example.",
+                            "required": false
+                        },
+                        {
+                            "key": "compliance_pipeline_repo_title",
+                            "type": "string",
+                            "default_value": "",
+                            "description": "(Optional) The title of the server. e.g. My Git Enterprise Server.",
+                            "required": false
+                        },
+                        {
+                            "key": "compliance_pipeline_repo_root_url",
+                            "type": "string",
+                            "default_value": "",
+                            "description": "(Optional) The Root URL of the server. e.g. https://git.example.com.",
+                            "required": false
+                        },
+                        {
+                            "key": "compliance_pipeline_repo_blind_connection",
+                            "type": "string",
+                            "default_value": "false",
+                            "description": "Setting this value to `true` means the server is not addressable on the public internet. IBM Cloud will not be able to validate the connection details you provide. Certain functionality that requires API access to the git server will be disabled. Delivery pipeline will only work using a private worker that has network access to the git server.",
                             "required": false
                         },
                         {

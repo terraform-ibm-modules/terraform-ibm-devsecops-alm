@@ -31,25 +31,30 @@ resource "time_static" "timestamp" {
 ####### SECRET GROUP ########################
 
 resource "ibm_iam_service_id" "pipeline_service_id" {
-  name = var.service_name_pipeline
+  count = (local.create_pipeline_api_key) ? 1 : 0
+  name  = var.service_name_pipeline
 }
 
 resource "ibm_iam_service_id" "cos_service_id" {
-  name = var.service_name_cos
+  count = (local.create_cos_api_key) ? 1 : 0
+  name  = var.service_name_cos
 }
 
 data "ibm_iam_service_id" "pipeline_service_id" {
+  count      = (local.create_pipeline_api_key) ? 1 : 0
   depends_on = [ibm_iam_service_id.pipeline_service_id]
   name       = var.service_name_pipeline
 }
 
 data "ibm_iam_service_id" "cos_service_id" {
+  count      = (local.create_cos_api_key) ? 1 : 0
   depends_on = [ibm_iam_service_id.cos_service_id]
   name       = var.service_name_cos
 }
 
 resource "ibm_iam_service_policy" "cos_policy" {
-  iam_service_id = ibm_iam_service_id.cos_service_id.id
+  count          = (local.create_cos_api_key) ? 1 : 0
+  iam_service_id = ibm_iam_service_id.cos_service_id[0].id
   roles          = ["Reader", "Object Writer"]
 
   resources {
@@ -59,7 +64,8 @@ resource "ibm_iam_service_policy" "cos_policy" {
 }
 
 resource "ibm_iam_service_policy" "pipeline_policy" {
-  iam_service_id = ibm_iam_service_id.pipeline_service_id.id
+  count          = (local.create_pipeline_api_key) ? 1 : 0
+  iam_service_id = ibm_iam_service_id.pipeline_service_id[0].id
   roles          = ["Editor"]
 
   resources {
@@ -69,7 +75,8 @@ resource "ibm_iam_service_policy" "pipeline_policy" {
 }
 
 resource "ibm_iam_service_policy" "toolchain_policy" {
-  iam_service_id = ibm_iam_service_id.pipeline_service_id.id
+  count          = (local.create_pipeline_api_key) ? 1 : 0
+  iam_service_id = ibm_iam_service_id.pipeline_service_id[0].id
   roles          = ["Viewer", "Operator"]
   resources {
     service           = "toolchain"
@@ -78,7 +85,8 @@ resource "ibm_iam_service_policy" "toolchain_policy" {
 }
 
 resource "ibm_iam_service_policy" "cr_policy" {
-  iam_service_id = ibm_iam_service_id.pipeline_service_id.id
+  count          = (local.create_pipeline_api_key) ? 1 : 0
+  iam_service_id = ibm_iam_service_id.pipeline_service_id[0].id
   roles          = ["Manager"]
   resources {
     service = "container-registry"
@@ -86,7 +94,8 @@ resource "ibm_iam_service_policy" "cr_policy" {
 }
 
 resource "ibm_iam_service_policy" "cd_policy" {
-  iam_service_id = ibm_iam_service_id.pipeline_service_id.id
+  count          = (local.create_pipeline_api_key) ? 1 : 0
+  iam_service_id = ibm_iam_service_id.pipeline_service_id[0].id
   roles          = ["Writer"]
   resources {
     service           = "continuous-delivery"
@@ -95,8 +104,8 @@ resource "ibm_iam_service_policy" "cd_policy" {
 }
 
 resource "ibm_iam_service_policy" "kube_policy" {
-  count          = (var.create_kubernetes_access_policy) ? 1 : 0
-  iam_service_id = ibm_iam_service_id.pipeline_service_id.id
+  count          = ((var.create_kubernetes_access_policy == true) && (local.create_pipeline_api_key == true)) ? 1 : 0
+  iam_service_id = ibm_iam_service_id.pipeline_service_id[0].id
   roles          = ["Editor"]
   resources {
     service           = "kubernetes"
@@ -105,8 +114,8 @@ resource "ibm_iam_service_policy" "kube_policy" {
 }
 
 resource "ibm_iam_service_policy" "ce_policy" {
-  count          = (var.create_code_engine_access_policy) ? 1 : 0
-  iam_service_id = ibm_iam_service_id.pipeline_service_id.id
+  count          = ((var.create_code_engine_access_policy) && (local.create_pipeline_api_key == true)) ? 1 : 0
+  iam_service_id = ibm_iam_service_id.pipeline_service_id[0].id
   roles          = ["Editor"]
   resources {
     service           = "code-engine"
@@ -224,7 +233,7 @@ resource "ibm_sm_iam_credentials_configuration" "iam_credentials_configuration" 
 
 resource "ibm_sm_iam_credentials_secret" "iam_pipeline_apikey_credentials_secret" {
   count       = (local.create_pipeline_api_key) ? 1 : 0
-  depends_on  = [ibm_sm_secret_group.sm_secret_group, ibm_sm_iam_credentials_configuration.iam_credentials_configuration]
+  depends_on  = [ibm_sm_secret_group.sm_secret_group, data.ibm_sm_secret_group.existing_sm_secret_group, ibm_sm_iam_credentials_configuration.iam_credentials_configuration]
   instance_id = data.ibm_resource_instance.sm_instance[0].guid
   region      = var.sm_location
   name        = var.iam_api_key_secret_name
@@ -234,14 +243,14 @@ resource "ibm_sm_iam_credentials_secret" "iam_pipeline_apikey_credentials_secret
     interval    = var.rotation_period
     unit        = "day"
   }
-  secret_group_id = ibm_sm_secret_group.sm_secret_group[0].secret_group_id
-  service_id      = data.ibm_iam_service_id.pipeline_service_id.service_ids[0].id
+  secret_group_id = (var.create_secret_group) ? ibm_sm_secret_group.sm_secret_group[0].secret_group_id : data.ibm_sm_secret_group.existing_sm_secret_group[0].secret_group_id
+  service_id      = data.ibm_iam_service_id.pipeline_service_id[0].service_ids[0].id
   ttl             = "7776000"
 }
 
 resource "ibm_sm_iam_credentials_secret" "iam_cos_apikey_credentials_secret" {
   count       = (local.create_cos_api_key) ? 1 : 0
-  depends_on  = [ibm_sm_secret_group.sm_secret_group, ibm_sm_iam_credentials_configuration.iam_credentials_configuration]
+  depends_on  = [ibm_sm_secret_group.sm_secret_group, data.ibm_sm_secret_group.existing_sm_secret_group, ibm_sm_iam_credentials_configuration.iam_credentials_configuration]
   instance_id = data.ibm_resource_instance.sm_instance[0].guid
   region      = var.sm_location
   name        = var.cos_api_key_secret_name
@@ -251,7 +260,7 @@ resource "ibm_sm_iam_credentials_secret" "iam_cos_apikey_credentials_secret" {
     interval    = var.rotation_period
     unit        = "day"
   }
-  secret_group_id = ibm_sm_secret_group.sm_secret_group[0].secret_group_id
-  service_id      = data.ibm_iam_service_id.cos_service_id.service_ids[0].id
+  secret_group_id = (var.create_secret_group) ? ibm_sm_secret_group.sm_secret_group[0].secret_group_id : data.ibm_sm_secret_group.existing_sm_secret_group[0].secret_group_id
+  service_id      = data.ibm_iam_service_id.cos_service_id[0].service_ids[0].id
   ttl             = "7776000"
 }
