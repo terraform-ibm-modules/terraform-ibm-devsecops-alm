@@ -224,11 +224,12 @@ resource "ibm_sm_arbitrary_secret" "git_token" {
 ################## IAM CREDENTIALS###############################
 
 resource "ibm_sm_iam_credentials_configuration" "iam_credentials_configuration" {
-  count       = ((local.create_pipeline_api_key) || (local.create_cos_api_key)) ? 1 : 0
-  instance_id = (local.sm_instance_id != "") ? local.sm_instance_id : var.sm_instance_id
-  region      = var.sm_location
-  name        = "iam_credentials_config"
-  api_key     = var.ibmcloud_api_key
+  count         = ((local.create_pipeline_api_key) || (local.create_cos_api_key)) ? 1 : 0
+  instance_id   = (local.sm_instance_id != "") ? local.sm_instance_id : var.sm_instance_id
+  region        = var.sm_location
+  name          = "iam_credentials_config"
+  api_key       = var.ibmcloud_api_key
+  endpoint_type = var.sm_endpoint_type
 }
 
 resource "ibm_sm_iam_credentials_secret" "iam_pipeline_apikey_credentials_secret" {
@@ -246,6 +247,7 @@ resource "ibm_sm_iam_credentials_secret" "iam_pipeline_apikey_credentials_secret
   secret_group_id = (var.create_secret_group) ? ibm_sm_secret_group.sm_secret_group[0].secret_group_id : data.ibm_sm_secret_group.existing_sm_secret_group[0].secret_group_id
   service_id      = data.ibm_iam_service_id.pipeline_service_id[0].service_ids[0].id
   ttl             = "7776000"
+  endpoint_type   = var.sm_endpoint_type
 }
 
 resource "ibm_sm_iam_credentials_secret" "iam_cos_apikey_credentials_secret" {
@@ -263,4 +265,5 @@ resource "ibm_sm_iam_credentials_secret" "iam_cos_apikey_credentials_secret" {
   secret_group_id = (var.create_secret_group) ? ibm_sm_secret_group.sm_secret_group[0].secret_group_id : data.ibm_sm_secret_group.existing_sm_secret_group[0].secret_group_id
   service_id      = data.ibm_iam_service_id.cos_service_id[0].service_ids[0].id
   ttl             = "7776000"
+  endpoint_type   = var.sm_endpoint_type
 }
