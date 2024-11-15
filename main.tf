@@ -994,7 +994,7 @@ module "devsecops_cc_toolchain" {
 # Random string for webhook token
 resource "random_string" "webhook_secret" {
   count      = (var.autostart) ? 1 : 0
-  depends_on = [module.devsecops_ci_toolchain[0].ci_pipeline_id, module.devsecops_ci_toolchain[0].app_repo_url]
+  depends_on = [module.devsecops_ci_toolchain[0].ci_pipeline_id, module.devsecops_ci_toolchain[0].app_repo_url, module.prereqs]
   length     = 48
   special    = false
   upper      = false

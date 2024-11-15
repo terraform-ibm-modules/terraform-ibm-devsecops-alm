@@ -106,9 +106,9 @@ resource "ibm_iam_service_policy" "cd_policy" {
 resource "ibm_iam_service_policy" "kube_policy" {
   count          = ((var.create_kubernetes_access_policy == true) && (local.create_pipeline_api_key == true)) ? 1 : 0
   iam_service_id = ibm_iam_service_id.pipeline_service_id[0].id
-  roles          = ["Editor"]
+  roles          = ["Manager", "Editor"]
   resources {
-    service           = "kubernetes"
+    service           = "containers-kubernetes"
     resource_group_id = data.ibm_resource_group.resource_group.id
   }
 }
@@ -116,9 +116,9 @@ resource "ibm_iam_service_policy" "kube_policy" {
 resource "ibm_iam_service_policy" "ce_policy" {
   count          = ((var.create_code_engine_access_policy) && (local.create_pipeline_api_key == true)) ? 1 : 0
   iam_service_id = ibm_iam_service_id.pipeline_service_id[0].id
-  roles          = ["Editor"]
+  roles          = ["Manager", "Editor"]
   resources {
-    service           = "code-engine"
+    service           = "codeengine"
     resource_group_id = data.ibm_resource_group.resource_group.id
   }
 }
