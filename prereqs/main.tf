@@ -108,8 +108,7 @@ resource "ibm_iam_service_policy" "kube_policy" {
   iam_service_id = ibm_iam_service_id.pipeline_service_id[0].id
   roles          = ["Manager", "Editor"]
   resources {
-    service           = "containers-kubernetes"
-    resource_group_id = data.ibm_resource_group.resource_group.id
+    service = "containers-kubernetes"
   }
 }
 
