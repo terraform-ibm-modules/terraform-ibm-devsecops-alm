@@ -57,6 +57,7 @@ module "devsecops_da" {
   create_git_triggers                               = var.create_git_triggers
   enable_key_protect                                = var.enable_key_protect
   enable_pipeline_notifications                     = var.enable_pipeline_notifications
+  enable_privateworker                              = var.enable_privateworker
   enable_secrets_manager                            = var.enable_secrets_manager
   enable_slack                                      = var.enable_slack
   environment_prefix                                = var.environment_prefix
@@ -116,6 +117,10 @@ module "devsecops_da" {
   pipeline_ibmcloud_api_key_secret_group            = var.pipeline_ibmcloud_api_key_secret_group
   pipeline_ibmcloud_api_key_secret_name             = var.pipeline_ibmcloud_api_key_secret_name
   prefix                                            = var.prefix
+  privateworker_credentials_secret_crn              = var.privateworker_credentials_secret_crn
+  privateworker_credentials_secret_group            = var.privateworker_credentials_secret_group
+  privateworker_credentials_secret_name             = var.privateworker_credentials_secret_name
+  privateworker_name                                = var.privateworker_name
   registry_namespace                                = var.registry_namespace
   repo_blind_connection                             = var.repo_blind_connection
   repo_git_id                                       = var.repo_git_id

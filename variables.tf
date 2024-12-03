@@ -345,6 +345,12 @@ variable "enable_secrets_manager" {
   default     = "true"
 }
 
+variable "enable_privateworker" {
+  type        = string
+  default     = "false"
+  description = "Set to `true` to enable private workers for the CI, CD, CC and PR pipelines. A valid service api key must be set in Secrets Manager. The name of this secret can be specified using   "
+}
+
 variable "enable_slack" {
   type        = string
   description = "Set to `true` to create the Slack toolchain integration. This requires a valid `slack_channel_name`, `slack_team_name`, and a valid `webhook` (see `slack_webhook_secret_name`). This setting applies for CI, CD, and CC toolchains."
@@ -731,6 +737,35 @@ variable "pipeline_ibmcloud_api_key_secret_name" {
   type        = string
   description = "Name of the Cloud API key secret in the secret provider for running the pipelines. Applies to the CI, CD and CC toolchains."
   default     = "ibmcloud-api-key"
+}
+
+variable "privateworker_credentials_secret_crn" {
+  type        = string
+  sensitive   = true
+  description = "The CRN for the Private Worker secret secret."
+  default     = ""
+  validation {
+    condition     = startswith(var.privateworker_credentials_secret_crn, "crn:") || var.privateworker_credentials_secret_crn == ""
+    error_message = "Must be a CRN or left empty."
+  }
+}
+
+variable "privateworker_credentials_secret_group" {
+  type        = string
+  description = "Secret group prefix for the Private Worker secret. Defaults to using `sm_secret_group` if not set. Only used with `Secrets Manager`."
+  default     = ""
+}
+
+variable "privateworker_credentials_secret_name" {
+  type        = string
+  default     = ""
+  description = "Name of the privateworker secret in the secret provider."
+}
+
+variable "privateworker_name" {
+  type        = string
+  description = "The name of the private worker tool integration."
+  default     = "private-worker-tool-01"
 }
 
 variable "pr_pipeline_git_tag" {

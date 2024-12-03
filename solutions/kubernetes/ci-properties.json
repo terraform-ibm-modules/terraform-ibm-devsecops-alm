@@ -164,7 +164,7 @@
       {
         "name": "slack-notifications",
         "type": "text",
-        "value": "0"
+        "value": ""
       },
       {
         "name": "sonarqube-config",
@@ -228,7 +228,7 @@
       {
         "name": "slack-notifications",
         "type": "text",
-        "value": "1"
+        "value": ""
       }
     ]
   }

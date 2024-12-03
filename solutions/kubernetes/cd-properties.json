@@ -127,7 +127,7 @@
         {
             "name": "slack-notifications",
             "type": "text",
-            "value": "0"
+            "value": ""
         },
         {
             "name": "source-environment",

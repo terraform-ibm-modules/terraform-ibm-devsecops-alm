@@ -295,7 +295,7 @@ module "prereqs" {
 module "devsecops_ci_toolchain" {
   count                    = var.create_ci_toolchain ? 1 : 0
   depends_on               = [ibm_resource_instance.cd_instance]
-  source                   = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-ci-toolchain?ref=v2.1.0"
+  source                   = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-ci-toolchain?ref=v2.3.0-beta.2"
   ibmcloud_api_key         = var.ibmcloud_api_key
   toolchain_name           = (var.prefix == "") ? local.ci_toolchain_name : format("${var.prefix}-%s", local.ci_toolchain_name)
   toolchain_region         = (var.ci_toolchain_region == "") ? var.toolchain_region : replace(replace(var.ci_toolchain_region, "ibm:yp:", ""), "ibm:ys1:", "")
@@ -362,7 +362,7 @@ module "devsecops_ci_toolchain" {
   cos_api_key_secret_crn                        = (var.ci_cos_api_key_secret_crn == "") ? var.cos_api_key_secret_crn : var.ci_cos_api_key_secret_crn
   pipeline_ibmcloud_api_key_secret_crn          = (var.ci_pipeline_ibmcloud_api_key_secret_crn == "") ? var.pipeline_ibmcloud_api_key_secret_crn : var.ci_pipeline_ibmcloud_api_key_secret_crn
   slack_webhook_secret_crn                      = (var.ci_slack_webhook_secret_crn == "") ? var.slack_webhook_secret_crn : var.ci_slack_webhook_secret_crn
-  privateworker_credentials_secret_crn          = var.ci_privateworker_credentials_secret_crn
+  privateworker_credentials_secret_crn          = (var.ci_privateworker_credentials_secret_crn == "") ? var.privateworker_credentials_secret_crn : var.ci_privateworker_credentials_secret_crn
   artifactory_token_secret_crn                  = var.ci_artifactory_token_secret_crn
   pipeline_doi_api_key_secret_crn               = var.ci_pipeline_doi_api_key_secret_crn
   sonarqube_secret_crn                          = (var.ci_sonarqube_secret_crn == "") ? var.sonarqube_secret_crn : var.ci_sonarqube_secret_crn
@@ -480,6 +480,12 @@ module "devsecops_ci_toolchain" {
   slack_toolchain_bind   = var.ci_slack_toolchain_bind
   slack_toolchain_unbind = var.ci_slack_toolchain_unbind
 
+  # PRIVATE WORKER
+  privateworker_credentials_secret_group = var.privateworker_credentials_secret_group
+  privateworker_credentials_secret_name  = var.privateworker_credentials_secret_name
+  privateworker_name                     = var.privateworker_name
+  enable_privateworker                   = var.enable_privateworker
+
   #SONARQUBE
   sonarqube_integration_name    = (var.ci_sonarqube_integration_name == "") ? var.sonarqube_integration_name : var.ci_sonarqube_integration_name
   sonarqube_user                = (var.ci_sonarqube_user == "") ? var.sonarqube_user : var.ci_sonarqube_user
@@ -525,7 +531,7 @@ module "devsecops_ci_toolchain" {
 module "devsecops_cd_toolchain" {
   count            = var.create_cd_toolchain ? 1 : 0
   depends_on       = [ibm_resource_instance.cd_instance]
-  source           = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain?ref=v2.1.0"
+  source           = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain?ref=v2.3.0-beta.2"
   ibmcloud_api_key = var.ibmcloud_api_key
 
   toolchain_name           = (var.prefix == "") ? local.cd_toolchain_name : format("${var.prefix}-%s", local.cd_toolchain_name)
@@ -598,7 +604,7 @@ module "devsecops_cd_toolchain" {
   cos_api_key_secret_crn                        = (var.cd_cos_api_key_secret_crn == "") ? var.cos_api_key_secret_crn : var.cd_cos_api_key_secret_crn
   pipeline_ibmcloud_api_key_secret_crn          = (var.cd_pipeline_ibmcloud_api_key_secret_crn == "") ? var.pipeline_ibmcloud_api_key_secret_crn : var.cd_pipeline_ibmcloud_api_key_secret_crn
   slack_webhook_secret_crn                      = (var.cd_slack_webhook_secret_crn == "") ? var.slack_webhook_secret_crn : var.cd_slack_webhook_secret_crn
-  privateworker_credentials_secret_crn          = var.cd_privateworker_credentials_secret_crn
+  privateworker_credentials_secret_crn          = (var.cd_privateworker_credentials_secret_crn == "") ? var.privateworker_credentials_secret_crn : var.cd_privateworker_credentials_secret_crn
   artifactory_token_secret_crn                  = var.cd_artifactory_token_secret_crn
   scc_scc_api_key_secret_crn                    = var.scc_scc_api_key_secret_crn
   pipeline_doi_api_key_secret_crn               = (var.cd_pipeline_doi_api_key_secret_crn == "") ? var.pipeline_doi_api_key_secret_crn : var.cd_pipeline_doi_api_key_secret_crn
@@ -728,6 +734,12 @@ module "devsecops_cd_toolchain" {
 
   code_signing_cert_secret_name = var.cd_code_signing_cert_secret_name
 
+  # PRIVATE WORKER
+  privateworker_credentials_secret_group = var.privateworker_credentials_secret_group
+  privateworker_credentials_secret_name  = var.privateworker_credentials_secret_name
+  privateworker_name                     = var.privateworker_name
+  enable_privateworker                   = var.enable_privateworker
+
   #SLACK INTEGRATION
   enable_slack           = (local.cd_enable_slack == "true") ? true : false
   slack_channel_name     = (var.cd_slack_channel_name == "") ? var.slack_channel_name : var.cd_slack_channel_name
@@ -775,7 +787,7 @@ module "devsecops_cd_toolchain" {
 
 module "devsecops_cc_toolchain" {
   count                         = var.create_cc_toolchain ? 1 : 0
-  source                        = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cc-toolchain?ref=v2.1.0"
+  source                        = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cc-toolchain?ref=v2.3.0-beta.2"
   ibmcloud_api_key              = var.ibmcloud_api_key
   toolchain_name                = (var.prefix == "") ? local.cc_toolchain_name : format("${var.prefix}-%s", local.cc_toolchain_name)
   toolchain_description         = var.cc_toolchain_description
@@ -967,6 +979,14 @@ module "devsecops_cc_toolchain" {
   sm_integration_name    = var.sm_integration_name
   kp_integration_name    = var.kp_integration_name
   slack_integration_name = var.slack_integration_name
+
+  # PRIVATE WORKER
+  privateworker_credentials_secret_crn   = var.privateworker_credentials_secret_crn
+  privateworker_credentials_secret_group = var.privateworker_credentials_secret_group
+  privateworker_credentials_secret_name  = var.privateworker_credentials_secret_name
+  privateworker_name                     = var.privateworker_name
+  enable_privateworker                   = var.enable_privateworker
+
 
   #SONARQUBE
   sonarqube_integration_name    = (var.cc_sonarqube_integration_name == "") ? var.sonarqube_integration_name : var.cc_sonarqube_integration_name
