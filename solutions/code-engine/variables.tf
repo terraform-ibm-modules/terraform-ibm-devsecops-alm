@@ -305,6 +305,12 @@ variable "create_kubernetes_access_policy" {
   default     = false
 }
 
+variable "create_privateworker_secret" {
+  type        = bool
+  description = "Set to `true` to add a specified private worker service api key to the Secrets Provider."
+  default     = false
+}
+
 variable "create_secret_group" {
   type        = bool
   description = "Set to `true` to create the specified Secrets Manager secret group."
@@ -762,6 +768,13 @@ variable "privateworker_name" {
   type        = string
   description = "The name of the private worker tool integration."
   default     = "private-worker-tool-01"
+}
+
+variable "privateworker_secret_value" {
+  type        = string
+  sensitive   = true
+  description = "The private worker service api key that will be added to the `privateworker_credentials_secret_name` secret in the secrets provider."
+  default     = ""
 }
 
 variable "pr_pipeline_git_tag" {

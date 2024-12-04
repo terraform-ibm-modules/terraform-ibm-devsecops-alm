@@ -51,6 +51,7 @@ module "devsecops_da" {
   create_ibmcloud_api_key                           = var.create_ibmcloud_api_key
   create_icr_namespace                              = var.create_icr_namespace
   create_kubernetes_access_policy                   = var.create_kubernetes_access_policy
+  create_privateworker_secret                       = var.create_privateworker_secret
   create_secret_group                               = var.create_secret_group
   create_signing_key                                = var.create_signing_key
   create_triggers                                   = var.create_triggers
@@ -121,6 +122,7 @@ module "devsecops_da" {
   privateworker_credentials_secret_group            = var.privateworker_credentials_secret_group
   privateworker_credentials_secret_name             = var.privateworker_credentials_secret_name
   privateworker_name                                = var.privateworker_name
+  privateworker_secret_value                        = var.privateworker_secret_value
   registry_namespace                                = var.registry_namespace
   repo_blind_connection                             = var.repo_blind_connection
   repo_git_id                                       = var.repo_git_id

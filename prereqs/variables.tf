@@ -34,6 +34,12 @@ variable "create_cos_api_key" {
   default     = false
 }
 
+variable "create_privateworker_secret" {
+  type        = bool
+  description = "Set to `true` to add a specified private worker service api key to the Secrets Provider."
+  default     = false
+}
+
 variable "create_signing_key" {
   type        = bool
   description = "Experimental. Set to `true` to create and add a `signing_key`to the Secrets Provider."
@@ -42,7 +48,7 @@ variable "create_signing_key" {
 
 variable "create_git_token" {
   type        = bool
-  description = "Set to `true` to create and add the specified personal access token secret to the Secrets Provider. Use `repo_git_token_secret_value` for setting the value."
+  description = "Set to `true` to add the specified personal access token secret to the Secrets Provider. Use `repo_git_token_secret_value` for setting the value."
   default     = false
 }
 
@@ -111,6 +117,19 @@ variable "iam_api_key_secret_name" {
   type        = string
   description = "The name of the secret as it appears in Secret Manager."
   default     = "ibmcloud-api-key"
+}
+
+variable "privateworker_secret_name" {
+  type        = string
+  description = "The name of the secret as it appears in Secret Manager."
+  default     = "private-worker-key"
+}
+
+variable "privateworker_secret_value" {
+  type        = string
+  sensitive   = true
+  description = "The private worker service api key that will be added to the `privateworker_secret_name` secret in the secrets provider."
+  default     = ""
 }
 
 variable "rotation_period" {

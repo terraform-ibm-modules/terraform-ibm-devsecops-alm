@@ -54,7 +54,7 @@ locals {
   cd_repositories_prefix = (var.cd_repositories_prefix == "") ? var.repositories_prefix : var.cd_repositories_prefix
   cc_repositories_prefix = (var.cc_repositories_prefix == "") ? var.repositories_prefix : var.cc_repositories_prefix
 
-  enable_prereqs = ((var.create_secret_group == true) || (var.create_ibmcloud_api_key == true) || (var.create_cos_api_key == true) || (var.create_signing_key == true)) || (var.create_git_token == true) ? true : false
+  enable_prereqs = ((var.create_secret_group == true) || (var.create_ibmcloud_api_key == true) || (var.create_cos_api_key == true) || (var.create_signing_key == true) || (var.create_git_token == true) || (var.create_privateworker_secret == true)) ? true : false
 
   registry_namespace_suffix = (var.add_container_name_suffix) ? format("%s-%s", var.registry_namespace, random_string.resource_suffix[0].result) : var.registry_namespace
   registry_namespace        = (var.prefix == "") ? local.registry_namespace_suffix : format("%s-%s", var.prefix, local.registry_namespace_suffix)
@@ -269,6 +269,7 @@ module "prereqs" {
   create_ibmcloud_api_key          = var.create_ibmcloud_api_key
   create_cos_api_key               = var.create_cos_api_key
   create_git_token                 = var.create_git_token
+  create_privateworker_secret      = var.create_privateworker_secret
   create_signing_key               = var.create_signing_key
   service_name_pipeline            = var.service_name_pipeline
   service_name_cos                 = var.service_name_cos
@@ -279,6 +280,8 @@ module "prereqs" {
   create_secret_group              = var.create_secret_group
   cos_api_key_secret_name          = var.cos_api_key_secret_name
   iam_api_key_secret_name          = var.pipeline_ibmcloud_api_key_secret_name
+  privateworker_secret_name        = var.privateworker_credentials_secret_name
+  privateworker_secret_value       = var.privateworker_secret_value
   signing_key_secret_name          = var.ci_signing_key_secret_name
   signing_certifcate_secret_name   = var.cd_code_signing_cert_secret_name
   repo_git_token_secret_name       = var.repo_git_token_secret_name
