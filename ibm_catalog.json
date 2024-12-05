@@ -1256,6 +1256,13 @@
                             "required": false
                         },
                         {
+                            "key": "create_privateworker_secret",
+                            "type": "boolean",
+                            "default_value": false,
+                            "description": "Set to `true` to add a specified private worker service api key to the Secrets Provider.",
+                            "required": false
+                        },
+                        {
                             "key": "create_secret_group",
                             "type": "boolean",
                             "default_value": false,
@@ -1274,6 +1281,13 @@
                             "type": "string",
                             "default_value": "",
                             "description": "When enabled, pipeline run events will be sent to the Event Notifications and Slack integrations in the enclosing toolchain.",
+                            "required": false
+                        },
+                        {
+                            "key": "enable_privateworker",
+                            "type": "string",
+                            "default_value": "false",
+                            "description": "Set to `true` to enable private workers for the CI, CD, CC and PR pipelines. A valid service api key must be set in Secrets Manager. The name of this secret can be specified using `privateworker_credentials_secret_name`.",
                             "required": false
                         },
                         {
@@ -1625,6 +1639,39 @@
                             "type": "string",
                             "default_value": "ibmcloud-api-key",
                             "description": "Name of the Cloud API key secret in the secret provider for running the pipelines. Applies to the CI, CD and CC toolchains.",
+                            "required": false
+                        },
+                        {
+                            "key": "privateworker_credentials_secret_crn",
+                            "type": "password",
+                            "description": "The CRN for the Private Worker secret secret.",
+                            "required": false
+                        },
+                        {
+                            "key": "privateworker_credentials_secret_group",
+                            "type": "string",
+                            "default_value": "",
+                            "description": "Secret group prefix for the Private Worker secret. Defaults to using `sm_secret_group` if not set. Only used with `Secrets Manager`.",
+                            "required": false
+                        },
+                        {
+                            "key": "privateworker_credentials_secret_name",
+                            "type": "string",
+                            "default_value": "private-worker-key",
+                            "description": "Name of the privateworker secret in the secret provider.",
+                            "required": false
+                        },
+                        {
+                            "key": "privateworker_name",
+                            "type": "string",
+                            "default_value": "private-worker-tool-01",
+                            "description": "The name of the private worker tool integration.",
+                            "required": false
+                        },
+                        {
+                            "key": "privateworker_secret_value",
+                            "type": "password",
+                            "description": "The private worker service api key that will be added to the `privateworker_credentials_secret_name` secret in the secrets provider.",
                             "required": false
                         },
                         {
@@ -3199,6 +3246,13 @@
                             "required": false
                         },
                         {
+                            "key": "create_privateworker_secret",
+                            "type": "boolean",
+                            "default_value": false,
+                            "description": "Set to `true` to add a specified private worker service api key to the Secrets Provider.",
+                            "required": false
+                        },
+                        {
                             "key": "create_secret_group",
                             "type": "boolean",
                             "default_value": false,
@@ -3217,6 +3271,13 @@
                             "type": "string",
                             "default_value": "",
                             "description": "When enabled, pipeline run events will be sent to the Event Notifications and Slack integrations in the enclosing toolchain.",
+                            "required": false
+                        },
+                        {
+                            "key": "enable_privateworker",
+                            "type": "string",
+                            "default_value": "false",
+                            "description": "Set to `true` to enable private workers for the CI, CD, CC and PR pipelines. A valid service api key must be set in Secrets Manager. The name of this secret can be specified using `privateworker_credentials_secret_name`.",
                             "required": false
                         },
                         {
@@ -3568,6 +3629,39 @@
                             "type": "string",
                             "default_value": "ibmcloud-api-key",
                             "description": "Name of the Cloud API key secret in the secret provider for running the pipelines. Applies to the CI, CD and CC toolchains.",
+                            "required": false
+                        },
+                        {
+                            "key": "privateworker_credentials_secret_crn",
+                            "type": "password",
+                            "description": "The CRN for the Private Worker secret secret.",
+                            "required": false
+                        },
+                        {
+                            "key": "privateworker_credentials_secret_group",
+                            "type": "string",
+                            "default_value": "",
+                            "description": "Secret group prefix for the Private Worker secret. Defaults to using `sm_secret_group` if not set. Only used with `Secrets Manager`.",
+                            "required": false
+                        },
+                        {
+                            "key": "privateworker_credentials_secret_name",
+                            "type": "string",
+                            "default_value": "private-worker-key",
+                            "description": "Name of the privateworker secret in the secret provider.",
+                            "required": false
+                        },
+                        {
+                            "key": "privateworker_name",
+                            "type": "string",
+                            "default_value": "private-worker-tool-01",
+                            "description": "The name of the private worker tool integration.",
+                            "required": false
+                        },
+                        {
+                            "key": "privateworker_secret_value",
+                            "type": "password",
+                            "description": "The private worker service api key that will be added to the `privateworker_credentials_secret_name` secret in the secrets provider.",
                             "required": false
                         },
                         {

@@ -354,7 +354,7 @@ variable "enable_secrets_manager" {
 variable "enable_privateworker" {
   type        = string
   default     = "false"
-  description = "Set to `true` to enable private workers for the CI, CD, CC and PR pipelines. A valid service api key must be set in Secrets Manager. The name of this secret can be specified using   "
+  description = "Set to `true` to enable private workers for the CI, CD, CC and PR pipelines. A valid service api key must be set in Secrets Manager. The name of this secret can be specified using `privateworker_credentials_secret_name`."
 }
 
 variable "enable_slack" {
