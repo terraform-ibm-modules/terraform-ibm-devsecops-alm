@@ -31,6 +31,7 @@ module "devsecops_da" {
   compliance_pipeline_repo_git_provider             = var.compliance_pipeline_repo_git_provider
   compliance_pipeline_repo_git_token_secret_crn     = var.compliance_pipeline_repo_git_token_secret_crn
   compliance_pipeline_repo_git_token_secret_name    = var.compliance_pipeline_repo_git_token_secret_name
+  compliance_pipeline_repo_name                     = var.compliance_pipeline_repo_name
   compliance_pipeline_repo_root_url                 = var.compliance_pipeline_repo_root_url
   compliance_pipeline_repo_use_group_settings       = var.compliance_pipeline_repo_use_group_settings
   compliance_pipeline_repo_secret_group             = var.compliance_pipeline_repo_secret_group
@@ -51,12 +52,14 @@ module "devsecops_da" {
   create_ibmcloud_api_key                           = var.create_ibmcloud_api_key
   create_icr_namespace                              = var.create_icr_namespace
   create_kubernetes_access_policy                   = var.create_kubernetes_access_policy
+  create_privateworker_secret                       = var.create_privateworker_secret
   create_secret_group                               = var.create_secret_group
   create_signing_key                                = var.create_signing_key
   create_triggers                                   = var.create_triggers
   create_git_triggers                               = var.create_git_triggers
   enable_key_protect                                = var.enable_key_protect
   enable_pipeline_notifications                     = var.enable_pipeline_notifications
+  enable_privateworker                              = var.enable_privateworker
   enable_secrets_manager                            = var.enable_secrets_manager
   enable_slack                                      = var.enable_slack
   environment_prefix                                = var.environment_prefix
@@ -116,6 +119,11 @@ module "devsecops_da" {
   pipeline_ibmcloud_api_key_secret_group            = var.pipeline_ibmcloud_api_key_secret_group
   pipeline_ibmcloud_api_key_secret_name             = var.pipeline_ibmcloud_api_key_secret_name
   prefix                                            = var.prefix
+  privateworker_credentials_secret_crn              = var.privateworker_credentials_secret_crn
+  privateworker_credentials_secret_group            = var.privateworker_credentials_secret_group
+  privateworker_credentials_secret_name             = var.privateworker_credentials_secret_name
+  privateworker_name                                = var.privateworker_name
+  privateworker_secret_value                        = var.privateworker_secret_value
   registry_namespace                                = var.registry_namespace
   repo_blind_connection                             = var.repo_blind_connection
   repo_git_id                                       = var.repo_git_id

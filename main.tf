@@ -54,7 +54,7 @@ locals {
   cd_repositories_prefix = (var.cd_repositories_prefix == "") ? var.repositories_prefix : var.cd_repositories_prefix
   cc_repositories_prefix = (var.cc_repositories_prefix == "") ? var.repositories_prefix : var.cc_repositories_prefix
 
-  enable_prereqs = ((var.create_secret_group == true) || (var.create_ibmcloud_api_key == true) || (var.create_cos_api_key == true) || (var.create_signing_key == true)) || (var.create_git_token == true) ? true : false
+  enable_prereqs = ((var.create_secret_group == true) || (var.create_ibmcloud_api_key == true) || (var.create_cos_api_key == true) || (var.create_signing_key == true) || (var.create_git_token == true) || (var.create_privateworker_secret == true)) ? true : false
 
   registry_namespace_suffix = (var.add_container_name_suffix) ? format("%s-%s", var.registry_namespace, random_string.resource_suffix[0].result) : var.registry_namespace
   registry_namespace        = (var.prefix == "") ? local.registry_namespace_suffix : format("%s-%s", var.prefix, local.registry_namespace_suffix)
@@ -269,6 +269,7 @@ module "prereqs" {
   create_ibmcloud_api_key          = var.create_ibmcloud_api_key
   create_cos_api_key               = var.create_cos_api_key
   create_git_token                 = var.create_git_token
+  create_privateworker_secret      = var.create_privateworker_secret
   create_signing_key               = var.create_signing_key
   service_name_pipeline            = var.service_name_pipeline
   service_name_cos                 = var.service_name_cos
@@ -279,6 +280,8 @@ module "prereqs" {
   create_secret_group              = var.create_secret_group
   cos_api_key_secret_name          = var.cos_api_key_secret_name
   iam_api_key_secret_name          = var.pipeline_ibmcloud_api_key_secret_name
+  privateworker_secret_name        = var.privateworker_credentials_secret_name
+  privateworker_secret_value       = var.privateworker_secret_value
   signing_key_secret_name          = var.ci_signing_key_secret_name
   signing_certifcate_secret_name   = var.cd_code_signing_cert_secret_name
   repo_git_token_secret_name       = var.repo_git_token_secret_name
@@ -295,7 +298,7 @@ module "prereqs" {
 module "devsecops_ci_toolchain" {
   count                    = var.create_ci_toolchain ? 1 : 0
   depends_on               = [ibm_resource_instance.cd_instance]
-  source                   = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-ci-toolchain?ref=v2.1.0"
+  source                   = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-ci-toolchain?ref=v2.3.0"
   ibmcloud_api_key         = var.ibmcloud_api_key
   toolchain_name           = (var.prefix == "") ? local.ci_toolchain_name : format("${var.prefix}-%s", local.ci_toolchain_name)
   toolchain_region         = (var.ci_toolchain_region == "") ? var.toolchain_region : replace(replace(var.ci_toolchain_region, "ibm:yp:", ""), "ibm:ys1:", "")
@@ -362,7 +365,7 @@ module "devsecops_ci_toolchain" {
   cos_api_key_secret_crn                        = (var.ci_cos_api_key_secret_crn == "") ? var.cos_api_key_secret_crn : var.ci_cos_api_key_secret_crn
   pipeline_ibmcloud_api_key_secret_crn          = (var.ci_pipeline_ibmcloud_api_key_secret_crn == "") ? var.pipeline_ibmcloud_api_key_secret_crn : var.ci_pipeline_ibmcloud_api_key_secret_crn
   slack_webhook_secret_crn                      = (var.ci_slack_webhook_secret_crn == "") ? var.slack_webhook_secret_crn : var.ci_slack_webhook_secret_crn
-  privateworker_credentials_secret_crn          = var.ci_privateworker_credentials_secret_crn
+  privateworker_credentials_secret_crn          = (var.ci_privateworker_credentials_secret_crn == "") ? var.privateworker_credentials_secret_crn : var.ci_privateworker_credentials_secret_crn
   artifactory_token_secret_crn                  = var.ci_artifactory_token_secret_crn
   pipeline_doi_api_key_secret_crn               = var.ci_pipeline_doi_api_key_secret_crn
   sonarqube_secret_crn                          = (var.ci_sonarqube_secret_crn == "") ? var.sonarqube_secret_crn : var.ci_sonarqube_secret_crn
@@ -403,6 +406,7 @@ module "devsecops_ci_toolchain" {
   compliance_pipelines_repo_git_id           = (var.compliance_pipeline_repo_use_group_settings) ? var.repo_git_id : var.compliance_pipeline_repo_git_id
   compliance_pipeline_existing_repo_url      = var.compliance_pipeline_existing_repo_url
   compliance_pipeline_source_repo_url        = var.compliance_pipeline_source_repo_url
+  compliance_pipelines_repo_name             = var.compliance_pipeline_repo_name
 
   #PIPELINE CONFIG REPO
   pipeline_config_repo_existing_url     = local.ci_pipeline_config_repo_existing_url
@@ -480,6 +484,12 @@ module "devsecops_ci_toolchain" {
   slack_toolchain_bind   = var.ci_slack_toolchain_bind
   slack_toolchain_unbind = var.ci_slack_toolchain_unbind
 
+  # PRIVATE WORKER
+  privateworker_credentials_secret_group = var.privateworker_credentials_secret_group
+  privateworker_credentials_secret_name  = var.privateworker_credentials_secret_name
+  privateworker_name                     = var.privateworker_name
+  enable_privateworker                   = var.enable_privateworker
+
   #SONARQUBE
   sonarqube_integration_name    = (var.ci_sonarqube_integration_name == "") ? var.sonarqube_integration_name : var.ci_sonarqube_integration_name
   sonarqube_user                = (var.ci_sonarqube_user == "") ? var.sonarqube_user : var.ci_sonarqube_user
@@ -525,7 +535,7 @@ module "devsecops_ci_toolchain" {
 module "devsecops_cd_toolchain" {
   count            = var.create_cd_toolchain ? 1 : 0
   depends_on       = [ibm_resource_instance.cd_instance]
-  source           = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain?ref=v2.1.0"
+  source           = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain?ref=v2.3.0"
   ibmcloud_api_key = var.ibmcloud_api_key
 
   toolchain_name           = (var.prefix == "") ? local.cd_toolchain_name : format("${var.prefix}-%s", local.cd_toolchain_name)
@@ -598,7 +608,7 @@ module "devsecops_cd_toolchain" {
   cos_api_key_secret_crn                        = (var.cd_cos_api_key_secret_crn == "") ? var.cos_api_key_secret_crn : var.cd_cos_api_key_secret_crn
   pipeline_ibmcloud_api_key_secret_crn          = (var.cd_pipeline_ibmcloud_api_key_secret_crn == "") ? var.pipeline_ibmcloud_api_key_secret_crn : var.cd_pipeline_ibmcloud_api_key_secret_crn
   slack_webhook_secret_crn                      = (var.cd_slack_webhook_secret_crn == "") ? var.slack_webhook_secret_crn : var.cd_slack_webhook_secret_crn
-  privateworker_credentials_secret_crn          = var.cd_privateworker_credentials_secret_crn
+  privateworker_credentials_secret_crn          = (var.cd_privateworker_credentials_secret_crn == "") ? var.privateworker_credentials_secret_crn : var.cd_privateworker_credentials_secret_crn
   artifactory_token_secret_crn                  = var.cd_artifactory_token_secret_crn
   scc_scc_api_key_secret_crn                    = var.scc_scc_api_key_secret_crn
   pipeline_doi_api_key_secret_crn               = (var.cd_pipeline_doi_api_key_secret_crn == "") ? var.pipeline_doi_api_key_secret_crn : var.cd_pipeline_doi_api_key_secret_crn
@@ -629,6 +639,7 @@ module "devsecops_cd_toolchain" {
   compliance_pipelines_repo_git_id           = (var.compliance_pipeline_repo_use_group_settings) ? var.repo_git_id : var.compliance_pipeline_repo_git_id
   compliance_pipeline_existing_repo_url      = var.compliance_pipeline_existing_repo_url
   compliance_pipeline_source_repo_url        = var.compliance_pipeline_source_repo_url
+  compliance_pipelines_repo_name             = var.compliance_pipeline_repo_name
 
   #PIPELINE CONFIG REPO
   pipeline_config_repo_existing_url     = local.cd_pipeline_config_repo_existing_url
@@ -728,6 +739,12 @@ module "devsecops_cd_toolchain" {
 
   code_signing_cert_secret_name = var.cd_code_signing_cert_secret_name
 
+  # PRIVATE WORKER
+  privateworker_credentials_secret_group = var.privateworker_credentials_secret_group
+  privateworker_credentials_secret_name  = var.privateworker_credentials_secret_name
+  privateworker_name                     = var.privateworker_name
+  enable_privateworker                   = var.enable_privateworker
+
   #SLACK INTEGRATION
   enable_slack           = (local.cd_enable_slack == "true") ? true : false
   slack_channel_name     = (var.cd_slack_channel_name == "") ? var.slack_channel_name : var.cd_slack_channel_name
@@ -775,7 +792,7 @@ module "devsecops_cd_toolchain" {
 
 module "devsecops_cc_toolchain" {
   count                         = var.create_cc_toolchain ? 1 : 0
-  source                        = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cc-toolchain?ref=v2.1.0"
+  source                        = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cc-toolchain?ref=v2.3.0"
   ibmcloud_api_key              = var.ibmcloud_api_key
   toolchain_name                = (var.prefix == "") ? local.cc_toolchain_name : format("${var.prefix}-%s", local.cc_toolchain_name)
   toolchain_description         = var.cc_toolchain_description
@@ -874,6 +891,7 @@ module "devsecops_cc_toolchain" {
   compliance_pipelines_repo_git_id           = (var.compliance_pipeline_repo_use_group_settings) ? var.repo_git_id : var.compliance_pipeline_repo_git_id
   compliance_pipeline_existing_repo_url      = var.compliance_pipeline_existing_repo_url
   compliance_pipeline_source_repo_url        = var.compliance_pipeline_source_repo_url
+  compliance_pipelines_repo_name             = var.compliance_pipeline_repo_name
 
   #PIPELINE CONFIG REPO
   pipeline_config_repo_existing_url     = local.cc_pipeline_config_repo_existing_url
@@ -967,6 +985,14 @@ module "devsecops_cc_toolchain" {
   sm_integration_name    = var.sm_integration_name
   kp_integration_name    = var.kp_integration_name
   slack_integration_name = var.slack_integration_name
+
+  # PRIVATE WORKER
+  privateworker_credentials_secret_crn   = var.privateworker_credentials_secret_crn
+  privateworker_credentials_secret_group = var.privateworker_credentials_secret_group
+  privateworker_credentials_secret_name  = var.privateworker_credentials_secret_name
+  privateworker_name                     = var.privateworker_name
+  enable_privateworker                   = var.enable_privateworker
+
 
   #SONARQUBE
   sonarqube_integration_name    = (var.cc_sonarqube_integration_name == "") ? var.sonarqube_integration_name : var.cc_sonarqube_integration_name

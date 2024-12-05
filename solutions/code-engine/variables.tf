@@ -153,6 +153,12 @@ variable "compliance_pipeline_repo_blind_connection" {
   default     = ""
 }
 
+variable "compliance_pipeline_repo_name" {
+  type        = string
+  description = "Sets the name for the compliance pipelines repository if cloned. The expected behaviour is to link to an existing compliance-pipelines repository."
+  default     = ""
+}
+
 variable "compliance_pipeline_repo_root_url" {
   type        = string
   description = "(Optional) The Root URL of the server. e.g. https://git.example.com."
@@ -305,6 +311,12 @@ variable "create_kubernetes_access_policy" {
   default     = false
 }
 
+variable "create_privateworker_secret" {
+  type        = bool
+  description = "Set to `true` to add a specified private worker service api key to the Secrets Provider."
+  default     = false
+}
+
 variable "create_secret_group" {
   type        = bool
   description = "Set to `true` to create the specified Secrets Manager secret group."
@@ -333,6 +345,12 @@ variable "enable_pipeline_notifications" {
   type        = string
   description = "When enabled, pipeline run events will be sent to the Event Notifications and Slack integrations in the enclosing toolchain."
   default     = ""
+}
+
+variable "enable_privateworker" {
+  type        = string
+  default     = "false"
+  description = "Set to `true` to enable private workers for the CI, CD, CC and PR pipelines. A valid service api key must be set in Secrets Manager. The name of this secret can be specified using `privateworker_credentials_secret_name`."
 }
 
 variable "enable_secrets_manager" {
@@ -727,6 +745,42 @@ variable "pipeline_ibmcloud_api_key_secret_name" {
   type        = string
   description = "Name of the Cloud API key secret in the secret provider for running the pipelines. Applies to the CI, CD and CC toolchains."
   default     = "ibmcloud-api-key"
+}
+
+variable "privateworker_credentials_secret_crn" {
+  type        = string
+  sensitive   = true
+  description = "The CRN for the Private Worker secret secret."
+  default     = ""
+  validation {
+    condition     = startswith(var.privateworker_credentials_secret_crn, "crn:") || var.privateworker_credentials_secret_crn == ""
+    error_message = "Must be a CRN or left empty."
+  }
+}
+
+variable "privateworker_credentials_secret_group" {
+  type        = string
+  description = "Secret group prefix for the Private Worker secret. Defaults to using `sm_secret_group` if not set. Only used with `Secrets Manager`."
+  default     = ""
+}
+
+variable "privateworker_credentials_secret_name" {
+  type        = string
+  default     = ""
+  description = "Name of the privateworker secret in the secret provider."
+}
+
+variable "privateworker_name" {
+  type        = string
+  description = "The name of the private worker tool integration."
+  default     = "private-worker-tool-01"
+}
+
+variable "privateworker_secret_value" {
+  type        = string
+  sensitive   = true
+  description = "The private worker service api key that will be added to the `privateworker_credentials_secret_name` secret in the secrets provider."
+  default     = ""
 }
 
 variable "pr_pipeline_git_tag" {
