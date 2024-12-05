@@ -153,7 +153,7 @@ variable "compliance_pipeline_repo_blind_connection" {
 
 variable "compliance_pipeline_repo_name" {
   type        = string
-  description = "Sets the name for the compliance repository if cloned. The expected behaviour is to link to an existing compliance-pipelines repository."
+  description = "Sets the name for the compliance pipelines repository if cloned. The expected behaviour is to link to an existing compliance-pipelines repository."
   default     = ""
 }
 
