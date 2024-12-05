@@ -406,6 +406,7 @@ module "devsecops_ci_toolchain" {
   compliance_pipelines_repo_git_id           = (var.compliance_pipeline_repo_use_group_settings) ? var.repo_git_id : var.compliance_pipeline_repo_git_id
   compliance_pipeline_existing_repo_url      = var.compliance_pipeline_existing_repo_url
   compliance_pipeline_source_repo_url        = var.compliance_pipeline_source_repo_url
+  compliance_pipelines_repo_name             = var.compliance_pipeline_repo_name
 
   #PIPELINE CONFIG REPO
   pipeline_config_repo_existing_url     = local.ci_pipeline_config_repo_existing_url
@@ -638,6 +639,7 @@ module "devsecops_cd_toolchain" {
   compliance_pipelines_repo_git_id           = (var.compliance_pipeline_repo_use_group_settings) ? var.repo_git_id : var.compliance_pipeline_repo_git_id
   compliance_pipeline_existing_repo_url      = var.compliance_pipeline_existing_repo_url
   compliance_pipeline_source_repo_url        = var.compliance_pipeline_source_repo_url
+  compliance_pipelines_repo_name             = var.compliance_pipeline_repo_name
 
   #PIPELINE CONFIG REPO
   pipeline_config_repo_existing_url     = local.cd_pipeline_config_repo_existing_url
@@ -889,6 +891,7 @@ module "devsecops_cc_toolchain" {
   compliance_pipelines_repo_git_id           = (var.compliance_pipeline_repo_use_group_settings) ? var.repo_git_id : var.compliance_pipeline_repo_git_id
   compliance_pipeline_existing_repo_url      = var.compliance_pipeline_existing_repo_url
   compliance_pipeline_source_repo_url        = var.compliance_pipeline_source_repo_url
+  compliance_pipelines_repo_name             = var.compliance_pipeline_repo_name
 
   #PIPELINE CONFIG REPO
   pipeline_config_repo_existing_url     = local.cc_pipeline_config_repo_existing_url

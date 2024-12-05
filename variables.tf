@@ -151,6 +151,12 @@ variable "compliance_pipeline_repo_blind_connection" {
   default     = ""
 }
 
+variable "compliance_pipeline_repo_name" {
+  type        = string
+  description = "Sets the name for the compliance repository if cloned. The expected behaviour is to link to an existing compliance-pipelines repository."
+  default     = ""
+}
+
 variable "compliance_pipeline_repo_root_url" {
   type        = string
   description = "(Optional) The Root URL of the server. e.g. https://git.example.com."

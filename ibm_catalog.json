@@ -398,6 +398,13 @@
                             "required": false
                         },
                         {
+                            "key": "compliance_pipeline_repo_name",
+                            "type": "string",
+                            "default_value": "",
+                            "description": "Sets the name for the compliance repository if cloned. The expected behaviour is to link to an existing compliance-pipelines repository.",
+                            "required": false
+                        },
+                        {
                             "key": "compliance_pipeline_repo_use_group_settings",
                             "type": "boolean",
                             "default_value": true,
@@ -2385,6 +2392,13 @@
                             "type": "string",
                             "default_value": "",
                             "description": "Set to use an existing issues repository.",
+                            "required": false
+                        },
+                        {
+                            "key": "compliance_pipeline_repo_name",
+                            "type": "string",
+                            "default_value": "",
+                            "description": "Sets the name for the compliance repository if cloned. The expected behaviour is to link to an existing compliance-pipelines repository.",
                             "required": false
                         },
                         {
