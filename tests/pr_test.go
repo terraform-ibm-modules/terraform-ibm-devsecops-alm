@@ -22,9 +22,7 @@ func TestRunDefaultExample(t *testing.T) {
 		TerraformDir: defaultExampleTerraformDir,
 		IgnoreUpdates: testhelper.Exemptions{ // Ignore for consistency check
 			List: []string{
-				"module.terraform_devsecops_alm.module.devsecops_cc_toolchain[0].module.pipeline_cc.ibm_cd_tekton_pipeline_trigger.cc_pipeline_timed_trigger",
-				"module.terraform_devsecops_alm.module.devsecops_cd_toolchain[0].module.integrations.ibm_cd_toolchain_tool_securitycompliance.scc_tool[0]",
-				"module.terraform_devsecops_alm.module.devsecops_cc_toolchain[0].module.integrations.ibm_cd_toolchain_tool_securitycompliance.scc_tool[0]",
+				"module.terraform_devsecops_alm.module.devsecops_cc_toolchain[0].module.pipeline_cc.ibm_cd_tekton_pipeline_trigger.cc_pipeline_timed_trigger[0]",
 			},
 		},
 		TerraformVars: map[string]interface{}{
@@ -46,9 +44,7 @@ func TestRunAppExample(t *testing.T) {
 		TerraformDir: appExampleDir,
 		IgnoreUpdates: testhelper.Exemptions{ // Ignore for consistency check
 			List: []string{
-				"module.terraform_devsecops_alm.module.devsecops_cc_toolchain[0].module.pipeline_cc.ibm_cd_tekton_pipeline_trigger.cc_pipeline_timed_trigger",
-				"module.terraform_devsecops_alm.module.devsecops_cd_toolchain[0].module.integrations.ibm_cd_toolchain_tool_securitycompliance.scc_tool[0]",
-				"module.terraform_devsecops_alm.module.devsecops_cc_toolchain[0].module.integrations.ibm_cd_toolchain_tool_securitycompliance.scc_tool[0]",
+				"module.terraform_devsecops_alm.module.devsecops_cc_toolchain[0].module.pipeline_cc.ibm_cd_tekton_pipeline_trigger.cc_pipeline_timed_trigger[0]",
 			},
 		},
 	})
@@ -66,9 +62,7 @@ func TestRunKPExample(t *testing.T) {
 		TerraformDir: kpExampleDir,
 		IgnoreUpdates: testhelper.Exemptions{ // Ignore for consistency check
 			List: []string{
-				"module.terraform_devsecops_alm.module.devsecops_cc_toolchain[0].module.pipeline_cc.ibm_cd_tekton_pipeline_trigger.cc_pipeline_timed_trigger",
-				"module.terraform_devsecops_alm.module.devsecops_cd_toolchain[0].module.integrations.ibm_cd_toolchain_tool_securitycompliance.scc_tool[0]",
-				"module.terraform_devsecops_alm.module.devsecops_cc_toolchain[0].module.integrations.ibm_cd_toolchain_tool_securitycompliance.scc_tool[0]",
+				"module.terraform_devsecops_alm.module.devsecops_cc_toolchain[0].module.pipeline_cc.ibm_cd_tekton_pipeline_trigger.cc_pipeline_timed_trigger[0]",
 			},
 		},
 	})
@@ -82,13 +76,20 @@ func TestRunUpgradeExample(t *testing.T) {
 	t.Parallel()
 
 	// TODO: Remove this line after the first merge to primary branch is complete to enable upgrade test
-	t.Skip("Skipping upgrade test until initial code is in primary branch")
+	//t.Skip("Skipping upgrade test until initial code is in primary branch")
 
 	options := testhelper.TestOptionsDefault(&testhelper.TestOptions{
 		Testing:      t,
 		TerraformDir: defaultExampleTerraformDir,
 		IgnoreUpdates: testhelper.Exemptions{ // Ignore for consistency check
-			List: []string{},
+			List: []string{
+				"module.terraform_devsecops_alm.module.devsecops_cc_toolchain[0].module.pipeline_cc.ibm_cd_tekton_pipeline_trigger.cc_pipeline_timed_trigger[0]",
+			},
+		},
+		IgnoreDestroys: testhelper.Exemptions{ // Terraform resource created but unused. Needs to be destroyed. Can remove exemption in subsequent release.
+			List: []string{
+				"module.terraform_devsecops_alm.random_string.webhook_secret[0]",
+			},
 		},
 	})
 
