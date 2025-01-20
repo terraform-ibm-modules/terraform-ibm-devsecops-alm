@@ -261,12 +261,12 @@ resource "ibm_cr_namespace" "cr_namespace" {
   resource_group_id = data.ibm_resource_group.resource_group.id
 }
 
-################ Experimental #####################
 module "prereqs" {
   count                            = (local.enable_prereqs) ? 1 : 0
   source                           = "./prereqs"
   ibmcloud_api_key                 = var.ibmcloud_api_key
   create_ibmcloud_api_key          = var.create_ibmcloud_api_key
+  force_create_service_api_key     = var.force_create_service_api_key
   create_cos_api_key               = var.create_cos_api_key
   create_git_token                 = var.create_git_token
   create_privateworker_secret      = var.create_privateworker_secret

@@ -76,6 +76,7 @@ module "devsecops_da" {
   evidence_repo_integration_owner                   = var.evidence_repo_integration_owner
   evidence_repo_name                                = var.evidence_repo_name
   evidence_repo_secret_group                        = var.evidence_repo_secret_group
+  force_create_service_api_key                      = var.force_create_service_api_key
   ibmcloud_api_key                                  = var.ibmcloud_api_key
   inventory_group                                   = var.inventory_group
   inventory_repo_auth_type                          = var.inventory_repo_auth_type

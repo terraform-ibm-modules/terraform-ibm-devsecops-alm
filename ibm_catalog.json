@@ -42,7 +42,7 @@
                                 "profile": {
                                     "id": "",
                                     "name": "IBM Cloud Framework for Financial Services",
-                                    "version": "1.6.0"
+                                    "version": "1.7.0"
                                 },
                                 "names": [
                                     "SA-3(a)",
@@ -1406,6 +1406,13 @@
                             "type": "string",
                             "default_value": "",
                             "description": "Secret group for the Evidence repository secret. Defaults to the value set in `sm_secret_group` if not set. Only used with `Secrets Manager`.",
+                            "required": false
+                        },
+                        {
+                            "key": "force_create_service_api_key",
+                            "type": "boolean",
+                            "default_value": false,
+                            "description": "Set to `true` to force create a service api key. By default the generated apikey will be a service api key if a Git token is specified. See `repo_git_token_secret_name`. In the absense of a Git Token a full api key will instead be created.",
                             "required": false
                         },
                         {
@@ -3403,6 +3410,13 @@
                             "type": "string",
                             "default_value": "",
                             "description": "Secret group for the Evidence repository secret. Defaults to the value set in `sm_secret_group` if not set. Only used with `Secrets Manager`.",
+                            "required": false
+                        },
+                        {
+                            "key": "force_create_service_api_key",
+                            "type": "boolean",
+                            "default_value": false,
+                            "description": "Set to `true` to force create a service api key. By default the generated apikey will be a service api key if a Git token is specified. See `repo_git_token_secret_name`. In the absense of a Git Token a full api key will instead be created.",
                             "required": false
                         },
                         {
