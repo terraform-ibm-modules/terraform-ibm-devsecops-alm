@@ -6,6 +6,7 @@ module "devsecops_da" {
   app_group                                         = var.app_group
   add_pipeline_definitions                          = var.add_pipeline_definitions
   app_repo_auth_type                                = var.app_repo_auth_type
+  app_repo_blind_connection                         = var.app_repo_blind_connection
   app_repo_branch                                   = var.app_repo_branch
   app_repo_clone_from_url                           = var.app_repo_clone_from_url
   app_repo_clone_to_git_id                          = var.app_repo_clone_to_git_id
@@ -15,7 +16,9 @@ module "devsecops_da" {
   app_repo_existing_url                             = var.app_repo_existing_url
   app_repo_git_token_secret_crn                     = var.app_repo_git_token_secret_crn
   app_repo_git_token_secret_name                    = var.app_repo_git_token_secret_name
+  app_repo_root_url                                 = var.app_repo_root_url
   app_repo_secret_group                             = var.app_repo_secret_group
+  app_repo_title                                    = var.app_repo_title
   authorization_policy_creation                     = var.authorization_policy_creation
   autostart                                         = var.autostart
   change_management_existing_url                    = var.change_management_existing_url

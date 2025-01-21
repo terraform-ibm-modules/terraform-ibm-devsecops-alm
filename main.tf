@@ -184,6 +184,7 @@ locals {
     (var.app_repo_existing_git_provider != "") ? var.app_repo_existing_git_provider :
     (var.repo_git_provider != "") ? var.repo_git_provider :
     (strcontains(var.app_repo_existing_url, "github")) ? "githubconsolidated" :
+    (strcontains(var.app_repo_existing_url, "gitlab")) ? "gitlab" :
     (strcontains(var.app_repo_existing_url, "git.cloud.ibm.com")) ? "hostedgit" : ""
   )
 
@@ -192,6 +193,7 @@ locals {
     (var.repo_git_id != "") ? var.repo_git_id :
     (strcontains(var.app_repo_existing_url, "github.ibm.com")) ? "integrated" :
     (strcontains(var.app_repo_existing_url, "github")) ? "github" :
+    (strcontains(var.app_repo_existing_url, "gitlab")) ? "gitlabcustom" :
     (strcontains(var.app_repo_existing_url, "git.cloud.ibm.com")) ? "" : ""
   )
 
@@ -394,9 +396,9 @@ module "devsecops_ci_toolchain" {
   app_repo_existing_git_id       = local.ci_app_repo_existing_git_id
   app_repo_clone_to_git_provider = local.ci_app_repo_clone_to_git_provider
   app_repo_clone_to_git_id       = local.ci_app_repo_clone_to_git_id
-  app_repo_blind_connection      = var.repo_blind_connection
-  app_repo_root_url              = var.repo_root_url
-  app_repo_title                 = var.repo_title
+  app_repo_blind_connection      = (var.app_repo_blind_connection == "") ? var.repo_blind_connection : var.app_repo_blind_connection
+  app_repo_root_url              = (var.app_repo_root_url == "") ? var.repo_root_url : var.app_repo_root_url
+  app_repo_title                 = (var.app_repo_title == "") ? var.repo_title : var.app_repo_title
 
   #COMPLIANCE PIPELINE REPO
   compliance_pipelines_repo_blind_connection = (var.compliance_pipeline_repo_use_group_settings) ? var.repo_blind_connection : var.compliance_pipeline_repo_blind_connection
