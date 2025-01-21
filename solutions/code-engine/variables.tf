@@ -28,6 +28,12 @@ variable "app_repo_auth_type" {
   default     = ""
 }
 
+variable "app_repo_blind_connection" {
+  type        = string
+  description = "Setting this value to `true` means the server is not addressable on the public internet. IBM Cloud will not be able to validate the connection details you provide. Certain functionality that requires API access to the git server will be disabled. Delivery pipeline will only work using a private worker that has network access to the git server."
+  default     = ""
+}
+
 variable "app_repo_branch" {
   type        = string
   description = "This is the repository branch used by the default sample application. Alternatively if `app_repo_existing_url` is provided, then the branch must reflect the default branch for that repository. Typically these branches are `main` or `master`."
@@ -76,9 +82,21 @@ variable "app_repo_git_token_secret_name" {
   default     = ""
 }
 
+variable "app_repo_root_url" {
+  type        = string
+  description = "(Optional) The Root URL of the server. e.g. https://git.example.com."
+  default     = ""
+}
+
 variable "app_repo_secret_group" {
   type        = string
   description = "Secret group for the App repository secret. Defaults to the value set in `sm_secret_group` if not set. Only used with `Secrets Manager`."
+  default     = ""
+}
+
+variable "app_repo_title" {
+  type        = string
+  description = "(Optional) The title of the server. e.g. My Git Enterprise Server."
   default     = ""
 }
 
@@ -456,6 +474,12 @@ variable "evidence_repo_secret_group" {
   type        = string
   description = "Secret group for the Evidence repository secret. Defaults to the value set in `sm_secret_group` if not set. Only used with `Secrets Manager`."
   default     = ""
+}
+
+variable "force_create_service_api_key" {
+  type        = bool
+  description = "Set to `true` to force create a service api key. By default the generated apikey will be a service api key if a Git token is specified. See `repo_git_token_secret_name`. In the absence of a Git Token a full api key will instead be created."
+  default     = false
 }
 
 variable "ibmcloud_api_key" {
