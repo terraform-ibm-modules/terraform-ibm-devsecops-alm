@@ -184,7 +184,7 @@ variable "create_code_engine_access_policy" {
 
 variable "force_create_service_api_key" {
   type        = bool
-  description = "Set to `true` to force create a service api key. By default the generated apikey will be a service api key if a Git token is specified. See `repo_git_token_secret_name`. In the absense of a Git Token a full api key will instead be created."
+  description = "Set to `true` to force create a service api key. By default the generated apikey will be a service api key if a Git token is specified. See `repo_git_token_secret_name`. In the absence of a Git Token a full api key will instead be created."
   default     = false
 }
 
