@@ -345,6 +345,24 @@ variable "custom_app_repo_blind_connection" {
   default     = ""
 }
 
+variable "custom_app_repo_git_id" {
+  type        = string
+  description = "The Git ID for the application repositories. Used by the sample application repository, pipeline config repository and additionally the deployment repository of the CD toolchain. Takes precedence for these repositories over the value set in `repo_git_id`."
+  default     = ""
+}
+
+variable "custom_app_repo_git_provider" {
+  type        = string
+  description = "The Git provider type. Used by the sample application repository, pipeline config repository and additionally the deployment repository of the CD toolchain. Takes precedence for these repositories over the value set in `repo_git_provider`."
+  default     = ""
+}
+
+variable "custom_app_repo_group" {
+  type        = string
+  description = "Specify the Git user or group for your application. This must be set if the repository authentication type is `pat` (personal access token). Used by the sample application repository, pipeline config repository and additionally the deployment repository of the CD toolchain. Takes precedence for these repositories over the value set in `repo_group`."
+  default     = ""
+}
+
 variable "custom_app_repo_git_token_secret_crn" {
   type        = string
   sensitive   = true

@@ -58,9 +58,12 @@ module "devsecops_da" {
   create_triggers                                   = var.create_triggers
   create_git_triggers                               = var.create_git_triggers
   custom_app_repo_blind_connection                  = var.custom_app_repo_blind_connection
+  custom_app_repo_git_id                            = var.custom_app_repo_git_id
+  custom_app_repo_git_provider                      = var.custom_app_repo_git_provider
   custom_app_repo_git_token_secret_crn              = var.custom_app_repo_git_token_secret_crn
   custom_app_repo_git_token_secret_name             = var.custom_app_repo_git_token_secret_name
   custom_app_repo_git_token_secret_value            = var.custom_app_repo_git_token_secret_value
+  custom_app_repo_group                             = var.custom_app_repo_group
   custom_app_repo_root_url                          = var.custom_app_repo_root_url
   custom_app_repo_title                             = var.custom_app_repo_title
   enable_key_protect                                = var.enable_key_protect
