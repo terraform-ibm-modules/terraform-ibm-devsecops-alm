@@ -25,9 +25,7 @@ locals {
 
   #determine if the key should be a service api key or a regular api key
   # Is a service api key if either a Git token is specified or the override is set
-  create_pipeline_service_api_key_temp = ((var.repo_git_token_secret_name != "") || (var.force_create_service_api_key == true)) ? true : false
-
-  create_pipeline_service_api_key = ((local.create_api_key == true) && (local.create_pipeline_service_api_key_temp == true)) ? true : false
+  create_pipeline_service_api_key = ((local.create_api_key == true) && (var.force_create_standard_api_key == false)) ? true : false
 
   # Is an api key if create key is true and create service api key is false
   create_pipeline_api_key = ((local.create_api_key == true) && (local.create_pipeline_service_api_key == false)) ? true : false
@@ -218,7 +216,7 @@ resource "ibm_sm_arbitrary_secret" "secret_signing_certifcate" {
 }
 
 resource "ibm_sm_arbitrary_secret" "git_token" {
-  count           = ((var.create_git_token == true) && (var.sm_exists == true)) ? 1 : 0
+  count           = ((var.create_git_token == true) && (var.sm_exists == true) && (var.repo_git_token_secret_name != "") && (var.repo_git_token_secret_value != "")) ? 1 : 0
   depends_on      = [ibm_sm_secret_group.sm_secret_group]
   region          = var.sm_location
   instance_id     = (local.sm_instance_id != "") ? local.sm_instance_id : var.sm_instance_id
@@ -227,6 +225,20 @@ resource "ibm_sm_arbitrary_secret" "git_token" {
   description     = "A personal access token for accessing your repositories."
   labels          = []
   payload         = var.repo_git_token_secret_value
+  expiration_date = local.expiration_date
+  endpoint_type   = var.sm_endpoint_type
+}
+
+resource "ibm_sm_arbitrary_secret" "custom_app_git_token" {
+  count           = ((var.create_git_token == true) && (var.sm_exists == true) && (var.custom_app_repo_git_token_secret_name != "") && (var.custom_app_repo_git_token_secret_value != "")) ? 1 : 0
+  depends_on      = [ibm_sm_secret_group.sm_secret_group]
+  region          = var.sm_location
+  instance_id     = (local.sm_instance_id != "") ? local.sm_instance_id : var.sm_instance_id
+  secret_group_id = (var.create_secret_group == false) ? data.ibm_sm_secret_group.existing_sm_secret_group[0].secret_group_id : ibm_sm_secret_group.sm_secret_group[0].secret_group_id
+  name            = var.custom_app_repo_git_token_secret_name
+  description     = "A personal access token for accessing your application repositories."
+  labels          = []
+  payload         = var.custom_app_repo_git_token_secret_value
   expiration_date = local.expiration_date
   endpoint_type   = var.sm_endpoint_type
 }

@@ -65,6 +65,19 @@ variable "repo_git_token_secret_value" {
   default     = ""
 }
 
+variable "custom_app_repo_git_token_secret_name" {
+  type        = string
+  description = "The name of the Git token secret in the secret provider used for accessing the sample application repository, pipeline config repository and additionally the deployment repository of the CD toolchain. Takes precedence for these repositories over the value set in `repo_git_token_secret_name`."
+  default     = ""
+}
+
+variable "custom_app_repo_git_token_secret_value" {
+  type        = string
+  sensitive   = true
+  description = "The personal access token that will be added to the `custom_app_repo_git_token_secret_name` secret in the secrets provider. Note if also using `repo_git_token_secret_name` to set a Git Token in Secrets Manager, the names of the secrets must be different."
+  default     = ""
+}
+
 variable "sm_exists" {
   description = "Only connect to the Secrets Manager instance if it has been enabled for the toolchain."
   type        = bool
@@ -182,9 +195,9 @@ variable "create_code_engine_access_policy" {
   default     = false
 }
 
-variable "force_create_service_api_key" {
+variable "force_create_standard_api_key" {
   type        = bool
-  description = "Set to `true` to force create a service api key. By default the generated apikey will be a service api key if a Git token is specified. See `repo_git_token_secret_name`. In the absence of a Git Token a full api key will instead be created."
+  description = "Set to `true` to force create a standard api key. By default the generated apikey will be a service api key. It is recommended to use a Git Token when using the service api key. In the case where the user has been invited to an account and that user not the account owner, during toolchain creation the default compliance repositories will be created in that user's account and the service api will not have access to those repositories. In this case a Git Token for the repositories is required. See `repo_git_token_secret_name` for more details. The alternative is to set `force_create_standard_api_key` to `true` to create a standard api key."
   default     = false
 }
 

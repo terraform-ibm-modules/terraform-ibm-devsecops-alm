@@ -28,12 +28,6 @@ variable "app_repo_auth_type" {
   default     = ""
 }
 
-variable "app_repo_blind_connection" {
-  type        = string
-  description = "Setting this value to `true` means the server is not addressable on the public internet. IBM Cloud will not be able to validate the connection details you provide. Certain functionality that requires API access to the git server will be disabled. Delivery pipeline will only work using a private worker that has network access to the git server."
-  default     = ""
-}
-
 variable "app_repo_branch" {
   type        = string
   description = "This is the repository branch used by the default sample application. Alternatively if `app_repo_existing_url` is provided, then the branch must reflect the default branch for that repository. Typically these branches are `main` or `master`."
@@ -82,21 +76,9 @@ variable "app_repo_git_token_secret_name" {
   default     = ""
 }
 
-variable "app_repo_root_url" {
-  type        = string
-  description = "(Optional) The Root URL of the server. e.g. https://git.example.com."
-  default     = ""
-}
-
 variable "app_repo_secret_group" {
   type        = string
   description = "Secret group for the App repository secret. Defaults to the value set in `sm_secret_group` if not set. Only used with `Secrets Manager`."
-  default     = ""
-}
-
-variable "app_repo_title" {
-  type        = string
-  description = "(Optional) The title of the server. e.g. My Git Enterprise Server."
   default     = ""
 }
 
@@ -353,6 +335,66 @@ variable "create_triggers" {
   default     = "true"
 }
 
+variable "custom_app_repo_blind_connection" {
+  type        = string
+  description = "Setting this value to `true` means the server is not addressable on the public internet. IBM Cloud will not be able to validate the connection details you provide. Certain functionality that requires API access to the git server will be disabled. Delivery pipeline will only work using a private worker that has network access to the git server."
+  default     = ""
+}
+
+variable "custom_app_repo_git_token_secret_crn" {
+  type        = string
+  sensitive   = true
+  description = "The CRN for Git Token used by the sample application repository, pipeline config repository and additionally the deployment repository of the CD toolchain. Takes precedence for these repositories over the value set in `repo_git_token_secret_crn`."
+  default     = ""
+  validation {
+    condition     = startswith(var.custom_app_repo_git_token_secret_crn, "crn:") || var.custom_app_repo_git_token_secret_crn == ""
+    error_message = "Must be a CRN or left empty."
+  }
+}
+
+variable "custom_app_repo_git_id" {
+  type        = string
+  description = "The Git ID for the application repositories. Used by the sample application repository, pipeline config repository and additionally the deployment repository of the CD toolchain. Takes precedence for these repositories over the value set in `repo_git_id`."
+  default     = ""
+}
+
+variable "custom_app_repo_git_provider" {
+  type        = string
+  description = "The Git provider type. Used by the sample application repository, pipeline config repository and additionally the deployment repository of the CD toolchain. Takes precedence for these repositories over the value set in `repo_git_provider`."
+  default     = ""
+}
+
+variable "custom_app_repo_group" {
+  type        = string
+  description = "Specify the Git user or group for your application. This must be set if the repository authentication type is `pat` (personal access token). Used by the sample application repository, pipeline config repository and additionally the deployment repository of the CD toolchain. Takes precedence for these repositories over the value set in `repo_group`."
+  default     = ""
+}
+
+variable "custom_app_repo_git_token_secret_name" {
+  type        = string
+  description = "The name of the Git token secret in the secret provider used for accessing the sample application repository, pipeline config repository and additionally the deployment repository of the CD toolchain. Takes precedence for these repositories over the value set in `repo_git_token_secret_name`."
+  default     = ""
+}
+
+variable "custom_app_repo_git_token_secret_value" {
+  type        = string
+  sensitive   = true
+  description = "The personal access token that will be added to the `app_repo_git_token_secret_name` secret in the secrets provider. Note if also using `repo_git_token_secret_name` to set a Git Token in Secrets Manager, the names of the secrets must be different."
+  default     = ""
+}
+
+variable "custom_app_repo_root_url" {
+  type        = string
+  description = "(Optional) The Root URL of the server. e.g. https://git.example.com. Applies to the sample application repository, pipeline config repository and additionally the deployment repository of the CD toolchain. Takes precedence over `repo_root_url`, if also set."
+  default     = ""
+}
+
+variable "custom_app_repo_title" {
+  type        = string
+  description = "(Optional) The title of the server. e.g. My Git Enterprise Server. Applies to the sample application repository, pipeline config repository and additionally the deployment repository of the CD toolchain. Takes precedence over `repo_title`, if also set."
+  default     = ""
+}
+
 variable "enable_key_protect" {
   type        = string
   description = "Set to `true` to the enable Key Protect integrations."
@@ -476,9 +518,9 @@ variable "evidence_repo_secret_group" {
   default     = ""
 }
 
-variable "force_create_service_api_key" {
+variable "force_create_standard_api_key" {
   type        = bool
-  description = "Set to `true` to force create a service api key. By default the generated apikey will be a service api key if a Git token is specified. See `repo_git_token_secret_name`. In the absence of a Git Token a full api key will instead be created."
+  description = "Set to `true` to force create a standard api key. By default the generated apikey will be a service api key. It is recommended to use a Git Token when using the service api key. In the case where the user has been invited to an account and that user not the account owner, during toolchain creation the default compliance repositories will be created in that user's account and the service api will not have access to those repositories. In this case a Git Token for the repositories is required. See `repo_git_token_secret_name` for more details. The alternative is to set `force_create_standard_api_key` to `true` to create a standard api key."
   default     = false
 }
 
