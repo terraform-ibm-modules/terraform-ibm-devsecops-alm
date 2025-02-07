@@ -29,6 +29,8 @@ locals {
   repo_git_token_secret_crn  = (var.repo_settings_apply_to_all == true) ? var.repo_git_token_secret_crn : ""
   repo_git_token_secret_name = (var.repo_settings_apply_to_all == true) ? var.repo_git_token_secret_name : ""
   repo_secret_group          = (var.repo_settings_apply_to_all == true) ? var.repo_secret_group : ""
+  repo_auth_type_app_group   = ((var.repo_git_token_secret_name == "") && (var.repo_git_token_secret_crn == "")) ? "" : "pat"
+  repo_auth_type             = (var.repo_settings_apply_to_all == true) ? local.repo_auth_type_app_group : ""
 
   #setting all three toolchain specific parameters to false by default instead of null. If any of these values change then use the toolchain specific values.
   ci_enable_secrets_manager = (var.ci_enable_secrets_manager == "") ? var.enable_secrets_manager : var.ci_enable_secrets_manager
@@ -50,7 +52,7 @@ locals {
   cd_scc_enable_scc = (var.cd_scc_enable_scc == "") ? var.scc_enable_scc : var.cd_scc_enable_scc
   cc_scc_enable_scc = (var.cc_scc_enable_scc == "") ? var.scc_enable_scc : var.cc_scc_enable_scc
 
-  repo_auth_type               = ((var.repo_git_token_secret_name == "") && (var.repo_git_token_secret_crn == "")) ? "" : "pat"
+
   calculated_ci_cluster_region = (var.ci_cluster_region != "") ? var.ci_cluster_region : var.toolchain_region
 
   ci_toolchain_name = (var.ci_toolchain_name == "") ? format("${var.toolchain_name}%s", "-CI-Toolchain") : var.ci_toolchain_name
@@ -309,7 +311,7 @@ module "prereqs" {
   privateworker_secret_value       = var.privateworker_secret_value
   signing_key_secret_name          = var.ci_signing_key_secret_name
   signing_certifcate_secret_name   = var.cd_code_signing_cert_secret_name
-  repo_git_token_secret_name       = local.repo_git_token_secret_name
+  repo_git_token_secret_name       = var.repo_git_token_secret_name
   repo_git_token_secret_value      = var.repo_git_token_secret_value
   rotation_period                  = var.rotation_period
   rotate_signing_key               = var.rotate_signing_key
@@ -406,13 +408,13 @@ module "devsecops_ci_toolchain" {
 
   #AUTH TYPE FOR REPOS
   pipeline_config_repo_auth_type = (
-    (local.ci_pipeline_config_repo_auth_type != "") ? local.ci_pipeline_config_repo_auth_type : local.repo_auth_type
+    (local.ci_pipeline_config_repo_auth_type != "") ? local.ci_pipeline_config_repo_auth_type : local.repo_auth_type_app_group
   )
   inventory_repo_auth_type = (local.ci_inventory_repo_auth_type == "") ? local.repo_auth_type : local.ci_inventory_repo_auth_type
   issues_repo_auth_type    = (local.ci_issues_repo_auth_type == "") ? local.repo_auth_type : local.ci_issues_repo_auth_type
   evidence_repo_auth_type  = (local.ci_evidence_repo_auth_type == "") ? local.repo_auth_type : local.ci_evidence_repo_auth_type
   app_repo_auth_type = (
-    (local.ci_app_repo_auth_type != "") ? local.ci_app_repo_auth_type : local.repo_auth_type
+    (local.ci_app_repo_auth_type != "") ? local.ci_app_repo_auth_type : local.repo_auth_type_app_group
   )
   compliance_pipeline_repo_auth_type = (var.compliance_pipeline_repo_use_group_settings) ? local.repo_auth_type : local.ci_compliance_pipeline_repo_auth_type
 
@@ -424,7 +426,7 @@ module "devsecops_ci_toolchain" {
   inventory_group = (local.ci_inventory_group == "") ? local.repo_group : local.ci_inventory_group
   evidence_group  = (local.ci_evidence_group == "") ? local.repo_group : local.ci_evidence_group
   pipeline_config_group = (
-    (local.ci_pipeline_config_group != "") ? local.ci_pipeline_config_group : var.repo_group
+    (local.ci_pipeline_config_group != "") ? local.ci_pipeline_config_group : local.repo_auth_type_app_group
   )
   compliance_pipeline_group = (var.compliance_pipeline_repo_use_group_settings) ? local.repo_group : local.ci_compliance_pipeline_group
 
@@ -669,13 +671,13 @@ module "devsecops_cd_toolchain" {
 
   #AUTH TYPE FOR REPOS
   pipeline_config_repo_auth_type = (
-    (local.cd_pipeline_config_repo_auth_type != "") ? local.cd_pipeline_config_repo_auth_type : local.repo_auth_type
+    (local.cd_pipeline_config_repo_auth_type != "") ? local.cd_pipeline_config_repo_auth_type : local.repo_auth_type_app_group
   )
   inventory_repo_auth_type = (local.cd_inventory_repo_auth_type == "") ? local.repo_auth_type : local.cd_inventory_repo_auth_type
   issues_repo_auth_type    = (local.cd_issues_repo_auth_type == "") ? local.repo_auth_type : local.cd_issues_repo_auth_type
   evidence_repo_auth_type  = (local.cd_evidence_repo_auth_type == "") ? local.repo_auth_type : local.cd_evidence_repo_auth_type
   deployment_repo_auth_type = (
-    (var.cd_deployment_repo_auth_type != "") ? var.cd_deployment_repo_auth_type : local.repo_auth_type
+    (var.cd_deployment_repo_auth_type != "") ? var.cd_deployment_repo_auth_type : local.repo_auth_type_app_group
   )
   compliance_pipeline_repo_auth_type = (var.compliance_pipeline_repo_use_group_settings) ? local.repo_auth_type : local.cd_compliance_pipeline_repo_auth_type
   change_management_repo_auth_type   = (var.cd_change_management_repo_auth_type == "") ? local.repo_auth_type : var.cd_change_management_repo_auth_type
@@ -940,13 +942,13 @@ module "devsecops_cc_toolchain" {
 
   #AUTH TYPE FOR REPOS
   pipeline_config_repo_auth_type = (
-    (local.cc_pipeline_config_repo_auth_type != "") ? local.cc_pipeline_config_repo_auth_type : local.repo_auth_type
+    (local.cc_pipeline_config_repo_auth_type != "") ? local.cc_pipeline_config_repo_auth_type : local.repo_auth_type_app_group
   )
   inventory_repo_auth_type = (local.cc_inventory_repo_auth_type == "") ? local.repo_auth_type : local.cc_inventory_repo_auth_type
   issues_repo_auth_type    = (local.cc_issues_repo_auth_type == "") ? local.repo_auth_type : local.cc_issues_repo_auth_type
   evidence_repo_auth_type  = (local.cc_evidence_repo_auth_type == "") ? local.repo_auth_type : local.cc_evidence_repo_auth_type
   app_repo_auth_type = (
-    (local.cc_app_repo_auth_type != "") ? local.cc_app_repo_auth_type : local.repo_auth_type
+    (local.cc_app_repo_auth_type != "") ? local.cc_app_repo_auth_type : local.repo_auth_type_app_group
   )
   compliance_pipeline_repo_auth_type = (var.compliance_pipeline_repo_use_group_settings) ? local.repo_auth_type : local.cc_compliance_pipeline_repo_auth_type
 
