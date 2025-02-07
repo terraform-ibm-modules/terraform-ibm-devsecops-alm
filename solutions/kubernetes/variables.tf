@@ -148,9 +148,9 @@ variable "compliance_pipeline_repo_git_id" {
 }
 
 variable "compliance_pipeline_repo_blind_connection" {
-  type        = string
+  type        = bool
   description = "Setting this value to `true` means the server is not addressable on the public internet. IBM Cloud will not be able to validate the connection details you provide. Certain functionality that requires API access to the git server will be disabled. Delivery pipeline will only work using a private worker that has network access to the git server."
-  default     = ""
+  default     = false
 }
 
 variable "compliance_pipeline_repo_name" {
@@ -333,66 +333,6 @@ variable "create_triggers" {
   type        = string
   description = "Set to `true` to create the default triggers associated with the compliance repos and sample app."
   default     = "true"
-}
-
-variable "custom_app_repo_blind_connection" {
-  type        = string
-  description = "Setting this value to `true` means the server is not addressable on the public internet. IBM Cloud will not be able to validate the connection details you provide. Certain functionality that requires API access to the git server will be disabled. Delivery pipeline will only work using a private worker that has network access to the git server."
-  default     = ""
-}
-
-variable "custom_app_repo_git_token_secret_crn" {
-  type        = string
-  sensitive   = true
-  description = "The CRN for Git Token used by the sample application repository, pipeline config repository and additionally the deployment repository of the CD toolchain. Takes precedence for these repositories over the value set in `repo_git_token_secret_crn`."
-  default     = ""
-  validation {
-    condition     = startswith(var.custom_app_repo_git_token_secret_crn, "crn:") || var.custom_app_repo_git_token_secret_crn == ""
-    error_message = "Must be a CRN or left empty."
-  }
-}
-
-variable "custom_app_repo_git_id" {
-  type        = string
-  description = "The Git ID for the application repositories. Used by the sample application repository, pipeline config repository and additionally the deployment repository of the CD toolchain. Takes precedence for these repositories over the value set in `repo_git_id`."
-  default     = ""
-}
-
-variable "custom_app_repo_git_provider" {
-  type        = string
-  description = "The Git provider type. Used by the sample application repository, pipeline config repository and additionally the deployment repository of the CD toolchain. Takes precedence for these repositories over the value set in `repo_git_provider`."
-  default     = ""
-}
-
-variable "custom_app_repo_group" {
-  type        = string
-  description = "Specify the Git user or group for your application. This must be set if the repository authentication type is `pat` (personal access token). Used by the sample application repository, pipeline config repository and additionally the deployment repository of the CD toolchain. Takes precedence for these repositories over the value set in `repo_group`."
-  default     = ""
-}
-
-variable "custom_app_repo_git_token_secret_name" {
-  type        = string
-  description = "The name of the Git token secret in the secret provider used for accessing the sample application repository, pipeline config repository and additionally the deployment repository of the CD toolchain. Takes precedence for these repositories over the value set in `repo_git_token_secret_name`."
-  default     = ""
-}
-
-variable "custom_app_repo_git_token_secret_value" {
-  type        = string
-  sensitive   = true
-  description = "The personal access token that will be added to the `app_repo_git_token_secret_name` secret in the secrets provider. Note if also using `repo_git_token_secret_name` to set a Git Token in Secrets Manager, the names of the secrets must be different."
-  default     = ""
-}
-
-variable "custom_app_repo_root_url" {
-  type        = string
-  description = "(Optional) The Root URL of the server. e.g. https://git.example.com. Applies to the sample application repository, pipeline config repository and additionally the deployment repository of the CD toolchain. Takes precedence over `repo_root_url`, if also set."
-  default     = ""
-}
-
-variable "custom_app_repo_title" {
-  type        = string
-  description = "(Optional) The title of the server. e.g. My Git Enterprise Server. Applies to the sample application repository, pipeline config repository and additionally the deployment repository of the CD toolchain. Takes precedence over `repo_title`, if also set."
-  default     = ""
 }
 
 variable "enable_key_protect" {
@@ -867,10 +807,16 @@ variable "registry_namespace" {
   default     = ""
 }
 
+variable "repo_settings_apply_to_all" {
+  type        = bool
+  description = "Set to `true` to apply the same settings to all the default compliance repositories. Set to `false` to apply these settings to only the sample application, pipeline config and the deployment repositories."
+  default     = true
+}
+
 variable "repo_blind_connection" {
-  type        = string
+  type        = bool
   description = "Setting this value to `true` means the server is not addressable on the public internet. IBM Cloud will not be able to validate the connection details you provide. Certain functionality that requires API access to the git server will be disabled. Delivery pipeline will only work using a private worker that has network access to the git server."
-  default     = ""
+  default     = false
 }
 
 variable "repo_git_id" {

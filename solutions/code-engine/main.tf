@@ -57,15 +57,6 @@ module "devsecops_da" {
   create_signing_key                                = var.create_signing_key
   create_triggers                                   = var.create_triggers
   create_git_triggers                               = var.create_git_triggers
-  custom_app_repo_blind_connection                  = var.custom_app_repo_blind_connection
-  custom_app_repo_git_id                            = var.custom_app_repo_git_id
-  custom_app_repo_git_provider                      = var.custom_app_repo_git_provider
-  custom_app_repo_git_token_secret_crn              = var.custom_app_repo_git_token_secret_crn
-  custom_app_repo_git_token_secret_name             = var.custom_app_repo_git_token_secret_name
-  custom_app_repo_git_token_secret_value            = var.custom_app_repo_git_token_secret_value
-  custom_app_repo_group                             = var.custom_app_repo_group
-  custom_app_repo_root_url                          = var.custom_app_repo_root_url
-  custom_app_repo_title                             = var.custom_app_repo_title
   enable_key_protect                                = var.enable_key_protect
   enable_pipeline_notifications                     = var.enable_pipeline_notifications
   enable_privateworker                              = var.enable_privateworker
@@ -145,6 +136,7 @@ module "devsecops_da" {
   repo_root_url                                     = var.repo_root_url
   repo_secret_group                                 = var.repo_secret_group
   repo_title                                        = var.repo_title
+  repo_settings_apply_to_all                        = var.repo_settings_apply_to_all
   repositories_prefix                               = var.repositories_prefix
   rotation_period                                   = var.rotation_period
   rotate_signing_key                                = var.rotate_signing_key

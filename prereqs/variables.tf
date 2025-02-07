@@ -65,19 +65,6 @@ variable "repo_git_token_secret_value" {
   default     = ""
 }
 
-variable "custom_app_repo_git_token_secret_name" {
-  type        = string
-  description = "The name of the Git token secret in the secret provider used for accessing the sample application repository, pipeline config repository and additionally the deployment repository of the CD toolchain. Takes precedence for these repositories over the value set in `repo_git_token_secret_name`."
-  default     = ""
-}
-
-variable "custom_app_repo_git_token_secret_value" {
-  type        = string
-  sensitive   = true
-  description = "The personal access token that will be added to the `custom_app_repo_git_token_secret_name` secret in the secrets provider. Note if also using `repo_git_token_secret_name` to set a Git Token in Secrets Manager, the names of the secrets must be different."
-  default     = ""
-}
-
 variable "sm_exists" {
   description = "Only connect to the Secrets Manager instance if it has been enabled for the toolchain."
   type        = bool
