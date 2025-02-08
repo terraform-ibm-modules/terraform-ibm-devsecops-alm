@@ -136,7 +136,7 @@ module "devsecops_da" {
   repo_root_url                                     = var.repo_root_url
   repo_secret_group                                 = var.repo_secret_group
   repo_title                                        = var.repo_title
-  repo_settings_apply_to_all                        = var.repo_settings_apply_to_all
+  repo_apply_settings_to_compliance_repos           = var.repo_apply_settings_to_compliance_repos
   repositories_prefix                               = var.repositories_prefix
   rotation_period                                   = var.rotation_period
   rotate_signing_key                                = var.rotate_signing_key

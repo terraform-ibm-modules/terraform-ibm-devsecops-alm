@@ -20,17 +20,17 @@ locals {
   # Local variables for the compliance repositories. Allows for exclusiion from full set of default compliance repositories.
   # Allows for app, deployment and config repositories to be set exclusively
   # Example app repo uses `var.repo_title` and evidence repo uses `local.repo_title` for this separation
-  repo_title                 = (var.repo_settings_apply_to_all == true) ? var.repo_title : ""
-  repo_root_url              = (var.repo_settings_apply_to_all == true) ? var.repo_root_url : ""
-  repo_blind_connection      = (var.repo_settings_apply_to_all == true) ? var.repo_blind_connection : false
-  repo_group                 = (var.repo_settings_apply_to_all == true) ? var.repo_group : ""
-  repo_git_id                = (var.repo_settings_apply_to_all == true) ? var.repo_git_id : ""
-  repo_git_provider          = (var.repo_settings_apply_to_all == true) ? var.repo_git_provider : ""
-  repo_git_token_secret_crn  = (var.repo_settings_apply_to_all == true) ? var.repo_git_token_secret_crn : ""
-  repo_git_token_secret_name = (var.repo_settings_apply_to_all == true) ? var.repo_git_token_secret_name : ""
-  repo_secret_group          = (var.repo_settings_apply_to_all == true) ? var.repo_secret_group : ""
+  repo_title                 = (var.repo_apply_settings_to_compliance_repos == true) ? var.repo_title : ""
+  repo_root_url              = (var.repo_apply_settings_to_compliance_repos == true) ? var.repo_root_url : ""
+  repo_blind_connection      = (var.repo_apply_settings_to_compliance_repos == true) ? var.repo_blind_connection : false
+  repo_group                 = (var.repo_apply_settings_to_compliance_repos == true) ? var.repo_group : ""
+  repo_git_id                = (var.repo_apply_settings_to_compliance_repos == true) ? var.repo_git_id : ""
+  repo_git_provider          = (var.repo_apply_settings_to_compliance_repos == true) ? var.repo_git_provider : ""
+  repo_git_token_secret_crn  = (var.repo_apply_settings_to_compliance_repos == true) ? var.repo_git_token_secret_crn : ""
+  repo_git_token_secret_name = (var.repo_apply_settings_to_compliance_repos == true) ? var.repo_git_token_secret_name : ""
+  repo_secret_group          = (var.repo_apply_settings_to_compliance_repos == true) ? var.repo_secret_group : ""
   repo_auth_type_app_group   = ((var.repo_git_token_secret_name == "") && (var.repo_git_token_secret_crn == "")) ? "" : "pat"
-  repo_auth_type             = (var.repo_settings_apply_to_all == true) ? local.repo_auth_type_app_group : ""
+  repo_auth_type             = (var.repo_apply_settings_to_compliance_repos == true) ? local.repo_auth_type_app_group : ""
 
   #setting all three toolchain specific parameters to false by default instead of null. If any of these values change then use the toolchain specific values.
   ci_enable_secrets_manager = (var.ci_enable_secrets_manager == "") ? var.enable_secrets_manager : var.ci_enable_secrets_manager

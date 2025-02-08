@@ -811,7 +811,7 @@ variable "registry_namespace" {
   default     = ""
 }
 
-variable "repo_settings_apply_to_all" {
+variable "repo_apply_settings_to_compliance_repos" {
   type        = bool
   description = "Set to `true` to apply the same settings to all the default compliance repositories. Set to `false` to apply these settings to only the sample application, pipeline config and the deployment repositories."
   default     = true
