@@ -1273,7 +1273,7 @@
                             "key": "create_privateworker_secret",
                             "type": "boolean",
                             "default_value": false,
-                            "description": "Set to `true` to add a specified private worker service api key to the Secrets Provider.",
+                            "description": "Set to `true` to add a specified private worker service api key to the Secrets Provider. This also enables a private worker tool integration in the toolchains.",
                             "required": false
                         },
                         {
@@ -3284,7 +3284,7 @@
                             "key": "create_privateworker_secret",
                             "type": "boolean",
                             "default_value": false,
-                            "description": "Set to `true` to add a specified private worker service api key to the Secrets Provider.",
+                            "description": "Set to `true` to add a specified private worker service api key to the Secrets Provider. This also enables a private worker tool integration in the toolchains.",
                             "required": false
                         },
                         {

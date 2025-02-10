@@ -534,7 +534,7 @@ module "devsecops_ci_toolchain" {
   privateworker_credentials_secret_group = var.privateworker_credentials_secret_group
   privateworker_credentials_secret_name  = var.privateworker_credentials_secret_name
   privateworker_name                     = var.privateworker_name
-  enable_privateworker                   = var.enable_privateworker
+  enable_privateworker                   = (var.create_privateworker_secret == true) ? true : var.enable_privateworker
 
   #SONARQUBE
   sonarqube_integration_name    = (var.ci_sonarqube_integration_name == "") ? var.sonarqube_integration_name : var.ci_sonarqube_integration_name
@@ -809,7 +809,7 @@ module "devsecops_cd_toolchain" {
   privateworker_credentials_secret_group = var.privateworker_credentials_secret_group
   privateworker_credentials_secret_name  = var.privateworker_credentials_secret_name
   privateworker_name                     = var.privateworker_name
-  enable_privateworker                   = var.enable_privateworker
+  enable_privateworker                   = (var.create_privateworker_secret == true) ? true : var.enable_privateworker
 
   #SLACK INTEGRATION
   enable_slack           = (local.cd_enable_slack == "true") ? true : false
@@ -1076,7 +1076,7 @@ module "devsecops_cc_toolchain" {
   privateworker_credentials_secret_group = var.privateworker_credentials_secret_group
   privateworker_credentials_secret_name  = var.privateworker_credentials_secret_name
   privateworker_name                     = var.privateworker_name
-  enable_privateworker                   = var.enable_privateworker
+  enable_privateworker                   = (var.create_privateworker_secret == true) ? true : var.enable_privateworker
 
 
   #SONARQUBE

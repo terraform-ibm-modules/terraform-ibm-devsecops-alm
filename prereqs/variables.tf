@@ -36,7 +36,7 @@ variable "create_cos_api_key" {
 
 variable "create_privateworker_secret" {
   type        = bool
-  description = "Set to `true` to add a specified private worker service api key to the Secrets Provider."
+  description = "Set to `true` to add a specified private worker service api key to the Secrets Provider. This also enables a private worker tool integration in the toolchains."
   default     = false
 }
 
