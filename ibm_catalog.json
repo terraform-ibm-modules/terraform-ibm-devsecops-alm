@@ -125,6 +125,66 @@
                             }
                         ]
                     },
+                    "iam_permissions": [
+						{
+							"role_crns": [
+								"crn:v1:bluemix:public:iam::::role:Administrator",
+								"crn:v1:bluemix:public:iam::::serviceRole:Manager"
+							],
+							"service_name": "secrets-manager"
+						},
+						{
+							"role_crns": [
+								"crn:v1:bluemix:public:iam::::role:Administrator"
+							],
+							"service_name": "cloud-object-storage"
+						},
+						{
+							"role_crns": [
+								"crn:v1:bluemix:public:iam::::role:Administrator"
+							],
+							"service_name": "codeengine"
+						},
+						{
+							"role_crns": [
+								"crn:v1:bluemix:public:iam::::role:Administrator"
+							],
+							"service_name": "continuous-delivery"
+						},
+						{
+							"role_crns": [
+								"crn:v1:bluemix:public:iam::::role:Administrator"
+							],
+							"service_name": "resource-group"
+						},
+						{
+							"role_crns": [
+								"crn:v1:bluemix:public:iam::::role:Administrator"
+							],
+							"service_name": "container-registry"
+						},
+						{
+							"role_crns": [
+								"crn:v1:bluemix:public:iam::::role:Editor"
+							],
+							"service_name": "iam-groups"
+						},
+						{
+							"role_crns": [
+								"crn:v1:bluemix:public:iam::::role:Editor"
+							],
+							"service_name": "toolchain"
+						},
+						{
+							"role_crns": [
+								"crn:v1:bluemix:public:iam-identity::::serviceRole:ServiceIdCreator",
+								"crn:v1:bluemix:public:iam-identity::::serviceRole:UserApiKeyCreator",
+								"crn:v1:bluemix:public:iam::::role:Operator"
+
+							],
+							"service_name": "iam-identity"
+						}
+					],
                     "configuration": [
                         {
                             "key": "toolchain_name",
@@ -2143,6 +2203,66 @@
                             }
                         ]
                     },
+                    "iam_permissions": [
+						{
+							"role_crns": [
+								"crn:v1:bluemix:public:iam::::role:Administrator",
+								"crn:v1:bluemix:public:iam::::serviceRole:Manager"
+							],
+							"service_name": "secrets-manager"
+						},
+						{
+							"role_crns": [
+								"crn:v1:bluemix:public:iam::::role:Administrator"
+							],
+							"service_name": "cloud-object-storage"
+						},
+						{
+							"role_crns": [
+								"crn:v1:bluemix:public:iam::::role:Administrator"
+							],
+							"service_name": "containers-kubernetes"
+						},
+						{
+							"role_crns": [
+								"crn:v1:bluemix:public:iam::::role:Administrator"
+							],
+							"service_name": "continuous-delivery"
+						},
+						{
+							"role_crns": [
+								"crn:v1:bluemix:public:iam::::role:Administrator"
+							],
+							"service_name": "resource-group"
+						},
+						{
+							"role_crns": [
+								"crn:v1:bluemix:public:iam::::role:Administrator"
+							],
+							"service_name": "container-registry"
+						},
+						{
+							"role_crns": [
+								"crn:v1:bluemix:public:iam::::role:Editor"
+							],
+							"service_name": "iam-groups"
+						},
+						{
+							"role_crns": [
+								"crn:v1:bluemix:public:iam::::role:Editor"
+							],
+							"service_name": "toolchain"
+						},
+						{
+							"role_crns": [
+								"crn:v1:bluemix:public:iam-identity::::serviceRole:ServiceIdCreator",
+								"crn:v1:bluemix:public:iam-identity::::serviceRole:UserApiKeyCreator",
+								"crn:v1:bluemix:public:iam::::role:Operator"
+
+							],
+							"service_name": "iam-identity"
+						}
+					],
                     "configuration": [
                         {
                             "key": "toolchain_name",
