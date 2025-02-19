@@ -40,8 +40,10 @@ module "devsecops_da" {
   cos_api_key_secret_crn                            = var.cos_api_key_secret_crn
   cos_api_key_secret_group                          = var.cos_api_key_secret_group
   cos_api_key_secret_name                           = var.cos_api_key_secret_name
+  cos_api_key_secret_value                          = var.cos_api_key_secret_value
   cos_bucket_name                                   = var.cos_bucket_name
   cos_endpoint                                      = var.cos_endpoint
+  create_access_group                               = var.create_access_group
   create_cc_toolchain                               = var.create_cc_toolchain
   create_cd_instance                                = var.create_cd_instance
   create_cd_toolchain                               = var.create_cd_toolchain
@@ -119,6 +121,7 @@ module "devsecops_da" {
   pipeline_ibmcloud_api_key_secret_crn              = var.pipeline_ibmcloud_api_key_secret_crn
   pipeline_ibmcloud_api_key_secret_group            = var.pipeline_ibmcloud_api_key_secret_group
   pipeline_ibmcloud_api_key_secret_name             = var.pipeline_ibmcloud_api_key_secret_name
+  pipeline_ibmcloud_api_key_secret_value            = var.pipeline_ibmcloud_api_key_secret_value
   prefix                                            = var.prefix
   privateworker_credentials_secret_crn              = var.privateworker_credentials_secret_crn
   privateworker_credentials_secret_group            = var.privateworker_credentials_secret_group
@@ -171,6 +174,7 @@ module "devsecops_da" {
   sonarqube_secret_name                             = var.sonarqube_secret_name
   sonarqube_server_url                              = var.sonarqube_server_url
   sonarqube_user                                    = var.sonarqube_user
+  toolchain_access_group_name                       = var.toolchain_access_group_name
   toolchain_name                                    = var.toolchain_name
   toolchain_resource_group                          = var.toolchain_resource_group
   toolchain_region                                  = var.toolchain_region
@@ -532,4 +536,5 @@ module "devsecops_da" {
   ci_trigger_timed_pruner_enable                    = var.ci_trigger_timed_pruner_enable
   ci_trigger_timed_pruner_name                      = var.ci_trigger_timed_pruner_name
   pr_pipeline_git_tag                               = var.pr_pipeline_git_tag
+  use_legacy_ref                                    = var.use_legacy_ref
 }

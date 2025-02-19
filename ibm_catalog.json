@@ -169,9 +169,22 @@
 							],
 							"service_name": "iam-groups"
 						},
-						{
+                        {
 							"role_crns": [
 								"crn:v1:bluemix:public:iam::::role:Editor"
+							],
+							"service_name": "user-management"
+						},
+						{
+							"role_crns": [
+								"crn:v1:bluemix:public:iam::::role:Administrator",
+                                "crn:v1:bluemix:public:iam::::serviceRole:Manager"
+							],
+							"service_name": "container-registry"
+						},
+                        {
+							"role_crns": [
+								"crn:v1:bluemix:public:iam::::role:Administrator"
 							],
 							"service_name": "toolchain"
 						},
@@ -2247,9 +2260,22 @@
 							],
 							"service_name": "iam-groups"
 						},
-						{
+                        {
 							"role_crns": [
 								"crn:v1:bluemix:public:iam::::role:Editor"
+							],
+							"service_name": "user-management"
+						},
+                        {
+							"role_crns": [
+								"crn:v1:bluemix:public:iam::::role:Administrator",
+                                "crn:v1:bluemix:public:iam::::serviceRole:Manager"
+							],
+							"service_name": "container-registry"
+						},
+						{
+							"role_crns": [
+								"crn:v1:bluemix:public:iam::::role:Administrator"
 							],
 							"service_name": "toolchain"
 						},

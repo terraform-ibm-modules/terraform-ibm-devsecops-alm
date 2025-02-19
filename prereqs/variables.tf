@@ -113,10 +113,24 @@ variable "cos_api_key_secret_name" {
   default     = "cos-api-key"
 }
 
+variable "cos_api_key_secret_value" {
+  type        = string
+  description = "A user provided api key with COS access permissions that can be pushed to Secrets Manager. See `cos_api_key_secret_name`."
+  sensitive   = true
+  default     = ""
+}
+
 variable "iam_api_key_secret_name" {
   type        = string
   description = "The name of the secret as it appears in Secret Manager."
   default     = "ibmcloud-api-key"
+}
+
+variable "iam_api_key_secret_value" {
+  type        = string
+  description = "A user provided api key for running the toolchain pipelines that can be pushed to Secrets Manager. See `iam_api_key_secret_name`."
+  sensitive   = true
+  default     = ""
 }
 
 variable "privateworker_secret_name" {
@@ -195,7 +209,7 @@ variable "sm_resource_group" {
   default     = ""
 }
 
-############### ACCESS GROUPS  ################
+############### SERVICE IDS  ################
 
 variable "service_name_pipeline" {
   type        = string
@@ -207,4 +221,19 @@ variable "service_name_cos" {
   type        = string
   description = "The name of the Service ID for COS access."
   default     = "cos-service-id"
+}
+
+
+############### ACCESS GROUPS  ################
+
+variable "toolchain_access_group_name" {
+  type        = string
+  description = "The name of the DevSecOps access group."
+  default     = "devsecops-toolchain"
+}
+
+variable "create_access_group" {
+  type        = bool
+  description = "Set to `true` to create an access group for the operations of the DevSecOps toolchains."
+  default     = false
 }
