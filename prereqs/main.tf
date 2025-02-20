@@ -21,17 +21,27 @@ locals {
   expiration_date = (local.sm_secret_expiration_period_hours != null) ? timeadd(time_static.timestamp[0].rfc3339, "${local.sm_secret_expiration_period_hours}h") : null
 
   #determine if an api key should be created
-  create_api_key     = ((var.create_ibmcloud_api_key == true) && (var.sm_exists == true)) ? true : false
+  #can either be a service api key, a standard api key or a provided api key
+  create_api_key = ((var.create_ibmcloud_api_key == true) && (var.sm_exists == true)) ? true : false
+
+  #can be a service api key or a provided api key
   create_cos_api_key = ((var.create_cos_api_key == true) && (var.sm_exists == true)) ? true : false
 
   #determine if the key should be a service api key or a regular api key
   # Is a service api key if the override is set to false
-  create_pipeline_service_api_key = ((local.create_api_key == true) && (var.force_create_standard_api_key == false)) ? true : false
-  create_cos_service_api_key      = ((local.create_cos_api_key == true) && (var.force_create_standard_api_key == false)) ? true : false
+
+  create_pipeline_service_api_key = (local.create_api_key == true && var.force_create_standard_api_key == false && var.iam_api_key_secret_value == "") ? true : false
+  #create_cos_service_api_key      = ((local.create_cos_api_key == true) && (var.force_create_standard_api_key == false)) ? true : false
+  create_auto_rotatable_cos_service_api_key = (local.create_cos_api_key == true && var.force_create_standard_api_key == false && var.cos_api_key_secret_value == "") ? true : false
 
   # Is an api key if the override is set to true
-  create_pipeline_api_key     = ((local.create_api_key == true) && (var.force_create_standard_api_key == true)) ? true : false
-  create_pipeline_cos_api_key = ((local.create_cos_api_key == true) && (var.force_create_standard_api_key == true)) ? true : false
+  create_pipeline_api_key               = (local.create_api_key == true && var.force_create_standard_api_key == true && var.iam_api_key_secret_value == "") ? true : false
+  create_non_auto_rotatable_cos_api_key = (local.create_cos_api_key == true && var.force_create_standard_api_key == true && var.cos_api_key_secret_value == "") ? true : false
+
+  create_cos_service_api_key = (local.create_auto_rotatable_cos_service_api_key == true || local.create_non_auto_rotatable_cos_api_key == true) ? true : false
+
+  create_provided_api_key     = (local.create_api_key == true && var.iam_api_key_secret_value != "") ? true : false
+  create_provided_cos_api_key = (local.create_cos_api_key == true && var.cos_api_key_secret_value != "") ? true : false
 }
 
 resource "time_static" "timestamp" {
@@ -84,16 +94,6 @@ resource "ibm_iam_service_policy" "pipeline_policy" {
   }
 }
 
-resource "ibm_iam_service_policy" "toolchain_policy" {
-  count          = (local.create_pipeline_service_api_key) ? 1 : 0
-  iam_service_id = ibm_iam_service_id.pipeline_service_id[0].id
-  roles          = ["Viewer", "Operator"]
-  resources {
-    service           = "toolchain"
-    resource_group_id = data.ibm_resource_group.resource_group.id
-  }
-}
-
 resource "ibm_iam_service_policy" "cr_policy" {
   count          = (local.create_pipeline_service_api_key) ? 1 : 0
   iam_service_id = ibm_iam_service_id.pipeline_service_id[0].id
@@ -123,7 +123,7 @@ resource "ibm_iam_service_policy" "kube_policy" {
 }
 
 resource "ibm_iam_service_policy" "ce_policy" {
-  count          = ((var.create_code_engine_access_policy) && (local.create_pipeline_service_api_key == true)) ? 1 : 0
+  count          = ((var.create_code_engine_access_policy == true) && (local.create_pipeline_service_api_key == true)) ? 1 : 0
   iam_service_id = ibm_iam_service_id.pipeline_service_id[0].id
   roles          = ["Manager", "Editor"]
   resources {
@@ -247,7 +247,7 @@ resource "ibm_sm_arbitrary_secret" "private_worker_secret" {
 ################## IAM CREDENTIALS SERVICE API KEYS ###############################
 
 resource "ibm_sm_iam_credentials_configuration" "iam_credentials_configuration" {
-  count         = ((local.create_pipeline_service_api_key) || (local.create_cos_service_api_key)) ? 1 : 0
+  count         = (local.create_pipeline_service_api_key) ? 1 : 0
   instance_id   = (local.sm_instance_id != "") ? local.sm_instance_id : var.sm_instance_id
   region        = var.sm_location
   name          = "iam_credentials_config"
@@ -274,7 +274,7 @@ resource "ibm_sm_iam_credentials_secret" "iam_pipeline_apikey_credentials_secret
 }
 
 resource "ibm_sm_iam_credentials_secret" "iam_cos_apikey_credentials_secret" {
-  count       = (local.create_cos_service_api_key) ? 1 : 0
+  count       = (local.create_auto_rotatable_cos_service_api_key) ? 1 : 0
   depends_on  = [ibm_sm_secret_group.sm_secret_group, data.ibm_sm_secret_group.existing_sm_secret_group, ibm_sm_iam_credentials_configuration.iam_credentials_configuration]
   instance_id = data.ibm_resource_instance.sm_instance[0].guid
   region      = var.sm_location
@@ -298,13 +298,14 @@ resource "ibm_iam_api_key" "iam_api_key" {
   name  = "ibmcloud-api-key"
 }
 
-resource "ibm_iam_api_key" "cos_iam_api_key" {
-  count = (local.create_pipeline_cos_api_key) ? 1 : 0
-  name  = "cos-api-key"
+resource "ibm_iam_service_api_key" "cos_service_api_key" {
+  count          = (local.create_non_auto_rotatable_cos_api_key) ? 1 : 0
+  name           = "cos-service-api-key"
+  iam_service_id = ibm_iam_service_id.cos_service_id[0].iam_id
 }
 
 resource "ibm_sm_arbitrary_secret" "secret_ibmcloud_api_key" {
-  count           = (local.create_pipeline_api_key == true) ? 1 : 0
+  count           = (local.create_pipeline_api_key == true || local.create_provided_api_key == true) ? 1 : 0
   depends_on      = [ibm_sm_secret_group.sm_secret_group]
   region          = var.sm_location
   instance_id     = (local.sm_instance_id != "") ? local.sm_instance_id : var.sm_instance_id
@@ -312,13 +313,13 @@ resource "ibm_sm_arbitrary_secret" "secret_ibmcloud_api_key" {
   name            = var.iam_api_key_secret_name
   description     = "The IBMCloud apikey for running the pipelines."
   labels          = []
-  payload         = ibm_iam_api_key.iam_api_key[0].apikey
+  payload         = (local.create_provided_api_key) ? var.iam_api_key_secret_value : ibm_iam_api_key.iam_api_key[0].apikey
   expiration_date = local.expiration_date
   endpoint_type   = var.sm_endpoint_type
 }
 
 resource "ibm_sm_arbitrary_secret" "secret_cos_api_key" {
-  count           = (local.create_pipeline_cos_api_key == true) ? 1 : 0
+  count           = (local.create_non_auto_rotatable_cos_api_key == true || local.create_provided_cos_api_key == true) ? 1 : 0
   depends_on      = [ibm_sm_secret_group.sm_secret_group]
   region          = var.sm_location
   instance_id     = (local.sm_instance_id != "") ? local.sm_instance_id : var.sm_instance_id
@@ -326,7 +327,92 @@ resource "ibm_sm_arbitrary_secret" "secret_cos_api_key" {
   name            = var.cos_api_key_secret_name
   description     = "The COS apikey for accessing the associated COS instance."
   labels          = []
-  payload         = ibm_iam_api_key.cos_iam_api_key[0].apikey
+  payload         = (local.create_provided_cos_api_key) ? var.cos_api_key_secret_value : ibm_iam_service_api_key.cos_service_api_key[0].apikey
   expiration_date = local.expiration_date
   endpoint_type   = var.sm_endpoint_type
+}
+
+######## ACCESS GROUP ####################
+
+resource "ibm_iam_access_group" "toolchain_access_group" {
+  count       = (var.create_access_group == true) ? 1 : 0
+  name        = var.toolchain_access_group_name
+  description = "Access group used for DevSecOps toolchain operations."
+}
+
+
+#resource "ibm_iam_access_group_members" "service_ids" {
+#  count           = (var.create_access_group == true && local.create_pipeline_service_api_key) ? 1 : 0
+#  access_group_id = ibm_iam_access_group.toolchain_access_group[0].id
+#  iam_service_ids = local.service_id_list
+#}
+
+
+resource "ibm_iam_access_group_policy" "resource_group_policy" {
+  count           = (var.create_access_group == true && local.create_api_key == true) ? 1 : 0
+  access_group_id = ibm_iam_access_group.toolchain_access_group[0].id
+  roles           = ["Editor"]
+  resources {
+    resource_type = "resource-group"
+    resource      = data.ibm_resource_group.resource_group.id
+  }
+}
+
+resource "ibm_iam_access_group_policy" "toolchain_group_policy" {
+  count           = (var.create_access_group == true && local.create_api_key == true) ? 1 : 0
+  access_group_id = ibm_iam_access_group.toolchain_access_group[0].id
+  roles           = ["Editor"]
+  resources {
+    service           = "toolchain"
+    resource_group_id = data.ibm_resource_group.resource_group.id
+  }
+}
+
+resource "ibm_iam_access_group_policy" "sm_group_policy" {
+  count           = (var.create_access_group == true && local.create_api_key == true) ? 1 : 0
+  access_group_id = ibm_iam_access_group.toolchain_access_group[0].id
+  roles           = ["Manager"]
+  resources {
+    service = "secrets-manager"
+  }
+}
+
+### Access policies specific to restricting the use of a standard api keys to users added to the access group
+resource "ibm_iam_access_group_policy" "cr_group_policy" {
+  count           = (var.create_access_group == true && (local.create_pipeline_api_key == true || local.create_provided_api_key == true)) ? 1 : 0
+  access_group_id = ibm_iam_access_group.toolchain_access_group[0].id
+  roles           = ["Manager"]
+  resources {
+    service = "container-registry"
+  }
+}
+
+resource "ibm_iam_access_group_policy" "continuous_delivery_group_policy" {
+  count           = (var.create_access_group == true && (local.create_pipeline_api_key == true || local.create_provided_api_key == true)) ? 1 : 0
+  access_group_id = ibm_iam_access_group.toolchain_access_group[0].id
+  roles           = ["Writer"]
+  resources {
+    service           = "continuous-delivery"
+    resource_group_id = data.ibm_resource_group.resource_group.id
+  }
+}
+
+resource "ibm_iam_access_group_policy" "ce_group_policy" {
+  count           = (var.create_access_group == true && var.create_code_engine_access_policy == true && (local.create_pipeline_api_key == true || local.create_provided_api_key == true)) ? 1 : 0
+  access_group_id = ibm_iam_access_group.toolchain_access_group[0].id
+  roles           = ["Manager", "Editor"]
+  resources {
+    service           = "codeengine"
+    resource_group_id = data.ibm_resource_group.resource_group.id
+  }
+}
+
+resource "ibm_iam_access_group_policy" "kube_group_policy" {
+  count           = (var.create_access_group == true && var.create_kubernetes_access_policy == true && (local.create_pipeline_api_key == true || local.create_provided_api_key == true)) ? 1 : 0
+  access_group_id = ibm_iam_access_group.toolchain_access_group[0].id
+  roles           = ["Manager", "Editor"]
+  resources {
+    service           = "containers-kubernetes"
+    resource_group_id = data.ibm_resource_group.resource_group.id
+  }
 }

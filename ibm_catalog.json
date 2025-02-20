@@ -159,19 +159,26 @@
 						},
 						{
 							"role_crns": [
-								"crn:v1:bluemix:public:iam::::role:Administrator"
-							],
-							"service_name": "container-registry"
-						},
-						{
-							"role_crns": [
 								"crn:v1:bluemix:public:iam::::role:Editor"
 							],
 							"service_name": "iam-groups"
 						},
-						{
+                        {
 							"role_crns": [
 								"crn:v1:bluemix:public:iam::::role:Editor"
+							],
+							"service_name": "user-management"
+						},
+						{
+							"role_crns": [
+								"crn:v1:bluemix:public:iam::::role:Administrator",
+                                "crn:v1:bluemix:public:iam::::serviceRole:Manager"
+							],
+							"service_name": "container-registry"
+						},
+                        {
+							"role_crns": [
+								"crn:v1:bluemix:public:iam::::role:Administrator"
 							],
 							"service_name": "toolchain"
 						},
@@ -1253,6 +1260,13 @@
                             "required": false
                         },
                         {
+                            "key": "cos_api_key_secret_value",
+                            "type": "string",
+                            "default_value": "",
+                            "description": "A user provided api key with COS access permissions that can be pushed to Secrets Manager. See `cos_api_key_secret_name` and `create_cos_api_key`.",
+                            "required": false
+                        },
+                        {
                             "key": "cos_bucket_name",
                             "type": "string",
                             "default_value": "",
@@ -1313,6 +1327,13 @@
                             "type": "password",
                             "default_value": "",
                             "description": "The personal access token that will be added to the `repo_git_token_secret_name` secret in the secrets provider.",
+                            "required": false
+                        },
+                        {
+                            "key": "create_access_group",
+                            "type": "boolean",
+                            "default_value": false,
+                            "description": "Set to `true` to create an access group for the operations of the DevSecOps toolchains.",
                             "required": false
                         },
                         {
@@ -1723,6 +1744,13 @@
                             "required": false
                         },
                         {
+                            "key": "pipeline_ibmcloud_api_key_secret_value",
+                            "type": "string",
+                            "default_value": "",
+                            "description": "A user provided api key for running the toolchain pipelines that can be pushed to Secrets Manager. See `pipeline_ibmcloud_api_key_secret_name` and `create_ibmcloud_api_key`.",
+                            "required": false
+                        },
+                        {
                             "key": "privateworker_credentials_secret_crn",
                             "type": "password",
                             "description": "The CRN for the Private Worker secret secret.",
@@ -1990,10 +2018,24 @@
                             "required": false
                         },
                         {
+                            "key": "toolchain_access_group_name",
+                            "type": "string",
+                            "default_value": "devsecops-toolchain",
+                            "description": "The name of the DevSecOps access group. See `create_access_group`.",
+                            "required": false
+                        },
+                        {
                             "key": "use_app_repo_for_cd_deploy",
                             "type": "boolean",
                             "default_value": true,
                             "description": "Set to `true` to use the CI sample application repository as the deployment repository in the CD pipeline. This will be set in the pipeline config integration.",
+                            "required": false
+                        },
+                        {
+                            "key": "use_legacy_ref",
+                            "type": "boolean",
+                            "default_value": true,
+                            "description": "Set to `true` to use the legacy secret reference format for Secrets Manager secrets.",
                             "required": false
                         },
                         {
@@ -2237,19 +2279,26 @@
 						},
 						{
 							"role_crns": [
-								"crn:v1:bluemix:public:iam::::role:Administrator"
+								"crn:v1:bluemix:public:iam::::role:Editor"
+							],
+							"service_name": "iam-groups"
+						},
+                        {
+							"role_crns": [
+								"crn:v1:bluemix:public:iam::::role:Editor"
+							],
+							"service_name": "user-management"
+						},
+                        {
+							"role_crns": [
+								"crn:v1:bluemix:public:iam::::role:Administrator",
+                                "crn:v1:bluemix:public:iam::::serviceRole:Manager"
 							],
 							"service_name": "container-registry"
 						},
 						{
 							"role_crns": [
-								"crn:v1:bluemix:public:iam::::role:Editor"
-							],
-							"service_name": "iam-groups"
-						},
-						{
-							"role_crns": [
-								"crn:v1:bluemix:public:iam::::role:Editor"
+								"crn:v1:bluemix:public:iam::::role:Administrator"
 							],
 							"service_name": "toolchain"
 						},
@@ -3324,6 +3373,13 @@
                             "required": false
                         },
                         {
+                            "key": "cos_api_key_secret_value",
+                            "type": "string",
+                            "default_value": "",
+                            "description": "A user provided api key with COS access permissions that can be pushed to Secrets Manager. See `cos_api_key_secret_name` and `create_cos_api_key`.",
+                            "required": false
+                        },
+                        {
                             "key": "cos_bucket_name",
                             "type": "string",
                             "default_value": "",
@@ -3384,6 +3440,13 @@
                             "type": "password",
                             "default_value": "",
                             "description": "The personal access token that will be added to the `repo_git_token_secret_name` secret in the secrets provider.",
+                            "required": false
+                        },
+                        {
+                            "key": "create_access_group",
+                            "type": "boolean",
+                            "default_value": false,
+                            "description": "Set to `true` to create an access group for the operations of the DevSecOps toolchains.",
                             "required": false
                         },
                         {
@@ -3794,6 +3857,13 @@
                             "required": false
                         },
                         {
+                            "key": "pipeline_ibmcloud_api_key_secret_value",
+                            "type": "string",
+                            "default_value": "",
+                            "description": "A user provided api key for running the toolchain pipelines that can be pushed to Secrets Manager. See `pipeline_ibmcloud_api_key_secret_name` and `create_ibmcloud_api_key`.",
+                            "required": false
+                        },
+                        {
                             "key": "privateworker_credentials_secret_crn",
                             "type": "password",
                             "description": "The CRN for the Private Worker secret secret.",
@@ -4061,10 +4131,24 @@
                             "required": false
                         },
                         {
+                            "key": "toolchain_access_group_name",
+                            "type": "string",
+                            "default_value": "devsecops-toolchain",
+                            "description": "The name of the DevSecOps access group. See `create_access_group`.",
+                            "required": false
+                        },
+                        {
                             "key": "use_app_repo_for_cd_deploy",
                             "type": "boolean",
                             "default_value": false,
                             "description": "Set to `true` to use the CI sample application repository as the deployment repository in the CD pipeline. This will be set in the pipeline config integration.",
+                            "required": false
+                        },
+                        {
+                            "key": "use_legacy_ref",
+                            "type": "boolean",
+                            "default_value": true,
+                            "description": "Set to `true` to use the legacy secret reference format for Secrets Manager secrets.",
                             "required": false
                         },
                         {
