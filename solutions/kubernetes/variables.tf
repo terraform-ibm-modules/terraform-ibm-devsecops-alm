@@ -3549,7 +3549,7 @@ variable "create_git_triggers" {
 
 variable "toolchain_access_group_name" {
   type        = string
-  description = "The name of the DevSecOps access group."
+  description = "The name of the DevSecOps access group. See `create_access_group`."
   default     = "devsecops-toolchain"
 }
 
