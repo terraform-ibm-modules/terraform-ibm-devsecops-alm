@@ -360,13 +360,6 @@
                             "required": false
                         },
                         {
-                            "key": "repo_git_token_secret_name",
-                            "type": "string",
-                            "default_value": "",
-                            "description": "Name of the Git token secret in the secret provider used for accessing the repositories created by the DA.",
-                            "required": false
-                        },
-                        {
                             "key": "repo_title",
                             "type": "string",
                             "default_value": "",
@@ -837,13 +830,6 @@
                             "type": "string",
                             "default_value": "",
                             "description": "By default this gets set as 'hostedgit', else set to 'githubconsolidated' for GitHub repositories.",
-                            "required": false
-                        },
-                        {
-                            "key": "cd_deployment_repo_existing_url",
-                            "type": "string",
-                            "default_value": "",
-                            "description": "Override to bring your own existing deployment repository URL, which is used directly instead of cloning the default deployment sample.",
                             "required": false
                         },
                         {
@@ -1435,13 +1421,6 @@
                             "required": false
                         },
                         {
-                            "key": "evidence_repo_existing_url",
-                            "type": "string",
-                            "default_value": "",
-                            "description": "Set to use an existing evidence repository.",
-                            "required": false
-                        },
-                        {
                             "key": "evidence_repo_git_token_secret_crn",
                             "type": "password",
                             "description": "The CRN of the Git token used for accessing the Evidence repository.",
@@ -1511,13 +1490,6 @@
                             "required": false
                         },
                         {
-                            "key": "inventory_repo_existing_url",
-                            "type": "string",
-                            "default_value": "",
-                            "description": "Set to use an existing inventory repository.",
-                            "required": false
-                        },
-                        {
                             "key": "inventory_repo_git_token_secret_crn",
                             "type": "password",
                             "description": "The CRN of the Git token used for acessing the Inventory repository.",
@@ -1574,13 +1546,6 @@
                         },
                         {
                             "key": "issues_repo_existing_git_provider",
-                            "type": "string",
-                            "default_value": "",
-                            "description": "By default this gets set as 'hostedgit', else set to 'githubconsolidated' for GitHub repositories.",
-                            "required": false
-                        },
-                        {
-                            "key": "issues_repo_existing_url",
                             "type": "string",
                             "default_value": "",
                             "description": "By default this gets set as 'hostedgit', else set to 'githubconsolidated' for GitHub repositories.",
@@ -2418,13 +2383,6 @@
                             "required": false
                         },
                         {
-                            "key": "repo_git_token_secret_name",
-                            "type": "string",
-                            "default_value": "",
-                            "description": "Name of the Git token secret in the secret provider used for accessing the repositories created by the DA.",
-                            "required": false
-                        },
-                        {
                             "key": "repo_title",
                             "type": "string",
                             "default_value": "",
@@ -2908,13 +2866,6 @@
                             "type": "string",
                             "default_value": "",
                             "description": "By default this gets set as 'hostedgit', else set to 'githubconsolidated' for GitHub repositories.",
-                            "required": false
-                        },
-                        {
-                            "key": "cd_deployment_repo_existing_url",
-                            "type": "string",
-                            "default_value": "",
-                            "description": "Override to bring your own existing deployment repository URL, which is used directly instead of cloning the default deployment sample.",
                             "required": false
                         },
                         {
@@ -3506,13 +3457,6 @@
                             "required": false
                         },
                         {
-                            "key": "evidence_repo_existing_url",
-                            "type": "string",
-                            "default_value": "",
-                            "description": "Set to use an existing evidence repository.",
-                            "required": false
-                        },
-                        {
                             "key": "evidence_repo_git_token_secret_crn",
                             "type": "password",
                             "description": "The CRN of the Git token used for accessing the Evidence repository.",
@@ -3582,13 +3526,6 @@
                             "required": false
                         },
                         {
-                            "key": "inventory_repo_existing_url",
-                            "type": "string",
-                            "default_value": "",
-                            "description": "Set to use an existing inventory repository.",
-                            "required": false
-                        },
-                        {
                             "key": "inventory_repo_git_token_secret_crn",
                             "type": "password",
                             "description": "The CRN of the Git token used for acessing the Inventory repository.",
@@ -3645,13 +3582,6 @@
                         },
                         {
                             "key": "issues_repo_existing_git_provider",
-                            "type": "string",
-                            "default_value": "",
-                            "description": "By default this gets set as 'hostedgit', else set to 'githubconsolidated' for GitHub repositories.",
-                            "required": false
-                        },
-                        {
-                            "key": "issues_repo_existing_url",
                             "type": "string",
                             "default_value": "",
                             "description": "By default this gets set as 'hostedgit', else set to 'githubconsolidated' for GitHub repositories.",
