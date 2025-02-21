@@ -3,13 +3,6 @@
 ##############################################################################
 ##### START OF COMMON VARIABLES ##########
 
-
-variable "add_code_engine_prefix" {
-  type        = bool
-  description = "Set to `true` to use `prefix` to add a prefix to the code engine project names."
-  default     = true
-}
-
 variable "add_container_name_suffix" {
   type        = bool
   description = "Set to `true` to add a random suffix to the specified ICR name."
@@ -148,9 +141,9 @@ variable "compliance_pipeline_repo_git_id" {
 }
 
 variable "compliance_pipeline_repo_blind_connection" {
-  type        = string
+  type        = bool
   description = "Setting this value to `true` means the server is not addressable on the public internet. IBM Cloud will not be able to validate the connection details you provide. Certain functionality that requires API access to the git server will be disabled. Delivery pipeline will only work using a private worker that has network access to the git server."
-  default     = ""
+  default     = false
 }
 
 variable "compliance_pipeline_repo_name" {
@@ -210,12 +203,6 @@ variable "compliance_pipeline_repo_secret_group" {
   default     = ""
 }
 
-variable "compliance_pipeline_source_repo_url" {
-  type        = string
-  default     = ""
-  description = "The URL of a compliance pipelines repository to clone."
-}
-
 variable "cos_api_key_secret_crn" {
   type        = string
   sensitive   = true
@@ -236,6 +223,13 @@ variable "cos_api_key_secret_group" {
 variable "cos_api_key_secret_name" {
   type        = string
   description = "Name of the Cloud Object Storage API key secret in the secret provider for accessing the evidence COS bucket. In addition `cos_endpoint` and `cos_bucket_name` must be set. This setting sets the same API key for the COS settings in the CI, CD, and CC toolchains."
+  default     = ""
+}
+
+variable "cos_api_key_secret_value" {
+  type        = string
+  description = "A user provided api key with COS access permissions that can be pushed to Secrets Manager. See `cos_api_key_secret_name` and `create_cos_api_key`."
+  sensitive   = true
   default     = ""
 }
 
@@ -313,7 +307,7 @@ variable "create_kubernetes_access_policy" {
 
 variable "create_privateworker_secret" {
   type        = bool
-  description = "Set to `true` to add a specified private worker service api key to the Secrets Provider."
+  description = "Set to `true` to add a specified private worker service api key to the Secrets Provider. This also enables a private worker tool integration in the toolchains."
   default     = false
 }
 
@@ -333,72 +327,6 @@ variable "create_triggers" {
   type        = string
   description = "Set to `true` to create the default triggers associated with the compliance repos and sample app."
   default     = "true"
-}
-
-variable "custom_app_repo_blind_connection" {
-  type        = string
-  description = "Setting this value to `true` means the server is not addressable on the public internet. IBM Cloud will not be able to validate the connection details you provide. Certain functionality that requires API access to the git server will be disabled. Delivery pipeline will only work using a private worker that has network access to the git server."
-  default     = ""
-}
-
-variable "custom_app_repo_git_token_secret_crn" {
-  type        = string
-  sensitive   = true
-  description = "The CRN for Git Token used by the sample application repository, pipeline config repository and additionally the deployment repository of the CD toolchain. Takes precedence for these repositories over the value set in `repo_git_token_secret_crn`."
-  default     = ""
-  validation {
-    condition     = startswith(var.custom_app_repo_git_token_secret_crn, "crn:") || var.custom_app_repo_git_token_secret_crn == ""
-    error_message = "Must be a CRN or left empty."
-  }
-}
-
-variable "custom_app_repo_git_id" {
-  type        = string
-  description = "The Git ID for the application repositories. Used by the sample application repository, pipeline config repository and additionally the deployment repository of the CD toolchain. Takes precedence for these repositories over the value set in `repo_git_id`."
-  default     = ""
-}
-
-variable "custom_app_repo_git_provider" {
-  type        = string
-  description = "The Git provider type. Used by the sample application repository, pipeline config repository and additionally the deployment repository of the CD toolchain. Takes precedence for these repositories over the value set in `repo_git_provider`."
-  default     = ""
-}
-
-variable "custom_app_repo_group" {
-  type        = string
-  description = "Specify the Git user or group for your application. This must be set if the repository authentication type is `pat` (personal access token). Used by the sample application repository, pipeline config repository and additionally the deployment repository of the CD toolchain. Takes precedence for these repositories over the value set in `repo_group`."
-  default     = ""
-}
-
-variable "custom_app_repo_git_token_secret_name" {
-  type        = string
-  description = "The name of the Git token secret in the secret provider used for accessing the sample application repository, pipeline config repository and additionally the deployment repository of the CD toolchain. Takes precedence for these repositories over the value set in `repo_git_token_secret_name`."
-  default     = ""
-}
-
-variable "custom_app_repo_git_token_secret_value" {
-  type        = string
-  sensitive   = true
-  description = "The personal access token that will be added to the `app_repo_git_token_secret_name` secret in the secrets provider. Note if also using `repo_git_token_secret_name` to set a Git Token in Secrets Manager, the names of the secrets must be different."
-  default     = ""
-}
-
-variable "custom_app_repo_root_url" {
-  type        = string
-  description = "(Optional) The Root URL of the server. e.g. https://git.example.com. Applies to the sample application repository, pipeline config repository and additionally the deployment repository of the CD toolchain. Takes precedence over `repo_root_url`, if also set."
-  default     = ""
-}
-
-variable "custom_app_repo_title" {
-  type        = string
-  description = "(Optional) The title of the server. e.g. My Git Enterprise Server. Applies to the sample application repository, pipeline config repository and additionally the deployment repository of the CD toolchain. Takes precedence over `repo_title`, if also set."
-  default     = ""
-}
-
-variable "enable_key_protect" {
-  type        = string
-  description = "Set to `true` to the enable Key Protect integrations."
-  default     = "false"
 }
 
 variable "enable_pipeline_notifications" {
@@ -668,30 +596,6 @@ variable "issues_repo_secret_group" {
   default     = ""
 }
 
-variable "kp_integration_name" {
-  type        = string
-  description = "The name of the Key Protect integration."
-  default     = "kp-compliance-secrets"
-}
-
-variable "kp_location" {
-  type        = string
-  description = "The region hosting the Key Protect instance. This applies to the CI, CD and CC Key Protect integrations. See `ci_kp_location`, `cd_kp_location`, and `cc_kp_location` to set these values ."
-  default     = "us-south"
-}
-
-variable "kp_name" {
-  type        = string
-  description = "Name of the Key Protect instance where the secrets are stored. This applies to the CI, CD and CC Key Protect integrations. See `ci_kp_name`, `cd_kp_name`, and `cc_kp_name` to set these values independently."
-  default     = "kp-compliance-secrets"
-}
-
-variable "kp_resource_group" {
-  type        = string
-  description = "The resource group containing the Key Protect instance. This applies to the CI, CD and CC Key Protect integrations. See `ci_kp_resource_group`, `cd_kp_resource_group`, and `cc_kp_resource_group` to set these values independently."
-  default     = "Default"
-}
-
 variable "pipeline_config_repo_auth_type" {
   type        = string
   description = "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`."
@@ -813,6 +717,13 @@ variable "pipeline_ibmcloud_api_key_secret_name" {
   default     = "ibmcloud-api-key"
 }
 
+variable "pipeline_ibmcloud_api_key_secret_value" {
+  type        = string
+  description = "A user provided api key for running the toolchain pipelines that can be pushed to Secrets Manager. See `pipeline_ibmcloud_api_key_secret_name` and `create_ibmcloud_api_key`."
+  sensitive   = true
+  default     = ""
+}
+
 variable "privateworker_credentials_secret_crn" {
   type        = string
   sensitive   = true
@@ -867,10 +778,16 @@ variable "registry_namespace" {
   default     = ""
 }
 
+variable "repo_apply_settings_to_compliance_repos" {
+  type        = bool
+  description = "Set to `true` to apply the same settings to all the default compliance repositories. Set to `false` to apply these settings to only the sample application, pipeline config and the deployment repositories."
+  default     = true
+}
+
 variable "repo_blind_connection" {
-  type        = string
+  type        = bool
   description = "Setting this value to `true` means the server is not addressable on the public internet. IBM Cloud will not be able to validate the connection details you provide. Certain functionality that requires API access to the git server will be disabled. Delivery pipeline will only work using a private worker that has network access to the git server."
-  default     = ""
+  default     = false
 }
 
 variable "repo_git_id" {
@@ -1172,169 +1089,13 @@ variable "toolchain_resource_group" {
   default     = "Default"
 }
 
-variable "worker_id" {
-  type        = string
-  default     = "public"
-  description = "The identifier for the pipeline worker. Applies to the CI, CD and CC pipelines."
-}
-
 ########################################################
 ##### START OF CC VARIABLES ##############
 ########################################################
 
-variable "cc_app_group" {
-  type        = string
-  description = "Specify user or group for app repository."
-  default     = ""
-}
-
-variable "cc_app_repo_auth_type" {
-  type        = string
-  description = "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`."
-  default     = ""
-}
-
 variable "cc_app_repo_branch" {
   type        = string
   description = "The default branch of the app repository."
-  default     = ""
-}
-
-variable "cc_app_repo_git_id" {
-  type        = string
-  description = "The Git Id of the repository."
-  default     = ""
-}
-
-variable "cc_app_repo_git_provider" {
-  type        = string
-  description = "Git provider for the application repo. If not set will default to `hostedgit`."
-  default     = ""
-  validation {
-    condition     = contains(["hostedgit", "githubconsolidated", "gitlab", ""], var.cc_app_repo_git_provider)
-    error_message = "Must be either \"hostedgit\" or \"gitlab\" or \"githubconsolidated\" for evidence repository."
-  }
-}
-
-variable "cc_app_repo_git_token_secret_crn" {
-  type        = string
-  sensitive   = true
-  description = "The CRN of the Git token used for accessing the application repository."
-  default     = ""
-  validation {
-    condition     = startswith(var.cc_app_repo_git_token_secret_crn, "crn:") || var.cc_app_repo_git_token_secret_crn == ""
-    error_message = "Must be a CRN or left empty."
-  }
-}
-
-variable "cc_app_repo_git_token_secret_name" {
-  type        = string
-  description = "Name of the Git token secret in the secret provider used for accessing the sample (or bring your own) application repository."
-  default     = ""
-}
-
-variable "cc_app_repo_secret_group" {
-  type        = string
-  description = "Secret group for the App repository secret. Defaults to the value set in `sm_secret_group` if not set. Only used with `Secrets Manager`."
-  default     = ""
-}
-
-variable "cc_app_repo_url" {
-  type        = string
-  description = "This Git URL for the application repository."
-  default     = ""
-}
-
-variable "cc_artifactory_token_secret_crn" {
-  type        = string
-  sensitive   = true
-  description = "The CRN for the Artifactory access secret."
-  default     = ""
-  validation {
-    condition     = startswith(var.cc_artifactory_token_secret_crn, "crn:") || var.cc_artifactory_token_secret_crn == ""
-    error_message = "Must be a CRN or left empty."
-  }
-}
-
-variable "cc_authorization_policy_creation" {
-  type        = string
-  description = "Disable Toolchain Service to Secrets Manager/Key Protect/Notifications Service authorization policy creation. To disable set the value to `disabled`."
-  default     = ""
-}
-
-variable "cc_compliance_pipeline_branch" {
-  type        = string
-  description = "The CC Pipeline Compliance Pipeline branch."
-  default     = ""
-}
-
-variable "cc_compliance_pipeline_group" {
-  type        = string
-  description = "Specify user or group for compliance pipline repository."
-  default     = ""
-}
-
-variable "cc_compliance_pipeline_repo_auth_type" {
-  type        = string
-  description = "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`."
-  default     = ""
-}
-
-variable "cc_compliance_pipeline_repo_git_token_secret_crn" {
-  type        = string
-  sensitive   = true
-  description = "The CRN of the Git token used for accessing the Compliance Pipelines repository."
-  default     = ""
-  validation {
-    condition     = startswith(var.cc_compliance_pipeline_repo_git_token_secret_crn, "crn:") || var.cc_compliance_pipeline_repo_git_token_secret_crn == ""
-    error_message = "Must be a CRN or left empty."
-  }
-}
-
-variable "cc_compliance_pipeline_repo_git_token_secret_name" {
-  type        = string
-  description = "Name of the Git token secret in the secret provider used for accessing the compliance pipelines repository."
-  default     = ""
-}
-
-variable "cc_compliance_pipeline_repo_secret_group" {
-  type        = string
-  description = "Secret group for the Compliance Pipeline repository secret. Defaults to the value set in `sm_secret_group` if not set. Only used with `Secrets Manager`."
-  default     = ""
-}
-
-variable "cc_cos_api_key_secret_crn" {
-  type        = string
-  sensitive   = true
-  description = "The CRN of the Cloud Object Storage apikey."
-  default     = ""
-  validation {
-    condition     = startswith(var.cc_cos_api_key_secret_crn, "crn:") || var.cc_cos_api_key_secret_crn == ""
-    error_message = "Must be a CRN or left empty."
-  }
-}
-
-variable "cc_cos_api_key_secret_group" {
-  type        = string
-  description = "Secret group for the COS API key secret. Defaults to the value set in `sm_secret_group` if not set. Only used with `Secrets Manager`."
-  default     = ""
-}
-
-variable "cc_cos_api_key_secret_name" {
-  type        = string
-  description = "Name of the Cloud Object Storage API key secret in the secret provider used for accessing the evidence COS bucket."
-  default     = ""
-}
-
-variable "cc_cos_bucket_name" {
-  type        = string
-  description = "The name of the Cloud Object Storage bucket used for storing the evidence."
-  default     = ""
-}
-
-variable "cc_cos_endpoint" {
-  type        = string
-  description = "The endpoint for the Cloud Object Stroage instance containing the evidence bucket."
   default     = ""
 }
 
@@ -1344,273 +1105,15 @@ variable "cc_doi_toolchain_id" {
   default     = ""
 }
 
-variable "cc_enable_key_protect" {
-  description = "Set to `true` to the enable Key Protect integrations."
-  type        = string
-  default     = ""
-}
-
-variable "cc_enable_pipeline_notifications" {
-  type        = string
-  description = "When enabled, pipeline run events will be sent to the Event Notifications and Slack integrations in the enclosing toolchain."
-  default     = ""
-}
-
-variable "cc_enable_secrets_manager" {
-  description = "Set to `true` to enable the Secrets Manager integrations."
-  type        = string
-  default     = ""
-}
-
-variable "cc_enable_slack" {
-  type        = string
-  description = "Set to `true` to create the Slack toolchain integration."
-  default     = ""
-}
-
-variable "cc_event_notifications_crn" {
-  type        = string
-  description = "Set the Event Notifications CRN to create an Events Notification integration."
-  default     = ""
-}
-
-variable "cc_evidence_group" {
-  type        = string
-  description = "Specify the Git user or group for the evidence repository."
-  default     = ""
-}
-
-variable "cc_evidence_repo_auth_type" {
-  type        = string
-  description = "Select the method of authentication that is used to access the Git provider. 'oauth' or 'pat'"
-  default     = ""
-}
-
-variable "cc_evidence_repo_git_token_secret_crn" {
-  type        = string
-  sensitive   = true
-  description = "The CRN of the Git token used for accessing the Evidence repository."
-  default     = ""
-  validation {
-    condition     = startswith(var.cc_evidence_repo_git_token_secret_crn, "crn:") || var.cc_evidence_repo_git_token_secret_crn == ""
-    error_message = "Must be a CRN or left empty."
-  }
-}
-
-variable "cc_evidence_repo_git_token_secret_name" {
-  type        = string
-  description = "Name of the Git token secret in the secret provider used for accessing the evidence repository."
-  default     = ""
-}
-
-variable "cc_evidence_repo_secret_group" {
-  type        = string
-  description = "Secret group for the Evidence repository secret. Defaults to the value set in `sm_secret_group` if not set. Only used with `Secrets Manager`."
-  default     = ""
-}
-
-variable "cc_inventory_group" {
-  type        = string
-  description = "Specify the Git user or group for the inventory repository."
-  default     = ""
-}
-
-variable "cc_inventory_repo_auth_type" {
-  type        = string
-  description = "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`."
-  default     = ""
-}
-
-variable "cc_inventory_repo_git_token_secret_crn" {
-  type        = string
-  sensitive   = true
-  description = "The CRN of the Git token used for acessing the Inventory repository."
-  default     = ""
-  validation {
-    condition     = startswith(var.cc_inventory_repo_git_token_secret_crn, "crn:") || var.cc_inventory_repo_git_token_secret_crn == ""
-    error_message = "Must be a CRN or left empty."
-  }
-}
-
-variable "cc_inventory_repo_git_token_secret_name" {
-  type        = string
-  description = "Name of the Git token secret in the secret provider used for accessing the inventory repository."
-  default     = ""
-}
-
-variable "cc_inventory_repo_secret_group" {
-  type        = string
-  description = "Secret group for the Inventory repository secret. Defaults to the value set in `sm_secret_group` if not set. Only used with `Secrets Manager`."
-  default     = ""
-}
-
-variable "cc_issues_group" {
-  type        = string
-  description = "Specify the Git user or group for the issues repository."
-  default     = ""
-}
-
-variable "cc_issues_repo_auth_type" {
-  type        = string
-  description = "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`."
-  default     = ""
-}
-
-variable "cc_issues_repo_git_token_secret_crn" {
-  type        = string
-  sensitive   = true
-  description = "The CRN of the Git token used for accessing the Issues repository."
-  default     = ""
-  validation {
-    condition     = startswith(var.cc_issues_repo_git_token_secret_crn, "crn:") || var.cc_issues_repo_git_token_secret_crn == ""
-    error_message = "Must be a CRN or left empty."
-  }
-}
-
-variable "cc_issues_repo_git_token_secret_name" {
-  type        = string
-  description = "Name of the Git token secret in the secret provider used for accessing the issues repository."
-  default     = ""
-}
-
-variable "cc_issues_repo_secret_group" {
-  type        = string
-  description = "Secret group for the Issues repository secret. Defaults to the value set in `sm_secret_group` if not set. Only used with `Secrets Manager`."
-  default     = ""
-}
-
-variable "cc_kp_location" {
-  type        = string
-  description = "The region hosting the Key Protect instance."
-  default     = ""
-}
-
-variable "cc_kp_name" {
-  type        = string
-  description = "Name of the Key Protect instance where the secrets are stored."
-  default     = ""
-}
-
-variable "cc_kp_resource_group" {
-  type        = string
-  description = "The resource group containing the Key Protect instance."
-  default     = ""
-}
-
 variable "cc_link_to_doi_toolchain" {
   description = "Enable a link to a DevOps Insights instance in another toolchain, true or false."
   type        = bool
   default     = true
 }
 
-variable "cc_pipeline_config_group" {
-  type        = string
-  description = "Specify the Git user or group for the compliance pipeline repository."
-  default     = ""
-}
-
-variable "cc_pipeline_config_repo_auth_type" {
-  type        = string
-  description = "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`."
-  default     = ""
-}
-
 variable "cc_pipeline_config_repo_branch" {
   type        = string
   description = "Specify the branch containing the custom pipeline-config.yaml file."
-  default     = ""
-}
-
-variable "cc_pipeline_config_repo_clone_from_url" {
-  type        = string
-  description = "Specify a repository containing a custom pipeline-config.yaml file."
-  default     = ""
-}
-
-variable "cc_pipeline_config_repo_existing_url" {
-  type        = string
-  description = "Specify a repository containing a custom pipeline-config.yaml file."
-  default     = ""
-}
-
-variable "cc_pipeline_config_repo_git_token_secret_crn" {
-  type        = string
-  sensitive   = true
-  description = "The CRN of the Git token for accessing the pipeline config repository."
-  default     = ""
-  validation {
-    condition     = startswith(var.cc_pipeline_config_repo_git_token_secret_crn, "crn:") || var.cc_pipeline_config_repo_git_token_secret_crn == ""
-    error_message = "Must be a CRN or left empty."
-  }
-}
-
-variable "cc_pipeline_config_repo_git_token_secret_name" {
-  type        = string
-  description = "Name of the Git token secret in the secret provider used for accessing the pipeline config repository."
-  default     = ""
-}
-
-variable "cc_pipeline_config_repo_secret_group" {
-  type        = string
-  description = "Secret group for the Pipeline Config repository secret. Defaults to the value set in `sm_secret_group` if not set. Only used with `Secrets Manager`."
-  default     = ""
-}
-
-variable "cc_pipeline_doi_api_key_secret_crn" {
-  type        = string
-  sensitive   = true
-  description = "The CRN of the DOI (DevOps Insights) apikey used for accessing a specific toolchain Insights instance."
-  default     = ""
-  validation {
-    condition     = startswith(var.cc_pipeline_doi_api_key_secret_crn, "crn:") || var.cc_pipeline_doi_api_key_secret_crn == ""
-    error_message = "Must be a CRN or left empty."
-  }
-}
-
-variable "cc_pipeline_doi_api_key_secret_group" {
-  type        = string
-  description = "Secret group for the pipeline DOI api key. Defaults to the value set in `sm_secret_group` if not set. Only used with `Secrets Manager`."
-  default     = ""
-}
-
-variable "cc_pipeline_doi_api_key_secret_name" {
-  type        = string
-  description = "Name of the Cloud API key secret in the secret provider to access the toolchain containing the Devops Insights instance."
-  default     = ""
-}
-
-variable "cc_pipeline_git_tag" {
-  type        = string
-  description = "The GIT tag selector for the Compliance Pipelines definitions."
-  default     = ""
-}
-
-variable "cc_pipeline_ibmcloud_api_key_secret_crn" {
-  type        = string
-  sensitive   = true
-  description = "The CRN of the IBMCloud apikey used for running the pipelines."
-  default     = ""
-  validation {
-    condition     = startswith(var.cc_pipeline_ibmcloud_api_key_secret_crn, "crn:") || var.cc_pipeline_ibmcloud_api_key_secret_crn == ""
-    error_message = "Must be a CRN or left empty."
-  }
-}
-
-variable "cc_pipeline_ibmcloud_api_key_secret_group" {
-  type        = string
-  description = "Secret group for the pipeline ibmcloud API key secret. Defaults to the value set in `sm_secret_group` if not set. Only used with `Secrets Manager`."
-  default     = ""
-}
-
-variable "cc_pipeline_ibmcloud_api_key_secret_name" {
-  type        = string
-  description = "Name of the Cloud API key secret in the secret provider for running the pipelines."
-  default     = ""
-}
-
-variable "cc_pipeline_properties_filepath" {
-  type        = string
-  description = "The path to the file containing the property JSON. If this is not set, it will by default read the `properties.json` file at the root of the module."
   default     = ""
 }
 
@@ -1620,190 +1123,9 @@ variable "cc_pipeline_properties" {
   default     = ""
 }
 
-variable "cc_repositories_prefix" {
-  type        = string
-  description = "The prefix for the compliance repositories. For the repositories_prefix value only a-z, A-Z and 0-9 and the special characters `-_` are allowed. In addition the string must not end with a special character or have two consecutive special characters."
-  default     = ""
-  validation {
-    condition = (
-      ((can(regex("^[0-9A-Za-z\\-\\_]+$", var.cc_repositories_prefix))) && ((endswith(var.cc_repositories_prefix, "-") == false) && (endswith(var.cc_repositories_prefix, "_") == false))
-        && (strcontains(var.cc_repositories_prefix, "--") == false) && (strcontains(var.cc_repositories_prefix, "__") == false) && (strcontains(var.cc_repositories_prefix, "_-") == false)
-      && (strcontains(var.cc_repositories_prefix, "-_") == false))
-      || (length(var.cc_repositories_prefix) == 0)
-    )
-    error_message = "For the repositories_prefix value only a-z, A-Z and 0-9 and the special characters `-_` are allowed. In addition the string must not end with a special character or have two consecutive special characters."
-  }
-}
-
-variable "cc_repository_properties_filepath" {
-  type        = string
-  description = "The path to the file containing the repository and triggers JSON. If this is not set, it will by default read the `repositories.json` file at the root of the module."
-  default     = ""
-}
-
 variable "cc_repository_properties" {
   type        = string
   description = "Stringified JSON containing the repositories and triggers that get created in the CI toolchain pipelines."
-  default     = ""
-}
-
-variable "cc_scc_enable_scc" {
-  type        = string
-  description = "Adds the SCC tool integration to the toolchain."
-  default     = ""
-}
-
-variable "cc_scc_integration_name" {
-  type        = string
-  description = "The name of the SCC integration."
-  default     = "Security and Compliance"
-}
-
-variable "cc_scc_use_profile_attachment" {
-  type        = string
-  description = "Set to `enabled` to enable use profile with attachment, so that the scripts in the pipeline can interact with the Security and Compliance Center service. When enabled, other parameters become relevant; `scc_scc_api_key_secret_name`, `scc_instance_crn`, `scc_profile_name`, `scc_profile_version`, `scc_attachment_id`."
-  default     = ""
-}
-
-variable "cc_slack_channel_name" {
-  type        = string
-  description = "The name of the Slack channel where notifications are posted."
-  default     = ""
-}
-
-variable "cc_slack_pipeline_fail" {
-  type        = bool
-  description = "Set to `true` to generate pipeline failed notifications."
-  default     = true
-}
-
-variable "cc_slack_pipeline_start" {
-  type        = bool
-  description = "Set to `true` to generate pipeline start notifications."
-  default     = true
-}
-
-variable "cc_slack_pipeline_success" {
-  type        = bool
-  description = "Set to `true` to generate pipeline succeeded notifications."
-  default     = true
-}
-
-variable "cc_slack_team_name" {
-  type        = string
-  description = "The Slack team name, which is the word or phrase before .slack.com in the team URL."
-  default     = ""
-}
-
-variable "cc_slack_toolchain_bind" {
-  type        = bool
-  description = "Generate tool added to toolchain notifications."
-  default     = true
-}
-
-variable "cc_slack_toolchain_unbind" {
-  type        = bool
-  description = "Set to `true` to generate tool removed from toolchain notifications."
-  default     = true
-}
-
-variable "cc_slack_webhook_secret_crn" {
-  type        = string
-  sensitive   = true
-  description = "The CRN of the Slack webhook secret used for accessing the specified Slack channel."
-  default     = ""
-  validation {
-    condition     = startswith(var.cc_slack_webhook_secret_crn, "crn:") || var.cc_slack_webhook_secret_crn == ""
-    error_message = "Must be a CRN or left empty."
-  }
-}
-
-variable "cc_slack_webhook_secret_group" {
-  type        = string
-  description = "Secret group for the Slack webhook secret. Defaults to the value set in `sm_secret_group` if not set. Only used with `Secrets Manager`."
-  default     = ""
-}
-
-variable "cc_slack_webhook_secret_name" {
-  type        = string
-  description = "Name of the webhook secret in the secret provider used for accessing the configured Slack channel."
-  default     = ""
-}
-
-variable "cc_sm_instance_crn" {
-  type        = string
-  description = "The CRN of the Secrets Manager instance."
-  default     = ""
-}
-
-variable "cc_sm_location" {
-  type        = string
-  description = "The region hosting the Secrets Manager instance."
-  default     = ""
-}
-
-variable "cc_sm_name" {
-  type        = string
-  description = "The name of an existing Secrets Manager instance where the secrets are stored."
-  default     = ""
-}
-
-variable "cc_sm_resource_group" {
-  type        = string
-  description = "The name of the existing resource group containing the Secrets Manager instance for your secrets."
-  default     = ""
-}
-
-variable "cc_sm_secret_group" {
-  type        = string
-  description = "The Secrets Manager secret group containing the secrets for the DevSecOps pipelines."
-  default     = ""
-}
-
-variable "cc_sonarqube_integration_name" {
-  type        = string
-  description = "The name of the SonarQube integration."
-  default     = ""
-}
-
-variable "cc_sonarqube_is_blind_connection" {
-  type        = string
-  description = "When set to `true`, instructs IBM Cloud Continuous Delivery to not validate the configuration of this integration. Set this to `true` if the SonarQube server is not addressable on the public internet."
-  default     = ""
-}
-
-variable "cc_sonarqube_secret_crn" {
-  type        = string
-  sensitive   = true
-  description = "The CRN of the secret used to access SonarQube."
-  default     = ""
-  validation {
-    condition     = startswith(var.cc_sonarqube_secret_crn, "crn:") || var.cc_sonarqube_secret_crn == ""
-    error_message = "Must be a CRN or left empty."
-  }
-}
-
-variable "cc_sonarqube_secret_group" {
-  type        = string
-  description = "Secret group for the SonarQube secret. Defaults to the value set in `sm_secret_group` if not set. Only used with `Secrets Manager`."
-  default     = ""
-}
-
-variable "cc_sonarqube_secret_name" {
-  type        = string
-  description = "The name of the SonarQube secret in the secrets provider."
-  default     = ""
-}
-
-variable "cc_sonarqube_server_url" {
-  type        = string
-  description = "The URL to the SonarQube server."
-  default     = ""
-}
-
-variable "cc_sonarqube_user" {
-  type        = string
-  description = "The name of the SonarQube user."
   default     = ""
 }
 
@@ -1819,40 +1141,16 @@ variable "cc_toolchain_name" {
   default     = ""
 }
 
-variable "cc_toolchain_region" {
-  type        = string
-  description = "The region containing the CI toolchain. Use the short form of the regions. For example `us-south`."
-  default     = ""
-}
-
-variable "cc_toolchain_resource_group" {
-  type        = string
-  description = "Resource group within which the toolchain is created."
-  default     = ""
-}
-
 variable "cc_trigger_manual_enable" {
   type        = bool
   description = "Set to `true` to enable the CC pipeline Manual trigger."
   default     = true
 }
 
-variable "cc_trigger_manual_name" {
-  type        = string
-  description = "The name of the CC pipeline Manual trigger."
-  default     = "CC Manual Trigger"
-}
-
 variable "cc_trigger_manual_pruner_enable" {
   type        = bool
   description = "Set to `true` to enable the manual Pruner trigger."
   default     = true
-}
-
-variable "cc_trigger_manual_pruner_name" {
-  type        = string
-  description = "The name of the manual Pruner trigger."
-  default     = "Evidence Pruner Manual Trigger"
 }
 
 variable "cc_trigger_timed_cron_schedule" {
@@ -1867,44 +1165,15 @@ variable "cc_trigger_timed_enable" {
   default     = false
 }
 
-variable "cc_trigger_timed_name" {
-  type        = string
-  description = "The name of the CC pipeline Timed trigger."
-  default     = "CC Timed Trigger"
-}
-
 variable "cc_trigger_timed_pruner_enable" {
   type        = bool
   description = "Set to `true` to enable the timed Pruner trigger."
   default     = false
 }
 
-variable "cc_trigger_timed_pruner_name" {
-  type        = string
-  description = "The name of the timed Pruner trigger."
-  default     = "Evidence Pruner Timed Trigger"
-}
-
 ########################################################
 ##### START OF CD VARIABLES ##############
 ########################################################
-
-variable "cd_artifactory_token_secret_crn" {
-  type        = string
-  sensitive   = true
-  description = "The CRN for the Artifactory access secret."
-  default     = ""
-  validation {
-    condition     = startswith(var.cd_artifactory_token_secret_crn, "crn:") || var.cd_artifactory_token_secret_crn == ""
-    error_message = "Must be a CRN or left empty."
-  }
-}
-
-variable "cd_authorization_policy_creation" {
-  type        = string
-  description = "Disable Toolchain Service to Secrets Manager/Key Protect/Notifications Service authorization policy creation. To disable set the value to `disabled`."
-  default     = ""
-}
 
 variable "cd_change_management_group" {
   type        = string
@@ -1916,16 +1185,6 @@ variable "cd_change_management_repo_auth_type" {
   type        = string
   description = "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`."
   default     = ""
-}
-
-variable "cd_change_management_repo_git_provider" {
-  type        = string
-  default     = ""
-  description = "By default this gets set as 'hostedgit', else set to 'githubconsolidated' for GitHub repositories."
-  validation {
-    condition     = contains(["hostedgit", "githubconsolidated", "gitlab", ""], var.cd_change_management_repo_git_provider)
-    error_message = "Must be either \"hostedgit\" or \"gitlab\" or \"githubconsolidated\" for evidence repository."
-  }
 }
 
 variable "change_management_existing_url" {
@@ -2009,82 +1268,6 @@ variable "cd_code_signing_cert_secret_name" {
   type        = string
   description = "This is the name of the secret in the secrets provider for storing the code signing certificate."
   default     = "signing-certificate"
-}
-
-variable "cd_compliance_pipeline_branch" {
-  type        = string
-  description = "The CD Pipeline Compliance Pipeline branch."
-  default     = ""
-}
-
-variable "cd_compliance_pipeline_group" {
-  type        = string
-  description = "Specify user or group for compliance pipline repository."
-  default     = ""
-}
-
-variable "cd_compliance_pipeline_repo_auth_type" {
-  type        = string
-  description = "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`."
-  default     = ""
-}
-
-variable "cd_compliance_pipeline_repo_git_token_secret_crn" {
-  type        = string
-  sensitive   = true
-  description = "The CRN of the Git token used for accessing the Compliance Pipelines repository."
-  default     = ""
-  validation {
-    condition     = startswith(var.cd_compliance_pipeline_repo_git_token_secret_crn, "crn:") || var.cd_compliance_pipeline_repo_git_token_secret_crn == ""
-    error_message = "Must be a CRN or left empty."
-  }
-}
-
-variable "cd_compliance_pipeline_repo_git_token_secret_name" {
-  type        = string
-  description = "Name of the Git token secret in the secret provider used for accessing the compliance pipelines repository."
-  default     = ""
-}
-
-variable "cd_compliance_pipeline_repo_secret_group" {
-  type        = string
-  description = "Secret group for the Compliance Pipeline repository secret. Defaults to the value set in `sm_secret_group` if not set. Only used with `Secrets Manager`."
-  default     = ""
-}
-
-variable "cd_cos_api_key_secret_crn" {
-  type        = string
-  sensitive   = true
-  description = "The CRN of the Cloud Object Storage apikey."
-  default     = ""
-  validation {
-    condition     = startswith(var.cd_cos_api_key_secret_crn, "crn:") || var.cd_cos_api_key_secret_crn == ""
-    error_message = "Must be a CRN or left empty."
-  }
-}
-
-variable "cd_cos_api_key_secret_group" {
-  type        = string
-  description = "Secret group for the COS API key secret. Defaults to the value set in `sm_secret_group` if not set. Only used with `Secrets Manager`."
-  default     = ""
-}
-
-variable "cd_cos_api_key_secret_name" {
-  type        = string
-  description = "Name of the Cloud Object Storage API key secret in the secret provider used for accessing the evidence COS bucket."
-  default     = ""
-}
-
-variable "cd_cos_bucket_name" {
-  type        = string
-  description = "The name of the Cloud Object Storage bucket used for storing the evidence."
-  default     = ""
-}
-
-variable "cd_cos_endpoint" {
-  type        = string
-  description = "The endpoint for the Cloud Object Stroage instance containing the evidence bucket."
-  default     = ""
 }
 
 variable "cd_deployment_group" {
@@ -2180,163 +1363,10 @@ variable "cd_doi_toolchain_id" {
   default     = ""
 }
 
-variable "cd_enable_key_protect" {
-  description = "Set to `true` to the enable Key Protect integrations."
-  type        = string
-  default     = ""
-}
-
-variable "cd_enable_pipeline_notifications" {
-  type        = string
-  description = "When enabled, pipeline run events will be sent to the Event Notifications and Slack integrations in the enclosing toolchain."
-  default     = ""
-}
-
-variable "cd_enable_secrets_manager" {
-  description = "Set to `true` to enable the Secrets Manager integrations."
-  type        = string
-  default     = ""
-}
-
-variable "cd_enable_slack" {
-  type        = string
-  description = "Set to `true` to create the Slack toolchain integration."
-  default     = ""
-}
-
-variable "cd_event_notifications_crn" {
-  type        = string
-  description = "Set the Event Notifications CRN to create an Events Notification integration."
-  default     = ""
-}
-
-variable "cd_evidence_group" {
-  type        = string
-  description = "Specify the Git user or group for the evidence repository."
-  default     = ""
-}
-
-variable "cd_evidence_repo_auth_type" {
-  type        = string
-  description = "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`."
-  default     = ""
-}
-
-variable "cd_evidence_repo_git_token_secret_crn" {
-  type        = string
-  sensitive   = true
-  description = "The CRN of the Git token used for accessing the Evidence repository."
-  default     = ""
-  validation {
-    condition     = startswith(var.cd_evidence_repo_git_token_secret_crn, "crn:") || var.cd_evidence_repo_git_token_secret_crn == ""
-    error_message = "Must be a CRN or left empty."
-  }
-}
-
-variable "cd_evidence_repo_git_token_secret_name" {
-  type        = string
-  description = "Name of the Git token secret in the secret provider used for accessing the evidence repository."
-  default     = ""
-}
-
-variable "cd_evidence_repo_secret_group" {
-  type        = string
-  description = "Secret group for the Evidence repository secret. Defaults to the value set in `sm_secret_group` if not set. Only used with `Secrets Manager`."
-  default     = ""
-}
-
 variable "continuous_delivery_service_name" {
   type        = string
   description = "The name of the CD instance."
   default     = "cd-devsecops"
-}
-
-variable "cd_inventory_group" {
-  type        = string
-  description = "Specify the Git user or group for the inventory repository."
-  default     = ""
-}
-
-variable "cd_inventory_repo_auth_type" {
-  type        = string
-  description = "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`."
-  default     = ""
-}
-
-variable "cd_inventory_repo_git_token_secret_crn" {
-  type        = string
-  sensitive   = true
-  description = "The CRN of the Git token used for acessing the Inventory repository."
-  default     = ""
-  validation {
-    condition     = startswith(var.cd_inventory_repo_git_token_secret_crn, "crn:") || var.cd_inventory_repo_git_token_secret_crn == ""
-    error_message = "Must be a CRN or left empty."
-  }
-}
-
-variable "cd_inventory_repo_git_token_secret_name" {
-  type        = string
-  description = "Name of the Git token secret in the secret provider used for accessing the inventory repository."
-  default     = ""
-}
-
-variable "cd_inventory_repo_secret_group" {
-  type        = string
-  description = "Secret group for the Inventory repository secret. Defaults to the value set in `sm_secret_group` if not set. Only used with `Secrets Manager`."
-  default     = ""
-}
-
-variable "cd_issues_group" {
-  type        = string
-  description = "Specify the Git user or group for the issues repository."
-  default     = ""
-}
-
-variable "cd_issues_repo_auth_type" {
-  type        = string
-  description = "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`."
-  default     = ""
-}
-
-variable "cd_issues_repo_git_token_secret_crn" {
-  type        = string
-  sensitive   = true
-  description = "The CRN of the Git token used for accessing the Issues repository."
-  default     = ""
-  validation {
-    condition     = startswith(var.cd_issues_repo_git_token_secret_crn, "crn:") || var.cd_issues_repo_git_token_secret_crn == ""
-    error_message = "Must be a CRN or left empty."
-  }
-}
-
-variable "cd_issues_repo_git_token_secret_name" {
-  type        = string
-  description = "Name of the Git token secret in the secret provider used for accessing the issues repository."
-  default     = ""
-}
-
-variable "cd_issues_repo_secret_group" {
-  type        = string
-  description = "Secret group for the Issues repository secret. Defaults to the value set in `sm_secret_group` if not set. Only used with `Secrets Manager`."
-  default     = ""
-}
-
-variable "cd_kp_location" {
-  type        = string
-  description = "The region hosting the Key Protect instance."
-  default     = ""
-}
-
-variable "cd_kp_name" {
-  type        = string
-  description = "Name of the Key Protect instance where the secrets are stored."
-  default     = ""
-}
-
-variable "cd_kp_resource_group" {
-  type        = string
-  description = "The resource group containing the Key Protect instance."
-  default     = ""
 }
 
 variable "cd_link_to_doi_toolchain" {
@@ -2345,114 +1375,9 @@ variable "cd_link_to_doi_toolchain" {
   default     = true
 }
 
-variable "cd_pipeline_config_group" {
-  type        = string
-  description = "Specify the Git user or group for the compliance pipeline repository."
-  default     = ""
-}
-
-variable "cd_pipeline_config_repo_auth_type" {
-  type        = string
-  description = "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`."
-  default     = ""
-}
-
 variable "cd_pipeline_config_repo_branch" {
   type        = string
   description = "Specify the branch containing the custom pipeline-config.yaml file."
-  default     = ""
-}
-
-variable "cd_pipeline_config_repo_clone_from_url" {
-  type        = string
-  description = "Specify a repository containing a custom pipeline-config.yaml file."
-  default     = ""
-}
-
-variable "cd_pipeline_config_repo_existing_url" {
-  type        = string
-  description = "Specify a repository containing a custom pipeline-config.yaml file."
-  default     = ""
-}
-
-variable "cd_pipeline_config_repo_git_token_secret_crn" {
-  type        = string
-  sensitive   = true
-  description = "The CRN of the Git token for accessing the pipeline config repository."
-  default     = ""
-  validation {
-    condition     = startswith(var.cd_pipeline_config_repo_git_token_secret_crn, "crn:") || var.cd_pipeline_config_repo_git_token_secret_crn == ""
-    error_message = "Must be a CRN or left empty."
-  }
-}
-
-variable "cd_pipeline_config_repo_git_token_secret_name" {
-  type        = string
-  description = "Name of the Git token secret in the secret provider used for accessing the pipeline config repository."
-  default     = ""
-}
-
-variable "cd_pipeline_config_repo_secret_group" {
-  type        = string
-  description = "Secret group for the Pipeline Config repository secret. Defaults to the value set in `sm_secret_group` if not set. Only used with `Secrets Manager`."
-  default     = ""
-}
-
-variable "cd_pipeline_doi_api_key_secret_crn" {
-  type        = string
-  sensitive   = true
-  description = "The CRN of the DOI (DevOps Insights) apikey used for accessing a specific toolchain Insights instance."
-  default     = ""
-  validation {
-    condition     = startswith(var.cd_pipeline_doi_api_key_secret_crn, "crn:") || var.cd_pipeline_doi_api_key_secret_crn == ""
-    error_message = "Must be a CRN or left empty."
-  }
-}
-
-variable "cd_pipeline_doi_api_key_secret_group" {
-  type        = string
-  description = "Secret group for the pipeline DOI api key. Defaults to the value set in `sm_secret_group` if not set. Only used with `Secrets Manager`."
-  default     = ""
-}
-
-variable "cd_pipeline_doi_api_key_secret_name" {
-  type        = string
-  description = "Name of the Cloud API key secret in the secret provider to access the toolchain containing the Devops Insights instance."
-  default     = ""
-}
-
-variable "cd_pipeline_git_tag" {
-  type        = string
-  description = "The GIT tag selector for the Compliance Pipelines definitions."
-  default     = ""
-}
-
-variable "cd_pipeline_ibmcloud_api_key_secret_crn" {
-  type        = string
-  sensitive   = true
-  description = "The CRN of the IBMCloud apikey used for running the pipelines."
-  default     = ""
-  validation {
-    condition     = startswith(var.cd_pipeline_ibmcloud_api_key_secret_crn, "crn:") || var.cd_pipeline_ibmcloud_api_key_secret_crn == ""
-    error_message = "Must be a CRN or left empty."
-  }
-}
-
-variable "cd_pipeline_ibmcloud_api_key_secret_group" {
-  type        = string
-  description = "Secret group for the pipeline ibmcloud API key secret. Defaults to the value set in `sm_secret_group` if not set. Only used with `Secrets Manager`."
-  default     = ""
-}
-
-variable "cd_pipeline_ibmcloud_api_key_secret_name" {
-  type        = string
-  description = "Name of the Cloud API key secret in the secret provider for running the pipelines."
-  default     = ""
-}
-
-variable "cd_pipeline_properties_filepath" {
-  type        = string
-  description = "The path to the file containing the property JSON. If this is not set, it will by default read the `properties.json` file at the root of the module."
   default     = ""
 }
 
@@ -2479,48 +1404,9 @@ variable "cd_region" {
   default     = ""
 }
 
-variable "cd_repositories_prefix" {
-  type        = string
-  description = "Prefix name for the cloned compliance repos. For the repositories_prefix value only a-z, A-Z and 0-9 and the special characters `-_` are allowed. In addition the string must not end with a special character or have two consecutive special characters."
-  default     = ""
-  validation {
-    condition = (
-      ((can(regex("^[0-9A-Za-z\\-\\_]+$", var.cd_repositories_prefix))) && ((endswith(var.cd_repositories_prefix, "-") == false) && (endswith(var.cd_repositories_prefix, "_") == false))
-        && (strcontains(var.cd_repositories_prefix, "--") == false) && (strcontains(var.cd_repositories_prefix, "__") == false) && (strcontains(var.cd_repositories_prefix, "_-") == false)
-      && (strcontains(var.cd_repositories_prefix, "-_") == false))
-      || (length(var.cd_repositories_prefix) == 0)
-    )
-    error_message = "For the repositories_prefix value only a-z, A-Z and 0-9 and the special characters `-_` are allowed. In addition the string must not end with a special character or have two consecutive special characters."
-  }
-}
-
-variable "cd_repository_properties_filepath" {
-  type        = string
-  description = "The path to the file containing the repository and triggers JSON. If this is not set, it will by default read the `repositories.json` file at the root of the module."
-  default     = ""
-}
-
 variable "cd_repository_properties" {
   type        = string
   description = "Stringified JSON containing the repositories and triggers that get created in the CI toolchain pipelines."
-  default     = ""
-}
-
-variable "cd_scc_enable_scc" {
-  type        = string
-  description = "Adds the SCC tool integration to the toolchain."
-  default     = ""
-}
-
-variable "cd_scc_integration_name" {
-  type        = string
-  description = "The name of the SCC integration."
-  default     = "Security and Compliance"
-}
-
-variable "cd_scc_use_profile_attachment" {
-  type        = string
-  description = "Set to `enabled` to enable use profile with attachment, so that the scripts in the pipeline can interact with the Security and Compliance Center service. When enabled, other parameters become relevant; `scc_scc_api_key_secret_name`, `scc_instance_crn`, `scc_profile_name`, `scc_profile_version`, `scc_attachment_id`."
   default     = ""
 }
 
@@ -2528,101 +1414,6 @@ variable "cd_service_plan" {
   type        = string
   description = "The Continuous Delivery service plan. Can be `lite` or `professional`."
   default     = "professional"
-}
-
-variable "cd_slack_channel_name" {
-  type        = string
-  description = "The name of the Slack channel where notifications are posted."
-  default     = ""
-}
-
-variable "cd_slack_pipeline_fail" {
-  type        = bool
-  description = "Set to `true` to generate pipeline failed notifications."
-  default     = true
-}
-
-variable "cd_slack_pipeline_start" {
-  type        = bool
-  description = "Set to `true` to generate pipeline start notifications."
-  default     = true
-}
-
-variable "cd_slack_pipeline_success" {
-  type        = bool
-  description = "Set to `true` to generate pipeline succeeded notifications."
-  default     = true
-}
-
-variable "cd_slack_team_name" {
-  type        = string
-  description = "The Slack team name, which is the word or phrase before .slack.com in the team URL."
-  default     = ""
-}
-
-variable "cd_slack_toolchain_bind" {
-  type        = bool
-  description = "Set to `true` to Generate tool added to toolchain notifications."
-  default     = true
-}
-
-variable "cd_slack_toolchain_unbind" {
-  type        = bool
-  description = "Set to `true` to generate tool removed from toolchain notifications."
-  default     = true
-}
-
-variable "cd_slack_webhook_secret_crn" {
-  type        = string
-  sensitive   = true
-  description = "The CRN of the Slack webhook secret used for accessing the specified Slack channel."
-  default     = ""
-  validation {
-    condition     = startswith(var.cd_slack_webhook_secret_crn, "crn:") || var.cd_slack_webhook_secret_crn == ""
-    error_message = "Must be a CRN or left empty."
-  }
-}
-
-variable "cd_slack_webhook_secret_group" {
-  type        = string
-  description = "Secret group for the Slack webhook secret. Defaults to the value set in `sm_secret_group` if not set. Only used with `Secrets Manager`."
-  default     = ""
-}
-
-variable "cd_slack_webhook_secret_name" {
-  type        = string
-  description = "Name of the webhook secret in the secret provider used for accessing the configured Slack channel."
-  default     = ""
-}
-
-variable "cd_sm_instance_crn" {
-  type        = string
-  description = "The CRN of the Secrets Manager instance."
-  default     = ""
-}
-
-variable "cd_sm_location" {
-  type        = string
-  description = "The region hosting the Secrets Manager instance."
-  default     = ""
-}
-
-variable "cd_sm_name" {
-  type        = string
-  description = "The name of an existing Secrets Manager instance where the secrets are stored."
-  default     = ""
-}
-
-variable "cd_sm_resource_group" {
-  type        = string
-  description = "The name of the existing resource group containing the Secrets Manager instance for your secrets."
-  default     = ""
-}
-
-variable "cd_sm_secret_group" {
-  type        = string
-  description = "The Secrets Manager secret group containing the secrets for the DevSecOps pipelines."
-  default     = ""
 }
 
 variable "cd_toolchain_description" {
@@ -2637,28 +1428,10 @@ variable "cd_toolchain_name" {
   default     = ""
 }
 
-variable "cd_toolchain_region" {
-  type        = string
-  description = "The region containing the CD toolchain. Use the short form of the regions. For example `us-south`."
-  default     = ""
-}
-
-variable "cd_toolchain_resource_group" {
-  type        = string
-  description = "Resource group within which the toolchain is created."
-  default     = ""
-}
-
 variable "cd_trigger_git_enable" {
   type        = bool
   description = "Set to `true` to enable the CD pipeline Git trigger."
   default     = false
-}
-
-variable "cd_trigger_git_name" {
-  type        = string
-  description = "The name of the CD pipeline GIT trigger."
-  default     = "Git CD Trigger"
 }
 
 variable "cd_trigger_git_promotion_validation_branch" {
@@ -2679,22 +1452,10 @@ variable "cd_trigger_git_promotion_validation_listener" {
   default     = "promotion-validation-listener-gitlab"
 }
 
-variable "cd_trigger_git_promotion_validation_name" {
-  type        = string
-  description = "Name of Git Promotion Validation Trigger"
-  default     = "Git Promotion Validation Trigger"
-}
-
 variable "cd_trigger_manual_enable" {
   type        = bool
   description = "Set to `true` to enable the CD pipeline Manual trigger."
   default     = true
-}
-
-variable "cd_trigger_manual_name" {
-  type        = string
-  description = "The name of the CI pipeline Manual trigger."
-  default     = "Manual CD Trigger"
 }
 
 variable "cd_trigger_manual_promotion_enable" {
@@ -2703,22 +1464,10 @@ variable "cd_trigger_manual_promotion_enable" {
   default     = true
 }
 
-variable "cd_trigger_manual_promotion_name" {
-  type        = string
-  description = "The name of the CD pipeline Manual Promotion trigger."
-  default     = "Manual Promotion Trigger"
-}
-
 variable "cd_trigger_manual_pruner_enable" {
   type        = bool
   description = "Set to `true` to enable the manual Pruner trigger."
   default     = true
-}
-
-variable "cd_trigger_manual_pruner_name" {
-  type        = string
-  description = "The name of the manual Pruner trigger."
-  default     = "Evidence Pruner Manual Trigger"
 }
 
 variable "cd_trigger_timed_cron_schedule" {
@@ -2733,33 +1482,15 @@ variable "cd_trigger_timed_enable" {
   default     = false
 }
 
-variable "cd_trigger_timed_name" {
-  type        = string
-  description = "The name of the CD pipeline Timed trigger."
-  default     = "Git CD Timed Trigger"
-}
-
 variable "cd_trigger_timed_pruner_enable" {
   type        = bool
   description = "Set to `true` to enable the timed Pruner trigger."
   default     = false
 }
 
-variable "cd_trigger_timed_pruner_name" {
-  type        = string
-  description = "The name of the timed Pruner trigger."
-  default     = "Evidence Pruner Timed Trigger"
-}
-
 ########################################################
 ##### START OF CI VARIABLES ##############
 ########################################################
-
-variable "ci_app_group" {
-  type        = string
-  description = "Specify the Git user or group for the application repository."
-  default     = ""
-}
 
 variable "ci_app_name" {
   type        = string
@@ -2767,91 +1498,9 @@ variable "ci_app_name" {
   default     = "hello-compliance-app"
 }
 
-variable "ci_app_repo_auth_type" {
-  type        = string
-  description = "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`."
-  default     = ""
-}
-
 variable "ci_app_repo_branch" {
   type        = string
   description = "This is the repository branch used by the default sample application. Alternatively if `app_repo_existing_url` is provided, then the branch must reflect the default branch for that repository. Typically these branches are `main` or `master`."
-  default     = ""
-}
-
-variable "ci_app_repo_clone_from_url" {
-  type        = string
-  description = "Override the default sample app by providing your own sample app URL, which is cloned into the app repository. Note, uses `clone_if_not_exists` mode, so if the app repository already exists the repository contents are unchanged."
-  default     = ""
-}
-
-variable "ci_app_repo_clone_to_git_id" {
-  type        = string
-  description = "Set this value to `github` for github.com, or to the GUID of a custom GitHub Enterprise server."
-  default     = ""
-}
-
-variable "ci_app_repo_clone_to_git_provider" {
-  type        = string
-  description = "By default this gets set as 'hostedgit', else set to 'githubconsolidated' for GitHub repositories."
-  default     = ""
-}
-
-variable "ci_app_repo_existing_git_id" {
-  type        = string
-  description = "Set this value to `github` for github.com, or to the GUID of a custom GitHub Enterprise server."
-  default     = ""
-}
-
-variable "ci_app_repo_existing_git_provider" {
-  type        = string
-  description = "By default this gets set as 'hostedgit', else set to 'githubconsolidated' for GitHub repositories."
-  default     = ""
-}
-
-variable "ci_app_repo_existing_url" {
-  type        = string
-  description = "Bring your own existing application repository by providing the URL. This will create an integration for your application repository instead of cloning the default sample. Repositories existing in a different org will require the use of Git token. See `app_repo_git_token_secret_name` under optional variables. "
-  default     = ""
-}
-
-variable "ci_app_repo_git_token_secret_crn" {
-  type        = string
-  sensitive   = true
-  description = "The CRN of the Git token used for accessing the application repository."
-  default     = ""
-  validation {
-    condition     = startswith(var.ci_app_repo_git_token_secret_crn, "crn:") || var.ci_app_repo_git_token_secret_crn == ""
-    error_message = "Must be a CRN or left empty."
-  }
-}
-
-variable "ci_app_repo_git_token_secret_name" {
-  type        = string
-  description = "Name of the Git token secret in the secret provider used for accessing the sample (or bring your own) application repository."
-  default     = ""
-}
-
-variable "ci_app_repo_secret_group" {
-  type        = string
-  description = "Secret group for the App repository secret. Defaults to the value set in `sm_secret_group` if not set. Only used with `Secrets Manager`."
-  default     = ""
-}
-
-variable "ci_artifactory_token_secret_crn" {
-  type        = string
-  sensitive   = true
-  description = "The CRN for the Artifactory access secret."
-  default     = ""
-  validation {
-    condition     = startswith(var.ci_artifactory_token_secret_crn, "crn:") || var.ci_artifactory_token_secret_crn == ""
-    error_message = "Must be a CRN or left empty."
-  }
-}
-
-variable "ci_authorization_policy_creation" {
-  type        = string
-  description = "Disable Toolchain Service to Secrets Manager/Key Protect/Notifications Service authorization policy creation. To disable set the value to `disabled`."
   default     = ""
 }
 
@@ -2897,85 +1546,9 @@ variable "ci_code_engine_resource_group" {
   default     = ""
 }
 
-variable "ci_compliance_pipeline_branch" {
-  type        = string
-  description = "The CI Pipeline Compliance Pipeline branch."
-  default     = ""
-}
-
-variable "ci_compliance_pipeline_group" {
-  type        = string
-  description = "Specify the Git user or group for the compliance pipeline repository."
-  default     = ""
-}
-
 variable "ci_compliance_pipeline_pr_branch" {
   type        = string
   description = "The PR Pipeline Compliance Pipeline branch."
-  default     = ""
-}
-
-variable "ci_compliance_pipeline_repo_auth_type" {
-  type        = string
-  description = "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`."
-  default     = ""
-}
-
-variable "ci_compliance_pipeline_repo_git_token_secret_crn" {
-  type        = string
-  sensitive   = true
-  description = "The CRN of the Git token used for accessing the Compliance Pipelines repository."
-  default     = ""
-  validation {
-    condition     = startswith(var.ci_compliance_pipeline_repo_git_token_secret_crn, "crn:") || var.ci_compliance_pipeline_repo_git_token_secret_crn == ""
-    error_message = "Must be a CRN or left empty."
-  }
-}
-
-variable "ci_compliance_pipeline_repo_git_token_secret_name" {
-  type        = string
-  description = "Name of the Git token secret in the secret provider used for accessing the compliance pipelines repository."
-  default     = ""
-}
-
-variable "ci_compliance_pipeline_repo_secret_group" {
-  type        = string
-  description = "Secret group for the Compliance Pipeline repository secret. Defaults to the value set in `sm_secret_group` if not set. Only used with `Secrets Manager`."
-  default     = ""
-}
-
-variable "ci_cos_api_key_secret_crn" {
-  type        = string
-  sensitive   = true
-  description = "The CRN of the Cloud Object Storage apikey."
-  default     = ""
-  validation {
-    condition     = startswith(var.ci_cos_api_key_secret_crn, "crn:") || var.ci_cos_api_key_secret_crn == ""
-    error_message = "Must be a CRN or left empty."
-  }
-}
-
-variable "ci_cos_api_key_secret_group" {
-  type        = string
-  description = "Secret group for the COS API key secret. Defaults to the value set in `sm_secret_group` if not set. Only used with `Secrets Manager`."
-  default     = ""
-}
-
-variable "ci_cos_api_key_secret_name" {
-  type        = string
-  description = "Name of the Cloud Object Storage API key secret in the secret provider used for accessing the evidence COS bucket."
-  default     = ""
-}
-
-variable "ci_cos_bucket_name" {
-  type        = string
-  description = "The name of the Cloud Object Storage bucket used for storing the evidence."
-  default     = ""
-}
-
-variable "ci_cos_endpoint" {
-  type        = string
-  description = "The endpoint for the Cloud Object Stroage instance containing the evidence bucket."
   default     = ""
 }
 
@@ -2991,273 +1564,15 @@ variable "ci_doi_toolchain_id" {
   default     = ""
 }
 
-variable "ci_enable_key_protect" {
-  type        = string
-  description = "Set to `true` to the enable Key Protect integrations."
-  default     = ""
-}
-
-variable "ci_enable_pipeline_notifications" {
-  type        = string
-  description = "When enabled, pipeline run events will be sent to the Event Notifications and Slack integrations in the enclosing toolchain."
-  default     = ""
-}
-
-variable "ci_enable_secrets_manager" {
-  type        = string
-  description = "Set to `true` to enable the Secrets Manager integrations."
-  default     = ""
-}
-
-variable "ci_enable_slack" {
-  type        = string
-  description = "Set to `true` to create the Slack toolchain integration."
-  default     = ""
-}
-
-variable "ci_event_notifications_crn" {
-  type        = string
-  description = "Set the Event Notifications CRN to create an Events Notification integration."
-  default     = ""
-}
-
-variable "ci_evidence_group" {
-  type        = string
-  description = "Specify the Git user or group for the evidence repository."
-  default     = ""
-}
-
-variable "ci_evidence_repo_auth_type" {
-  type        = string
-  description = "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`."
-  default     = ""
-}
-
-variable "ci_evidence_repo_git_token_secret_crn" {
-  type        = string
-  sensitive   = true
-  description = "The CRN of the Git token used for accessing the Evidence repository."
-  default     = ""
-  validation {
-    condition     = startswith(var.ci_evidence_repo_git_token_secret_crn, "crn:") || var.ci_evidence_repo_git_token_secret_crn == ""
-    error_message = "Must be a CRN or left empty."
-  }
-}
-
-variable "ci_evidence_repo_git_token_secret_name" {
-  type        = string
-  description = "Name of the Git token secret in the secret provider used for accessing the evidence repository."
-  default     = ""
-}
-
-variable "ci_evidence_repo_secret_group" {
-  type        = string
-  description = "Secret group for the Evidence repository secret. Defaults to the value set in `sm_secret_group` if not set. Only used with `Secrets Manager`."
-  default     = ""
-}
-
-variable "ci_inventory_group" {
-  type        = string
-  description = "Specify the Git user or group for the inventory repository."
-  default     = ""
-}
-
-variable "ci_inventory_repo_auth_type" {
-  type        = string
-  description = "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`."
-  default     = ""
-}
-
-variable "ci_inventory_repo_git_token_secret_crn" {
-  type        = string
-  sensitive   = true
-  description = "The CRN of the Git token used for acessing the Inventory repository."
-  default     = ""
-  validation {
-    condition     = startswith(var.ci_inventory_repo_git_token_secret_crn, "crn:") || var.ci_inventory_repo_git_token_secret_crn == ""
-    error_message = "Must be a CRN or left empty."
-  }
-}
-
-variable "ci_inventory_repo_git_token_secret_name" {
-  type        = string
-  description = "Name of the Git token secret in the secret provider used for accessing the inventory repository."
-  default     = ""
-}
-
-variable "ci_inventory_repo_secret_group" {
-  type        = string
-  description = "Secret group for the Inventory repository secret. Defaults to the value set in `sm_secret_group` if not set. Only used with `Secrets Manager`."
-  default     = ""
-}
-
-variable "ci_issues_group" {
-  type        = string
-  description = "Specify the Git user or group for the issues repository."
-  default     = ""
-}
-
-variable "ci_issues_repo_auth_type" {
-  type        = string
-  description = "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`."
-  default     = ""
-}
-
-variable "ci_issues_repo_git_token_secret_crn" {
-  type        = string
-  sensitive   = true
-  description = "The CRN of the Git token used for accessing the Issues repository."
-  default     = ""
-  validation {
-    condition     = startswith(var.ci_issues_repo_git_token_secret_crn, "crn:") || var.ci_issues_repo_git_token_secret_crn == ""
-    error_message = "Must be a CRN or left empty."
-  }
-}
-
-variable "ci_issues_repo_git_token_secret_name" {
-  type        = string
-  description = "Name of the Git token secret in the secret provider used for accessing the issues repository."
-  default     = ""
-}
-
-variable "ci_issues_repo_secret_group" {
-  type        = string
-  description = "Secret group for the Issues repository secret. Defaults to the value set in `sm_secret_group` if not set. Only used with `Secrets Manager`."
-  default     = ""
-}
-
-variable "ci_kp_location" {
-  type        = string
-  description = "The region hosting the Key Protect instance."
-  default     = ""
-}
-
-variable "ci_kp_name" {
-  type        = string
-  description = "Name of the Key Protect instance where the secrets are stored."
-  default     = ""
-}
-
-variable "ci_kp_resource_group" {
-  type        = string
-  description = "The resource group containing the Key Protect instance."
-  default     = ""
-}
-
 variable "ci_link_to_doi_toolchain" {
   description = "Enable a link to a DevOps Insights instance in another toolchain."
   type        = bool
   default     = false
 }
 
-variable "ci_pipeline_config_group" {
-  type        = string
-  description = "Specify the Git user or group for the pipeline config repository."
-  default     = ""
-}
-
-variable "ci_pipeline_config_repo_auth_type" {
-  type        = string
-  description = "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`."
-  default     = ""
-}
-
 variable "ci_pipeline_config_repo_branch" {
   type        = string
   description = "Specify the branch containing the custom pipeline-config.yaml file."
-  default     = ""
-}
-
-variable "ci_pipeline_config_repo_clone_from_url" {
-  type        = string
-  description = "Specify a repository containing a custom pipeline-config.yaml file."
-  default     = ""
-}
-
-variable "ci_pipeline_config_repo_existing_url" {
-  type        = string
-  description = "Specify and link to an existing repository containing a custom pipeline-config.yaml file."
-  default     = ""
-}
-
-variable "ci_pipeline_config_repo_git_token_secret_crn" {
-  type        = string
-  sensitive   = true
-  description = "The CRN of the Git token for accessing the pipeline config repository."
-  default     = ""
-  validation {
-    condition     = startswith(var.ci_pipeline_config_repo_git_token_secret_crn, "crn:") || var.ci_pipeline_config_repo_git_token_secret_crn == ""
-    error_message = "Must be a CRN or left empty."
-  }
-}
-
-variable "ci_pipeline_config_repo_git_token_secret_name" {
-  type        = string
-  description = "Name of the Git token secret in the secret provider used for accessing the pipeline config repository."
-  default     = ""
-}
-
-variable "ci_pipeline_config_repo_secret_group" {
-  type        = string
-  description = "Secret group for the Pipeline Config repository secret. Defaults to the value set in `sm_secret_group` if not set. Only used with `Secrets Manager`."
-  default     = ""
-}
-
-variable "ci_pipeline_doi_api_key_secret_crn" {
-  type        = string
-  sensitive   = true
-  description = "The CRN of the DOI (DevOps Insights) apikey used for accessing a specific toolchain Insights instance."
-  default     = ""
-  validation {
-    condition     = startswith(var.ci_pipeline_doi_api_key_secret_crn, "crn:") || var.ci_pipeline_doi_api_key_secret_crn == ""
-    error_message = "Must be a CRN or left empty."
-  }
-}
-
-variable "ci_pipeline_doi_api_key_secret_group" {
-  type        = string
-  description = "Secret group for the pipeline DOI api key. Defaults to the value set in `sm_secret_group` if not set. Only used with `Secrets Manager`."
-  default     = ""
-}
-
-variable "ci_pipeline_doi_api_key_secret_name" {
-  type        = string
-  description = "Name of the Cloud API key secret in the secret provider to access the toolchain containing the Devops Insights instance."
-  default     = ""
-}
-
-variable "ci_pipeline_git_tag" {
-  type        = string
-  description = "The GIT tag selector for the Compliance Pipelines definitions."
-  default     = ""
-}
-
-variable "ci_pipeline_ibmcloud_api_key_secret_crn" {
-  type        = string
-  sensitive   = true
-  description = "The CRN of the IBMCloud apikey used for running the pipelines."
-  default     = ""
-  validation {
-    condition     = startswith(var.ci_pipeline_ibmcloud_api_key_secret_crn, "crn:") || var.ci_pipeline_ibmcloud_api_key_secret_crn == ""
-    error_message = "Must be a CRN or left empty."
-  }
-}
-
-variable "ci_pipeline_ibmcloud_api_key_secret_group" {
-  type        = string
-  description = "Secret group for the pipeline ibmcloud API key secret. Defaults to the value set in `sm_secret_group` if not set. Only used with `Secrets Manager`."
-  default     = ""
-}
-
-variable "ci_pipeline_ibmcloud_api_key_secret_name" {
-  type        = string
-  description = "Name of the Cloud API key secret in the secret provider for running the pipelines."
-  default     = ""
-}
-
-variable "ci_pipeline_properties_filepath" {
-  type        = string
-  description = "The path to the file containing the properties JSON. If this is not set, it will by default read the `properties.json` file at the root of the CI module."
   default     = ""
 }
 
@@ -3284,27 +1599,6 @@ variable "ci_registry_region" {
   default     = ""
 }
 
-variable "ci_repositories_prefix" {
-  type        = string
-  description = "Prefix name for the cloned compliance repos. For the repositories_prefix value only a-z, A-Z and 0-9 and the special characters `-_` are allowed. In addition the string must not end with a special character or have two consecutive special characters."
-  default     = ""
-  validation {
-    condition = (
-      ((can(regex("^[0-9A-Za-z\\-\\_]+$", var.ci_repositories_prefix))) && ((endswith(var.ci_repositories_prefix, "-") == false) && (endswith(var.ci_repositories_prefix, "_") == false))
-        && (strcontains(var.ci_repositories_prefix, "--") == false) && (strcontains(var.ci_repositories_prefix, "__") == false) && (strcontains(var.ci_repositories_prefix, "_-") == false)
-      && (strcontains(var.ci_repositories_prefix, "-_") == false))
-      || (length(var.ci_repositories_prefix) == 0)
-    )
-    error_message = "For the repositories_prefix value only a-z, A-Z and 0-9 and the special characters `-_` are allowed. In addition the string must not end with a special character or have two consecutive special characters."
-  }
-}
-
-variable "ci_repository_properties_filepath" {
-  type        = string
-  description = "The path to a file containing the repository and triggers JSON. If this is not set, it will by default read the `repositories.json` file at the root of the CI module."
-  default     = ""
-}
-
 variable "ci_repository_properties" {
   type        = string
   description = "Stringified JSON containing the repositories and triggers that get created in the CI toolchain pipelines."
@@ -3315,148 +1609,6 @@ variable "ci_signing_key_secret_name" {
   type        = string
   description = "Name of the signing key secret in the secret provider used for signing images/artifacts."
   default     = "signing-key"
-}
-
-variable "ci_slack_channel_name" {
-  type        = string
-  description = "The name of the Slack channel where notifications are posted."
-  default     = ""
-}
-
-variable "ci_slack_pipeline_fail" {
-  type        = bool
-  description = "Set to `true` to generate pipeline failed notifications."
-  default     = true
-}
-
-variable "ci_slack_pipeline_start" {
-  type        = bool
-  description = "Set to `true` to generate pipeline start notifications."
-  default     = true
-}
-
-variable "ci_slack_pipeline_success" {
-  type        = bool
-  description = "Set to `true` to generate pipeline succeeded notifications."
-  default     = true
-}
-
-variable "ci_slack_team_name" {
-  type        = string
-  description = "The Slack team name, which is the word or phrase before `.slack.com` in the team URL."
-  default     = ""
-}
-
-variable "ci_slack_toolchain_bind" {
-  type        = bool
-  description = "Set to `true` to Generate tool added to toolchain notifications."
-  default     = true
-}
-
-variable "ci_slack_toolchain_unbind" {
-  type        = bool
-  description = "Set to `true` to generate tool removed from toolchain notifications."
-  default     = true
-}
-
-variable "ci_slack_webhook_secret_crn" {
-  type        = string
-  sensitive   = true
-  description = "The CRN of the Slack webhook secret used for accessing the specified Slack channel."
-  default     = ""
-  validation {
-    condition     = startswith(var.ci_slack_webhook_secret_crn, "crn:") || var.ci_slack_webhook_secret_crn == ""
-    error_message = "Must be a CRN or left empty."
-  }
-}
-
-variable "ci_slack_webhook_secret_group" {
-  type        = string
-  description = "Secret group for the Slack webhook secret. Defaults to the value set in `sm_secret_group` if not set. Only used with `Secrets Manager`."
-  default     = ""
-}
-
-variable "ci_slack_webhook_secret_name" {
-  type        = string
-  description = "Name of the webhook secret in the secret provider used for accessing the configured Slack channel."
-  default     = ""
-}
-
-variable "ci_sm_instance_crn" {
-  type        = string
-  description = "The CRN of the Secrets Manager instance."
-  default     = ""
-}
-
-variable "ci_sm_location" {
-  type        = string
-  description = "The region hosting the Secrets Manager instance."
-  default     = ""
-}
-
-variable "ci_sm_name" {
-  type        = string
-  description = "The name of an existing Secrets Manager instance where the secrets are stored."
-  default     = ""
-}
-
-variable "ci_sm_resource_group" {
-  type        = string
-  description = "The name of the existing resource group containing the Secrets Manager instance for your secrets."
-  default     = ""
-}
-
-variable "ci_sm_secret_group" {
-  type        = string
-  description = "The Secrets Manager secret group containing the secrets for the DevSecOps pipelines."
-  default     = ""
-}
-
-variable "ci_sonarqube_integration_name" {
-  type        = string
-  description = "The name of the SonarQube integration."
-  default     = ""
-}
-
-variable "ci_sonarqube_is_blind_connection" {
-  type        = string
-  description = "When set to `true`, instructs IBM Cloud Continuous Delivery to not validate the configuration of this integration. Set this to `true` if the SonarQube server is not addressable on the public internet."
-  default     = ""
-}
-
-variable "ci_sonarqube_secret_crn" {
-  type        = string
-  sensitive   = true
-  description = "The CRN of the secret used to access SonarQube."
-  default     = ""
-  validation {
-    condition     = startswith(var.ci_sonarqube_secret_crn, "crn:") || var.ci_sonarqube_secret_crn == ""
-    error_message = "Must be a CRN or left empty."
-  }
-}
-
-variable "ci_sonarqube_secret_group" {
-  type        = string
-  description = "Secret group for the SonarQube secret. Defaults to the value set in `sm_secret_group` if not set. Only used with `Secrets Manager`."
-  default     = ""
-}
-
-variable "ci_sonarqube_secret_name" {
-  type        = string
-  description = "The name of the SonarQube secret in the secrets provider."
-  default     = ""
-}
-
-variable "ci_sonarqube_server_url" {
-  type        = string
-  description = "The URL to the SonarQube server."
-  default     = ""
-}
-
-variable "ci_sonarqube_user" {
-  type        = string
-  description = "The name of the SonarQube user."
-  default     = ""
 }
 
 variable "ci_toolchain_description" {
@@ -3471,28 +1623,10 @@ variable "ci_toolchain_name" {
   default     = ""
 }
 
-variable "ci_toolchain_region" {
-  type        = string
-  description = "The region containing the CI toolchain. Use the short form of the regions. For example `us-south`."
-  default     = ""
-}
-
-variable "ci_toolchain_resource_group" {
-  type        = string
-  description = "The resource group within which the toolchain is created."
-  default     = ""
-}
-
 variable "ci_trigger_git_enable" {
   type        = bool
   description = "Set to `true` to enable the CI pipeline Git trigger."
   default     = true
-}
-
-variable "ci_trigger_git_name" {
-  type        = string
-  description = "The name of the CI pipeline GIT trigger."
-  default     = "Git CI Trigger"
 }
 
 variable "ci_trigger_manual_enable" {
@@ -3501,34 +1635,16 @@ variable "ci_trigger_manual_enable" {
   default     = true
 }
 
-variable "ci_trigger_manual_name" {
-  type        = string
-  description = "The name of the CI pipeline Manual trigger."
-  default     = "Manual Trigger"
-}
-
 variable "ci_trigger_manual_pruner_enable" {
   type        = bool
   description = "Set to `true` to enable the manual Pruner trigger."
   default     = true
 }
 
-variable "ci_trigger_manual_pruner_name" {
-  type        = string
-  description = "The name of the manual Pruner trigger."
-  default     = "Evidence Pruner Manual Trigger"
-}
-
 variable "ci_trigger_pr_git_enable" {
   type        = bool
   description = "Set to `true` to enable the PR pipeline Git trigger."
   default     = true
-}
-
-variable "ci_trigger_pr_git_name" {
-  type        = string
-  description = "The name of the PR pipeline GIT trigger."
-  default     = "Git PR Trigger"
 }
 
 variable "ci_trigger_timed_cron_schedule" {
@@ -3543,22 +1659,10 @@ variable "ci_trigger_timed_enable" {
   default     = false
 }
 
-variable "ci_trigger_timed_name" {
-  type        = string
-  description = "The name of the CI pipeline Timed trigger."
-  default     = "Git CI Timed Trigger"
-}
-
 variable "ci_trigger_timed_pruner_enable" {
   type        = bool
   description = "Set to `true` to enable the timed Pruner trigger."
   default     = false
-}
-
-variable "ci_trigger_timed_pruner_name" {
-  type        = string
-  description = "The name of the timed Pruner trigger."
-  default     = "Evidence Pruner Timed Trigger"
 }
 
 variable "sample_default_application" {
@@ -3583,4 +1687,18 @@ variable "create_git_triggers" {
   type        = string
   description = "Set to `true` to create the default Git triggers associated with the compliance repos and sample app."
   default     = "true"
+}
+
+############### ACCESS GROUPS  ################
+
+variable "toolchain_access_group_name" {
+  type        = string
+  description = "The name of the DevSecOps access group. See `create_access_group`."
+  default     = "devsecops-toolchain"
+}
+
+variable "create_access_group" {
+  type        = bool
+  description = "Set to `true` to create an access group for the operations of the DevSecOps toolchains."
+  default     = false
 }

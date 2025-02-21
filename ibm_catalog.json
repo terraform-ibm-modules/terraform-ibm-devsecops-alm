@@ -125,6 +125,73 @@
                             }
                         ]
                     },
+                    "iam_permissions": [
+						{
+							"role_crns": [
+								"crn:v1:bluemix:public:iam::::role:Administrator",
+								"crn:v1:bluemix:public:iam::::serviceRole:Manager"
+							],
+							"service_name": "secrets-manager"
+						},
+						{
+							"role_crns": [
+								"crn:v1:bluemix:public:iam::::role:Administrator"
+							],
+							"service_name": "cloud-object-storage"
+						},
+						{
+							"role_crns": [
+								"crn:v1:bluemix:public:iam::::role:Administrator"
+							],
+							"service_name": "codeengine"
+						},
+						{
+							"role_crns": [
+								"crn:v1:bluemix:public:iam::::role:Administrator"
+							],
+							"service_name": "continuous-delivery"
+						},
+						{
+							"role_crns": [
+								"crn:v1:bluemix:public:iam::::role:Administrator"
+							],
+							"service_name": "resource-group"
+						},
+						{
+							"role_crns": [
+								"crn:v1:bluemix:public:iam::::role:Editor"
+							],
+							"service_name": "iam-groups"
+						},
+                        {
+							"role_crns": [
+								"crn:v1:bluemix:public:iam::::role:Editor"
+							],
+							"service_name": "user-management"
+						},
+						{
+							"role_crns": [
+								"crn:v1:bluemix:public:iam::::role:Administrator",
+                                "crn:v1:bluemix:public:iam::::serviceRole:Manager"
+							],
+							"service_name": "container-registry"
+						},
+                        {
+							"role_crns": [
+								"crn:v1:bluemix:public:iam::::role:Administrator"
+							],
+							"service_name": "toolchain"
+						},
+						{
+							"role_crns": [
+								"crn:v1:bluemix:public:iam-identity::::serviceRole:ServiceIdCreator",
+								"crn:v1:bluemix:public:iam-identity::::serviceRole:UserApiKeyCreator",
+								"crn:v1:bluemix:public:iam::::role:Operator"
+
+							],
+							"service_name": "iam-identity"
+						}
+					],
                     "configuration": [
                         {
                             "key": "toolchain_name",
@@ -300,13 +367,6 @@
                             "required": false
                         },
                         {
-                            "key": "repo_git_token_secret_name",
-                            "type": "string",
-                            "default_value": "",
-                            "description": "Name of the Git token secret in the secret provider used for accessing the repositories created by the DA.",
-                            "required": false
-                        },
-                        {
                             "key": "repo_title",
                             "type": "string",
                             "default_value": "",
@@ -321,30 +381,16 @@
                             "required": false
                         },
                         {
+                            "key": "repo_apply_settings_to_compliance_repos",
+                            "type": "boolean",
+                            "default_value": true,
+                            "description": "Set to `true` to apply the same settings to all the default compliance repositories. Set to `false` to apply these settings to only the sample application, pipeline config and the deployment repositories.",
+                            "required": false
+                        },
+                        {
                             "key": "repo_blind_connection",
-                            "type": "string",
-                            "default_value": "false",
-                            "description": "Setting this value to `true` means the server is not addressable on the public internet. IBM Cloud will not be able to validate the connection details you provide. Certain functionality that requires API access to the git server will be disabled. Delivery pipeline will only work using a private worker that has network access to the git server.",
-                            "required": false
-                        },
-                        {
-                            "key": "custom_app_repo_title",
-                            "type": "string",
-                            "default_value": "",
-                            "description": "(Optional) The title of the server. e.g. My Git Enterprise Server. Applies to the sample application repository, pipeline config repository and additionally the deployment repository of the CD toolchain. Takes precedence over `repo_title`, if also set.",
-                            "required": false
-                        },
-                        {
-                            "key": "custom_app_repo_root_url",
-                            "type": "string",
-                            "default_value": "",
-                            "description": "(Optional) The Root URL of the server. e.g. https://git.example.com. Applies to the sample application repository, pipeline config repository and additionally the deployment repository of the CD toolchain. Takes precedence over `repo_root_url`, if also set.",
-                            "required": false
-                        },
-                        {
-                            "key": "custom_app_repo_blind_connection",
-                            "type": "string",
-                            "default_value": "false",
+                            "type": "boolean",
+                            "default_value": false,
                             "description": "Setting this value to `true` means the server is not addressable on the public internet. IBM Cloud will not be able to validate the connection details you provide. Certain functionality that requires API access to the git server will be disabled. Delivery pipeline will only work using a private worker that has network access to the git server.",
                             "required": false
                         },
@@ -448,8 +494,8 @@
                         },
                         {
                             "key": "compliance_pipeline_repo_blind_connection",
-                            "type": "string",
-                            "default_value": "false",
+                            "type": "boolean",
+                            "default_value": false,
                             "description": "Setting this value to `true` means the server is not addressable on the public internet. IBM Cloud will not be able to validate the connection details you provide. Certain functionality that requires API access to the git server will be disabled. Delivery pipeline will only work using a private worker that has network access to the git server.",
                             "required": false
                         },
@@ -551,47 +597,6 @@
                             "required": false
                         },
                         {
-                            "key": "custom_app_repo_git_token_secret_crn",
-                            "type": "password",
-                            "description": "The CRN for Git Token used by the sample application repository, pipeline config repository and additionally the deployment repository of the CD toolchain. Takes precedence for these repositories over the value set in `repo_git_token_secret_crn`.",
-                            "required": false
-                        },
-                        {
-                            "key": "custom_app_repo_git_id",
-                            "type": "string",
-                            "default_value": "",
-                            "description": "The Git ID for the application repositories. Used by the sample application repository, pipeline config repository and additionally the deployment repository of the CD toolchain. Takes precedence for these repositories over the value set in `repo_git_id`.",
-                            "required": false
-                        },
-                        {
-                            "key": "custom_app_repo_group",
-                            "type": "string",
-                            "default_value": "",
-                            "description": "Specify the Git user or group for your application. This must be set if the repository authentication type is `pat` (personal access token). Used by the sample application repository, pipeline config repository and additionally the deployment repository of the CD toolchain. Takes precedence for these repositories over the value set in `repo_group`.",
-                            "required": false
-                        },
-                        {
-                            "key": "custom_app_repo_git_provider",
-                            "type": "string",
-                            "default_value": "",
-                            "description": "The Git provider type. Used by the sample application repository, pipeline config repository and additionally the deployment repository of the CD toolchain. Takes precedence for these repositories over the value set in `repo_git_provider`.",
-                            "required": false
-                        },
-                        {
-                            "key": "custom_app_repo_git_token_secret_name",
-                            "type": "string",
-                            "default_value": "",
-                            "description": "The name of the Git token secret in the secret provider used for accessing the sample application repository, pipeline config repository and additionally the deployment repository of the CD toolchain. Takes precedence for these repositories over the value set in `repo_git_token_secret_name`.",
-                            "required": false
-                        },
-                        {
-                            "key": "custom_app_repo_git_token_secret_value",
-                            "type": "password",
-                            "default_value": "",
-                            "description": "The personal access token that will be added to the `custom_app_repo_git_token_secret_name` secret in the secrets provider. Note if also using `repo_git_token_secret_name` to set a Git Token in Secrets Manager, the names of the secrets must be different.",
-                            "required": false
-                        },
-                        {
                             "key": "app_repo_secret_group",
                             "type": "string",
                             "default_value": "",
@@ -686,6 +691,13 @@
                             "type": "boolean",
                             "default_value": false,
                             "description": "Set to `true` to enable the timed Pruner trigger.",
+                            "required": false
+                        },
+                        {
+                            "key": "change_management_repo_git_id",
+                            "type": "string",
+                            "default_value": "",
+                            "description": "Set this value to `github` for github.com, or to the ID of a custom GitHub Enterprise server.",
                             "required": false
                         },
                         {
@@ -832,13 +844,6 @@
                             "type": "string",
                             "default_value": "",
                             "description": "By default this gets set as 'hostedgit', else set to 'githubconsolidated' for GitHub repositories.",
-                            "required": false
-                        },
-                        {
-                            "key": "cd_deployment_repo_existing_url",
-                            "type": "string",
-                            "default_value": "",
-                            "description": "Override to bring your own existing deployment repository URL, which is used directly instead of cloning the default deployment sample.",
                             "required": false
                         },
                         {
@@ -1248,6 +1253,13 @@
                             "required": false
                         },
                         {
+                            "key": "cos_api_key_secret_value",
+                            "type": "string",
+                            "default_value": "",
+                            "description": "A user provided api key with COS access permissions that can be pushed to Secrets Manager. See `cos_api_key_secret_name` and `create_cos_api_key`.",
+                            "required": false
+                        },
+                        {
                             "key": "cos_bucket_name",
                             "type": "string",
                             "default_value": "",
@@ -1290,10 +1302,24 @@
                             "required": false
                         },
                         {
+                            "key": "create_code_engine_access_policy",
+                            "type": "boolean",
+                            "default_value": true,
+                            "description": "Add a Code Engine access policy to the generated IAM access key. See `create_ibmcloud_api_key`.",
+                            "required": false
+                        },
+                        {
                             "key": "create_cos_api_key",
                             "type": "boolean",
                             "default_value": false,
                             "description": "Set to `true` to create and add a `cos-api-key` to the Secrets Provider.",
+                            "required": false
+                        },
+                        {
+                            "key": "create_kubernetes_access_policy",
+                            "type": "boolean",
+                            "default_value": false,
+                            "description": "Add a Kubernetes access policy to the generated IAM access key. See `create_ibmcloud_api_key`.",
                             "required": false
                         },
                         {
@@ -1308,6 +1334,13 @@
                             "type": "password",
                             "default_value": "",
                             "description": "The personal access token that will be added to the `repo_git_token_secret_name` secret in the secrets provider.",
+                            "required": false
+                        },
+                        {
+                            "key": "create_access_group",
+                            "type": "boolean",
+                            "default_value": false,
+                            "description": "Set to `true` to create an access group for the operations of the DevSecOps toolchains.",
                             "required": false
                         },
                         {
@@ -1328,7 +1361,7 @@
                             "key": "create_privateworker_secret",
                             "type": "boolean",
                             "default_value": false,
-                            "description": "Set to `true` to add a specified private worker service api key to the Secrets Provider.",
+                            "description": "Set to `true` to add a specified private worker service api key to the Secrets Provider. This also enables a private worker tool integration in the toolchains.",
                             "required": false
                         },
                         {
@@ -1430,13 +1463,6 @@
                             "required": false
                         },
                         {
-                            "key": "evidence_repo_existing_url",
-                            "type": "string",
-                            "default_value": "",
-                            "description": "Set to use an existing evidence repository.",
-                            "required": false
-                        },
-                        {
                             "key": "evidence_repo_git_token_secret_crn",
                             "type": "password",
                             "description": "The CRN of the Git token used for accessing the Evidence repository.",
@@ -1506,13 +1532,6 @@
                             "required": false
                         },
                         {
-                            "key": "inventory_repo_existing_url",
-                            "type": "string",
-                            "default_value": "",
-                            "description": "Set to use an existing inventory repository.",
-                            "required": false
-                        },
-                        {
                             "key": "inventory_repo_git_token_secret_crn",
                             "type": "password",
                             "description": "The CRN of the Git token used for acessing the Inventory repository.",
@@ -1569,13 +1588,6 @@
                         },
                         {
                             "key": "issues_repo_existing_git_provider",
-                            "type": "string",
-                            "default_value": "",
-                            "description": "By default this gets set as 'hostedgit', else set to 'githubconsolidated' for GitHub repositories.",
-                            "required": false
-                        },
-                        {
-                            "key": "issues_repo_existing_url",
                             "type": "string",
                             "default_value": "",
                             "description": "By default this gets set as 'hostedgit', else set to 'githubconsolidated' for GitHub repositories.",
@@ -1651,6 +1663,20 @@
                             "required": false
                         },
                         {
+                            "key": "pipeline_config_repo_git_id",
+                            "type": "string",
+                            "default_value": "",
+                            "description": "Set this value to `github` for github.com, or to the GUID of a custom GitHub Enterprise server.",
+                            "required": false
+                        },
+                        {
+                            "key": "pipeline_config_repo_git_provider",
+                            "type": "string",
+                            "default_value": "",
+                            "description": "Git provider for pipeline repo config",
+                            "required": false
+                        },
+                        {
                             "key": "pipeline_config_repo_git_token_secret_crn",
                             "type": "password",
                             "description": "The CRN of the Git token for accessing the pipeline config repository.",
@@ -1715,6 +1741,13 @@
                             "type": "string",
                             "default_value": "ibmcloud-api-key",
                             "description": "Name of the Cloud API key secret in the secret provider for running the pipelines. Applies to the CI, CD and CC toolchains.",
+                            "required": false
+                        },
+                        {
+                            "key": "pipeline_ibmcloud_api_key_secret_value",
+                            "type": "string",
+                            "default_value": "",
+                            "description": "A user provided api key for running the toolchain pipelines that can be pushed to Secrets Manager. See `pipeline_ibmcloud_api_key_secret_name` and `create_ibmcloud_api_key`.",
                             "required": false
                         },
                         {
@@ -1985,6 +2018,13 @@
                             "required": false
                         },
                         {
+                            "key": "toolchain_access_group_name",
+                            "type": "string",
+                            "default_value": "devsecops-toolchain",
+                            "description": "The name of the DevSecOps access group. See `create_access_group`.",
+                            "required": false
+                        },
+                        {
                             "key": "use_app_repo_for_cd_deploy",
                             "type": "boolean",
                             "default_value": true,
@@ -2198,6 +2238,73 @@
                             }
                         ]
                     },
+                    "iam_permissions": [
+						{
+							"role_crns": [
+								"crn:v1:bluemix:public:iam::::role:Administrator",
+								"crn:v1:bluemix:public:iam::::serviceRole:Manager"
+							],
+							"service_name": "secrets-manager"
+						},
+						{
+							"role_crns": [
+								"crn:v1:bluemix:public:iam::::role:Administrator"
+							],
+							"service_name": "cloud-object-storage"
+						},
+						{
+							"role_crns": [
+								"crn:v1:bluemix:public:iam::::role:Administrator"
+							],
+							"service_name": "containers-kubernetes"
+						},
+						{
+							"role_crns": [
+								"crn:v1:bluemix:public:iam::::role:Administrator"
+							],
+							"service_name": "continuous-delivery"
+						},
+						{
+							"role_crns": [
+								"crn:v1:bluemix:public:iam::::role:Administrator"
+							],
+							"service_name": "resource-group"
+						},
+						{
+							"role_crns": [
+								"crn:v1:bluemix:public:iam::::role:Editor"
+							],
+							"service_name": "iam-groups"
+						},
+                        {
+							"role_crns": [
+								"crn:v1:bluemix:public:iam::::role:Editor"
+							],
+							"service_name": "user-management"
+						},
+                        {
+							"role_crns": [
+								"crn:v1:bluemix:public:iam::::role:Administrator",
+                                "crn:v1:bluemix:public:iam::::serviceRole:Manager"
+							],
+							"service_name": "container-registry"
+						},
+						{
+							"role_crns": [
+								"crn:v1:bluemix:public:iam::::role:Administrator"
+							],
+							"service_name": "toolchain"
+						},
+						{
+							"role_crns": [
+								"crn:v1:bluemix:public:iam-identity::::serviceRole:ServiceIdCreator",
+								"crn:v1:bluemix:public:iam-identity::::serviceRole:UserApiKeyCreator",
+								"crn:v1:bluemix:public:iam::::role:Operator"
+
+							],
+							"service_name": "iam-identity"
+						}
+					],
                     "configuration": [
                         {
                             "key": "toolchain_name",
@@ -2353,13 +2460,6 @@
                             "required": false
                         },
                         {
-                            "key": "repo_git_token_secret_name",
-                            "type": "string",
-                            "default_value": "",
-                            "description": "Name of the Git token secret in the secret provider used for accessing the repositories created by the DA.",
-                            "required": false
-                        },
-                        {
                             "key": "repo_title",
                             "type": "string",
                             "default_value": "",
@@ -2374,33 +2474,19 @@
                             "required": false
                         },
                         {
-                            "key": "repo_blind_connection",
-                            "type": "string",
-                            "default_value": "false",
-                            "description": "Setting this value to `true` means the server is not addressable on the public internet. IBM Cloud will not be able to validate the connection details you provide. Certain functionality that requires API access to the git server will be disabled. Delivery pipeline will only work using a private worker that has network access to the git server.",
+                            "key": "repo_apply_settings_to_compliance_repos",
+                            "type": "boolean",
+                            "default_value": true,
+                            "description": "Set to `true` to apply the same settings to all the default compliance repositories. Set to `false` to apply these settings to only the sample application, pipeline config and the deployment repositories.",
                             "required": false
                         },
                         {
-                            "key": "custom_app_repo_title",
-                            "type": "string",
-                            "default_value": "",
-                            "description": "(Optional) The title of the server. e.g. My Git Enterprise Server. Applies to the sample application repository, pipeline config repository and additionally the deployment repository of the CD toolchain. Takes precedence over `repo_title`, if also set.",
-                            "required": false
-                          },
-                          {
-                            "key": "custom_app_repo_root_url",
-                            "type": "string",
-                            "default_value": "",
-                            "description": "(Optional) The Root URL of the server. e.g. https://git.example.com. Applies to the sample application repository, pipeline config repository and additionally the deployment repository of the CD toolchain. Takes precedence over `repo_root_url`, if also set.",
-                            "required": false
-                          },
-                          {
-                            "key": "custom_app_repo_blind_connection",
-                            "type": "string",
-                            "default_value": "false",
+                            "key": "repo_blind_connection",
+                            "type": "boolean",
+                            "default_value": false,
                             "description": "Setting this value to `true` means the server is not addressable on the public internet. IBM Cloud will not be able to validate the connection details you provide. Certain functionality that requires API access to the git server will be disabled. Delivery pipeline will only work using a private worker that has network access to the git server.",
                             "required": false
-                          },
+                        },
                         {
                             "key": "create_git_triggers",
                             "type": "string",
@@ -2514,8 +2600,8 @@
                         },
                         {
                             "key": "compliance_pipeline_repo_blind_connection",
-                            "type": "string",
-                            "default_value": "false",
+                            "type": "boolean",
+                            "default_value": false,
                             "description": "Setting this value to `true` means the server is not addressable on the public internet. IBM Cloud will not be able to validate the connection details you provide. Certain functionality that requires API access to the git server will be disabled. Delivery pipeline will only work using a private worker that has network access to the git server.",
                             "required": false
                         },
@@ -2607,47 +2693,6 @@
                             "type": "string",
                             "default_value": "",
                             "description": "Name of the Git token secret in the secret provider used for accessing the sample (or bring your own) application repository.",
-                            "required": false
-                        },
-                        {
-                            "key": "custom_app_repo_git_token_secret_crn",
-                            "type": "password",
-                            "description": "The CRN for Git Token used by the sample application repository, pipeline config repository and additionally the deployment repository of the CD toolchain. Takes precedence for these repositories over the value set in `repo_git_token_secret_crn`.",
-                            "required": false
-                        },
-                        {
-                            "key": "custom_app_repo_git_id",
-                            "type": "string",
-                            "default_value": "",
-                            "description": "The Git ID for the application repositories. Used by the sample application repository, pipeline config repository and additionally the deployment repository of the CD toolchain. Takes precedence for these repositories over the value set in `repo_git_id`.",
-                            "required": false
-                        },
-                        {
-                            "key": "custom_app_repo_git_provider",
-                            "type": "string",
-                            "default_value": "",
-                            "description": "The Git provider type. Used by the sample application repository, pipeline config repository and additionally the deployment repository of the CD toolchain. Takes precedence for these repositories over the value set in `repo_git_provider`.",
-                            "required": false
-                        },
-                        {
-                            "key": "custom_app_repo_group",
-                            "type": "string",
-                            "default_value": "",
-                            "description": "Specify the Git user or group for your application. This must be set if the repository authentication type is `pat` (personal access token). Used by the sample application repository, pipeline config repository and additionally the deployment repository of the CD toolchain. Takes precedence for these repositories over the value set in `repo_group`.",
-                            "required": false
-                        },
-                        {
-                            "key": "custom_app_repo_git_token_secret_name",
-                            "type": "string",
-                            "default_value": "",
-                            "description": "The name of the Git token secret in the secret provider used for accessing the sample application repository, pipeline config repository and additionally the deployment repository of the CD toolchain. Takes precedence for these repositories over the value set in `repo_git_token_secret_name`.",
-                            "required": false
-                        },
-                        {
-                            "key": "custom_app_repo_git_token_secret_value",
-                            "type": "password",
-                            "default_value": "",
-                            "description": "The personal access token that will be added to the `custom_app_repo_git_token_secret_name` secret in the secrets provider. Note if also using `repo_git_token_secret_name` to set a Git Token in Secrets Manager, the names of the secrets must be different.",
                             "required": false
                         },
                         {
@@ -2745,6 +2790,13 @@
                             "type": "boolean",
                             "default_value": false,
                             "description": "Set to `true` to enable the timed Pruner trigger.",
+                            "required": false
+                        },
+                        {
+                            "key": "change_management_repo_git_id",
+                            "type": "string",
+                            "default_value": "",
+                            "description": "Set this value to `github` for github.com, or to the ID of a custom GitHub Enterprise server.",
                             "required": false
                         },
                         {
@@ -2898,13 +2950,6 @@
                             "type": "string",
                             "default_value": "",
                             "description": "By default this gets set as 'hostedgit', else set to 'githubconsolidated' for GitHub repositories.",
-                            "required": false
-                        },
-                        {
-                            "key": "cd_deployment_repo_existing_url",
-                            "type": "string",
-                            "default_value": "",
-                            "description": "Override to bring your own existing deployment repository URL, which is used directly instead of cloning the default deployment sample.",
                             "required": false
                         },
                         {
@@ -3314,6 +3359,13 @@
                             "required": false
                         },
                         {
+                            "key": "cos_api_key_secret_value",
+                            "type": "string",
+                            "default_value": "",
+                            "description": "A user provided api key with COS access permissions that can be pushed to Secrets Manager. See `cos_api_key_secret_name` and `create_cos_api_key`.",
+                            "required": false
+                        },
+                        {
                             "key": "cos_bucket_name",
                             "type": "string",
                             "default_value": "",
@@ -3356,10 +3408,24 @@
                             "required": false
                         },
                         {
+                            "key": "create_code_engine_access_policy",
+                            "type": "boolean",
+                            "default_value": false,
+                            "description": "Add a Code Engine access policy to the generated IAM access key. See `create_ibmcloud_api_key`.",
+                            "required": false
+                        },
+                        {
                             "key": "create_cos_api_key",
                             "type": "boolean",
                             "default_value": false,
                             "description": "Set to `true` to create and add a `cos-api-key` to the Secrets Provider.",
+                            "required": false
+                        },
+                        {
+                            "key": "create_kubernetes_access_policy",
+                            "type": "boolean",
+                            "default_value": true,
+                            "description": "Add a Kubernetes access policy to the generated IAM access key. See `create_ibmcloud_api_key`.",
                             "required": false
                         },
                         {
@@ -3374,6 +3440,13 @@
                             "type": "password",
                             "default_value": "",
                             "description": "The personal access token that will be added to the `repo_git_token_secret_name` secret in the secrets provider.",
+                            "required": false
+                        },
+                        {
+                            "key": "create_access_group",
+                            "type": "boolean",
+                            "default_value": false,
+                            "description": "Set to `true` to create an access group for the operations of the DevSecOps toolchains.",
                             "required": false
                         },
                         {
@@ -3394,7 +3467,7 @@
                             "key": "create_privateworker_secret",
                             "type": "boolean",
                             "default_value": false,
-                            "description": "Set to `true` to add a specified private worker service api key to the Secrets Provider.",
+                            "description": "Set to `true` to add a specified private worker service api key to the Secrets Provider. This also enables a private worker tool integration in the toolchains.",
                             "required": false
                         },
                         {
@@ -3496,13 +3569,6 @@
                             "required": false
                         },
                         {
-                            "key": "evidence_repo_existing_url",
-                            "type": "string",
-                            "default_value": "",
-                            "description": "Set to use an existing evidence repository.",
-                            "required": false
-                        },
-                        {
                             "key": "evidence_repo_git_token_secret_crn",
                             "type": "password",
                             "description": "The CRN of the Git token used for accessing the Evidence repository.",
@@ -3572,13 +3638,6 @@
                             "required": false
                         },
                         {
-                            "key": "inventory_repo_existing_url",
-                            "type": "string",
-                            "default_value": "",
-                            "description": "Set to use an existing inventory repository.",
-                            "required": false
-                        },
-                        {
                             "key": "inventory_repo_git_token_secret_crn",
                             "type": "password",
                             "description": "The CRN of the Git token used for acessing the Inventory repository.",
@@ -3635,13 +3694,6 @@
                         },
                         {
                             "key": "issues_repo_existing_git_provider",
-                            "type": "string",
-                            "default_value": "",
-                            "description": "By default this gets set as 'hostedgit', else set to 'githubconsolidated' for GitHub repositories.",
-                            "required": false
-                        },
-                        {
-                            "key": "issues_repo_existing_url",
                             "type": "string",
                             "default_value": "",
                             "description": "By default this gets set as 'hostedgit', else set to 'githubconsolidated' for GitHub repositories.",
@@ -3717,6 +3769,20 @@
                             "required": false
                         },
                         {
+                            "key": "pipeline_config_repo_git_id",
+                            "type": "string",
+                            "default_value": "",
+                            "description": "Set this value to `github` for github.com, or to the GUID of a custom GitHub Enterprise server.",
+                            "required": false
+                        },
+                        {
+                            "key": "pipeline_config_repo_git_provider",
+                            "type": "string",
+                            "default_value": "",
+                            "description": "Git provider for pipeline repo config",
+                            "required": false
+                        },
+                        {
                             "key": "pipeline_config_repo_git_token_secret_crn",
                             "type": "password",
                             "description": "The CRN of the Git token for accessing the pipeline config repository.",
@@ -3781,6 +3847,13 @@
                             "type": "string",
                             "default_value": "ibmcloud-api-key",
                             "description": "Name of the Cloud API key secret in the secret provider for running the pipelines. Applies to the CI, CD and CC toolchains.",
+                            "required": false
+                        },
+                        {
+                            "key": "pipeline_ibmcloud_api_key_secret_value",
+                            "type": "string",
+                            "default_value": "",
+                            "description": "A user provided api key for running the toolchain pipelines that can be pushed to Secrets Manager. See `pipeline_ibmcloud_api_key_secret_name` and `create_ibmcloud_api_key`.",
                             "required": false
                         },
                         {
@@ -4048,6 +4121,13 @@
                             "type": "string",
                             "default_value": "",
                             "description": "The name of the SonarQube user.",
+                            "required": false
+                        },
+                        {
+                            "key": "toolchain_access_group_name",
+                            "type": "string",
+                            "default_value": "devsecops-toolchain",
+                            "description": "The name of the DevSecOps access group. See `create_access_group`.",
                             "required": false
                         },
                         {
