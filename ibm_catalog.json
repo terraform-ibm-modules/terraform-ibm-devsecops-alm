@@ -367,13 +367,6 @@
                             "required": false
                         },
                         {
-                            "key": "repo_git_token_secret_name",
-                            "type": "string",
-                            "default_value": "",
-                            "description": "Name of the Git token secret in the secret provider used for accessing the repositories created by the DA.",
-                            "required": false
-                        },
-                        {
                             "key": "repo_title",
                             "type": "string",
                             "default_value": "",
@@ -2039,13 +2032,6 @@
                             "required": false
                         },
                         {
-                            "key": "use_legacy_ref",
-                            "type": "boolean",
-                            "default_value": true,
-                            "description": "Set to `true` to use the legacy secret reference format for Secrets Manager secrets.",
-                            "required": false
-                        },
-                        {
                             "key": "cc_app_repo_branch",
                             "type": "string",
                             "default_value": "",
@@ -2471,13 +2457,6 @@
                             "type": "string",
                             "default_value": "",
                             "description": "Set this value to `github` for github.com, `gitlabcustom` for GitLab or to the ID of a custom GitHub Enterprise server.",
-                            "required": false
-                        },
-                        {
-                            "key": "repo_git_token_secret_name",
-                            "type": "string",
-                            "default_value": "",
-                            "description": "Name of the Git token secret in the secret provider used for accessing the repositories created by the DA.",
                             "required": false
                         },
                         {
@@ -4156,13 +4135,6 @@
                             "type": "boolean",
                             "default_value": false,
                             "description": "Set to `true` to use the CI sample application repository as the deployment repository in the CD pipeline. This will be set in the pipeline config integration.",
-                            "required": false
-                        },
-                        {
-                            "key": "use_legacy_ref",
-                            "type": "boolean",
-                            "default_value": true,
-                            "description": "Set to `true` to use the legacy secret reference format for Secrets Manager secrets.",
                             "required": false
                         },
                         {

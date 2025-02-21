@@ -262,5 +262,4 @@ module "devsecops_da" {
   ci_trigger_timed_enable                         = var.ci_trigger_timed_enable
   ci_trigger_timed_pruner_enable                  = var.ci_trigger_timed_pruner_enable
   pr_pipeline_git_tag                             = var.pr_pipeline_git_tag
-  use_legacy_ref                                  = var.use_legacy_ref
 }

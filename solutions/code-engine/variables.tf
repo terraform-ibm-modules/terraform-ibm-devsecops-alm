@@ -1709,9 +1709,3 @@ variable "create_access_group" {
   description = "Set to `true` to create an access group for the operations of the DevSecOps toolchains."
   default     = false
 }
-
-variable "use_legacy_ref" {
-  type        = bool
-  description = "Set to `true` to use the legacy secret reference format for Secrets Manager secrets."
-  default     = true
-}

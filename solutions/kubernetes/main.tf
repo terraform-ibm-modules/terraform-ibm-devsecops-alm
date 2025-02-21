@@ -1,7 +1,6 @@
 module "devsecops_da" {
   source = "../../"
 
-  add_code_engine_prefix                          = var.add_code_engine_prefix
   add_container_name_suffix                       = var.add_container_name_suffix
   app_group                                       = var.app_group
   add_pipeline_definitions                        = var.add_pipeline_definitions
@@ -262,5 +261,4 @@ module "devsecops_da" {
   ci_trigger_timed_enable                         = var.ci_trigger_timed_enable
   ci_trigger_timed_pruner_enable                  = var.ci_trigger_timed_pruner_enable
   pr_pipeline_git_tag                             = var.pr_pipeline_git_tag
-  use_legacy_ref                                  = var.use_legacy_ref
 }

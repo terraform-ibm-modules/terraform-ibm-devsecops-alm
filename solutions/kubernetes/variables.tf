@@ -3,13 +3,6 @@
 ##############################################################################
 ##### START OF COMMON VARIABLES ##########
 
-
-variable "add_code_engine_prefix" {
-  type        = bool
-  description = "Set to `true` to use `prefix` to add a prefix to the code engine project names."
-  default     = true
-}
-
 variable "add_container_name_suffix" {
   type        = bool
   description = "Set to `true` to add a random suffix to the specified ICR name."
@@ -1708,10 +1701,4 @@ variable "create_access_group" {
   type        = bool
   description = "Set to `true` to create an access group for the operations of the DevSecOps toolchains."
   default     = false
-}
-
-variable "use_legacy_ref" {
-  type        = bool
-  description = "Set to `true` to use the legacy secret reference format for Secrets Manager secrets."
-  default     = true
 }

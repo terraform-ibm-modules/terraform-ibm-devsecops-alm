@@ -73,7 +73,6 @@ No resources.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_add_code_engine_prefix"></a> [add\_code\_engine\_prefix](#input\_add\_code\_engine\_prefix) | Set to `true` to use `prefix` to add a prefix to the code engine project names. | `bool` | `true` | no |
 | <a name="input_add_container_name_suffix"></a> [add\_container\_name\_suffix](#input\_add\_container\_name\_suffix) | Set to `true` to add a random suffix to the specified ICR name. | `bool` | `false` | no |
 | <a name="input_add_pipeline_definitions"></a> [add\_pipeline\_definitions](#input\_add\_pipeline\_definitions) | Set to `true` to add pipeline definitions. | `string` | `"true"` | no |
 | <a name="input_app_group"></a> [app\_group](#input\_app\_group) | Specify the Git user or group for the application repository. | `string` | `""` | no |
@@ -334,7 +333,6 @@ No resources.
 | <a name="input_toolchain_region"></a> [toolchain\_region](#input\_toolchain\_region) | The region identifier that will be used, by default, for all resource creation and service instance lookup. This can be overridden on a per resource/service basis. | `string` | `"us-south"` | no |
 | <a name="input_toolchain_resource_group"></a> [toolchain\_resource\_group](#input\_toolchain\_resource\_group) | The resource group that will be used, by default, for all resource creation and service instance lookups. This can be overridden on a per resource/service basis. | `string` | `"Default"` | no |
 | <a name="input_use_app_repo_for_cd_deploy"></a> [use\_app\_repo\_for\_cd\_deploy](#input\_use\_app\_repo\_for\_cd\_deploy) | Set to `true` to use the CI sample application repository as the deployment repository in the CD pipeline. This will be set in the pipeline config integration. | `bool` | `false` | no |
-| <a name="input_use_legacy_ref"></a> [use\_legacy\_ref](#input\_use\_legacy\_ref) | Set to `true` to use the legacy secret reference format for Secrets Manager secrets. | `bool` | `true` | no |
 
 ### Outputs
 
