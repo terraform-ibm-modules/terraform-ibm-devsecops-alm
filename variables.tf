@@ -243,6 +243,13 @@ variable "cos_api_key_secret_name" {
   default     = ""
 }
 
+variable "cos_api_key_secret_value" {
+  type        = string
+  description = "A user provided api key with COS access permissions that can be pushed to Secrets Manager. See `cos_api_key_secret_name` and `create_cos_api_key`."
+  sensitive   = true
+  default     = ""
+}
+
 variable "cos_bucket_name" {
   type        = string
   description = "Set the name of your COS bucket. This applies the same COS bucket name for the CI, CD, and CC toolchains. See `ci_cos_bucket_name`, `cd_cos_bucket_name`, and `cc_cos_bucket_name` to set separately."
@@ -755,6 +762,13 @@ variable "pipeline_ibmcloud_api_key_secret_name" {
   type        = string
   description = "Name of the Cloud API key secret in the secret provider for running the pipelines. Applies to the CI, CD and CC toolchains."
   default     = "ibmcloud-api-key"
+}
+
+variable "pipeline_ibmcloud_api_key_secret_value" {
+  type        = string
+  description = "A user provided api key for running the toolchain pipelines that can be pushed to Secrets Manager. See `pipeline_ibmcloud_api_key_secret_name` and `create_ibmcloud_api_key`."
+  sensitive   = true
+  default     = ""
 }
 
 variable "privateworker_credentials_secret_crn" {
@@ -3549,4 +3563,18 @@ variable "create_git_triggers" {
   type        = string
   description = "Set to `true` to create the default Git triggers associated with the compliance repos and sample app."
   default     = "true"
+}
+
+############### ACCESS GROUPS  ################
+
+variable "toolchain_access_group_name" {
+  type        = string
+  description = "The name of the DevSecOps access group. See `create_access_group`."
+  default     = "devsecops-toolchain"
+}
+
+variable "create_access_group" {
+  type        = bool
+  description = "Set to `true` to create an access group for the operations of the DevSecOps toolchains."
+  default     = false
 }

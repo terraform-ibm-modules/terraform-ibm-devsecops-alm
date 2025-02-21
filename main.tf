@@ -306,7 +306,9 @@ module "prereqs" {
   sm_resource_group                = var.sm_resource_group
   create_secret_group              = var.create_secret_group
   cos_api_key_secret_name          = var.cos_api_key_secret_name
+  cos_api_key_secret_value         = var.cos_api_key_secret_value
   iam_api_key_secret_name          = var.pipeline_ibmcloud_api_key_secret_name
+  iam_api_key_secret_value         = var.pipeline_ibmcloud_api_key_secret_value
   privateworker_secret_name        = var.privateworker_credentials_secret_name
   privateworker_secret_value       = var.privateworker_secret_value
   signing_key_secret_name          = var.ci_signing_key_secret_name
@@ -320,6 +322,8 @@ module "prereqs" {
   sm_endpoint_type                 = var.sm_endpoint_type
   create_code_engine_access_policy = var.create_code_engine_access_policy
   create_kubernetes_access_policy  = var.create_kubernetes_access_policy
+  toolchain_access_group_name      = var.toolchain_access_group_name
+  create_access_group              = var.create_access_group
 }
 
 module "devsecops_ci_toolchain" {
