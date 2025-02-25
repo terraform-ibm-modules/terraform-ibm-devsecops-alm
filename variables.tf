@@ -1580,7 +1580,7 @@ variable "cc_pipeline_ibmcloud_api_key_secret_name" {
 
 variable "cc_pipeline_properties_filepath" {
   type        = string
-  description = "The path to the file containing the property JSON. If this is not set, it will by default read the `properties.json` file at the root of the module."
+  description = "The path to the file containing the property JSON. If this is not set and `cc_pipeline_properties` is not set, it will by default read the `properties.json` file at the root of the CC module."
   default     = ""
 }
 
@@ -2422,7 +2422,7 @@ variable "cd_pipeline_ibmcloud_api_key_secret_name" {
 
 variable "cd_pipeline_properties_filepath" {
   type        = string
-  description = "The path to the file containing the property JSON. If this is not set, it will by default read the `properties.json` file at the root of the module."
+  description = "The path to the file containing the property JSON. If this is not set and `cd_pipeline_properties` is not set, it will by default read the `properties.json` file at the root of the CD module."
   default     = ""
 }
 
@@ -3231,7 +3231,7 @@ variable "ci_pipeline_ibmcloud_api_key_secret_name" {
 
 variable "ci_pipeline_properties_filepath" {
   type        = string
-  description = "The path to the file containing the properties JSON. If this is not set, it will by default read the `properties.json` file at the root of the CI module."
+  description = "The path to the file containing the property JSON. If this is not set and `ci_pipeline_properties` is not set, it will by default read the `properties.json` file at the root of the CI module."
   default     = ""
 }
 
@@ -3583,4 +3583,12 @@ variable "create_access_group" {
   type        = bool
   description = "Set to `true` to create an access group for the operations of the DevSecOps toolchains."
   default     = false
+}
+
+
+####################################################################
+variable "use_legacy_ref" {
+  type        = bool
+  description = "Set to `true` to use the legacy secret reference format for Secrets Manager secrets."
+  default     = true
 }

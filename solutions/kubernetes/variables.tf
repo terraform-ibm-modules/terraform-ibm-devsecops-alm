@@ -1129,6 +1129,12 @@ variable "cc_pipeline_properties" {
   default     = ""
 }
 
+variable "cc_pipeline_properties_filepath" {
+  type        = string
+  description = "The path to the file containing the property JSON. If this is not set and `cc_pipeline_properties` is not set, it will by default read the `properties.json` file at the root of the CC module."
+  default     = ""
+}
+
 variable "cc_repository_properties" {
   type        = string
   description = "Stringified JSON containing the repositories and triggers that get created in the CI toolchain pipelines."
@@ -1393,6 +1399,12 @@ variable "cd_pipeline_properties" {
   default     = ""
 }
 
+variable "cd_pipeline_properties_filepath" {
+  type        = string
+  description = "The path to the file containing the property JSON. If this is not set and `cd_pipeline_properties` is not set, it will by default read the `properties.json` file at the root of the CD module."
+  default     = ""
+}
+
 variable "cd_privateworker_credentials_secret_crn" {
   type        = string
   sensitive   = true
@@ -1588,6 +1600,12 @@ variable "ci_pipeline_properties" {
   default     = ""
 }
 
+variable "ci_pipeline_properties_filepath" {
+  type        = string
+  description = "The path to the file containing the property JSON. If this is not set and `ci_pipeline_properties` is not set, it will by default read the `properties.json` file at the root of the CI module."
+  default     = ""
+}
+
 variable "ci_privateworker_credentials_secret_crn" {
   type        = string
   sensitive   = true
@@ -1707,4 +1725,11 @@ variable "create_access_group" {
   type        = bool
   description = "Set to `true` to create an access group for the operations of the DevSecOps toolchains."
   default     = false
+}
+
+#############################################
+variable "use_legacy_ref" {
+  type        = bool
+  description = "Set to `true` to use the legacy secret reference format for Secrets Manager secrets."
+  default     = true
 }
