@@ -267,7 +267,7 @@ resource "ibm_sm_arbitrary_secret" "private_worker_secret" {
 ################## IAM CREDENTIALS SERVICE API KEYS ###############################
 
 resource "ibm_sm_iam_credentials_configuration" "iam_credentials_configuration" {
-  count         = (local.create_pipeline_service_api_key) ? 1 : 0
+  count         = (local.create_pipeline_service_api_key == true || local.create_auto_rotatable_cos_service_api_key == true) ? 1 : 0
   instance_id   = (local.sm_instance_id != "") ? local.sm_instance_id : var.sm_instance_id
   region        = var.sm_location
   name          = "iam_credentials_config"
