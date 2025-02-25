@@ -245,6 +245,12 @@ variable "cos_endpoint" {
   default     = ""
 }
 
+variable "cos_instance_crn" {
+  type        = string
+  description = "The CRN of the Cloud Object Storage instance containing the required bucket. This value is required to generate the correct access policies if creating IAM service credentials."
+  default     = ""
+}
+
 variable "create_cc_toolchain" {
   description = "Boolean flag which determines if the DevSecOps CC toolchain is created."
   type        = bool

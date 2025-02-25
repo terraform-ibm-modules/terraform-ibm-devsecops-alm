@@ -252,13 +252,19 @@ variable "cos_api_key_secret_value" {
 
 variable "cos_bucket_name" {
   type        = string
-  description = "Set the name of your COS bucket. This applies the same COS bucket name for the CI, CD, and CC toolchains. See `ci_cos_bucket_name`, `cd_cos_bucket_name`, and `cc_cos_bucket_name` to set separately."
+  description = "Set the name of your COS bucket. This applies the same COS bucket name for the CI, CD, and CC toolchains."
   default     = ""
 }
 
 variable "cos_endpoint" {
   type        = string
   description = "The endpoint for the Cloud Object Stroage instance containing the evidence bucket. This setting sets the same endpoint for COS in the CI, CD, and CC toolchains. See `ci_cos_endpoint`, `cd_cos_endpoint`, and `cc_cos_endpoint` to set the endpoints independently."
+  default     = ""
+}
+
+variable "cos_instance_crn" {
+  type        = string
+  description = "The CRN of the Cloud Object Storage instance containing the required bucket. This value is required to generate the correct access policies if creating IAM service credentials."
   default     = ""
 }
 

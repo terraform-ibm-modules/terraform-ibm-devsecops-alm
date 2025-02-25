@@ -41,6 +41,7 @@ module "devsecops_da" {
   cos_api_key_secret_value                        = var.cos_api_key_secret_value
   cos_bucket_name                                 = var.cos_bucket_name
   cos_endpoint                                    = var.cos_endpoint
+  cos_instance_crn                                = var.cos_instance_crn
   create_access_group                             = var.create_access_group
   create_cc_toolchain                             = var.create_cc_toolchain
   create_cd_instance                              = var.create_cd_instance

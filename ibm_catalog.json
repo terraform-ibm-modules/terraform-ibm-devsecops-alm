@@ -1263,7 +1263,7 @@
                             "key": "cos_bucket_name",
                             "type": "string",
                             "default_value": "",
-                            "description": "Set the name of your COS bucket. This applies the same COS bucket name for the CI, CD, and CC toolchains. See `ci_cos_bucket_name`, `cd_cos_bucket_name`, and `cc_cos_bucket_name` to set separately.",
+                            "description": "Set the name of your COS bucket. This applies the same COS bucket name for the CI, CD, and CC toolchains.",
                             "required": false
                         },
                         {
@@ -1271,6 +1271,13 @@
                             "type": "string",
                             "default_value": "",
                             "description": "The endpoint for the Cloud Object Stroage instance containing the evidence bucket. This setting sets the same endpoint for COS in the CI, CD, and CC toolchains. See `ci_cos_endpoint`, `cd_cos_endpoint`, and `cc_cos_endpoint` to set the endpoints independently.",
+                            "required": false
+                        },
+                        {
+                            "key": "cos_instance_crn",
+                            "type": "string",
+                            "default_value": "",
+                            "description": "The CRN of the Cloud Object Storage instance containing the required bucket. This value is required to generate the correct access policies if creating IAM service credentials.",
                             "required": false
                         },
                         {
@@ -3369,7 +3376,7 @@
                             "key": "cos_bucket_name",
                             "type": "string",
                             "default_value": "",
-                            "description": "Set the name of your COS bucket. This applies the same COS bucket name for the CI, CD, and CC toolchains. See `ci_cos_bucket_name`, `cd_cos_bucket_name`, and `cc_cos_bucket_name` to set separately.",
+                            "description": "Set the name of your COS bucket. This applies the same COS bucket name for the CI, CD, and CC toolchains.",
                             "required": false
                         },
                         {
@@ -3377,6 +3384,13 @@
                             "type": "string",
                             "default_value": "",
                             "description": "The endpoint for the Cloud Object Stroage instance containing the evidence bucket. This setting sets the same endpoint for COS in the CI, CD, and CC toolchains. See `ci_cos_endpoint`, `cd_cos_endpoint`, and `cc_cos_endpoint` to set the endpoints independently.",
+                            "required": false
+                        },
+                        {
+                            "key": "cos_instance_crn",
+                            "type": "string",
+                            "default_value": "",
+                            "description": "The CRN of the Cloud Object Storage instance containing the required bucket. This value is required to generate the correct access policies if creating IAM service credentials.",
                             "required": false
                         },
                         {

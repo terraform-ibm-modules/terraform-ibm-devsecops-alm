@@ -307,6 +307,8 @@ module "prereqs" {
   create_secret_group              = var.create_secret_group
   cos_api_key_secret_name          = var.cos_api_key_secret_name
   cos_api_key_secret_value         = var.cos_api_key_secret_value
+  cos_instance_crn                 = var.cos_instance_crn
+  cos_bucket_name                  = var.cos_bucket_name
   iam_api_key_secret_name          = var.pipeline_ibmcloud_api_key_secret_name
   iam_api_key_secret_value         = var.pipeline_ibmcloud_api_key_secret_value
   privateworker_secret_name        = var.privateworker_credentials_secret_name
