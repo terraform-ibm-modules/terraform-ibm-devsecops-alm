@@ -35,8 +35,7 @@ locals {
   #determine if the key should be a service api key or a regular api key
   # Is a service api key if the override is set to false
 
-  create_pipeline_service_api_key = (local.create_api_key == true && var.force_create_standard_api_key == false && var.iam_api_key_secret_value == "") ? true : false
-  #create_cos_service_api_key      = ((local.create_cos_api_key == true) && (var.force_create_standard_api_key == false)) ? true : false
+  create_pipeline_service_api_key           = (local.create_api_key == true && var.force_create_standard_api_key == false && var.iam_api_key_secret_value == "") ? true : false
   create_auto_rotatable_cos_service_api_key = (local.create_cos_api_key == true && var.force_create_standard_api_key == false && var.cos_api_key_secret_value == "") ? true : false
 
   # Is an api key if the override is set to true
