@@ -252,13 +252,19 @@ variable "cos_api_key_secret_value" {
 
 variable "cos_bucket_name" {
   type        = string
-  description = "Set the name of your COS bucket. This applies the same COS bucket name for the CI, CD, and CC toolchains. See `ci_cos_bucket_name`, `cd_cos_bucket_name`, and `cc_cos_bucket_name` to set separately."
+  description = "Set the name of your COS bucket. This applies the same COS bucket name for the CI, CD, and CC toolchains."
   default     = ""
 }
 
 variable "cos_endpoint" {
   type        = string
   description = "The endpoint for the Cloud Object Stroage instance containing the evidence bucket. This setting sets the same endpoint for COS in the CI, CD, and CC toolchains. See `ci_cos_endpoint`, `cd_cos_endpoint`, and `cc_cos_endpoint` to set the endpoints independently."
+  default     = ""
+}
+
+variable "cos_instance_crn" {
+  type        = string
+  description = "The CRN of the Cloud Object Storage instance containing the required bucket. This value is required to generate the correct access policies if creating IAM service credentials."
   default     = ""
 }
 
@@ -1574,7 +1580,7 @@ variable "cc_pipeline_ibmcloud_api_key_secret_name" {
 
 variable "cc_pipeline_properties_filepath" {
   type        = string
-  description = "The path to the file containing the property JSON. If this is not set, it will by default read the `properties.json` file at the root of the module."
+  description = "The path to the file containing the property JSON. If this is not set and `cc_pipeline_properties` is not set, it will by default read the `properties.json` file at the root of the CC module."
   default     = ""
 }
 
@@ -2416,7 +2422,7 @@ variable "cd_pipeline_ibmcloud_api_key_secret_name" {
 
 variable "cd_pipeline_properties_filepath" {
   type        = string
-  description = "The path to the file containing the property JSON. If this is not set, it will by default read the `properties.json` file at the root of the module."
+  description = "The path to the file containing the property JSON. If this is not set and `cd_pipeline_properties` is not set, it will by default read the `properties.json` file at the root of the CD module."
   default     = ""
 }
 
@@ -3225,7 +3231,7 @@ variable "ci_pipeline_ibmcloud_api_key_secret_name" {
 
 variable "ci_pipeline_properties_filepath" {
   type        = string
-  description = "The path to the file containing the properties JSON. If this is not set, it will by default read the `properties.json` file at the root of the CI module."
+  description = "The path to the file containing the property JSON. If this is not set and `ci_pipeline_properties` is not set, it will by default read the `properties.json` file at the root of the CI module."
   default     = ""
 }
 
@@ -3577,4 +3583,12 @@ variable "create_access_group" {
   type        = bool
   description = "Set to `true` to create an access group for the operations of the DevSecOps toolchains."
   default     = false
+}
+
+
+####################################################################
+variable "use_legacy_ref" {
+  type        = bool
+  description = "Set to `true` to use the legacy secret reference format for Secrets Manager secrets."
+  default     = true
 }

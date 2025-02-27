@@ -120,6 +120,18 @@ variable "cos_api_key_secret_value" {
   default     = ""
 }
 
+variable "cos_bucket_name" {
+  type        = string
+  description = "Set the name of your COS bucket. This applies the same COS bucket name for the CI, CD, and CC toolchains."
+  default     = ""
+}
+
+variable "cos_instance_crn" {
+  type        = string
+  description = "The CRN of the Cloud Object Storage instance containing the required bucket. This value is required to generate the correct access policies if creating IAM service credentials."
+  default     = ""
+}
+
 variable "iam_api_key_secret_name" {
   type        = string
   description = "The name of the secret as it appears in Secret Manager."

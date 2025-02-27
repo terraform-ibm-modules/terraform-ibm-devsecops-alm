@@ -632,6 +632,13 @@
                             "required": false
                         },
                         {
+                            "key": "cc_pipeline_properties_filepath",
+                            "type": "string",
+                            "default_value": "",
+                            "description": "The path to the file containing the property JSON. If this is not set and `cc_pipeline_properties` is not set, it will by default read the `properties.json` file at the root of the CC module.",
+                            "required": false
+                        },
+                        {
                             "key": "cc_repository_properties",
                             "type": "string",
                             "default_value": "",
@@ -888,6 +895,13 @@
                             "required": false
                         },
                         {
+                            "key": "cd_pipeline_properties_filepath",
+                            "type": "string",
+                            "default_value": "",
+                            "description": "The path to the file containing the property JSON. If this is not set and `cd_pipeline_properties` is not set, it will by default read the `properties.json` file at the root of the CD module.",
+                            "required": false
+                        },
+                        {
                             "key": "cd_privateworker_credentials_secret_crn",
                             "type": "password",
                             "description": "The CRN of the private worker service apikey that runs the pipeline tasks.",
@@ -1082,6 +1096,13 @@
                             "required": false
                         },
                         {
+                            "key": "ci_pipeline_properties_filepath",
+                            "type": "string",
+                            "default_value": "",
+                            "description": "The path to the file containing the property JSON. If this is not set and `ci_pipeline_properties` is not set, it will by default read the `properties.json` file at the root of the CI module.",
+                            "required": false
+                        },
+                        {
                             "key": "ci_privateworker_credentials_secret_crn",
                             "type": "password",
                             "description": "The CRN of the private worker service apikey that runs the pipeline tasks.",
@@ -1263,7 +1284,7 @@
                             "key": "cos_bucket_name",
                             "type": "string",
                             "default_value": "",
-                            "description": "Set the name of your COS bucket. This applies the same COS bucket name for the CI, CD, and CC toolchains. See `ci_cos_bucket_name`, `cd_cos_bucket_name`, and `cc_cos_bucket_name` to set separately.",
+                            "description": "Set the name of your COS bucket. This applies the same COS bucket name for the CI, CD, and CC toolchains.",
                             "required": false
                         },
                         {
@@ -1271,6 +1292,13 @@
                             "type": "string",
                             "default_value": "",
                             "description": "The endpoint for the Cloud Object Stroage instance containing the evidence bucket. This setting sets the same endpoint for COS in the CI, CD, and CC toolchains. See `ci_cos_endpoint`, `cd_cos_endpoint`, and `cc_cos_endpoint` to set the endpoints independently.",
+                            "required": false
+                        },
+                        {
+                            "key": "cos_instance_crn",
+                            "type": "string",
+                            "default_value": "",
+                            "description": "The CRN of the Cloud Object Storage instance containing the required bucket. This value is required to generate the correct access policies if creating IAM service credentials.",
                             "required": false
                         },
                         {
@@ -2032,6 +2060,13 @@
                             "required": false
                         },
                         {
+                            "key": "use_legacy_ref",
+                            "type": "boolean",
+                            "default_value": true,
+                            "description": "Set to `true` to use the legacy secret reference format for Secrets Manager secrets.",
+                            "required": false
+                        },
+                        {
                             "key": "cc_app_repo_branch",
                             "type": "string",
                             "default_value": "",
@@ -2731,6 +2766,13 @@
                             "required": false
                         },
                         {
+                            "key": "cc_pipeline_properties_filepath",
+                            "type": "string",
+                            "default_value": "",
+                            "description": "The path to the file containing the property JSON. If this is not set and `cc_pipeline_properties` is not set, it will by default read the `properties.json` file at the root of the CC module.",
+                            "required": false
+                        },
+                        {
                             "key": "cc_repository_properties",
                             "type": "string",
                             "default_value": "",
@@ -2994,6 +3036,13 @@
                             "required": false
                         },
                         {
+                            "key": "cd_pipeline_properties_filepath",
+                            "type": "string",
+                            "default_value": "",
+                            "description": "The path to the file containing the property JSON. If this is not set and `cd_pipeline_properties` is not set, it will by default read the `properties.json` file at the root of the CD module.",
+                            "required": false
+                        },
+                        {
                             "key": "cd_privateworker_credentials_secret_crn",
                             "type": "password",
                             "description": "The CRN of the private worker service apikey that runs the pipeline tasks.",
@@ -3195,6 +3244,13 @@
                             "required": false
                         },
                         {
+                            "key": "ci_pipeline_properties_filepath",
+                            "type": "string",
+                            "default_value": "",
+                            "description": "The path to the file containing the property JSON. If this is not set and `ci_pipeline_properties` is not set, it will by default read the `properties.json` file at the root of the CI module.",
+                            "required": false
+                        },
+                        {
                             "key": "ci_privateworker_credentials_secret_crn",
                             "type": "password",
                             "description": "The CRN of the private worker service apikey that runs the pipeline tasks.",
@@ -3369,7 +3425,7 @@
                             "key": "cos_bucket_name",
                             "type": "string",
                             "default_value": "",
-                            "description": "Set the name of your COS bucket. This applies the same COS bucket name for the CI, CD, and CC toolchains. See `ci_cos_bucket_name`, `cd_cos_bucket_name`, and `cc_cos_bucket_name` to set separately.",
+                            "description": "Set the name of your COS bucket. This applies the same COS bucket name for the CI, CD, and CC toolchains.",
                             "required": false
                         },
                         {
@@ -3377,6 +3433,13 @@
                             "type": "string",
                             "default_value": "",
                             "description": "The endpoint for the Cloud Object Stroage instance containing the evidence bucket. This setting sets the same endpoint for COS in the CI, CD, and CC toolchains. See `ci_cos_endpoint`, `cd_cos_endpoint`, and `cc_cos_endpoint` to set the endpoints independently.",
+                            "required": false
+                        },
+                        {
+                            "key": "cos_instance_crn",
+                            "type": "string",
+                            "default_value": "",
+                            "description": "The CRN of the Cloud Object Storage instance containing the required bucket. This value is required to generate the correct access policies if creating IAM service credentials.",
                             "required": false
                         },
                         {
@@ -4135,6 +4198,13 @@
                             "type": "boolean",
                             "default_value": false,
                             "description": "Set to `true` to use the CI sample application repository as the deployment repository in the CD pipeline. This will be set in the pipeline config integration.",
+                            "required": false
+                        },
+                        {
+                            "key": "use_legacy_ref",
+                            "type": "boolean",
+                            "default_value": true,
+                            "description": "Set to `true` to use the legacy secret reference format for Secrets Manager secrets.",
                             "required": false
                         },
                         {

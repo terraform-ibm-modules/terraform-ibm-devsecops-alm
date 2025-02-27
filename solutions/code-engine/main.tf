@@ -42,6 +42,7 @@ module "devsecops_da" {
   cos_api_key_secret_value                        = var.cos_api_key_secret_value
   cos_bucket_name                                 = var.cos_bucket_name
   cos_endpoint                                    = var.cos_endpoint
+  cos_instance_crn                                = var.cos_instance_crn
   create_access_group                             = var.create_access_group
   create_cc_toolchain                             = var.create_cc_toolchain
   create_cd_instance                              = var.create_cd_instance
@@ -178,6 +179,7 @@ module "devsecops_da" {
   cc_link_to_doi_toolchain                        = var.cc_link_to_doi_toolchain
   cc_pipeline_config_repo_branch                  = var.cc_pipeline_config_repo_branch
   cc_pipeline_properties                          = var.cc_pipeline_properties
+  cc_pipeline_properties_filepath                 = var.cc_pipeline_properties_filepath
   cc_repository_properties                        = var.cc_repository_properties
   cc_toolchain_description                        = var.cc_toolchain_description
   cc_toolchain_name                               = var.cc_toolchain_name
@@ -217,6 +219,7 @@ module "devsecops_da" {
   cd_link_to_doi_toolchain                        = var.cd_link_to_doi_toolchain
   cd_pipeline_config_repo_branch                  = var.cd_pipeline_config_repo_branch
   cd_pipeline_properties                          = var.cd_pipeline_properties
+  cd_pipeline_properties_filepath                 = var.cd_pipeline_properties_filepath
   cd_privateworker_credentials_secret_crn         = var.cd_privateworker_credentials_secret_crn
   cd_region                                       = var.cd_region
   cd_repository_properties                        = var.cd_repository_properties
@@ -248,6 +251,7 @@ module "devsecops_da" {
   ci_link_to_doi_toolchain                        = var.ci_link_to_doi_toolchain
   ci_pipeline_config_repo_branch                  = var.ci_pipeline_config_repo_branch
   ci_pipeline_properties                          = var.ci_pipeline_properties
+  ci_pipeline_properties_filepath                 = var.ci_pipeline_properties_filepath
   ci_privateworker_credentials_secret_crn         = var.ci_privateworker_credentials_secret_crn
   ci_registry_region                              = var.ci_registry_region
   ci_repository_properties                        = var.ci_repository_properties
@@ -262,4 +266,5 @@ module "devsecops_da" {
   ci_trigger_timed_enable                         = var.ci_trigger_timed_enable
   ci_trigger_timed_pruner_enable                  = var.ci_trigger_timed_pruner_enable
   pr_pipeline_git_tag                             = var.pr_pipeline_git_tag
+  use_legacy_ref                                  = var.use_legacy_ref
 }

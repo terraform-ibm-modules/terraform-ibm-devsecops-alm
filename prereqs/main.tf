@@ -16,6 +16,11 @@ locals {
   secret_group_list = (var.sm_exists) ? data.ibm_sm_secret_groups.secret_groups[0].secret_groups : []
   secret_group_id   = try(local.secret_group_list[index(local.secret_group_list[*].name, var.sm_secret_group_name)].id, "")
 
+  #COS instance crn has the form "crn:v1:bluemix:public:cloud-object-storage:global:a/efee86c6370b7cec15139af02b60d633:23f003f2-3b96-4b38-bf00-94497866cee1::
+  #need to extract the XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX segment as the COS instance id
+  forward_slash_split_sm = try(split("/", var.cos_instance_crn)[1], "")
+  cos_instance_id        = try(split(":", local.forward_slash_split_sm)[1], "")
+
   sm_secret_expiration_period_hours = ((var.sm_secret_expiration_period != "") && (var.sm_secret_expiration_period != "0")) ? var.sm_secret_expiration_period * 24 : null
 
   expiration_date = (local.sm_secret_expiration_period_hours != null) ? timeadd(time_static.timestamp[0].rfc3339, "${local.sm_secret_expiration_period_hours}h") : null
@@ -30,8 +35,7 @@ locals {
   #determine if the key should be a service api key or a regular api key
   # Is a service api key if the override is set to false
 
-  create_pipeline_service_api_key = (local.create_api_key == true && var.force_create_standard_api_key == false && var.iam_api_key_secret_value == "") ? true : false
-  #create_cos_service_api_key      = ((local.create_cos_api_key == true) && (var.force_create_standard_api_key == false)) ? true : false
+  create_pipeline_service_api_key           = (local.create_api_key == true && var.force_create_standard_api_key == false && var.iam_api_key_secret_value == "") ? true : false
   create_auto_rotatable_cos_service_api_key = (local.create_cos_api_key == true && var.force_create_standard_api_key == false && var.cos_api_key_secret_value == "") ? true : false
 
   # Is an api key if the override is set to true
@@ -77,9 +81,24 @@ resource "ibm_iam_service_policy" "cos_policy" {
   iam_service_id = ibm_iam_service_id.cos_service_id[0].id
   roles          = ["Reader", "Object Writer"]
 
-  resources {
-    service           = "cloud-object-storage"
-    resource_group_id = data.ibm_resource_group.resource_group.id
+  resource_attributes {
+    name  = "serviceName"
+    value = "cloud-object-storage"
+  }
+  resource_attributes {
+    name     = "serviceInstance"
+    value    = local.cos_instance_id
+    operator = "stringEquals"
+  }
+  resource_attributes {
+    name     = "resource"
+    value    = var.cos_bucket_name
+    operator = "stringEquals"
+  }
+  resource_attributes {
+    name     = "resourceType"
+    value    = "bucket"
+    operator = "stringEquals"
   }
 }
 
@@ -247,7 +266,7 @@ resource "ibm_sm_arbitrary_secret" "private_worker_secret" {
 ################## IAM CREDENTIALS SERVICE API KEYS ###############################
 
 resource "ibm_sm_iam_credentials_configuration" "iam_credentials_configuration" {
-  count         = (local.create_pipeline_service_api_key) ? 1 : 0
+  count         = (local.create_pipeline_service_api_key == true || local.create_auto_rotatable_cos_service_api_key == true) ? 1 : 0
   instance_id   = (local.sm_instance_id != "") ? local.sm_instance_id : var.sm_instance_id
   region        = var.sm_location
   name          = "iam_credentials_config"
