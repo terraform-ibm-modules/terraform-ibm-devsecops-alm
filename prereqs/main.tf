@@ -265,18 +265,25 @@ resource "ibm_sm_arbitrary_secret" "private_worker_secret" {
 
 ################## IAM CREDENTIALS SERVICE API KEYS ###############################
 
-resource "ibm_sm_iam_credentials_configuration" "iam_credentials_configuration" {
-  count         = (local.create_pipeline_service_api_key == true || local.create_auto_rotatable_cos_service_api_key == true) ? 1 : 0
-  instance_id   = (local.sm_instance_id != "") ? local.sm_instance_id : var.sm_instance_id
-  region        = var.sm_location
-  name          = "iam_credentials_config"
-  api_key       = var.ibmcloud_api_key
-  endpoint_type = var.sm_endpoint_type
+resource "ibm_iam_authorization_policy" "secretsmanager_iam_group_auth_policy" {
+  count                       = (local.create_pipeline_service_api_key == true || local.create_auto_rotatable_cos_service_api_key == true) ? 1 : 0
+  source_service_name         = "secrets-manager"
+  source_resource_instance_id = (local.sm_instance_id != "") ? local.sm_instance_id : var.sm_instance_id
+  target_service_name         = "iam-groups"
+  roles                       = ["Groups Service Member Manage"]
+}
+
+resource "ibm_iam_authorization_policy" "secretsmanager_iam_identitiy_auth_policy" {
+  count                       = (local.create_pipeline_service_api_key == true || local.create_auto_rotatable_cos_service_api_key == true) ? 1 : 0
+  source_service_name         = "secrets-manager"
+  source_resource_instance_id = (local.sm_instance_id != "") ? local.sm_instance_id : var.sm_instance_id
+  target_service_name         = "iam-identity"
+  roles                       = ["Operator"]
 }
 
 resource "ibm_sm_iam_credentials_secret" "iam_pipeline_apikey_credentials_secret" {
   count       = (local.create_pipeline_service_api_key) ? 1 : 0
-  depends_on  = [ibm_sm_secret_group.sm_secret_group, data.ibm_sm_secret_group.existing_sm_secret_group, ibm_sm_iam_credentials_configuration.iam_credentials_configuration]
+  depends_on  = [ibm_sm_secret_group.sm_secret_group, data.ibm_sm_secret_group.existing_sm_secret_group, ibm_iam_authorization_policy.secretsmanager_iam_group_auth_policy, ibm_iam_authorization_policy.secretsmanager_iam_identitiy_auth_policy]
   instance_id = data.ibm_resource_instance.sm_instance[0].guid
   region      = var.sm_location
   name        = var.iam_api_key_secret_name
@@ -294,7 +301,7 @@ resource "ibm_sm_iam_credentials_secret" "iam_pipeline_apikey_credentials_secret
 
 resource "ibm_sm_iam_credentials_secret" "iam_cos_apikey_credentials_secret" {
   count       = (local.create_auto_rotatable_cos_service_api_key) ? 1 : 0
-  depends_on  = [ibm_sm_secret_group.sm_secret_group, data.ibm_sm_secret_group.existing_sm_secret_group, ibm_sm_iam_credentials_configuration.iam_credentials_configuration]
+  depends_on  = [ibm_sm_secret_group.sm_secret_group, data.ibm_sm_secret_group.existing_sm_secret_group, ibm_iam_authorization_policy.secretsmanager_iam_group_auth_policy, ibm_iam_authorization_policy.secretsmanager_iam_identitiy_auth_policy]
   instance_id = data.ibm_resource_instance.sm_instance[0].guid
   region      = var.sm_location
   name        = var.cos_api_key_secret_name
