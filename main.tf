@@ -326,6 +326,7 @@ module "prereqs" {
   create_kubernetes_access_policy  = var.create_kubernetes_access_policy
   toolchain_access_group_name      = var.toolchain_access_group_name
   create_access_group              = var.create_access_group
+  prefix                           = var.prefix
 }
 
 module "devsecops_ci_toolchain" {

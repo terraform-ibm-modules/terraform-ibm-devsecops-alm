@@ -249,3 +249,9 @@ variable "create_access_group" {
   description = "Set to `true` to create an access group for the operations of the DevSecOps toolchains."
   default     = false
 }
+
+variable "prefix" {
+  type        = string
+  description = "A prefix that is added to the toolchain resources."
+  default     = ""
+}

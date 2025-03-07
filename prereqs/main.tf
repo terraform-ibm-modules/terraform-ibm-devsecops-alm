@@ -56,24 +56,24 @@ resource "time_static" "timestamp" {
 
 resource "ibm_iam_service_id" "pipeline_service_id" {
   count = (local.create_pipeline_service_api_key) ? 1 : 0
-  name  = var.service_name_pipeline
+  name  = (var.prefix == "") ? var.service_name_pipeline : format("${var.prefix}-%s", var.service_name_pipeline)
 }
 
 resource "ibm_iam_service_id" "cos_service_id" {
   count = (local.create_cos_service_api_key) ? 1 : 0
-  name  = var.service_name_cos
+  name  = (var.prefix == "") ? var.service_name_cos : format("${var.prefix}-%s", var.service_name_cos)
 }
 
 data "ibm_iam_service_id" "pipeline_service_id" {
   count      = (local.create_pipeline_service_api_key) ? 1 : 0
   depends_on = [ibm_iam_service_id.pipeline_service_id]
-  name       = var.service_name_pipeline
+  name       = (var.prefix == "") ? var.service_name_pipeline : format("${var.prefix}-%s", var.service_name_pipeline)
 }
 
 data "ibm_iam_service_id" "cos_service_id" {
   count      = (local.create_cos_service_api_key) ? 1 : 0
   depends_on = [ibm_iam_service_id.cos_service_id]
-  name       = var.service_name_cos
+  name       = (var.prefix == "") ? var.service_name_cos : format("${var.prefix}-%s", var.service_name_cos)
 }
 
 resource "ibm_iam_service_policy" "cos_policy" {
@@ -119,6 +119,15 @@ resource "ibm_iam_service_policy" "cr_policy" {
   roles          = ["Manager"]
   resources {
     service = "container-registry"
+  }
+}
+
+resource "ibm_iam_service_policy" "toolchain_policy" {
+  count          = (local.create_pipeline_service_api_key) ? 1 : 0
+  iam_service_id = ibm_iam_service_id.pipeline_service_id[0].id
+  roles          = ["Editor"]
+  resources {
+    service = "toolchain"
   }
 }
 
@@ -362,17 +371,9 @@ resource "ibm_sm_arbitrary_secret" "secret_cos_api_key" {
 
 resource "ibm_iam_access_group" "toolchain_access_group" {
   count       = (var.create_access_group == true) ? 1 : 0
-  name        = var.toolchain_access_group_name
+  name        = (var.prefix == "") ? var.toolchain_access_group_name : format("${var.prefix}-%s", var.toolchain_access_group_name)
   description = "Access group used for DevSecOps toolchain operations."
 }
-
-
-#resource "ibm_iam_access_group_members" "service_ids" {
-#  count           = (var.create_access_group == true && local.create_pipeline_service_api_key) ? 1 : 0
-#  access_group_id = ibm_iam_access_group.toolchain_access_group[0].id
-#  iam_service_ids = local.service_id_list
-#}
-
 
 resource "ibm_iam_access_group_policy" "resource_group_policy" {
   count           = (var.create_access_group == true && local.create_api_key == true) ? 1 : 0
