@@ -326,6 +326,7 @@ module "prereqs" {
   create_kubernetes_access_policy  = var.create_kubernetes_access_policy
   toolchain_access_group_name      = var.toolchain_access_group_name
   create_access_group              = var.create_access_group
+  prefix                           = var.prefix
 }
 
 module "devsecops_ci_toolchain" {
@@ -1187,6 +1188,41 @@ resource "null_resource" "ci_pipeline_run" {
     quiet       = true
   }
 }
+
+############# Additional pipeline property for Stack airgap support ############################
+
+resource "ibm_cd_tekton_pipeline_property" "ci_pipeline_ibmcloud_api" {
+  count       = (var.create_ci_toolchain == true && var.ibmcloud_api != "") ? 1 : 0
+  name        = "ibmcloud-api"
+  type        = "text"
+  value       = var.ibmcloud_api
+  pipeline_id = module.devsecops_ci_toolchain[0].ci_pipeline_id
+}
+
+resource "ibm_cd_tekton_pipeline_property" "pr_pipeline_ibmcloud_api" {
+  count       = (var.create_ci_toolchain == true && var.ibmcloud_api != "") ? 1 : 0
+  name        = "ibmcloud-api"
+  type        = "text"
+  value       = var.ibmcloud_api
+  pipeline_id = module.devsecops_ci_toolchain[0].pr_pipeline_id
+}
+
+resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_ibmcloud_api" {
+  count       = (var.create_cd_toolchain == true && var.ibmcloud_api != "") ? 1 : 0
+  name        = "ibmcloud-api"
+  type        = "text"
+  value       = var.ibmcloud_api
+  pipeline_id = module.devsecops_cd_toolchain[0].cd_pipeline_id
+}
+
+resource "ibm_cd_tekton_pipeline_property" "cc_pipeline_ibmcloud_api" {
+  count       = (var.create_cc_toolchain == true && var.ibmcloud_api != "") ? 1 : 0
+  name        = "ibmcloud-api"
+  type        = "text"
+  value       = var.ibmcloud_api
+  pipeline_id = module.devsecops_cc_toolchain[0].cc_pipeline_id
+}
+
 
 #############################################################
 ## Example resources to extend the ci_toolchain created above

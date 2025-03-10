@@ -487,6 +487,12 @@ variable "ibmcloud_api_key" {
   sensitive   = true
 }
 
+variable "ibmcloud_api" {
+  type        = string
+  description = "The environment URL. When left unset this will default to `https://cloud.ibm.com`"
+  default     = ""
+}
+
 variable "inventory_group" {
   type        = string
   description = "Specify the Git user or group for the inventory repository."

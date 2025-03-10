@@ -458,6 +458,12 @@ variable "force_create_standard_api_key" {
   default     = false
 }
 
+variable "ibmcloud_api" {
+  type        = string
+  description = "The environment URL. When left unset this will default to `https://cloud.ibm.com`"
+  default     = ""
+}
+
 variable "ibmcloud_api_key" {
   type        = string
   description = "The API key used to create the toolchains. (See deployment guide.)"
