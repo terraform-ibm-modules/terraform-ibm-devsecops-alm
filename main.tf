@@ -332,7 +332,7 @@ module "prereqs" {
 module "devsecops_ci_toolchain" {
   count                    = var.create_ci_toolchain ? 1 : 0
   depends_on               = [ibm_resource_instance.cd_instance]
-  source                   = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-ci-toolchain?ref=v2.5.1-beta.1"
+  source                   = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-ci-toolchain?ref=v2.5.0"
   ibmcloud_api_key         = var.ibmcloud_api_key
   toolchain_name           = (var.prefix == "") ? local.ci_toolchain_name : format("${var.prefix}-%s", local.ci_toolchain_name)
   toolchain_region         = (var.ci_toolchain_region == "") ? var.toolchain_region : replace(replace(var.ci_toolchain_region, "ibm:yp:", ""), "ibm:ys1:", "")
@@ -1192,7 +1192,7 @@ resource "null_resource" "ci_pipeline_run" {
 ############# Additional pipeline property for Stack airgap support ############################
 
 resource "ibm_cd_tekton_pipeline_property" "ci_pipeline_ibmcloud_api" {
-  count       = (var.create_ci_toolchain) ? 1 : 0
+  count       = (var.create_ci_toolchain == true && var.ibmcloud_api != "") ? 1 : 0
   name        = "ibmcloud-api"
   type        = "text"
   value       = var.ibmcloud_api
@@ -1200,7 +1200,7 @@ resource "ibm_cd_tekton_pipeline_property" "ci_pipeline_ibmcloud_api" {
 }
 
 resource "ibm_cd_tekton_pipeline_property" "pr_pipeline_ibmcloud_api" {
-  count       = (var.create_ci_toolchain) ? 1 : 0
+  count       = (var.create_ci_toolchain == true && var.ibmcloud_api != "") ? 1 : 0
   name        = "ibmcloud-api"
   type        = "text"
   value       = var.ibmcloud_api
@@ -1208,7 +1208,7 @@ resource "ibm_cd_tekton_pipeline_property" "pr_pipeline_ibmcloud_api" {
 }
 
 resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_ibmcloud_api" {
-  count       = (var.create_cd_toolchain) ? 1 : 0
+  count       = (var.create_cd_toolchain == true && var.ibmcloud_api != "") ? 1 : 0
   name        = "ibmcloud-api"
   type        = "text"
   value       = var.ibmcloud_api
@@ -1216,7 +1216,7 @@ resource "ibm_cd_tekton_pipeline_property" "cd_pipeline_ibmcloud_api" {
 }
 
 resource "ibm_cd_tekton_pipeline_property" "cc_pipeline_ibmcloud_api" {
-  count       = (var.create_cc_toolchain) ? 1 : 0
+  count       = (var.create_cc_toolchain == true && var.ibmcloud_api != "") ? 1 : 0
   name        = "ibmcloud-api"
   type        = "text"
   value       = var.ibmcloud_api

@@ -127,7 +127,8 @@ resource "ibm_iam_service_policy" "toolchain_policy" {
   iam_service_id = ibm_iam_service_id.pipeline_service_id[0].id
   roles          = ["Editor"]
   resources {
-    service = "toolchain"
+    service           = "toolchain"
+    resource_group_id = data.ibm_resource_group.resource_group.id
   }
 }
 
@@ -146,7 +147,8 @@ resource "ibm_iam_service_policy" "kube_policy" {
   iam_service_id = ibm_iam_service_id.pipeline_service_id[0].id
   roles          = ["Manager", "Editor"]
   resources {
-    service = "containers-kubernetes"
+    service           = "containers-kubernetes"
+    resource_group_id = data.ibm_resource_group.resource_group.id
   }
 }
 
@@ -388,7 +390,7 @@ resource "ibm_iam_access_group_policy" "resource_group_policy" {
 resource "ibm_iam_access_group_policy" "toolchain_group_policy" {
   count           = (var.create_access_group == true && local.create_api_key == true) ? 1 : 0
   access_group_id = ibm_iam_access_group.toolchain_access_group[0].id
-  roles           = ["Editor"]
+  roles           = ["Editor", "PipelineRunner"]
   resources {
     service           = "toolchain"
     resource_group_id = data.ibm_resource_group.resource_group.id
@@ -400,13 +402,14 @@ resource "ibm_iam_access_group_policy" "sm_group_policy" {
   access_group_id = ibm_iam_access_group.toolchain_access_group[0].id
   roles           = ["Manager"]
   resources {
-    service = "secrets-manager"
+    service           = "secrets-manager"
+    resource_group_id = data.ibm_resource_group.resource_group.id
   }
 }
 
 ### Access policies specific to restricting the use of a standard api keys to users added to the access group
 resource "ibm_iam_access_group_policy" "cr_group_policy" {
-  count           = (var.create_access_group == true && (local.create_pipeline_api_key == true || local.create_provided_api_key == true)) ? 1 : 0
+  count           = (var.create_access_group == true && (local.create_api_key == true || local.create_provided_api_key == true)) ? 1 : 0
   access_group_id = ibm_iam_access_group.toolchain_access_group[0].id
   roles           = ["Manager"]
   resources {
@@ -415,7 +418,7 @@ resource "ibm_iam_access_group_policy" "cr_group_policy" {
 }
 
 resource "ibm_iam_access_group_policy" "continuous_delivery_group_policy" {
-  count           = (var.create_access_group == true && (local.create_pipeline_api_key == true || local.create_provided_api_key == true)) ? 1 : 0
+  count           = (var.create_access_group == true && (local.create_api_key == true || local.create_provided_api_key == true)) ? 1 : 0
   access_group_id = ibm_iam_access_group.toolchain_access_group[0].id
   roles           = ["Writer"]
   resources {
@@ -425,7 +428,7 @@ resource "ibm_iam_access_group_policy" "continuous_delivery_group_policy" {
 }
 
 resource "ibm_iam_access_group_policy" "ce_group_policy" {
-  count           = (var.create_access_group == true && var.create_code_engine_access_policy == true && (local.create_pipeline_api_key == true || local.create_provided_api_key == true)) ? 1 : 0
+  count           = ((var.create_access_group == true && var.create_code_engine_access_policy == true) && (local.create_api_key == true || local.create_provided_api_key == true)) ? 1 : 0
   access_group_id = ibm_iam_access_group.toolchain_access_group[0].id
   roles           = ["Manager", "Editor"]
   resources {
@@ -435,7 +438,7 @@ resource "ibm_iam_access_group_policy" "ce_group_policy" {
 }
 
 resource "ibm_iam_access_group_policy" "kube_group_policy" {
-  count           = (var.create_access_group == true && var.create_kubernetes_access_policy == true && (local.create_pipeline_api_key == true || local.create_provided_api_key == true)) ? 1 : 0
+  count           = ((var.create_access_group == true && var.create_kubernetes_access_policy == true) && (local.create_api_key == true || local.create_provided_api_key == true)) ? 1 : 0
   access_group_id = ibm_iam_access_group.toolchain_access_group[0].id
   roles           = ["Manager", "Editor"]
   resources {
