@@ -74,6 +74,10 @@ statement instead the previous block.
 
 | Name | Type |
 |------|------|
+| [ibm_cd_tekton_pipeline_property.cc_pipeline_ibmcloud_api](https://registry.terraform.io/providers/IBM-Cloud/ibm/1.70.0/docs/resources/cd_tekton_pipeline_property) | resource |
+| [ibm_cd_tekton_pipeline_property.cd_pipeline_ibmcloud_api](https://registry.terraform.io/providers/IBM-Cloud/ibm/1.70.0/docs/resources/cd_tekton_pipeline_property) | resource |
+| [ibm_cd_tekton_pipeline_property.ci_pipeline_ibmcloud_api](https://registry.terraform.io/providers/IBM-Cloud/ibm/1.70.0/docs/resources/cd_tekton_pipeline_property) | resource |
+| [ibm_cd_tekton_pipeline_property.pr_pipeline_ibmcloud_api](https://registry.terraform.io/providers/IBM-Cloud/ibm/1.70.0/docs/resources/cd_tekton_pipeline_property) | resource |
 | [ibm_cd_tekton_pipeline_trigger.ci_pipeline_webhook](https://registry.terraform.io/providers/IBM-Cloud/ibm/1.70.0/docs/resources/cd_tekton_pipeline_trigger) | resource |
 | [ibm_cd_tekton_pipeline_trigger_property.ci_pipeline_webhook_branch_property](https://registry.terraform.io/providers/IBM-Cloud/ibm/1.70.0/docs/resources/cd_tekton_pipeline_trigger_property) | resource |
 | [ibm_cd_tekton_pipeline_trigger_property.ci_pipeline_webhook_name_property](https://registry.terraform.io/providers/IBM-Cloud/ibm/1.70.0/docs/resources/cd_tekton_pipeline_trigger_property) | resource |
@@ -523,6 +527,7 @@ statement instead the previous block.
 | <a name="input_evidence_repo_name"></a> [evidence\_repo\_name](#input\_evidence\_repo\_name) | Set to use a custom name for the Evidence repository. | `string` | `""` | no |
 | <a name="input_evidence_repo_secret_group"></a> [evidence\_repo\_secret\_group](#input\_evidence\_repo\_secret\_group) | Secret group for the Evidence repository secret. Defaults to the value set in `sm_secret_group` if not set. Only used with `Secrets Manager`. | `string` | `""` | no |
 | <a name="input_force_create_standard_api_key"></a> [force\_create\_standard\_api\_key](#input\_force\_create\_standard\_api\_key) | Set to `true` to force create a standard api key. By default the generated apikey will be a service api key. It is recommended to use a Git Token when using the service api key. In the case where the user has been invited to an account and that user not the account owner, during toolchain creation the default compliance repositories will be created in that user's account and the service api will not have access to those repositories. In this case a Git Token for the repositories is required. See `repo_git_token_secret_name` for more details. The alternative is to set `force_create_standard_api_key` to `true` to create a standard api key. | `bool` | `false` | no |
+| <a name="input_ibmcloud_api"></a> [ibmcloud\_api](#input\_ibmcloud\_api) | The environment URL. When left unset this will default to `https://cloud.ibm.com` | `string` | `""` | no |
 | <a name="input_ibmcloud_api_key"></a> [ibmcloud\_api\_key](#input\_ibmcloud\_api\_key) | The API key used to create the toolchains. (See deployment guide.) | `string` | n/a | yes |
 | <a name="input_inventory_group"></a> [inventory\_group](#input\_inventory\_group) | Specify the Git user or group for the inventory repository. | `string` | `""` | no |
 | <a name="input_inventory_repo_auth_type"></a> [inventory\_repo\_auth\_type](#input\_inventory\_repo\_auth\_type) | Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`. | `string` | `""` | no |
