@@ -85,7 +85,7 @@
       {
         "name": "context-dir",
         "type": "text",
-        "value": "dockerfile-strategy"
+        "value": "."
       },
       {
         "name": "cos-api-key",
