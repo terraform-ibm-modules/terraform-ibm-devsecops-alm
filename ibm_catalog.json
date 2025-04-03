@@ -187,7 +187,6 @@
 								"crn:v1:bluemix:public:iam-identity::::serviceRole:ServiceIdCreator",
 								"crn:v1:bluemix:public:iam-identity::::serviceRole:UserApiKeyCreator",
 								"crn:v1:bluemix:public:iam::::role:Operator"
-
 							],
 							"service_name": "iam-identity"
 						}
@@ -2342,7 +2341,6 @@
 								"crn:v1:bluemix:public:iam-identity::::serviceRole:ServiceIdCreator",
 								"crn:v1:bluemix:public:iam-identity::::serviceRole:UserApiKeyCreator",
 								"crn:v1:bluemix:public:iam::::role:Operator"
-
 							],
 							"service_name": "iam-identity"
 						}
