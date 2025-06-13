@@ -57,7 +57,7 @@ statement instead the previous block.
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0.0 |
-| <a name="requirement_ibm"></a> [ibm](#requirement\_ibm) | =1.75.2 |
+| <a name="requirement_ibm"></a> [ibm](#requirement\_ibm) | =1.79.1 |
 | <a name="requirement_null"></a> [null](#requirement\_null) | = 3.2.2 |
 | <a name="requirement_random"></a> [random](#requirement\_random) | = 3.6.2 |
 
@@ -65,29 +65,29 @@ statement instead the previous block.
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_devsecops_cc_toolchain"></a> [devsecops\_cc\_toolchain](#module\_devsecops\_cc\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cc-toolchain | v2.4.0 |
-| <a name="module_devsecops_cd_toolchain"></a> [devsecops\_cd\_toolchain](#module\_devsecops\_cd\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain | v2.4.0 |
-| <a name="module_devsecops_ci_toolchain"></a> [devsecops\_ci\_toolchain](#module\_devsecops\_ci\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-ci-toolchain | v2.5.0 |
+| <a name="module_devsecops_cc_toolchain"></a> [devsecops\_cc\_toolchain](#module\_devsecops\_cc\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cc-toolchain | v2.5.0 |
+| <a name="module_devsecops_cd_toolchain"></a> [devsecops\_cd\_toolchain](#module\_devsecops\_cd\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain | v2.5.0 |
+| <a name="module_devsecops_ci_toolchain"></a> [devsecops\_ci\_toolchain](#module\_devsecops\_ci\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-ci-toolchain | v2.6.0 |
 | <a name="module_prereqs"></a> [prereqs](#module\_prereqs) | ./prereqs | n/a |
 
 ### Resources
 
 | Name | Type |
 |------|------|
-| [ibm_cd_tekton_pipeline_property.cc_pipeline_ibmcloud_api](https://registry.terraform.io/providers/IBM-Cloud/ibm/1.75.2/docs/resources/cd_tekton_pipeline_property) | resource |
-| [ibm_cd_tekton_pipeline_property.cd_pipeline_ibmcloud_api](https://registry.terraform.io/providers/IBM-Cloud/ibm/1.75.2/docs/resources/cd_tekton_pipeline_property) | resource |
-| [ibm_cd_tekton_pipeline_property.ci_pipeline_ibmcloud_api](https://registry.terraform.io/providers/IBM-Cloud/ibm/1.75.2/docs/resources/cd_tekton_pipeline_property) | resource |
-| [ibm_cd_tekton_pipeline_property.pr_pipeline_ibmcloud_api](https://registry.terraform.io/providers/IBM-Cloud/ibm/1.75.2/docs/resources/cd_tekton_pipeline_property) | resource |
-| [ibm_cd_tekton_pipeline_trigger.ci_pipeline_webhook](https://registry.terraform.io/providers/IBM-Cloud/ibm/1.75.2/docs/resources/cd_tekton_pipeline_trigger) | resource |
-| [ibm_cd_tekton_pipeline_trigger_property.ci_pipeline_webhook_branch_property](https://registry.terraform.io/providers/IBM-Cloud/ibm/1.75.2/docs/resources/cd_tekton_pipeline_trigger_property) | resource |
-| [ibm_cd_tekton_pipeline_trigger_property.ci_pipeline_webhook_name_property](https://registry.terraform.io/providers/IBM-Cloud/ibm/1.75.2/docs/resources/cd_tekton_pipeline_trigger_property) | resource |
-| [ibm_cd_tekton_pipeline_trigger_property.ci_pipeline_webhook_repo_url_property](https://registry.terraform.io/providers/IBM-Cloud/ibm/1.75.2/docs/resources/cd_tekton_pipeline_trigger_property) | resource |
-| [ibm_cr_namespace.cr_namespace](https://registry.terraform.io/providers/IBM-Cloud/ibm/1.75.2/docs/resources/cr_namespace) | resource |
-| [ibm_resource_instance.cd_instance](https://registry.terraform.io/providers/IBM-Cloud/ibm/1.75.2/docs/resources/resource_instance) | resource |
+| [ibm_cd_tekton_pipeline_property.cc_pipeline_ibmcloud_api](https://registry.terraform.io/providers/IBM-Cloud/ibm/1.79.1/docs/resources/cd_tekton_pipeline_property) | resource |
+| [ibm_cd_tekton_pipeline_property.cd_pipeline_ibmcloud_api](https://registry.terraform.io/providers/IBM-Cloud/ibm/1.79.1/docs/resources/cd_tekton_pipeline_property) | resource |
+| [ibm_cd_tekton_pipeline_property.ci_pipeline_ibmcloud_api](https://registry.terraform.io/providers/IBM-Cloud/ibm/1.79.1/docs/resources/cd_tekton_pipeline_property) | resource |
+| [ibm_cd_tekton_pipeline_property.pr_pipeline_ibmcloud_api](https://registry.terraform.io/providers/IBM-Cloud/ibm/1.79.1/docs/resources/cd_tekton_pipeline_property) | resource |
+| [ibm_cd_tekton_pipeline_trigger.ci_pipeline_webhook](https://registry.terraform.io/providers/IBM-Cloud/ibm/1.79.1/docs/resources/cd_tekton_pipeline_trigger) | resource |
+| [ibm_cd_tekton_pipeline_trigger_property.ci_pipeline_webhook_branch_property](https://registry.terraform.io/providers/IBM-Cloud/ibm/1.79.1/docs/resources/cd_tekton_pipeline_trigger_property) | resource |
+| [ibm_cd_tekton_pipeline_trigger_property.ci_pipeline_webhook_name_property](https://registry.terraform.io/providers/IBM-Cloud/ibm/1.79.1/docs/resources/cd_tekton_pipeline_trigger_property) | resource |
+| [ibm_cd_tekton_pipeline_trigger_property.ci_pipeline_webhook_repo_url_property](https://registry.terraform.io/providers/IBM-Cloud/ibm/1.79.1/docs/resources/cd_tekton_pipeline_trigger_property) | resource |
+| [ibm_cr_namespace.cr_namespace](https://registry.terraform.io/providers/IBM-Cloud/ibm/1.79.1/docs/resources/cr_namespace) | resource |
+| [ibm_resource_instance.cd_instance](https://registry.terraform.io/providers/IBM-Cloud/ibm/1.79.1/docs/resources/resource_instance) | resource |
 | [null_resource.ci_pipeline_run](https://registry.terraform.io/providers/hashicorp/null/3.2.2/docs/resources/resource) | resource |
 | [random_string.resource_suffix](https://registry.terraform.io/providers/hashicorp/random/3.6.2/docs/resources/string) | resource |
 | [random_string.webhook_secret](https://registry.terraform.io/providers/hashicorp/random/3.6.2/docs/resources/string) | resource |
-| [ibm_resource_group.resource_group](https://registry.terraform.io/providers/IBM-Cloud/ibm/1.75.2/docs/data-sources/resource_group) | data source |
+| [ibm_resource_group.resource_group](https://registry.terraform.io/providers/IBM-Cloud/ibm/1.79.1/docs/data-sources/resource_group) | data source |
 
 ### Inputs
 
@@ -256,6 +256,7 @@ statement instead the previous block.
 | <a name="input_cd_deployment_repo_git_token_secret_name"></a> [cd\_deployment\_repo\_git\_token\_secret\_name](#input\_cd\_deployment\_repo\_git\_token\_secret\_name) | Name of the Git token secret in the secret provider. | `string` | `""` | no |
 | <a name="input_cd_deployment_repo_secret_group"></a> [cd\_deployment\_repo\_secret\_group](#input\_cd\_deployment\_repo\_secret\_group) | Secret group for the Deployment repository secret. Defaults to the value set in `sm_secret_group` if not set. Only used with `Secrets Manager`. | `string` | `""` | no |
 | <a name="input_cd_doi_toolchain_id"></a> [cd\_doi\_toolchain\_id](#input\_cd\_doi\_toolchain\_id) | The ID of the toolchain containing the DevOps Insights integration. This variable is used to link the DevOps Insights toolcard to a specific instance. | `string` | `""` | no |
+| <a name="input_cd_enable_change_management_repo"></a> [cd\_enable\_change\_management\_repo](#input\_cd\_enable\_change\_management\_repo) | Set to `true` to enable the Change Management Repo integration. | `string` | `true` | no |
 | <a name="input_cd_enable_key_protect"></a> [cd\_enable\_key\_protect](#input\_cd\_enable\_key\_protect) | Set to `true` to the enable Key Protect integrations. | `string` | `""` | no |
 | <a name="input_cd_enable_pipeline_notifications"></a> [cd\_enable\_pipeline\_notifications](#input\_cd\_enable\_pipeline\_notifications) | When enabled, pipeline run events will be sent to the Event Notifications and Slack integrations in the enclosing toolchain. | `string` | `""` | no |
 | <a name="input_cd_enable_secrets_manager"></a> [cd\_enable\_secrets\_manager](#input\_cd\_enable\_secrets\_manager) | Set to `true` to enable the Secrets Manager integrations. | `string` | `""` | no |
@@ -507,6 +508,7 @@ statement instead the previous block.
 | <a name="input_create_secret_group"></a> [create\_secret\_group](#input\_create\_secret\_group) | Set to `true` to create the specified Secrets Manager secret group. | `bool` | `false` | no |
 | <a name="input_create_signing_key"></a> [create\_signing\_key](#input\_create\_signing\_key) | Set to `true` to create and add a `signing-key` and the `signing-certificate` to the Secrets Provider. | `bool` | `false` | no |
 | <a name="input_create_triggers"></a> [create\_triggers](#input\_create\_triggers) | Set to `true` to create the default triggers associated with the compliance repos and sample app. | `string` | `"true"` | no |
+| <a name="input_enable_cos"></a> [enable\_cos](#input\_enable\_cos) | Set to `true` to enable the new COS integration. | `bool` | `false` | no |
 | <a name="input_enable_key_protect"></a> [enable\_key\_protect](#input\_enable\_key\_protect) | Set to `true` to the enable Key Protect integrations. | `string` | `"false"` | no |
 | <a name="input_enable_pipeline_notifications"></a> [enable\_pipeline\_notifications](#input\_enable\_pipeline\_notifications) | When enabled, pipeline run events will be sent to the Event Notifications and Slack integrations in the enclosing toolchain. | `string` | `""` | no |
 | <a name="input_enable_privateworker"></a> [enable\_privateworker](#input\_enable\_privateworker) | Set to `true` to enable private workers for the CI, CD, CC and PR pipelines. A valid service api key must be set in Secrets Manager. The name of this secret can be specified using `privateworker_credentials_secret_name`. | `string` | `"false"` | no |
@@ -526,6 +528,7 @@ statement instead the previous block.
 | <a name="input_evidence_repo_integration_owner"></a> [evidence\_repo\_integration\_owner](#input\_evidence\_repo\_integration\_owner) | The name of the repository integration owner. | `string` | `""` | no |
 | <a name="input_evidence_repo_name"></a> [evidence\_repo\_name](#input\_evidence\_repo\_name) | Set to use a custom name for the Evidence repository. | `string` | `""` | no |
 | <a name="input_evidence_repo_secret_group"></a> [evidence\_repo\_secret\_group](#input\_evidence\_repo\_secret\_group) | Secret group for the Evidence repository secret. Defaults to the value set in `sm_secret_group` if not set. Only used with `Secrets Manager`. | `string` | `""` | no |
+| <a name="input_evidence_repo_source_url"></a> [evidence\_repo\_source\_url](#input\_evidence\_repo\_source\_url) | URL of evidence repo template to be cloned | `string` | `""` | no |
 | <a name="input_force_create_standard_api_key"></a> [force\_create\_standard\_api\_key](#input\_force\_create\_standard\_api\_key) | Set to `true` to force create a standard api key. By default the generated apikey will be a service api key. It is recommended to use a Git Token when using the service api key. In the case where the user has been invited to an account and that user not the account owner, during toolchain creation the default compliance repositories will be created in that user's account and the service api will not have access to those repositories. In this case a Git Token for the repositories is required. See `repo_git_token_secret_name` for more details. The alternative is to set `force_create_standard_api_key` to `true` to create a standard api key. | `bool` | `false` | no |
 | <a name="input_ibmcloud_api"></a> [ibmcloud\_api](#input\_ibmcloud\_api) | The environment URL. When left unset this will default to `https://cloud.ibm.com` | `string` | `""` | no |
 | <a name="input_ibmcloud_api_key"></a> [ibmcloud\_api\_key](#input\_ibmcloud\_api\_key) | The API key used to create the toolchains. (See deployment guide.) | `string` | n/a | yes |
@@ -539,6 +542,7 @@ statement instead the previous block.
 | <a name="input_inventory_repo_integration_owner"></a> [inventory\_repo\_integration\_owner](#input\_inventory\_repo\_integration\_owner) | The name of the repository integration owner. | `string` | `""` | no |
 | <a name="input_inventory_repo_name"></a> [inventory\_repo\_name](#input\_inventory\_repo\_name) | Set to use a custom name for the Inventory repository. | `string` | `""` | no |
 | <a name="input_inventory_repo_secret_group"></a> [inventory\_repo\_secret\_group](#input\_inventory\_repo\_secret\_group) | Secret group for the Inventory repository secret. Defaults to the value set in `sm_secret_group` if not set. Only used with `Secrets Manager`. | `string` | `""` | no |
+| <a name="input_inventory_repo_source_url"></a> [inventory\_repo\_source\_url](#input\_inventory\_repo\_source\_url) | URL of inventory repo template to be cloned. | `string` | `""` | no |
 | <a name="input_issues_group"></a> [issues\_group](#input\_issues\_group) | Specify the Git user or group for the issues repository. | `string` | `""` | no |
 | <a name="input_issues_repo_auth_type"></a> [issues\_repo\_auth\_type](#input\_issues\_repo\_auth\_type) | Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`. | `string` | `""` | no |
 | <a name="input_issues_repo_existing_git_id"></a> [issues\_repo\_existing\_git\_id](#input\_issues\_repo\_existing\_git\_id) | Set this value to `github` for github.com, or to the GUID of a custom GitHub Enterprise server. | `string` | `""` | no |
@@ -549,6 +553,7 @@ statement instead the previous block.
 | <a name="input_issues_repo_integration_owner"></a> [issues\_repo\_integration\_owner](#input\_issues\_repo\_integration\_owner) | The name of the repository integration owner. | `string` | `""` | no |
 | <a name="input_issues_repo_name"></a> [issues\_repo\_name](#input\_issues\_repo\_name) | Set to use a custom name for the Issues repository. | `string` | `""` | no |
 | <a name="input_issues_repo_secret_group"></a> [issues\_repo\_secret\_group](#input\_issues\_repo\_secret\_group) | Secret group for the Issues repository secret. Defaults to the value set in `sm_secret_group` if not set. Only used with `Secrets Manager`. | `string` | `""` | no |
+| <a name="input_issues_repo_source_url"></a> [issues\_repo\_source\_url](#input\_issues\_repo\_source\_url) | URL of issue repo template to be cloned. | `string` | `""` | no |
 | <a name="input_kp_integration_name"></a> [kp\_integration\_name](#input\_kp\_integration\_name) | The name of the Key Protect integration. | `string` | `"kp-compliance-secrets"` | no |
 | <a name="input_kp_location"></a> [kp\_location](#input\_kp\_location) | The region hosting the Key Protect instance. This applies to the CI, CD and CC Key Protect integrations. See `ci_kp_location`, `cd_kp_location`, and `cc_kp_location` to set these values . | `string` | `"us-south"` | no |
 | <a name="input_kp_name"></a> [kp\_name](#input\_kp\_name) | Name of the Key Protect instance where the secrets are stored. This applies to the CI, CD and CC Key Protect integrations. See `ci_kp_name`, `cd_kp_name`, and `cc_kp_name` to set these values independently. | `string` | `"kp-compliance-secrets"` | no |
@@ -596,6 +601,7 @@ statement instead the previous block.
 | <a name="input_sample_default_application"></a> [sample\_default\_application](#input\_sample\_default\_application) | The name of the sample application repository. The repository source URL is automatically computed based on the toolchain region. The other currently supported name is `code-engine-compliance-app`. Alternatively an integration can be created that can link to or clone from an existing repository. See `app_repo_existing_url` and `app_repo_clone_from_url` to override the sample application default behavior. | `string` | `"hello-compliance-app"` | no |
 | <a name="input_scc_attachment_id"></a> [scc\_attachment\_id](#input\_scc\_attachment\_id) | An attachment ID. An attachment is configured under a profile to define how a scan will be run. To find the attachment ID, in the browser, in the attachments list, click on the attachment link, and a panel appears with a button to copy the attachment ID. This parameter is only relevant when the `scc_use_profile_attachment` parameter is enabled. | `string` | `""` | no |
 | <a name="input_scc_enable_scc"></a> [scc\_enable\_scc](#input\_scc\_enable\_scc) | Adds the SCC tool integration to the toolchain. | `string` | `"true"` | no |
+| <a name="input_scc_evidence_locker_type"></a> [scc\_evidence\_locker\_type](#input\_scc\_evidence\_locker\_type) | Allowable values are `evidence-repo` and `evidence-bucket`. If left unset, the SCC tool will behave as if `evidence-repo` has been set and will use the evidence repository configured in the toolchain. If the COS tool has been enabled, then the bucket name in `cos_bucket_name` will be provided to the SCC tool and `evidence-bucket` will be set. To override this behavior, explicitly set `scc_evidence_locker_type`. | `string` | `""` | no |
 | <a name="input_scc_instance_crn"></a> [scc\_instance\_crn](#input\_scc\_instance\_crn) | The Security and Compliance Center service instance CRN (Cloud Resource Name). This parameter is only relevant when the `scc_use_profile_attachment` parameter is enabled. | `string` | `""` | no |
 | <a name="input_scc_profile_name"></a> [scc\_profile\_name](#input\_scc\_profile\_name) | The name of a Security and Compliance Center profile. Use the `IBM Cloud Framework for Financial Services` profile, which contains the DevSecOps Toolchain rules. Or use a user-authored customized profile that has been configured to contain those rules. This parameter is only relevant when the `scc_use_profile_attachment` parameter is enabled. | `string` | `""` | no |
 | <a name="input_scc_profile_version"></a> [scc\_profile\_version](#input\_scc\_profile\_version) | The version of a Security and Compliance Center profile, in SemVer format, like `0.0.0`. This parameter is only relevant when the `scc_use_profile_attachment` parameter is enabled. | `string` | `""` | no |
@@ -631,6 +637,7 @@ statement instead the previous block.
 | <a name="input_toolchain_region"></a> [toolchain\_region](#input\_toolchain\_region) | The region identifier that will be used, by default, for all resource creation and service instance lookup. | `string` | `"us-south"` | no |
 | <a name="input_toolchain_resource_group"></a> [toolchain\_resource\_group](#input\_toolchain\_resource\_group) | The resource group that will be used, by default, for all resource creation and service instance lookups. This can be overridden on a per resource/service basis. | `string` | `"Default"` | no |
 | <a name="input_use_app_repo_for_cd_deploy"></a> [use\_app\_repo\_for\_cd\_deploy](#input\_use\_app\_repo\_for\_cd\_deploy) | Set to `true` to use the CI sample application repository as the deployment repository in the CD pipeline. This will be set in the pipeline config integration. | `bool` | `false` | no |
+| <a name="input_use_legacy_cos_tool"></a> [use\_legacy\_cos\_tool](#input\_use\_legacy\_cos\_tool) | The custom tool integration is being replaced with the new COS tool integration. To continue using the legacy tool. Set the value to `true`. See `enable_cos` | `bool` | `false` | no |
 | <a name="input_use_legacy_ref"></a> [use\_legacy\_ref](#input\_use\_legacy\_ref) | Set to `true` to use the legacy secret reference format for Secrets Manager secrets. | `bool` | `true` | no |
 | <a name="input_worker_id"></a> [worker\_id](#input\_worker\_id) | The identifier for the pipeline worker. Applies to the CI, CD and CC pipelines. | `string` | `"public"` | no |
 
