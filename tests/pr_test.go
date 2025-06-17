@@ -20,11 +20,6 @@ func TestRunDefaultExample(t *testing.T) {
 	options := testhelper.TestOptionsDefault(&testhelper.TestOptions{
 		Testing:      t,
 		TerraformDir: defaultExampleTerraformDir,
-		IgnoreUpdates: testhelper.Exemptions{ // Ignore for consistency check
-			List: []string{
-				"module.terraform_devsecops_alm.module.devsecops_cc_toolchain[0].module.pipeline_cc.ibm_cd_tekton_pipeline_trigger.cc_pipeline_timed_trigger[0]",
-			},
-		},
 		TerraformVars: map[string]interface{}{
 			"enable_secrets_manager": false,
 			"enable_key_protect":     false,
@@ -42,11 +37,6 @@ func TestRunAppExample(t *testing.T) {
 	options := testhelper.TestOptionsDefault(&testhelper.TestOptions{
 		Testing:      t,
 		TerraformDir: appExampleDir,
-		IgnoreUpdates: testhelper.Exemptions{ // Ignore for consistency check
-			List: []string{
-				"module.terraform_devsecops_alm.module.devsecops_cc_toolchain[0].module.pipeline_cc.ibm_cd_tekton_pipeline_trigger.cc_pipeline_timed_trigger[0]",
-			},
-		},
 	})
 
 	output, err := options.RunTestConsistency()
@@ -60,11 +50,6 @@ func TestRunKPExample(t *testing.T) {
 	options := testhelper.TestOptionsDefault(&testhelper.TestOptions{
 		Testing:      t,
 		TerraformDir: kpExampleDir,
-		IgnoreUpdates: testhelper.Exemptions{ // Ignore for consistency check
-			List: []string{
-				"module.terraform_devsecops_alm.module.devsecops_cc_toolchain[0].module.pipeline_cc.ibm_cd_tekton_pipeline_trigger.cc_pipeline_timed_trigger[0]",
-			},
-		},
 	})
 
 	output, err := options.RunTestConsistency()
@@ -81,14 +66,11 @@ func TestRunUpgradeExample(t *testing.T) {
 	options := testhelper.TestOptionsDefault(&testhelper.TestOptions{
 		Testing:      t,
 		TerraformDir: defaultExampleTerraformDir,
-		IgnoreUpdates: testhelper.Exemptions{ // Ignore for consistency check
+		IgnoreDestroys: testhelper.Exemptions{ // Terraform resource custom cos tool being replaced by dedicated cos tool integration. Can remove in subsequent release
 			List: []string{
-				"module.terraform_devsecops_alm.module.devsecops_cc_toolchain[0].module.pipeline_cc.ibm_cd_tekton_pipeline_trigger.cc_pipeline_timed_trigger[0]",
-			},
-		},
-		IgnoreDestroys: testhelper.Exemptions{ // Terraform resource created but unused. Needs to be destroyed. Can remove exemption in subsequent release.
-			List: []string{
-				"module.terraform_devsecops_alm.random_string.webhook_secret[0]",
+				"module.terraform_devsecops_alm.module.devsecops_ci_toolchain[0].module.integrations.ibm_cd_toolchain_tool_custom.cos_integration[0]",
+				"module.terraform_devsecops_alm.module.devsecops_cd_toolchain[0].module.integrations.ibm_cd_toolchain_tool_custom.cos_integration[0]",
+				"module.terraform_devsecops_alm.module.devsecops_cc_toolchain[0].module.integrations.ibm_cd_toolchain_tool_custom.cos_integration[0]",
 			},
 		},
 	})
