@@ -335,6 +335,12 @@ variable "create_triggers" {
   default     = "true"
 }
 
+variable "enable_cos" {
+  type        = bool
+  description = "Set to `true` to enable the new COS integration."
+  default     = false
+}
+
 variable "enable_pipeline_notifications" {
   type        = string
   description = "When enabled, pipeline run events will be sent to the Event Notifications and Slack integrations in the enclosing toolchain."
@@ -452,6 +458,12 @@ variable "evidence_repo_secret_group" {
   default     = ""
 }
 
+variable "evidence_repo_source_url" {
+  type        = string
+  default     = ""
+  description = "URL of evidence repo template to be cloned."
+}
+
 variable "force_create_standard_api_key" {
   type        = bool
   description = "Set to `true` to force create a standard api key. By default the generated apikey will be a service api key. It is recommended to use a Git Token when using the service api key. In the case where the user has been invited to an account and that user not the account owner, during toolchain creation the default compliance repositories will be created in that user's account and the service api will not have access to those repositories. In this case a Git Token for the repositories is required. See `repo_git_token_secret_name` for more details. The alternative is to set `force_create_standard_api_key` to `true` to create a standard api key."
@@ -539,6 +551,12 @@ variable "inventory_repo_secret_group" {
   default     = ""
 }
 
+variable "inventory_repo_source_url" {
+  type        = string
+  default     = ""
+  description = "URL of inventory repo template to be cloned."
+}
+
 variable "issues_group" {
   type        = string
   description = "Specify the Git user or group for the issues repository."
@@ -606,6 +624,12 @@ variable "issues_repo_secret_group" {
   type        = string
   description = "Secret group for the Issues repository secret. Defaults to the value set in `sm_secret_group` if not set. Only used with `Secrets Manager`."
   default     = ""
+}
+
+variable "issues_repo_source_url" {
+  type        = string
+  default     = ""
+  description = "URL of issue repo template to be cloned."
 }
 
 variable "pipeline_config_repo_auth_type" {
@@ -898,6 +922,16 @@ variable "scc_enable_scc" {
   type        = string
   description = "Adds the SCC tool integration to the toolchain."
   default     = "true"
+}
+
+variable "scc_evidence_locker_type" {
+  type        = string
+  description = "Allowable values are `evidence-repo` and `evidence-bucket`. If left unset, the SCC tool will behave as if `evidence-repo` has been set and will use the evidence repository configured in the toolchain. If the COS tool has been enabled, then the bucket name in `cos_bucket_name` will be provided to the SCC tool and `evidence-bucket` will be set. To override this behavior, explicitly set `scc_evidence_locker_type`."
+  default     = ""
+  validation {
+    condition     = contains(["", "evidence-repo", "evidence-bucket"], var.scc_evidence_locker_type)
+    error_message = "Must be either \"evidence-repo\" or \"evidence-bucket\" or left unset."
+  }
 }
 
 variable "scc_instance_crn" {
@@ -1381,6 +1415,12 @@ variable "cd_doi_toolchain_id" {
   default     = ""
 }
 
+variable "cd_enable_change_management_repo" {
+  type        = string
+  description = "Set to `true` to enable the Change Management Repo integration."
+  default     = true
+}
+
 variable "continuous_delivery_service_name" {
   type        = string
   description = "The name of the CD instance."
@@ -1734,6 +1774,12 @@ variable "create_access_group" {
 }
 
 #############################################
+variable "use_legacy_cos_tool" {
+  type        = bool
+  description = "The custom tool integration is being replaced with the new COS tool integration. To continue using the legacy tool. Set the value to `true`. See `enable_cos`"
+  default     = false
+}
+
 variable "use_legacy_ref" {
   type        = bool
   description = "Set to `true` to use the legacy secret reference format for Secrets Manager secrets."
