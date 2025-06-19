@@ -881,6 +881,13 @@
                             "required": false
                         },
                         {
+                            "key": "cd_enable_change_management_repo",
+                            "type": "boolean",
+                            "default_value":true,
+                            "description": "Set to `true` to enable the Change Management Repo integration.",
+                            "required": false
+                        },
+                        {
                             "key": "continuous_delivery_service_name",
                             "type": "string",
                             "default_value": "cd-devsecops",
@@ -1407,6 +1414,13 @@
                             "required": false
                         },
                         {
+                            "key": "enable_cos",
+                            "type": "string",
+                            "default_value": "",
+                            "description": "Set to `true` to enable the new COS integration.",
+                            "required": false
+                        },
+                        {
                             "key": "enable_pipeline_notifications",
                             "type": "string",
                             "default_value": "",
@@ -1525,6 +1539,13 @@
                             "required": false
                         },
                         {
+                            "key": "evidence_repo_source_url",
+                            "type": "string",
+                            "default_value": "",
+                            "description": "URL of evidence repo template to be cloned.",
+                            "required": false
+                        },
+                        {
                             "key": "force_create_standard_api_key",
                             "type": "boolean",
                             "default_value": false,
@@ -1601,6 +1622,13 @@
                             "required": false
                         },
                         {
+                            "key": "inventory_repo_source_url",
+                            "type": "string",
+                            "default_value": "",
+                            "description": "URL of inventory repo template to be cloned.",
+                            "required": false
+                        },
+                        {
                             "key": "issues_group",
                             "type": "string",
                             "default_value": "",
@@ -1660,6 +1688,13 @@
                             "type": "string",
                             "default_value": "",
                             "description": "Secret group for the Issues repository secret. Defaults to the value set in `sm_secret_group` if not set. Only used with `Secrets Manager`.",
+                            "required": false
+                        },
+                        {
+                            "key": "issues_repo_source_url",
+                            "type": "string",
+                            "default_value": "",
+                            "description": "URL of issue repo template to be cloned.",
                             "required": false
                         },
                         {
@@ -1888,6 +1923,13 @@
                             "required": false
                         },
                         {
+                            "key": "scc_evidence_locker_type",
+                            "type": "string",
+                            "default_value": "",
+                            "description": "Allowable values are `evidence-repo` and `evidence-bucket`. If left unset, the SCC tool will behave as if `evidence-repo` has been set and will use the evidence repository configured in the toolchain. If the COS tool has been enabled, then the bucket name in `cos_bucket_name` will be provided to the SCC tool and `evidence-bucket` will be set. To override this behavior, explicitly set `scc_evidence_locker_type`.",
+                            "required": false
+                        },
+                        {
                             "key": "scc_instance_crn",
                             "type": "string",
                             "default_value": "",
@@ -2064,6 +2106,13 @@
                             "type": "boolean",
                             "default_value": true,
                             "description": "Set to `true` to use the CI sample application repository as the deployment repository in the CD pipeline. This will be set in the pipeline config integration.",
+                            "required": false
+                        },
+                        {
+                            "key": "use_legacy_cos_tool",
+                            "type": "boolean",
+                            "default_value": true,
+                            "description": "The custom tool integration is being replaced with the new COS tool integration. To continue using the legacy tool. Set the value to `true`. See `enable_cos`",
                             "required": false
                         },
                         {
@@ -3029,6 +3078,13 @@
                             "required": false
                         },
                         {
+                            "key": "cd_enable_change_management_repo",
+                            "type": "boolean",
+                            "default_value":true,
+                            "description": "Set to `true` to enable the Change Management Repo integration.",
+                            "required": false
+                        },
+                        {
                             "key": "continuous_delivery_service_name",
                             "type": "string",
                             "default_value": "cd-devsecops",
@@ -3555,6 +3611,13 @@
                             "required": false
                         },
                         {
+                            "key": "enable_cos",
+                            "type": "string",
+                            "default_value": "",
+                            "description": "Set to `true` to enable the new COS integration.",
+                            "required": false
+                        },
+                        {
                             "key": "enable_pipeline_notifications",
                             "type": "string",
                             "default_value": "",
@@ -3673,6 +3736,13 @@
                             "required": false
                         },
                         {
+                            "key": "evidence_repo_source_url",
+                            "type": "string",
+                            "default_value": "",
+                            "description": "URL of evidence repo template to be cloned.",
+                            "required": false
+                        },
+                        {
                             "key": "force_create_standard_api_key",
                             "type": "boolean",
                             "default_value": false,
@@ -3749,6 +3819,13 @@
                             "required": false
                         },
                         {
+                            "key": "inventory_repo_source_url",
+                            "type": "string",
+                            "default_value": "",
+                            "description": "URL of inventory repo template to be cloned.",
+                            "required": false
+                        },
+                        {
                             "key": "issues_group",
                             "type": "string",
                             "default_value": "",
@@ -3808,6 +3885,13 @@
                             "type": "string",
                             "default_value": "",
                             "description": "Secret group for the Issues repository secret. Defaults to the value set in `sm_secret_group` if not set. Only used with `Secrets Manager`.",
+                            "required": false
+                        },
+                        {
+                            "key": "issues_repo_source_url",
+                            "type": "string",
+                            "default_value": "",
+                            "description": "URL of issue repo template to be cloned.",
                             "required": false
                         },
                         {
@@ -4036,6 +4120,13 @@
                             "required": false
                         },
                         {
+                            "key": "scc_evidence_locker_type",
+                            "type": "string",
+                            "default_value": "",
+                            "description": "Allowable values are `evidence-repo` and `evidence-bucket`. If left unset, the SCC tool will behave as if `evidence-repo` has been set and will use the evidence repository configured in the toolchain. If the COS tool has been enabled, then the bucket name in `cos_bucket_name` will be provided to the SCC tool and `evidence-bucket` will be set. To override this behavior, explicitly set `scc_evidence_locker_type`.",
+                            "required": false
+                        },
+                        {
                             "key": "scc_instance_crn",
                             "type": "string",
                             "default_value": "",
@@ -4212,6 +4303,13 @@
                             "type": "boolean",
                             "default_value": false,
                             "description": "Set to `true` to use the CI sample application repository as the deployment repository in the CD pipeline. This will be set in the pipeline config integration.",
+                            "required": false
+                        },
+                        {
+                            "key": "use_legacy_cos_tool",
+                            "type": "boolean",
+                            "default_value": true,
+                            "description": "The custom tool integration is being replaced with the new COS tool integration. To continue using the legacy tool. Set the value to `true`. See `enable_cos`",
                             "required": false
                         },
                         {

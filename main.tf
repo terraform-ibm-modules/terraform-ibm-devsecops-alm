@@ -332,7 +332,7 @@ module "prereqs" {
 module "devsecops_ci_toolchain" {
   count                    = var.create_ci_toolchain ? 1 : 0
   depends_on               = [ibm_resource_instance.cd_instance]
-  source                   = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-ci-toolchain?ref=v2.5.0"
+  source                   = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-ci-toolchain?ref=v2.6.0"
   ibmcloud_api_key         = var.ibmcloud_api_key
   toolchain_name           = (var.prefix == "") ? local.ci_toolchain_name : format("${var.prefix}-%s", local.ci_toolchain_name)
   toolchain_region         = (var.ci_toolchain_region == "") ? var.toolchain_region : replace(replace(var.ci_toolchain_region, "ibm:yp:", ""), "ibm:ys1:", "")
@@ -357,6 +357,7 @@ module "devsecops_ci_toolchain" {
   kp_resource_group        = (var.ci_kp_resource_group != "") ? var.ci_kp_resource_group : (var.kp_resource_group != "") ? var.kp_resource_group : var.toolchain_resource_group
   sm_instance_crn          = (var.ci_sm_instance_crn != "") ? var.ci_sm_instance_crn : var.sm_instance_crn
   add_pipeline_definitions = var.add_pipeline_definitions
+  use_legacy_cos_tool      = var.use_legacy_cos_tool
   use_legacy_ref           = var.use_legacy_ref
 
   #SECRET NAMES
@@ -441,7 +442,7 @@ module "devsecops_ci_toolchain" {
   #APP REPO
   app_repo_clone_from_url        = (local.ci_app_repo_clone_from_url == "") ? local.app_source_repo_url : local.ci_app_repo_clone_from_url
   app_repo_branch                = local.ci_app_repo_branch
-  app_repo_existing_url          = local.ci_app_repo_existing_url
+  app_repo_existing_url          = (local.ci_app_repo_existing_url == "__NOTSET__") ? "" : local.ci_app_repo_existing_url
   app_repo_existing_git_provider = local.ci_app_repo_existing_git_provider
   app_repo_existing_git_id       = local.ci_app_repo_existing_git_id
   app_repo_clone_to_git_provider = local.ci_app_repo_clone_to_git_provider
@@ -475,6 +476,7 @@ module "devsecops_ci_toolchain" {
   #EVIDENCE REPO
   evidence_repo_name              = var.evidence_repo_name
   evidence_repo_existing_url      = var.evidence_repo_existing_url
+  evidence_source_repo_url        = var.evidence_repo_source_url
   evidence_repo_git_provider      = local.evidence_repo_existing_git_provider
   evidence_repo_git_id            = (var.evidence_repo_existing_git_id == "") ? local.repo_git_id : var.evidence_repo_existing_git_id
   evidence_repo_integration_owner = var.evidence_repo_integration_owner
@@ -485,6 +487,7 @@ module "devsecops_ci_toolchain" {
   #ISSUES REPO
   issues_repo_name              = var.issues_repo_name
   issues_repo_existing_url      = var.issues_repo_existing_url
+  issues_source_repo_url        = var.issues_repo_source_url
   issues_repo_git_provider      = local.issues_repo_existing_git_provider
   issues_repo_git_id            = (var.issues_repo_existing_git_id == "") ? local.repo_git_id : var.issues_repo_existing_git_id
   issues_repo_integration_owner = var.issues_repo_integration_owner
@@ -495,6 +498,7 @@ module "devsecops_ci_toolchain" {
   #INVENTORY REPO
   inventory_repo_name              = var.inventory_repo_name
   inventory_repo_existing_url      = var.inventory_repo_existing_url
+  inventory_source_repo_url        = var.inventory_repo_source_url
   inventory_repo_git_provider      = local.inventory_repo_existing_git_provider
   inventory_repo_git_id            = (var.inventory_repo_existing_git_id == "") ? local.repo_git_id : var.inventory_repo_existing_git_id
   inventory_repo_integration_owner = var.inventory_repo_integration_owner
@@ -553,8 +557,10 @@ module "devsecops_ci_toolchain" {
   sonarqube_server_url          = (var.ci_sonarqube_server_url == "") ? var.sonarqube_server_url : var.ci_sonarqube_server_url
 
   #COS INTEGRATION
-  cos_endpoint    = (var.ci_cos_endpoint == "") ? var.cos_endpoint : var.ci_cos_endpoint
-  cos_bucket_name = (var.ci_cos_bucket_name == "") ? var.cos_bucket_name : var.ci_cos_bucket_name
+  enable_cos       = var.enable_cos
+  cos_instance_crn = var.cos_instance_crn
+  cos_endpoint     = (var.ci_cos_endpoint == "") ? var.cos_endpoint : var.ci_cos_endpoint
+  cos_bucket_name  = (var.ci_cos_bucket_name == "") ? var.cos_bucket_name : var.ci_cos_bucket_name
 
   #EVENT NOTIFICATIONS
   event_notifications_crn       = (var.ci_event_notifications_crn == "") ? var.event_notifications_crn : var.ci_event_notifications_crn
@@ -589,7 +595,7 @@ module "devsecops_ci_toolchain" {
 module "devsecops_cd_toolchain" {
   count            = var.create_cd_toolchain ? 1 : 0
   depends_on       = [ibm_resource_instance.cd_instance]
-  source           = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain?ref=v2.4.0"
+  source           = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain?ref=v2.5.0"
   ibmcloud_api_key = var.ibmcloud_api_key
 
   toolchain_name           = (var.prefix == "") ? local.cd_toolchain_name : format("${var.prefix}-%s", local.cd_toolchain_name)
@@ -612,6 +618,7 @@ module "devsecops_cd_toolchain" {
   kp_resource_group        = (var.cd_kp_resource_group != "") ? var.cd_kp_resource_group : (var.kp_resource_group != "") ? var.kp_resource_group : var.toolchain_resource_group
   sm_instance_crn          = (var.cd_sm_instance_crn != "") ? var.cd_sm_instance_crn : var.sm_instance_crn
   add_pipeline_definitions = var.add_pipeline_definitions
+  use_legacy_cos_tool      = var.use_legacy_cos_tool
   use_legacy_ref           = var.use_legacy_ref
 
   #SECRET NAMES AND SECRET GROUPS
@@ -757,7 +764,7 @@ module "devsecops_cd_toolchain" {
   inventory_repo_title             = local.repo_title
 
   #CHANGE MANAGEMENT REPO
-  enable_change_management_repo           = true
+  enable_change_management_repo           = var.cd_enable_change_management_repo
   change_repo_clone_from_url              = var.cd_change_repo_clone_from_url
   change_management_repo_blind_connection = local.repo_blind_connection
   change_management_repo_root_url         = local.repo_root_url
@@ -805,6 +812,7 @@ module "devsecops_cd_toolchain" {
   scc_profile_name              = var.scc_profile_name
   scc_profile_version           = var.scc_profile_version
   scc_use_profile_attachment    = (var.cd_scc_use_profile_attachment == "") ? var.scc_use_profile_attachment : var.cd_scc_use_profile_attachment
+  scc_evidence_locker_type      = var.scc_evidence_locker_type
   enable_pipeline_notifications = (local.cd_enable_pipeline_notifications == "true") ? true : false
   pipeline_properties           = var.cd_pipeline_properties
   pipeline_properties_filepath  = var.cd_pipeline_properties_filepath
@@ -831,8 +839,10 @@ module "devsecops_cd_toolchain" {
   slack_toolchain_unbind = var.cd_slack_toolchain_unbind
 
   #COS INTEGRATION
-  cos_endpoint    = (var.cd_cos_endpoint == "") ? var.cos_endpoint : var.cd_cos_endpoint
-  cos_bucket_name = (var.cd_cos_bucket_name == "") ? var.cos_bucket_name : var.cd_cos_bucket_name
+  enable_cos       = var.enable_cos
+  cos_instance_crn = var.cos_instance_crn
+  cos_endpoint     = (var.cd_cos_endpoint == "") ? var.cos_endpoint : var.cd_cos_endpoint
+  cos_bucket_name  = (var.cd_cos_bucket_name == "") ? var.cos_bucket_name : var.cd_cos_bucket_name
 
   #EVENT NOTIFICATIONS
   event_notifications_crn       = (var.cd_event_notifications_crn == "") ? var.event_notifications_crn : var.cd_event_notifications_crn
@@ -867,7 +877,7 @@ module "devsecops_cd_toolchain" {
 
 module "devsecops_cc_toolchain" {
   count                         = var.create_cc_toolchain ? 1 : 0
-  source                        = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cc-toolchain?ref=v2.4.0"
+  source                        = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cc-toolchain?ref=v2.5.0"
   ibmcloud_api_key              = var.ibmcloud_api_key
   toolchain_name                = (var.prefix == "") ? local.cc_toolchain_name : format("${var.prefix}-%s", local.cc_toolchain_name)
   toolchain_description         = var.cc_toolchain_description
@@ -890,6 +900,7 @@ module "devsecops_cc_toolchain" {
   kp_resource_group        = (var.cc_kp_resource_group != "") ? var.cc_kp_resource_group : (var.kp_resource_group != "") ? var.kp_resource_group : var.toolchain_resource_group
   sm_instance_crn          = (var.cc_sm_instance_crn != "") ? var.cc_sm_instance_crn : var.sm_instance_crn
   add_pipeline_definitions = var.add_pipeline_definitions
+  use_legacy_cos_tool      = var.use_legacy_cos_tool
   use_legacy_ref           = var.use_legacy_ref
 
   #SECRET NAMES AND SECRET GROUPS
@@ -1050,6 +1061,7 @@ module "devsecops_cc_toolchain" {
   scc_profile_name               = var.scc_profile_name
   scc_profile_version            = var.scc_profile_version
   scc_use_profile_attachment     = (var.cc_scc_use_profile_attachment == "") ? var.scc_use_profile_attachment : var.cc_scc_use_profile_attachment
+  scc_evidence_locker_type       = var.scc_evidence_locker_type
   enable_pipeline_notifications  = (local.cc_enable_pipeline_notifications == "true") ? true : false
   pipeline_properties            = var.cc_pipeline_properties
   pipeline_properties_filepath   = var.cc_pipeline_properties_filepath
@@ -1069,8 +1081,10 @@ module "devsecops_cc_toolchain" {
 
 
   #COS INTEGRATION
-  cos_endpoint    = (var.cc_cos_endpoint == "") ? var.cos_endpoint : var.cc_cos_endpoint
-  cos_bucket_name = (var.cc_cos_bucket_name == "") ? var.cos_bucket_name : var.cc_cos_bucket_name
+  enable_cos       = var.enable_cos
+  cos_instance_crn = var.cos_instance_crn
+  cos_endpoint     = (var.cc_cos_endpoint == "") ? var.cos_endpoint : var.cc_cos_endpoint
+  cos_bucket_name  = (var.cc_cos_bucket_name == "") ? var.cos_bucket_name : var.cc_cos_bucket_name
 
   #EVENT NOTIFICATIONS
   event_notifications_crn       = (var.cc_event_notifications_crn == "") ? var.event_notifications_crn : var.cc_event_notifications_crn

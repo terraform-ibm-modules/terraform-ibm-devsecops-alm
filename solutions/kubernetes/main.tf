@@ -58,6 +58,7 @@ module "devsecops_da" {
   create_signing_key                              = var.create_signing_key
   create_triggers                                 = var.create_triggers
   create_git_triggers                             = var.create_git_triggers
+  enable_cos                                      = var.enable_cos
   enable_pipeline_notifications                   = var.enable_pipeline_notifications
   enable_privateworker                            = var.enable_privateworker
   enable_secrets_manager                          = var.enable_secrets_manager
@@ -76,6 +77,7 @@ module "devsecops_da" {
   evidence_repo_integration_owner                 = var.evidence_repo_integration_owner
   evidence_repo_name                              = var.evidence_repo_name
   evidence_repo_secret_group                      = var.evidence_repo_secret_group
+  evidence_repo_source_url                        = var.evidence_repo_source_url
   force_create_standard_api_key                   = var.force_create_standard_api_key
   ibmcloud_api                                    = var.ibmcloud_api
   ibmcloud_api_key                                = var.ibmcloud_api_key
@@ -89,6 +91,7 @@ module "devsecops_da" {
   inventory_repo_integration_owner                = var.inventory_repo_integration_owner
   inventory_repo_name                             = var.inventory_repo_name
   inventory_repo_secret_group                     = var.inventory_repo_secret_group
+  inventory_repo_source_url                       = var.inventory_repo_source_url
   issues_group                                    = var.issues_group
   issues_repo_auth_type                           = var.issues_repo_auth_type
   issues_repo_existing_git_id                     = var.issues_repo_existing_git_id
@@ -99,6 +102,7 @@ module "devsecops_da" {
   issues_repo_integration_owner                   = var.issues_repo_integration_owner
   issues_repo_name                                = var.issues_repo_name
   issues_repo_secret_group                        = var.issues_repo_secret_group
+  issues_repo_source_url                          = var.issues_repo_source_url
   pipeline_config_group                           = var.pipeline_config_group
   pipeline_config_repo_auth_type                  = var.pipeline_config_repo_auth_type
   pipeline_config_repo_branch                     = var.pipeline_config_repo_branch
@@ -140,6 +144,7 @@ module "devsecops_da" {
   rotate_signing_key                              = var.rotate_signing_key
   scc_attachment_id                               = var.scc_attachment_id
   scc_enable_scc                                  = var.scc_enable_scc
+  scc_evidence_locker_type                        = var.scc_evidence_locker_type
   scc_instance_crn                                = var.scc_instance_crn
   scc_profile_name                                = var.scc_profile_name
   scc_profile_version                             = var.scc_profile_version
@@ -194,6 +199,7 @@ module "devsecops_da" {
   cd_change_management_repo_git_token_secret_name = var.cd_change_management_repo_git_token_secret_name
   cd_change_management_repo_secret_group          = var.cd_change_management_repo_secret_group
   cd_change_repo_clone_from_url                   = var.cd_change_repo_clone_from_url
+  cd_enable_change_management_repo                = var.cd_enable_change_management_repo
   cd_cluster_name                                 = var.cd_cluster_name
   cd_cluster_namespace                            = var.cd_cluster_namespace
   cd_cluster_region                               = var.cd_cluster_region
@@ -266,5 +272,6 @@ module "devsecops_da" {
   ci_trigger_timed_enable                         = var.ci_trigger_timed_enable
   ci_trigger_timed_pruner_enable                  = var.ci_trigger_timed_pruner_enable
   pr_pipeline_git_tag                             = var.pr_pipeline_git_tag
+  use_legacy_cos_tool                             = var.use_legacy_cos_tool
   use_legacy_ref                                  = var.use_legacy_ref
 }
