@@ -66,13 +66,6 @@ func TestRunUpgradeExample(t *testing.T) {
 	options := testhelper.TestOptionsDefault(&testhelper.TestOptions{
 		Testing:      t,
 		TerraformDir: defaultExampleTerraformDir,
-		IgnoreDestroys: testhelper.Exemptions{ // Terraform resource custom cos tool being replaced by dedicated cos tool integration. Can remove in subsequent release
-			List: []string{
-				"module.terraform_devsecops_alm.module.devsecops_ci_toolchain[0].module.integrations.ibm_cd_toolchain_tool_custom.cos_integration[0]",
-				"module.terraform_devsecops_alm.module.devsecops_cd_toolchain[0].module.integrations.ibm_cd_toolchain_tool_custom.cos_integration[0]",
-				"module.terraform_devsecops_alm.module.devsecops_cc_toolchain[0].module.integrations.ibm_cd_toolchain_tool_custom.cos_integration[0]",
-			},
-		},
 	})
 
 	output, err := options.RunTestUpgrade()
