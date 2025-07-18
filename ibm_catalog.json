@@ -1418,8 +1418,8 @@
             },
             {
               "key": "enable_cos",
-              "type": "string",
-              "default_value": "",
+              "type": "boolean",
+              "default_value": false,
               "description": "Set to `true` to enable the new COS integration.",
               "required": false
             },
@@ -2114,14 +2114,14 @@
             {
               "key": "use_legacy_cos_tool",
               "type": "boolean",
-              "default_value": true,
+              "default_value": false,
               "description": "The custom tool integration is being replaced with the new COS tool integration. To continue using the legacy tool. Set the value to `true`. See `enable_cos`",
               "required": false
             },
             {
               "key": "use_legacy_ref",
               "type": "boolean",
-              "default_value": true,
+              "default_value": false,
               "description": "Set to `true` to use the legacy secret reference format for Secrets Manager secrets.",
               "required": false
             },
@@ -3614,8 +3614,8 @@
             },
             {
               "key": "enable_cos",
-              "type": "string",
-              "default_value": "",
+              "type": "boolean",
+              "default_value": false,
               "description": "Set to `true` to enable the new COS integration.",
               "required": false
             },
@@ -4310,14 +4310,14 @@
             {
               "key": "use_legacy_cos_tool",
               "type": "boolean",
-              "default_value": true,
+              "default_value": false,
               "description": "The custom tool integration is being replaced with the new COS tool integration. To continue using the legacy tool. Set the value to `true`. See `enable_cos`",
               "required": false
             },
             {
               "key": "use_legacy_ref",
               "type": "boolean",
-              "default_value": true,
+              "default_value": false,
               "description": "Set to `true` to use the legacy secret reference format for Secrets Manager secrets.",
               "required": false
             },
