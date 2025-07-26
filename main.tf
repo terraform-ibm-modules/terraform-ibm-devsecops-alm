@@ -595,7 +595,7 @@ module "devsecops_ci_toolchain" {
 module "devsecops_cd_toolchain" {
   count            = var.create_cd_toolchain ? 1 : 0
   depends_on       = [ibm_resource_instance.cd_instance]
-  source           = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain?ref=v2.5.0"
+  source           = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain?ref=v2.6.0"
   ibmcloud_api_key = var.ibmcloud_api_key
 
   toolchain_name           = (var.prefix == "") ? local.cd_toolchain_name : format("${var.prefix}-%s", local.cd_toolchain_name)
