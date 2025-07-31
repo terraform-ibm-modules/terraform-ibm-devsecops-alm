@@ -2235,7 +2235,8 @@
               "description": "The Secrets Manage Instance ID"
             }
           ],
-          "install_type": "fullstack"
+          "install_type": "fullstack",
+          "terraform_version": "1.10.5"
         },
         {
           "label": "Deploy to Kubernetes",
@@ -4431,7 +4432,8 @@
               "description": "The CI pipeline Id"
             }
           ],
-          "install_type": "fullstack"
+          "install_type": "fullstack",
+          "terraform_version": "1.10.5"
         }
       ]
     }
