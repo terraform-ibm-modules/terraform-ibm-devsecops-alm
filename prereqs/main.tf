@@ -76,7 +76,8 @@ data "ibm_iam_service_id" "cos_service_id" {
   name       = (var.prefix == "") ? var.service_name_cos : format("${var.prefix}-%s", var.service_name_cos)
 }
 
-resource "ibm_iam_service_policy" "cos_policy" {
+
+resource "ibm_iam_service_policy" "cos_bucket_policy" {
   count          = (local.create_cos_service_api_key) ? 1 : 0
   iam_service_id = ibm_iam_service_id.cos_service_id[0].id
   roles          = ["Reader", "Object Writer"]
@@ -98,6 +99,21 @@ resource "ibm_iam_service_policy" "cos_policy" {
   resource_attributes {
     name     = "resourceType"
     value    = "bucket"
+    operator = "stringEquals"
+  }
+}
+
+resource "ibm_iam_service_policy" "cos_policy" {
+  iam_service_id = ibm_iam_service_id.cos_service_id[0].id
+  roles          = ["Reader"]
+
+  resource_attributes {
+    name  = "serviceName"
+    value = "cloud-object-storage"
+  }
+  resource_attributes {
+    name     = "serviceInstance"
+    value    = local.cos_instance_id
     operator = "stringEquals"
   }
 }
