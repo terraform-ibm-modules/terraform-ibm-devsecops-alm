@@ -332,7 +332,7 @@ module "prereqs" {
 module "devsecops_ci_toolchain" {
   count                    = var.create_ci_toolchain ? 1 : 0
   depends_on               = [ibm_resource_instance.cd_instance]
-  source                   = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-ci-toolchain?ref=v2.7.0"
+  source                   = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-ci-toolchain?ref=v2.7.1"
   ibmcloud_api_key         = var.ibmcloud_api_key
   toolchain_name           = (var.prefix == "") ? local.ci_toolchain_name : format("${var.prefix}-%s", local.ci_toolchain_name)
   toolchain_region         = (var.ci_toolchain_region == "") ? var.toolchain_region : replace(replace(var.ci_toolchain_region, "ibm:yp:", ""), "ibm:ys1:", "")
@@ -460,6 +460,7 @@ module "devsecops_ci_toolchain" {
   compliance_pipeline_existing_repo_url      = var.compliance_pipeline_existing_repo_url
   compliance_pipeline_source_repo_url        = var.compliance_pipeline_source_repo_url
   compliance_pipelines_repo_name             = var.compliance_pipeline_repo_name
+  compliance_pipelines_repo_is_private_repo  = var.compliance_pipelines_repo_is_private_repo
 
   #PIPELINE CONFIG REPO
   pipeline_config_repo_existing_url   = local.ci_pipeline_config_repo_existing_url
@@ -720,6 +721,7 @@ module "devsecops_cd_toolchain" {
   compliance_pipeline_existing_repo_url      = var.compliance_pipeline_existing_repo_url
   compliance_pipeline_source_repo_url        = var.compliance_pipeline_source_repo_url
   compliance_pipelines_repo_name             = var.compliance_pipeline_repo_name
+  compliance_pipelines_repo_is_private_repo  = var.compliance_pipelines_repo_is_private_repo
 
   #PIPELINE CONFIG REPO
   pipeline_config_repo_existing_url   = local.cd_pipeline_config_repo_existing_url
@@ -996,6 +998,7 @@ module "devsecops_cc_toolchain" {
   compliance_pipeline_existing_repo_url      = var.compliance_pipeline_existing_repo_url
   compliance_pipeline_source_repo_url        = var.compliance_pipeline_source_repo_url
   compliance_pipelines_repo_name             = var.compliance_pipeline_repo_name
+  compliance_pipelines_repo_is_private_repo  = var.compliance_pipelines_repo_is_private_repo
 
   #PIPELINE CONFIG REPO
   pipeline_config_repo_existing_url   = local.cc_pipeline_config_repo_existing_url

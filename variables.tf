@@ -208,6 +208,12 @@ variable "compliance_pipeline_repo_git_token_secret_name" {
   default     = ""
 }
 
+variable "compliance_pipelines_repo_is_private_repo" {
+  type        = bool
+  description = "Set to `true` to make repository private."
+  default     = false
+}
+
 variable "compliance_pipeline_repo_secret_group" {
   type        = string
   description = "Secret group for the Compliance Pipeline repository secret. Defaults to the value set in `sm_secret_group` if not set. Only used with `Secrets Manager`."

@@ -57,7 +57,7 @@ statement instead the previous block.
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0.0 |
-| <a name="requirement_ibm"></a> [ibm](#requirement\_ibm) | =1.79.2 |
+| <a name="requirement_ibm"></a> [ibm](#requirement\_ibm) | =1.82.1 |
 
 ### Modules
 
@@ -199,6 +199,7 @@ No resources.
 | <a name="input_compliance_pipeline_repo_secret_group"></a> [compliance\_pipeline\_repo\_secret\_group](#input\_compliance\_pipeline\_repo\_secret\_group) | Secret group for the Compliance Pipeline repository secret. Defaults to the value set in `sm_secret_group` if not set. Only used with `Secrets Manager`. | `string` | `""` | no |
 | <a name="input_compliance_pipeline_repo_title"></a> [compliance\_pipeline\_repo\_title](#input\_compliance\_pipeline\_repo\_title) | (Optional) The title of the server. e.g. My Git Enterprise Server. | `string` | `""` | no |
 | <a name="input_compliance_pipeline_repo_use_group_settings"></a> [compliance\_pipeline\_repo\_use\_group\_settings](#input\_compliance\_pipeline\_repo\_use\_group\_settings) | Set to `true` to apply group level repository settings to the compliance pipeline repository. See `repo_git_provider` as an example. | `bool` | `true` | no |
+| <a name="input_compliance_pipelines_repo_is_private_repo"></a> [compliance\_pipelines\_repo\_is\_private\_repo](#input\_compliance\_pipelines\_repo\_is\_private\_repo) | Set to `true` to make repository private. | `bool` | `false` | no |
 | <a name="input_continuous_delivery_service_name"></a> [continuous\_delivery\_service\_name](#input\_continuous\_delivery\_service\_name) | The name of the CD instance. | `string` | `"cd-devsecops"` | no |
 | <a name="input_cos_api_key_secret_crn"></a> [cos\_api\_key\_secret\_crn](#input\_cos\_api\_key\_secret\_crn) | The CRN of the Cloud Object Storage apikey. Applies to the CI, CD and CC toolchains. Can beset independently using `ci_cos_api_key_secret_crn`,`cd_cos_api_key_secret_crn`,`cc_cos_api_key_secret_crn`. | `string` | `""` | no |
 | <a name="input_cos_api_key_secret_group"></a> [cos\_api\_key\_secret\_group](#input\_cos\_api\_key\_secret\_group) | Secret group for the COS api key secret. Defaults to the value set in `sm_secret_group` if not set. Only used with `Secrets Manager`. | `string` | `""` | no |

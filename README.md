@@ -57,7 +57,7 @@ statement instead the previous block.
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0.0 |
-| <a name="requirement_ibm"></a> [ibm](#requirement\_ibm) | =1.79.2 |
+| <a name="requirement_ibm"></a> [ibm](#requirement\_ibm) | >= 1.79.2, < 2.0.0 |
 | <a name="requirement_null"></a> [null](#requirement\_null) | = 3.2.2 |
 | <a name="requirement_random"></a> [random](#requirement\_random) | = 3.6.2 |
 
@@ -67,27 +67,27 @@ statement instead the previous block.
 |------|--------|---------|
 | <a name="module_devsecops_cc_toolchain"></a> [devsecops\_cc\_toolchain](#module\_devsecops\_cc\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cc-toolchain | v2.6.0 |
 | <a name="module_devsecops_cd_toolchain"></a> [devsecops\_cd\_toolchain](#module\_devsecops\_cd\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain | v2.6.0 |
-| <a name="module_devsecops_ci_toolchain"></a> [devsecops\_ci\_toolchain](#module\_devsecops\_ci\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-ci-toolchain | v2.7.0 |
+| <a name="module_devsecops_ci_toolchain"></a> [devsecops\_ci\_toolchain](#module\_devsecops\_ci\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-ci-toolchain | v2.7.1 |
 | <a name="module_prereqs"></a> [prereqs](#module\_prereqs) | ./prereqs | n/a |
 
 ### Resources
 
 | Name | Type |
 |------|------|
-| [ibm_cd_tekton_pipeline_property.cc_pipeline_ibmcloud_api](https://registry.terraform.io/providers/IBM-Cloud/ibm/1.79.2/docs/resources/cd_tekton_pipeline_property) | resource |
-| [ibm_cd_tekton_pipeline_property.cd_pipeline_ibmcloud_api](https://registry.terraform.io/providers/IBM-Cloud/ibm/1.79.2/docs/resources/cd_tekton_pipeline_property) | resource |
-| [ibm_cd_tekton_pipeline_property.ci_pipeline_ibmcloud_api](https://registry.terraform.io/providers/IBM-Cloud/ibm/1.79.2/docs/resources/cd_tekton_pipeline_property) | resource |
-| [ibm_cd_tekton_pipeline_property.pr_pipeline_ibmcloud_api](https://registry.terraform.io/providers/IBM-Cloud/ibm/1.79.2/docs/resources/cd_tekton_pipeline_property) | resource |
-| [ibm_cd_tekton_pipeline_trigger.ci_pipeline_webhook](https://registry.terraform.io/providers/IBM-Cloud/ibm/1.79.2/docs/resources/cd_tekton_pipeline_trigger) | resource |
-| [ibm_cd_tekton_pipeline_trigger_property.ci_pipeline_webhook_branch_property](https://registry.terraform.io/providers/IBM-Cloud/ibm/1.79.2/docs/resources/cd_tekton_pipeline_trigger_property) | resource |
-| [ibm_cd_tekton_pipeline_trigger_property.ci_pipeline_webhook_name_property](https://registry.terraform.io/providers/IBM-Cloud/ibm/1.79.2/docs/resources/cd_tekton_pipeline_trigger_property) | resource |
-| [ibm_cd_tekton_pipeline_trigger_property.ci_pipeline_webhook_repo_url_property](https://registry.terraform.io/providers/IBM-Cloud/ibm/1.79.2/docs/resources/cd_tekton_pipeline_trigger_property) | resource |
-| [ibm_cr_namespace.cr_namespace](https://registry.terraform.io/providers/IBM-Cloud/ibm/1.79.2/docs/resources/cr_namespace) | resource |
-| [ibm_resource_instance.cd_instance](https://registry.terraform.io/providers/IBM-Cloud/ibm/1.79.2/docs/resources/resource_instance) | resource |
+| [ibm_cd_tekton_pipeline_property.cc_pipeline_ibmcloud_api](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/resources/cd_tekton_pipeline_property) | resource |
+| [ibm_cd_tekton_pipeline_property.cd_pipeline_ibmcloud_api](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/resources/cd_tekton_pipeline_property) | resource |
+| [ibm_cd_tekton_pipeline_property.ci_pipeline_ibmcloud_api](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/resources/cd_tekton_pipeline_property) | resource |
+| [ibm_cd_tekton_pipeline_property.pr_pipeline_ibmcloud_api](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/resources/cd_tekton_pipeline_property) | resource |
+| [ibm_cd_tekton_pipeline_trigger.ci_pipeline_webhook](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/resources/cd_tekton_pipeline_trigger) | resource |
+| [ibm_cd_tekton_pipeline_trigger_property.ci_pipeline_webhook_branch_property](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/resources/cd_tekton_pipeline_trigger_property) | resource |
+| [ibm_cd_tekton_pipeline_trigger_property.ci_pipeline_webhook_name_property](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/resources/cd_tekton_pipeline_trigger_property) | resource |
+| [ibm_cd_tekton_pipeline_trigger_property.ci_pipeline_webhook_repo_url_property](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/resources/cd_tekton_pipeline_trigger_property) | resource |
+| [ibm_cr_namespace.cr_namespace](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/resources/cr_namespace) | resource |
+| [ibm_resource_instance.cd_instance](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/resources/resource_instance) | resource |
 | [null_resource.ci_pipeline_run](https://registry.terraform.io/providers/hashicorp/null/3.2.2/docs/resources/resource) | resource |
 | [random_string.resource_suffix](https://registry.terraform.io/providers/hashicorp/random/3.6.2/docs/resources/string) | resource |
 | [random_string.webhook_secret](https://registry.terraform.io/providers/hashicorp/random/3.6.2/docs/resources/string) | resource |
-| [ibm_resource_group.resource_group](https://registry.terraform.io/providers/IBM-Cloud/ibm/1.79.2/docs/data-sources/resource_group) | data source |
+| [ibm_resource_group.resource_group](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/data-sources/resource_group) | data source |
 
 ### Inputs
 
@@ -484,6 +484,7 @@ statement instead the previous block.
 | <a name="input_compliance_pipeline_repo_title"></a> [compliance\_pipeline\_repo\_title](#input\_compliance\_pipeline\_repo\_title) | (Optional) The title of the server. e.g. My Git Enterprise Server. | `string` | `""` | no |
 | <a name="input_compliance_pipeline_repo_use_group_settings"></a> [compliance\_pipeline\_repo\_use\_group\_settings](#input\_compliance\_pipeline\_repo\_use\_group\_settings) | Set to `true` to apply group level repository settings to the compliance pipeline repository. See `repo_git_provider` as an example. | `bool` | `false` | no |
 | <a name="input_compliance_pipeline_source_repo_url"></a> [compliance\_pipeline\_source\_repo\_url](#input\_compliance\_pipeline\_source\_repo\_url) | The URL of a compliance pipelines repository to clone. | `string` | `""` | no |
+| <a name="input_compliance_pipelines_repo_is_private_repo"></a> [compliance\_pipelines\_repo\_is\_private\_repo](#input\_compliance\_pipelines\_repo\_is\_private\_repo) | Set to `true` to make repository private. | `bool` | `false` | no |
 | <a name="input_continuous_delivery_service_name"></a> [continuous\_delivery\_service\_name](#input\_continuous\_delivery\_service\_name) | The name of the Continuous Delivery service instance. | `string` | `"cd-devsecops"` | no |
 | <a name="input_cos_api_key_secret_crn"></a> [cos\_api\_key\_secret\_crn](#input\_cos\_api\_key\_secret\_crn) | The CRN of the Cloud Object Storage apikey. Applies to the CI, CD and CC toolchains. Can beset independently using `ci_cos_api_key_secret_crn`,`cd_cos_api_key_secret_crn`,`cc_cos_api_key_secret_crn`. | `string` | `""` | no |
 | <a name="input_cos_api_key_secret_group"></a> [cos\_api\_key\_secret\_group](#input\_cos\_api\_key\_secret\_group) | Secret group for the COS api key secret. Defaults to the value set in `sm_secret_group` if not set. Only used with `Secrets Manager`. | `string` | `""` | no |

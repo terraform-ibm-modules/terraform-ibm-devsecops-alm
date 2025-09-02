@@ -524,6 +524,13 @@
               "required": false
             },
             {
+              "key": "compliance_pipelines_repo_is_private_repo",
+              "type": "boolean",
+              "default_value": false,
+              "description": "Set to `true` to make repository private.",
+              "required": false
+            },
+            {
               "key": "add_code_engine_prefix",
               "type": "boolean",
               "default_value": true,
@@ -2718,6 +2725,13 @@
               "type": "string",
               "default_value": "",
               "description": "Override to bring your own existing compliance pipelines repository URL, which is used directly instead of cloning the default change compliance pipelines repository.",
+              "required": false
+            },
+            {
+              "key": "compliance_pipelines_repo_is_private_repo",
+              "type": "boolean",
+              "default_value": false,
+              "description": "Set to `true` to make repository private.",
               "required": false
             },
             {
