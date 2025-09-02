@@ -12,7 +12,7 @@ locals {
   # updated_at  = "2024-07-05T22:05:57.000Z"
   # }
   # 2) Use index to find the index of the object containing the correct name
-  # 3) retrive that object from the list and get the ID from it
+  # 3) retrieve that object from the list and get the ID from it
   secret_group_list = (var.sm_exists) ? data.ibm_sm_secret_groups.secret_groups[0].secret_groups : []
   secret_group_id   = try(local.secret_group_list[index(local.secret_group_list[*].name, var.sm_secret_group_name)].id, "")
 
