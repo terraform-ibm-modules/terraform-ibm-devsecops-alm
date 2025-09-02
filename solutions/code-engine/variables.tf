@@ -131,7 +131,7 @@ variable "compliance_pipeline_existing_repo_url" {
 
 variable "compliance_pipeline_group" {
   type        = string
-  description = "Specify user or group for compliance pipline repository."
+  description = "Specify user or group for compliance pipeline repository."
   default     = ""
 }
 
@@ -204,6 +204,12 @@ variable "compliance_pipeline_repo_git_token_secret_name" {
   default     = ""
 }
 
+variable "compliance_pipelines_repo_is_private_repo" {
+  type        = bool
+  description = "Set to `true` to make repository private."
+  default     = false
+}
+
 variable "compliance_pipeline_repo_secret_group" {
   type        = string
   description = "Secret group for the Compliance Pipeline repository secret. Defaults to the value set in `sm_secret_group` if not set. Only used with `Secrets Manager`."
@@ -248,7 +254,7 @@ variable "cos_bucket_name" {
 
 variable "cos_endpoint" {
   type        = string
-  description = "The endpoint for the Cloud Object Stroage instance containing the evidence bucket. This setting sets the same endpoint for COS in the CI, CD, and CC toolchains. See `ci_cos_endpoint`, `cd_cos_endpoint`, and `cc_cos_endpoint` to set the endpoints independently."
+  description = "The endpoint for the Cloud Object Storage instance containing the evidence bucket. This setting sets the same endpoint for COS in the CI, CD, and CC toolchains. See `ci_cos_endpoint`, `cd_cos_endpoint`, and `cc_cos_endpoint` to set the endpoints independently."
   default     = ""
 }
 
@@ -386,7 +392,7 @@ variable "environment_tag" {
 
 variable "event_notifications_crn" {
   type        = string
-  description = "Set the Event Notifications CRN to create an Events Notification integration. This paramater will apply to the CI, CD and CC toolchains. Can be set independently with `ci_event_notifications_crn`, `cd_event_notifications_crn`, `cc_event_notifications_crn`."
+  description = "Set the Event Notifications CRN to create an Events Notification integration. This parameter will apply to the CI, CD and CC toolchains. Can be set independently with `ci_event_notifications_crn`, `cd_event_notifications_crn`, `cc_event_notifications_crn`."
   default     = ""
 }
 
@@ -526,7 +532,7 @@ variable "inventory_repo_existing_url" {
 variable "inventory_repo_git_token_secret_crn" {
   type        = string
   sensitive   = true
-  description = "The CRN of the Git token used for acessing the Inventory repository."
+  description = "The CRN of the Git token used for accessing the Inventory repository."
   default     = ""
   validation {
     condition     = startswith(var.inventory_repo_git_token_secret_crn, "crn:") || var.inventory_repo_git_token_secret_crn == ""
@@ -877,7 +883,7 @@ variable "repo_group" {
 
 variable "repo_secret_group" {
   type        = string
-  description = "Secret group in Secrets Manager that contains the secret for the repository. This variable will set the same secret group for all the repositories. Can be overriden on a per secret group basis. Only applies when using Secrets Manager."
+  description = "Secret group in Secrets Manager that contains the secret for the repository. This variable will set the same secret group for all the repositories. Can be overridden on a per secret group basis. Only applies when using Secrets Manager."
   default     = ""
 }
 
@@ -1037,7 +1043,7 @@ variable "sm_endpoint_type" {
 
 variable "sm_instance_crn" {
   type        = string
-  description = "The CRN of the Secrets Manager instance. Will apply to CI, CD and CC toolchains unless set individually. Setting up the Secrets Manager integration using a CRN takes precendence over the non CRN setup."
+  description = "The CRN of the Secrets Manager instance. Will apply to CI, CD and CC toolchains unless set individually. Setting up the Secrets Manager integration using a CRN takes precedence over the non CRN setup."
   default     = ""
 }
 
@@ -1172,7 +1178,7 @@ variable "cc_pipeline_config_repo_branch" {
 
 variable "cc_pipeline_properties" {
   type        = string
-  description = "This JSON represents the pipeline properties belonging to the CC pipeline in the CC toolchain. Each element in the JSON represents a seperate pipeline property. Three attributes are required to create a property. These are the `name` field (how the name appears in the pipeline properties), the `type` (text, secure and enum) and then the `value`. Do not put secrets directly into JSON for the `secure` type, instead the value for a `secret` type should be a CRN to a secret in the configured secrets provider or a secret reference to a secret in the configured secrets provider."
+  description = "This JSON represents the pipeline properties belonging to the CC pipeline in the CC toolchain. Each element in the JSON represents a separate pipeline property. Three attributes are required to create a property. These are the `name` field (how the name appears in the pipeline properties), the `type` (text, secure and enum) and then the `value`. Do not put secrets directly into JSON for the `secure` type, instead the value for a `secret` type should be a CRN to a secret in the configured secrets provider or a secret reference to a secret in the configured secrets provider."
   default     = ""
 }
 
@@ -1448,7 +1454,7 @@ variable "cd_pipeline_config_repo_branch" {
 
 variable "cd_pipeline_properties" {
   type        = string
-  description = "This JSON represents the pipeline properties belonging to the CD pipeline in the CD toolchain. Each element in the JSON represents a seperate pipeline property. Three attributes are required to create a property. These are the `name` field (how the name appears in the pipeline properties), the `type` (text, secure and enum) and then the `value`. Do not put secrets directly into JSON for the `secure` type, instead the value for a `secret` type should be a CRN to a secret in the configured secrets provider or a secret reference to a secret in the configured secrets provider."
+  description = "This JSON represents the pipeline properties belonging to the CD pipeline in the CD toolchain. Each element in the JSON represents a separate pipeline property. Three attributes are required to create a property. These are the `name` field (how the name appears in the pipeline properties), the `type` (text, secure and enum) and then the `value`. Do not put secrets directly into JSON for the `secure` type, instead the value for a `secret` type should be a CRN to a secret in the configured secrets provider or a secret reference to a secret in the configured secrets provider."
   default     = ""
 }
 
@@ -1649,7 +1655,7 @@ variable "ci_pipeline_config_repo_branch" {
 
 variable "ci_pipeline_properties" {
   type        = string
-  description = "This JSON represents the pipeline properties belonging to the both the CI and PR pipelines in the CI toolchain. Each element in the JSON represents a seperate pipeline property. Three attributes are required to create a property. These are the `name` field (how the name appears in the pipeline properties), the `type` (text, secure and enum) and then the `value`. Do not put secrets directly into JSON for the `secure` type, instead the value for a `secret` type should be a CRN to a secret in the configured secrets provider or a secret reference to a secret in the configured secrets provider."
+  description = "This JSON represents the pipeline properties belonging to the both the CI and PR pipelines in the CI toolchain. Each element in the JSON represents a separate pipeline property. Three attributes are required to create a property. These are the `name` field (how the name appears in the pipeline properties), the `type` (text, secure and enum) and then the `value`. Do not put secrets directly into JSON for the `secure` type, instead the value for a `secret` type should be a CRN to a secret in the configured secrets provider or a secret reference to a secret in the configured secrets provider."
   default     = ""
 }
 

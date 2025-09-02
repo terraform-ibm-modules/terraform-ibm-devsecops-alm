@@ -36,6 +36,7 @@ module "devsecops_da" {
   compliance_pipeline_repo_use_group_settings     = var.compliance_pipeline_repo_use_group_settings
   compliance_pipeline_repo_secret_group           = var.compliance_pipeline_repo_secret_group
   compliance_pipeline_repo_title                  = var.compliance_pipeline_repo_title
+  compliance_pipelines_repo_is_private_repo       = var.compliance_pipelines_repo_is_private_repo
   cos_api_key_secret_crn                          = var.cos_api_key_secret_crn
   cos_api_key_secret_group                        = var.cos_api_key_secret_group
   cos_api_key_secret_name                         = var.cos_api_key_secret_name
