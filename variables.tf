@@ -128,7 +128,7 @@ variable "artifactory_repo_url" {
 
 variable "artifactory_repo_name" {
   type        = string
-  default     = "wcp-compliance-automation-team-docker-local"
+  default     = ""
   description = "Type the name of your Artifactory repository where your docker images are located."
 }
 
