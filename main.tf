@@ -396,6 +396,10 @@ module "devsecops_ci_toolchain" {
   pipeline_doi_api_key_secret_name  = (var.ci_pipeline_doi_api_key_secret_name == "") ? var.pipeline_doi_api_key_secret_name : var.ci_pipeline_doi_api_key_secret_name
   pipeline_doi_api_key_secret_group = (var.ci_pipeline_doi_api_key_secret_group == "") ? var.pipeline_doi_api_key_secret_group : var.ci_pipeline_doi_api_key_secret_group
 
+  artifactory_token_secret_name  = var.artifactory_token_secret_name
+  artifactory_token_secret_group = var.artifactory_token_secret_group
+
+
   # CRN SECRETS
   app_repo_git_token_secret_crn = (
     (local.ci_app_repo_git_token_secret_crn != "") ? local.ci_app_repo_git_token_secret_crn : var.repo_git_token_secret_crn
@@ -575,6 +579,15 @@ module "devsecops_ci_toolchain" {
   #DEVOPS INSIGHTS
   link_to_doi_toolchain = var.ci_link_to_doi_toolchain
 
+  #ARTIFACTORY
+  enable_artifactory           = var.enable_artifactory
+  artifactory_user             = var.artifactory_user
+  artifactory_dashboard_url    = var.artifactory_dashboard_url
+  artifactory_repo_url         = var.artifactory_repo_url
+  artifactory_repo_name        = var.artifactory_repo_name
+  artifactory_integration_name = var.artifactory_integration_name
+
+
   #TRIGGER PROPERTIES
   create_triggers              = var.create_triggers
   create_git_triggers          = var.create_git_triggers
@@ -665,6 +678,9 @@ module "devsecops_cd_toolchain" {
 
   pipeline_doi_api_key_secret_name  = (var.cd_pipeline_doi_api_key_secret_name == "") ? var.pipeline_doi_api_key_secret_name : var.cd_pipeline_doi_api_key_secret_name
   pipeline_doi_api_key_secret_group = (var.cd_pipeline_doi_api_key_secret_group == "") ? var.pipeline_doi_api_key_secret_group : var.cd_pipeline_doi_api_key_secret_group
+
+  artifactory_token_secret_name  = var.artifactory_token_secret_name
+  artifactory_token_secret_group = var.artifactory_token_secret_group
 
   # CRN SECRETS
   deployment_repo_git_token_secret_crn = (
@@ -855,6 +871,14 @@ module "devsecops_cd_toolchain" {
   kp_integration_name    = var.kp_integration_name
   slack_integration_name = var.slack_integration_name
 
+  #ARTIFACTORY
+  enable_artifactory           = var.enable_artifactory
+  artifactory_user             = var.artifactory_user
+  artifactory_dashboard_url    = var.artifactory_dashboard_url
+  artifactory_repo_url         = var.artifactory_repo_url
+  artifactory_repo_name        = var.artifactory_repo_name
+  artifactory_integration_name = var.artifactory_integration_name
+
   #TRIGGER PROPERTIES
   create_triggers                       = var.create_triggers
   create_git_triggers                   = var.create_git_triggers
@@ -943,6 +967,9 @@ module "devsecops_cc_toolchain" {
 
   pipeline_doi_api_key_secret_name  = (var.cc_pipeline_doi_api_key_secret_name == "") ? var.pipeline_doi_api_key_secret_name : var.cc_pipeline_doi_api_key_secret_name
   pipeline_doi_api_key_secret_group = (var.cc_pipeline_doi_api_key_secret_group == "") ? var.pipeline_doi_api_key_secret_group : var.cc_pipeline_doi_api_key_secret_group
+
+  artifactory_token_secret_name  = var.artifactory_token_secret_name
+  artifactory_token_secret_group = var.artifactory_token_secret_group
 
   # CRN SECRETS
   app_repo_git_token_secret_crn = (
@@ -1113,6 +1140,14 @@ module "devsecops_cc_toolchain" {
   sonarqube_secret_group        = (var.cc_sonarqube_secret_group == "") ? var.sonarqube_secret_group : var.cc_sonarqube_secret_group
   sonarqube_is_blind_connection = (var.cc_sonarqube_is_blind_connection == "") ? var.sonarqube_is_blind_connection : var.cc_sonarqube_is_blind_connection
   sonarqube_server_url          = (var.cc_sonarqube_server_url == "") ? var.sonarqube_server_url : var.cc_sonarqube_server_url
+
+  #ARTIFACTORY
+  enable_artifactory           = var.enable_artifactory
+  artifactory_user             = var.artifactory_user
+  artifactory_dashboard_url    = var.artifactory_dashboard_url
+  artifactory_repo_url         = var.artifactory_repo_url
+  artifactory_repo_name        = var.artifactory_repo_name
+  artifactory_integration_name = var.artifactory_integration_name
 
   #TRIGGER PROPERTIES
   create_triggers              = var.create_triggers

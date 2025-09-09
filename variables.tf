@@ -97,6 +97,47 @@ variable "app_repo_git_token_secret_crn" {
   }
 }
 
+variable "artifactory_token_secret_name" {
+  type        = string
+  default     = "artifactory-token"
+  description = "Name of the artifactory token secret in the secret provider."
+}
+
+variable "artifactory_token_secret_group" {
+  type        = string
+  description = "Secret group prefix for the Artifactory token secret. Defaults to `sm_secret_group` if not set. Only used with `Secrets Manager`."
+  default     = ""
+}
+
+variable "artifactory_user" {
+  type        = string
+  description = "Type the User ID or email for your Artifactory repository."
+  default     = ""
+}
+
+variable "artifactory_dashboard_url" {
+  type        = string
+  default     = ""
+  description = "Type the URL that you want to navigate to when you click the Artifactory integration tile."
+}
+variable "artifactory_repo_url" {
+  type        = string
+  default     = ""
+  description = "Type the URL for your Artifactory release repository."
+}
+
+variable "artifactory_repo_name" {
+  type        = string
+  default     = "wcp-compliance-automation-team-docker-local"
+  description = "Type the name of your Artifactory repository where your docker images are located."
+}
+
+variable "artifactory_integration_name" {
+  type        = string
+  default     = "artifactory-dockerconfigjson"
+  description = "The name of the Artifactory tool integration"
+}
+
 variable "authorization_policy_creation" {
   type        = string
   description = "Disable Toolchain Service to Secrets Manager/Key Protect/Notifications Service authorization policy creation. To disable set the value to `disabled`. This applies to the CI, CD, and CC toolchains. To set independently, see `ci_authorization_policy_creation`, `cd_authorization_policy_creation`, and `cc_authorization_policy_creation`."
@@ -356,6 +397,12 @@ variable "create_triggers" {
   type        = string
   description = "Set to `true` to create the default triggers associated with the compliance repos and sample app."
   default     = "true"
+}
+
+variable "enable_artifactory" {
+  type        = bool
+  default     = false
+  description = "Set true to enable artifacory for devsecops."
 }
 
 variable "enable_cos" {
