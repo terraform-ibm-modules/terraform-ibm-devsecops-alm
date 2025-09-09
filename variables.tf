@@ -402,7 +402,7 @@ variable "create_triggers" {
 variable "enable_artifactory" {
   type        = bool
   default     = false
-  description = "Set to `true` to enable artifacory for devsecops."
+  description = "Set to `true` to enable Artifactory for devsecops."
 }
 
 variable "enable_cos" {
