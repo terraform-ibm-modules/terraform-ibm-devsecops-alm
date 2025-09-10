@@ -239,7 +239,7 @@ resource "ibm_sm_arbitrary_secret" "secret_signing_key" {
   endpoint_type   = var.sm_endpoint_type
 }
 
-resource "ibm_sm_arbitrary_secret" "secret_signing_certifcate" {
+resource "ibm_sm_arbitrary_secret" "secret_signing_certificate" {
   count           = ((var.create_signing_key == true) && (var.sm_exists == true)) ? 1 : 0
   depends_on      = [ibm_sm_secret_group.sm_secret_group, data.external.signing_keys]
   region          = var.sm_location
