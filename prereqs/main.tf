@@ -104,6 +104,7 @@ resource "ibm_iam_service_policy" "cos_bucket_policy" {
 }
 
 resource "ibm_iam_service_policy" "cos_policy" {
+  count          = (local.create_cos_service_api_key) ? 1 : 0
   iam_service_id = ibm_iam_service_id.cos_service_id[0].id
   roles          = ["Reader"]
 
