@@ -92,4 +92,10 @@ output "icr_namespace_name" {
   value       = (var.prefix == "") ? local.registry_namespace_suffix : local.registry_namespace
 }
 
+
+output "change_management_repo_tool_id" {
+  description = "The ID of the Change Managemnet repo tool."
+  value       = try(module.devsecops_cd_toolchain[0].change_management_repo.tool_id, "")
+}
+
 #############################################################################
