@@ -203,7 +203,7 @@ data "external" "signing_keys" {
     region             = var.sm_location
     secret_group_id    = (var.create_secret_group == false) ? data.ibm_sm_secret_group.existing_sm_secret_group[0].secret_group_id : ibm_sm_secret_group.sm_secret_group[0].secret_group_id
     signing_key_name   = var.signing_key_secret_name
-    signing_cert_name  = var.signing_certifcate_secret_name
+    signing_cert_name  = var.signing_certificate_secret_name
     rotate_signing_key = var.rotate_signing_key
   }
 }
@@ -245,7 +245,7 @@ resource "ibm_sm_arbitrary_secret" "secret_signing_certifcate" {
   region          = var.sm_location
   instance_id     = (local.sm_instance_id != "") ? local.sm_instance_id : var.sm_instance_id
   secret_group_id = (var.create_secret_group == false) ? data.ibm_sm_secret_group.existing_sm_secret_group[0].secret_group_id : ibm_sm_secret_group.sm_secret_group[0].secret_group_id
-  name            = var.signing_certifcate_secret_name
+  name            = var.signing_certificate_secret_name
   description     = "The public component of the GPG signing key for validating image signatures."
   labels          = []
   payload         = (var.signing_certificate_secret == "") ? data.external.signing_keys[0].result.publickey : var.signing_certificate_secret
