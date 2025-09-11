@@ -177,7 +177,7 @@ variable "signing_certificate_secret" {
   default     = ""
 }
 
-variable "signing_certifcate_secret_name" {
+variable "signing_certificate_secret_name" {
   type        = string
   description = "The name of the secret as it appears in Secret Manager."
   default     = "signing-certificate"

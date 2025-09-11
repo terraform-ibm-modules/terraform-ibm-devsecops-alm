@@ -314,7 +314,7 @@ module "prereqs" {
   privateworker_secret_name        = var.privateworker_credentials_secret_name
   privateworker_secret_value       = var.privateworker_secret_value
   signing_key_secret_name          = var.ci_signing_key_secret_name
-  signing_certifcate_secret_name   = var.cd_code_signing_cert_secret_name
+  signing_certificate_secret_name  = var.cd_code_signing_cert_secret_name
   repo_git_token_secret_name       = var.repo_git_token_secret_name
   repo_git_token_secret_value      = var.repo_git_token_secret_value
   rotation_period                  = var.rotation_period
