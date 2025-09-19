@@ -179,6 +179,7 @@ module "devsecops_da" {
   toolchain_access_group_name                     = var.toolchain_access_group_name
   toolchain_name                                  = var.toolchain_name
   toolchain_resource_group                        = var.toolchain_resource_group
+  toolchain_resource_region_override              = var.toolchain_resource_region_override
   toolchain_region                                = var.toolchain_region
   use_app_repo_for_cd_deploy                      = var.use_app_repo_for_cd_deploy
   cc_app_repo_branch                              = var.cc_app_repo_branch

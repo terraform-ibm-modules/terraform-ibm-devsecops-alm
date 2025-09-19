@@ -1235,6 +1235,12 @@ variable "toolchain_resource_group" {
   default     = "Default"
 }
 
+variable "toolchain_resource_region_override" {
+  type        = string
+  description = "IBM Cloud region for the created resources. If not set resources will be created in the region set in `toolchain_region`."
+  default     = ""
+}
+
 variable "worker_id" {
   type        = string
   default     = "public"
