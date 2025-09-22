@@ -76,6 +76,7 @@ module "devsecops_da" {
   evidence_repo_git_token_secret_crn              = var.evidence_repo_git_token_secret_crn
   evidence_repo_git_token_secret_name             = var.evidence_repo_git_token_secret_name
   evidence_repo_integration_owner                 = var.evidence_repo_integration_owner
+  evidence_repo_enabled                           = var.evidence_repo_enabled
   evidence_repo_name                              = var.evidence_repo_name
   evidence_repo_secret_group                      = var.evidence_repo_secret_group
   evidence_repo_source_url                        = var.evidence_repo_source_url
