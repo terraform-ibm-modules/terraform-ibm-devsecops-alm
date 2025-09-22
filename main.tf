@@ -345,6 +345,8 @@ module "devsecops_ci_toolchain" {
   pr_pipeline_git_tag      = (var.pr_pipeline_git_tag == "") ? var.pipeline_git_tag : var.pr_pipeline_git_tag
   worker_id                = var.worker_id
 
+  toolchain_resource_region_override = var.toolchain_resource_region_override
+
   #SECRET PROVIDERS
   enable_key_protect       = (local.ci_enable_key_protect == "true") ? true : false
   enable_secrets_manager   = (local.ci_enable_secrets_manager == "true") ? true : false
@@ -619,6 +621,8 @@ module "devsecops_cd_toolchain" {
   pipeline_branch          = (var.cd_compliance_pipeline_branch == "") ? var.compliance_pipeline_branch : var.cd_compliance_pipeline_branch
   pipeline_git_tag         = (var.cd_pipeline_git_tag == "") ? var.pipeline_git_tag : var.cd_pipeline_git_tag
   worker_id                = var.worker_id
+
+  toolchain_resource_region_override = var.toolchain_resource_region_override
 
   #SECRET PROVIDERS
   enable_key_protect       = (local.cd_enable_key_protect == "true") ? true : false
@@ -913,6 +917,8 @@ module "devsecops_cc_toolchain" {
   pipeline_branch               = (var.cc_compliance_pipeline_branch == "") ? var.compliance_pipeline_branch : var.cc_compliance_pipeline_branch
   pipeline_git_tag              = (var.cc_pipeline_git_tag == "") ? var.pipeline_git_tag : var.cc_pipeline_git_tag
   worker_id                     = var.worker_id
+
+  toolchain_resource_region_override = var.toolchain_resource_region_override
 
   #SECRET PROVIDERS
   enable_key_protect       = (local.cc_enable_key_protect == "true") ? true : false
