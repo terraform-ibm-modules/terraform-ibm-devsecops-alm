@@ -65,9 +65,9 @@ statement instead the previous block.
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_devsecops_cc_toolchain"></a> [devsecops\_cc\_toolchain](#module\_devsecops\_cc\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cc-toolchain | v2.6.0 |
-| <a name="module_devsecops_cd_toolchain"></a> [devsecops\_cd\_toolchain](#module\_devsecops\_cd\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain | v2.6.0 |
-| <a name="module_devsecops_ci_toolchain"></a> [devsecops\_ci\_toolchain](#module\_devsecops\_ci\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-ci-toolchain | v2.7.1 |
+| <a name="module_devsecops_cc_toolchain"></a> [devsecops\_cc\_toolchain](#module\_devsecops\_cc\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cc-toolchain | v2.6.1 |
+| <a name="module_devsecops_cd_toolchain"></a> [devsecops\_cd\_toolchain](#module\_devsecops\_cd\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain | v2.6.1 |
+| <a name="module_devsecops_ci_toolchain"></a> [devsecops\_ci\_toolchain](#module\_devsecops\_ci\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-ci-toolchain | v2.7.2 |
 | <a name="module_prereqs"></a> [prereqs](#module\_prereqs) | ./prereqs | n/a |
 
 ### Resources
@@ -645,6 +645,7 @@ statement instead the previous block.
 | <a name="input_toolchain_name"></a> [toolchain\_name](#input\_toolchain\_name) | This variable specifies the root name for the CI, CD and CC toolchain names. A fixed suffix will automatically be appended. Setting `DevSecOps` will generate toolchains with the names `DevSecOps-CI-Toolchain`,  `DevSecOps-CD-Toolchain` and `DevSecOps-CC-Toolchain`. The full name of each toolchain can be set independently using `ci_toolchain_name`, `cd_toolchain_name`, and `cc_toolchain_name`. | `string` | `"DevSecOps"` | no |
 | <a name="input_toolchain_region"></a> [toolchain\_region](#input\_toolchain\_region) | The region identifier that will be used, by default, for all resource creation and service instance lookup. | `string` | `"us-south"` | no |
 | <a name="input_toolchain_resource_group"></a> [toolchain\_resource\_group](#input\_toolchain\_resource\_group) | The resource group that will be used, by default, for all resource creation and service instance lookups. This can be overridden on a per resource/service basis. | `string` | `"Default"` | no |
+| <a name="input_toolchain_resource_region_override"></a> [toolchain\_resource\_region\_override](#input\_toolchain\_resource\_region\_override) | IBM Cloud region for the created resources. If not set resources will be created in the region set in `toolchain_region`. | `string` | `""` | no |
 | <a name="input_use_app_repo_for_cd_deploy"></a> [use\_app\_repo\_for\_cd\_deploy](#input\_use\_app\_repo\_for\_cd\_deploy) | Set to `true` to use the CI sample application repository as the deployment repository in the CD pipeline. This will be set in the pipeline config integration. | `bool` | `false` | no |
 | <a name="input_use_legacy_cos_tool"></a> [use\_legacy\_cos\_tool](#input\_use\_legacy\_cos\_tool) | The custom tool integration is being replaced with the new COS tool integration. To continue using the legacy tool. Set the value to `true`. See `enable_cos` | `bool` | `false` | no |
 | <a name="input_use_legacy_ref"></a> [use\_legacy\_ref](#input\_use\_legacy\_ref) | Set to `true` to use the legacy secret reference format for Secrets Manager secrets. | `bool` | `true` | no |
