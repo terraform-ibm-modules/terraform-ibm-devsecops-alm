@@ -522,6 +522,12 @@ variable "evidence_repo_integration_owner" {
   default     = ""
 }
 
+variable "evidence_repo_enabled" {
+  type        = bool
+  description = "Set to `true` to enable the evidence repository tool integration."
+  default     = true
+}
+
 variable "evidence_repo_name" {
   type        = string
   description = "Set to use a custom name for the Evidence repository."
