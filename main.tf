@@ -481,6 +481,7 @@ module "devsecops_ci_toolchain" {
   pipeline_config_repo_title            = var.repo_title
 
   #EVIDENCE REPO
+  evidence_repo_enabled           = var.evidence_repo_enabled
   evidence_repo_name              = var.evidence_repo_name
   evidence_repo_existing_url      = var.evidence_repo_existing_url
   evidence_source_repo_url        = var.evidence_repo_source_url
@@ -756,6 +757,7 @@ module "devsecops_cd_toolchain" {
   pipeline_config_repo_title            = var.repo_title
 
   #EVIDENCE REPO
+  evidence_repo_enabled           = var.evidence_repo_enabled
   evidence_repo_name              = var.evidence_repo_name
   evidence_repo_url               = try(module.devsecops_ci_toolchain[0].evidence_repo_url, var.evidence_repo_existing_url)
   evidence_repo_git_provider      = local.evidence_repo_existing_git_provider
@@ -1055,6 +1057,7 @@ module "devsecops_cc_toolchain" {
   app_repo_root_url         = var.repo_root_url
 
   #EVIDENCE REPO
+  evidence_repo_enabled           = var.evidence_repo_enabled
   evidence_repo_name              = var.evidence_repo_name
   evidence_repo_url               = try(module.devsecops_ci_toolchain[0].evidence_repo_url, var.evidence_repo_existing_url)
   evidence_repo_git_provider      = local.evidence_repo_existing_git_provider

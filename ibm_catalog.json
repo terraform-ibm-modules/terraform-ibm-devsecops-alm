@@ -1535,6 +1535,13 @@
               "required": false
             },
             {
+              "key": "evidence_repo_enabled",
+              "type": "boolean",
+              "default_value": true,
+              "description": "Set to `true` to enable the evidence repository tool integration.",
+              "required": false
+            },
+            {
               "key": "evidence_repo_name",
               "type": "string",
               "default_value": "",
@@ -3743,6 +3750,13 @@
               "type": "string",
               "default_value": "",
               "description": "The name of the repository integration owner.",
+              "required": false
+            },
+            {
+              "key": "evidence_repo_enabled",
+              "type": "boolean",
+              "default_value": true,
+              "description": "Set to `true` to enable the evidence repository tool integration.",
               "required": false
             },
             {
