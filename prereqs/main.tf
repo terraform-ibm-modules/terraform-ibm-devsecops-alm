@@ -78,9 +78,9 @@ data "ibm_iam_service_id" "cos_service_id" {
 
 
 resource "ibm_iam_service_policy" "cos_bucket_policy" {
-  count          = (local.create_cos_service_api_key) ? 1 : 0
-  iam_service_id = ibm_iam_service_id.cos_service_id[0].id
-  roles          = ["Reader", "Object Writer"]
+  count  = (local.create_cos_service_api_key) ? 1 : 0
+  iam_id = ibm_iam_service_id.cos_service_id[0].iam_id
+  roles  = ["Reader", "Object Writer"]
 
   resource_attributes {
     name  = "serviceName"
@@ -104,9 +104,9 @@ resource "ibm_iam_service_policy" "cos_bucket_policy" {
 }
 
 resource "ibm_iam_service_policy" "cos_policy" {
-  count          = (local.create_cos_service_api_key) ? 1 : 0
-  iam_service_id = ibm_iam_service_id.cos_service_id[0].id
-  roles          = ["Reader"]
+  count  = (local.create_cos_service_api_key) ? 1 : 0
+  iam_id = ibm_iam_service_id.cos_service_id[0].iam_id
+  roles  = ["Reader"]
 
   resource_attributes {
     name  = "serviceName"
@@ -120,9 +120,9 @@ resource "ibm_iam_service_policy" "cos_policy" {
 }
 
 resource "ibm_iam_service_policy" "pipeline_policy" {
-  count          = (local.create_pipeline_service_api_key) ? 1 : 0
-  iam_service_id = ibm_iam_service_id.pipeline_service_id[0].id
-  roles          = ["Editor"]
+  count  = (local.create_pipeline_service_api_key) ? 1 : 0
+  iam_id = ibm_iam_service_id.pipeline_service_id[0].iam_id
+  roles  = ["Editor"]
 
   resources {
     resource_type = "resource-group"
@@ -131,18 +131,18 @@ resource "ibm_iam_service_policy" "pipeline_policy" {
 }
 
 resource "ibm_iam_service_policy" "cr_policy" {
-  count          = (local.create_pipeline_service_api_key) ? 1 : 0
-  iam_service_id = ibm_iam_service_id.pipeline_service_id[0].id
-  roles          = ["Manager"]
+  count  = (local.create_pipeline_service_api_key) ? 1 : 0
+  iam_id = ibm_iam_service_id.pipeline_service_id[0].iam_id
+  roles  = ["Manager"]
   resources {
     service = "container-registry"
   }
 }
 
 resource "ibm_iam_service_policy" "toolchain_policy" {
-  count          = (local.create_pipeline_service_api_key) ? 1 : 0
-  iam_service_id = ibm_iam_service_id.pipeline_service_id[0].id
-  roles          = ["Editor"]
+  count  = (local.create_pipeline_service_api_key) ? 1 : 0
+  iam_id = ibm_iam_service_id.pipeline_service_id[0].iam_id
+  roles  = ["Editor"]
   resources {
     service           = "toolchain"
     resource_group_id = data.ibm_resource_group.resource_group.id
@@ -150,9 +150,9 @@ resource "ibm_iam_service_policy" "toolchain_policy" {
 }
 
 resource "ibm_iam_service_policy" "kube_policy" {
-  count          = ((var.create_kubernetes_access_policy == true) && (local.create_pipeline_service_api_key == true)) ? 1 : 0
-  iam_service_id = ibm_iam_service_id.pipeline_service_id[0].id
-  roles          = ["Manager", "Editor"]
+  count  = ((var.create_kubernetes_access_policy == true) && (local.create_pipeline_service_api_key == true)) ? 1 : 0
+  iam_id = ibm_iam_service_id.pipeline_service_id[0].iam_id
+  roles  = ["Manager", "Editor"]
   resources {
     service           = "containers-kubernetes"
     resource_group_id = data.ibm_resource_group.resource_group.id
@@ -160,9 +160,9 @@ resource "ibm_iam_service_policy" "kube_policy" {
 }
 
 resource "ibm_iam_service_policy" "ce_policy" {
-  count          = ((var.create_code_engine_access_policy == true) && (local.create_pipeline_service_api_key == true)) ? 1 : 0
-  iam_service_id = ibm_iam_service_id.pipeline_service_id[0].id
-  roles          = ["Manager", "Editor"]
+  count  = ((var.create_code_engine_access_policy == true) && (local.create_pipeline_service_api_key == true)) ? 1 : 0
+  iam_id = ibm_iam_service_id.pipeline_service_id[0].iam_id
+  roles  = ["Manager", "Editor"]
   resources {
     service           = "codeengine"
     resource_group_id = data.ibm_resource_group.resource_group.id
@@ -345,7 +345,7 @@ resource "ibm_iam_api_key" "iam_api_key" {
 resource "ibm_iam_service_api_key" "cos_service_api_key" {
   count          = (local.create_non_auto_rotatable_cos_api_key) ? 1 : 0
   name           = "cos-service-api-key"
-  iam_service_id = ibm_iam_service_id.cos_service_id[0].iam_id
+  iam_service_id = ibm_iam_service_id.cos_service_id[0].id
 }
 
 resource "ibm_sm_arbitrary_secret" "secret_ibmcloud_api_key" {
