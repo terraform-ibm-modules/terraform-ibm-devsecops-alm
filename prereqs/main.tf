@@ -345,7 +345,7 @@ resource "ibm_iam_api_key" "iam_api_key" {
 resource "ibm_iam_service_api_key" "cos_service_api_key" {
   count          = (local.create_non_auto_rotatable_cos_api_key) ? 1 : 0
   name           = "cos-service-api-key"
-  iam_service_id = ibm_iam_service_id.cos_service_id[0].id
+  iam_service_id = ibm_iam_service_id.cos_service_id[0].iam_id
 }
 
 resource "ibm_sm_arbitrary_secret" "secret_ibmcloud_api_key" {
