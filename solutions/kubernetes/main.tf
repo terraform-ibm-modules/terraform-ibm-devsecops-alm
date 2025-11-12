@@ -15,6 +15,7 @@ module "devsecops_da" {
   app_repo_git_token_secret_crn                   = var.app_repo_git_token_secret_crn
   app_repo_git_token_secret_name                  = var.app_repo_git_token_secret_name
   app_repo_secret_group                           = var.app_repo_secret_group
+  app_repo_name                                   = var.app_repo_name
   authorization_policy_creation                   = var.authorization_policy_creation
   autostart                                       = var.autostart
   change_management_existing_url                  = var.change_management_existing_url
@@ -192,10 +193,8 @@ module "devsecops_da" {
   cc_toolchain_description                        = var.cc_toolchain_description
   cc_toolchain_name                               = var.cc_toolchain_name
   cc_trigger_manual_enable                        = var.cc_trigger_manual_enable
-  cc_trigger_manual_pruner_enable                 = var.cc_trigger_manual_pruner_enable
   cc_trigger_timed_cron_schedule                  = var.cc_trigger_timed_cron_schedule
   cc_trigger_timed_enable                         = var.cc_trigger_timed_enable
-  cc_trigger_timed_pruner_enable                  = var.cc_trigger_timed_pruner_enable
   cd_change_management_group                      = var.cd_change_management_group
   cd_change_management_repo_auth_type             = var.cd_change_management_repo_auth_type
   cd_change_management_repo_git_token_secret_crn  = var.cd_change_management_repo_git_token_secret_crn
@@ -241,10 +240,8 @@ module "devsecops_da" {
   cd_trigger_git_promotion_validation_listener    = var.cd_trigger_git_promotion_validation_listener
   cd_trigger_manual_enable                        = var.cd_trigger_manual_enable
   cd_trigger_manual_promotion_enable              = var.cd_trigger_manual_promotion_enable
-  cd_trigger_manual_pruner_enable                 = var.cd_trigger_manual_pruner_enable
   cd_trigger_timed_cron_schedule                  = var.cd_trigger_timed_cron_schedule
   cd_trigger_timed_enable                         = var.cd_trigger_timed_enable
-  cd_trigger_timed_pruner_enable                  = var.cd_trigger_timed_pruner_enable
   ci_app_name                                     = var.ci_app_name
   ci_app_repo_branch                              = var.ci_app_repo_branch
   ci_cluster_name                                 = var.ci_cluster_name
@@ -269,11 +266,9 @@ module "devsecops_da" {
   ci_toolchain_name                               = var.ci_toolchain_name
   ci_trigger_git_enable                           = var.ci_trigger_git_enable
   ci_trigger_manual_enable                        = var.ci_trigger_manual_enable
-  ci_trigger_manual_pruner_enable                 = var.ci_trigger_manual_pruner_enable
   ci_trigger_pr_git_enable                        = var.ci_trigger_pr_git_enable
   ci_trigger_timed_cron_schedule                  = var.ci_trigger_timed_cron_schedule
   ci_trigger_timed_enable                         = var.ci_trigger_timed_enable
-  ci_trigger_timed_pruner_enable                  = var.ci_trigger_timed_pruner_enable
   pr_pipeline_git_tag                             = var.pr_pipeline_git_tag
   use_legacy_cos_tool                             = var.use_legacy_cos_tool
   use_legacy_ref                                  = var.use_legacy_ref

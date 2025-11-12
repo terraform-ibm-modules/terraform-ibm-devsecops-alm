@@ -69,6 +69,12 @@ variable "app_repo_git_token_secret_name" {
   default     = ""
 }
 
+variable "app_repo_name" {
+  type        = string
+  description = "The repository name."
+  default     = ""
+}
+
 variable "app_repo_secret_group" {
   type        = string
   description = "Secret group for the App repository secret. Defaults to the value set in `sm_secret_group` if not set. Only used with `Secrets Manager`."
@@ -1217,12 +1223,6 @@ variable "cc_trigger_manual_enable" {
   default     = true
 }
 
-variable "cc_trigger_manual_pruner_enable" {
-  type        = bool
-  description = "Set to `true` to enable the manual Pruner trigger."
-  default     = true
-}
-
 variable "cc_trigger_timed_cron_schedule" {
   type        = string
   description = "Only needed for timer triggers. Cron expression that indicates when this trigger will activate. Maximum frequency is every 5 minutes. The string is based on UNIX crontab syntax: minute, hour, day of month, month, day of week. Example: 0 *_/2 * * * - every 2 hours."
@@ -1232,12 +1232,6 @@ variable "cc_trigger_timed_cron_schedule" {
 variable "cc_trigger_timed_enable" {
   type        = bool
   description = "Set to `true` to enable the CI pipeline Timed trigger."
-  default     = false
-}
-
-variable "cc_trigger_timed_pruner_enable" {
-  type        = bool
-  description = "Set to `true` to enable the timed Pruner trigger."
   default     = false
 }
 
@@ -1546,12 +1540,6 @@ variable "cd_trigger_manual_promotion_enable" {
   default     = true
 }
 
-variable "cd_trigger_manual_pruner_enable" {
-  type        = bool
-  description = "Set to `true` to enable the manual Pruner trigger."
-  default     = true
-}
-
 variable "cd_trigger_timed_cron_schedule" {
   type        = string
   description = "Only needed for timer triggers. Cron expression that indicates when this trigger will activate. Maximum frequency is every 5 minutes. The string is based on UNIX crontab syntax: minute, hour, day of month, month, day of week. Example: 0 *_/2 * * * - every 2 hours."
@@ -1561,12 +1549,6 @@ variable "cd_trigger_timed_cron_schedule" {
 variable "cd_trigger_timed_enable" {
   type        = bool
   description = "Set to `true` to enable the CD pipeline Timed trigger."
-  default     = false
-}
-
-variable "cd_trigger_timed_pruner_enable" {
-  type        = bool
-  description = "Set to `true` to enable the timed Pruner trigger."
   default     = false
 }
 
@@ -1723,12 +1705,6 @@ variable "ci_trigger_manual_enable" {
   default     = true
 }
 
-variable "ci_trigger_manual_pruner_enable" {
-  type        = bool
-  description = "Set to `true` to enable the manual Pruner trigger."
-  default     = true
-}
-
 variable "ci_trigger_pr_git_enable" {
   type        = bool
   description = "Set to `true` to enable the PR pipeline Git trigger."
@@ -1744,12 +1720,6 @@ variable "ci_trigger_timed_cron_schedule" {
 variable "ci_trigger_timed_enable" {
   type        = bool
   description = "Set to `true` to enable the CI pipeline Timed trigger."
-  default     = false
-}
-
-variable "ci_trigger_timed_pruner_enable" {
-  type        = bool
-  description = "Set to `true` to enable the timed Pruner trigger."
   default     = false
 }
 
@@ -1801,5 +1771,5 @@ variable "use_legacy_cos_tool" {
 variable "use_legacy_ref" {
   type        = bool
   description = "Set to `true` to use the legacy secret reference format for Secrets Manager secrets."
-  default     = true
+  default     = false
 }
