@@ -607,6 +607,13 @@
               "required": false
             },
             {
+              "key": "app_repo_name",
+              "type": "string",
+              "default_value": "",
+              "description": "The repository name.",
+              "required": false
+            },
+            {
               "key": "app_repo_secret_group",
               "type": "string",
               "default_value": "",
@@ -683,13 +690,6 @@
               "required": false
             },
             {
-              "key": "cc_trigger_manual_pruner_enable",
-              "type": "boolean",
-              "default_value": true,
-              "description": "Set to `true` to enable the manual Pruner trigger.",
-              "required": false
-            },
-            {
               "key": "cc_trigger_timed_cron_schedule",
               "type": "string",
               "default_value": "0 4 * * *",
@@ -701,13 +701,6 @@
               "type": "boolean",
               "default_value": false,
               "description": "Set to `true` to enable the CI pipeline Timed trigger.",
-              "required": false
-            },
-            {
-              "key": "cc_trigger_timed_pruner_enable",
-              "type": "boolean",
-              "default_value": false,
-              "description": "Set to `true` to enable the timed Pruner trigger.",
               "required": false
             },
             {
@@ -1008,13 +1001,6 @@
               "required": false
             },
             {
-              "key": "cd_trigger_manual_pruner_enable",
-              "type": "boolean",
-              "default_value": true,
-              "description": "Set to `true` to enable the manual Pruner trigger.",
-              "required": false
-            },
-            {
               "key": "cd_trigger_timed_cron_schedule",
               "type": "string",
               "default_value": "0 4 * * *",
@@ -1026,13 +1012,6 @@
               "type": "boolean",
               "default_value": false,
               "description": "Set to `true` to enable the CD pipeline Timed trigger.",
-              "required": false
-            },
-            {
-              "key": "cd_trigger_timed_pruner_enable",
-              "type": "boolean",
-              "default_value": false,
-              "description": "Set to `true` to enable the timed Pruner trigger.",
               "required": false
             },
             {
@@ -1181,13 +1160,6 @@
               "required": false
             },
             {
-              "key": "ci_trigger_manual_pruner_enable",
-              "type": "boolean",
-              "default_value": true,
-              "description": "Set to `true` to enable the manual Pruner trigger.",
-              "required": false
-            },
-            {
               "key": "ci_trigger_pr_git_enable",
               "type": "boolean",
               "default_value": true,
@@ -1206,13 +1178,6 @@
               "type": "boolean",
               "default_value": false,
               "description": "Set to `true` to enable the CI pipeline Timed trigger.",
-              "required": false
-            },
-            {
-              "key": "ci_trigger_timed_pruner_enable",
-              "type": "boolean",
-              "default_value": false,
-              "description": "Set to `true` to enable the timed Pruner trigger.",
               "required": false
             },
             {
@@ -2818,6 +2783,13 @@
               "required": false
             },
             {
+              "key": "app_repo_name",
+              "type": "string",
+              "default_value": "",
+              "description": "The repository name.",
+              "required": false
+            },
+            {
               "key": "app_repo_secret_group",
               "type": "string",
               "default_value": "",
@@ -2894,13 +2866,6 @@
               "required": false
             },
             {
-              "key": "cc_trigger_manual_pruner_enable",
-              "type": "boolean",
-              "default_value": true,
-              "description": "Set to `true` to enable the manual Pruner trigger.",
-              "required": false
-            },
-            {
               "key": "cc_trigger_timed_cron_schedule",
               "type": "string",
               "default_value": "0 4 * * *",
@@ -2912,13 +2877,6 @@
               "type": "boolean",
               "default_value": false,
               "description": "Set to `true` to enable the CI pipeline Timed trigger.",
-              "required": false
-            },
-            {
-              "key": "cc_trigger_timed_pruner_enable",
-              "type": "boolean",
-              "default_value": false,
-              "description": "Set to `true` to enable the timed Pruner trigger.",
               "required": false
             },
             {
@@ -3226,13 +3184,6 @@
               "required": false
             },
             {
-              "key": "cd_trigger_manual_pruner_enable",
-              "type": "boolean",
-              "default_value": true,
-              "description": "Set to `true` to enable the manual Pruner trigger.",
-              "required": false
-            },
-            {
               "key": "cd_trigger_timed_cron_schedule",
               "type": "string",
               "default_value": "0 4 * * *",
@@ -3244,13 +3195,6 @@
               "type": "boolean",
               "default_value": false,
               "description": "Set to `true` to enable the CD pipeline Timed trigger.",
-              "required": false
-            },
-            {
-              "key": "cd_trigger_timed_pruner_enable",
-              "type": "boolean",
-              "default_value": false,
-              "description": "Set to `true` to enable the timed Pruner trigger.",
               "required": false
             },
             {
@@ -3406,13 +3350,6 @@
               "required": false
             },
             {
-              "key": "ci_trigger_manual_pruner_enable",
-              "type": "boolean",
-              "default_value": true,
-              "description": "Set to `true` to enable the manual Pruner trigger.",
-              "required": false
-            },
-            {
               "key": "ci_trigger_pr_git_enable",
               "type": "boolean",
               "default_value": true,
@@ -3431,13 +3368,6 @@
               "type": "boolean",
               "default_value": false,
               "description": "Set to `true` to enable the CI pipeline Timed trigger.",
-              "required": false
-            },
-            {
-              "key": "ci_trigger_timed_pruner_enable",
-              "type": "boolean",
-              "default_value": false,
-              "description": "Set to `true` to enable the timed Pruner trigger.",
               "required": false
             },
             {

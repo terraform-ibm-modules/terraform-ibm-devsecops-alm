@@ -332,7 +332,7 @@ module "prereqs" {
 module "devsecops_ci_toolchain" {
   count                    = var.create_ci_toolchain ? 1 : 0
   depends_on               = [ibm_resource_instance.cd_instance]
-  source                   = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-ci-toolchain?ref=v2.7.2"
+  source                   = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-ci-toolchain?ref=v2.8.0"
   ibmcloud_api_key         = var.ibmcloud_api_key
   toolchain_name           = (var.prefix == "") ? local.ci_toolchain_name : format("${var.prefix}-%s", local.ci_toolchain_name)
   toolchain_region         = (var.ci_toolchain_region == "") ? var.toolchain_region : replace(replace(var.ci_toolchain_region, "ibm:yp:", ""), "ibm:ys1:", "")
@@ -456,6 +456,7 @@ module "devsecops_ci_toolchain" {
   app_repo_blind_connection      = var.repo_blind_connection
   app_repo_root_url              = var.repo_root_url
   app_repo_title                 = var.repo_title
+  app_repo_name                  = var.app_repo_name
 
   #COMPLIANCE PIPELINE REPO
   compliance_pipelines_repo_blind_connection = (var.compliance_pipeline_repo_use_group_settings) ? local.repo_blind_connection : var.compliance_pipeline_repo_blind_connection
@@ -592,27 +593,23 @@ module "devsecops_ci_toolchain" {
 
 
   #TRIGGER PROPERTIES
-  create_triggers              = var.create_triggers
-  create_git_triggers          = var.create_git_triggers
-  trigger_git_name             = var.ci_trigger_git_name
-  trigger_git_enable           = var.ci_trigger_git_enable
-  trigger_timed_name           = var.ci_trigger_timed_name
-  trigger_timed_enable         = var.ci_trigger_timed_enable
-  trigger_timed_cron_schedule  = var.ci_trigger_timed_cron_schedule
-  trigger_manual_name          = var.ci_trigger_manual_name
-  trigger_manual_enable        = var.ci_trigger_manual_enable
-  trigger_pr_git_name          = var.ci_trigger_pr_git_name
-  trigger_pr_git_enable        = var.ci_trigger_pr_git_enable
-  trigger_manual_pruner_name   = var.ci_trigger_manual_pruner_name
-  trigger_manual_pruner_enable = var.ci_trigger_manual_pruner_enable
-  trigger_timed_pruner_name    = var.ci_trigger_timed_pruner_name
-  trigger_timed_pruner_enable  = var.ci_trigger_timed_pruner_enable
+  create_triggers             = var.create_triggers
+  create_git_triggers         = var.create_git_triggers
+  trigger_git_name            = var.ci_trigger_git_name
+  trigger_git_enable          = var.ci_trigger_git_enable
+  trigger_timed_name          = var.ci_trigger_timed_name
+  trigger_timed_enable        = var.ci_trigger_timed_enable
+  trigger_timed_cron_schedule = var.ci_trigger_timed_cron_schedule
+  trigger_manual_name         = var.ci_trigger_manual_name
+  trigger_manual_enable       = var.ci_trigger_manual_enable
+  trigger_pr_git_name         = var.ci_trigger_pr_git_name
+  trigger_pr_git_enable       = var.ci_trigger_pr_git_enable
 }
 
 module "devsecops_cd_toolchain" {
   count            = var.create_cd_toolchain ? 1 : 0
   depends_on       = [ibm_resource_instance.cd_instance]
-  source           = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain?ref=v2.6.1"
+  source           = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain?ref=v2.7.0"
   ibmcloud_api_key = var.ibmcloud_api_key
 
   toolchain_name           = (var.prefix == "") ? local.cd_toolchain_name : format("${var.prefix}-%s", local.cd_toolchain_name)
@@ -901,15 +898,11 @@ module "devsecops_cd_toolchain" {
   trigger_manual_enable                 = var.cd_trigger_manual_enable
   trigger_manual_promotion_name         = var.cd_trigger_manual_promotion_name
   trigger_manual_promotion_enable       = var.cd_trigger_manual_promotion_enable
-  trigger_manual_pruner_name            = var.cd_trigger_manual_pruner_name
-  trigger_manual_pruner_enable          = var.cd_trigger_manual_pruner_enable
-  trigger_timed_pruner_name             = var.cd_trigger_timed_pruner_name
-  trigger_timed_pruner_enable           = var.cd_trigger_timed_pruner_enable
 }
 
 module "devsecops_cc_toolchain" {
   count                         = var.create_cc_toolchain ? 1 : 0
-  source                        = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cc-toolchain?ref=v2.6.1"
+  source                        = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cc-toolchain?ref=v2.7.0"
   ibmcloud_api_key              = var.ibmcloud_api_key
   toolchain_name                = (var.prefix == "") ? local.cc_toolchain_name : format("${var.prefix}-%s", local.cc_toolchain_name)
   toolchain_description         = var.cc_toolchain_description
@@ -1159,16 +1152,12 @@ module "devsecops_cc_toolchain" {
   artifactory_integration_name = var.artifactory_integration_name
 
   #TRIGGER PROPERTIES
-  create_triggers              = var.create_triggers
-  trigger_timed_name           = var.cc_trigger_timed_name
-  trigger_timed_enable         = var.cc_trigger_timed_enable
-  trigger_timed_cron_schedule  = var.cc_trigger_timed_cron_schedule
-  trigger_manual_name          = var.cc_trigger_manual_name
-  trigger_manual_enable        = var.cc_trigger_manual_enable
-  trigger_manual_pruner_name   = var.cc_trigger_manual_pruner_name
-  trigger_manual_pruner_enable = var.cc_trigger_manual_pruner_enable
-  trigger_timed_pruner_name    = var.cc_trigger_timed_pruner_name
-  trigger_timed_pruner_enable  = var.cc_trigger_timed_pruner_enable
+  create_triggers             = var.create_triggers
+  trigger_timed_name          = var.cc_trigger_timed_name
+  trigger_timed_enable        = var.cc_trigger_timed_enable
+  trigger_timed_cron_schedule = var.cc_trigger_timed_cron_schedule
+  trigger_manual_name         = var.cc_trigger_manual_name
+  trigger_manual_enable       = var.cc_trigger_manual_enable
 }
 
 ############### Auto Start Webhook ######################
