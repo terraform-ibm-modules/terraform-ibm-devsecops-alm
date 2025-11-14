@@ -18,6 +18,7 @@ module "terraform_devsecops_alm" {
   ci_app_repo_existing_git_provider = var.ci_app_repo_existing_git_provider
   ci_app_repo_existing_git_id       = var.ci_app_repo_existing_git_id
   app_repo_branch                   = var.app_repo_branch
+  enable_cos                        = false
   #disabling authorization_policy_creation as it seems to be unstable for the unit tests
   authorization_policy_creation = "disabled"
 }

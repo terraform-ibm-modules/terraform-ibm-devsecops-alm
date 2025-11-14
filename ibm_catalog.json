@@ -303,6 +303,27 @@
               "required": true
             },
             {
+              "key": "cos_bucket_name",
+              "type": "string",
+              "default_value": "",
+              "description": "Set the name of your COS bucket. This applies the same COS bucket name for the CI, CD, and CC toolchains.",
+              "required": false
+            },
+            {
+              "key": "cos_endpoint",
+              "type": "string",
+              "default_value": "",
+              "description": "The endpoint for the Cloud Object Storage instance containing the evidence bucket. The S£ direct endpoint for the bucket region should be provided. This setting sets the same endpoint for COS in the CI, CD, and CC toolchains. ",
+              "required": false
+            },
+            {
+              "key": "cos_instance_crn",
+              "type": "string",
+              "default_value": "",
+              "description": "The CRN of the Cloud Object Storage instance containing the required bucket. This value is required to generate the correct access policies if creating IAM service credentials.",
+              "required": true
+            },
+            {
               "key": "cc_pipeline_properties",
               "type": "string",
               "default_value": "[\n  {\n    \"pipeline_id\": \"cc\",\n    \"properties\": [\n      {\n        \"name\": \"cos-api-key\",\n        \"type\": \"secure\",\n        \"value\": \"\"\n      },\n      {\n        \"name\": \"cos-bucket-name\",\n        \"type\": \"text\",\n        \"value\": \"\"\n      },\n     {\n        \"name\": \"cos-endpoint\",\n        \"type\": \"text\",\n        \"value\": \"\"\n      },\n      {\n        \"name\": \"cra-bom-generate\",\n        \"type\": \"single_select\",\n        \"value\": \"1\",\n        \"enum\": \"[0,1]\"\n      },\n      {\n        \"name\": \"cra-deploy-analysis\",\n        \"type\": \"single_select\",\n        \"value\": \"1\",\n        \"enum\": \"[0,1]\"\n      },\n      {\n        \"name\": \"cra-vulnerability-scan\",\n        \"type\": \"single_select\",\n        \"value\": \"1\",\n        \"enum\": \"[0,1]\"\n      },\n      {\n          \"name\": \"doi-environment\",\n          \"type\": \"text\",\n          \"value\": \"\"\n      },\n      {\n        \"name\": \"doi-ibmcloud-api-key\",\n        \"type\": \"secure\",\n        \"value\": \"\"\n      },\n      {\n        \"name\": \"doi-toolchain-id\",\n        \"type\": \"text\",\n        \"value\": \"\"\n      },\n      {\n        \"name\": \"environment-tag\",\n        \"type\": \"text\",\n        \"value\": \"\"\n      },\n      {\n        \"name\": \"event-notifications\",\n        \"type\": \"text\",\n        \"value\": \"0\"\n      },\n      {\n        \"name\": \"git-token\",\n        \"type\": \"secure\",\n        \"value\": \"\"\n      },\n      {\n        \"name\": \"ibmcloud-api-key\",\n        \"type\": \"secure\",\n        \"value\": \"\"\n      },\n      {\n          \"name\": \"opt-in-auto-close\",\n          \"type\": \"text\",\n          \"value\": \"1\"\n      },\n      {\n        \"name\": \"opt-in-cra-auto-remediation\",\n        \"type\": \"text\",\n        \"value\": \"true\"\n      },\n\n      {\n        \"name\": \"opt-in-cra-auto-remediation-enabled-repos\",\n        \"type\": \"text\",\n        \"value\": \"\"\n      },\n      {\n        \"name\": \"opt-in-cra-auto-remediation-force\",\n        \"type\": \"text\",\n        \"value\": \"true\"\n      },\n      {\n          \"name\": \"opt-in-dynamic-api-scan\",\n          \"type\": \"text\",\n          \"value\": \"\"\n      },\n      {\n        \"name\": \"opt-in-dynamic-scan\",\n        \"type\": \"text\",\n        \"value\": \"\"\n      },\n      {\n          \"name\": \"opt-in-dynamic-ui-scan\",\n          \"type\": \"text\",\n          \"value\": \"\"\n      },\n      {\n          \"name\": \"opt-in-gosec\",\n          \"type\": \"text\",\n          \"value\": \"\"\n      },\n      {\n          \"name\": \"opt-in-sonar\",\n          \"type\": \"text\",\n          \"value\": \"true\"\n      },\n      {\n        \"name\": \"peer-review-compliance\",\n        \"type\": \"text\",\n        \"value\": \"1\"\n      },\n      {\n        \"name\": \"pipeline-config\",\n        \"type\": \"text\",\n        \"value\": \".pipeline-config.yaml\"\n      },\n      {\n        \"name\": \"pipeline-config-branch\",\n        \"type\": \"text\",\n        \"value\": \"\"\n      },\n      {\n        \"name\": \"pipeline-debug\",\n        \"type\": \"single_select\",\n        \"value\": \"0\",\n        \"enum\": \"[0,1]\"\n      },\n      {\n        \"name\": \"slack-notifications\",\n        \"type\": \"text\",\n        \"value\": \"\"\n      },\n      {\n        \"name\": \"sonarqube-config\",\n        \"type\": \"text\",\n        \"value\": \"default\"\n      }\n    ]\n  }\n]\n",
@@ -1263,27 +1284,6 @@
               "required": false
             },
             {
-              "key": "cos_bucket_name",
-              "type": "string",
-              "default_value": "",
-              "description": "Set the name of your COS bucket. This applies the same COS bucket name for the CI, CD, and CC toolchains.",
-              "required": false
-            },
-            {
-              "key": "cos_endpoint",
-              "type": "string",
-              "default_value": "",
-              "description": "The endpoint for the Cloud Object Storage instance containing the evidence bucket. This setting sets the same endpoint for COS in the CI, CD, and CC toolchains. See `ci_cos_endpoint`, `cd_cos_endpoint`, and `cc_cos_endpoint` to set the endpoints independently.",
-              "required": false
-            },
-            {
-              "key": "cos_instance_crn",
-              "type": "string",
-              "default_value": "",
-              "description": "The CRN of the Cloud Object Storage instance containing the required bucket. This value is required to generate the correct access policies if creating IAM service credentials.",
-              "required": false
-            },
-            {
               "key": "create_cc_toolchain",
               "type": "boolean",
               "default_value": true,
@@ -1391,7 +1391,7 @@
             {
               "key": "enable_cos",
               "type": "boolean",
-              "default_value": false,
+              "default_value": true,
               "description": "Set to `true` to enable the new COS integration.",
               "required": false
             },
@@ -1502,7 +1502,7 @@
             {
               "key": "evidence_repo_enabled",
               "type": "boolean",
-              "default_value": true,
+              "default_value": false,
               "description": "Set to `true` to enable the evidence repository tool integration.",
               "required": false
             },
@@ -1900,7 +1900,7 @@
             {
               "key": "scc_enable_scc",
               "type": "string",
-              "default_value": "true",
+              "default_value": "false",
               "description": "Adds the SCC tool integration to the toolchain.",
               "required": false
             },
@@ -2222,7 +2222,8 @@
             }
           ],
           "install_type": "fullstack",
-          "terraform_version": "1.12.2"
+          "terraform_version": "1.12.2",
+          "ignore_readme": true
         },
         {
           "label": "Deploy to Kubernetes",
@@ -2484,6 +2485,27 @@
               "default_value": "Default",
               "description": "The Secrets Manager secret group containing the secrets for the DevSecOps pipelines. This applies to the CI, CD and CC Secret Manager integrations.",
               "required": true
+            },
+            {
+              "key": "cos_bucket_name",
+              "type": "string",
+              "default_value": "",
+              "description": "Set the name of your COS bucket. This applies the same COS bucket name for the CI, CD, and CC toolchains.",
+              "required": false
+            },
+            {
+              "key": "cos_endpoint",
+              "type": "string",
+              "default_value": "",
+              "description": "The endpoint for the Cloud Object Storage instance containing the evidence bucket. The S£ direct endpoint for the bucket region should be provided. This setting sets the same endpoint for COS in the CI, CD, and CC toolchains. ",
+              "required": false
+            },
+            {
+              "key": "cos_instance_crn",
+              "type": "string",
+              "default_value": "",
+              "description": "The CRN of the Cloud Object Storage instance containing the required bucket. This value is required to generate the correct access policies if creating IAM service credentials.",
+              "required": false
             },
             {
               "key": "cc_pipeline_properties",
@@ -3446,27 +3468,6 @@
               "required": false
             },
             {
-              "key": "cos_bucket_name",
-              "type": "string",
-              "default_value": "",
-              "description": "Set the name of your COS bucket. This applies the same COS bucket name for the CI, CD, and CC toolchains.",
-              "required": false
-            },
-            {
-              "key": "cos_endpoint",
-              "type": "string",
-              "default_value": "",
-              "description": "The endpoint for the Cloud Object Storage instance containing the evidence bucket. This setting sets the same endpoint for COS in the CI, CD, and CC toolchains. See `ci_cos_endpoint`, `cd_cos_endpoint`, and `cc_cos_endpoint` to set the endpoints independently.",
-              "required": false
-            },
-            {
-              "key": "cos_instance_crn",
-              "type": "string",
-              "default_value": "",
-              "description": "The CRN of the Cloud Object Storage instance containing the required bucket. This value is required to generate the correct access policies if creating IAM service credentials.",
-              "required": false
-            },
-            {
               "key": "create_cc_toolchain",
               "type": "boolean",
               "default_value": true,
@@ -3574,7 +3575,7 @@
             {
               "key": "enable_cos",
               "type": "boolean",
-              "default_value": false,
+              "default_value": true,
               "description": "Set to `true` to enable the new COS integration.",
               "required": false
             },
@@ -3685,7 +3686,7 @@
             {
               "key": "evidence_repo_enabled",
               "type": "boolean",
-              "default_value": true,
+              "default_value": false,
               "description": "Set to `true` to enable the evidence repository tool integration.",
               "required": false
             },
@@ -4083,7 +4084,7 @@
             {
               "key": "scc_enable_scc",
               "type": "string",
-              "default_value": "true",
+              "default_value": "false",
               "description": "Adds the SCC tool integration to the toolchain.",
               "required": false
             },
@@ -4405,7 +4406,8 @@
             }
           ],
           "install_type": "fullstack",
-          "terraform_version": "1.12.2"
+          "terraform_version": "1.12.2",
+          "ignore_readme": true
         }
       ]
     }
