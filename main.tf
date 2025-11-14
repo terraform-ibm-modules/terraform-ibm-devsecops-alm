@@ -456,6 +456,7 @@ module "devsecops_ci_toolchain" {
   app_repo_blind_connection      = var.repo_blind_connection
   app_repo_root_url              = var.repo_root_url
   app_repo_title                 = var.repo_title
+  app_repo_name                  = var.app_repo_name
 
   #COMPLIANCE PIPELINE REPO
   compliance_pipelines_repo_blind_connection = (var.compliance_pipeline_repo_use_group_settings) ? local.repo_blind_connection : var.compliance_pipeline_repo_blind_connection
@@ -592,21 +593,17 @@ module "devsecops_ci_toolchain" {
 
 
   #TRIGGER PROPERTIES
-  create_triggers              = var.create_triggers
-  create_git_triggers          = var.create_git_triggers
-  trigger_git_name             = var.ci_trigger_git_name
-  trigger_git_enable           = var.ci_trigger_git_enable
-  trigger_timed_name           = var.ci_trigger_timed_name
-  trigger_timed_enable         = var.ci_trigger_timed_enable
-  trigger_timed_cron_schedule  = var.ci_trigger_timed_cron_schedule
-  trigger_manual_name          = var.ci_trigger_manual_name
-  trigger_manual_enable        = var.ci_trigger_manual_enable
-  trigger_pr_git_name          = var.ci_trigger_pr_git_name
-  trigger_pr_git_enable        = var.ci_trigger_pr_git_enable
-  trigger_manual_pruner_name   = var.ci_trigger_manual_pruner_name
-  trigger_manual_pruner_enable = var.ci_trigger_manual_pruner_enable
-  trigger_timed_pruner_name    = var.ci_trigger_timed_pruner_name
-  trigger_timed_pruner_enable  = var.ci_trigger_timed_pruner_enable
+  create_triggers             = var.create_triggers
+  create_git_triggers         = var.create_git_triggers
+  trigger_git_name            = var.ci_trigger_git_name
+  trigger_git_enable          = var.ci_trigger_git_enable
+  trigger_timed_name          = var.ci_trigger_timed_name
+  trigger_timed_enable        = var.ci_trigger_timed_enable
+  trigger_timed_cron_schedule = var.ci_trigger_timed_cron_schedule
+  trigger_manual_name         = var.ci_trigger_manual_name
+  trigger_manual_enable       = var.ci_trigger_manual_enable
+  trigger_pr_git_name         = var.ci_trigger_pr_git_name
+  trigger_pr_git_enable       = var.ci_trigger_pr_git_enable
 }
 
 module "devsecops_cd_toolchain" {
@@ -901,10 +898,6 @@ module "devsecops_cd_toolchain" {
   trigger_manual_enable                 = var.cd_trigger_manual_enable
   trigger_manual_promotion_name         = var.cd_trigger_manual_promotion_name
   trigger_manual_promotion_enable       = var.cd_trigger_manual_promotion_enable
-  trigger_manual_pruner_name            = var.cd_trigger_manual_pruner_name
-  trigger_manual_pruner_enable          = var.cd_trigger_manual_pruner_enable
-  trigger_timed_pruner_name             = var.cd_trigger_timed_pruner_name
-  trigger_timed_pruner_enable           = var.cd_trigger_timed_pruner_enable
 }
 
 module "devsecops_cc_toolchain" {
@@ -1159,16 +1152,12 @@ module "devsecops_cc_toolchain" {
   artifactory_integration_name = var.artifactory_integration_name
 
   #TRIGGER PROPERTIES
-  create_triggers              = var.create_triggers
-  trigger_timed_name           = var.cc_trigger_timed_name
-  trigger_timed_enable         = var.cc_trigger_timed_enable
-  trigger_timed_cron_schedule  = var.cc_trigger_timed_cron_schedule
-  trigger_manual_name          = var.cc_trigger_manual_name
-  trigger_manual_enable        = var.cc_trigger_manual_enable
-  trigger_manual_pruner_name   = var.cc_trigger_manual_pruner_name
-  trigger_manual_pruner_enable = var.cc_trigger_manual_pruner_enable
-  trigger_timed_pruner_name    = var.cc_trigger_timed_pruner_name
-  trigger_timed_pruner_enable  = var.cc_trigger_timed_pruner_enable
+  create_triggers             = var.create_triggers
+  trigger_timed_name          = var.cc_trigger_timed_name
+  trigger_timed_enable        = var.cc_trigger_timed_enable
+  trigger_timed_cron_schedule = var.cc_trigger_timed_cron_schedule
+  trigger_manual_name         = var.cc_trigger_manual_name
+  trigger_manual_enable       = var.cc_trigger_manual_enable
 }
 
 ############### Auto Start Webhook ######################
