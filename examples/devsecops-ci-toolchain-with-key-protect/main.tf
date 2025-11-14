@@ -13,6 +13,7 @@ module "terraform_devsecops_alm" {
   create_ci_toolchain      = var.create_ci_toolchain
   create_cd_toolchain      = var.create_cd_toolchain
   create_cc_toolchain      = var.create_cc_toolchain
+  enable_cos               = false
   #disabling authorization_policy_creation as it seems to be unstable for the unit tests
   authorization_policy_creation = "disabled"
 }

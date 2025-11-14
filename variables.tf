@@ -311,7 +311,7 @@ variable "cos_bucket_name" {
 
 variable "cos_endpoint" {
   type        = string
-  description = "The endpoint for the Cloud Object Storage instance containing the evidence bucket. This setting sets the same endpoint for COS in the CI, CD, and CC toolchains. See `ci_cos_endpoint`, `cd_cos_endpoint`, and `cc_cos_endpoint` to set the endpoints independently."
+  description = "The endpoint for the Cloud Object Storage instance containing the evidence bucket. The S£ direct endpoint for the bucket region should be provided. This setting sets the same endpoint for COS in the CI, CD, and CC toolchains. "
   default     = ""
 }
 
@@ -414,7 +414,7 @@ variable "enable_artifactory" {
 variable "enable_cos" {
   type        = bool
   description = "Set to `true` to enable the new COS integration."
-  default     = false
+  default     = true
 }
 
 variable "enable_key_protect" {
@@ -531,7 +531,7 @@ variable "evidence_repo_integration_owner" {
 variable "evidence_repo_enabled" {
   type        = bool
   description = "Set to `true` to enable the evidence repository tool integration."
-  default     = true
+  default     = false
 }
 
 variable "evidence_repo_name" {
@@ -1033,7 +1033,7 @@ variable "scc_attachment_id" {
 variable "scc_enable_scc" {
   type        = string
   description = "Adds the SCC tool integration to the toolchain."
-  default     = "true"
+  default     = "false"
 }
 
 variable "scc_evidence_locker_type" {
