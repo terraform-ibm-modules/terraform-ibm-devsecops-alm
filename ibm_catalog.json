@@ -236,14 +236,14 @@
               "type": "string",
               "default_value": "",
               "description": "Set the name of your COS bucket. This applies the same COS bucket name for the CI, CD, and CC toolchains.",
-              "required": false
+              "required": true
             },
             {
               "key": "cos_endpoint",
               "type": "string",
               "default_value": "",
               "description": "The endpoint for the Cloud Object Storage instance containing the evidence bucket. The S£ direct endpoint for the bucket region should be provided. This setting sets the same endpoint for COS in the CI, CD, and CC toolchains. ",
-              "required": false
+              "required": true
             },
             {
               "key": "cos_instance_crn",
@@ -251,6 +251,13 @@
               "default_value": "",
               "description": "The CRN of the Cloud Object Storage instance containing the required bucket. This value is required to generate the correct access policies if creating IAM service credentials.",
               "required": true
+            },
+            {
+              "key": "cos_api_key_secret_name",
+              "type": "string",
+              "default_value": "",
+              "description": "Name of the Cloud Object Storage API key secret in the secret provider for accessing the evidence COS bucket. In addition `cos_endpoint` and `cos_bucket_name` must be set. This setting sets the same API key for the COS settings in the CI, CD, and CC toolchains.",
+              "required": false
             },
             {
               "key": "cc_pipeline_properties",
@@ -1196,13 +1203,6 @@
               "type": "string",
               "default_value": "",
               "description": "Secret group for the COS api key secret. Defaults to the value set in `sm_secret_group` if not set. Only used with `Secrets Manager`.",
-              "required": false
-            },
-            {
-              "key": "cos_api_key_secret_name",
-              "type": "string",
-              "default_value": "",
-              "description": "Name of the Cloud Object Storage API key secret in the secret provider for accessing the evidence COS bucket. In addition `cos_endpoint` and `cos_bucket_name` must be set. This setting sets the same API key for the COS settings in the CI, CD, and CC toolchains.",
               "required": false
             },
             {
@@ -2349,20 +2349,27 @@
               "type": "string",
               "default_value": "",
               "description": "Set the name of your COS bucket. This applies the same COS bucket name for the CI, CD, and CC toolchains.",
-              "required": false
+              "required": true
             },
             {
               "key": "cos_endpoint",
               "type": "string",
               "default_value": "",
               "description": "The endpoint for the Cloud Object Storage instance containing the evidence bucket. The S£ direct endpoint for the bucket region should be provided. This setting sets the same endpoint for COS in the CI, CD, and CC toolchains. ",
-              "required": false
+              "required": true
             },
             {
               "key": "cos_instance_crn",
               "type": "string",
               "default_value": "",
               "description": "The CRN of the Cloud Object Storage instance containing the required bucket. This value is required to generate the correct access policies if creating IAM service credentials.",
+              "required": true
+            },
+            {
+              "key": "cos_api_key_secret_name",
+              "type": "string",
+              "default_value": "",
+              "description": "Name of the Cloud Object Storage API key secret in the secret provider for accessing the evidence COS bucket. In addition `cos_endpoint` and `cos_bucket_name` must be set. This setting sets the same API key for the COS settings in the CI, CD, and CC toolchains.",
               "required": false
             },
             {
@@ -3309,13 +3316,6 @@
               "type": "string",
               "default_value": "",
               "description": "Secret group for the COS api key secret. Defaults to the value set in `sm_secret_group` if not set. Only used with `Secrets Manager`.",
-              "required": false
-            },
-            {
-              "key": "cos_api_key_secret_name",
-              "type": "string",
-              "default_value": "",
-              "description": "Name of the Cloud Object Storage API key secret in the secret provider for accessing the evidence COS bucket. In addition `cos_endpoint` and `cos_bucket_name` must be set. This setting sets the same API key for the COS settings in the CI, CD, and CC toolchains.",
               "required": false
             },
             {
