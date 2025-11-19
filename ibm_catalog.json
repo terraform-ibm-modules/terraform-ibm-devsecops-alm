@@ -695,6 +695,13 @@
               "required": false
             },
             {
+              "key": "cd_change_management_repo_name",
+              "type": "string",
+              "default_value": "",
+              "description": "The repository name.",
+              "required": false
+            },
+            {
               "key": "cd_change_management_repo_secret_group",
               "type": "string",
               "default_value": "",
@@ -824,6 +831,13 @@
               "type": "string",
               "default_value": "",
               "description": "Name of the Git token secret in the secret provider.",
+              "required": false
+            },
+            {
+              "key": "cd_deployment_repo_name",
+              "type": "string",
+              "default_value": "",
+              "description": "The repository name.",
               "required": false
             },
             {
@@ -2801,6 +2815,13 @@
               "required": false
             },
             {
+              "key": "cd_change_management_repo_name",
+              "type": "string",
+              "default_value": "",
+              "description": "The repository name.",
+              "required": false
+            },
+            {
               "key": "cd_change_management_repo_secret_group",
               "type": "string",
               "default_value": "",
@@ -2937,6 +2958,13 @@
               "type": "string",
               "default_value": "",
               "description": "Name of the Git token secret in the secret provider.",
+              "required": false
+            },
+            {
+              "key": "cd_deployment_repo_name",
+              "type": "string",
+              "default_value": "",
+              "description": "The repository name.",
               "required": false
             },
             {

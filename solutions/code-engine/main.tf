@@ -200,6 +200,7 @@ module "devsecops_da" {
   cd_change_management_repo_auth_type             = var.cd_change_management_repo_auth_type
   cd_change_management_repo_git_token_secret_crn  = var.cd_change_management_repo_git_token_secret_crn
   cd_change_management_repo_git_token_secret_name = var.cd_change_management_repo_git_token_secret_name
+  cd_change_management_repo_name                  = var.cd_change_management_repo_name
   cd_change_management_repo_secret_group          = var.cd_change_management_repo_secret_group
   cd_change_repo_clone_from_url                   = var.cd_change_repo_clone_from_url
   cd_enable_change_management_repo                = var.cd_enable_change_management_repo
@@ -222,6 +223,7 @@ module "devsecops_da" {
   cd_deployment_repo_existing_url                 = var.cd_deployment_repo_existing_url
   cd_deployment_repo_git_token_secret_crn         = var.cd_deployment_repo_git_token_secret_crn
   cd_deployment_repo_git_token_secret_name        = var.cd_deployment_repo_git_token_secret_name
+  cd_deployment_repo_name                         = var.cd_deployment_repo_name
   cd_deployment_repo_secret_group                 = var.cd_deployment_repo_secret_group
   cd_doi_toolchain_id                             = var.cd_doi_toolchain_id
   continuous_delivery_service_name                = var.continuous_delivery_service_name
