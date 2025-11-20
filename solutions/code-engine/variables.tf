@@ -1300,6 +1300,12 @@ variable "cd_change_repo_clone_from_url" {
   default     = ""
 }
 
+variable "cd_change_management_repo_name" {
+  type        = string
+  description = "The repository name."
+  default     = ""
+}
+
 variable "cd_cluster_name" {
   type        = string
   description = "Name of the cluster where the application is deployed."
@@ -1363,6 +1369,12 @@ variable "cd_deployment_repo_clone_from_branch" {
 variable "cd_deployment_repo_clone_from_url" {
   type        = string
   description = "Override the default sample app by providing your own sample deployment URL, which is cloned into the app repository. Note, using clone_if_not_exists mode, so if the app repository already exists the repository contents are unchanged."
+  default     = ""
+}
+
+variable "cd_deployment_repo_name" {
+  type        = string
+  description = "The repository name."
   default     = ""
 }
 
