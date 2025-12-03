@@ -457,6 +457,7 @@ module "devsecops_ci_toolchain" {
   app_repo_root_url              = var.repo_root_url
   app_repo_title                 = var.repo_title
   app_repo_name                  = var.app_repo_name
+  enable_app_repo_integration    = var.enable_app_repo_integration
 
   #COMPLIANCE PIPELINE REPO
   compliance_pipelines_repo_blind_connection = (var.compliance_pipeline_repo_use_group_settings) ? local.repo_blind_connection : var.compliance_pipeline_repo_blind_connection
