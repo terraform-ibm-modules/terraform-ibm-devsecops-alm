@@ -338,7 +338,7 @@ module "devsecops_ci_toolchain" {
   toolchain_region         = (var.ci_toolchain_region == "") ? var.toolchain_region : replace(replace(var.ci_toolchain_region, "ibm:yp:", ""), "ibm:ys1:", "")
   toolchain_resource_group = (var.ci_toolchain_resource_group == "") ? var.toolchain_resource_group : var.ci_toolchain_resource_group
   toolchain_description    = var.ci_toolchain_description
-  registry_namespace       = local.registry_namespace
+  registry_namespace       = (var.create_icr_namespace == true) ? local.registry_namespace : var.registry_namespace
   ci_pipeline_branch       = (var.ci_compliance_pipeline_branch == "") ? var.compliance_pipeline_branch : var.ci_compliance_pipeline_branch
   pr_pipeline_branch       = (var.ci_compliance_pipeline_pr_branch == "") ? var.compliance_pipeline_branch : var.ci_compliance_pipeline_pr_branch
   ci_pipeline_git_tag      = (var.ci_pipeline_git_tag == "") ? var.pipeline_git_tag : var.ci_pipeline_git_tag
