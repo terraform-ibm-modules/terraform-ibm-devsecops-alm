@@ -3647,7 +3647,7 @@ variable "create_access_group" {
 
 variable "enable_app_repo_integration" {
   type        = bool
-  description = "Set `enable_app_repo_integration` to false if you don't want to create default app repo integration. You can instead make use of `repository.json` to create the integration. Note: disabling this option requires explicitly setting the following variables,`cc_app_repo_url`, `cc_app_repo_branch`. `cc_app_repo_git_provider` and  `cc_app_repo_git_id` should be set if required but the default."
+  description = "Set `enable_app_repo_integration` to false if you don't want to create the default app repo integration. You can instead make use of `repository.json` to create the integration. Note: With respect to the CC pipeline, disabling this option requires explicitly setting the following variables,`cc_app_repo_url`, `cc_app_repo_branch` . `cc_app_repo_git_provider` and  `cc_app_repo_git_id` should be set if required but the default."
   default     = true
 }
 
