@@ -38,6 +38,7 @@
           "label": "Deploy to Code Engine",
           "name": "devsecopsce",
           "index": 2,
+          "short_description": "The DevSecOps set of predefined continuous integration, continuous deployment and continuous compliance toolchain templates with a sample Code Engine application.",
           "working_directory": "solutions/code-engine",
           "architecture": {
             "features": [
@@ -2172,6 +2173,7 @@
           "label": "Deploy to Kubernetes",
           "name": "devsecops",
           "index": 1,
+          "short_description": "The DevSecOps set of predefined continuous integration, continuous deployment and continuous compliance toolchain templates with a sample Node application.",
           "working_directory": "solutions/kubernetes",
           "architecture": {
             "features": [
