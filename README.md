@@ -67,7 +67,7 @@ statement instead the previous block.
 |------|--------|---------|
 | <a name="module_devsecops_cc_toolchain"></a> [devsecops\_cc\_toolchain](#module\_devsecops\_cc\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cc-toolchain | v2.7.0 |
 | <a name="module_devsecops_cd_toolchain"></a> [devsecops\_cd\_toolchain](#module\_devsecops\_cd\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain | v2.7.0 |
-| <a name="module_devsecops_ci_toolchain"></a> [devsecops\_ci\_toolchain](#module\_devsecops\_ci\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-ci-toolchain | v2.8.0 |
+| <a name="module_devsecops_ci_toolchain"></a> [devsecops\_ci\_toolchain](#module\_devsecops\_ci\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-ci-toolchain | v2.8.1 |
 | <a name="module_prereqs"></a> [prereqs](#module\_prereqs) | ./prereqs | n/a |
 
 ### Resources
@@ -509,7 +509,7 @@ statement instead the previous block.
 | <a name="input_create_triggers"></a> [create\_triggers](#input\_create\_triggers) | Set to `true` to create the default triggers associated with the compliance repos and sample app. | `string` | `"true"` | no |
 | <a name="input_enable_app_repo_integration"></a> [enable\_app\_repo\_integration](#input\_enable\_app\_repo\_integration) | Set `enable_app_repo_integration` to false if you don't want to create the default app repo integration. You can instead make use of `repository.json` to create the integration. Note: With respect to the CC pipeline, disabling this option requires explicitly setting the following variables,`cc_app_repo_url`, `cc_app_repo_branch` . `cc_app_repo_git_provider` and  `cc_app_repo_git_id` should be set if required but the default. | `bool` | `true` | no |
 | <a name="input_enable_artifactory"></a> [enable\_artifactory](#input\_enable\_artifactory) | Set to `true` to enable Artifactory for devsecops. | `bool` | `false` | no |
-| <a name="input_enable_cos"></a> [enable\_cos](#input\_enable\_cos) | Set to `true` to enable the new COS integration. | `bool` | `true` | no |
+| <a name="input_enable_cos"></a> [enable\_cos](#input\_enable\_cos) | Set to `true` to enable the new COS integration. | `bool` | `false` | no |
 | <a name="input_enable_key_protect"></a> [enable\_key\_protect](#input\_enable\_key\_protect) | Set to `true` to the enable Key Protect integrations. | `string` | `"false"` | no |
 | <a name="input_enable_pipeline_notifications"></a> [enable\_pipeline\_notifications](#input\_enable\_pipeline\_notifications) | When enabled, pipeline run events will be sent to the Event Notifications and Slack integrations in the enclosing toolchain. | `string` | `""` | no |
 | <a name="input_enable_privateworker"></a> [enable\_privateworker](#input\_enable\_privateworker) | Set to `true` to enable private workers for the CI, CD, CC and PR pipelines. A valid service api key must be set in Secrets Manager. The name of this secret can be specified using `privateworker_credentials_secret_name`. | `string` | `"false"` | no |

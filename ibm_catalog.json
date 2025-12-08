@@ -251,7 +251,7 @@
               "type": "string",
               "default_value": "",
               "description": "The CRN of the Cloud Object Storage instance containing the required bucket. This value is required to generate the correct access policies if creating IAM service credentials.",
-              "required": true
+              "required": false
             },
             {
               "key": "cos_api_key_secret_name",
@@ -1335,7 +1335,7 @@
             {
               "key": "enable_cos",
               "type": "boolean",
-              "default_value": true,
+              "default_value": false,
               "description": "Set to `true` to enable the new COS integration.",
               "required": false
             },
@@ -2379,7 +2379,7 @@
               "type": "string",
               "default_value": "",
               "description": "The CRN of the Cloud Object Storage instance containing the required bucket. This value is required to generate the correct access policies if creating IAM service credentials.",
-              "required": true
+              "required": false
             },
             {
               "key": "cos_api_key_secret_name",
@@ -3463,7 +3463,7 @@
             {
               "key": "enable_cos",
               "type": "boolean",
-              "default_value": true,
+              "default_value": false,
               "description": "Set to `true` to enable the new COS integration.",
               "required": false
             },

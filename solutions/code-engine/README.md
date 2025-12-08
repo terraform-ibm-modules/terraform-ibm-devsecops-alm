@@ -221,7 +221,7 @@ No resources.
 | <a name="input_create_secret_group"></a> [create\_secret\_group](#input\_create\_secret\_group) | Set to `true` to create the specified Secrets Manager secret group. | `bool` | `false` | no |
 | <a name="input_create_signing_key"></a> [create\_signing\_key](#input\_create\_signing\_key) | Set to `true` to create and add a `signing-key` and the `signing-certificate` to the Secrets Provider. | `bool` | `false` | no |
 | <a name="input_create_triggers"></a> [create\_triggers](#input\_create\_triggers) | Set to `true` to create the default triggers associated with the compliance repos and sample app. | `string` | `"true"` | no |
-| <a name="input_enable_cos"></a> [enable\_cos](#input\_enable\_cos) | Set to `true` to enable the new COS integration. | `bool` | `true` | no |
+| <a name="input_enable_cos"></a> [enable\_cos](#input\_enable\_cos) | Set to `true` to enable the new COS integration. | `bool` | `false` | no |
 | <a name="input_enable_pipeline_notifications"></a> [enable\_pipeline\_notifications](#input\_enable\_pipeline\_notifications) | When enabled, pipeline run events will be sent to the Event Notifications and Slack integrations in the enclosing toolchain. | `string` | `""` | no |
 | <a name="input_enable_privateworker"></a> [enable\_privateworker](#input\_enable\_privateworker) | Set to `true` to enable private workers for the CI, CD, CC and PR pipelines. A valid service api key must be set in Secrets Manager. The name of this secret can be specified using `privateworker_credentials_secret_name`. | `string` | `"false"` | no |
 | <a name="input_enable_secrets_manager"></a> [enable\_secrets\_manager](#input\_enable\_secrets\_manager) | Set to `true` to enable the Secrets Manager integrations. | `string` | `"true"` | no |
