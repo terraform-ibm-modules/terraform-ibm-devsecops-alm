@@ -414,7 +414,7 @@ variable "enable_artifactory" {
 variable "enable_cos" {
   type        = bool
   description = "Set to `true` to enable the new COS integration."
-  default     = true
+  default     = false
 }
 
 variable "enable_key_protect" {
