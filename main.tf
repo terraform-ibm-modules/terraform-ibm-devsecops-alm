@@ -49,10 +49,6 @@ locals {
   cd_enable_pipeline_notifications = (var.cd_enable_pipeline_notifications == "") ? var.enable_pipeline_notifications : var.cd_enable_pipeline_notifications
   cc_enable_pipeline_notifications = (var.cc_enable_pipeline_notifications == "") ? var.enable_pipeline_notifications : var.cc_enable_pipeline_notifications
 
-  cd_scc_enable_scc = (var.cd_scc_enable_scc == "") ? var.scc_enable_scc : var.cd_scc_enable_scc
-  cc_scc_enable_scc = (var.cc_scc_enable_scc == "") ? var.scc_enable_scc : var.cc_scc_enable_scc
-
-
   calculated_ci_cluster_region = (var.ci_cluster_region != "") ? var.ci_cluster_region : var.toolchain_region
 
   ci_toolchain_name = (var.ci_toolchain_name == "") ? format("${var.toolchain_name}%s", "-CI-Toolchain") : var.ci_toolchain_name
@@ -815,7 +811,7 @@ module "devsecops_cd_toolchain" {
   deployment_repo_title                 = var.repo_title
 
   #SCC
-  scc_enable_scc       = (local.cd_scc_enable_scc == "true") ? true : false
+  scc_enable_scc       = var.scc_enable_scc
   scc_integration_name = var.cd_scc_integration_name
 
   #CODE ENGINE
@@ -1090,7 +1086,7 @@ module "devsecops_cc_toolchain" {
   inventory_repo_title             = local.repo_title
 
   #SCC
-  scc_enable_scc       = (local.cc_scc_enable_scc == "true") ? true : false
+  scc_enable_scc       = var.scc_enable_scc
   scc_integration_name = var.cc_scc_integration_name
 
   #OTHER INTEGRATIONS

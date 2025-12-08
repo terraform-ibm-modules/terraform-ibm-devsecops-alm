@@ -1031,9 +1031,9 @@ variable "scc_attachment_id" {
 }
 
 variable "scc_enable_scc" {
-  type        = string
+  type        = bool
   description = "Adds the SCC tool integration to the toolchain."
-  default     = "false"
+  default     = false
 }
 
 variable "scc_evidence_locker_type" {
@@ -1725,12 +1725,6 @@ variable "cc_repository_properties_filepath" {
 variable "cc_repository_properties" {
   type        = string
   description = "Stringified JSON containing the repositories and triggers that get created in the CI toolchain pipelines."
-  default     = ""
-}
-
-variable "cc_scc_enable_scc" {
-  type        = string
-  description = "Adds the SCC tool integration to the toolchain."
   default     = ""
 }
 
@@ -2578,12 +2572,6 @@ variable "cd_repository_properties_filepath" {
 variable "cd_repository_properties" {
   type        = string
   description = "Stringified JSON containing the repositories and triggers that get created in the CI toolchain pipelines."
-  default     = ""
-}
-
-variable "cd_scc_enable_scc" {
-  type        = string
-  description = "Adds the SCC tool integration to the toolchain."
   default     = ""
 }
 
