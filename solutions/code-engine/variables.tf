@@ -468,7 +468,7 @@ variable "evidence_repo_integration_owner" {
 variable "evidence_repo_enabled" {
   type        = bool
   description = "Set to `true` to enable the evidence repository tool integration."
-  default     = true
+  default     = false
 }
 
 variable "evidence_repo_name" {
@@ -944,9 +944,9 @@ variable "scc_attachment_id" {
 }
 
 variable "scc_enable_scc" {
-  type        = string
+  type        = bool
   description = "Adds the SCC tool integration to the toolchain."
-  default     = "false"
+  default     = false
 }
 
 variable "scc_evidence_locker_type" {

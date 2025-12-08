@@ -1843,8 +1843,8 @@
             },
             {
               "key": "scc_enable_scc",
-              "type": "string",
-              "default_value": "false",
+              "type": "boolean",
+              "default_value": false,
               "description": "Adds the SCC tool integration to the toolchain.",
               "required": false
             },
@@ -3971,8 +3971,8 @@
             },
             {
               "key": "scc_enable_scc",
-              "type": "string",
-              "default_value": "false",
+              "type": "boolean",
+              "default_value": false,
               "description": "Adds the SCC tool integration to the toolchain.",
               "required": false
             },
