@@ -3645,6 +3645,24 @@ variable "create_access_group" {
 
 ####################################################################
 
+variable "ci_locked_properties" {
+  type        = list(string)
+  description = "List of default locked properties"
+  default     = ["artifactory-dockerconfigjson", "cluster", "cluster-namespace", "cluster-region", "compliance-baseimage", "cos-api-key", "cos-bucket-name", "cos-endpoint", "cra-bom-generate", "cra-deploy-analysis", "cra-generate-cyclonedx-format", "cra-vulnerability-scan", "custom-image-tag", "dev-region", "dev-resource-group", "doi-environment", "doi-ibmcloud-api-key", "doi-toolchain-id", "event-notifications", "evidence-repo", "git-token", "gosec-private-repository-host", "gosec-private-repository-ssh-key", "ibmcloud-api", "ibmcloud-api-key", "incident-repo", "inventory-repo", "opt-in-dynamic-api-scan", "opt-in-dynamic-scan", "opt-in-dynamic-ui-scan", "opt-in-gosec", "opt-in-sonar", "peer-review-compliance", "pipeline-config", "pipeline-config-branch", "pipeline-config-repo", "pipeline-dockerconfigjson", "print-code-signing-certificate", "registry-namespace", "registry-region", "signing-key", "slack-notifications", "sonarqube", "sonarqube-config", "version"]
+}
+
+variable "cd_locked_properties" {
+  type        = list(string)
+  description = "List of default locked properties"
+  default     = ["allow_test_servicenow", "app-concurrency", "app-deployment-timeout", "app-max-scale", "app-min-scale", "app-port", "app-visibility", "artifact-signature-verification", "change-management-repo", "cluster", "cluster-namespace", "cluster-region", "code-engine-binding-resource-group", "code-engine-deployment-type", "code-engine-project", "code-engine-region", "code-engine-resource-group", "code-signing-certificate", "compliance-baseimage", "cos-api-key", "cos-bucket-name", "cos-endpoint", "cpu", "cra-bom-generate", "cra-deploy-analysis", "cra-vulnerability-scan", "doi-environment", "doi-ibmcloud-api-key", "doi-toolchain-id", "emergency-label", "env-from-configmaps", "env-from-secrets", "ephemeral-storage", "event-notifications", "evidence-repo", "git-token", "ibmcloud-api", "ibmcloud-api-key", "incident-repo", "inventory-repo", "job-instances", "job-maxexecutiontime", "job-retrylimit", "memory", "pipeline-config", "pipeline-config-branch", "pipeline-config-repo", "pnp-ibmcloud-api", "pnp-ibmcloud-api-key", "pre-prod-evidence-collection", "remove-unspecified-references-to-configuration-resources", "service-bindings", "servicenow-api-base-url", "servicenow-crn-mask", "slack-notifications", "version"]
+}
+
+variable "cc_locked_properties" {
+  type        = list(string)
+  description = "List of default locked properties"
+  default     = ["app-concurrency", "app-deployment-timeout", "app-max-scale", "app-min-scale", "app-port", "app-visibility", "artifactory-dockerconfigjson", "cluster", "cluster-name", "cluster-namespace", "cluster-region", "code-engine-binding-resource-group", "code-engine-build-size", "code-engine-build-strategy", "code-engine-build-timeout", "code-engine-build-use-native-docker", "code-engine-deployment-type", "code-engine-project", "code-engine-region", "code-engine-resource-group", "code-engine-wait-timeout", "compliance-baseimage", "context-dir", "cos-api-key", "cos-bucket-name", "cos-endpoint", "cpu", "cra-bom-generate", "cra-deploy-analysis", "cra-generate-cyclonedx-format", "cra-vulnerability-scan", "custom-image-tag", "dev-cluster-namespace", "dev-region", "dev-resource-group", "dockerfile", "doi-environment", "doi-ibmcloud-api-key", "doi-toolchain-id", "env-from-configmaps", "env-from-secrets", "ephemeral-storage", "event-notifications", "evidence-repo", "git-token", "gosec-private-repository-host", "gosec-private-repository-ssh-key", "ibmcloud-api", "ibmcloud-api-key", "image-name", "incident-repo", "inventory-repo", "job-instances", "job-maxexecutiontime", "job-retrylimit", "memory", "opt-in-dynamic-api-scan", "opt-in-dynamic-scan", "opt-in-dynamic-ui-scan", "opt-in-gosec", "opt-in-sonar", "peer-review-compliance", "pipeline-config", "pipeline-config-branch", "pipeline-config-repo", "pipeline-dockerconfigjson", "print-code-signing-certificate", "registry-domain", "registry-namespace", "registry-region", "remove-unspecified-references-to-configuration-resources", "service-bindings", "signing-key", "slack-notifications", "sonarqube", "sonarqube-config", "source", "version"]
+}
+
 variable "enable_app_repo_integration" {
   type        = bool
   description = "Set `enable_app_repo_integration` to false if you don't want to create the default app repo integration. You can instead make use of `repository.json` to create the integration. Note: With respect to the CC pipeline, disabling this option requires explicitly setting the following variables,`cc_app_repo_url`, `cc_app_repo_branch` . `cc_app_repo_git_provider` and  `cc_app_repo_git_id` should be set if required but the default."

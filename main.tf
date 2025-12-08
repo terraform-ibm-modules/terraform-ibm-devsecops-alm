@@ -345,6 +345,8 @@ module "devsecops_ci_toolchain" {
   pr_pipeline_git_tag      = (var.pr_pipeline_git_tag == "") ? var.pipeline_git_tag : var.pr_pipeline_git_tag
   worker_id                = var.worker_id
 
+  default_locked_properties = var.ci_locked_properties
+
   toolchain_resource_region_override = var.toolchain_resource_region_override
 
   #SECRET PROVIDERS
@@ -622,6 +624,8 @@ module "devsecops_cd_toolchain" {
   worker_id                = var.worker_id
 
   toolchain_resource_region_override = var.toolchain_resource_region_override
+
+  default_locked_properties = var.cd_locked_properties
 
   #SECRET PROVIDERS
   enable_key_protect       = (local.cd_enable_key_protect == "true") ? true : false
@@ -917,6 +921,8 @@ module "devsecops_cc_toolchain" {
   worker_id                     = var.worker_id
 
   toolchain_resource_region_override = var.toolchain_resource_region_override
+
+  default_locked_properties = var.cc_locked_properties
 
   #SECRET PROVIDERS
   enable_key_protect       = (local.cc_enable_key_protect == "true") ? true : false
