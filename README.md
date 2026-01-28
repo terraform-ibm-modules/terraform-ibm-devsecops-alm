@@ -18,7 +18,20 @@ A Terraform module for provisioning the DevSecOps CI, CD, and CC toolchains.
 
 ![Architecture diagram for 'DevSecOps CI, CD, CC toolchains'.](/reference-architectures/diagram-deploy-arch-ibm-devsecops-alm-diagram.svg "Architecture diagram")
 
-## Usage
+<!-- BEGIN OVERVIEW HOOK -->
+## Overview
+* [terraform-ibm-devsecops-alm](#terraform-ibm-devsecops-alm)
+* [Examples](./examples)
+:information_source: Ctrl/Cmd+Click or right-click on the Schematics deploy button to open in a new tab
+    * <a href="./examples/default">Default example</a> <a href="https://cloud.ibm.com/schematics/workspaces/create?workspace_name=devsecops-alm-default-example&repository=https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-alm/tree/main/examples/default"><img src="https://img.shields.io/badge/Deploy%20with IBM%20Cloud%20Schematics-0f62fe?logo=ibm&logoColor=white&labelColor=0f62fe" alt="Deploy with IBM Cloud Schematics" style="height: 16px; vertical-align: text-bottom; margin-left: 5px;"></a>
+    * <a href="./examples/devsecops-ci-toolchain-bring-your-own-app">Bring your own app example</a> <a href="https://cloud.ibm.com/schematics/workspaces/create?workspace_name=devsecops-alm-devsecops-ci-toolchain-bring-your-own-app-example&repository=https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-alm/tree/main/examples/devsecops-ci-toolchain-bring-your-own-app"><img src="https://img.shields.io/badge/Deploy%20with IBM%20Cloud%20Schematics-0f62fe?logo=ibm&logoColor=white&labelColor=0f62fe" alt="Deploy with IBM Cloud Schematics" style="height: 16px; vertical-align: text-bottom; margin-left: 5px;"></a>
+    * <a href="./examples/devsecops-ci-toolchain-with-key-protect">Key Protect and CI only example</a> <a href="https://cloud.ibm.com/schematics/workspaces/create?workspace_name=devsecops-alm-devsecops-ci-toolchain-with-key-protect-example&repository=https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-alm/tree/main/examples/devsecops-ci-toolchain-with-key-protect"><img src="https://img.shields.io/badge/Deploy%20with IBM%20Cloud%20Schematics-0f62fe?logo=ibm&logoColor=white&labelColor=0f62fe" alt="Deploy with IBM Cloud Schematics" style="height: 16px; vertical-align: text-bottom; margin-left: 5px;"></a>
+* [Contributing](#contributing)
+<!-- END OVERVIEW HOOK -->
+
+## terraform-ibm-devsecops-alm
+
+### Usage
 
 ```hcl
 module "terraform_devsecops_alm" {
@@ -44,13 +57,7 @@ statement instead the previous block.
 
 <!-- No permissions are needed to run this module.-->
 <!-- END MODULE HOOK -->
-<!-- BEGIN EXAMPLES HOOK -->
-## Examples
 
-- [ Default example](examples/default)
-- [ Bring your own app example](examples/devsecops-ci-toolchain-bring-your-own-app)
-- [ Key Protect and CI only example](examples/devsecops-ci-toolchain-with-key-protect)
-<!-- END EXAMPLES HOOK -->
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ### Requirements
 
