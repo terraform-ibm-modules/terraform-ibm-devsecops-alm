@@ -27,11 +27,6 @@ output "key_protect_instance_id" {
   value       = module.devsecops_da.key_protect_instance_id
 }
 
-output "evidence_repo_url" {
-  description = "The Evidence Repo URL"
-  value       = module.devsecops_da.evidence_repo_url
-}
-
 output "issues_repo_url" {
   description = "The Issues Repo URL"
   value       = module.devsecops_da.issues_repo_url

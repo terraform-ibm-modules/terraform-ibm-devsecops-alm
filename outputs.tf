@@ -27,11 +27,6 @@ output "key_protect_instance_id" {
   value       = try(module.devsecops_ci_toolchain[0].key_protect_instance_id, "")
 }
 
-output "evidence_repo_url" {
-  description = "The Evidence Repo URL"
-  value       = try(module.devsecops_ci_toolchain[0].evidence_repo_url, var.evidence_repo_existing_url)
-}
-
 output "issues_repo_url" {
   description = "The Issues Repo URL"
   value       = try(module.devsecops_ci_toolchain[0].issues_repo_url, var.issues_repo_existing_url)

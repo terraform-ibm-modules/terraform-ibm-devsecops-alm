@@ -70,18 +70,6 @@ module "devsecops_da" {
   environment_tag                                 = var.environment_tag
   event_notifications_crn                         = var.event_notifications_crn
   event_notifications_tool_name                   = var.event_notifications_tool_name
-  evidence_group                                  = var.evidence_group
-  evidence_repo_auth_type                         = var.evidence_repo_auth_type
-  evidence_repo_existing_git_id                   = var.evidence_repo_existing_git_id
-  evidence_repo_existing_git_provider             = var.evidence_repo_existing_git_provider
-  evidence_repo_existing_url                      = var.evidence_repo_existing_url
-  evidence_repo_git_token_secret_crn              = var.evidence_repo_git_token_secret_crn
-  evidence_repo_git_token_secret_name             = var.evidence_repo_git_token_secret_name
-  evidence_repo_integration_owner                 = var.evidence_repo_integration_owner
-  evidence_repo_enabled                           = var.evidence_repo_enabled
-  evidence_repo_name                              = var.evidence_repo_name
-  evidence_repo_secret_group                      = var.evidence_repo_secret_group
-  evidence_repo_source_url                        = var.evidence_repo_source_url
   force_create_standard_api_key                   = var.force_create_standard_api_key
   ibmcloud_api                                    = var.ibmcloud_api
   ibmcloud_api_key                                = var.ibmcloud_api_key
@@ -148,7 +136,6 @@ module "devsecops_da" {
   rotate_signing_key                              = var.rotate_signing_key
   scc_attachment_id                               = var.scc_attachment_id
   scc_enable_scc                                  = var.scc_enable_scc
-  scc_evidence_locker_type                        = var.scc_evidence_locker_type
   scc_instance_crn                                = var.scc_instance_crn
   scc_profile_name                                = var.scc_profile_name
   scc_profile_version                             = var.scc_profile_version
