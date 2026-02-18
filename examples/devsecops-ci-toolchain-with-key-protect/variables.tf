@@ -62,7 +62,7 @@ variable "kp_location" {
 }
 
 variable "create_ci_toolchain" {
-  description = "Flag which determines if the DevSecOps CI toolchain is created. If this toolchain is not created then values must be set for the following variables, evidence_repo_url, issues_repo_url and inventory_repo_url."
+  description = "Flag which determines if the DevSecOps CI toolchain is created. If this toolchain is not created then values must be set for the following variables, issues_repo_url and inventory_repo_url."
   type        = bool
   default     = true
 }

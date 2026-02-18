@@ -64,7 +64,7 @@ variable "app_repo_existing_git_provider" {
   description = "Git provider for application repo. If not set will default to `hostedgit`."
   validation {
     condition     = contains(["hostedgit", "githubconsolidated", "gitlab", ""], var.app_repo_existing_git_provider)
-    error_message = "Must be either \"hostedgit\" or \"gitlab\" or \"githubconsolidated\" for evidence repository."
+    error_message = "Must be either \"hostedgit\" or \"gitlab\" or \"githubconsolidated\" for app repository."
   }
 }
 
@@ -340,7 +340,7 @@ variable "create_cd_toolchain" {
 }
 
 variable "create_ci_toolchain" {
-  description = "Flag which determines if the DevSecOps CI toolchain is created. If this toolchain is not created then values must be set for the following variables, evidence_repo_url, issues_repo_url and inventory_repo_url."
+  description = "Flag which determines if the DevSecOps CI toolchain is created. If this toolchain is not created then values must be set for the following variables, issues_repo_url and inventory_repo_url."
   type        = bool
   default     = true
 }
@@ -469,87 +469,6 @@ variable "event_notifications_tool_name" {
   type        = string
   description = "The name of the Event Notifications integration."
   default     = "Event Notifications"
-}
-
-variable "evidence_group" {
-  type        = string
-  description = "Specify the Git user or group for the evidence repository."
-  default     = ""
-}
-
-variable "evidence_repo_auth_type" {
-  type        = string
-  description = "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`."
-  default     = ""
-}
-
-variable "evidence_repo_existing_git_id" {
-  type        = string
-  description = "Set this value to `github` for github.com, or to the GUID of a custom GitHub Enterprise server."
-  default     = ""
-}
-
-variable "evidence_repo_existing_git_provider" {
-  type        = string
-  default     = ""
-  description = "Git provider for evidence repo. If not set will default to `hostedgit`."
-  validation {
-    condition     = contains(["hostedgit", "githubconsolidated", "gitlab", ""], var.evidence_repo_existing_git_provider)
-    error_message = "Must be either \"hostedgit\" or \"gitlab\" or \"githubconsolidated\" for evidence repository."
-  }
-}
-
-variable "evidence_repo_existing_url" {
-  type        = string
-  description = "Set to use an existing evidence repository."
-  default     = ""
-}
-
-variable "evidence_repo_git_token_secret_crn" {
-  type        = string
-  sensitive   = true
-  description = "The CRN of the Git token used for accessing the Evidence repository."
-  default     = ""
-  validation {
-    condition     = startswith(var.evidence_repo_git_token_secret_crn, "crn:") || var.evidence_repo_git_token_secret_crn == ""
-    error_message = "Must be a CRN or left empty."
-  }
-}
-
-variable "evidence_repo_git_token_secret_name" {
-  type        = string
-  description = "Name of the Git token secret in the secret provider used for accessing the evidence repository."
-  default     = ""
-}
-
-variable "evidence_repo_integration_owner" {
-  type        = string
-  description = "The name of the repository integration owner."
-  default     = ""
-}
-
-variable "evidence_repo_enabled" {
-  type        = bool
-  description = "Set to `true` to enable the evidence repository tool integration."
-  default     = false
-}
-
-variable "evidence_repo_name" {
-  type        = string
-  description = "Set to use a custom name for the Evidence repository."
-  default     = ""
-}
-
-variable "evidence_repo_secret_group" {
-  type        = string
-  description = "Secret group for the Evidence repository secret. Defaults to the value set in `sm_secret_group` if not set. Only used with `Secrets Manager`."
-  default     = ""
-}
-
-variable "evidence_repo_source_url" {
-  type        = string
-  default     = ""
-  description = "URL of evidence repo template to be cloned"
 }
 
 variable "force_create_standard_api_key" {
@@ -1036,16 +955,6 @@ variable "scc_enable_scc" {
   default     = false
 }
 
-variable "scc_evidence_locker_type" {
-  type        = string
-  description = "Allowable values are `evidence-repo` and `evidence-bucket`. If left unset, the SCC tool will behave as if `evidence-repo` has been set and will use the evidence repository configured in the toolchain. If the COS tool has been enabled, then the bucket name in `cos_bucket_name` will be provided to the SCC tool and `evidence-bucket` will be set. To override this behavior, explicitly set `scc_evidence_locker_type`."
-  default     = ""
-  validation {
-    condition     = contains(["", "evidence-repo", "evidence-bucket"], var.scc_evidence_locker_type)
-    error_message = "Must be either \"evidence-repo\" or \"evidence-bucket\" or left unset."
-  }
-}
-
 variable "scc_instance_crn" {
   type        = string
   description = "The Security and Compliance Center service instance CRN (Cloud Resource Name). This parameter is only relevant when the `scc_use_profile_attachment` parameter is enabled."
@@ -1293,7 +1202,7 @@ variable "cc_app_repo_git_provider" {
   default     = ""
   validation {
     condition     = contains(["hostedgit", "githubconsolidated", "gitlab", ""], var.cc_app_repo_git_provider)
-    error_message = "Must be either \"hostedgit\" or \"gitlab\" or \"githubconsolidated\" for evidence repository."
+    error_message = "Must be either \"hostedgit\" or \"gitlab\" or \"githubconsolidated\" for app repository."
   }
 }
 
@@ -1452,41 +1361,6 @@ variable "cc_enable_slack" {
 variable "cc_event_notifications_crn" {
   type        = string
   description = "Set the Event Notifications CRN to create an Events Notification integration."
-  default     = ""
-}
-
-variable "cc_evidence_group" {
-  type        = string
-  description = "Specify the Git user or group for the evidence repository."
-  default     = ""
-}
-
-variable "cc_evidence_repo_auth_type" {
-  type        = string
-  description = "Select the method of authentication that is used to access the Git provider. 'oauth' or 'pat'"
-  default     = ""
-}
-
-variable "cc_evidence_repo_git_token_secret_crn" {
-  type        = string
-  sensitive   = true
-  description = "The CRN of the Git token used for accessing the Evidence repository."
-  default     = ""
-  validation {
-    condition     = startswith(var.cc_evidence_repo_git_token_secret_crn, "crn:") || var.cc_evidence_repo_git_token_secret_crn == ""
-    error_message = "Must be a CRN or left empty."
-  }
-}
-
-variable "cc_evidence_repo_git_token_secret_name" {
-  type        = string
-  description = "Name of the Git token secret in the secret provider used for accessing the evidence repository."
-  default     = ""
-}
-
-variable "cc_evidence_repo_secret_group" {
-  type        = string
-  description = "Secret group for the Evidence repository secret. Defaults to the value set in `sm_secret_group` if not set. Only used with `Secrets Manager`."
   default     = ""
 }
 
@@ -2204,7 +2078,7 @@ variable "cd_deployment_repo_existing_git_provider" {
   default     = ""
   validation {
     condition     = contains(["hostedgit", "githubconsolidated", "gitlab", ""], var.cd_deployment_repo_existing_git_provider)
-    error_message = "Must be either \"hostedgit\" or \"gitlab\" or \"githubconsolidated\" for evidence repository."
+    error_message = "Must be either \"hostedgit\" or \"gitlab\" or \"githubconsolidated\" for deployment repository."
   }
 }
 
@@ -2276,41 +2150,6 @@ variable "cd_enable_slack" {
 variable "cd_event_notifications_crn" {
   type        = string
   description = "Set the Event Notifications CRN to create an Events Notification integration."
-  default     = ""
-}
-
-variable "cd_evidence_group" {
-  type        = string
-  description = "Specify the Git user or group for the evidence repository."
-  default     = ""
-}
-
-variable "cd_evidence_repo_auth_type" {
-  type        = string
-  description = "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`."
-  default     = ""
-}
-
-variable "cd_evidence_repo_git_token_secret_crn" {
-  type        = string
-  sensitive   = true
-  description = "The CRN of the Git token used for accessing the Evidence repository."
-  default     = ""
-  validation {
-    condition     = startswith(var.cd_evidence_repo_git_token_secret_crn, "crn:") || var.cd_evidence_repo_git_token_secret_crn == ""
-    error_message = "Must be a CRN or left empty."
-  }
-}
-
-variable "cd_evidence_repo_git_token_secret_name" {
-  type        = string
-  description = "Name of the Git token secret in the secret provider used for accessing the evidence repository."
-  default     = ""
-}
-
-variable "cd_evidence_repo_secret_group" {
-  type        = string
-  description = "Secret group for the Evidence repository secret. Defaults to the value set in `sm_secret_group` if not set. Only used with `Secrets Manager`."
   default     = ""
 }
 
@@ -2848,7 +2687,7 @@ variable "ci_app_repo_existing_git_provider" {
   default     = ""
   validation {
     condition     = contains(["hostedgit", "githubconsolidated", "gitlab", ""], var.ci_app_repo_existing_git_provider)
-    error_message = "Must be either \"hostedgit\" or \"gitlab\" or \"githubconsolidated\" for evidence repository."
+    error_message = "Must be either \"hostedgit\" or \"gitlab\" or \"githubconsolidated\" for app repository."
   }
 }
 
@@ -3061,41 +2900,6 @@ variable "ci_enable_slack" {
 variable "ci_event_notifications_crn" {
   type        = string
   description = "Set the Event Notifications CRN to create an Events Notification integration."
-  default     = ""
-}
-
-variable "ci_evidence_group" {
-  type        = string
-  description = "Specify the Git user or group for the evidence repository."
-  default     = ""
-}
-
-variable "ci_evidence_repo_auth_type" {
-  type        = string
-  description = "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`."
-  default     = ""
-}
-
-variable "ci_evidence_repo_git_token_secret_crn" {
-  type        = string
-  sensitive   = true
-  description = "The CRN of the Git token used for accessing the Evidence repository."
-  default     = ""
-  validation {
-    condition     = startswith(var.ci_evidence_repo_git_token_secret_crn, "crn:") || var.ci_evidence_repo_git_token_secret_crn == ""
-    error_message = "Must be a CRN or left empty."
-  }
-}
-
-variable "ci_evidence_repo_git_token_secret_name" {
-  type        = string
-  description = "Name of the Git token secret in the secret provider used for accessing the evidence repository."
-  default     = ""
-}
-
-variable "ci_evidence_repo_secret_group" {
-  type        = string
-  description = "Secret group for the Evidence repository secret. Defaults to the value set in `sm_secret_group` if not set. Only used with `Secrets Manager`."
   default     = ""
 }
 
@@ -3636,19 +3440,19 @@ variable "create_access_group" {
 variable "ci_locked_properties" {
   type        = list(string)
   description = "List of default locked properties"
-  default     = ["artifactory-dockerconfigjson", "cluster", "cluster-namespace", "cluster-region", "compliance-baseimage", "cos-api-key", "cos-bucket-name", "cos-endpoint", "cra-bom-generate", "cra-deploy-analysis", "cra-generate-cyclonedx-format", "cra-vulnerability-scan", "custom-image-tag", "dev-region", "dev-resource-group", "doi-environment", "doi-ibmcloud-api-key", "doi-toolchain-id", "event-notifications", "evidence-repo", "git-token", "gosec-private-repository-host", "gosec-private-repository-ssh-key", "ibmcloud-api", "ibmcloud-api-key", "incident-repo", "inventory-repo", "opt-in-dynamic-api-scan", "opt-in-dynamic-scan", "opt-in-dynamic-ui-scan", "opt-in-gosec", "opt-in-sonar", "peer-review-compliance", "pipeline-config", "pipeline-config-branch", "pipeline-config-repo", "pipeline-dockerconfigjson", "print-code-signing-certificate", "registry-namespace", "registry-region", "signing-key", "slack-notifications", "sonarqube", "sonarqube-config", "version"]
+  default     = ["artifactory-dockerconfigjson", "cluster", "cluster-namespace", "cluster-region", "compliance-baseimage", "cos-api-key", "cos-bucket-name", "cos-endpoint", "cra-bom-generate", "cra-deploy-analysis", "cra-generate-cyclonedx-format", "cra-vulnerability-scan", "custom-image-tag", "dev-region", "dev-resource-group", "doi-environment", "doi-ibmcloud-api-key", "doi-toolchain-id", "event-notifications", "git-token", "gosec-private-repository-host", "gosec-private-repository-ssh-key", "ibmcloud-api", "ibmcloud-api-key", "incident-repo", "inventory-repo", "opt-in-dynamic-api-scan", "opt-in-dynamic-scan", "opt-in-dynamic-ui-scan", "opt-in-gosec", "opt-in-sonar", "peer-review-compliance", "pipeline-config", "pipeline-config-branch", "pipeline-config-repo", "pipeline-dockerconfigjson", "print-code-signing-certificate", "registry-namespace", "registry-region", "signing-key", "slack-notifications", "sonarqube", "sonarqube-config", "version"]
 }
 
 variable "cd_locked_properties" {
   type        = list(string)
   description = "List of default locked properties"
-  default     = ["allow_test_servicenow", "app-concurrency", "app-deployment-timeout", "app-max-scale", "app-min-scale", "app-port", "app-visibility", "artifact-signature-verification", "change-management-repo", "cluster", "cluster-namespace", "cluster-region", "code-engine-binding-resource-group", "code-engine-deployment-type", "code-engine-project", "code-engine-region", "code-engine-resource-group", "code-signing-certificate", "compliance-baseimage", "cos-api-key", "cos-bucket-name", "cos-endpoint", "cpu", "cra-bom-generate", "cra-deploy-analysis", "cra-vulnerability-scan", "doi-environment", "doi-ibmcloud-api-key", "doi-toolchain-id", "emergency-label", "env-from-configmaps", "env-from-secrets", "ephemeral-storage", "event-notifications", "evidence-repo", "git-token", "ibmcloud-api", "ibmcloud-api-key", "incident-repo", "inventory-repo", "job-instances", "job-maxexecutiontime", "job-retrylimit", "memory", "pipeline-config", "pipeline-config-branch", "pipeline-config-repo", "pnp-ibmcloud-api", "pnp-ibmcloud-api-key", "pre-prod-evidence-collection", "remove-unspecified-references-to-configuration-resources", "service-bindings", "servicenow-api-base-url", "servicenow-crn-mask", "slack-notifications", "version"]
+  default     = ["allow_test_servicenow", "app-concurrency", "app-deployment-timeout", "app-max-scale", "app-min-scale", "app-port", "app-visibility", "artifact-signature-verification", "change-management-repo", "cluster", "cluster-namespace", "cluster-region", "code-engine-binding-resource-group", "code-engine-deployment-type", "code-engine-project", "code-engine-region", "code-engine-resource-group", "code-signing-certificate", "compliance-baseimage", "cos-api-key", "cos-bucket-name", "cos-endpoint", "cpu", "cra-bom-generate", "cra-deploy-analysis", "cra-vulnerability-scan", "doi-environment", "doi-ibmcloud-api-key", "doi-toolchain-id", "emergency-label", "env-from-configmaps", "env-from-secrets", "ephemeral-storage", "event-notifications", "git-token", "ibmcloud-api", "ibmcloud-api-key", "incident-repo", "inventory-repo", "job-instances", "job-maxexecutiontime", "job-retrylimit", "memory", "pipeline-config", "pipeline-config-branch", "pipeline-config-repo", "pnp-ibmcloud-api", "pnp-ibmcloud-api-key", "pre-prod-evidence-collection", "remove-unspecified-references-to-configuration-resources", "service-bindings", "servicenow-api-base-url", "servicenow-crn-mask", "slack-notifications", "version"]
 }
 
 variable "cc_locked_properties" {
   type        = list(string)
   description = "List of default locked properties"
-  default     = ["app-concurrency", "app-deployment-timeout", "app-max-scale", "app-min-scale", "app-port", "app-visibility", "artifactory-dockerconfigjson", "cluster", "cluster-name", "cluster-namespace", "cluster-region", "code-engine-binding-resource-group", "code-engine-build-size", "code-engine-build-strategy", "code-engine-build-timeout", "code-engine-build-use-native-docker", "code-engine-deployment-type", "code-engine-project", "code-engine-region", "code-engine-resource-group", "code-engine-wait-timeout", "compliance-baseimage", "context-dir", "cos-api-key", "cos-bucket-name", "cos-endpoint", "cpu", "cra-bom-generate", "cra-deploy-analysis", "cra-generate-cyclonedx-format", "cra-vulnerability-scan", "custom-image-tag", "dev-cluster-namespace", "dev-region", "dev-resource-group", "dockerfile", "doi-environment", "doi-ibmcloud-api-key", "doi-toolchain-id", "env-from-configmaps", "env-from-secrets", "ephemeral-storage", "event-notifications", "evidence-repo", "git-token", "gosec-private-repository-host", "gosec-private-repository-ssh-key", "ibmcloud-api", "ibmcloud-api-key", "image-name", "incident-repo", "inventory-repo", "job-instances", "job-maxexecutiontime", "job-retrylimit", "memory", "opt-in-dynamic-api-scan", "opt-in-dynamic-scan", "opt-in-dynamic-ui-scan", "opt-in-gosec", "opt-in-sonar", "peer-review-compliance", "pipeline-config", "pipeline-config-branch", "pipeline-config-repo", "pipeline-dockerconfigjson", "print-code-signing-certificate", "registry-domain", "registry-namespace", "registry-region", "remove-unspecified-references-to-configuration-resources", "service-bindings", "signing-key", "slack-notifications", "sonarqube", "sonarqube-config", "source", "version"]
+  default     = ["app-concurrency", "app-deployment-timeout", "app-max-scale", "app-min-scale", "app-port", "app-visibility", "artifactory-dockerconfigjson", "cluster", "cluster-name", "cluster-namespace", "cluster-region", "code-engine-binding-resource-group", "code-engine-build-size", "code-engine-build-strategy", "code-engine-build-timeout", "code-engine-build-use-native-docker", "code-engine-deployment-type", "code-engine-project", "code-engine-region", "code-engine-resource-group", "code-engine-wait-timeout", "compliance-baseimage", "context-dir", "cos-api-key", "cos-bucket-name", "cos-endpoint", "cpu", "cra-bom-generate", "cra-deploy-analysis", "cra-generate-cyclonedx-format", "cra-vulnerability-scan", "custom-image-tag", "dev-cluster-namespace", "dev-region", "dev-resource-group", "dockerfile", "doi-environment", "doi-ibmcloud-api-key", "doi-toolchain-id", "env-from-configmaps", "env-from-secrets", "ephemeral-storage", "event-notifications", "git-token", "gosec-private-repository-host", "gosec-private-repository-ssh-key", "ibmcloud-api", "ibmcloud-api-key", "image-name", "incident-repo", "inventory-repo", "job-instances", "job-maxexecutiontime", "job-retrylimit", "memory", "opt-in-dynamic-api-scan", "opt-in-dynamic-scan", "opt-in-dynamic-ui-scan", "opt-in-gosec", "opt-in-sonar", "peer-review-compliance", "pipeline-config", "pipeline-config-branch", "pipeline-config-repo", "pipeline-dockerconfigjson", "print-code-signing-certificate", "registry-domain", "registry-namespace", "registry-region", "remove-unspecified-references-to-configuration-resources", "service-bindings", "signing-key", "slack-notifications", "sonarqube", "sonarqube-config", "source", "version"]
 }
 
 variable "enable_app_repo_integration" {

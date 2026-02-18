@@ -19,7 +19,7 @@ locals {
 
   # Local variables for the compliance repositories. Allows for exclusiion from full set of default compliance repositories.
   # Allows for app, deployment and config repositories to be set exclusively
-  # Example app repo uses `var.repo_title` and evidence repo uses `local.repo_title` for this separation
+  # Example app repo uses `var.repo_title` and inventory repo uses `local.repo_title` for this separation
   repo_title                 = (var.repo_apply_settings_to_compliance_repos == true) ? var.repo_title : ""
   repo_root_url              = (var.repo_apply_settings_to_compliance_repos == true) ? var.repo_root_url : ""
   repo_blind_connection      = (var.repo_apply_settings_to_compliance_repos == true) ? var.repo_blind_connection : false
@@ -91,26 +91,6 @@ locals {
   compliance_pipeline_repo_existing_git_provider = (
     (var.compliance_pipeline_repo_git_provider != "") ? var.compliance_pipeline_repo_git_provider :
     (var.compliance_pipeline_repo_use_group_settings == false) ? "hostedgit" :
-    (local.repo_git_provider != "") ? local.repo_git_provider : "hostedgit"
-  )
-
-  ci_evidence_repo_auth_type             = (var.ci_evidence_repo_auth_type == "") ? var.evidence_repo_auth_type : var.ci_evidence_repo_auth_type
-  cd_evidence_repo_auth_type             = (var.cd_evidence_repo_auth_type == "") ? var.evidence_repo_auth_type : var.cd_evidence_repo_auth_type
-  cc_evidence_repo_auth_type             = (var.cc_evidence_repo_auth_type == "") ? var.evidence_repo_auth_type : var.cc_evidence_repo_auth_type
-  ci_evidence_repo_git_token_secret_crn  = (var.ci_evidence_repo_git_token_secret_crn == "") ? var.evidence_repo_git_token_secret_crn : var.ci_evidence_repo_git_token_secret_crn
-  cd_evidence_repo_git_token_secret_crn  = (var.cd_evidence_repo_git_token_secret_crn == "") ? var.evidence_repo_git_token_secret_crn : var.cd_evidence_repo_git_token_secret_crn
-  cc_evidence_repo_git_token_secret_crn  = (var.cc_evidence_repo_git_token_secret_crn == "") ? var.evidence_repo_git_token_secret_crn : var.cc_evidence_repo_git_token_secret_crn
-  ci_evidence_repo_git_token_secret_name = (var.ci_evidence_repo_git_token_secret_name == "") ? var.evidence_repo_git_token_secret_name : var.ci_evidence_repo_git_token_secret_name
-  cd_evidence_repo_git_token_secret_name = (var.cd_evidence_repo_git_token_secret_name == "") ? var.evidence_repo_git_token_secret_name : var.cd_evidence_repo_git_token_secret_name
-  cc_evidence_repo_git_token_secret_name = (var.cc_evidence_repo_git_token_secret_name == "") ? var.evidence_repo_git_token_secret_name : var.cc_evidence_repo_git_token_secret_name
-  ci_evidence_repo_secret_group          = (var.ci_evidence_repo_secret_group == "") ? var.evidence_repo_secret_group : var.ci_evidence_repo_secret_group
-  cd_evidence_repo_secret_group          = (var.cd_evidence_repo_secret_group == "") ? var.evidence_repo_secret_group : var.cd_evidence_repo_secret_group
-  cc_evidence_repo_secret_group          = (var.cc_evidence_repo_secret_group == "") ? var.evidence_repo_secret_group : var.cc_evidence_repo_secret_group
-  ci_evidence_group                      = (var.ci_evidence_group == "") ? var.evidence_group : var.ci_evidence_group
-  cd_evidence_group                      = (var.cd_evidence_group == "") ? var.evidence_group : var.cd_evidence_group
-  cc_evidence_group                      = (var.cc_evidence_group == "") ? var.evidence_group : var.cc_evidence_group
-  evidence_repo_existing_git_provider = (
-    (var.evidence_repo_existing_git_provider != "") ? var.evidence_repo_existing_git_provider :
     (local.repo_git_provider != "") ? local.repo_git_provider : "hostedgit"
   )
 
@@ -328,7 +308,7 @@ module "prereqs" {
 module "devsecops_ci_toolchain" {
   count                    = var.create_ci_toolchain ? 1 : 0
   depends_on               = [ibm_resource_instance.cd_instance]
-  source                   = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-ci-toolchain?ref=v2.8.1"
+  source                   = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-ci-toolchain?ref=v2.8.2"
   ibmcloud_api_key         = var.ibmcloud_api_key
   toolchain_name           = (var.prefix == "") ? local.ci_toolchain_name : format("${var.prefix}-%s", local.ci_toolchain_name)
   toolchain_region         = (var.ci_toolchain_region == "") ? var.toolchain_region : replace(replace(var.ci_toolchain_region, "ibm:yp:", ""), "ibm:ys1:", "")
@@ -373,9 +353,6 @@ module "devsecops_ci_toolchain" {
   issues_repo_git_token_secret_name = (local.ci_issues_repo_git_token_secret_name == "") ? local.repo_git_token_secret_name : local.ci_issues_repo_git_token_secret_name
   issues_repo_secret_group          = (local.ci_issues_repo_secret_group == "") ? local.repo_secret_group : local.ci_issues_repo_secret_group
 
-  evidence_repo_git_token_secret_name = (local.ci_evidence_repo_git_token_secret_name == "") ? local.repo_git_token_secret_name : local.ci_evidence_repo_git_token_secret_name
-  evidence_repo_secret_group          = (local.ci_evidence_repo_secret_group == "") ? local.repo_secret_group : local.ci_evidence_repo_secret_group
-
   inventory_repo_git_token_secret_name = (local.ci_inventory_repo_git_token_secret_name == "") ? local.repo_git_token_secret_name : local.ci_inventory_repo_git_token_secret_name
   inventory_repo_secret_group          = (local.ci_inventory_repo_secret_group == "") ? local.repo_secret_group : local.ci_inventory_repo_secret_group
 
@@ -405,7 +382,6 @@ module "devsecops_ci_toolchain" {
     (local.ci_app_repo_git_token_secret_crn != "") ? local.ci_app_repo_git_token_secret_crn : var.repo_git_token_secret_crn
   )
   issues_repo_git_token_secret_crn              = (local.ci_issues_repo_git_token_secret_crn == "") ? local.repo_git_token_secret_crn : local.ci_issues_repo_git_token_secret_crn
-  evidence_repo_git_token_secret_crn            = (local.ci_evidence_repo_git_token_secret_crn == "") ? local.repo_git_token_secret_crn : local.ci_evidence_repo_git_token_secret_crn
   inventory_repo_git_token_secret_crn           = (local.ci_inventory_repo_git_token_secret_crn == "") ? local.repo_git_token_secret_crn : local.ci_inventory_repo_git_token_secret_crn
   compliance_pipeline_repo_git_token_secret_crn = (local.ci_compliance_pipeline_repo_git_token_secret_crn == "") ? local.repo_git_token_secret_crn : local.ci_pipeline_config_repo_git_token_secret_crn
   pipeline_config_repo_git_token_secret_crn = (
@@ -425,7 +401,6 @@ module "devsecops_ci_toolchain" {
   )
   inventory_repo_auth_type = (local.ci_inventory_repo_auth_type == "") ? local.repo_auth_type : local.ci_inventory_repo_auth_type
   issues_repo_auth_type    = (local.ci_issues_repo_auth_type == "") ? local.repo_auth_type : local.ci_issues_repo_auth_type
-  evidence_repo_auth_type  = (local.ci_evidence_repo_auth_type == "") ? local.repo_auth_type : local.ci_evidence_repo_auth_type
   app_repo_auth_type = (
     (local.ci_app_repo_auth_type != "") ? local.ci_app_repo_auth_type : local.repo_auth_type_app_group
   )
@@ -437,7 +412,6 @@ module "devsecops_ci_toolchain" {
   )
   issues_group    = (local.ci_issues_group == "") ? local.repo_group : local.ci_issues_group
   inventory_group = (local.ci_inventory_group == "") ? local.repo_group : local.ci_inventory_group
-  evidence_group  = (local.ci_evidence_group == "") ? local.repo_group : local.ci_evidence_group
   pipeline_config_group = (
     (local.ci_pipeline_config_group != "") ? local.ci_pipeline_config_group : local.repo_auth_type_app_group
   )
@@ -479,18 +453,6 @@ module "devsecops_ci_toolchain" {
   pipeline_config_repo_blind_connection = var.repo_blind_connection
   pipeline_config_repo_root_url         = var.repo_root_url
   pipeline_config_repo_title            = var.repo_title
-
-  #EVIDENCE REPO
-  evidence_repo_enabled           = var.evidence_repo_enabled
-  evidence_repo_name              = var.evidence_repo_name
-  evidence_repo_existing_url      = var.evidence_repo_existing_url
-  evidence_source_repo_url        = var.evidence_repo_source_url
-  evidence_repo_git_provider      = local.evidence_repo_existing_git_provider
-  evidence_repo_git_id            = (var.evidence_repo_existing_git_id == "") ? local.repo_git_id : var.evidence_repo_existing_git_id
-  evidence_repo_integration_owner = var.evidence_repo_integration_owner
-  evidence_repo_blind_connection  = local.repo_blind_connection
-  evidence_repo_root_url          = local.repo_root_url
-  evidence_repo_title             = local.repo_title
 
   #ISSUES REPO
   issues_repo_name              = var.issues_repo_name
@@ -608,7 +570,7 @@ module "devsecops_ci_toolchain" {
 module "devsecops_cd_toolchain" {
   count            = var.create_cd_toolchain ? 1 : 0
   depends_on       = [ibm_resource_instance.cd_instance]
-  source           = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain?ref=v2.7.0"
+  source           = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain?ref=v2.7.1"
   ibmcloud_api_key = var.ibmcloud_api_key
 
   toolchain_name           = (var.prefix == "") ? local.cd_toolchain_name : format("${var.prefix}-%s", local.cd_toolchain_name)
@@ -647,9 +609,6 @@ module "devsecops_cd_toolchain" {
 
   issues_repo_git_token_secret_name = (local.cd_issues_repo_git_token_secret_name == "") ? local.repo_git_token_secret_name : local.cd_issues_repo_git_token_secret_name
   issues_repo_secret_group          = (local.cd_issues_repo_secret_group == "") ? local.repo_secret_group : local.cd_issues_repo_secret_group
-
-  evidence_repo_git_token_secret_name = (local.cd_evidence_repo_git_token_secret_name == "") ? local.repo_git_token_secret_name : local.cd_evidence_repo_git_token_secret_name
-  evidence_repo_secret_group          = (local.cd_evidence_repo_secret_group == "") ? local.repo_secret_group : local.cd_evidence_repo_secret_group
 
   inventory_repo_git_token_secret_name = (local.cd_inventory_repo_git_token_secret_name == "") ? local.repo_git_token_secret_name : local.cd_inventory_repo_git_token_secret_name
   inventory_repo_secret_group          = (local.cd_inventory_repo_secret_group == "") ? local.repo_secret_group : local.cd_inventory_repo_secret_group
@@ -691,7 +650,6 @@ module "devsecops_cd_toolchain" {
   )
   change_management_repo_git_token_secret_crn   = (var.cd_change_management_repo_git_token_secret_crn == "") ? local.repo_git_token_secret_crn : var.cd_change_management_repo_git_token_secret_crn
   issues_repo_git_token_secret_crn              = (local.cd_issues_repo_git_token_secret_crn == "") ? local.repo_git_token_secret_crn : local.cd_issues_repo_git_token_secret_crn
-  evidence_repo_git_token_secret_crn            = (local.cd_evidence_repo_git_token_secret_crn == "") ? local.repo_git_token_secret_crn : local.cd_evidence_repo_git_token_secret_crn
   inventory_repo_git_token_secret_crn           = (local.cd_inventory_repo_git_token_secret_crn == "") ? local.repo_git_token_secret_crn : local.cd_inventory_repo_git_token_secret_crn
   compliance_pipeline_repo_git_token_secret_crn = (local.cd_compliance_pipeline_repo_git_token_secret_crn == "") ? local.repo_git_token_secret_crn : local.cd_compliance_pipeline_repo_git_token_secret_crn
   pipeline_config_repo_git_token_secret_crn = (
@@ -711,7 +669,6 @@ module "devsecops_cd_toolchain" {
   )
   inventory_repo_auth_type = (local.cd_inventory_repo_auth_type == "") ? local.repo_auth_type : local.cd_inventory_repo_auth_type
   issues_repo_auth_type    = (local.cd_issues_repo_auth_type == "") ? local.repo_auth_type : local.cd_issues_repo_auth_type
-  evidence_repo_auth_type  = (local.cd_evidence_repo_auth_type == "") ? local.repo_auth_type : local.cd_evidence_repo_auth_type
   deployment_repo_auth_type = (
     (var.cd_deployment_repo_auth_type != "") ? var.cd_deployment_repo_auth_type : local.repo_auth_type_app_group
   )
@@ -721,7 +678,6 @@ module "devsecops_cd_toolchain" {
   #GROUPS/USERS FOR REPOS
   issues_group    = (local.cd_issues_group == "") ? local.repo_group : local.cd_issues_group
   inventory_group = (local.cd_inventory_group == "") ? local.repo_group : local.cd_inventory_group
-  evidence_group  = (local.cd_evidence_group == "") ? local.repo_group : local.cd_evidence_group
   pipeline_config_group = (
     (local.cd_pipeline_config_group != "") ? local.cd_pipeline_config_group : var.repo_group
   )
@@ -753,17 +709,6 @@ module "devsecops_cd_toolchain" {
   pipeline_config_repo_blind_connection = var.repo_blind_connection
   pipeline_config_repo_root_url         = var.repo_root_url
   pipeline_config_repo_title            = var.repo_title
-
-  #EVIDENCE REPO
-  evidence_repo_enabled           = var.evidence_repo_enabled
-  evidence_repo_name              = var.evidence_repo_name
-  evidence_repo_url               = try(module.devsecops_ci_toolchain[0].evidence_repo_url, var.evidence_repo_existing_url)
-  evidence_repo_git_provider      = local.evidence_repo_existing_git_provider
-  evidence_repo_git_id            = (var.evidence_repo_existing_git_id == "") ? local.repo_git_id : var.evidence_repo_existing_git_id
-  evidence_repo_integration_owner = var.evidence_repo_integration_owner
-  evidence_repo_blind_connection  = local.repo_blind_connection
-  evidence_repo_root_url          = local.repo_root_url
-  evidence_repo_title             = local.repo_title
 
   #ISSUES REPO
   issues_repo_name              = var.issues_repo_name
@@ -836,7 +781,6 @@ module "devsecops_cd_toolchain" {
   scc_profile_name              = var.scc_profile_name
   scc_profile_version           = var.scc_profile_version
   scc_use_profile_attachment    = (var.cd_scc_use_profile_attachment == "") ? var.scc_use_profile_attachment : var.cd_scc_use_profile_attachment
-  scc_evidence_locker_type      = var.scc_evidence_locker_type
   enable_pipeline_notifications = (local.cd_enable_pipeline_notifications == "true") ? true : false
   pipeline_properties           = var.cd_pipeline_properties
   pipeline_properties_filepath  = var.cd_pipeline_properties_filepath
@@ -905,7 +849,7 @@ module "devsecops_cd_toolchain" {
 
 module "devsecops_cc_toolchain" {
   count                         = var.create_cc_toolchain ? 1 : 0
-  source                        = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cc-toolchain?ref=v2.7.0"
+  source                        = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cc-toolchain?ref=v2.7.1"
   ibmcloud_api_key              = var.ibmcloud_api_key
   toolchain_name                = (var.prefix == "") ? local.cc_toolchain_name : format("${var.prefix}-%s", local.cc_toolchain_name)
   toolchain_description         = var.cc_toolchain_description
@@ -945,9 +889,6 @@ module "devsecops_cc_toolchain" {
   issues_repo_git_token_secret_name = (local.cc_issues_repo_git_token_secret_name == "") ? local.repo_git_token_secret_name : local.cc_issues_repo_git_token_secret_name
   issues_repo_secret_group          = (local.cc_issues_repo_secret_group == "") ? local.repo_secret_group : local.cc_issues_repo_secret_group
 
-  evidence_repo_git_token_secret_name = (local.cc_evidence_repo_git_token_secret_name == "") ? local.repo_git_token_secret_name : local.cc_evidence_repo_git_token_secret_name
-  evidence_repo_secret_group          = (local.cc_evidence_repo_secret_group == "") ? local.repo_secret_group : local.cc_evidence_repo_secret_group
-
   inventory_repo_git_token_secret_name = (local.cc_inventory_repo_git_token_secret_name == "") ? local.repo_git_token_secret_name : local.cc_inventory_repo_git_token_secret_name
   inventory_repo_secret_group          = (local.cc_inventory_repo_secret_group == "") ? local.repo_secret_group : local.cc_inventory_repo_secret_group
 
@@ -982,7 +923,6 @@ module "devsecops_cc_toolchain" {
     (local.cc_app_repo_git_token_secret_crn != "") ? local.cc_app_repo_git_token_secret_crn : var.repo_git_token_secret_crn
   )
   issues_repo_git_token_secret_crn              = (local.cc_issues_repo_git_token_secret_crn == "") ? local.repo_git_token_secret_crn : local.cc_issues_repo_git_token_secret_crn
-  evidence_repo_git_token_secret_crn            = (local.cc_evidence_repo_git_token_secret_crn == "") ? local.repo_git_token_secret_crn : local.cc_evidence_repo_git_token_secret_crn
   inventory_repo_git_token_secret_crn           = (local.cc_inventory_repo_git_token_secret_crn == "") ? local.repo_git_token_secret_crn : local.cc_inventory_repo_git_token_secret_crn
   compliance_pipeline_repo_git_token_secret_crn = (local.cc_compliance_pipeline_repo_git_token_secret_crn == "") ? local.repo_git_token_secret_crn : local.cc_compliance_pipeline_repo_git_token_secret_crn
   pipeline_config_repo_git_token_secret_crn = (
@@ -1002,7 +942,6 @@ module "devsecops_cc_toolchain" {
   )
   inventory_repo_auth_type = (local.cc_inventory_repo_auth_type == "") ? local.repo_auth_type : local.cc_inventory_repo_auth_type
   issues_repo_auth_type    = (local.cc_issues_repo_auth_type == "") ? local.repo_auth_type : local.cc_issues_repo_auth_type
-  evidence_repo_auth_type  = (local.cc_evidence_repo_auth_type == "") ? local.repo_auth_type : local.cc_evidence_repo_auth_type
   app_repo_auth_type = (
     (local.cc_app_repo_auth_type != "") ? local.cc_app_repo_auth_type : local.repo_auth_type_app_group
   )
@@ -1011,7 +950,6 @@ module "devsecops_cc_toolchain" {
   #GROUPS/USERS FOR REPOS
   issues_group    = (local.cc_issues_group == "") ? local.repo_group : local.cc_issues_group
   inventory_group = (local.cc_inventory_group == "") ? local.repo_group : local.cc_inventory_group
-  evidence_group  = (local.cc_evidence_group == "") ? local.repo_group : local.cc_evidence_group
   pipeline_config_group = (
     (local.cc_pipeline_config_group != "") ? local.cc_pipeline_config_group : var.repo_group
   )
@@ -1054,17 +992,6 @@ module "devsecops_cc_toolchain" {
   app_repo_blind_connection = var.repo_blind_connection
   app_repo_root_url         = var.repo_root_url
 
-  #EVIDENCE REPO
-  evidence_repo_enabled           = var.evidence_repo_enabled
-  evidence_repo_name              = var.evidence_repo_name
-  evidence_repo_url               = try(module.devsecops_ci_toolchain[0].evidence_repo_url, var.evidence_repo_existing_url)
-  evidence_repo_git_provider      = local.evidence_repo_existing_git_provider
-  evidence_repo_git_id            = (var.evidence_repo_existing_git_id == "") ? local.repo_git_id : var.evidence_repo_existing_git_id
-  evidence_repo_integration_owner = var.evidence_repo_integration_owner
-  evidence_repo_blind_connection  = local.repo_blind_connection
-  evidence_repo_root_url          = local.repo_root_url
-  evidence_repo_title             = local.repo_title
-
   #ISSUES REPO
   issues_repo_name              = var.issues_repo_name
   issues_repo_url               = try(module.devsecops_ci_toolchain[0].issues_repo_url, var.issues_repo_existing_url)
@@ -1098,7 +1025,6 @@ module "devsecops_cc_toolchain" {
   scc_profile_name               = var.scc_profile_name
   scc_profile_version            = var.scc_profile_version
   scc_use_profile_attachment     = (var.cc_scc_use_profile_attachment == "") ? var.scc_use_profile_attachment : var.cc_scc_use_profile_attachment
-  scc_evidence_locker_type       = var.scc_evidence_locker_type
   enable_pipeline_notifications  = (local.cc_enable_pipeline_notifications == "true") ? true : false
   pipeline_properties            = var.cc_pipeline_properties
   pipeline_properties_filepath   = var.cc_pipeline_properties_filepath
