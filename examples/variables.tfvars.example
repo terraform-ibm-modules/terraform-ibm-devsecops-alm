@@ -65,6 +65,5 @@ sm_secret_group             = "Default"
 #NOTE By default all three toolchains are set up. The CD and CC templates take ouputs from the CI Toolchain when it is set up.
 # If the CI Toolchain is not set up then the following parameters must be set
 
-#evidence_repo_url                   = "https://us-south.git.cloud.ibm.com/{my-repo}/{evidence-repo}"
 #inventory_repo_url                  = "https://us-south.git.cloud.ibm.com/{my-repo}/{inventory-repo}"
 #issues_repo_url                     = "https://us-south.git.cloud.ibm.com/{my-repo}/{issues-repo}"
