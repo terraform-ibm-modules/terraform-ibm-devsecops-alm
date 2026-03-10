@@ -308,7 +308,7 @@ module "prereqs" {
 module "devsecops_ci_toolchain" {
   count                    = var.create_ci_toolchain ? 1 : 0
   depends_on               = [ibm_resource_instance.cd_instance]
-  source                   = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-ci-toolchain?ref=v2.8.2"
+  source                   = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-ci-toolchain?ref=v3.0.0-beta.1"
   ibmcloud_api_key         = var.ibmcloud_api_key
   toolchain_name           = (var.prefix == "") ? local.ci_toolchain_name : format("${var.prefix}-%s", local.ci_toolchain_name)
   toolchain_region         = (var.ci_toolchain_region == "") ? var.toolchain_region : replace(replace(var.ci_toolchain_region, "ibm:yp:", ""), "ibm:ys1:", "")
@@ -370,9 +370,6 @@ module "devsecops_ci_toolchain" {
   )
   app_repo_secret_group = (local.ci_app_repo_secret_group == "") ? var.repo_secret_group : local.ci_app_repo_secret_group
 
-  pipeline_doi_api_key_secret_name  = (var.ci_pipeline_doi_api_key_secret_name == "") ? var.pipeline_doi_api_key_secret_name : var.ci_pipeline_doi_api_key_secret_name
-  pipeline_doi_api_key_secret_group = (var.ci_pipeline_doi_api_key_secret_group == "") ? var.pipeline_doi_api_key_secret_group : var.ci_pipeline_doi_api_key_secret_group
-
   artifactory_token_secret_name  = var.artifactory_token_secret_name
   artifactory_token_secret_group = var.artifactory_token_secret_group
 
@@ -392,7 +389,6 @@ module "devsecops_ci_toolchain" {
   slack_webhook_secret_crn             = (var.ci_slack_webhook_secret_crn == "") ? var.slack_webhook_secret_crn : var.ci_slack_webhook_secret_crn
   privateworker_credentials_secret_crn = (var.ci_privateworker_credentials_secret_crn == "") ? var.privateworker_credentials_secret_crn : var.ci_privateworker_credentials_secret_crn
   artifactory_token_secret_crn         = var.ci_artifactory_token_secret_crn
-  pipeline_doi_api_key_secret_crn      = var.ci_pipeline_doi_api_key_secret_crn
   sonarqube_secret_crn                 = (var.ci_sonarqube_secret_crn == "") ? var.sonarqube_secret_crn : var.ci_sonarqube_secret_crn
 
   #AUTH TYPE FOR REPOS
@@ -476,18 +472,16 @@ module "devsecops_ci_toolchain" {
   inventory_repo_root_url          = local.repo_root_url
   inventory_repo_title             = local.repo_title
 
-  app_name                           = var.ci_app_name
-  signing_key_secret_name            = var.ci_signing_key_secret_name
-  registry_region                    = (var.ci_registry_region == "") ? format("${var.environment_prefix}%s", var.toolchain_region) : format("${var.environment_prefix}%s", replace(replace(var.ci_registry_region, "ibm:yp:", ""), "ibm:ys1:", ""))
-  authorization_policy_creation      = (var.ci_authorization_policy_creation == "") ? var.authorization_policy_creation : var.ci_authorization_policy_creation
-  repositories_prefix                = (local.ci_repositories_prefix == "compliance" && var.prefix != "") ? format("%s-%s", var.prefix, local.ci_repositories_prefix) : local.ci_repositories_prefix
-  doi_toolchain_id                   = var.ci_doi_toolchain_id
-  doi_toolchain_id_pipeline_property = var.ci_doi_toolchain_id_pipeline_property
-  enable_pipeline_notifications      = (local.ci_enable_pipeline_notifications == "true") ? true : false
-  pipeline_properties                = var.ci_pipeline_properties
-  pipeline_properties_filepath       = var.ci_pipeline_properties_filepath
-  repository_properties              = var.ci_repository_properties
-  repository_properties_filepath     = var.ci_repository_properties_filepath
+  app_name                       = var.ci_app_name
+  signing_key_secret_name        = var.ci_signing_key_secret_name
+  registry_region                = (var.ci_registry_region == "") ? format("${var.environment_prefix}%s", var.toolchain_region) : format("${var.environment_prefix}%s", replace(replace(var.ci_registry_region, "ibm:yp:", ""), "ibm:ys1:", ""))
+  authorization_policy_creation  = (var.ci_authorization_policy_creation == "") ? var.authorization_policy_creation : var.ci_authorization_policy_creation
+  repositories_prefix            = (local.ci_repositories_prefix == "compliance" && var.prefix != "") ? format("%s-%s", var.prefix, local.ci_repositories_prefix) : local.ci_repositories_prefix
+  enable_pipeline_notifications  = (local.ci_enable_pipeline_notifications == "true") ? true : false
+  pipeline_properties            = var.ci_pipeline_properties
+  pipeline_properties_filepath   = var.ci_pipeline_properties_filepath
+  repository_properties          = var.ci_repository_properties
+  repository_properties_filepath = var.ci_repository_properties_filepath
 
   #CODE ENGINE
   code_engine_project        = local.ci_code_engine_project_name
@@ -541,9 +535,6 @@ module "devsecops_ci_toolchain" {
   kp_integration_name    = var.kp_integration_name
   slack_integration_name = var.slack_integration_name
 
-  #DEVOPS INSIGHTS
-  link_to_doi_toolchain = var.ci_link_to_doi_toolchain
-
   #ARTIFACTORY
   enable_artifactory           = var.enable_artifactory
   artifactory_user             = var.artifactory_user
@@ -570,7 +561,7 @@ module "devsecops_ci_toolchain" {
 module "devsecops_cd_toolchain" {
   count            = var.create_cd_toolchain ? 1 : 0
   depends_on       = [ibm_resource_instance.cd_instance]
-  source           = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain?ref=v2.7.1"
+  source           = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain?ref=v3.0.0-beta.1"
   ibmcloud_api_key = var.ibmcloud_api_key
 
   toolchain_name           = (var.prefix == "") ? local.cd_toolchain_name : format("${var.prefix}-%s", local.cd_toolchain_name)
@@ -638,9 +629,6 @@ module "devsecops_cd_toolchain" {
   scc_scc_api_key_secret_name  = var.scc_scc_api_key_secret_name
   scc_scc_api_key_secret_group = var.scc_scc_api_key_secret_group
 
-  pipeline_doi_api_key_secret_name  = (var.cd_pipeline_doi_api_key_secret_name == "") ? var.pipeline_doi_api_key_secret_name : var.cd_pipeline_doi_api_key_secret_name
-  pipeline_doi_api_key_secret_group = (var.cd_pipeline_doi_api_key_secret_group == "") ? var.pipeline_doi_api_key_secret_group : var.cd_pipeline_doi_api_key_secret_group
-
   artifactory_token_secret_name  = var.artifactory_token_secret_name
   artifactory_token_secret_group = var.artifactory_token_secret_group
 
@@ -661,7 +649,6 @@ module "devsecops_cd_toolchain" {
   privateworker_credentials_secret_crn = (var.cd_privateworker_credentials_secret_crn == "") ? var.privateworker_credentials_secret_crn : var.cd_privateworker_credentials_secret_crn
   artifactory_token_secret_crn         = var.cd_artifactory_token_secret_crn
   scc_scc_api_key_secret_crn           = var.scc_scc_api_key_secret_crn
-  pipeline_doi_api_key_secret_crn      = (var.cd_pipeline_doi_api_key_secret_crn == "") ? var.pipeline_doi_api_key_secret_crn : var.cd_pipeline_doi_api_key_secret_crn
 
   #AUTH TYPE FOR REPOS
   pipeline_config_repo_auth_type = (
@@ -773,8 +760,6 @@ module "devsecops_cd_toolchain" {
 
   repositories_prefix           = (local.cd_repositories_prefix == "compliance" && var.prefix != "") ? format("%s-%s", var.prefix, local.cd_repositories_prefix) : local.cd_repositories_prefix
   authorization_policy_creation = (var.cd_authorization_policy_creation == "") ? var.authorization_policy_creation : var.cd_authorization_policy_creation
-  link_to_doi_toolchain         = var.cd_link_to_doi_toolchain
-  doi_toolchain_id              = try(module.devsecops_ci_toolchain[0].toolchain_id, var.cd_doi_toolchain_id)
   region                        = (var.cd_region == "") ? var.toolchain_region : var.cd_region
   scc_attachment_id             = var.scc_attachment_id
   scc_instance_crn              = var.scc_instance_crn
@@ -849,7 +834,7 @@ module "devsecops_cd_toolchain" {
 
 module "devsecops_cc_toolchain" {
   count                         = var.create_cc_toolchain ? 1 : 0
-  source                        = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cc-toolchain?ref=v2.7.1"
+  source                        = "git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cc-toolchain?ref=v3.0.0-beta.1"
   ibmcloud_api_key              = var.ibmcloud_api_key
   toolchain_name                = (var.prefix == "") ? local.cc_toolchain_name : format("${var.prefix}-%s", local.cc_toolchain_name)
   toolchain_description         = var.cc_toolchain_description
@@ -912,9 +897,6 @@ module "devsecops_cc_toolchain" {
   scc_scc_api_key_secret_name  = var.scc_scc_api_key_secret_name
   scc_scc_api_key_secret_group = var.scc_scc_api_key_secret_group
 
-  pipeline_doi_api_key_secret_name  = (var.cc_pipeline_doi_api_key_secret_name == "") ? var.pipeline_doi_api_key_secret_name : var.cc_pipeline_doi_api_key_secret_name
-  pipeline_doi_api_key_secret_group = (var.cc_pipeline_doi_api_key_secret_group == "") ? var.pipeline_doi_api_key_secret_group : var.cc_pipeline_doi_api_key_secret_group
-
   artifactory_token_secret_name  = var.artifactory_token_secret_name
   artifactory_token_secret_group = var.artifactory_token_secret_group
 
@@ -934,7 +916,6 @@ module "devsecops_cc_toolchain" {
   artifactory_token_secret_crn         = var.cc_artifactory_token_secret_crn
   scc_scc_api_key_secret_crn           = var.scc_scc_api_key_secret_crn
   sonarqube_secret_crn                 = (var.cc_sonarqube_secret_crn == "") ? var.sonarqube_secret_crn : var.cc_sonarqube_secret_crn
-  pipeline_doi_api_key_secret_crn      = (var.cc_pipeline_doi_api_key_secret_crn == "") ? var.pipeline_doi_api_key_secret_crn : var.cc_pipeline_doi_api_key_secret_crn
 
   #AUTH TYPE FOR REPOS
   pipeline_config_repo_auth_type = (
@@ -957,8 +938,6 @@ module "devsecops_cc_toolchain" {
   app_group = (
     (local.cc_app_group != "") ? local.cc_app_group : var.repo_group
   )
-
-  link_to_doi_toolchain = var.cc_link_to_doi_toolchain
 
   #COMPLIANCE PIPELINE REPO
   compliance_pipelines_repo_blind_connection = (var.compliance_pipeline_repo_use_group_settings) ? local.repo_blind_connection : var.compliance_pipeline_repo_blind_connection
@@ -1018,7 +997,6 @@ module "devsecops_cc_toolchain" {
 
   #OTHER INTEGRATIONS
   repositories_prefix            = (local.cc_repositories_prefix == "compliance" && var.prefix != "") ? format("%s-%s", var.prefix, local.cc_repositories_prefix) : local.cc_repositories_prefix
-  doi_toolchain_id               = try(module.devsecops_ci_toolchain[0].toolchain_id, var.cc_doi_toolchain_id)
   environment_tag                = (var.environment_tag == "") ? format("%s_prod_latest", var.toolchain_region) : format("%s_%s", var.toolchain_region, var.environment_tag)
   scc_attachment_id              = var.scc_attachment_id
   scc_instance_crn               = var.scc_instance_crn

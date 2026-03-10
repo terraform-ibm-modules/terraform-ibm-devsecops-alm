@@ -66,21 +66,6 @@
         "value": ""
       },
       {
-        "name": "doi-environment",
-        "type": "text",
-        "value": ""
-      },
-      {
-        "name": "doi-ibmcloud-api-key",
-        "type": "secure",
-        "value": ""
-      },
-      {
-        "name": "doi-toolchain-id",
-        "type": "text",
-        "value": ""
-      },
-      {
         "name": "event-notifications",
         "type": "text",
         "value": "0"

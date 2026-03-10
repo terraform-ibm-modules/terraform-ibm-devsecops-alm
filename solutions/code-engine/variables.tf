@@ -651,29 +651,6 @@ variable "pipeline_config_repo_secret_group" {
   default     = ""
 }
 
-variable "pipeline_doi_api_key_secret_crn" {
-  type        = string
-  sensitive   = true
-  description = "The CRN of the DOI (DevOps Insights) apikey used for accessing a specific toolchain Insights instance. Applies to the CI, CD and CC toolchains."
-  default     = ""
-  validation {
-    condition     = startswith(var.pipeline_doi_api_key_secret_crn, "crn:") || var.pipeline_doi_api_key_secret_crn == ""
-    error_message = "Must be a CRN or left empty."
-  }
-}
-
-variable "pipeline_doi_api_key_secret_group" {
-  type        = string
-  description = "Secret group for the pipeline DOI api key. Defaults to the value set in `sm_secret_group` if not set. Only used with `Secrets Manager`. Applies to the CI, CD and CC toolchains."
-  default     = ""
-}
-
-variable "pipeline_doi_api_key_secret_name" {
-  type        = string
-  description = "Name of the Cloud API key secret in the secret provider to access the toolchain containing the Devops Insights instance. This will apply to the CI, CD and CC toolchains."
-  default     = ""
-}
-
 variable "pipeline_git_tag" {
   type        = string
   description = "The GIT tag selector for the Compliance Pipelines definitions."
@@ -1085,18 +1062,6 @@ variable "cc_app_repo_branch" {
   default     = ""
 }
 
-variable "cc_doi_toolchain_id" {
-  type        = string
-  description = "The ID of the toolchain containing the DevOps Insights integration. This variable is used to link the DevOps Insights toolcard to a specific instance."
-  default     = ""
-}
-
-variable "cc_link_to_doi_toolchain" {
-  description = "Enable a link to a DevOps Insights instance in another toolchain, true or false."
-  type        = bool
-  default     = true
-}
-
 variable "cc_pipeline_config_repo_branch" {
   type        = string
   description = "Specify the branch containing the custom pipeline-config.yaml file."
@@ -1350,12 +1315,6 @@ variable "cd_deployment_repo_secret_group" {
   default     = ""
 }
 
-variable "cd_doi_toolchain_id" {
-  type        = string
-  description = "The ID of the toolchain containing the DevOps Insights integration. This variable is used to link the DevOps Insights toolcard to a specific instance."
-  default     = ""
-}
-
 variable "cd_enable_change_management_repo" {
   type        = string
   description = "Set to `true` to enable the Change Management Repo integration."
@@ -1366,12 +1325,6 @@ variable "continuous_delivery_service_name" {
   type        = string
   description = "The name of the CD instance."
   default     = "cd-devsecops"
-}
-
-variable "cd_link_to_doi_toolchain" {
-  description = "Enable a link to a DevOps Insights instance in another toolchain, true or false."
-  type        = bool
-  default     = true
 }
 
 variable "cd_pipeline_config_repo_branch" {
@@ -1543,24 +1496,6 @@ variable "ci_compliance_pipeline_pr_branch" {
   type        = string
   description = "The PR Pipeline Compliance Pipeline branch."
   default     = ""
-}
-
-variable "ci_doi_toolchain_id_pipeline_property" {
-  type        = string
-  description = "The pipeline property for the DevOps Insights instance toolchain ID."
-  default     = ""
-}
-
-variable "ci_doi_toolchain_id" {
-  type        = string
-  description = "The ID of the toolchain containing the DevOps Insights integration. This variable is used to link the DevOps Insights toolcard to a specific instance."
-  default     = ""
-}
-
-variable "ci_link_to_doi_toolchain" {
-  description = "Enable a link to a DevOps Insights instance in another toolchain."
-  type        = bool
-  default     = false
 }
 
 variable "ci_pipeline_config_repo_branch" {
