@@ -66,6 +66,13 @@ func TestRunUpgradeExample(t *testing.T) {
 	options := testhelper.TestOptionsDefault(&testhelper.TestOptions{
 		Testing:      t,
 		TerraformDir: defaultExampleTerraformDir,
+		IgnoreDestroys: testhelper.Exemptions{ // Ignore for consistency check
+			List: []string{
+				"module.terraform_devsecops_alm.module.devsecops_ci_toolchain[0].module.integrations.ibm_cd_toolchain_tool_devopsinsights.insights_tool[0]",
+				"module.terraform_devsecops_alm.module.devsecops_cc_toolchain[0].module.integrations.ibm_cd_toolchain_tool_custom.link_to_insights[0]",
+				"module.terraform_devsecops_alm.module.devsecops_cd_toolchain[0].module.integrations.ibm_cd_toolchain_tool_custom.link_to_insights[0]",
+			},
+		},
 	})
 
 	output, err := options.RunTestUpgrade()

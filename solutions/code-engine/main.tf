@@ -105,9 +105,6 @@ module "devsecops_da" {
   pipeline_config_repo_git_token_secret_crn       = var.pipeline_config_repo_git_token_secret_crn
   pipeline_config_repo_git_token_secret_name      = var.pipeline_config_repo_git_token_secret_name
   pipeline_config_repo_secret_group               = var.pipeline_config_repo_secret_group
-  pipeline_doi_api_key_secret_crn                 = var.pipeline_doi_api_key_secret_crn
-  pipeline_doi_api_key_secret_group               = var.pipeline_doi_api_key_secret_group
-  pipeline_doi_api_key_secret_name                = var.pipeline_doi_api_key_secret_name
   pipeline_git_tag                                = var.pipeline_git_tag
   pipeline_ibmcloud_api_key_secret_crn            = var.pipeline_ibmcloud_api_key_secret_crn
   pipeline_ibmcloud_api_key_secret_group          = var.pipeline_ibmcloud_api_key_secret_group
@@ -172,8 +169,6 @@ module "devsecops_da" {
   toolchain_region                                = var.toolchain_region
   use_app_repo_for_cd_deploy                      = var.use_app_repo_for_cd_deploy
   cc_app_repo_branch                              = var.cc_app_repo_branch
-  cc_doi_toolchain_id                             = var.cc_doi_toolchain_id
-  cc_link_to_doi_toolchain                        = var.cc_link_to_doi_toolchain
   cc_pipeline_config_repo_branch                  = var.cc_pipeline_config_repo_branch
   cc_pipeline_properties                          = var.cc_pipeline_properties
   cc_pipeline_properties_filepath                 = var.cc_pipeline_properties_filepath
@@ -212,9 +207,7 @@ module "devsecops_da" {
   cd_deployment_repo_git_token_secret_name        = var.cd_deployment_repo_git_token_secret_name
   cd_deployment_repo_name                         = var.cd_deployment_repo_name
   cd_deployment_repo_secret_group                 = var.cd_deployment_repo_secret_group
-  cd_doi_toolchain_id                             = var.cd_doi_toolchain_id
   continuous_delivery_service_name                = var.continuous_delivery_service_name
-  cd_link_to_doi_toolchain                        = var.cd_link_to_doi_toolchain
   cd_pipeline_config_repo_branch                  = var.cd_pipeline_config_repo_branch
   cd_pipeline_properties                          = var.cd_pipeline_properties
   cd_pipeline_properties_filepath                 = var.cd_pipeline_properties_filepath
@@ -242,9 +235,6 @@ module "devsecops_da" {
   ci_code_engine_region                           = var.ci_code_engine_region
   ci_code_engine_resource_group                   = var.ci_code_engine_resource_group
   ci_compliance_pipeline_pr_branch                = var.ci_compliance_pipeline_pr_branch
-  ci_doi_toolchain_id                             = var.ci_doi_toolchain_id
-  ci_doi_toolchain_id_pipeline_property           = var.ci_doi_toolchain_id_pipeline_property
-  ci_link_to_doi_toolchain                        = var.ci_link_to_doi_toolchain
   ci_pipeline_config_repo_branch                  = var.ci_pipeline_config_repo_branch
   ci_pipeline_properties                          = var.ci_pipeline_properties
   ci_pipeline_properties_filepath                 = var.ci_pipeline_properties_filepath

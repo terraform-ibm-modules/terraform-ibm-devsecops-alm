@@ -36,21 +36,6 @@
         "enum": "[0,1]"
       },
       {
-          "name": "doi-environment",
-          "type": "text",
-          "value": ""
-      },
-      {
-        "name": "doi-ibmcloud-api-key",
-        "type": "secure",
-        "value": ""
-      },
-      {
-        "name": "doi-toolchain-id",
-        "type": "text",
-        "value": ""
-      },
-      {
         "name": "environment-tag",
         "type": "text",
         "value": ""
