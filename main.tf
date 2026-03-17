@@ -278,7 +278,7 @@ module "prereqs" {
   service_name_cos                 = var.service_name_cos
   sm_name                          = var.sm_name
   sm_location                      = var.sm_location
-  sm_secret_group_name             = var.sm_secret_group
+  sm_secret_group_name             = var.prefix != "" ? "${var.prefix}-${var.sm_secret_group}" : var.sm_secret_group
   sm_resource_group                = var.sm_resource_group
   create_secret_group              = var.create_secret_group
   cos_api_key_secret_name          = var.cos_api_key_secret_name
@@ -331,7 +331,7 @@ module "devsecops_ci_toolchain" {
   sm_name                  = (var.ci_sm_name == "") ? var.sm_name : var.ci_sm_name
   sm_location              = (var.ci_sm_location == "") ? replace(replace(var.sm_location, "ibm:yp:", ""), "ibm:ys1:", "") : replace(replace(var.ci_sm_location, "ibm:yp:", ""), "ibm:ys1:", "")
   sm_resource_group        = (var.ci_sm_resource_group != "") ? var.ci_sm_resource_group : (var.sm_resource_group != "") ? var.sm_resource_group : var.toolchain_resource_group
-  sm_secret_group          = (var.ci_sm_secret_group == "") ? var.sm_secret_group : var.ci_sm_secret_group
+  sm_secret_group          = var.prefix != "" ? "${var.prefix}-${(var.ci_sm_secret_group == "") ? var.sm_secret_group : var.ci_sm_secret_group}" : (var.ci_sm_secret_group == "") ? var.sm_secret_group : var.ci_sm_secret_group
   kp_name                  = (var.ci_kp_name == "") ? var.kp_name : var.ci_kp_name
   kp_location              = (var.ci_kp_location == "") ? replace(replace(var.kp_location, "ibm:yp:", ""), "ibm:ys1:", "") : replace(replace(var.ci_kp_location, "ibm:yp:", ""), "ibm:ys1:", "")
   kp_resource_group        = (var.ci_kp_resource_group != "") ? var.ci_kp_resource_group : (var.kp_resource_group != "") ? var.kp_resource_group : var.toolchain_resource_group
@@ -582,7 +582,7 @@ module "devsecops_cd_toolchain" {
   sm_name                  = (var.cd_sm_name == "") ? var.sm_name : var.cd_sm_name
   sm_location              = (var.cd_sm_location == "") ? replace(replace(var.sm_location, "ibm:yp:", ""), "ibm:ys1:", "") : replace(replace(var.cd_sm_location, "ibm:yp:", ""), "ibm:ys1:", "")
   sm_resource_group        = (var.cd_sm_resource_group != "") ? var.cd_sm_resource_group : (var.sm_resource_group != "") ? var.sm_resource_group : var.toolchain_resource_group
-  sm_secret_group          = (var.cd_sm_secret_group == "") ? var.sm_secret_group : var.cd_sm_secret_group
+  sm_secret_group          = var.prefix != "" ? "${var.prefix}-${(var.cd_sm_secret_group == "") ? var.sm_secret_group : var.cd_sm_secret_group}" : (var.cd_sm_secret_group == "") ? var.sm_secret_group : var.cd_sm_secret_group
   kp_name                  = (var.cd_kp_name == "") ? var.kp_name : var.cd_kp_name
   kp_location              = (var.cd_kp_location == "") ? replace(replace(var.kp_location, "ibm:yp:", ""), "ibm:ys1:", "") : replace(replace(var.cd_kp_location, "ibm:yp:", ""), "ibm:ys1:", "")
   kp_resource_group        = (var.cd_kp_resource_group != "") ? var.cd_kp_resource_group : (var.kp_resource_group != "") ? var.kp_resource_group : var.toolchain_resource_group
@@ -855,7 +855,7 @@ module "devsecops_cc_toolchain" {
   sm_name                  = (var.cc_sm_name == "") ? var.sm_name : var.cc_sm_name
   sm_location              = (var.cc_sm_location == "") ? replace(replace(var.sm_location, "ibm:yp:", ""), "ibm:ys1:", "") : replace(replace(var.cc_sm_location, "ibm:yp:", ""), "ibm:ys1:", "")
   sm_resource_group        = (var.cc_sm_resource_group != "") ? var.cc_sm_resource_group : (var.sm_resource_group != "") ? var.sm_resource_group : var.toolchain_resource_group
-  sm_secret_group          = (var.cc_sm_secret_group == "") ? var.sm_secret_group : var.cc_sm_secret_group
+  sm_secret_group          = var.prefix != "" ? "${var.prefix}-${(var.cc_sm_secret_group == "") ? var.sm_secret_group : var.cc_sm_secret_group}" : (var.cc_sm_secret_group == "") ? var.sm_secret_group : var.cc_sm_secret_group
   kp_name                  = (var.cc_kp_name == "") ? var.kp_name : var.cc_kp_name
   kp_location              = (var.cc_sm_location == "") ? replace(replace(var.kp_location, "ibm:yp:", ""), "ibm:ys1:", "") : replace(replace(var.cc_kp_location, "ibm:yp:", ""), "ibm:ys1:", "")
   kp_resource_group        = (var.cc_kp_resource_group != "") ? var.cc_kp_resource_group : (var.kp_resource_group != "") ? var.kp_resource_group : var.toolchain_resource_group
