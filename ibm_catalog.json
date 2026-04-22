@@ -1279,7 +1279,7 @@
             {
               "key": "enable_cos",
               "type": "boolean",
-              "default_value": false,
+              "default_value": true,
               "description": "Set to `true` to enable the new COS integration.",
               "required": false
             },
@@ -3244,7 +3244,7 @@
             {
               "key": "enable_cos",
               "type": "boolean",
-              "default_value": false,
+              "default_value": true,
               "description": "Set to `true` to enable the new COS integration.",
               "required": false
             },
