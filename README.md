@@ -22,27 +22,27 @@ A Terraform module for provisioning the DevSecOps CI, CD, and CC toolchains.
 ## Overview
 <ul>
   <li><a href="#terraform-ibm-devsecops-alm">terraform-ibm-devsecops-alm</a></li>
-  <li><a href="./examples">Examples</a>
+  <li><a href="https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-alm/tree/main/examples">Examples</a>
     <ul>
       <li>
-        <a href="./examples/default">Default example</a>
+        <a href="https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-alm/tree/main/examples/default">Default example</a>
         <a href="https://cloud.ibm.com/schematics/workspaces/create?workspace_name=devsecops-alm-default-example&repository=https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-alm/tree/main/examples/default"><img src="https://img.shields.io/badge/Deploy%20with%20IBM%20Cloud%20Schematics-0f62fe?style=flat&logo=ibm&logoColor=white&labelColor=0f62fe" alt="Deploy with IBM Cloud Schematics" style="height: 16px; vertical-align: text-bottom; margin-left: 5px;"></a>
       </li>
       <li>
-        <a href="./examples/devsecops-ci-toolchain-bring-your-own-app">Bring your own app example</a>
+        <a href="https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-alm/tree/main/examples/devsecops-ci-toolchain-bring-your-own-app">Bring your own app example</a>
         <a href="https://cloud.ibm.com/schematics/workspaces/create?workspace_name=devsecops-alm-devsecops-ci-toolchain-bring-your-own-app-example&repository=https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-alm/tree/main/examples/devsecops-ci-toolchain-bring-your-own-app"><img src="https://img.shields.io/badge/Deploy%20with%20IBM%20Cloud%20Schematics-0f62fe?style=flat&logo=ibm&logoColor=white&labelColor=0f62fe" alt="Deploy with IBM Cloud Schematics" style="height: 16px; vertical-align: text-bottom; margin-left: 5px;"></a>
       </li>
       <li>
-        <a href="./examples/devsecops-ci-toolchain-with-key-protect">Key Protect and CI only example</a>
+        <a href="https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-alm/tree/main/examples/devsecops-ci-toolchain-with-key-protect">Key Protect and CI only example</a>
         <a href="https://cloud.ibm.com/schematics/workspaces/create?workspace_name=devsecops-alm-devsecops-ci-toolchain-with-key-protect-example&repository=https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-alm/tree/main/examples/devsecops-ci-toolchain-with-key-protect"><img src="https://img.shields.io/badge/Deploy%20with%20IBM%20Cloud%20Schematics-0f62fe?style=flat&logo=ibm&logoColor=white&labelColor=0f62fe" alt="Deploy with IBM Cloud Schematics" style="height: 16px; vertical-align: text-bottom; margin-left: 5px;"></a>
       </li>
     </ul>
     ℹ️ Ctrl/Cmd+Click or right-click on the Schematics deploy button to open in a new tab.
   </li>
-  <li><a href="./solutions">Deployable Architectures</a>
+  <li><a href="https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-alm/tree/main/solutions">Deployable Architectures</a>
     <ul>
-      <li><a href="./solutions/code-engine"><!-- BEGIN MODULE HOOK --></a></li>
-      <li><a href="./solutions/kubernetes"><!-- BEGIN MODULE HOOK --></a></li>
+      <li><a href="https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-alm/tree/main/solutions/code-engine"><!-- BEGIN MODULE HOOK --></a></li>
+      <li><a href="https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-alm/tree/main/solutions/kubernetes"><!-- BEGIN MODULE HOOK --></a></li>
     </ul>
   </li>
   <li><a href="#contributing">Contributing</a></li>
