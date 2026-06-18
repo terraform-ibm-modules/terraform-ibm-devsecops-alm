@@ -24,16 +24,12 @@ variable "repo_git_id" {
   default = ""
 }
 
-variable "pipeline_config_repo_git_id" {
-  default = "hostedgit"
-}
-
 variable "repo_git_token_secret_crn" {
   default = ""
 }
 
 variable "app_repo_branch" {
-  default = "main"
+  default = "master"
 }
 
 variable "inventory_repo_existing_url" {
@@ -45,9 +41,5 @@ variable "issues_repo_existing_url" {
 }
 
 variable "ghec_git_token_secret_crn" {
-  default = ""
-}
-
-variable "change_management_repo_existing_url" {
   default = ""
 }

@@ -9,6 +9,7 @@ module "terraform_devsecops_alm" {
   toolchain_resource_group                       = var.toolchain_resource_group
   sm_instance_crn                                = var.sm_instance_crn
   enable_privateworker                           = false
+  repo_git_provider                              = "githubconsolidated"
   repo_git_id                                    = "ibm_ghe"
   inventory_repo_existing_url                    = var.inventory_repo_existing_url
   inventory_repo_auth_type                       = "pat"
@@ -22,9 +23,10 @@ module "terraform_devsecops_alm" {
   ci_app_repo_existing_url                       = var.app_repo_existing_url
   ci_app_repo_branch                             = var.app_repo_branch
   ci_app_repo_git_token_secret_crn               = var.repo_git_token_secret_crn
-  cd_enable_change_management_repo                  = true
+  cd_enable_change_management_repo               = true
   change_management_repo_git_id                  = "ibm_ghe"
-  change_management_existing_url                 = var.change_management_repo_existing_url
+  cd_change_management_repo_auth_type            = "pat"
+  cd_change_management_repo_git_token_secret_crn = var.repo_git_token_secret_crn
   cd_deployment_repo_existing_git_id             = "ibm_ghe"
   cd_deployment_repo_auth_type                   = "pat"
   cd_deployment_repo_git_token_secret_crn        = var.repo_git_token_secret_crn
