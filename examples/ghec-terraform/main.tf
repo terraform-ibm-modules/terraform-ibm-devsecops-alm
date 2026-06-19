@@ -1,5 +1,5 @@
 module "terraform_devsecops_alm" {
-  source = "./../.."
+  source                                         = "./../.."
   ibmcloud_api_key                               = var.ibmcloud_api_key
   create_ci_toolchain                            = true
   create_cd_toolchain                            = true

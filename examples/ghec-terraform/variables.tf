@@ -1,7 +1,7 @@
 variable "ibmcloud_api_key" {
   type        = string
   description = "IBM Cloud API KEY to fetch/post cloud resources in terraform."
-  sensitive = true
+  sensitive   = true
 }
 
 variable "sm_instance_crn" {
@@ -17,41 +17,41 @@ variable "toolchain_name" {
 variable "toolchain_region" {
   type        = string
   description = "Region where toolchain(s) will be created."
-  default = "us-south"
+  default     = "us-south"
 }
 
 variable "toolchain_resource_group" {
   type        = string
   description = "Resource Group where toolchain(s) will be created."
-  default = "jumpstart"
+  default     = "jumpstart"
 }
 
 variable "app_repo_existing_url" {
   type        = string
   description = "Existing application repo URL."
-  default = ""
+  default     = ""
 }
 
 variable "repo_git_token_secret_crn" {
   type        = string
   description = "Git token used to clone repo(s)."
-  sensitive = true
+  sensitive   = true
 }
 
 variable "app_repo_branch" {
   type        = string
   description = "Application repo branch."
-  default = "master"
+  default     = "master"
 }
 
 variable "inventory_repo_existing_url" {
   type        = string
   description = "Existing inventory repo URL."
-  default = ""
+  default     = ""
 }
 
 variable "issues_repo_existing_url" {
   type        = string
   description = "Existing issues repo URL."
-  default = ""
+  default     = ""
 }
