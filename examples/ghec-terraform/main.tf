@@ -8,7 +8,6 @@ module "terraform_devsecops_alm" {
   toolchain_region                               = var.toolchain_region
   toolchain_resource_group                       = var.toolchain_resource_group
   sm_instance_crn                                = var.sm_instance_crn
-  enable_privateworker                           = false
   repo_git_provider                              = "githubconsolidated"
   repo_git_id                                    = "ibm_ghe"
   inventory_repo_existing_url                    = var.inventory_repo_existing_url

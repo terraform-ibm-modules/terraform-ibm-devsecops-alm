@@ -20,10 +20,6 @@ variable "app_repo_existing_url" {
   default = ""
 }
 
-variable "repo_git_id" {
-  default = ""
-}
-
 variable "repo_git_token_secret_crn" {
   default = ""
 }
@@ -37,9 +33,5 @@ variable "inventory_repo_existing_url" {
 }
 
 variable "issues_repo_existing_url" {
-  default = ""
-}
-
-variable "ghec_git_token_secret_crn" {
   default = ""
 }

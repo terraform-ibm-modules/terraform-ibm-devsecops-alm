@@ -1,28 +1,5 @@
-
-# APIKEY to run the Terraform script
-#ibmcloud_api_key        = ""
-toolchain_resource_group = "Default"
-toolchain_region         = "us-south"
-
-# Required properties for using Key Protect
-enable_key_protect       = true
-kp_name                  = "prodkeys"
-kp_location              = "us-south"
-kp_resource_group        = "Default"
-
-# Required properties for using Secrets Manager. Secrets Manager is disiabled in this example
-enable_secrets_manager   = false
-#sm_name                  = "sm-compliance-secrets"
-#sm_location              = "us-south"
-#sm_resource_group        = "Default"
-#sm_secret_group          = "Default"
-
-# Required Pipeline properties for running the pipelines in the toolchain
-ci_registry_namespace    = "my-namespace"
-ci_registry_region       = "ibm:yp:us-south"
-ci_cluster_name          = "mycluster-free"
-ci_cluster_region            = "ibm:yp:us-south"
-ci_cluster_resource_group    = "Default"
-ci_cluster_namespace     = "dev"
-cd_cluster_name          = "mycluster-free"
-cd_cluster_namespace     = "prod"
+toolchain_region = "us-south"
+toolchain_resource_group = "jumpstart"
+toolchain_name = "ejd-ghec-devsecops-alm"
+sm_instance_crn = "crn:v1:bluemix:public:secrets-manager:eu-de:a/d2948a254c42cdfbec135a5af44f5d56:90151b12-ec22-439b-9d9d-70b9d2536809::"
+repo_git_token_secret_crn = "crn:v1:bluemix:public:secrets-manager:eu-de:a/d2948a254c42cdfbec135a5af44f5d56:90151b12-ec22-439b-9d9d-70b9d2536809:secret:49eaccff-a9c2-d52c-96c1-1651de97d217"
