@@ -86,7 +86,7 @@ statement instead the previous block.
 ### Requirements
 
 | Name | Version |
-| ---- | ------- |
+|------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0.0 |
 | <a name="requirement_ibm"></a> [ibm](#requirement\_ibm) | >= 1.82.1, < 3.0.0 |
 | <a name="requirement_null"></a> [null](#requirement\_null) | = 3.2.2 |
@@ -95,7 +95,7 @@ statement instead the previous block.
 ### Modules
 
 | Name | Source | Version |
-| ---- | ------ | ------- |
+|------|--------|---------|
 | <a name="module_devsecops_cc_toolchain"></a> [devsecops\_cc\_toolchain](#module\_devsecops\_cc\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cc-toolchain | v3.1.0 |
 | <a name="module_devsecops_cd_toolchain"></a> [devsecops\_cd\_toolchain](#module\_devsecops\_cd\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-cd-toolchain | v3.1.0 |
 | <a name="module_devsecops_ci_toolchain"></a> [devsecops\_ci\_toolchain](#module\_devsecops\_ci\_toolchain) | git::https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-ci-toolchain | v3.1.0 |
@@ -104,7 +104,7 @@ statement instead the previous block.
 ### Resources
 
 | Name | Type |
-| ---- | ---- |
+|------|------|
 | [ibm_cd_tekton_pipeline_property.cc_pipeline_ibmcloud_api](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/resources/cd_tekton_pipeline_property) | resource |
 | [ibm_cd_tekton_pipeline_property.cd_pipeline_ibmcloud_api](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/resources/cd_tekton_pipeline_property) | resource |
 | [ibm_cd_tekton_pipeline_property.ci_pipeline_ibmcloud_api](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/resources/cd_tekton_pipeline_property) | resource |
@@ -123,7 +123,7 @@ statement instead the previous block.
 ### Inputs
 
 | Name | Description | Type | Default | Required |
-| ---- | ----------- | ---- | ------- | :------: |
+|------|-------------|------|---------|:--------:|
 | <a name="input_add_code_engine_prefix"></a> [add\_code\_engine\_prefix](#input\_add\_code\_engine\_prefix) | Set to `true` to use `prefix` to add a prefix to the code engine project names. | `bool` | `true` | no |
 | <a name="input_add_container_name_suffix"></a> [add\_container\_name\_suffix](#input\_add\_container\_name\_suffix) | Set to `true` to add a random suffix to the specified ICR name. | `bool` | `false` | no |
 | <a name="input_add_pipeline_definitions"></a> [add\_pipeline\_definitions](#input\_add\_pipeline\_definitions) | Set to `true` to add pipeline definitions. | `string` | `"true"` | no |
@@ -632,7 +632,7 @@ statement instead the previous block.
 ### Outputs
 
 | Name | Description |
-| ---- | ----------- |
+|------|-------------|
 | <a name="output_app_repo_url"></a> [app\_repo\_url](#output\_app\_repo\_url) | The App Repo URL |
 | <a name="output_cc_pipeline_id"></a> [cc\_pipeline\_id](#output\_cc\_pipeline\_id) | The CC pipeline Id |
 | <a name="output_cd_pipeline_id"></a> [cd\_pipeline\_id](#output\_cd\_pipeline\_id) | The CD pipeline Id |
