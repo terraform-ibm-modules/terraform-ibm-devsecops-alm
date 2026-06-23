@@ -1,0 +1,5 @@
+toolchain_region = "target-region"
+toolchain_resource_group = "target-resource-group"
+toolchain_name = "toolchain-name-prefix"
+sm_instance_crn = "sm-instance-crn"
+repo_git_token_secret_crn = "git-token-secret-crn"

@@ -36,6 +36,10 @@ A Terraform module for provisioning the DevSecOps CI, CD, and CC toolchains.
         <a href="https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-alm/tree/main/examples/devsecops-ci-toolchain-with-key-protect">Key Protect and CI only example</a>
         <a href="https://cloud.ibm.com/schematics/workspaces/create?workspace_name=devsecops-alm-devsecops-ci-toolchain-with-key-protect-example&repository=https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-alm/tree/main/examples/devsecops-ci-toolchain-with-key-protect"><img src="https://img.shields.io/badge/Deploy%20with%20IBM%20Cloud%20Schematics-0f62fe?style=flat&logo=ibm&logoColor=white&labelColor=0f62fe" alt="Deploy with IBM Cloud Schematics" style="height: 16px; vertical-align: text-bottom; margin-left: 5px;"></a>
       </li>
+      <li>
+        <a href="https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-alm/tree/main/examples/ghec-terraform">GHEC example</a>
+        <a href="https://cloud.ibm.com/schematics/workspaces/create?workspace_name=devsecops-alm-ghec-terraform-example&repository=https://github.com/terraform-ibm-modules/terraform-ibm-devsecops-alm/tree/main/examples/ghec-terraform"><img src="https://img.shields.io/badge/Deploy%20with%20IBM%20Cloud%20Schematics-0f62fe?style=flat&logo=ibm&logoColor=white&labelColor=0f62fe" alt="Deploy with IBM Cloud Schematics" style="height: 16px; vertical-align: text-bottom; margin-left: 5px;"></a>
+      </li>
     </ul>
     ℹ️ Ctrl/Cmd+Click or right-click on the Schematics deploy button to open in a new tab.
   </li>
