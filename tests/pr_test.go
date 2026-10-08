@@ -8,8 +8,8 @@ import (
 	"github.com/terraform-ibm-modules/ibmcloud-terratest-wrapper/testhelper"
 )
 
-// Use existing resource group
-// const resourceGroup = "geretain-test-resources"
+// Use existing resource group from "2626712 - IDS AuthService's Account"
+const resourceGroup = "product-management"
 const defaultExampleTerraformDir = "examples/default"
 const appExampleDir = "examples/devsecops-ci-toolchain-bring-your-own-app"
 const kpExampleDir = "examples/devsecops-ci-toolchain-with-key-protect"
@@ -21,8 +21,9 @@ func TestRunDefaultExample(t *testing.T) {
 		Testing:      t,
 		TerraformDir: defaultExampleTerraformDir,
 		TerraformVars: map[string]interface{}{
-			"enable_secrets_manager": false,
-			"enable_key_protect":     false,
+			"enable_secrets_manager":   false,
+			"enable_key_protect":       false,
+			"toolchain_resource_group": resourceGroup,
 		},
 	})
 
@@ -37,6 +38,9 @@ func TestRunAppExample(t *testing.T) {
 	options := testhelper.TestOptionsDefault(&testhelper.TestOptions{
 		Testing:      t,
 		TerraformDir: appExampleDir,
+		TerraformVars: map[string]interface{}{
+			"toolchain_resource_group": resourceGroup,
+		},
 	})
 
 	output, err := options.RunTestConsistency()
@@ -50,6 +54,9 @@ func TestRunKPExample(t *testing.T) {
 	options := testhelper.TestOptionsDefault(&testhelper.TestOptions{
 		Testing:      t,
 		TerraformDir: kpExampleDir,
+		TerraformVars: map[string]interface{}{
+			"toolchain_resource_group": resourceGroup,
+		},
 	})
 
 	output, err := options.RunTestConsistency()
@@ -66,6 +73,9 @@ func TestRunUpgradeExample(t *testing.T) {
 	options := testhelper.TestOptionsDefault(&testhelper.TestOptions{
 		Testing:      t,
 		TerraformDir: defaultExampleTerraformDir,
+		TerraformVars: map[string]interface{}{
+			"toolchain_resource_group": resourceGroup,
+		},
 	})
 
 	output, err := options.RunTestUpgrade()

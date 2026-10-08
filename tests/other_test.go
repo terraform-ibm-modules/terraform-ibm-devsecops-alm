@@ -17,8 +17,9 @@ func TestRunNonDefaultExample(t *testing.T) {
 		Testing:      t,
 		TerraformDir: nonDefaultExampleTerraformDir,
 		TerraformVars: map[string]interface{}{
-			"enable_secrets_manager": false,
-			"enable_key_protect":     false,
+			"enable_secrets_manager":   false,
+			"enable_key_protect":       false,
+			"toolchain_resource_group": resourceGroup,
 		},
 	})
 
