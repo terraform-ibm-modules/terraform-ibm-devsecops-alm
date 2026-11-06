@@ -61,3 +61,9 @@ variable "issues_repo_existing_url" {
   description = "Existing issues repo URL."
   default     = ""
 }
+
+variable "change_management_existing_url" {
+  type        = string
+  description = "Existing change management repo URL."
+  default     = ""
+}
