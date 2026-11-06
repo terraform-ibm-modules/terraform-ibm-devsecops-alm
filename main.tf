@@ -380,7 +380,7 @@ module "devsecops_ci_toolchain" {
   )
   issues_repo_git_token_secret_crn              = (local.ci_issues_repo_git_token_secret_crn == "") ? local.repo_git_token_secret_crn : local.ci_issues_repo_git_token_secret_crn
   inventory_repo_git_token_secret_crn           = (local.ci_inventory_repo_git_token_secret_crn == "") ? local.repo_git_token_secret_crn : local.ci_inventory_repo_git_token_secret_crn
-  compliance_pipeline_repo_git_token_secret_crn = (local.ci_compliance_pipeline_repo_git_token_secret_crn == "") ? local.repo_git_token_secret_crn : local.ci_pipeline_config_repo_git_token_secret_crn
+  compliance_pipeline_repo_git_token_secret_crn = (local.ci_compliance_pipeline_repo_git_token_secret_crn == "") ? local.repo_git_token_secret_crn : local.ci_compliance_pipeline_repo_git_token_secret_crn
   pipeline_config_repo_git_token_secret_crn = (
     (local.ci_pipeline_config_repo_git_token_secret_crn != "") ? local.ci_pipeline_config_repo_git_token_secret_crn : var.repo_git_token_secret_crn
   )
@@ -433,6 +433,7 @@ module "devsecops_ci_toolchain" {
   compliance_pipelines_repo_title            = (var.compliance_pipeline_repo_use_group_settings) ? local.repo_title : var.compliance_pipeline_repo_title
   compliance_pipeline_repo_git_provider      = local.compliance_pipeline_repo_existing_git_provider
   compliance_pipelines_repo_git_id           = (var.compliance_pipeline_repo_use_group_settings) ? local.repo_git_id : var.compliance_pipeline_repo_git_id
+  compliance_pipeline_repo_url               = var.compliance_pipeline_existing_repo_url
   compliance_pipeline_existing_repo_url      = var.compliance_pipeline_existing_repo_url
   compliance_pipeline_source_repo_url        = var.compliance_pipeline_source_repo_url
   compliance_pipelines_repo_name             = var.compliance_pipeline_repo_name
