@@ -26,6 +26,12 @@ variable "toolchain_resource_group" {
   default     = "jumpstart"
 }
 
+variable "ghe_next_git_id" {
+  type        = string
+  description = "GHE Next git_id (`ibm_ghe` for https://ibm.ghe.com, `sandbox` for https://sandbox.github.ibm.com)."
+  default     = "ibm_ghe"
+}
+
 variable "app_repo_existing_url" {
   type        = string
   description = "Existing application repo URL."
