@@ -2,7 +2,6 @@ locals {
   ghe_next_compliance_pipeline_urls = {
     ibm_ghe = "https://ibm.ghe.com/one-pipeline/compliance-pipelines"
     sandbox = "https://sandbox.github.ibm.com/one-pipeline/compliance-pipelines"
-    integrated = "https://github.ibm.com/one-pipeline/compliance-pipelines"
   }
 
   ghe_next_compliance_pipeline_url = lookup(local.ghe_next_compliance_pipeline_urls, var.ghe_next_git_id, "")
