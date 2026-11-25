@@ -58,6 +58,35 @@ variable "app_repo_existing_git_id" {
   default     = ""
 }
 
+variable "app_repo_github_app_auth_method" {
+  type        = string
+  description = "The GitHub App authorization method for the app-repo. E.g. `custom` or `managed`. Overrides `repo_github_app_auth_method` for this repository."
+  default     = ""
+}
+
+variable "app_repo_github_app_credential_app_id" {
+  type        = string
+  description = "The GitHub App App ID for the app-repo. Overrides `repo_github_app_credential_app_id` for this repository."
+  default     = ""
+}
+
+variable "app_repo_github_app_credential_private_key_crn" {
+  type        = string
+  sensitive   = true
+  description = "CRN of the GitHub App private key secret in the secret provider for the app-repo. Overrides `repo_github_app_credential_private_key_crn` for this repository."
+  default     = ""
+  validation {
+    condition     = startswith(var.app_repo_github_app_credential_private_key_crn, "crn:") || var.app_repo_github_app_credential_private_key_crn == ""
+    error_message = "Must be a CRN or left empty."
+  }
+}
+
+variable "app_repo_github_app_credential_private_key_secret_name" {
+  type        = string
+  description = "Name of the GitHub App private key secret in the secret provider for the app-repo. Overrides `repo_github_app_credential_private_key_secret_name` for this repository."
+  default     = ""
+}
+
 variable "app_repo_existing_git_provider" {
   type        = string
   description = "By default this gets set as 'hostedgit', else set to 'githubconsolidated' for GitHub repositories."
@@ -150,6 +179,35 @@ variable "compliance_pipeline_repo_auth_type" {
 variable "compliance_pipeline_repo_git_id" {
   type        = string
   description = "Set this value to `github` for github.com, or to the ID of a custom GitHub Enterprise server."
+  default     = ""
+}
+
+variable "compliance_pipeline_repo_github_app_auth_method" {
+  type        = string
+  description = "The GitHub App authorization method for the compliance-pipeline-repo. E.g. `custom` or `managed`. Overrides `repo_github_app_auth_method` for this repository."
+  default     = ""
+}
+
+variable "compliance_pipeline_repo_github_app_credential_app_id" {
+  type        = string
+  description = "The GitHub App App ID for the compliance-pipeline-repo. Overrides `repo_github_app_credential_app_id` for this repository."
+  default     = ""
+}
+
+variable "compliance_pipeline_repo_github_app_credential_private_key_crn" {
+  type        = string
+  sensitive   = true
+  description = "CRN of the GitHub App private key secret in the secret provider for the compliance-pipeline-repo. Overrides `repo_github_app_credential_private_key_crn` for this repository."
+  default     = ""
+  validation {
+    condition     = startswith(var.compliance_pipeline_repo_github_app_credential_private_key_crn, "crn:") || var.compliance_pipeline_repo_github_app_credential_private_key_crn == ""
+    error_message = "Must be a CRN or left empty."
+  }
+}
+
+variable "compliance_pipeline_repo_github_app_credential_private_key_secret_name" {
+  type        = string
+  description = "Name of the GitHub App private key secret in the secret provider for the compliance-pipeline-repo. Overrides `repo_github_app_credential_private_key_secret_name` for this repository."
   default     = ""
 }
 
@@ -444,6 +502,35 @@ variable "inventory_repo_existing_git_id" {
   default     = ""
 }
 
+variable "inventory_repo_github_app_auth_method" {
+  type        = string
+  description = "The GitHub App authorization method for the inventory-repo. E.g. `custom` or `managed`. Overrides `repo_github_app_auth_method` for this repository."
+  default     = ""
+}
+
+variable "inventory_repo_github_app_credential_app_id" {
+  type        = string
+  description = "The GitHub App App ID for the inventory-repo. Overrides `repo_github_app_credential_app_id` for this repository."
+  default     = ""
+}
+
+variable "inventory_repo_github_app_credential_private_key_crn" {
+  type        = string
+  sensitive   = true
+  description = "CRN of the GitHub App private key secret in the secret provider for the inventory-repo. Overrides `repo_github_app_credential_private_key_crn` for this repository."
+  default     = ""
+  validation {
+    condition     = startswith(var.inventory_repo_github_app_credential_private_key_crn, "crn:") || var.inventory_repo_github_app_credential_private_key_crn == ""
+    error_message = "Must be a CRN or left empty."
+  }
+}
+
+variable "inventory_repo_github_app_credential_private_key_secret_name" {
+  type        = string
+  description = "Name of the GitHub App private key secret in the secret provider for the inventory-repo. Overrides `repo_github_app_credential_private_key_secret_name` for this repository."
+  default     = ""
+}
+
 variable "inventory_repo_existing_git_provider" {
   type        = string
   default     = ""
@@ -516,6 +603,35 @@ variable "issues_repo_auth_type" {
 variable "issues_repo_existing_git_id" {
   type        = string
   description = "Set this value to `github` for github.com, or to the GUID of a custom GitHub Enterprise server."
+  default     = ""
+}
+
+variable "issues_repo_github_app_auth_method" {
+  type        = string
+  description = "The GitHub App authorization method for the issues-repo. E.g. `custom` or `managed`. Overrides `repo_github_app_auth_method` for this repository."
+  default     = ""
+}
+
+variable "issues_repo_github_app_credential_app_id" {
+  type        = string
+  description = "The GitHub App App ID for the issues-repo. Overrides `repo_github_app_credential_app_id` for this repository."
+  default     = ""
+}
+
+variable "issues_repo_github_app_credential_private_key_crn" {
+  type        = string
+  sensitive   = true
+  description = "CRN of the GitHub App private key secret in the secret provider for the issues-repo. Overrides `repo_github_app_credential_private_key_crn` for this repository."
+  default     = ""
+  validation {
+    condition     = startswith(var.issues_repo_github_app_credential_private_key_crn, "crn:") || var.issues_repo_github_app_credential_private_key_crn == ""
+    error_message = "Must be a CRN or left empty."
+  }
+}
+
+variable "issues_repo_github_app_credential_private_key_secret_name" {
+  type        = string
+  description = "Name of the GitHub App private key secret in the secret provider for the issues-repo. Overrides `repo_github_app_credential_private_key_secret_name` for this repository."
   default     = ""
 }
 
@@ -626,6 +742,35 @@ variable "pipeline_config_group" {
 variable "pipeline_config_repo_git_id" {
   type        = string
   description = "Set this value to `github` for github.com, or to the GUID of a custom GitHub Enterprise server."
+  default     = ""
+}
+
+variable "pipeline_config_repo_github_app_auth_method" {
+  type        = string
+  description = "The GitHub App authorization method for the pipeline-config-repo. E.g. `custom` or `managed`. Overrides `repo_github_app_auth_method` for this repository."
+  default     = ""
+}
+
+variable "pipeline_config_repo_github_app_credential_app_id" {
+  type        = string
+  description = "The GitHub App App ID for the pipeline-config-repo. Overrides `repo_github_app_credential_app_id` for this repository."
+  default     = ""
+}
+
+variable "pipeline_config_repo_github_app_credential_private_key_crn" {
+  type        = string
+  sensitive   = true
+  description = "CRN of the GitHub App private key secret in the secret provider for the pipeline-config-repo. Overrides `repo_github_app_credential_private_key_crn` for this repository."
+  default     = ""
+  validation {
+    condition     = startswith(var.pipeline_config_repo_github_app_credential_private_key_crn, "crn:") || var.pipeline_config_repo_github_app_credential_private_key_crn == ""
+    error_message = "Must be a CRN or left empty."
+  }
+}
+
+variable "pipeline_config_repo_github_app_credential_private_key_secret_name" {
+  type        = string
+  description = "Name of the GitHub App private key secret in the secret provider for the pipeline-config-repo. Overrides `repo_github_app_credential_private_key_secret_name` for this repository."
   default     = ""
 }
 
@@ -750,6 +895,41 @@ variable "repo_blind_connection" {
 variable "repo_git_id" {
   type        = string
   description = "The Git ID for the compliance repositories."
+  default     = ""
+}
+
+variable "repo_auth_type" {
+  type        = string
+  description = "Select the method of authentication that is used to access the Git repository. Valid values are `oauth`, `pat` or `github_app`. Defaults to `oauth` when unset. `pat` is a git `personal access token`."
+  default     = ""
+}
+
+variable "repo_github_app_auth_method" {
+  type        = string
+  description = "The GitHub App authorization method for the compliance repositories. E.g. `custom` or `managed`. Only used when `repo_auth_type` is `github_app`."
+  default     = ""
+}
+
+variable "repo_github_app_credential_app_id" {
+  type        = string
+  description = "The GitHub App App ID for the compliance repositories. Only used when `repo_auth_type` is `github_app`."
+  default     = ""
+}
+
+variable "repo_github_app_credential_private_key_crn" {
+  type        = string
+  sensitive   = true
+  description = "CRN of the GitHub App private key secret in the secret provider. Only used when `repo_auth_type` is `github_app`."
+  default     = ""
+  validation {
+    condition     = startswith(var.repo_github_app_credential_private_key_crn, "crn:") || var.repo_github_app_credential_private_key_crn == ""
+    error_message = "Must be a CRN or left empty."
+  }
+}
+
+variable "repo_github_app_credential_private_key_secret_name" {
+  type        = string
+  description = "Name of the GitHub App private key secret in the secret provider. Only used when `repo_auth_type` is `github_app`."
   default     = ""
 }
 
@@ -1145,6 +1325,35 @@ variable "change_management_repo_git_id" {
   default     = ""
 }
 
+variable "cd_change_management_repo_github_app_auth_method" {
+  type        = string
+  description = "The GitHub App authorization method for the change-management-repo in the CD toolchain. E.g. `custom` or `managed`. Overrides `repo_github_app_auth_method` for this repository."
+  default     = ""
+}
+
+variable "cd_change_management_repo_github_app_credential_app_id" {
+  type        = string
+  description = "The GitHub App App ID for the change-management-repo in the CD toolchain. Overrides `repo_github_app_credential_app_id` for this repository."
+  default     = ""
+}
+
+variable "cd_change_management_repo_github_app_credential_private_key_crn" {
+  type        = string
+  sensitive   = true
+  description = "CRN of the GitHub App private key secret in the secret provider for the change-management-repo in the CD toolchain. Overrides `repo_github_app_credential_private_key_crn` for this repository."
+  default     = ""
+  validation {
+    condition     = startswith(var.cd_change_management_repo_github_app_credential_private_key_crn, "crn:") || var.cd_change_management_repo_github_app_credential_private_key_crn == ""
+    error_message = "Must be a CRN or left empty."
+  }
+}
+
+variable "cd_change_management_repo_github_app_credential_private_key_secret_name" {
+  type        = string
+  description = "Name of the GitHub App private key secret in the secret provider for the change-management-repo in the CD toolchain. Overrides `repo_github_app_credential_private_key_secret_name` for this repository."
+  default     = ""
+}
+
 variable "cd_change_management_repo_git_token_secret_crn" {
   type        = string
   sensitive   = true
@@ -1273,6 +1482,35 @@ variable "cd_deployment_repo_existing_branch" {
 variable "cd_deployment_repo_existing_git_id" {
   type        = string
   description = "Set this value to `github` for github.com, or to the GUID of a custom GitHub Enterprise server."
+  default     = ""
+}
+
+variable "cd_deployment_repo_github_app_auth_method" {
+  type        = string
+  description = "The GitHub App authorization method for the deployment-repo in the CD toolchain. E.g. `custom` or `managed`. Overrides `repo_github_app_auth_method` for this repository."
+  default     = ""
+}
+
+variable "cd_deployment_repo_github_app_credential_app_id" {
+  type        = string
+  description = "The GitHub App App ID for the deployment-repo in the CD toolchain. Overrides `repo_github_app_credential_app_id` for this repository."
+  default     = ""
+}
+
+variable "cd_deployment_repo_github_app_credential_private_key_crn" {
+  type        = string
+  sensitive   = true
+  description = "CRN of the GitHub App private key secret in the secret provider for the deployment-repo in the CD toolchain. Overrides `repo_github_app_credential_private_key_crn` for this repository."
+  default     = ""
+  validation {
+    condition     = startswith(var.cd_deployment_repo_github_app_credential_private_key_crn, "crn:") || var.cd_deployment_repo_github_app_credential_private_key_crn == ""
+    error_message = "Must be a CRN or left empty."
+  }
+}
+
+variable "cd_deployment_repo_github_app_credential_private_key_secret_name" {
+  type        = string
+  description = "Name of the GitHub App private key secret in the secret provider for the deployment-repo in the CD toolchain. Overrides `repo_github_app_credential_private_key_secret_name` for this repository."
   default     = ""
 }
 
@@ -1626,6 +1864,7 @@ variable "create_access_group" {
 }
 
 #############################################
+
 variable "use_legacy_cos_tool" {
   type        = bool
   description = "The custom tool integration is being replaced with the new COS tool integration. To continue using the legacy tool. Set the value to `true`. See `enable_cos`"
