@@ -17,7 +17,7 @@ variable "app_group" {
 
 variable "app_repo_auth_type" {
   type        = string
-  description = "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`."
+  description = "Select the method of authentication that is used to access the Git repository. Valid values are `oauth`, `pat` or `github_app`. Defaults to `oauth` when unset. `pat` is a git `personal access token`."
   default     = ""
 }
 
@@ -136,7 +136,7 @@ variable "compliance_pipeline_group" {
 
 variable "compliance_pipeline_repo_auth_type" {
   type        = string
-  description = "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`."
+  description = "Select the method of authentication that is used to access the Git repository. Valid values are `oauth`, `pat` or `github_app`. Defaults to `oauth` when unset. `pat` is a git `personal access token`."
   default     = ""
 }
 
@@ -427,7 +427,7 @@ variable "inventory_group" {
 
 variable "inventory_repo_auth_type" {
   type        = string
-  description = "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`."
+  description = "Select the method of authentication that is used to access the Git repository. Valid values are `oauth`, `pat` or `github_app`. Defaults to `oauth` when unset. `pat` is a git `personal access token`."
   default     = ""
 }
 
@@ -502,7 +502,7 @@ variable "issues_group" {
 
 variable "issues_repo_auth_type" {
   type        = string
-  description = "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`."
+  description = "Select the method of authentication that is used to access the Git repository. Valid values are `oauth`, `pat` or `github_app`. Defaults to `oauth` when unset. `pat` is a git `personal access token`."
   default     = ""
 }
 
@@ -571,7 +571,7 @@ variable "issues_repo_source_url" {
 
 variable "pipeline_config_repo_auth_type" {
   type        = string
-  description = "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`."
+  description = "Select the method of authentication that is used to access the Git repository. Valid values are `oauth`, `pat` or `github_app`. Defaults to `oauth` when unset. `pat` is a git `personal access token`."
   default     = ""
 }
 
@@ -1121,7 +1121,7 @@ variable "cd_change_management_group" {
 
 variable "cd_change_management_repo_auth_type" {
   type        = string
-  description = "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`."
+  description = "Select the method of authentication that is used to access the Git repository. Valid values are `oauth`, `pat` or `github_app`. Defaults to `oauth` when unset. `pat` is a git `personal access token`."
   default     = ""
 }
 
@@ -1222,7 +1222,7 @@ variable "cd_deployment_group" {
 
 variable "cd_deployment_repo_auth_type" {
   type        = string
-  description = "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`."
+  description = "Select the method of authentication that is used to access the Git repository. Valid values are `oauth`, `pat` or `github_app`. Defaults to `oauth` when unset. `pat` is a git `personal access token`."
   default     = ""
 }
 

@@ -506,7 +506,7 @@
               "key": "app_repo_auth_type",
               "type": "string",
               "default_value": "",
-              "description": "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`.",
+              "description": "Select the method of authentication that is used to access the Git repository. Valid values are `oauth`, `pat` or `github_app`. Defaults to `oauth` when unset. `pat` is a git `personal access token`.",
               "required": false
             },
             {
@@ -658,7 +658,7 @@
               "key": "cd_change_management_repo_auth_type",
               "type": "string",
               "default_value": "",
-              "description": "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`.",
+              "description": "Select the method of authentication that is used to access the Git repository. Valid values are `oauth`, `pat` or `github_app`. Defaults to `oauth` when unset. `pat` is a git `personal access token`.",
               "required": false
             },
             {
@@ -748,7 +748,7 @@
               "key": "cd_deployment_repo_auth_type",
               "type": "string",
               "default_value": "",
-              "description": "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`.",
+              "description": "Select the method of authentication that is used to access the Git repository. Valid values are `oauth`, `pat` or `github_app`. Defaults to `oauth` when unset. `pat` is a git `personal access token`.",
               "required": false
             },
             {
@@ -1128,7 +1128,7 @@
               "key": "compliance_pipeline_repo_auth_type",
               "type": "string",
               "default_value": "",
-              "description": "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`.",
+              "description": "Select the method of authentication that is used to access the Git repository. Valid values are `oauth`, `pat` or `github_app`. Defaults to `oauth` when unset. `pat` is a git `personal access token`.",
               "required": false
             },
             {
@@ -1364,7 +1364,7 @@
               "key": "inventory_repo_auth_type",
               "type": "string",
               "default_value": "",
-              "description": "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`.",
+              "description": "Select the method of authentication that is used to access the Git repository. Valid values are `oauth`, `pat` or `github_app`. Defaults to `oauth` when unset. `pat` is a git `personal access token`.",
               "required": false
             },
             {
@@ -1433,7 +1433,7 @@
               "key": "issues_repo_auth_type",
               "type": "string",
               "default_value": "",
-              "description": "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`.",
+              "description": "Select the method of authentication that is used to access the Git repository. Valid values are `oauth`, `pat` or `github_app`. Defaults to `oauth` when unset. `pat` is a git `personal access token`.",
               "required": false
             },
             {
@@ -1502,7 +1502,7 @@
               "key": "pipeline_config_repo_auth_type",
               "type": "string",
               "default_value": "",
-              "description": "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`.",
+              "description": "Select the method of authentication that is used to access the Git repository. Valid values are `oauth`, `pat` or `github_app`. Defaults to `oauth` when unset. `pat` is a git `personal access token`.",
               "required": false
             },
             {
@@ -2464,7 +2464,7 @@
               "key": "app_repo_auth_type",
               "type": "string",
               "default_value": "",
-              "description": "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`.",
+              "description": "Select the method of authentication that is used to access the Git repository. Valid values are `oauth`, `pat` or `github_app`. Defaults to `oauth` when unset. `pat` is a git `personal access token`.",
               "required": false
             },
             {
@@ -2616,7 +2616,7 @@
               "key": "cd_change_management_repo_auth_type",
               "type": "string",
               "default_value": "",
-              "description": "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`.",
+              "description": "Select the method of authentication that is used to access the Git repository. Valid values are `oauth`, `pat` or `github_app`. Defaults to `oauth` when unset. `pat` is a git `personal access token`.",
               "required": false
             },
             {
@@ -2713,7 +2713,7 @@
               "key": "cd_deployment_repo_auth_type",
               "type": "string",
               "default_value": "",
-              "description": "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`.",
+              "description": "Select the method of authentication that is used to access the Git repository. Valid values are `oauth`, `pat` or `github_app`. Defaults to `oauth` when unset. `pat` is a git `personal access token`.",
               "required": false
             },
             {
@@ -3093,7 +3093,7 @@
               "key": "compliance_pipeline_repo_auth_type",
               "type": "string",
               "default_value": "",
-              "description": "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`.",
+              "description": "Select the method of authentication that is used to access the Git repository. Valid values are `oauth`, `pat` or `github_app`. Defaults to `oauth` when unset. `pat` is a git `personal access token`.",
               "required": false
             },
             {
@@ -3329,7 +3329,7 @@
               "key": "inventory_repo_auth_type",
               "type": "string",
               "default_value": "",
-              "description": "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`.",
+              "description": "Select the method of authentication that is used to access the Git repository. Valid values are `oauth`, `pat` or `github_app`. Defaults to `oauth` when unset. `pat` is a git `personal access token`.",
               "required": false
             },
             {
@@ -3398,7 +3398,7 @@
               "key": "issues_repo_auth_type",
               "type": "string",
               "default_value": "",
-              "description": "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`.",
+              "description": "Select the method of authentication that is used to access the Git repository. Valid values are `oauth`, `pat` or `github_app`. Defaults to `oauth` when unset. `pat` is a git `personal access token`.",
               "required": false
             },
             {
@@ -3467,7 +3467,7 @@
               "key": "pipeline_config_repo_auth_type",
               "type": "string",
               "default_value": "",
-              "description": "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`.",
+              "description": "Select the method of authentication that is used to access the Git repository. Valid values are `oauth`, `pat` or `github_app`. Defaults to `oauth` when unset. `pat` is a git `personal access token`.",
               "required": false
             },
             {
