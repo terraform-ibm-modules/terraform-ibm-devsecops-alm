@@ -65,6 +65,7 @@ module "devsecops_da" {
   create_code_engine_access_policy                                        = var.create_code_engine_access_policy
   create_cos_api_key                                                      = var.create_cos_api_key
   create_git_token                                                        = var.create_git_token
+  create_github_app_private_key                                           = var.create_github_app_private_key
   create_ibmcloud_api_key                                                 = var.create_ibmcloud_api_key
   create_icr_namespace                                                    = var.create_icr_namespace
   create_kubernetes_access_policy                                         = var.create_kubernetes_access_policy
@@ -151,6 +152,7 @@ module "devsecops_da" {
   repo_git_provider                                                       = var.repo_git_provider
   repo_git_token_secret_crn                                               = var.repo_git_token_secret_crn
   repo_git_token_secret_name                                              = var.repo_git_token_secret_name
+  repo_github_app_credential_private_key_secret_value                     = var.repo_github_app_credential_private_key_secret_value
   repo_git_token_secret_value                                             = var.repo_git_token_secret_value
   repo_group                                                              = var.repo_group
   repo_root_url                                                           = var.repo_root_url

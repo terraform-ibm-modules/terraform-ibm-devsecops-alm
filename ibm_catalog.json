@@ -1377,6 +1377,20 @@
               "required": false
             },
             {
+              "key": "create_github_app_private_key",
+              "type": "boolean",
+              "default_value": false,
+              "description": "Set to `true` to create and add the specified GitHub App private key secret to the Secrets Provider. Use `repo_github_app_credential_private_key_secret_value` for setting the value.",
+              "required": false
+            },
+            {
+              "key": "repo_github_app_credential_private_key_secret_value",
+              "type": "password",
+              "default_value": "",
+              "description": "The GitHub App private key that will be added to the `repo_github_app_credential_private_key_secret_name` secret in the secrets provider.",
+              "required": false
+            },
+            {
               "key": "create_access_group",
               "type": "boolean",
               "default_value": false,
@@ -3562,6 +3576,20 @@
               "type": "password",
               "default_value": "",
               "description": "The personal access token that will be added to the `repo_git_token_secret_name` secret in the secrets provider.",
+              "required": false
+            },
+            {
+              "key": "create_github_app_private_key",
+              "type": "boolean",
+              "default_value": false,
+              "description": "Set to `true` to create and add the specified GitHub App private key secret to the Secrets Provider. Use `repo_github_app_credential_private_key_secret_value` for setting the value.",
+              "required": false
+            },
+            {
+              "key": "repo_github_app_credential_private_key_secret_value",
+              "type": "password",
+              "default_value": "",
+              "description": "The GitHub App private key that will be added to the `repo_github_app_credential_private_key_secret_name` secret in the secrets provider.",
               "required": false
             },
             {

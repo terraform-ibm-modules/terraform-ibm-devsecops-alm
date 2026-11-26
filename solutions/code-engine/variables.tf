@@ -370,6 +370,12 @@ variable "create_git_token" {
   default     = false
 }
 
+variable "create_github_app_private_key" {
+  type        = bool
+  description = "Set to `true` to create and add the specified GitHub App private key secret to the Secrets Provider. Use `repo_github_app_credential_private_key_secret_value` for setting the value."
+  default     = false
+}
+
 variable "create_ibmcloud_api_key" {
   type        = bool
   description = "Set to `true` to create and add an `ibmcloud-api-key` to the Secrets Provider."
@@ -960,6 +966,13 @@ variable "repo_git_token_secret_value" {
   type        = string
   sensitive   = true
   description = "The personal access token that will be added to the `repo_git_token_secret_name` secret in the secrets provider."
+  default     = ""
+}
+
+variable "repo_github_app_credential_private_key_secret_value" {
+  type        = string
+  sensitive   = true
+  description = "The GitHub App private key that will be added to the `repo_github_app_credential_private_key_secret_name` secret in the secrets provider."
   default     = ""
 }
 
