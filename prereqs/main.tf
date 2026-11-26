@@ -267,6 +267,20 @@ resource "ibm_sm_arbitrary_secret" "git_token" {
   endpoint_type   = var.sm_endpoint_type
 }
 
+resource "ibm_sm_arbitrary_secret" "github_app_private_key" {
+  count           = ((var.create_github_app_private_key == true) && (var.sm_exists == true) && (var.repo_github_app_credential_private_key_secret_name != "") && (var.repo_github_app_credential_private_key_secret_value != "")) ? 1 : 0
+  depends_on      = [ibm_sm_secret_group.sm_secret_group]
+  region          = var.sm_location
+  instance_id     = (local.sm_instance_id != "") ? local.sm_instance_id : var.sm_instance_id
+  secret_group_id = (var.create_secret_group == false) ? data.ibm_sm_secret_group.existing_sm_secret_group[0].secret_group_id : ibm_sm_secret_group.sm_secret_group[0].secret_group_id
+  name            = var.repo_github_app_credential_private_key_secret_name
+  description     = "A GitHub App private key for accessing your repositories."
+  labels          = []
+  payload         = var.repo_github_app_credential_private_key_secret_value
+  expiration_date = local.expiration_date
+  endpoint_type   = var.sm_endpoint_type
+}
+
 resource "ibm_sm_arbitrary_secret" "private_worker_secret" {
   count           = ((var.create_privateworker_secret == true) && (var.sm_exists == true)) ? 1 : 0
   depends_on      = [ibm_sm_secret_group.sm_secret_group]

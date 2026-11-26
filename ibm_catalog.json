@@ -328,6 +328,40 @@
               "required": false
             },
             {
+              "key": "repo_auth_type",
+              "type": "string",
+              "default_value": "",
+              "description": "Select the method of authentication that is used to access the Git repository. Valid values are `oauth`, `pat` or `github_app`. Defaults to `oauth` when unset. `pat` is a git `personal access token`.",
+              "required": false
+            },
+            {
+              "key": "repo_github_app_auth_method",
+              "type": "string",
+              "default_value": "",
+              "description": "The GitHub App authorization method for the compliance repositories. E.g. `custom` or `managed`. Only used when `repo_auth_type` is `github_app`.",
+              "required": false
+            },
+            {
+              "key": "repo_github_app_credential_app_id",
+              "type": "string",
+              "default_value": "",
+              "description": "The GitHub App App ID for the compliance repositories. Only used when `repo_auth_type` is `github_app`.",
+              "required": false
+            },
+            {
+              "key": "repo_github_app_credential_private_key_crn",
+              "type": "password",
+              "description": "CRN of the GitHub App private key secret in the secret provider. Only used when `repo_auth_type` is `github_app`.",
+              "required": false
+            },
+            {
+              "key": "repo_github_app_credential_private_key_secret_name",
+              "type": "string",
+              "default_value": "",
+              "description": "Name of the GitHub App private key secret in the secret provider. Only used when `repo_auth_type` is `github_app`.",
+              "required": false
+            },
+            {
               "key": "repo_title",
               "type": "string",
               "default_value": "",
@@ -506,7 +540,34 @@
               "key": "app_repo_auth_type",
               "type": "string",
               "default_value": "",
-              "description": "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`.",
+              "description": "Select the method of authentication that is used to access the Git repository. Valid values are `oauth`, `pat` or `github_app`. Defaults to `oauth` when unset. `pat` is a git `personal access token`.",
+              "required": false
+            },
+            {
+              "key": "app_repo_github_app_auth_method",
+              "type": "string",
+              "default_value": "",
+              "description": "The GitHub App authorization method for the app-repo. E.g. `custom` or `managed`. Overrides `repo_github_app_auth_method` for this repository.",
+              "required": false
+            },
+            {
+              "key": "app_repo_github_app_credential_app_id",
+              "type": "string",
+              "default_value": "",
+              "description": "The GitHub App App ID for the app-repo. Overrides `repo_github_app_credential_app_id` for this repository.",
+              "required": false
+            },
+            {
+              "key": "app_repo_github_app_credential_private_key_crn",
+              "type": "password",
+              "description": "CRN of the GitHub App private key secret in the secret provider for the app-repo. Overrides `repo_github_app_credential_private_key_crn` for this repository.",
+              "required": false
+            },
+            {
+              "key": "app_repo_github_app_credential_private_key_secret_name",
+              "type": "string",
+              "default_value": "",
+              "description": "Name of the GitHub App private key secret in the secret provider for the app-repo. Overrides `repo_github_app_credential_private_key_secret_name` for this repository.",
               "required": false
             },
             {
@@ -658,7 +719,34 @@
               "key": "cd_change_management_repo_auth_type",
               "type": "string",
               "default_value": "",
-              "description": "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`.",
+              "description": "Select the method of authentication that is used to access the Git repository. Valid values are `oauth`, `pat` or `github_app`. Defaults to `oauth` when unset. `pat` is a git `personal access token`.",
+              "required": false
+            },
+            {
+              "key": "cd_change_management_repo_github_app_auth_method",
+              "type": "string",
+              "default_value": "",
+              "description": "The GitHub App authorization method for the change-management-repo in the CD toolchain. E.g. `custom` or `managed`. Overrides `repo_github_app_auth_method` for this repository.",
+              "required": false
+            },
+            {
+              "key": "cd_change_management_repo_github_app_credential_app_id",
+              "type": "string",
+              "default_value": "",
+              "description": "The GitHub App App ID for the change-management-repo in the CD toolchain. Overrides `repo_github_app_credential_app_id` for this repository.",
+              "required": false
+            },
+            {
+              "key": "cd_change_management_repo_github_app_credential_private_key_crn",
+              "type": "password",
+              "description": "CRN of the GitHub App private key secret in the secret provider for the change-management-repo in the CD toolchain. Overrides `repo_github_app_credential_private_key_crn` for this repository.",
+              "required": false
+            },
+            {
+              "key": "cd_change_management_repo_github_app_credential_private_key_secret_name",
+              "type": "string",
+              "default_value": "",
+              "description": "Name of the GitHub App private key secret in the secret provider for the change-management-repo in the CD toolchain. Overrides `repo_github_app_credential_private_key_secret_name` for this repository.",
               "required": false
             },
             {
@@ -748,7 +836,34 @@
               "key": "cd_deployment_repo_auth_type",
               "type": "string",
               "default_value": "",
-              "description": "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`.",
+              "description": "Select the method of authentication that is used to access the Git repository. Valid values are `oauth`, `pat` or `github_app`. Defaults to `oauth` when unset. `pat` is a git `personal access token`.",
+              "required": false
+            },
+            {
+              "key": "cd_deployment_repo_github_app_auth_method",
+              "type": "string",
+              "default_value": "",
+              "description": "The GitHub App authorization method for the deployment-repo in the CD toolchain. E.g. `custom` or `managed`. Overrides `repo_github_app_auth_method` for this repository.",
+              "required": false
+            },
+            {
+              "key": "cd_deployment_repo_github_app_credential_app_id",
+              "type": "string",
+              "default_value": "",
+              "description": "The GitHub App App ID for the deployment-repo in the CD toolchain. Overrides `repo_github_app_credential_app_id` for this repository.",
+              "required": false
+            },
+            {
+              "key": "cd_deployment_repo_github_app_credential_private_key_crn",
+              "type": "password",
+              "description": "CRN of the GitHub App private key secret in the secret provider for the deployment-repo in the CD toolchain. Overrides `repo_github_app_credential_private_key_crn` for this repository.",
+              "required": false
+            },
+            {
+              "key": "cd_deployment_repo_github_app_credential_private_key_secret_name",
+              "type": "string",
+              "default_value": "",
+              "description": "Name of the GitHub App private key secret in the secret provider for the deployment-repo in the CD toolchain. Overrides `repo_github_app_credential_private_key_secret_name` for this repository.",
               "required": false
             },
             {
@@ -1128,7 +1243,34 @@
               "key": "compliance_pipeline_repo_auth_type",
               "type": "string",
               "default_value": "",
-              "description": "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`.",
+              "description": "Select the method of authentication that is used to access the Git repository. Valid values are `oauth`, `pat` or `github_app`. Defaults to `oauth` when unset. `pat` is a git `personal access token`.",
+              "required": false
+            },
+            {
+              "key": "compliance_pipeline_repo_github_app_auth_method",
+              "type": "string",
+              "default_value": "",
+              "description": "The GitHub App authorization method for the compliance-pipeline-repo. E.g. `custom` or `managed`. Overrides `repo_github_app_auth_method` for this repository.",
+              "required": false
+            },
+            {
+              "key": "compliance_pipeline_repo_github_app_credential_app_id",
+              "type": "string",
+              "default_value": "",
+              "description": "The GitHub App App ID for the compliance-pipeline-repo. Overrides `repo_github_app_credential_app_id` for this repository.",
+              "required": false
+            },
+            {
+              "key": "compliance_pipeline_repo_github_app_credential_private_key_crn",
+              "type": "password",
+              "description": "CRN of the GitHub App private key secret in the secret provider for the compliance-pipeline-repo. Overrides `repo_github_app_credential_private_key_crn` for this repository.",
+              "required": false
+            },
+            {
+              "key": "compliance_pipeline_repo_github_app_credential_private_key_secret_name",
+              "type": "string",
+              "default_value": "",
+              "description": "Name of the GitHub App private key secret in the secret provider for the compliance-pipeline-repo. Overrides `repo_github_app_credential_private_key_secret_name` for this repository.",
               "required": false
             },
             {
@@ -1232,6 +1374,20 @@
               "type": "password",
               "default_value": "",
               "description": "The personal access token that will be added to the `repo_git_token_secret_name` secret in the secrets provider.",
+              "required": false
+            },
+            {
+              "key": "create_github_app_private_key",
+              "type": "boolean",
+              "default_value": false,
+              "description": "Set to `true` to create and add the specified GitHub App private key secret to the Secrets Provider. Use `repo_github_app_credential_private_key_secret_value` for setting the value.",
+              "required": false
+            },
+            {
+              "key": "repo_github_app_credential_private_key_secret_value",
+              "type": "password",
+              "default_value": "",
+              "description": "The GitHub App private key that will be added to the `repo_github_app_credential_private_key_secret_name` secret in the secrets provider.",
               "required": false
             },
             {
@@ -1364,7 +1520,34 @@
               "key": "inventory_repo_auth_type",
               "type": "string",
               "default_value": "",
-              "description": "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`.",
+              "description": "Select the method of authentication that is used to access the Git repository. Valid values are `oauth`, `pat` or `github_app`. Defaults to `oauth` when unset. `pat` is a git `personal access token`.",
+              "required": false
+            },
+            {
+              "key": "inventory_repo_github_app_auth_method",
+              "type": "string",
+              "default_value": "",
+              "description": "The GitHub App authorization method for the inventory-repo. E.g. `custom` or `managed`. Overrides `repo_github_app_auth_method` for this repository.",
+              "required": false
+            },
+            {
+              "key": "inventory_repo_github_app_credential_app_id",
+              "type": "string",
+              "default_value": "",
+              "description": "The GitHub App App ID for the inventory-repo. Overrides `repo_github_app_credential_app_id` for this repository.",
+              "required": false
+            },
+            {
+              "key": "inventory_repo_github_app_credential_private_key_crn",
+              "type": "password",
+              "description": "CRN of the GitHub App private key secret in the secret provider for the inventory-repo. Overrides `repo_github_app_credential_private_key_crn` for this repository.",
+              "required": false
+            },
+            {
+              "key": "inventory_repo_github_app_credential_private_key_secret_name",
+              "type": "string",
+              "default_value": "",
+              "description": "Name of the GitHub App private key secret in the secret provider for the inventory-repo. Overrides `repo_github_app_credential_private_key_secret_name` for this repository.",
               "required": false
             },
             {
@@ -1433,7 +1616,34 @@
               "key": "issues_repo_auth_type",
               "type": "string",
               "default_value": "",
-              "description": "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`.",
+              "description": "Select the method of authentication that is used to access the Git repository. Valid values are `oauth`, `pat` or `github_app`. Defaults to `oauth` when unset. `pat` is a git `personal access token`.",
+              "required": false
+            },
+            {
+              "key": "issues_repo_github_app_auth_method",
+              "type": "string",
+              "default_value": "",
+              "description": "The GitHub App authorization method for the issues-repo. E.g. `custom` or `managed`. Overrides `repo_github_app_auth_method` for this repository.",
+              "required": false
+            },
+            {
+              "key": "issues_repo_github_app_credential_app_id",
+              "type": "string",
+              "default_value": "",
+              "description": "The GitHub App App ID for the issues-repo. Overrides `repo_github_app_credential_app_id` for this repository.",
+              "required": false
+            },
+            {
+              "key": "issues_repo_github_app_credential_private_key_crn",
+              "type": "password",
+              "description": "CRN of the GitHub App private key secret in the secret provider for the issues-repo. Overrides `repo_github_app_credential_private_key_crn` for this repository.",
+              "required": false
+            },
+            {
+              "key": "issues_repo_github_app_credential_private_key_secret_name",
+              "type": "string",
+              "default_value": "",
+              "description": "Name of the GitHub App private key secret in the secret provider for the issues-repo. Overrides `repo_github_app_credential_private_key_secret_name` for this repository.",
               "required": false
             },
             {
@@ -1502,7 +1712,34 @@
               "key": "pipeline_config_repo_auth_type",
               "type": "string",
               "default_value": "",
-              "description": "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`.",
+              "description": "Select the method of authentication that is used to access the Git repository. Valid values are `oauth`, `pat` or `github_app`. Defaults to `oauth` when unset. `pat` is a git `personal access token`.",
+              "required": false
+            },
+            {
+              "key": "pipeline_config_repo_github_app_auth_method",
+              "type": "string",
+              "default_value": "",
+              "description": "The GitHub App authorization method for the pipeline-config-repo. E.g. `custom` or `managed`. Overrides `repo_github_app_auth_method` for this repository.",
+              "required": false
+            },
+            {
+              "key": "pipeline_config_repo_github_app_credential_app_id",
+              "type": "string",
+              "default_value": "",
+              "description": "The GitHub App App ID for the pipeline-config-repo. Overrides `repo_github_app_credential_app_id` for this repository.",
+              "required": false
+            },
+            {
+              "key": "pipeline_config_repo_github_app_credential_private_key_crn",
+              "type": "password",
+              "description": "CRN of the GitHub App private key secret in the secret provider for the pipeline-config-repo. Overrides `repo_github_app_credential_private_key_crn` for this repository.",
+              "required": false
+            },
+            {
+              "key": "pipeline_config_repo_github_app_credential_private_key_secret_name",
+              "type": "string",
+              "default_value": "",
+              "description": "Name of the GitHub App private key secret in the secret provider for the pipeline-config-repo. Overrides `repo_github_app_credential_private_key_secret_name` for this repository.",
               "required": false
             },
             {
@@ -2280,6 +2517,40 @@
               "required": false
             },
             {
+              "key": "repo_auth_type",
+              "type": "string",
+              "default_value": "",
+              "description": "Select the method of authentication that is used to access the Git repository. Valid values are `oauth`, `pat` or `github_app`. Defaults to `oauth` when unset. `pat` is a git `personal access token`.",
+              "required": false
+            },
+            {
+              "key": "repo_github_app_auth_method",
+              "type": "string",
+              "default_value": "",
+              "description": "The GitHub App authorization method for the compliance repositories. E.g. `custom` or `managed`. Only used when `repo_auth_type` is `github_app`.",
+              "required": false
+            },
+            {
+              "key": "repo_github_app_credential_app_id",
+              "type": "string",
+              "default_value": "",
+              "description": "The GitHub App App ID for the compliance repositories. Only used when `repo_auth_type` is `github_app`.",
+              "required": false
+            },
+            {
+              "key": "repo_github_app_credential_private_key_crn",
+              "type": "password",
+              "description": "CRN of the GitHub App private key secret in the secret provider. Only used when `repo_auth_type` is `github_app`.",
+              "required": false
+            },
+            {
+              "key": "repo_github_app_credential_private_key_secret_name",
+              "type": "string",
+              "default_value": "",
+              "description": "Name of the GitHub App private key secret in the secret provider. Only used when `repo_auth_type` is `github_app`.",
+              "required": false
+            },
+            {
               "key": "repo_title",
               "type": "string",
               "default_value": "",
@@ -2464,7 +2735,34 @@
               "key": "app_repo_auth_type",
               "type": "string",
               "default_value": "",
-              "description": "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`.",
+              "description": "Select the method of authentication that is used to access the Git repository. Valid values are `oauth`, `pat` or `github_app`. Defaults to `oauth` when unset. `pat` is a git `personal access token`.",
+              "required": false
+            },
+            {
+              "key": "app_repo_github_app_auth_method",
+              "type": "string",
+              "default_value": "",
+              "description": "The GitHub App authorization method for the app-repo. E.g. `custom` or `managed`. Overrides `repo_github_app_auth_method` for this repository.",
+              "required": false
+            },
+            {
+              "key": "app_repo_github_app_credential_app_id",
+              "type": "string",
+              "default_value": "",
+              "description": "The GitHub App App ID for the app-repo. Overrides `repo_github_app_credential_app_id` for this repository.",
+              "required": false
+            },
+            {
+              "key": "app_repo_github_app_credential_private_key_crn",
+              "type": "password",
+              "description": "CRN of the GitHub App private key secret in the secret provider for the app-repo. Overrides `repo_github_app_credential_private_key_crn` for this repository.",
+              "required": false
+            },
+            {
+              "key": "app_repo_github_app_credential_private_key_secret_name",
+              "type": "string",
+              "default_value": "",
+              "description": "Name of the GitHub App private key secret in the secret provider for the app-repo. Overrides `repo_github_app_credential_private_key_secret_name` for this repository.",
               "required": false
             },
             {
@@ -2616,7 +2914,34 @@
               "key": "cd_change_management_repo_auth_type",
               "type": "string",
               "default_value": "",
-              "description": "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`.",
+              "description": "Select the method of authentication that is used to access the Git repository. Valid values are `oauth`, `pat` or `github_app`. Defaults to `oauth` when unset. `pat` is a git `personal access token`.",
+              "required": false
+            },
+            {
+              "key": "cd_change_management_repo_github_app_auth_method",
+              "type": "string",
+              "default_value": "",
+              "description": "The GitHub App authorization method for the change-management-repo in the CD toolchain. E.g. `custom` or `managed`. Overrides `repo_github_app_auth_method` for this repository.",
+              "required": false
+            },
+            {
+              "key": "cd_change_management_repo_github_app_credential_app_id",
+              "type": "string",
+              "default_value": "",
+              "description": "The GitHub App App ID for the change-management-repo in the CD toolchain. Overrides `repo_github_app_credential_app_id` for this repository.",
+              "required": false
+            },
+            {
+              "key": "cd_change_management_repo_github_app_credential_private_key_crn",
+              "type": "password",
+              "description": "CRN of the GitHub App private key secret in the secret provider for the change-management-repo in the CD toolchain. Overrides `repo_github_app_credential_private_key_crn` for this repository.",
+              "required": false
+            },
+            {
+              "key": "cd_change_management_repo_github_app_credential_private_key_secret_name",
+              "type": "string",
+              "default_value": "",
+              "description": "Name of the GitHub App private key secret in the secret provider for the change-management-repo in the CD toolchain. Overrides `repo_github_app_credential_private_key_secret_name` for this repository.",
               "required": false
             },
             {
@@ -2713,7 +3038,34 @@
               "key": "cd_deployment_repo_auth_type",
               "type": "string",
               "default_value": "",
-              "description": "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`.",
+              "description": "Select the method of authentication that is used to access the Git repository. Valid values are `oauth`, `pat` or `github_app`. Defaults to `oauth` when unset. `pat` is a git `personal access token`.",
+              "required": false
+            },
+            {
+              "key": "cd_deployment_repo_github_app_auth_method",
+              "type": "string",
+              "default_value": "",
+              "description": "The GitHub App authorization method for the deployment-repo in the CD toolchain. E.g. `custom` or `managed`. Overrides `repo_github_app_auth_method` for this repository.",
+              "required": false
+            },
+            {
+              "key": "cd_deployment_repo_github_app_credential_app_id",
+              "type": "string",
+              "default_value": "",
+              "description": "The GitHub App App ID for the deployment-repo in the CD toolchain. Overrides `repo_github_app_credential_app_id` for this repository.",
+              "required": false
+            },
+            {
+              "key": "cd_deployment_repo_github_app_credential_private_key_crn",
+              "type": "password",
+              "description": "CRN of the GitHub App private key secret in the secret provider for the deployment-repo in the CD toolchain. Overrides `repo_github_app_credential_private_key_crn` for this repository.",
+              "required": false
+            },
+            {
+              "key": "cd_deployment_repo_github_app_credential_private_key_secret_name",
+              "type": "string",
+              "default_value": "",
+              "description": "Name of the GitHub App private key secret in the secret provider for the deployment-repo in the CD toolchain. Overrides `repo_github_app_credential_private_key_secret_name` for this repository.",
               "required": false
             },
             {
@@ -3093,7 +3445,34 @@
               "key": "compliance_pipeline_repo_auth_type",
               "type": "string",
               "default_value": "",
-              "description": "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`.",
+              "description": "Select the method of authentication that is used to access the Git repository. Valid values are `oauth`, `pat` or `github_app`. Defaults to `oauth` when unset. `pat` is a git `personal access token`.",
+              "required": false
+            },
+            {
+              "key": "compliance_pipeline_repo_github_app_auth_method",
+              "type": "string",
+              "default_value": "",
+              "description": "The GitHub App authorization method for the compliance-pipeline-repo. E.g. `custom` or `managed`. Overrides `repo_github_app_auth_method` for this repository.",
+              "required": false
+            },
+            {
+              "key": "compliance_pipeline_repo_github_app_credential_app_id",
+              "type": "string",
+              "default_value": "",
+              "description": "The GitHub App App ID for the compliance-pipeline-repo. Overrides `repo_github_app_credential_app_id` for this repository.",
+              "required": false
+            },
+            {
+              "key": "compliance_pipeline_repo_github_app_credential_private_key_crn",
+              "type": "password",
+              "description": "CRN of the GitHub App private key secret in the secret provider for the compliance-pipeline-repo. Overrides `repo_github_app_credential_private_key_crn` for this repository.",
+              "required": false
+            },
+            {
+              "key": "compliance_pipeline_repo_github_app_credential_private_key_secret_name",
+              "type": "string",
+              "default_value": "",
+              "description": "Name of the GitHub App private key secret in the secret provider for the compliance-pipeline-repo. Overrides `repo_github_app_credential_private_key_secret_name` for this repository.",
               "required": false
             },
             {
@@ -3197,6 +3576,20 @@
               "type": "password",
               "default_value": "",
               "description": "The personal access token that will be added to the `repo_git_token_secret_name` secret in the secrets provider.",
+              "required": false
+            },
+            {
+              "key": "create_github_app_private_key",
+              "type": "boolean",
+              "default_value": false,
+              "description": "Set to `true` to create and add the specified GitHub App private key secret to the Secrets Provider. Use `repo_github_app_credential_private_key_secret_value` for setting the value.",
+              "required": false
+            },
+            {
+              "key": "repo_github_app_credential_private_key_secret_value",
+              "type": "password",
+              "default_value": "",
+              "description": "The GitHub App private key that will be added to the `repo_github_app_credential_private_key_secret_name` secret in the secrets provider.",
               "required": false
             },
             {
@@ -3329,7 +3722,34 @@
               "key": "inventory_repo_auth_type",
               "type": "string",
               "default_value": "",
-              "description": "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`.",
+              "description": "Select the method of authentication that is used to access the Git repository. Valid values are `oauth`, `pat` or `github_app`. Defaults to `oauth` when unset. `pat` is a git `personal access token`.",
+              "required": false
+            },
+            {
+              "key": "inventory_repo_github_app_auth_method",
+              "type": "string",
+              "default_value": "",
+              "description": "The GitHub App authorization method for the inventory-repo. E.g. `custom` or `managed`. Overrides `repo_github_app_auth_method` for this repository.",
+              "required": false
+            },
+            {
+              "key": "inventory_repo_github_app_credential_app_id",
+              "type": "string",
+              "default_value": "",
+              "description": "The GitHub App App ID for the inventory-repo. Overrides `repo_github_app_credential_app_id` for this repository.",
+              "required": false
+            },
+            {
+              "key": "inventory_repo_github_app_credential_private_key_crn",
+              "type": "password",
+              "description": "CRN of the GitHub App private key secret in the secret provider for the inventory-repo. Overrides `repo_github_app_credential_private_key_crn` for this repository.",
+              "required": false
+            },
+            {
+              "key": "inventory_repo_github_app_credential_private_key_secret_name",
+              "type": "string",
+              "default_value": "",
+              "description": "Name of the GitHub App private key secret in the secret provider for the inventory-repo. Overrides `repo_github_app_credential_private_key_secret_name` for this repository.",
               "required": false
             },
             {
@@ -3398,7 +3818,34 @@
               "key": "issues_repo_auth_type",
               "type": "string",
               "default_value": "",
-              "description": "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`.",
+              "description": "Select the method of authentication that is used to access the Git repository. Valid values are `oauth`, `pat` or `github_app`. Defaults to `oauth` when unset. `pat` is a git `personal access token`.",
+              "required": false
+            },
+            {
+              "key": "issues_repo_github_app_auth_method",
+              "type": "string",
+              "default_value": "",
+              "description": "The GitHub App authorization method for the issues-repo. E.g. `custom` or `managed`. Overrides `repo_github_app_auth_method` for this repository.",
+              "required": false
+            },
+            {
+              "key": "issues_repo_github_app_credential_app_id",
+              "type": "string",
+              "default_value": "",
+              "description": "The GitHub App App ID for the issues-repo. Overrides `repo_github_app_credential_app_id` for this repository.",
+              "required": false
+            },
+            {
+              "key": "issues_repo_github_app_credential_private_key_crn",
+              "type": "password",
+              "description": "CRN of the GitHub App private key secret in the secret provider for the issues-repo. Overrides `repo_github_app_credential_private_key_crn` for this repository.",
+              "required": false
+            },
+            {
+              "key": "issues_repo_github_app_credential_private_key_secret_name",
+              "type": "string",
+              "default_value": "",
+              "description": "Name of the GitHub App private key secret in the secret provider for the issues-repo. Overrides `repo_github_app_credential_private_key_secret_name` for this repository.",
               "required": false
             },
             {
@@ -3467,7 +3914,34 @@
               "key": "pipeline_config_repo_auth_type",
               "type": "string",
               "default_value": "",
-              "description": "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`.",
+              "description": "Select the method of authentication that is used to access the Git repository. Valid values are `oauth`, `pat` or `github_app`. Defaults to `oauth` when unset. `pat` is a git `personal access token`.",
+              "required": false
+            },
+            {
+              "key": "pipeline_config_repo_github_app_auth_method",
+              "type": "string",
+              "default_value": "",
+              "description": "The GitHub App authorization method for the pipeline-config-repo. E.g. `custom` or `managed`. Overrides `repo_github_app_auth_method` for this repository.",
+              "required": false
+            },
+            {
+              "key": "pipeline_config_repo_github_app_credential_app_id",
+              "type": "string",
+              "default_value": "",
+              "description": "The GitHub App App ID for the pipeline-config-repo. Overrides `repo_github_app_credential_app_id` for this repository.",
+              "required": false
+            },
+            {
+              "key": "pipeline_config_repo_github_app_credential_private_key_crn",
+              "type": "password",
+              "description": "CRN of the GitHub App private key secret in the secret provider for the pipeline-config-repo. Overrides `repo_github_app_credential_private_key_crn` for this repository.",
+              "required": false
+            },
+            {
+              "key": "pipeline_config_repo_github_app_credential_private_key_secret_name",
+              "type": "string",
+              "default_value": "",
+              "description": "Name of the GitHub App private key secret in the secret provider for the pipeline-config-repo. Overrides `repo_github_app_credential_private_key_secret_name` for this repository.",
               "required": false
             },
             {

@@ -24,7 +24,7 @@ variable "app_group" {
 
 variable "app_repo_auth_type" {
   type        = string
-  description = "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`."
+  description = "Select the method of authentication that is used to access the Git repository. Valid values are `oauth`, `pat` or `github_app`. Defaults to `oauth` when unset. `pat` is a git `personal access token`."
   default     = ""
 }
 
@@ -55,6 +55,35 @@ variable "app_repo_clone_to_git_provider" {
 variable "app_repo_existing_git_id" {
   type        = string
   description = "Set this value to `github` for github.com, or to the GUID of a custom GitHub Enterprise server."
+  default     = ""
+}
+
+variable "app_repo_github_app_auth_method" {
+  type        = string
+  description = "The GitHub App authorization method for the app-repo. E.g. `custom` or `managed`. Overrides `repo_github_app_auth_method` for this repository."
+  default     = ""
+}
+
+variable "app_repo_github_app_credential_app_id" {
+  type        = string
+  description = "The GitHub App App ID for the app-repo. Overrides `repo_github_app_credential_app_id` for this repository."
+  default     = ""
+}
+
+variable "app_repo_github_app_credential_private_key_crn" {
+  type        = string
+  sensitive   = true
+  description = "CRN of the GitHub App private key secret in the secret provider for the app-repo. Overrides `repo_github_app_credential_private_key_crn` for this repository."
+  default     = ""
+  validation {
+    condition     = startswith(var.app_repo_github_app_credential_private_key_crn, "crn:") || var.app_repo_github_app_credential_private_key_crn == ""
+    error_message = "Must be a CRN or left empty."
+  }
+}
+
+variable "app_repo_github_app_credential_private_key_secret_name" {
+  type        = string
+  description = "Name of the GitHub App private key secret in the secret provider for the app-repo. Overrides `repo_github_app_credential_private_key_secret_name` for this repository."
   default     = ""
 }
 
@@ -188,7 +217,7 @@ variable "compliance_pipeline_group" {
 
 variable "compliance_pipeline_repo_auth_type" {
   type        = string
-  description = "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`."
+  description = "Select the method of authentication that is used to access the Git repository. Valid values are `oauth`, `pat` or `github_app`. Defaults to `oauth` when unset. `pat` is a git `personal access token`."
   default     = ""
 }
 
@@ -235,6 +264,35 @@ variable "compliance_pipeline_repo_git_provider" {
 variable "compliance_pipeline_repo_git_id" {
   type        = string
   description = "Set this value to `github` for github.com, or to the ID of a custom GitHub Enterprise server."
+  default     = ""
+}
+
+variable "compliance_pipeline_repo_github_app_auth_method" {
+  type        = string
+  description = "The GitHub App authorization method for the compliance-pipeline-repo. E.g. `custom` or `managed`. Overrides `repo_github_app_auth_method` for this repository."
+  default     = ""
+}
+
+variable "compliance_pipeline_repo_github_app_credential_app_id" {
+  type        = string
+  description = "The GitHub App App ID for the compliance-pipeline-repo. Overrides `repo_github_app_credential_app_id` for this repository."
+  default     = ""
+}
+
+variable "compliance_pipeline_repo_github_app_credential_private_key_crn" {
+  type        = string
+  sensitive   = true
+  description = "CRN of the GitHub App private key secret in the secret provider for the compliance-pipeline-repo. Overrides `repo_github_app_credential_private_key_crn` for this repository."
+  default     = ""
+  validation {
+    condition     = startswith(var.compliance_pipeline_repo_github_app_credential_private_key_crn, "crn:") || var.compliance_pipeline_repo_github_app_credential_private_key_crn == ""
+    error_message = "Must be a CRN or left empty."
+  }
+}
+
+variable "compliance_pipeline_repo_github_app_credential_private_key_secret_name" {
+  type        = string
+  description = "Name of the GitHub App private key secret in the secret provider for the compliance-pipeline-repo. Overrides `repo_github_app_credential_private_key_secret_name` for this repository."
   default     = ""
 }
 
@@ -360,6 +418,12 @@ variable "create_cos_api_key" {
 variable "create_git_token" {
   type        = bool
   description = "Set to `true` to create and add the specified personal access token secret to the Secrets Provider. Use `repo_git_token_secret_value` for setting the value."
+  default     = false
+}
+
+variable "create_github_app_private_key" {
+  type        = bool
+  description = "Set to `true` to create and add the specified GitHub App private key secret to the Secrets Provider. Use `repo_github_app_credential_private_key_secret_value` for setting the value."
   default     = false
 }
 
@@ -497,13 +561,42 @@ variable "inventory_group" {
 
 variable "inventory_repo_auth_type" {
   type        = string
-  description = "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`."
+  description = "Select the method of authentication that is used to access the Git repository. Valid values are `oauth`, `pat` or `github_app`. Defaults to `oauth` when unset. `pat` is a git `personal access token`."
   default     = ""
 }
 
 variable "inventory_repo_existing_git_id" {
   type        = string
   description = "Set this value to `github` for github.com, or to the GUID of a custom GitHub Enterprise server."
+  default     = ""
+}
+
+variable "inventory_repo_github_app_auth_method" {
+  type        = string
+  description = "The GitHub App authorization method for the inventory-repo. E.g. `custom` or `managed`. Overrides `repo_github_app_auth_method` for this repository."
+  default     = ""
+}
+
+variable "inventory_repo_github_app_credential_app_id" {
+  type        = string
+  description = "The GitHub App App ID for the inventory-repo. Overrides `repo_github_app_credential_app_id` for this repository."
+  default     = ""
+}
+
+variable "inventory_repo_github_app_credential_private_key_crn" {
+  type        = string
+  sensitive   = true
+  description = "CRN of the GitHub App private key secret in the secret provider for the inventory-repo. Overrides `repo_github_app_credential_private_key_crn` for this repository."
+  default     = ""
+  validation {
+    condition     = startswith(var.inventory_repo_github_app_credential_private_key_crn, "crn:") || var.inventory_repo_github_app_credential_private_key_crn == ""
+    error_message = "Must be a CRN or left empty."
+  }
+}
+
+variable "inventory_repo_github_app_credential_private_key_secret_name" {
+  type        = string
+  description = "Name of the GitHub App private key secret in the secret provider for the inventory-repo. Overrides `repo_github_app_credential_private_key_secret_name` for this repository."
   default     = ""
 }
 
@@ -572,13 +665,42 @@ variable "issues_group" {
 
 variable "issues_repo_auth_type" {
   type        = string
-  description = "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`."
+  description = "Select the method of authentication that is used to access the Git repository. Valid values are `oauth`, `pat` or `github_app`. Defaults to `oauth` when unset. `pat` is a git `personal access token`."
   default     = ""
 }
 
 variable "issues_repo_existing_git_id" {
   type        = string
   description = "Set this value to `github` for github.com, or to the GUID of a custom GitHub Enterprise server."
+  default     = ""
+}
+
+variable "issues_repo_github_app_auth_method" {
+  type        = string
+  description = "The GitHub App authorization method for the issues-repo. E.g. `custom` or `managed`. Overrides `repo_github_app_auth_method` for this repository."
+  default     = ""
+}
+
+variable "issues_repo_github_app_credential_app_id" {
+  type        = string
+  description = "The GitHub App App ID for the issues-repo. Overrides `repo_github_app_credential_app_id` for this repository."
+  default     = ""
+}
+
+variable "issues_repo_github_app_credential_private_key_crn" {
+  type        = string
+  sensitive   = true
+  description = "CRN of the GitHub App private key secret in the secret provider for the issues-repo. Overrides `repo_github_app_credential_private_key_crn` for this repository."
+  default     = ""
+  validation {
+    condition     = startswith(var.issues_repo_github_app_credential_private_key_crn, "crn:") || var.issues_repo_github_app_credential_private_key_crn == ""
+    error_message = "Must be a CRN or left empty."
+  }
+}
+
+variable "issues_repo_github_app_credential_private_key_secret_name" {
+  type        = string
+  description = "Name of the GitHub App private key secret in the secret provider for the issues-repo. Overrides `repo_github_app_credential_private_key_secret_name` for this repository."
   default     = ""
 }
 
@@ -665,7 +787,7 @@ variable "kp_resource_group" {
 
 variable "pipeline_config_repo_auth_type" {
   type        = string
-  description = "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`."
+  description = "Select the method of authentication that is used to access the Git repository. Valid values are `oauth`, `pat` or `github_app`. Defaults to `oauth` when unset. `pat` is a git `personal access token`."
   default     = ""
 }
 
@@ -707,6 +829,35 @@ variable "pipeline_ibmcloud_api_key_secret_group" {
 variable "pipeline_config_repo_git_id" {
   type        = string
   description = "Set this value to `github` for github.com, or to the GUID of a custom GitHub Enterprise server."
+  default     = ""
+}
+
+variable "pipeline_config_repo_github_app_auth_method" {
+  type        = string
+  description = "The GitHub App authorization method for the pipeline-config-repo. E.g. `custom` or `managed`. Overrides `repo_github_app_auth_method` for this repository."
+  default     = ""
+}
+
+variable "pipeline_config_repo_github_app_credential_app_id" {
+  type        = string
+  description = "The GitHub App App ID for the pipeline-config-repo. Overrides `repo_github_app_credential_app_id` for this repository."
+  default     = ""
+}
+
+variable "pipeline_config_repo_github_app_credential_private_key_crn" {
+  type        = string
+  sensitive   = true
+  description = "CRN of the GitHub App private key secret in the secret provider for the pipeline-config-repo. Overrides `repo_github_app_credential_private_key_crn` for this repository."
+  default     = ""
+  validation {
+    condition     = startswith(var.pipeline_config_repo_github_app_credential_private_key_crn, "crn:") || var.pipeline_config_repo_github_app_credential_private_key_crn == ""
+    error_message = "Must be a CRN or left empty."
+  }
+}
+
+variable "pipeline_config_repo_github_app_credential_private_key_secret_name" {
+  type        = string
+  description = "Name of the GitHub App private key secret in the secret provider for the pipeline-config-repo. Overrides `repo_github_app_credential_private_key_secret_name` for this repository."
   default     = ""
 }
 
@@ -840,6 +991,41 @@ variable "repo_git_id" {
   default     = ""
 }
 
+variable "repo_github_app_auth_method" {
+  type        = string
+  description = "The GitHub App authorization method for the compliance repositories. E.g. `custom` or `managed`. Only used when `repo_auth_type` is `github_app`."
+  default     = ""
+}
+
+variable "repo_github_app_credential_app_id" {
+  type        = string
+  description = "The GitHub App App ID for the compliance repositories. Only used when `repo_auth_type` is `github_app`."
+  default     = ""
+}
+
+variable "repo_github_app_credential_private_key_crn" {
+  type        = string
+  sensitive   = true
+  description = "CRN of the GitHub App private key secret in the secret provider. Only used when `repo_auth_type` is `github_app`."
+  default     = ""
+  validation {
+    condition     = startswith(var.repo_github_app_credential_private_key_crn, "crn:") || var.repo_github_app_credential_private_key_crn == ""
+    error_message = "Must be a CRN or left empty."
+  }
+}
+
+variable "repo_github_app_credential_private_key_secret_name" {
+  type        = string
+  description = "Name of the GitHub App private key secret in the secret provider. Only used when `repo_auth_type` is `github_app`."
+  default     = ""
+}
+
+variable "repo_auth_type" {
+  type        = string
+  description = "Select the method of authentication that is used to access the Git repository. Valid values are `oauth`, `pat` or `github_app`. Defaults to `oauth` when unset. `pat` is a git `personal access token`."
+  default     = ""
+}
+
 variable "repo_git_provider" {
   type        = string
   description = "The Git provider type."
@@ -867,6 +1053,13 @@ variable "repo_git_token_secret_value" {
   type        = string
   sensitive   = true
   description = "The personal access token that will be added to the `repo_git_token_secret_name` secret in the secrets provider."
+  default     = ""
+}
+
+variable "repo_github_app_credential_private_key_secret_value" {
+  type        = string
+  sensitive   = true
+  description = "The GitHub App private key that will be added to the `repo_github_app_credential_private_key_secret_name` secret in the secrets provider."
   default     = ""
 }
 
@@ -1157,7 +1350,7 @@ variable "cc_app_group" {
 
 variable "cc_app_repo_auth_type" {
   type        = string
-  description = "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`."
+  description = "Select the method of authentication that is used to access the Git repository. Valid values are `oauth`, `pat` or `github_app`. Defaults to `oauth` when unset. `pat` is a git `personal access token`."
   default     = ""
 }
 
@@ -1243,7 +1436,7 @@ variable "cc_compliance_pipeline_group" {
 
 variable "cc_compliance_pipeline_repo_auth_type" {
   type        = string
-  description = "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`."
+  description = "Select the method of authentication that is used to access the Git repository. Valid values are `oauth`, `pat` or `github_app`. Defaults to `oauth` when unset. `pat` is a git `personal access token`."
   default     = ""
 }
 
@@ -1343,7 +1536,7 @@ variable "cc_inventory_group" {
 
 variable "cc_inventory_repo_auth_type" {
   type        = string
-  description = "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`."
+  description = "Select the method of authentication that is used to access the Git repository. Valid values are `oauth`, `pat` or `github_app`. Defaults to `oauth` when unset. `pat` is a git `personal access token`."
   default     = ""
 }
 
@@ -1378,7 +1571,7 @@ variable "cc_issues_group" {
 
 variable "cc_issues_repo_auth_type" {
   type        = string
-  description = "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`."
+  description = "Select the method of authentication that is used to access the Git repository. Valid values are `oauth`, `pat` or `github_app`. Defaults to `oauth` when unset. `pat` is a git `personal access token`."
   default     = ""
 }
 
@@ -1431,7 +1624,7 @@ variable "cc_pipeline_config_group" {
 
 variable "cc_pipeline_config_repo_auth_type" {
   type        = string
-  description = "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`."
+  description = "Select the method of authentication that is used to access the Git repository. Valid values are `oauth`, `pat` or `github_app`. Defaults to `oauth` when unset. `pat` is a git `personal access token`."
   default     = ""
 }
 
@@ -1781,7 +1974,7 @@ variable "cd_change_management_group" {
 
 variable "cd_change_management_repo_auth_type" {
   type        = string
-  description = "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`."
+  description = "Select the method of authentication that is used to access the Git repository. Valid values are `oauth`, `pat` or `github_app`. Defaults to `oauth` when unset. `pat` is a git `personal access token`."
   default     = ""
 }
 
@@ -1794,6 +1987,35 @@ variable "change_management_existing_url" {
 variable "change_management_repo_git_id" {
   type        = string
   description = "Set this value to `github` for github.com, or to the ID of a custom GitHub Enterprise server."
+  default     = ""
+}
+
+variable "cd_change_management_repo_github_app_auth_method" {
+  type        = string
+  description = "The GitHub App authorization method for the change-management-repo in the CD toolchain. E.g. `custom` or `managed`. Overrides `repo_github_app_auth_method` for this repository."
+  default     = ""
+}
+
+variable "cd_change_management_repo_github_app_credential_app_id" {
+  type        = string
+  description = "The GitHub App App ID for the change-management-repo in the CD toolchain. Overrides `repo_github_app_credential_app_id` for this repository."
+  default     = ""
+}
+
+variable "cd_change_management_repo_github_app_credential_private_key_crn" {
+  type        = string
+  sensitive   = true
+  description = "CRN of the GitHub App private key secret in the secret provider for the change-management-repo in the CD toolchain. Overrides `repo_github_app_credential_private_key_crn` for this repository."
+  default     = ""
+  validation {
+    condition     = startswith(var.cd_change_management_repo_github_app_credential_private_key_crn, "crn:") || var.cd_change_management_repo_github_app_credential_private_key_crn == ""
+    error_message = "Must be a CRN or left empty."
+  }
+}
+
+variable "cd_change_management_repo_github_app_credential_private_key_secret_name" {
+  type        = string
+  description = "Name of the GitHub App private key secret in the secret provider for the change-management-repo in the CD toolchain. Overrides `repo_github_app_credential_private_key_secret_name` for this repository."
   default     = ""
 }
 
@@ -1898,7 +2120,7 @@ variable "cd_compliance_pipeline_group" {
 
 variable "cd_compliance_pipeline_repo_auth_type" {
   type        = string
-  description = "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`."
+  description = "Select the method of authentication that is used to access the Git repository. Valid values are `oauth`, `pat` or `github_app`. Defaults to `oauth` when unset. `pat` is a git `personal access token`."
   default     = ""
 }
 
@@ -1968,7 +2190,7 @@ variable "cd_deployment_group" {
 
 variable "cd_deployment_repo_auth_type" {
   type        = string
-  description = "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`."
+  description = "Select the method of authentication that is used to access the Git repository. Valid values are `oauth`, `pat` or `github_app`. Defaults to `oauth` when unset. `pat` is a git `personal access token`."
   default     = ""
 }
 
@@ -2011,6 +2233,35 @@ variable "cd_deployment_repo_existing_branch" {
 variable "cd_deployment_repo_existing_git_id" {
   type        = string
   description = "Set this value to `github` for github.com, or to the GUID of a custom GitHub Enterprise server."
+  default     = ""
+}
+
+variable "cd_deployment_repo_github_app_auth_method" {
+  type        = string
+  description = "The GitHub App authorization method for the deployment-repo in the CD toolchain. E.g. `custom` or `managed`. Overrides `repo_github_app_auth_method` for this repository."
+  default     = ""
+}
+
+variable "cd_deployment_repo_github_app_credential_app_id" {
+  type        = string
+  description = "The GitHub App App ID for the deployment-repo in the CD toolchain. Overrides `repo_github_app_credential_app_id` for this repository."
+  default     = ""
+}
+
+variable "cd_deployment_repo_github_app_credential_private_key_crn" {
+  type        = string
+  sensitive   = true
+  description = "CRN of the GitHub App private key secret in the secret provider for the deployment-repo in the CD toolchain. Overrides `repo_github_app_credential_private_key_crn` for this repository."
+  default     = ""
+  validation {
+    condition     = startswith(var.cd_deployment_repo_github_app_credential_private_key_crn, "crn:") || var.cd_deployment_repo_github_app_credential_private_key_crn == ""
+    error_message = "Must be a CRN or left empty."
+  }
+}
+
+variable "cd_deployment_repo_github_app_credential_private_key_secret_name" {
+  type        = string
+  description = "Name of the GitHub App private key secret in the secret provider for the deployment-repo in the CD toolchain. Overrides `repo_github_app_credential_private_key_secret_name` for this repository."
   default     = ""
 }
 
@@ -2103,7 +2354,7 @@ variable "cd_inventory_group" {
 
 variable "cd_inventory_repo_auth_type" {
   type        = string
-  description = "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`."
+  description = "Select the method of authentication that is used to access the Git repository. Valid values are `oauth`, `pat` or `github_app`. Defaults to `oauth` when unset. `pat` is a git `personal access token`."
   default     = ""
 }
 
@@ -2138,7 +2389,7 @@ variable "cd_issues_group" {
 
 variable "cd_issues_repo_auth_type" {
   type        = string
-  description = "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`."
+  description = "Select the method of authentication that is used to access the Git repository. Valid values are `oauth`, `pat` or `github_app`. Defaults to `oauth` when unset. `pat` is a git `personal access token`."
   default     = ""
 }
 
@@ -2191,7 +2442,7 @@ variable "cd_pipeline_config_group" {
 
 variable "cd_pipeline_config_repo_auth_type" {
   type        = string
-  description = "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`."
+  description = "Select the method of authentication that is used to access the Git repository. Valid values are `oauth`, `pat` or `github_app`. Defaults to `oauth` when unset. `pat` is a git `personal access token`."
   default     = ""
 }
 
@@ -2554,7 +2805,7 @@ variable "ci_app_name" {
 
 variable "ci_app_repo_auth_type" {
   type        = string
-  description = "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`."
+  description = "Select the method of authentication that is used to access the Git repository. Valid values are `oauth`, `pat` or `github_app`. Defaults to `oauth` when unset. `pat` is a git `personal access token`."
   default     = ""
 }
 
@@ -2706,7 +2957,7 @@ variable "ci_compliance_pipeline_pr_branch" {
 
 variable "ci_compliance_pipeline_repo_auth_type" {
   type        = string
-  description = "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`."
+  description = "Select the method of authentication that is used to access the Git repository. Valid values are `oauth`, `pat` or `github_app`. Defaults to `oauth` when unset. `pat` is a git `personal access token`."
   default     = ""
 }
 
@@ -2806,7 +3057,7 @@ variable "ci_inventory_group" {
 
 variable "ci_inventory_repo_auth_type" {
   type        = string
-  description = "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`."
+  description = "Select the method of authentication that is used to access the Git repository. Valid values are `oauth`, `pat` or `github_app`. Defaults to `oauth` when unset. `pat` is a git `personal access token`."
   default     = ""
 }
 
@@ -2841,7 +3092,7 @@ variable "ci_issues_group" {
 
 variable "ci_issues_repo_auth_type" {
   type        = string
-  description = "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`."
+  description = "Select the method of authentication that is used to access the Git repository. Valid values are `oauth`, `pat` or `github_app`. Defaults to `oauth` when unset. `pat` is a git `personal access token`."
   default     = ""
 }
 
@@ -2894,7 +3145,7 @@ variable "ci_pipeline_config_group" {
 
 variable "ci_pipeline_config_repo_auth_type" {
   type        = string
-  description = "Select the method of authentication that is used to access the Git repository. Valid values are 'oauth' or 'pat'. Defaults to `oauth` when unset. `pat` is a git `personal access token`."
+  description = "Select the method of authentication that is used to access the Git repository. Valid values are `oauth`, `pat` or `github_app`. Defaults to `oauth` when unset. `pat` is a git `personal access token`."
   default     = ""
 }
 

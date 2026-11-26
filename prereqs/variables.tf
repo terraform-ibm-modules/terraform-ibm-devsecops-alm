@@ -65,6 +65,25 @@ variable "repo_git_token_secret_value" {
   default     = ""
 }
 
+variable "create_github_app_private_key" {
+  type        = bool
+  description = "Set to `true` to add the specified GitHub App private key secret to the Secrets Provider. Use `repo_github_app_credential_private_key_secret_value` for setting the value."
+  default     = false
+}
+
+variable "repo_github_app_credential_private_key_secret_name" {
+  type        = string
+  description = "Name of the GitHub App private key secret in the secret provider."
+  default     = ""
+}
+
+variable "repo_github_app_credential_private_key_secret_value" {
+  type        = string
+  sensitive   = true
+  description = "The GitHub App private key that will be added to the `repo_github_app_credential_private_key_secret_name` secret in the secrets provider."
+  default     = ""
+}
+
 variable "sm_exists" {
   description = "Only connect to the Secrets Manager instance if it has been enabled for the toolchain."
   type        = bool
